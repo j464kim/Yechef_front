@@ -10,27 +10,29 @@
  */
 angular
 	.module('yechefFrontApp', [
+		// angular modules
 		'ngAnimate',
 		'ngCookies',
 		'ngResource',
 		'ngRoute',
 		'ngSanitize',
 		'ngTouch',
+
+		// libraries
+		'ui.router',
 		'satellizer',
+
+		// config
+		'config',
+
+		// route
+		'routes',
+
+		// services
+		'http.interceptor',
 	])
-	.config(function ($routeProvider) {
-		$routeProvider
-			.when('/', {
-				templateUrl: 'views/main.html',
-				controller: 'MainCtrl',
-				controllerAs: 'main'
-			})
-			.when('/about', {
-				templateUrl: 'views/about.html',
-				controller: 'AboutCtrl',
-				controllerAs: 'about'
-			})
-			.otherwise({
-				redirectTo: '/'
-			});
+	.config(function ($urlRouterProvider, $httpProvider) {
+		//push http interceptor 
+		$httpProvider.interceptors.push('httpRequestInterceptor');
+
 	});

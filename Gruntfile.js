@@ -49,8 +49,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'postcss']
+        files: ['<%= yeoman.app %>/styles/**/*.less'],
+        tasks: ['newer:copy:styles', 'less']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -170,31 +170,27 @@ module.exports = function (grunt) {
       server: '.tmp'
     },
 
-    // Add vendor prefixed styles
-    postcss: {
-      options: {
-        processors: [
-          require('autoprefixer-core')({browsers: ['last 1 version']})
-        ]
-      },
-      server: {
+    // less
+    less: {
+      development: {
         options: {
-          map: true
+          paths: ['<%= yeoman.app %>/styles/main.less']
         },
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+        }
       },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
+      production: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles/main.less'],
+          // plugins: [
+          //   new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]}),
+          //   new (require('less-plugin-clean-css'))(cleanCssOptions)
+          // ]
+        },
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+        }
       }
     },
 
@@ -436,7 +432,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
-      'postcss:server',
+      'less:development',
       'connect:livereload',
       'watch'
     ]);
@@ -451,7 +447,7 @@ module.exports = function (grunt) {
     'clean:server',
     'wiredep',
     'concurrent:test',
-    'postcss',
+    'less:production',
     'connect:test',
     'karma'
   ]);
@@ -461,7 +457,7 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'postcss',
+    'less:production',
     'ngtemplates',
     'concat',
     'ngAnnotate',

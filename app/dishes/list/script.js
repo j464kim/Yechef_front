@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dish.list', [
-	'dishes.api'
+	'dishes.api',
+	'directive.loader'
 ])
 
 .controller('DishListController', ['$state', 'DishesAPI',

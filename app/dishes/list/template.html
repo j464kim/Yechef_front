@@ -1,21 +1,12 @@
-<div class="container">
-	
-<div class="row">
-	
-<div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
-	{{dish.name}}
+<div class="container" id="dishList">
+	<div class="row" loader>
+		<div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
+			{{dish.name}}
 
 
+		</div>
+	</div>
 
-
-</div>
-
-
-<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" ng-change="DishCtrl.getDishes()"></ul>
-</div>
-
-
-
-
+	<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" ng-change="DishCtrl.getDishes()"></ul>
 </div>
 

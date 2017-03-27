@@ -1,13 +1,18 @@
 'use strict';
 
-angular.module('dish.list', [])
+angular.module('dish.list', [
+	'dishes.api',
+	'angular-carousel'
+])
 
-.controller('DishListController', ['$state',
-	function($state){
+.controller('DishListController', ['$state', 'DishesAPI',
+	function($state, DishesAPI){
 
 		/*********************
 		*	Private Variables
 		**********************/
+		// reference to this controller
+		var that = this;
 
 		/*********************
 		*	Public Variables
@@ -20,17 +25,23 @@ angular.module('dish.list', [])
 		**********************/
 
 		function _init() {	
-
+			_getDishes();
 		}
 
-		function _test() {
-
+		function _getDishes(pageNum) {
+			DishesAPI.list(pageNum).then(function(response){
+				console.log(response);
+				that.dishes = response.data;
+			}, function(response) {
+				// TODO handle error state
+				console.error(response);
+			});
 		}
 
 		/*********************
 		*	Public Functions
 		**********************/
-		this.test = _test;
+		this.getDishes = _getDishes;
 
 
 		/*********************

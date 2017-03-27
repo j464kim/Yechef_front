@@ -22,9 +22,6 @@ angular
 		'ui.router',
 		'satellizer',
 
-		// config
-		'config',
-
 		// route
 		'routes',
 

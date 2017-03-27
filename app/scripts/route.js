@@ -10,8 +10,8 @@ angular.module('routes', [
 	$stateProvider
 		.state('home', {
 			url: '/',
-			controller: 'DishListController',
-			templateUrl: 'dishes/list.html'
+			templateUrl: 'dishes/list/template.html',
+			controller: 'DishListController as DishCtrl',
 		});
 
 	// For any unmatched url, redirect to /

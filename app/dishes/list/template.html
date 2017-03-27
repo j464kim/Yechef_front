@@ -1,0 +1,24 @@
+<div class="container">
+	
+<div class="row">
+	
+<div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
+	{{dish.name}}
+
+
+	<div ng-repeat="image in dish.media">
+		<img src="{{image.url}}"/>
+	</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+

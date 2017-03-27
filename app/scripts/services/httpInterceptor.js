@@ -1,27 +1,31 @@
 'use strict';
 
-angular.module('http.interceptor', [])
+angular.module('http.interceptor', [
+	'configuration'
+])
 
-.factory('httpRequestInterceptor', ['$q', 'constant', function ($q, constant) {
+.factory('httpRequestInterceptor', ['$q', 'config', 
+	function ($q, config) {
 
-	var request = function(config) {
-		return config;
-	};
+		var request = function(config) {
+			return config;
+		};
 
 
-	var response = function(response) {
-		if(constant.debugMode === true){
-			var httpCode = response.status;
-			if(httpCode !== 200){
-				console.error('##Response Status of ' + httpCode + ' returned');
-				console.error('##Response Body: ', response);
+		var response = function(response) {
+			if(config.debugMode === true){
+				var httpCode = response.status;
+				if(httpCode !== 200){
+					console.error('##Response Status of ' + httpCode + ' returned');
+					console.error('##Response Body: ', response);
+				}
 			}
-		}
-        return response;
-	};
+	        return response;
+		};
 
-	return {
-		request: request,
-		response: response
-	};
-}]);
+		return {
+			request: request,
+			response: response
+		};
+	}
+]);

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('config', [])
+angular.module('configuration', [])
 
-.constant('constant', (function() {
+.constant('config', (function() {
 	var endpoint,
 		env,
 		debugMode;
@@ -10,8 +10,8 @@ angular.module('config', [])
 	env = 'DEBUG';
 
 	// remember to add the last /
-	var debugAPI 	= 	'//localhost:8000/api/';
-	var productAPI 	= 	'//localhost:8000/api/';
+	var debugAPI 	= 	'//laravel.dev/api/';
+	var productAPI 	= 	'//laravel.dev/api/';
 
 
 	/* jshint undef: false */

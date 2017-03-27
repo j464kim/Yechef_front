@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('dish.list', [
-	'dishes.api',
-	'angular-carousel'
+	'dishes.api'
 ])
 
 .controller('DishListController', ['$state', 'DishesAPI',
@@ -17,8 +16,8 @@ angular.module('dish.list', [
 		/*********************
 		*	Public Variables
 		**********************/
-		this.state = 'home';
-		
+		this.totalItems = 0;
+		this.currentPage = 0;
 
 		/*********************
 		*	Private Functions
@@ -28,10 +27,14 @@ angular.module('dish.list', [
 			_getDishes();
 		}
 
-		function _getDishes(pageNum) {
+		function _getDishes() {
+			var pageNum = that.currentPage || that.currentPage++;
+
 			DishesAPI.list(pageNum).then(function(response){
 				console.log(response);
 				that.dishes = response.data;
+				that.totalItems = response.total;
+				that.currentPage = response.current_page;
 			}, function(response) {
 				// TODO handle error state
 				console.error(response);

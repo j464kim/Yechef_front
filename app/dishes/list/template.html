@@ -6,15 +6,12 @@
 	{{dish.name}}
 
 
-	<div ng-repeat="image in dish.media">
-		<img src="{{image.url}}"/>
-	</div>
 
 
 </div>
 
 
-
+<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" ng-change="DishCtrl.getDishes()"></ul>
 </div>
 
 

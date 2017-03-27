@@ -21,6 +21,7 @@ angular
 		// libraries
 		'ui.router',
 		'satellizer',
+		'ui.bootstrap',
 
 		// route
 		'routes',

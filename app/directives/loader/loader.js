@@ -1,7 +1,6 @@
 angular.module('directive.loader', [])
 
 .directive('loader',   ['$http' ,function ($http) {
-    console.log("loader");
     return {
         restrict: 'EA',
         transclude: true,

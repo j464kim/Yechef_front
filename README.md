@@ -28,6 +28,7 @@ grunt serve
 
 # you can then see the front end running by visiting `http://192.168.10.10:9001` on your host machine browser. 
 # please note, `192.168.10.10` is your homestead ip address defined in `~/.homestead/Homestead.yaml` 
+```
 
 ## Code style
 - Try to keep everything moduler, in the angular way, put all business logic in a service and inject it into your controllers, only leave the simpliest page behavior in your controllers.

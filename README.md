@@ -15,7 +15,7 @@ npm install
 bower install
 
 # you may experience some error when running npm install, if it fails, please try
-npm install -no-bin-links
+npm install --no-bin-links
 
 # if it still fails, let me know whats the output.
 
@@ -23,8 +23,8 @@ npm install -no-bin-links
 # this is exactly why I was suggesting to use `laravel.dev` as our vhost server name
 
 # start up the project
-# once you run this command, please keep this ssh session on, and take a look on it constantly as this grunt take will trigger several watcher scripts after you make some change on your code. 
 grunt serve
+# once you run this command, please keep this ssh session on, and take a look on it constantly as this grunt take will trigger several watcher scripts after you make some change on your code. 
 
 # you can then see the front end running by visiting `http://192.168.10.10:9001` on your host machine browser. 
 # please note, `192.168.10.10` is your homestead ip address defined in `~/.homestead/Homestead.yaml` 

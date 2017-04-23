@@ -4,14 +4,14 @@ angular.module('dishes.api', [
 	'configuration'
 ])
 
-.factory('DishesResource', ['$resource', 'config', 
+.factory('DishesResource', ['$resource', 'config',
 	function($resource, config) {
-		var api_endpoint = config.endpoint + 'dishes/';
+		var apiEndpoint = config.endpoint + 'dishes/';
 
-		return $resource(api_endpoint + ':id', {id: '@id'},{
+		return $resource(apiEndpoint + ':id', {id: '@id'},{
 			list: {
 				method: 'GET',
-			},
+			}
 		});
 	}
 ])
@@ -30,15 +30,16 @@ angular.module('dishes.api', [
 				).$promise.then(function(response){
 					resolve(response.body);
 				}, function(response) {
-					reject(response)
+					reject(response);
 				});
 			});
-		};
+		}
 
 
 
 		return {
-			list: list,
+			list: list
 		};
 	}
 ]);
+

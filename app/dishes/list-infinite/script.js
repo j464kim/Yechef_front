@@ -25,7 +25,7 @@ angular.module('dish.list.infinite', [
 		*	Private Functions
 		**********************/
 
-		function _init() {	
+		function _init() {
 			_getDishes();
 		}
 
@@ -36,7 +36,7 @@ angular.module('dish.list.infinite', [
 				console.log(response);
 				that.dishes = that.dishes.concat(response.data);
 				that.totalItems = response.total;
-				that.currentPage = response.current_page;
+				that.currentPage = response.currentPage;
 			}, function(response) {
 				// TODO handle error state
 				console.error(response);
@@ -59,6 +59,6 @@ angular.module('dish.list.infinite', [
 		**********************/
 
 
-		
+
 	}
 ])

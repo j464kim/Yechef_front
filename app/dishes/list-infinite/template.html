@@ -1,8 +1,8 @@
 <div class="container" id="dishList" loader>
 	<div class="row">
-		<div class="col-md-4" ng-repeat="dish in DishCtrl.dishes">
+		<div class="col-md-4" ng-repeat="dish in DishInfCtrl.dishes">
 				<img ng-src="{{dish.media[0].url}}" alt="Card image cap" style="width:100%;">
-				
+
 				<h4 class="card-title">{{dish.name}}</h4>
 				<p class="card-text">{{dish.description}}</p>
 				<a href="#" class="btn btn-primary">View Detail</a>
@@ -10,4 +10,4 @@
 	</div>
 </div>
 
-<button class="btn btn-primary" ng-click="DishCtrl.getDishes()">Load More</button>
+<button class="btn btn-primary" ng-click="DishInfCtrl.getDishes()">Load More</button>

@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('dishes.api', [
+angular.module('kitchen.api', [
   'configuration'
 ])
 
-  .factory('DishesResource', ['$resource', 'config',
+  .factory('KitchenResource', ['$resource', 'config',
     function ($resource, config) {
-      var apiEndpoint = config.endpoint + 'dishes/';
+      var apiEndpoint = config.endpoint + 'kitchens/';
 
       return $resource(apiEndpoint + ':id', {id: '@id'}, {
         list: {
@@ -16,14 +16,14 @@ angular.module('dishes.api', [
     }
   ])
 
-  .service('DishesAPI', ['$q', 'DishesResource',
-    function ($q, DishesResource) {
+  .service('KitchenAPI', ['$q', 'KitchenResource',
+    function ($q, KitchenResource) {
 
       function list(pageNum) {
         pageNum = pageNum || 0;
 
         return $q(function (resolve, reject) {
-          DishesResource.list(
+          KitchenResource.list(
             {
               page: pageNum
             }
@@ -35,9 +35,9 @@ angular.module('dishes.api', [
         });
       }
 
+
       return {
         list: list
       };
     }
   ]);
-

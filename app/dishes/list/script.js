@@ -19,12 +19,13 @@ angular.module('dish.list', [
 		**********************/
 		this.totalItems = 0;
 		this.currentPage = 0;
+    this.dishes = [];
 
 		/*********************
 		*	Private Functions
 		**********************/
 
-		function _init() {	
+		function _init() {
 			_getDishes();
 		}
 
@@ -35,7 +36,7 @@ angular.module('dish.list', [
 				console.log(response);
 				that.dishes = response.data;
 				that.totalItems = response.total;
-				that.currentPage = response.current_page;
+				that.currentPage = response.currentPage;
 			}, function(response) {
 				// TODO handle error state
 				console.error(response);
@@ -58,6 +59,6 @@ angular.module('dish.list', [
 		**********************/
 
 
-		
+
 	}
 ])

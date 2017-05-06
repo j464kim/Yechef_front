@@ -1,0 +1,64 @@
+'use strict';
+
+angular.module('kitchen.list', [
+  'kitchen.api',
+  'directive.loader'
+])
+
+  .controller('KitchenListController', ['$state', 'KitchenAPI',
+    function ($state, KitchenAPI) {
+
+      /*********************
+       *  Private Variables
+       **********************/
+        // reference to this controller
+      var that = this;
+
+      /*********************
+       *  Public Variables
+       **********************/
+      this.totalItems = 0;
+      this.currentPage = 0;
+      this.kitchens = [];
+
+      /*********************
+       *  Private Functions
+       **********************/
+
+      function _init() {
+        _getKitchens();
+      }
+
+      function _getKitchens() {
+        var pageNum = that.currentPage || that.currentPage++;
+
+        KitchenAPI.list(pageNum).then(function (response) {
+          console.log(response);
+          that.kitchens = response.data;
+          that.totalItems = response.total;
+          that.currentPage = response.currentPage;
+        }, function (response) {
+          // TODO handle error state
+          console.error(response);
+        });
+      }
+
+      /*********************
+       *  Public Functions
+       **********************/
+      this.getKitchens = _getKitchens;
+
+
+      /*********************
+       *  Initialization
+       **********************/
+      _init();
+
+
+      /*********************
+       *  EVENTS
+       **********************/
+
+
+    }
+  ]);

@@ -1,0 +1,14 @@
+<div class="container" id="kitchenList" loader>
+  <div class="row">
+    <div class="col-md-4" ng-repeat="kitchen in KitchenCtrl.kitchens">
+      <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
+
+      <h4 class="card-title">{{kitchen.name}}</h4>
+      <p class="card-text">{{kitchen.description}}</p>
+      <a href="#" class="btn btn-primary">View Detail</a>
+    </div>
+  </div>
+</div>
+
+<ul uib-pagination total-items="KitchenCtrl.totalItems" ng-model="KitchenCtrl.currentPage"
+    ng-change="KitchenCtrl.getKitchens()"></ul>

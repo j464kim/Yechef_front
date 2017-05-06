@@ -9,9 +9,18 @@ angular.module('dishes.api', [
 		var api_endpoint = config.endpoint + 'dishes/';
 
 		return $resource(api_endpoint + ':id', {id: '@id'},{
-			list: {
-				method: 'GET',
-			},
+            list: {
+                method: 'GET',
+            },
+            create: {
+				method: 'POST',
+            },
+			update: {
+                method: 'PUT',
+            },
+            destroy: {
+				method: 'DELETE',
+            },
 		});
 	}
 ])
@@ -35,10 +44,58 @@ angular.module('dishes.api', [
 			});
 		};
 
+		function create(slug, name, description) {
+            return $q(function(resolve, reject) {
+                DishesResource.create(
+                    {
+                        slug: slug,
+						name: name,
+						description: description
+                    }
+                ).$promise.then(function(response){
+                    resolve(response.body);
+                }, function(response) {
+                    reject(response)
+                });
+            });
+        };
 
+        function update(slug, name, description) {
+            return $q(function(resolve, reject) {
+                DishesResource.update(
+                    {
+                        slug: slug,
+                        name: name,
+                        description: description
+                    }
+                ).$promise.then(function(response){
+                    resolve(response.body);
+                }, function(response) {
+                    reject(response)
+                });
+            });
+        };
+
+        function destroy() {
+
+            return $q(function(resolve, reject) {
+                DishesResource.destroy(
+                    {
+
+                    }
+                ).$promise.then(function(response){
+                    resolve(response.body);
+                }, function(response) {
+                    reject(response)
+                });
+            });
+        };
 
 		return {
 			list: list,
+			create: create,
+			update: update,
+			destroy: destroy,
 		};
 	}
 ]);

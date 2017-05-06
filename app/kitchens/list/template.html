@@ -1,10 +1,12 @@
 <div class="container" id="kitchenList" loader>
   <div class="row">
-    <div class="col-md-4" ng-repeat="kitchen in KitchenCtrl.kitchens">
+    <div class="col-md-6" ng-repeat="kitchen in KitchenCtrl.kitchens">
       <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
 
       <h4 class="card-title">{{kitchen.name}}</h4>
-      <p class="card-text">{{kitchen.description}}</p>
+      <p class="card-text">{{kitchen.email}}</p>
+      <p class="card-text">{{kitchen.phone}}</p>
+      <p class="card-text">{{kitchen.address}}</p>
       <a href="#" class="btn btn-primary">View Detail</a>
     </div>
   </div>

@@ -32,9 +32,8 @@ angular.module('routes', [
 			controller: 'DishListInfiniteController as DishCtrl',
 		})
         .state('dish.show', {
-            url: '/show',
+            url: '/show/{id}',
             templateUrl: 'dishes/show/template.html',
-            controller: 'DishShowController as DishCtrl',
         })
         .state('dish.create', {
             url: '/create',
@@ -42,12 +41,12 @@ angular.module('routes', [
             controller: 'DishCreateController as DishCtrl',
         })
         .state('dish.update', {
-            url: '/update',
+            url: '/update/{id}',
             templateUrl: 'dishes/update/template.html',
             controller: 'DishUpdateController as DishCtrl',
         })
         .state('dish.destroy', {
-            url: '/destroy',
+            url: '/destroy/{id}',
             templateUrl: 'dishes/destroy/template.html',
             controller: 'DishDestroyController as DishCtrl',
         });

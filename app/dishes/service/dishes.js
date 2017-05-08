@@ -12,6 +12,9 @@ angular.module('dishes.api', [
             list: {
                 method: 'GET',
             },
+            show: {
+                method: 'GET',
+            },
             create: {
 				method: 'POST',
             },
@@ -28,21 +31,36 @@ angular.module('dishes.api', [
 .service('DishesAPI', ['$q', 'DishesResource',
 	function($q, DishesResource){
 
-		function list(pageNum) {
-			pageNum = pageNum || 0;
+        function list(pageNum) {
+            pageNum = pageNum || 0;
 
-			return $q(function(resolve, reject) {
-				DishesResource.list(
-					{
-						page: pageNum
-					}
-				).$promise.then(function(response){
-					resolve(response.body);
-				}, function(response) {
-					reject(response)
-				});
-			});
-		};
+            return $q(function(resolve, reject) {
+                DishesResource.list(
+                    {
+                        page: pageNum
+                    }
+                ).$promise.then(function(response){
+                    resolve(response.body);
+                }, function(response) {
+                    reject(response)
+                });
+            });
+        };
+
+        function show(dishId) {
+
+            return $q(function(resolve, reject) {
+                DishesResource.show(
+                    {
+                        id: dishId
+                    }
+                ).$promise.then(function(response){
+                    resolve(response.body);
+                }, function(response) {
+                    reject(response)
+                });
+            });
+        };
 
 		function create(slug, name, description) {
             return $q(function(resolve, reject) {
@@ -92,7 +110,8 @@ angular.module('dishes.api', [
         };
 
 		return {
-			list: list,
+            list: list,
+            show: show,
 			create: create,
 			update: update,
 			destroy: destroy,

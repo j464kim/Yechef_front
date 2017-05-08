@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container" id="dishList" loader>
+    <div class="row">
+        <div class="col-md-4" ng-controller="DishShowController">
+            <img ng-src="{{dish.media[0].url}}" alt="Card image cap" style="width:100%;">
 
-</body>
-</html>
+            <h4 class="card-title">{{dish.name}}</h4>
+            <p class="card-text">{{dish.description}}</p>
+        </div>
+    </div>
+</div>
+
+<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" ng-change="DishCtrl.showDish("DishCtrl.dishId")"></ul>

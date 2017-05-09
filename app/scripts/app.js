@@ -25,6 +25,7 @@ angular
 
 		// route
 		'routes',
+		'user',
 
 		// services
 		'http.interceptor',

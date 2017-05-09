@@ -1,17 +1,13 @@
 'use strict';
 
-angular.module('routes', [
+angular.module('dish', [
 	'dish.list',
 	'dish.list.infinite',
 ])
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider) {
 
 	$stateProvider
-		.state('home', {
-			url: '/',
-			templateUrl: 'homepage/template.html'
-		})
 		.state('dish', {
 			url: '/dish',
 			abstract: true,
@@ -27,7 +23,4 @@ angular.module('routes', [
 			templateUrl: 'dishes/list-infinite/template.html',
 			controller: 'DishListInfiniteController as DishCtrl',
 		});
-
-	// For any unmatched url, redirect to /
-	$urlRouterProvider.otherwise('/');
 });

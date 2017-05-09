@@ -1,15 +1,22 @@
 <div class="container" id="kitchenList" loader>
-  <div class="row">
-    <div class="col-md-6" ng-repeat="kitchen in KitchenCtrl.kitchens">
-      <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
+    <div class="row">
+        <button id="btn-add" class="btn btn-primary">New Kitchen</button>
+        <br/>
+        <div class="col-md-6" ng-repeat="kitchen in KitchenCtrl.kitchens">
+            <img ui-sref="kitchen.show({id: kitchen.id})" ng-src="{{kitchen.media[0].url}}" alt="Card image cap"
+                 style="width:100%;">
 
-      <h4 class="card-title">{{kitchen.name}}</h4>
-      <p class="card-text">{{kitchen.email}}</p>
-      <p class="card-text">{{kitchen.phone}}</p>
-      <p class="card-text">{{kitchen.address}}</p>
-      <a href="#" class="btn btn-primary">View Detail</a>
+            <h4 class="card-title">{{kitchen.name}}</h4>
+            <p class="card-text">{{kitchen.email}}</p>
+            <p class="card-text">{{kitchen.phone}}</p>
+            <p class="card-text">{{kitchen.address}}</p>
+            <a ui-sref="kitchen.show({id: kitchen.id})" class="btn btn-primary btn-sm btn-detail">See
+                more</a>
+            <a class="btn btn-default btn-sm btn-edit">Edit
+            </a>
+            <button class="btn btn-danger btn-sm btn-delete">Delete</button>
+        </div>
     </div>
-  </div>
 </div>
 
 <ul uib-pagination total-items="KitchenCtrl.totalItems" ng-model="KitchenCtrl.currentPage"

@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="kitchen.list">
+<head>
+</head>
+
+<body>
+<div class="container" id="kitchenList" loader>
+    <div class="row">
+        <div class="col-md-6" ng-controller="KitchenShowController">
+            <br/>
+            <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
+
+            <p class="card-text">{{kitchen.name}}</p>
+            <p class="card-text">{{kitchen.email}}</p>
+            <p class="card-text">{{kitchen.phone}}</p>
+            <p class="card-text">{{kitchen.address}}</p>
+            <button class="btn btn-default btn-sm btn-edit">Edit</button>
+            <button class="btn btn-danger btn-sm btn-delete">Delete</button>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

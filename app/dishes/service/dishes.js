@@ -1,43 +1,43 @@
 'use strict';
 
 angular.module('dishes.api', [
-  'configuration'
+    'configuration'
 ])
 
-  .factory('DishesResource', ['$resource', 'config',
-    function ($resource, config) {
+    .factory('DishesResource', ['$resource', 'config',
+        function ($resource, config) {
       var apiEndpoint = config.endpoint + 'dishes/';
 
       return $resource(apiEndpoint + ':id', {id: '@id'}, {
-        list: {
-          method: 'GET',
+                list: {
+                    method: 'GET',
         }
-      });
-    }
-  ])
+            });
+        }
+    ])
 
-  .service('DishesAPI', ['$q', 'DishesResource',
-    function ($q, DishesResource) {
+    .service('DishesAPI', ['$q', 'DishesResource',
+        function ($q, DishesResource) {
 
-      function list(pageNum) {
-        pageNum = pageNum || 0;
+            function list(pageNum) {
+                pageNum = pageNum || 0;
 
-        return $q(function (resolve, reject) {
-          DishesResource.list(
-            {
-              page: pageNum
-            }
-          ).$promise.then(function (response) {
-            resolve(response.body);
-          }, function (response) {
+                return $q(function (resolve, reject) {
+                    DishesResource.list(
+                        {
+                            page: pageNum
+                        }
+                    ).$promise.then(function (response) {
+                        resolve(response.body);
+                    }, function (response) {
             reject(response);
-          });
-        });
-      }
+                    });
+                });
+            }
 
-      return {
+            return {
         list: list
-      };
-    }
-  ]);
+            };
+        }
+    ]);
 

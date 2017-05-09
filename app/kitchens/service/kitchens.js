@@ -1,43 +1,61 @@
 'use strict';
 
 angular.module('kitchen.api', [
-  'configuration'
+	'configuration'
 ])
 
-  .factory('KitchenResource', ['$resource', 'config',
-    function ($resource, config) {
-      var apiEndpoint = config.endpoint + 'kitchens/';
+	.factory('KitchenResource', ['$resource', 'config',
+		function ($resource, config) {
+			var apiEndpoint = config.endpoint + 'kitchens/';
 
-      return $resource(apiEndpoint + ':id', {id: '@id'}, {
-        list: {
-          method: 'GET',
-        }
-      });
-    }
-  ])
+			return $resource(apiEndpoint + ':id', {id: '@id'}, {
+				list: {
+					method: 'GET',
+				},
+				show: {
+					method: 'GET',
+				}
+			});
+		}
+	])
 
-  .service('KitchenAPI', ['$q', 'KitchenResource',
-    function ($q, KitchenResource) {
+	.service('KitchenAPI', ['$q', 'KitchenResource',
+		function ($q, KitchenResource) {
 
-      function list(pageNum) {
-        pageNum = pageNum || 0;
+			function list(pageNum) {
+				pageNum = pageNum || 0;
 
-        return $q(function (resolve, reject) {
-          KitchenResource.list(
-            {
-              page: pageNum
-            }
-          ).$promise.then(function (response) {
-            resolve(response.body);
-          }, function (response) {
-            reject(response);
-          });
-        });
-      }
+				return $q(function (resolve, reject) {
+					KitchenResource.list(
+						{
+							page: pageNum
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
 
+			function show(kitchenId) {
 
-      return {
-        list: list
-      };
-    }
-  ]);
+				return $q(function (resolve, reject) {
+					KitchenResource.show(
+						{
+							id: kitchenId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			}
+
+			return {
+				list: list,
+				show: show
+			};
+		}
+	]);

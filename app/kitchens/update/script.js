@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('kitchen.update', [
-	'kitchen.api',
-	'directive.loader'
+	'kitchen.api'
 ])
 
 	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
@@ -23,10 +22,10 @@ angular.module('kitchen.update', [
 			 **********************/
 
 			function _init() {
-				_editKitchen();
+				_getKitchen();
 			}
 
-			function _editKitchen() {
+			function _getKitchen() {
 				KitchenAPI.show(kitchenId).then(function (response) {
 					console.log(response);
 					$scope.kitchen = response;
@@ -50,7 +49,6 @@ angular.module('kitchen.update', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.editKitchen = _editKitchen;
 			this.updateKitchen = _updateKitchen;
 
 

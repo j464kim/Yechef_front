@@ -6,37 +6,39 @@
 <body>
 <div class="container" id="kitchenList" loader>
 
-    <div class="row">
-        <div class="col-md-6">
-            <br/>
-            <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
+    <form novalidate name="kitchenCreateForm" class="css-validation">
+        <div class="row">
+            <div class="col-md-6">
+                <br/>
+                <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
 
-            <div class="kitchenName">
-                <label class="control-label" for="kitchenName">Name:</label>
-                <input class="card-text" id="kitchenName" ng-model="kitchen.name"/>
-            </div>
-            <div class="kitchenEmail">
-                <label class="control-label" for="kitchenEmail">Email:</label>
-                <input class="card-text" id="kitchenEmail" ng-model="kitchen.email"/>
-            </div>
-            <div class="kitchenPhone">
-                <label class="control-label" for="kitchenPhone">Phone:</label>
-                <input class="card-text" id="kitchenPhone" ng-model="kitchen.phone"/>
-            </div>
-            <div class="kitchenAddress">
-                <label class="control-label" for="kitchenAddress">Address:</label>
-                <input class="card-text" id="kitchenAddress" ng-model="kitchen.address"/>
-            </div>
-            <div class="kitchenAddress">
-                <label class="control-label" for="kitchenDescription">Description:</label>
-                <input class="card-text" id="kitchenDescription" ng-model="kitchen.description"/>
-            </div>
-            <div class="submit">
-                <a ng-click="KitchenCtrl.updateKitchen()" class="btn btn-small btn-primary">Update the Kitchen!</a>
-                <button class="btn btn-danger btn-sm btn-delete">Delete</button>
+                <div class="kitchenName">
+                    <label class="control-label" for="kitchenName">Name:</label>
+                    <input class="card-text" id="kitchenName" ng-model="kitchen.name"/>
+                </div>
+                <div class="kitchenEmail">
+                    <label class="control-label" for="kitchenEmail">Email:</label>
+                    <input class="card-text" id="kitchenEmail" ng-model="kitchen.email"/>
+                </div>
+                <div class="kitchenPhone">
+                    <label class="control-label" for="kitchenPhone">Phone:</label>
+                    <input class="card-text" id="kitchenPhone" ng-model="kitchen.phone"/>
+                </div>
+                <div class="kitchenAddress">
+                    <label class="control-label" for="kitchenAddress">Address:</label>
+                    <input class="card-text" id="kitchenAddress" ng-model="kitchen.address"/>
+                </div>
+                <div class="kitchenAddress">
+                    <label class="control-label" for="kitchenDescription">Description:</label>
+                    <input class="card-text" id="kitchenDescription" ng-model="kitchen.description"/>
+                </div>
+                <div class="submit">
+                    <a ng-click="KitchenCtrl.updateKitchen()" class="btn btn-small btn-primary">Update the Kitchen!</a>
+                    <button class="btn btn-danger btn-sm btn-delete">Delete</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 </body>
 </html>

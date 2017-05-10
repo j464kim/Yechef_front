@@ -2,7 +2,6 @@
 
 angular.module('kitchen.list', [
     'kitchen.api',
-    'directive.loader',
 ])
 
     .controller('KitchenListController', ['$state', 'KitchenAPI',
@@ -37,7 +36,7 @@ angular.module('kitchen.list', [
                     that.totalItems = response.total;
                     that.currentPage = response.currentPage;
                 }, function (response) {
-                    // TODO handle error state
+                    // TODO handle error state ie. front end display
                     console.error(response);
                 });
             }

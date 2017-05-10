@@ -4,8 +4,7 @@
 'use strict';
 
 angular.module('kitchen.create', [
-	'kitchen.api',
-	'directive.loader'
+	'kitchen.api'
 ])
 
 	.controller('KitchenCreateController', ['$stateParams', 'KitchenAPI', '$scope', '$location',

@@ -6,29 +6,29 @@
 </head>
 <body>
 
-<form novalidate="novalidate" class="form-horizontal">
+<form novalidate name="kitchenCreateForm" class="css-validation">
     <div class="kitchenName">
         <label class="control-label" for="kitchenName">Name:</label>
         <div class="controls">
-            <input type="text" id="kitchenName" ng-model="kitchen.name"/>
+            <input type="text" id="kitchenName" ng-model="kitchen.name" required/>
         </div>
     </div>
     <div class="kitchenAddress">
         <label class="control-label" for="kitchenAddress">Address:</label>
         <div class="controls">
-            <input type="text" id="kitchenAddress" ng-model="kitchen.address"/>
+            <input type="text" id="kitchenAddress" ng-model="kitchen.address" required/>
         </div>
     </div>
     <div class="kitchenPhone">
         <label class="control-label" for="kitchenPhone">Phone:</label>
         <div class="controls">
-            <input type="text" id="kitchenPhone" ng-model="kitchen.phone"/>
+            <input type="text" id="kitchenPhone" ng-model="kitchen.phone" required/>
         </div>
     </div>
     <div class="kitchenEmail">
         <label class="control-label" for="kitchenEmail">Email:</label>
         <div class="controls">
-            <input type="text" id="kitchenEmail" ng-model="kitchen.email"/>
+            <input type="email" id="kitchenEmail" ng-model="kitchen.email" required/>
         </div>
     </div>
     <div class="kitchenDescription">
@@ -40,8 +40,8 @@
 
     <br/>
     <div class="submit">
-        <a ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
-        <a ng-click="cancel()" class="btn btn-small">cancel</a>
+        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
+        <a type="button" ng-click="cancel()" class="btn btn-small">cancel</a>
     </div>
     <br/>
 </form>

@@ -28,7 +28,8 @@
                 <span class="card-text" id="kitchenAddress">{{kitchen.address}}</span>
             </div>
             <div class="kitchenDescription">
-                <button class="btn btn-default btn-sm btn-edit">Edit</button>
+                <button ui-sref="kitchen.edit({id: kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
+                </button>
                 <button class="btn btn-danger btn-sm btn-delete">Delete</button>
             </div>
         </div>

@@ -2,7 +2,6 @@
 
 angular.module('dish.create', [
     'dishes.api',
-    'directive.loader'
 ])
 
     .controller('DishCreateController', ['$state', 'DishesAPI', '$scope',
@@ -29,7 +28,7 @@ angular.module('dish.create', [
             function _createDish() {
 //                console.log($scope.slug + $scope.name + $scope.description);
 
-                DishesAPI.create($scope.slug, $scope.name, $scope.description).then(function (response) {
+                DishesAPI.create($scope.name, $scope.description).then(function (response) {
                     console.log(response);
                 }, function (response) {
                     // TODO handle error state
@@ -42,7 +41,8 @@ angular.module('dish.create', [
              **********************/
             $scope.createDish = _createDish;
             $scope.reset = function reset() {
-                console.log("reset");
+                $scope.name = '';
+                $scope.description = '';
             };
 
             /*********************

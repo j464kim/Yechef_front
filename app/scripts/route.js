@@ -43,7 +43,7 @@ angular.module('routes', [
             .state('dish.update', {
                 url: '/update/{id}',
                 templateUrl: 'dishes/update/template.html',
-                controller: 'DishUpdateController as DishCtrl',
+                //controller: 'DishUpdateController as DishCtrl',
             })
             .state('dish.destroy', {
                 url: '/destroy/{id}',

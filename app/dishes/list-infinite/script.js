@@ -2,7 +2,6 @@
 
 angular.module('dish.list.infinite', [
     'dishes.api',
-    'directive.loader'
 ])
 
     .controller('DishListInfiniteController', ['$state', 'DishesAPI',

@@ -5,9 +5,11 @@
 
             <h4 class="card-title">{{dish.name}}</h4>
             <p class="card-text">{{dish.description}}</p>
+
+            <a href="/#!/dish/update/{{dish.id}}" class="btn btn-primary">Edit Dish</a>
         </div>
     </div>
+    <div class="col-md-4" ng-controller="DishDestroyController">
+        <button ng-click="destroyDish()">Delete</button>
+    </div>
 </div>
-
-<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" ng-change="DishCtrl.showDish("
-    DishCtrl.dishId")"></ul>

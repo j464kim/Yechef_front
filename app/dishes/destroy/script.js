@@ -5,53 +5,41 @@ angular.module('dish.destroy', [
     'directive.loader'
 ])
 
-    .controller('DishDestroyController', ['$state', 'DishesAPI',
-        function ($state, DishesAPI) {
+    .controller('DishDestroyController', ['$stateParams', 'DishesAPI', '$scope',
+        function ($stateParams, DishesAPI, $scope) {
 
             /*********************
              *    Private Variables
              **********************/
                 // reference to this controller
             var that = this;
+            var dishId = $stateParams.id;
 
             /*********************
              *    Public Variables
              **********************/
-            this.totalItems = 0;
-            this.currentPage = 0;
 
             /*********************
              *    Private Functions
              **********************/
 
-            function _init() {
-                _getDishes();
-            }
-
-            function _getDishes() {
-                var pageNum = that.currentPage || that.currentPage++;
-
-                DishesAPI.list(pageNum).then(function (response) {
+            /*********************
+             *    Public Functions
+             **********************/
+            $scope.destroyDish = function _destroyDish() {
+                DishesAPI.destroy(dishId).then(function (response) {
                     console.log(response);
-                    that.dishes = response.data;
-                    that.totalItems = response.total;
-                    that.currentPage = response.current_page;
+                    $scope.dish = response;
                 }, function (response) {
                     // TODO handle error state
                     console.error(response);
                 });
             }
 
-            /*********************
-             *    Public Functions
-             **********************/
-            this.getDishes = _getDishes;
-
 
             /*********************
              *    Initialization
              **********************/
-            _init();
 
             /*********************
              *    EVENTS

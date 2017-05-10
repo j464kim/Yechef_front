@@ -2,11 +2,10 @@
 
 angular.module('dish.show', [
     'dishes.api',
-    'directive.loader'
 ])
 
     .controller('DishShowController', ['$stateParams', 'DishesAPI', '$scope',
-        function ($stateParams, DishesAPI, scope) {
+        function ($stateParams, DishesAPI, $scope) {
 
             /*********************
              *    Private Variables
@@ -31,8 +30,8 @@ angular.module('dish.show', [
             function _showDish() {
                 DishesAPI.show(dishId).then(function (response) {
                     console.log(response);
-                    that.dish = response;
-                    scope.dish = response;
+                    // that.dish = response;
+                    $scope.dish = response;
                 }, function (response) {
                     // TODO handle error state
                     console.error(response);
@@ -43,7 +42,6 @@ angular.module('dish.show', [
              *    Public Functions
              **********************/
             this.showDish = _showDish;
-
 
             /*********************
              *    Initialization

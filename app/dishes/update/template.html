@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div ng-controller="DishUpdateController">
+    <form>
+        Name:<br>
+        <input type="text" ng-model="name"><br>
+        Description:<br>
+        <textarea ng-model="description"/><br>
+        <br><br>
+        <button ng-click="updateDish()">Update</button>
+        <button ng-click="reset()">Reset</button>
+    </form>
+</div>

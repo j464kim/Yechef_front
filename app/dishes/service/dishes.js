@@ -62,11 +62,10 @@ angular.module('dishes.api', [
                 });
             };
 
-            function create(slug, name, description) {
+            function create(name, description) {
                 return $q(function (resolve, reject) {
                     DishesResource.create(
                         {
-                            slug: slug,
                             name: name,
                             description: description
                         }
@@ -78,11 +77,11 @@ angular.module('dishes.api', [
                 });
             };
 
-            function update(slug, name, description) {
+            function update(dishId, name, description) {
                 return $q(function (resolve, reject) {
                     DishesResource.update(
                         {
-                            slug: slug,
+                            id: dishId,
                             name: name,
                             description: description
                         }
@@ -94,11 +93,13 @@ angular.module('dishes.api', [
                 });
             };
 
-            function destroy() {
+            function destroy(dishId) {
 
                 return $q(function (resolve, reject) {
                     DishesResource.destroy(
-                        {}
+                        {
+                            id: dishId,
+                        }
                     ).$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {

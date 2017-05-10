@@ -17,6 +17,9 @@ angular.module('kitchen.api', [
 				},
 				create: {
 					method: 'POST'
+				},
+				update: {
+					method: 'PUT'
 				}
 			});
 		}
@@ -59,9 +62,19 @@ angular.module('kitchen.api', [
 			function create(kitchen) {
 
 				return $q(function (resolve, reject) {
-					KitchenResource.create(
-						kitchen
-					).$promise.then(function (response) {
+					KitchenResource.create(kitchen)
+						.$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function update(kitchen, id) {
+				return $q(function (resolve, reject) {
+					KitchenResource.update(kitchen, id)
+						.$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -72,7 +85,8 @@ angular.module('kitchen.api', [
 			return {
 				list: list,
 				show: show,
-				create: create
+				create: create,
+				update: update
 			};
 		}
 	]);

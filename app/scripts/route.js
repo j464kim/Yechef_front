@@ -5,7 +5,8 @@ angular.module('routes', [
 	'dish.list.infinite',
 	'kitchen.list',
 	'kitchen.show',
-	'kitchen.create'
+	'kitchen.create',
+	'kitchen.update'
 ])
 
 	.config(function ($stateProvider, $urlRouterProvider) {
@@ -48,6 +49,11 @@ angular.module('routes', [
 				url: '',
 				templateUrl: 'kitchens/create/template.html',
 				controller: 'KitchenCreateController as KitchenCtrl'
+			})
+			.state('kitchen.edit', {
+				url: '/edit/{id}',
+				templateUrl: 'kitchens/update/template.html',
+				controller: 'KitchenUpdateController as KitchenCtrl'
 			});
 
 		// For any unmatched url, redirect to /

@@ -12,7 +12,7 @@
             <p class="card-text">{{kitchen.address}}</p>
             <a ui-sref="kitchen.show({id: kitchen.id})" class="btn btn-primary btn-sm btn-detail">See
                 more</a>
-            <a class="btn btn-default btn-sm btn-edit">Edit
+            <a ui-sref="kitchen.edit({id: kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
             </a>
             <button class="btn btn-danger btn-sm btn-delete">Delete</button>
         </div>

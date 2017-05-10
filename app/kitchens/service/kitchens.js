@@ -10,10 +10,13 @@ angular.module('kitchen.api', [
 
 			return $resource(apiEndpoint + ':id', {id: '@id'}, {
 				list: {
-					method: 'GET',
+					method: 'GET'
 				},
 				show: {
-					method: 'GET',
+					method: 'GET'
+				},
+				create: {
+					method: 'POST'
 				}
 			});
 		}
@@ -48,14 +51,28 @@ angular.module('kitchen.api', [
 					).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
-						reject(response)
+						reject(response);
+					});
+				});
+			}
+
+			function create(kitchen) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.create(
+						kitchen
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
 					});
 				});
 			}
 
 			return {
 				list: list,
-				show: show
+				show: show,
+				create: create
 			};
 		}
 	]);

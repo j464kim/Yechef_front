@@ -3,20 +3,20 @@
  */
 'use strict';
 
-angular.module('kitchen.show', [
+angular.module('kitchen.create', [
 	'kitchen.api',
 	'directive.loader'
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', '$scope',
-		function ($stateParams, KitchenAPI, $scope) {
+	.controller('KitchenCreateController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
+		function ($stateParams, KitchenAPI, $scope, $location) {
 
 			/*********************
 			 *  Private Variables
 			 **********************/
 				// reference to this controller
 
-			var kitchenId = $stateParams.id;
+			var that = this;
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -25,14 +25,11 @@ angular.module('kitchen.show', [
 			 *  Private Functions
 			 **********************/
 
-			function _init() {
-				_showKitchen();
-			}
-
-			function _showKitchen() {
-				KitchenAPI.show(kitchenId).then(function (response) {
+			function _createKitchen() {
+				KitchenAPI.create($scope.kitchen).then(function (response) {
+					var newKitchen = response;
 					console.log(response);
-					$scope.kitchen = response;
+					$location.path('/kitchens/' + newKitchen.id);
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);
@@ -42,14 +39,12 @@ angular.module('kitchen.show', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.showKitchen = _showKitchen;
+			this.createKitchen = _createKitchen;
 
 
 			/*********************
 			 *  Initialization
 			 **********************/
-			_init();
-
 
 			/*********************
 			 *  EVENTS

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form novalidate="novalidate" class="form-horizontal">
+    <div class="name">
+        <label class="control-label" for="kitchenName">Name:</label>
+        <div class="controls">
+            <input type="text" id="kitchenName" ng-model="kitchen.name"/>
+        </div>
+    </div>
+    <div class="address">
+        <label class="control-label" for="kitchenAddress">Address:</label>
+        <div class="controls">
+            <input type="text" id="kitchenAddress" ng-model="kitchen.address"/>
+        </div>
+    </div>
+    <div class="phone">
+        <label class="control-label" for="kitchenPhone">Phone:</label>
+        <div class="controls">
+            <input type="text" id="kitchenPhone" ng-model="kitchen.phone"/>
+        </div>
+    </div>
+    <div class="email">
+        <label class="control-label" for="kitchenEmail">Email:</label>
+        <div class="controls">
+            <input type="text" id="kitchenEmail" ng-model="kitchen.email"/>
+        </div>
+    </div>
+    <div class="email">
+        <label class="control-label" for="kitchenDescription">Description:</label>
+        <div class="controls">
+            <input type="text" id="kitchenDescription" ng-model="kitchen.description"/>
+        </div>
+    </div>
+
+    <br/>
+    <div class="submit">
+        <!-- user-detail.html: -->
+        <a ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
+        <a ng-click="cancel()" class="btn btn-small">cancel</a>
+    </div>
+    <br/>
+</form>
+
+</body>
+</html>

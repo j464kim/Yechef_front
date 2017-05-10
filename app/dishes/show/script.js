@@ -6,22 +6,22 @@ angular.module('dish.show', [
 ])
 
     .controller('DishShowController', ['$stateParams', 'DishesAPI', '$scope',
-        function($stateParams, DishesAPI, scope){
+        function ($stateParams, DishesAPI, scope) {
 
             /*********************
-             *	Private Variables
+             *    Private Variables
              **********************/
                 // reference to this controller
             var that = this;
             var dishId = $stateParams.id;
 
             /*********************
-             *	Public Variables
+             *    Public Variables
              **********************/
             this.dishId = $stateParams.id;
 
             /*********************
-             *	Private Functions
+             *    Private Functions
              **********************/
 
             function _init() {
@@ -29,34 +29,34 @@ angular.module('dish.show', [
             }
 
             function _showDish() {
-                DishesAPI.show(dishId).then(function(response){
+                DishesAPI.show(dishId).then(function (response) {
                     console.log(response);
                     that.dish = response;
                     scope.dish = response;
-                }, function(response) {
+                }, function (response) {
                     // TODO handle error state
                     console.error(response);
                 });
             }
 
             /*********************
-             *	Public Functions
+             *    Public Functions
              **********************/
             this.showDish = _showDish;
 
 
             /*********************
-             *	Initialization
+             *    Initialization
              **********************/
             _init();
 
             /*********************
-             *	EVENTS
+             *    EVENTS
              **********************/
 
 
-
         }
-    ])/**
+    ])
+/**
  * Created by ghkdt on 2017-05-06.
  */

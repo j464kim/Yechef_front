@@ -6,22 +6,22 @@ angular.module('dish.destroy', [
 ])
 
     .controller('DishDestroyController', ['$state', 'DishesAPI',
-        function($state, DishesAPI){
+        function ($state, DishesAPI) {
 
             /*********************
-             *	Private Variables
+             *    Private Variables
              **********************/
                 // reference to this controller
             var that = this;
 
             /*********************
-             *	Public Variables
+             *    Public Variables
              **********************/
             this.totalItems = 0;
             this.currentPage = 0;
 
             /*********************
-             *	Private Functions
+             *    Private Functions
              **********************/
 
             function _init() {
@@ -31,35 +31,35 @@ angular.module('dish.destroy', [
             function _getDishes() {
                 var pageNum = that.currentPage || that.currentPage++;
 
-                DishesAPI.list(pageNum).then(function(response){
+                DishesAPI.list(pageNum).then(function (response) {
                     console.log(response);
                     that.dishes = response.data;
                     that.totalItems = response.total;
                     that.currentPage = response.current_page;
-                }, function(response) {
+                }, function (response) {
                     // TODO handle error state
                     console.error(response);
                 });
             }
 
             /*********************
-             *	Public Functions
+             *    Public Functions
              **********************/
             this.getDishes = _getDishes;
 
 
             /*********************
-             *	Initialization
+             *    Initialization
              **********************/
             _init();
 
             /*********************
-             *	EVENTS
+             *    EVENTS
              **********************/
 
 
-
         }
-    ])/**
+    ])
+/**
  * Created by ghkdt on 2017-05-06.
  */

@@ -9,28 +9,28 @@
  * Main module of the application.
  */
 angular
-	.module('yechefFrontApp', [
-		// angular modules
-		'ngAnimate',
-		'ngCookies',
-		'ngResource',
-		'ngRoute',
-		'ngSanitize',
-		'ngTouch',
+    .module('yechefFrontApp', [
+        // angular modules
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
 
-		// libraries
-		'ui.router',
-		'satellizer',
-		'ui.bootstrap',
+        // libraries
+        'ui.router',
+        'satellizer',
+        'ui.bootstrap',
 
-		// route
-		'routes',
+        // route
+        'routes',
 
-		// services
-		'http.interceptor',
-	])
-	.config(function ($urlRouterProvider, $httpProvider) {
-		//push http interceptor 
-		$httpProvider.interceptors.push('httpRequestInterceptor');
+        // services
+        'http.interceptor',
+    ])
+    .config(function ($urlRouterProvider, $httpProvider) {
+        //push http interceptor
+        $httpProvider.interceptors.push('httpRequestInterceptor');
 
-	});
+    });

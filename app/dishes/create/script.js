@@ -5,61 +5,58 @@ angular.module('dish.create', [
     'directive.loader'
 ])
 
-    .controller('DishCreateController', ['$state', 'DishesAPI',
-        function($state, DishesAPI){
+    .controller('DishCreateController', ['$state', 'DishesAPI', '$scope',
+        function ($state, DishesAPI, $scope) {
 
             /*********************
-             *	Private Variables
+             *    Private Variables
              **********************/
                 // reference to this controller
             var that = this;
 
             /*********************
-             *	Public Variables
+             *    Public Variables
              **********************/
-            this.totalItems = 0;
-            this.currentPage = 0;
 
             /*********************
-             *	Private Functions
+             *    Private Functions
              **********************/
 
             function _init() {
-                _getDishes();
+                //_createDish();
             }
 
-            function _getDishes() {
-                var pageNum = that.currentPage || that.currentPage++;
+            function _createDish() {
+//                console.log($scope.slug + $scope.name + $scope.description);
 
-                DishesAPI.list(pageNum).then(function(response){
+                DishesAPI.create($scope.slug, $scope.name, $scope.description).then(function (response) {
                     console.log(response);
-                    that.dishes = response.data;
-                    that.totalItems = response.total;
-                    that.currentPage = response.current_page;
-                }, function(response) {
+                }, function (response) {
                     // TODO handle error state
                     console.error(response);
                 });
             }
 
             /*********************
-             *	Public Functions
+             *    Public Functions
              **********************/
-            this.getDishes = _getDishes;
-
+            $scope.createDish = _createDish;
+            $scope.reset = function reset() {
+                console.log("reset");
+            };
 
             /*********************
-             *	Initialization
+             *    Initialization
              **********************/
             _init();
 
             /*********************
-             *	EVENTS
+             *    EVENTS
              **********************/
 
 
-
         }
-    ])/**
+    ])
+/**
  * Created by ghkdt on 2017-05-06.
  */

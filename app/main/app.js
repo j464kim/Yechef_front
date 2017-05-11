@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name yechefFrontApp
- * @description
- * # yechefFrontApp
- *
- * Main module of the application.
- */
 angular
     .module('yechefFrontApp', [
         // angular modules
@@ -23,14 +15,22 @@ angular
         'satellizer',
         'ui.bootstrap',
 
-        // route
-        'routes',
+        // main modules
+        'dish',
 
         // services
         'http.interceptor',
     ])
-    .config(function ($urlRouterProvider, $httpProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //push http interceptor
         $httpProvider.interceptors.push('httpRequestInterceptor');
 
+        // Default route
+        $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: 'homepage/template.html'
+            });
+        // For any unmatched url, redirect to /
+        $urlRouterProvider.otherwise('/');
     });

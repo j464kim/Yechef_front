@@ -15,12 +15,12 @@ angular.module('dish', [
 		})
 		.state('dish.list', {
 			url: 'list',
-			templateUrl: 'dishes/list/template.html',
+			templateUrl: '/components/dish/list/template.html',
 			controller: 'DishListController as DishCtrl',
 		})
-		.state('dish.list-infiniteload', {
+		.state('dish.listInfinite', {
 			url: 'list/infinite',
-			templateUrl: 'dishes/list-infinite/template.html',
+			templateUrl: '/components/dish/listInfinite/template.html',
 			controller: 'DishListInfiniteController as DishCtrl',
 		});
 });

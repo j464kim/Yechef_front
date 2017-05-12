@@ -55,6 +55,3 @@ angular.module('dish.show', [
 
         }
     ])
-/**
- * Created by ghkdt on 2017-05-06.
- */

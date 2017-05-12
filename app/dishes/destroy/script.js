@@ -2,11 +2,10 @@
 
 angular.module('dish.destroy', [
     'dishes.api',
-    'directive.loader'
 ])
 
-    .controller('DishDestroyController', ['$stateParams', 'DishesAPI', '$scope',
-        function ($stateParams, DishesAPI, $scope) {
+    .controller('DishDestroyController', ['$state', '$stateParams', 'DishesAPI', '$scope',
+        function ($state, $stateParams, DishesAPI, $scope) {
 
             /*********************
              *    Private Variables
@@ -28,14 +27,12 @@ angular.module('dish.destroy', [
              **********************/
             $scope.destroyDish = function _destroyDish() {
                 DishesAPI.destroy(dishId).then(function (response) {
-                    console.log(response);
-                    $scope.dish = response;
+                    $state.go('dish.list');
                 }, function (response) {
                     // TODO handle error state
                     console.error(response);
                 });
             }
-
 
             /*********************
              *    Initialization
@@ -45,9 +42,5 @@ angular.module('dish.destroy', [
              *    EVENTS
              **********************/
 
-
         }
     ])
-/**
- * Created by ghkdt on 2017-05-06.
- */

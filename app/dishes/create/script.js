@@ -13,27 +13,14 @@ angular.module('dish.create', [
                 // reference to this controller
             var that = this;
 
-            /*********************
-             *    Public Variables
-             **********************/
-
-            /*********************
-             *    Private Functions
-             **********************/
-
-            function _init() {
-                //_createDish();
-            }
-
             function _createDish() {
-//                console.log($scope.slug + $scope.name + $scope.description);
-
-                DishesAPI.create($scope.name, $scope.description).then(function (response) {
-                    console.log(response);
-                }, function (response) {
-                    // TODO handle error state
-                    console.error(response);
-                });
+                DishesAPI.create($scope.name, $scope.description)
+                    .then(function (response) {
+                        $state.go('dish.show', {"id": response.id});
+                    }, function (response) {
+                        // TODO handle error state
+                        console.error(response);
+                    });
             }
 
             /*********************
@@ -46,17 +33,9 @@ angular.module('dish.create', [
             };
 
             /*********************
-             *    Initialization
-             **********************/
-            _init();
-
-            /*********************
              *    EVENTS
              **********************/
 
 
         }
     ])
-/**
- * Created by ghkdt on 2017-05-06.
- */

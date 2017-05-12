@@ -43,7 +43,6 @@ angular.module('dish', [
             })
             .state('dish.destroy', {
                 url: '/destroy/{id}',
-                templateUrl: 'dishes/destroy/template.html',
                 controller: 'DishDestroyController as DishCtrl',
             });
     });

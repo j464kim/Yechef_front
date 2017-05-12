@@ -21,22 +21,33 @@ angular.module('dish.destroy', [
             /*********************
              *    Private Functions
              **********************/
+            function _init() {
+                _destroyDish(dishId);
+            }
 
             /*********************
              *    Public Functions
              **********************/
-            $scope.destroyDish = function _destroyDish() {
-                DishesAPI.destroy(dishId).then(function (response) {
-                    $state.go('dish.list');
-                }, function (response) {
-                    // TODO handle error state
-                    console.error(response);
-                });
+            function _destroyDish(dishId) {
+                console.log(dishId);
+                //TODO: Probably better to use ng directive to handle confirmation popup
+                if (confirm("Do you want to delete the dish?")) {
+                    DishesAPI.destroy(dishId)
+                        .then(function (response) {
+                            $state.go('dish.list');
+                        }, function (response) {
+                            // TODO handle error state
+                            console.error(response);
+                        });
+                } else {
+                    $state.go('dish.show', {"id": dishId});
+                }
             }
 
             /*********************
              *    Initialization
              **********************/
+            _init();
 
             /*********************
              *    EVENTS

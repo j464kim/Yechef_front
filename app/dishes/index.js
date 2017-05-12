@@ -30,16 +30,17 @@ angular.module('dish', [
             .state('dish.show', {
                 url: '/show/{id}',
                 templateUrl: 'dishes/show/template.html',
+                controller: 'DishShowController as DishCtrl'
             })
             .state('dish.create', {
                 url: '/create',
                 templateUrl: 'dishes/create/template.html',
-                // controller: 'DishCreateController as DishCtrl',
+                controller: 'DishCreateController as DishCtrl',
             })
             .state('dish.update', {
                 url: '/update/{id}',
                 templateUrl: 'dishes/update/template.html',
-                //controller: 'DishUpdateController as DishCtrl',
+                controller: 'DishUpdateController as DishCtrl',
             })
             .state('dish.destroy', {
                 url: '/destroy/{id}',

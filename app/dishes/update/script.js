@@ -4,8 +4,8 @@ angular.module('dish.update', [
     'dishes.api',
 ])
 
-    .controller('DishUpdateController', ['$state', '$stateParams', 'DishesAPI', '$scope',
-        function ($state, $stateParams, DishesAPI, $scope) {
+    .controller('DishUpdateController', ['$state', '$stateParams', 'DishesAPI',
+        function ($state, $stateParams, DishesAPI) {
 
             /*********************
              *    Private Variables
@@ -29,10 +29,9 @@ angular.module('dish.update', [
             function _showDish() {
                 DishesAPI.show(dishId)
                     .then(function (response) {
-                        console.log(response);
-                        $scope.dish = response;
-                        $scope.name = $scope.dish.name;
-                        $scope.description = $scope.dish.description;
+                        that.dish = response;
+                        that.name = response.name;
+                        that.description = response.description;
                     }, function (response) {
                         // TODO handle error state
                         console.error(response);
@@ -42,8 +41,8 @@ angular.module('dish.update', [
             /*********************
              *    Public Functions
              **********************/
-            $scope.updateDish = function _updateDish() {
-                DishesAPI.update($scope.dish.id, $scope.name, $scope.description)
+            this.updateDish = function _updateDish() {
+                DishesAPI.update(that.dish.id, that.name, that.description)
                     .then(function (response) {
                         $state.go('dish.show', {"id": response.id});
                     }, function (response) {
@@ -51,9 +50,9 @@ angular.module('dish.update', [
                         console.error(response);
                     });
             }
-            $scope.reset = function reset() {
-                $scope.name = '';
-                $scope.description = '';
+            this.reset = function reset() {
+                that.name = '';
+                that.description = '';
             };
 
             /*********************

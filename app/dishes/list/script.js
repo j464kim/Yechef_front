@@ -31,7 +31,6 @@ angular.module('dish.list', [
                 var pageNum = that.currentPage || that.currentPage++;
 
                 DishesAPI.list(pageNum).then(function (response) {
-                    console.log(response);
                     that.dishes = response.data;
                     that.totalItems = response.total;
                     that.currentPage = response.current_page;

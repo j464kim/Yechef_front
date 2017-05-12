@@ -1,15 +1,13 @@
-<div class="container" id="dishList" loader>
+<div class="container" id="dishShow" loader>
     <div class="row">
-        <div class="col-md-4" ng-controller="DishShowController">
-            <img ng-src="{{dish.media[0].url}}" alt="Card image cap" style="width:100%;">
+        <div class="col-md-4">
+            <img ng-src="{{DishCtrl.dish.media[0].url}}" alt="Card image cap" style="width:100%;">
 
-            <h4 class="card-title">{{dish.name}}</h4>
-            <p class="card-text">{{dish.description}}</p>
+            <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
+            <p class="card-text">{{DishCtrl.dish.description}}</p>
 
-            <a ui-sref="dish.update({id: {{dish.id}})" class="btn btn-primary">Edit Dish</a>
+            <a ng-click="DishCtrl.update()" class="btn btn-primary">Edit Dish</a>
+            <a ng-click="DishCtrl.destroy()" class="btn btn-primary">Delete</a>
         </div>
-    </div>
-    <div class="col-md-4" ng-controller="DishDestroyController">
-        <button ng-click="destroyDish()">Delete</button>
     </div>
 </div>

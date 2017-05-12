@@ -4,8 +4,8 @@ angular.module('dish.show', [
     'dishes.api',
 ])
 
-    .controller('DishShowController', ['$stateParams', 'DishesAPI', '$scope',
-        function ($stateParams, DishesAPI, $scope) {
+    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI',
+        function ($state, $stateParams, DishesAPI) {
 
             /*********************
              *    Private Variables
@@ -17,7 +17,6 @@ angular.module('dish.show', [
             /*********************
              *    Public Variables
              **********************/
-            this.dishId = $stateParams.id;
 
             /*********************
              *    Private Functions
@@ -28,20 +27,26 @@ angular.module('dish.show', [
             }
 
             function _showDish() {
-                DishesAPI.show(dishId).then(function (response) {
-                    console.log(response);
-                    // that.dish = response;
-                    $scope.dish = response;
-                }, function (response) {
-                    // TODO handle error state
-                    console.error(response);
-                });
+                DishesAPI.show(dishId)
+                    .then(function (response) {
+                        that.dish = response;
+                    }, function (response) {
+                        // TODO handle error state
+                        console.error(response);
+                    });
             }
 
             /*********************
              *    Public Functions
              **********************/
-            this.showDish = _showDish;
+            this.update = function _update() {
+                //TODO: Will need to validate the user access control.
+                $state.go('dish.update', {"id": this.dish.id});
+            };
+            this.destroy = function _destory() {
+                //TODO: Will need to validate the user access control.
+                $state.go('dish.destroy', {"id": this.dish.id});
+            };
 
             /*********************
              *    Initialization

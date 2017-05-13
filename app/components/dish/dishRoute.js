@@ -10,7 +10,6 @@ angular.module('dish', [
 ])
 
     .config(function ($stateProvider) {
-
         $stateProvider
             .state('dish', {
                 url: '/dish',
@@ -19,27 +18,27 @@ angular.module('dish', [
             })
             .state('dish.list', {
                 url: 'list',
-                templateUrl: 'dishes/list/template.html',
+                templateUrl: '/components/dish/list/template.html',
                 controller: 'DishListController as DishCtrl',
             })
-            .state('dish.list-infiniteload', {
+            .state('dish.listInfinite', {
                 url: 'list/infinite',
-                templateUrl: 'dishes/list-infinite/template.html',
+                templateUrl: '/components/dish/listInfinite/template.html',
                 controller: 'DishListInfiniteController as DishCtrl',
             })
             .state('dish.show', {
                 url: '/show/{id}',
-                templateUrl: 'dishes/show/template.html',
+                templateUrl: '/components/dish/show/template.html',
                 controller: 'DishShowController as DishCtrl'
             })
             .state('dish.create', {
                 url: '/create',
-                templateUrl: 'dishes/create/template.html',
+                templateUrl: '/components/dish/create/template.html',
                 controller: 'DishCreateController as DishCtrl',
             })
             .state('dish.update', {
                 url: '/update/{id}',
-                templateUrl: 'dishes/update/template.html',
+                templateUrl: '/components/dish/update/template.html',
                 controller: 'DishUpdateController as DishCtrl',
             })
             .state('dish.destroy', {
@@ -47,4 +46,3 @@ angular.module('dish', [
                 controller: 'DishDestroyController as DishCtrl',
             });
     });
-

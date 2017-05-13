@@ -1,10 +1,8 @@
-'use strict';
-
-angular.module('kitchen.create', [
+angular.module('kitchen.destroy', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenCreateController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
+	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
 		function ($stateParams, KitchenAPI, $scope, $location) {
 
 			/*********************
@@ -12,7 +10,8 @@ angular.module('kitchen.create', [
 			 **********************/
 				// reference to this controller
 
-			var that = this;
+			var kitchenId = $stateParams.id;
+
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -21,11 +20,12 @@ angular.module('kitchen.create', [
 			 *  Private Functions
 			 **********************/
 
-			function _createKitchen() {
-				KitchenAPI.create($scope.kitchen).then(function (response) {
-					var newKitchen = response;
+			function _destroyKitchen() {
+				console.log('_destroyKitchen ' + kitchenId);
+				KitchenAPI.destroy(kitchenId).then(function (response) {
 					console.log(response);
-					$location.path('/kitchens/' + newKitchen.id);
+					$scope.kitchen = response;
+					$location.path('/kitchens/list');
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);
@@ -35,7 +35,7 @@ angular.module('kitchen.create', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.createKitchen = _createKitchen;
+			$scope.destroyKitchen = _destroyKitchen;
 
 
 			/*********************

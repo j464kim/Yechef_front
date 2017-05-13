@@ -4,7 +4,8 @@ angular.module('kitchen', [
 	'kitchen.list',
 	'kitchen.show',
 	'kitchen.create',
-	'kitchen.update'
+	'kitchen.update',
+	'kitchen.destroy'
 ])
 
 	.config(function ($stateProvider) {
@@ -30,7 +31,7 @@ angular.module('kitchen', [
 				controller: 'KitchenCreateController as KitchenCtrl'
 			})
 			.state('kitchen.edit', {
-				url: '/edit/{id}',
+				url: '/{id}/edit',
 				templateUrl: 'kitchens/update/template.html',
 				controller: 'KitchenUpdateController as KitchenCtrl'
 			});

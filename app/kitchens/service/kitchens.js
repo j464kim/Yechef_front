@@ -20,6 +20,9 @@ angular.module('kitchen.api', [
 				},
 				update: {
 					method: 'PUT'
+				},
+				destroy: {
+					method: 'DELETE'
 				}
 			});
 		}
@@ -71,10 +74,24 @@ angular.module('kitchen.api', [
 				});
 			}
 
-			function update(kitchen, id) {
+			function update(kitchen, kitchenId) {
 				return $q(function (resolve, reject) {
-					KitchenResource.update(kitchen, id)
-						.$promise.then(function (response) {
+					KitchenResource.update(kitchen,kitchenId)
+					.$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function destroy(kitchenId) {
+				return $q(function (resolve, reject) {
+					KitchenResource.destroy(
+						{
+							id: kitchenId
+						}
+					).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -86,7 +103,8 @@ angular.module('kitchen.api', [
 				list: list,
 				show: show,
 				create: create,
-				update: update
+				update: update,
+				destroy: destroy
 			};
 		}
 	]);

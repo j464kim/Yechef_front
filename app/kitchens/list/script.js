@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kitchen.list', [
-    'kitchen.api',
+    'kitchen.api'
 ])
 
     .controller('KitchenListController', ['$state', 'KitchenAPI',

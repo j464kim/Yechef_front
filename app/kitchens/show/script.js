@@ -1,6 +1,3 @@
-/**
- * Created by Jun on 2017-05-08.
- */
 'use strict';
 
 angular.module('kitchen.show', [
@@ -41,7 +38,6 @@ angular.module('kitchen.show', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.showKitchen = _showKitchen;
 
 
 			/*********************

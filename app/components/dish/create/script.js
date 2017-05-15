@@ -28,9 +28,10 @@ angular.module('dish.create', [
              *    Public Functions
              **********************/
             this.createDish = _createDish;
-            this.reset = function reset() {
-                that.name = '';
-                that.description = '';
+            this.cancel = function cancel() {
+                if (confirm("Do you want to go back?")) {
+                    $state.go('dish.listInfinite');
+                }
             };
 
             /*********************

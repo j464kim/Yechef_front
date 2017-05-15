@@ -36,17 +36,21 @@ angular.module('dish.show', [
                     });
             }
 
-            /*********************
-             *    Public Functions
-             **********************/
-            this.update = function _update() {
+            function _update() {
                 //TODO: Will need to validate the user access control.
                 $state.go('dish.update', {"id": this.dish.id});
             };
-            this.destroy = function _destory() {
+
+            function _destory() {
                 //TODO: Will need to validate the user access control.
                 $state.go('dish.destroy', {"id": this.dish.id});
             };
+
+            /*********************
+             *    Public Functions
+             **********************/
+            this.update = _update;
+            this.destroy = _destory
 
             /*********************
              *    Initialization

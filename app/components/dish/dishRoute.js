@@ -16,33 +16,33 @@ angular.module('dish', [
                 abstract: true,
                 template: '<ui-view/>'
             })
-            .state('dish.list', {
-                url: 'list',
-                templateUrl: '/components/dish/list/template.html',
-                controller: 'DishListController as DishCtrl',
-            })
+            // .state('dish.list', {
+            //     url: 'list',
+            //     templateUrl: '/components/dish/list/template.html',
+            //     controller: 'DishListController as DishCtrl',
+            // })
             .state('dish.listInfinite', {
-                url: 'list/infinite',
+                url: 'es',
                 templateUrl: '/components/dish/listInfinite/template.html',
                 controller: 'DishListInfiniteController as DishCtrl',
             })
             .state('dish.show', {
-                url: '/show/{id}',
+                url: '/{id}',
                 templateUrl: '/components/dish/show/template.html',
                 controller: 'DishShowController as DishCtrl'
             })
             .state('dish.create', {
-                url: '/create',
+                url: '',
                 templateUrl: '/components/dish/create/template.html',
                 controller: 'DishCreateController as DishCtrl',
             })
             .state('dish.update', {
-                url: '/update/{id}',
+                url: '/{id}/edit',
                 templateUrl: '/components/dish/update/template.html',
                 controller: 'DishUpdateController as DishCtrl',
             })
             .state('dish.destroy', {
-                url: '/destroy/{id}',
+                url: '/{id}',
                 controller: 'DishDestroyController as DishCtrl',
             });
     });

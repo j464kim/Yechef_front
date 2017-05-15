@@ -38,10 +38,7 @@ angular.module('dish.update', [
                     });
             }
 
-            /*********************
-             *    Public Functions
-             **********************/
-            this.updateDish = function _updateDish() {
+            function _updateDish() {
                 DishesAPI.update(that.dish.id, that.name, that.description)
                     .then(function (response) {
                         $state.go('dish.show', {"id": response.id});
@@ -50,9 +47,15 @@ angular.module('dish.update', [
                         console.error(response);
                     });
             }
-            this.reset = function reset() {
-                that.name = '';
-                that.description = '';
+
+            /*********************
+             *    Public Functions
+             **********************/
+            this.updateDish = _updateDish;
+            this.cancel = function cancel() {
+                if (confirm("Do you want to go back?")) {
+                    $state.go('dish.show', {"id": dishId});
+                }
             };
 
             /*********************

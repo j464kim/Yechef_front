@@ -10,27 +10,27 @@
         <div class="row">
             <div class="col-md-6">
                 <br/>
-                <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
+                <img ng-src="{{KitchenCtrl.kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
 
                 <div class="kitchenName">
                     <label class="control-label" for="kitchenName">Name:</label>
-                    <input class="card-text" id="kitchenName" ng-model="kitchen.name"/>
+                    <input class="card-text" id="kitchenName" ng-model="KitchenCtrl.kitchen.name"/>
                 </div>
                 <div class="kitchenEmail">
                     <label class="control-label" for="kitchenEmail">Email:</label>
-                    <input class="card-text" id="kitchenEmail" ng-model="kitchen.email"/>
+                    <input class="card-text" id="kitchenEmail" ng-model="KitchenCtrl.kitchen.email"/>
                 </div>
                 <div class="kitchenPhone">
                     <label class="control-label" for="kitchenPhone">Phone:</label>
-                    <input class="card-text" id="kitchenPhone" ng-model="kitchen.phone"/>
+                    <input class="card-text" id="kitchenPhone" ng-model="KitchenCtrl.kitchen.phone"/>
                 </div>
                 <div class="kitchenAddress">
                     <label class="control-label" for="kitchenAddress">Address:</label>
-                    <input class="card-text" id="kitchenAddress" ng-model="kitchen.address"/>
+                    <input class="card-text" id="kitchenAddress" ng-model="KitchenCtrl.kitchen.address"/>
                 </div>
                 <div class="kitchenAddress">
                     <label class="control-label" for="kitchenDescription">Description:</label>
-                    <input class="card-text" id="kitchenDescription" ng-model="kitchen.description"/>
+                    <input class="card-text" id="kitchenDescription" ng-model="KitchenCtrl.kitchen.description"/>
                 </div>
                 <div class="submit">
                     <a ng-click="KitchenCtrl.updateKitchen()" class="btn btn-small btn-primary">Update the Kitchen!</a>

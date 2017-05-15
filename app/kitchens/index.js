@@ -23,7 +23,8 @@ angular.module('kitchen', [
 			})
 			.state('kitchen.show', {
 				url: '/{id}',
-				templateUrl: 'kitchens/show/template.html'
+				templateUrl: 'kitchens/show/template.html',
+				controller: 'KitchenShowController as KitchenCtrl'
 			})
 			.state('kitchen.create', {
 				url: '',

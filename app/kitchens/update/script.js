@@ -4,14 +4,15 @@ angular.module('kitchen.update', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$scope', '$state',
-		function ($stateParams, KitchenAPI, $scope, $state) {
+	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state',
+		function ($stateParams, KitchenAPI, $state) {
 
 			/*********************
 			 *  Private Variables
 			 **********************/
 				// reference to this controller
 
+			var that = this;
 			var kitchenId = $stateParams.id;
 			/*********************
 			 *  Public Variables
@@ -28,7 +29,7 @@ angular.module('kitchen.update', [
 			function _getKitchen() {
 				KitchenAPI.show(kitchenId).then(function (response) {
 					console.log(response);
-					$scope.kitchen = response;
+					that.kitchen = response;
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);
@@ -36,7 +37,7 @@ angular.module('kitchen.update', [
 			}
 
 			function _updateKitchen() {
-				KitchenAPI.update($scope.kitchen, kitchenId).then(function (response) {
+				KitchenAPI.update(that.kitchen, kitchenId).then(function (response) {
 					var updatedKitchen = response;
 					console.log(response);
 					$state.go('kitchen.show', {'id': updatedKitchen.id});

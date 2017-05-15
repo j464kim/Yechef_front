@@ -6,40 +6,38 @@
 <body>
 <div class="container" id="kitchenList" loader>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div ng-controller="KitchenShowController">
-        <br/>
-        <img ng-src="{{kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
+    <div class="row">
+        <div class="col-md-6">
+            <br/>
+            <img ng-src="{{KitchenCtrl.kitchen.media[0].url}}" alt="Card image cap" style="width:100%;">
 
-        <div class="kitchenName">
-          <label class="control-label" for="kitchenName">Name:</label>
-          <span class="card-text" id="kitchenName">{{kitchen.name}}</span>
-        </div>
-        <div class="kitchenEmail">
-          <label class="control-label" for="kitchenEmail">Email:</label>
-          <span class="card-text" id="kitchenEmail">{{kitchen.email}}</span>
-        </div>
-        <div class="kitchenPhone">
-          <label class="control-label" for="kitchenPhone">Phone:</label>
-          <span class="card-text" id="kitchenPhone">{{kitchen.phone}}</span>
-        </div>
-        <div class="kitchenAddress">
-          <label class="control-label" for="kitchenAddress">Address:</label>
-          <span class="card-text" id="kitchenAddress">{{kitchen.address}}</span>
-        </div>
-        <div class="kitchenAddress">
-          <label class="control-label" for="kitchenDescription">Description:</label>
-          <span class="card-text" id="kitchenDescription">{{kitchen.description}}</span>
-        </div>
-        <button ui-sref="kitchen.edit({id: kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
-        </button>
-        <span ng-controller="KitchenDestroyController">
-                    <button ng-click="destroyKitchen()" class="btn btn-danger btn-sm btn-delete">Delete</button>
+            <div class="kitchenName">
+                <label class="control-label" for="kitchenName">Name:</label>
+                <span class="card-text" id="kitchenName">{{KitchenCtrl.kitchen.name}}</span>
+            </div>
+            <div class="kitchenEmail">
+                <label class="control-label" for="kitchenEmail">Email:</label>
+                <span class="card-text" id="kitchenEmail">{{KitchenCtrl.kitchen.email}}</span>
+            </div>
+            <div class="kitchenPhone">
+                <label class="control-label" for="kitchenPhone">Phone:</label>
+                <span class="card-text" id="kitchenPhone">{{KitchenCtrl.kitchen.phone}}</span>
+            </div>
+            <div class="kitchenAddress">
+                <label class="control-label" for="kitchenAddress">Address:</label>
+                <span class="card-text" id="kitchenAddress">{{KitchenCtrl.kitchen.address}}</span>
+            </div>
+            <div class="kitchenAddress">
+                <label class="control-label" for="kitchenDescription">Description:</label>
+                <span class="card-text" id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</span>
+            </div>
+            <button ui-sref="kitchen.edit({id: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
+            </button>
+            <span ng-controller="KitchenDestroyController as vm">
+                    <button ng-click="vm.destroyKitchen()" class="btn btn-danger btn-sm btn-delete">Delete</button>
                 </span>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
 </body>
 </html>

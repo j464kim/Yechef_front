@@ -28,13 +28,13 @@ angular.module('dish.destroy', [
             /*********************
              *    Public Functions
              **********************/
-            function _destroyDish(dishId) {
+            function _destroyDish() {
                 console.log(dishId);
                 //TODO: Probably better to use ng directive to handle confirmation popup
                 if (confirm("Do you want to delete the dish?")) {
                     DishesAPI.destroy(dishId)
                         .then(function (response) {
-                            $state.go('dish.list');
+                            $state.go('dish.listInfinite');
                         }, function (response) {
                             // TODO handle error state
                             console.error(response);

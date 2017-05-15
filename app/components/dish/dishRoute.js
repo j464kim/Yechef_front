@@ -27,22 +27,22 @@ angular.module('dish', [
                 controller: 'DishListInfiniteController as DishCtrl',
             })
             .state('dish.show', {
-                url: '/{id}',
+                url: '/show/{id}',
                 templateUrl: '/components/dish/show/template.html',
                 controller: 'DishShowController as DishCtrl'
             })
             .state('dish.create', {
-                url: '',
+                url: '/new',
                 templateUrl: '/components/dish/create/template.html',
                 controller: 'DishCreateController as DishCtrl',
             })
             .state('dish.update', {
-                url: '/{id}/edit',
+                url: '/edit/{id}',
                 templateUrl: '/components/dish/update/template.html',
                 controller: 'DishUpdateController as DishCtrl',
             })
             .state('dish.destroy', {
-                url: '/{id}',
+                params: {id: {}},
                 controller: 'DishDestroyController as DishCtrl',
             });
     });

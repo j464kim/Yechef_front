@@ -6,8 +6,8 @@
             <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
             <p class="card-text">{{DishCtrl.dish.description}}</p>
 
-            <a ng-click="DishCtrl.update()" class="btn btn-primary">Edit Dish</a>
-            <a ng-click="DishCtrl.destroy()" class="btn btn-primary">Delete</a>
+            <a ui-sref="dish.update({id: DishCtrl.dish.id})" class="btn btn-primary">Edit Dish</a>
+            <a ui-sref="dish.destroy({id: DishCtrl.dish.id})" class="btn btn-primary">Delete</a>
         </div>
     </div>
 </div>

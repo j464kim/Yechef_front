@@ -4,8 +4,8 @@ angular.module('kitchen.update', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
-		function ($stateParams, KitchenAPI, $scope, $location) {
+	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$scope', '$state',
+		function ($stateParams, KitchenAPI, $scope, $state) {
 
 			/*********************
 			 *  Private Variables
@@ -39,7 +39,7 @@ angular.module('kitchen.update', [
 				KitchenAPI.update($scope.kitchen, kitchenId).then(function (response) {
 					var updatedKitchen = response;
 					console.log(response);
-					$location.path('/kitchens/' + updatedKitchen.id);
+					$state.go('kitchen.show', {'id': updatedKitchen.id});
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

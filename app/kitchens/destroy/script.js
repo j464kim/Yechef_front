@@ -2,8 +2,8 @@ angular.module('kitchen.destroy', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
-		function ($stateParams, KitchenAPI, $scope, $location) {
+	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$scope', '$state',
+		function ($stateParams, KitchenAPI, $scope, $state) {
 
 			/*********************
 			 *  Private Variables
@@ -21,11 +21,10 @@ angular.module('kitchen.destroy', [
 			 **********************/
 
 			function _destroyKitchen() {
-				console.log('_destroyKitchen ' + kitchenId);
 				KitchenAPI.destroy(kitchenId).then(function (response) {
 					console.log(response);
 					$scope.kitchen = response;
-					$location.path('/kitchens/list');
+					$state.go('kitchen.list');
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

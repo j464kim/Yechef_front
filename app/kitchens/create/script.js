@@ -4,15 +4,14 @@ angular.module('kitchen.create', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenCreateController', ['$stateParams', 'KitchenAPI', '$scope', '$location',
-		function ($stateParams, KitchenAPI, $scope, $location) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', '$scope',
+		function ($state, KitchenAPI, $scope) {
 
 			/*********************
 			 *  Private Variables
 			 **********************/
 				// reference to this controller
 
-			var that = this;
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -25,7 +24,7 @@ angular.module('kitchen.create', [
 				KitchenAPI.create($scope.kitchen).then(function (response) {
 					var newKitchen = response;
 					console.log(response);
-					$location.path('/kitchens/' + newKitchen.id);
+					$state.go('kitchen.show', {'id': newKitchen.id});
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

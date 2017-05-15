@@ -21,19 +21,20 @@ angular.module('kitchen', [
 				templateUrl: 'kitchens/list/template.html',
 				controller: 'KitchenListController as KitchenCtrl'
 			})
-			.state('kitchen.show', {
-				url: '/{id}',
-				templateUrl: 'kitchens/show/template.html',
-				controller: 'KitchenShowController as KitchenCtrl'
-			})
 			.state('kitchen.create', {
-				url: '',
+				url: '/new',
 				templateUrl: 'kitchens/create/template.html',
 				controller: 'KitchenCreateController as KitchenCtrl'
 			})
 			.state('kitchen.edit', {
-				url: '/{id}/edit',
+				url: '/edit/{id}',
 				templateUrl: 'kitchens/update/template.html',
 				controller: 'KitchenUpdateController as KitchenCtrl'
+			})
+			.state('kitchen.show', {
+				url: '/show/{id}',
+				templateUrl: 'kitchens/show/template.html',
+				controller: 'KitchenShowController as KitchenCtrl'
 			});
+
 	});

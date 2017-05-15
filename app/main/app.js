@@ -23,7 +23,7 @@ angular
 		'http.interceptor',
 	])
 	.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-		//push http interceptor
+		//push http interceptor 
 		$httpProvider.interceptors.push('httpRequestInterceptor');
 
 		// Default route

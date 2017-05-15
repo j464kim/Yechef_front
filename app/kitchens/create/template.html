@@ -10,34 +10,33 @@
     <div class="kitchenName">
         <label class="control-label" for="kitchenName">Name:</label>
         <div class="controls">
-            <input type="text" id="kitchenName" ng-model="kitchen.name" required/>
+            <input type="text" id="kitchenName" ng-model="KitchenCtrl.kitchen.name" required/>
         </div>
     </div>
     <div class="kitchenAddress">
         <label class="control-label" for="kitchenAddress">Address:</label>
         <div class="controls">
-            <input type="text" id="kitchenAddress" ng-model="kitchen.address" required/>
+            <input type="text" id="kitchenAddress" ng-model="KitchenCtrl.kitchen.address" required/>
         </div>
     </div>
     <div class="kitchenPhone">
         <label class="control-label" for="kitchenPhone">Phone:</label>
         <div class="controls">
-            <input type="text" id="kitchenPhone" ng-model="kitchen.phone" required/>
+            <input type="text" id="kitchenPhone" ng-model="KitchenCtrl.kitchen.phone" required/>
         </div>
     </div>
     <div class="kitchenEmail">
         <label class="control-label" for="kitchenEmail">Email:</label>
         <div class="controls">
-            <input type="email" id="kitchenEmail" ng-model="kitchen.email" required/>
+            <input type="email" id="kitchenEmail" ng-model="KitchenCtrl.kitchen.email" required/>
         </div>
     </div>
     <div class="kitchenDescription">
         <label class="control-label" for="kitchenDescription">Description:</label>
         <div class="controls">
-            <input type="text" id="kitchenDescription" ng-model="kitchen.description"/>
+            <input type="text" id="kitchenDescription" ng-model="KitchenCtrl.kitchen.description"/>
         </div>
     </div>
-
     <br/>
     <div class="submit">
         <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>

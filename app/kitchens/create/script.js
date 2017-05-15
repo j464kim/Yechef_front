@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', '$scope',
-		function ($state, KitchenAPI, $scope) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI',
+		function ($state, KitchenAPI) {
 
 			/*********************
 			 *  Private Variables
@@ -15,13 +15,14 @@ angular.module('kitchen.create', [
 			/*********************
 			 *  Public Variables
 			 **********************/
+			var that = this;
 
 			/*********************
 			 *  Private Functions
 			 **********************/
 
 			function _createKitchen() {
-				KitchenAPI.create($scope.kitchen).then(function (response) {
+				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
 					console.log(response);
 					$state.go('kitchen.show', {'id': newKitchen.id});

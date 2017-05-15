@@ -32,7 +32,7 @@ angular.module('kitchen.list', [
 
                 KitchenAPI.list(pageNum).then(function (response) {
                     console.log(response);
-                    that.kitchens = response.data;
+                    that.kitchens = that.kitchens.concat(response.data);
                     that.totalItems = response.total;
                     that.currentPage = response.currentPage;
                 }, function (response) {

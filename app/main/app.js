@@ -17,6 +17,7 @@ angular
 
         // main modules
         'dish',
+		'kitchen',
 
         // services
         'http.interceptor',

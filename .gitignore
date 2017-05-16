@@ -3,3 +3,15 @@
 /.tmp
 /.sass-cache
 /bower_components
+
+.idea/workspace.xml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+.idea/Yechef_front.iml
+
+.idea/jsLibraryMappings.xml
+
+*.xml

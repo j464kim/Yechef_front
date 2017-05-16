@@ -36,21 +36,9 @@ angular.module('dish.show', [
                     });
             }
 
-            // function _update() {
-            //     //TODO: Will need to validate the user access control.
-            //     $state.go('dish.update', {"id": this.dish.id});
-            // };
-            //
-            // function _destroy() {
-            //     //TODO: Will need to validate the user access control.
-            //     $state.go('dish.destroy', {"id": this.dish.id});
-            // };
-            //
             // /*********************
             //  *    Public Functions
             //  **********************/
-            // this.update = _update;
-            // this.destroy = _destroy
 
             /*********************
              *    Initialization
@@ -60,7 +48,5 @@ angular.module('dish.show', [
             /*********************
              *    EVENTS
              **********************/
-
-
         }
     ])

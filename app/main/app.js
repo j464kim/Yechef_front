@@ -18,7 +18,8 @@ angular
 		// main modules
 		'dish',
 		'kitchen',
-		'myAppName',
+		'dropzone',
+		'mediaUpload',
 
 		// services
 		'http.interceptor',
@@ -31,8 +32,9 @@ angular
 		$stateProvider
 			.state('home', {
 				url: '/',
-				templateUrl: 'homepage/template.html'
+				templateUrl: 'homepage/template.html',
 			});
+
 		// For any unmatched url, redirect to /
 		$urlRouterProvider.otherwise('/');
 	});

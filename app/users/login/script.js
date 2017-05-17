@@ -1,8 +1,16 @@
 'use strict';
 
 angular.module('user.login', [
-	'user.api'
+	'user.api',
+	'satellizer'
 ])
+
+.config(function($authProvider) {
+
+    $authProvider.facebook({
+      clientId: '789389204557240'
+    });
+})
 
 .controller('UserLoginController', ['$state', 'UserAPI',
 	function($state, UserAPI){
@@ -16,9 +24,6 @@ angular.module('user.login', [
 		/*********************
 		*	Public Variables
 		**********************/
-		this.totalItems = 0;
-		this.currentPage = 0;
-
 		/*********************
 		*	Private Functions
 		**********************/
@@ -26,17 +31,13 @@ angular.module('user.login', [
 		function _init() {	
 		}
 
-		function _login() {
-			UserAPI.login().then(function(response) {
-				console.log(response);
-			}, function(response) {
-				console.error(response);
-			});
+		function _socialLogin() {
+			console.log("12312");
 		}
 		/*********************
 		*	Public Functions
 		**********************/
-		this.login = _login;
+		this.socialLogin = _socialLogin;
 
 
 		/*********************
@@ -51,4 +52,4 @@ angular.module('user.login', [
 
 		
 	}
-])
+]);

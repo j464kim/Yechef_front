@@ -14,7 +14,7 @@ angular.module('user', [
 		})
 		.state('user.login', {
 			url: 'login',
-			templateUrl: 'users/login/template.html',
+			templateUrl: 'components/users/login/template.html',
 			controller: 'UserLoginController as LoginCtrl',
 		});
 });

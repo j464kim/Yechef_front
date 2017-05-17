@@ -2,18 +2,20 @@
 
 angular.module('user.login', [
 	'user.api',
-	'satellizer'
+	'satellizer',
+	'configuration'
 ])
 
-.config(function($authProvider) {
+.config(function($authProvider, config) {
 
     $authProvider.facebook({
-      clientId: '789389204557240'
+      clientId: config.facebookAppId,
+      url: config.endpoint + 'auth/facebook',
     });
 })
 
-.controller('UserLoginController', ['$state', 'UserAPI',
-	function($state, UserAPI){
+.controller('UserLoginController', ['$state', 'UserAPI', '$auth',
+	function($state, UserAPI, $auth){
 
 		/*********************
 		*	Private Variables
@@ -31,8 +33,8 @@ angular.module('user.login', [
 		function _init() {	
 		}
 
-		function _socialLogin() {
-			console.log("12312");
+		function _socialLogin(provider) {
+			$auth.authenticate(provider).then();
 		}
 		/*********************
 		*	Public Functions

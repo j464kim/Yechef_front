@@ -14,6 +14,10 @@ angular.module('configuration', [])
         var productAPI = '//laravel.dev/api/';
 
 
+        // social configurations
+        var facebookAppId = '789389204557240';
+
+
         /* jshint undef: false */
         switch (env) {
             case 'DEBUG':
@@ -34,6 +38,7 @@ angular.module('configuration', [])
             env: env,
             debugMode: debugMode,
             endpoint: endpoint,
+            facebookAppId : facebookAppId
         };
 
     })());

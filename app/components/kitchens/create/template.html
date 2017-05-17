@@ -37,6 +37,12 @@
             <input type="text" id="kitchenDescription" ng-model="KitchenCtrl.kitchen.description"/>
         </div>
     </div>
+    <div class="kitchenImage">
+        <label class="control-label" for="kitchenImage">Image:</label>
+        <div class="controls">
+            <input type="file" id="kitchenImage"/>
+        </div>
+    </div>
     <br/>
     <div class="submit">
         <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>

@@ -8,27 +8,27 @@
 
 <form novalidate name="kitchenCreateForm" class="css-validation">
     <div class="kitchenName">
-        <label class="control-label" for="kitchenName">Name:</label>
+        <label class="control-label" for="name">Name:</label>
         <div class="controls">
-            <input type="text" id="kitchenName" ng-model="KitchenCtrl.kitchen.name" required/>
+            <input type="text" id="name" ng-model="KitchenCtrl.kitchen.name" required/>
         </div>
     </div>
     <div class="kitchenAddress">
-        <label class="control-label" for="kitchenAddress">Address:</label>
+        <label class="control-label" for="address">Address:</label>
         <div class="controls">
-            <input type="text" id="kitchenAddress" ng-model="KitchenCtrl.kitchen.address" required/>
+            <input type="text" id="address" ng-model="KitchenCtrl.kitchen.address" required/>
         </div>
     </div>
     <div class="kitchenPhone">
-        <label class="control-label" for="kitchenPhone">Phone:</label>
+        <label class="control-label" for="phone">Phone:</label>
         <div class="controls">
-            <input type="text" id="kitchenPhone" ng-model="KitchenCtrl.kitchen.phone" required/>
+            <input type="text" id="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
         </div>
     </div>
     <div class="kitchenEmail">
-        <label class="control-label" for="kitchenEmail">Email:</label>
+        <label class="control-label" for="email">Email:</label>
         <div class="controls">
-            <input type="email" id="kitchenEmail" ng-model="KitchenCtrl.kitchen.email" required/>
+            <input type="email" id="email" ng-model="KitchenCtrl.kitchen.email" required/>
         </div>
     </div>
     <div class="kitchenDescription">
@@ -41,13 +41,14 @@
         <label class="control-label" for="kitchenImage">Image:</label>
         <div class="controls">
             <div ng-app="mediaUpload" ng-controller="MediaController">
-                <div class="dropzone" id="kitchenImage" options="dzOptions" methods="dzMethods" dropzone="dropzoneConfig" ng-dropzone></div>
+                <div class="dropzone" id="kitchenImage" dropzone="dropzoneConfig" ng-dropzone></div>
+                <a type="submit" id="submit-media" class="btn btn-small btn-primary">Create a Kitchen!</a>
             </div>
         </div>
     </div>
     <br/>
     <div class="submit">
-        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
+        <!--<a type="submit" ng-click="KitchenCtrl.createKitchen()" id="submit-media" class="btn btn-small btn-primary">Create a Kitchen!</a>-->
         <a type="button" ui-sref="kitchen.list" class="btn btn-small">cancel</a>
     </div>
     <br/>

@@ -65,12 +65,14 @@ angular.module('dishes.api', [
                 });
             };
 
-            function create(name, description) {
+            function create(name, description, price, kitchen_id) {
                 return $q(function (resolve, reject) {
                     DishesResource.create(
                         {
                             name: name,
-                            description: description
+                            description: description,
+                            price: price,
+                            kitchen_id: kitchen_id,
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);
@@ -80,13 +82,15 @@ angular.module('dishes.api', [
                 });
             };
 
-            function update(dishId, name, description) {
+            function update(dishId, name, description, price, kitchen_id) {
                 return $q(function (resolve, reject) {
                     DishesResource.update(
                         {
                             id: dishId,
                             name: name,
-                            description: description
+                            description: description,
+                            price: price,
+                            kitchen_id: kitchen_id,
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);

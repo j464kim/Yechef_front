@@ -4,6 +4,14 @@
         <input type="text" ng-model="DishCtrl.name"><br>
         Description:<br>
         <textarea ng-model="DishCtrl.description"/><br>
+        <div class="DishImage">
+            <label class="control-label" for="DishImage">Image:</label>
+            <div class="controls">
+                <div ng-app="mediaUpload" ng-controller="MediaController">
+                    <div class="dropzone" id="DishImage" options="dzOptions" methods="dzMethods" dropzone="dropzoneConfig" ng-dropzone></div>
+                </div>
+            </div>
+        </div>
         <br><br>
         <a ng-click="DishCtrl.createDish()" class="btn btn-primary">Create</a>
         <a ng-click="DishCtrl.cancel()" class="btn btn-primary">Cancel</a>

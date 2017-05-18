@@ -40,7 +40,9 @@
     <div class="kitchenImage">
         <label class="control-label" for="kitchenImage">Image:</label>
         <div class="controls">
-            <input type="file" id="kitchenImage"/>
+            <div ng-app="mediaUpload" ng-controller="MediaController">
+                <div class="dropzone" id="kitchenImage" options="dzOptions" methods="dzMethods" dropzone="dropzoneConfig" ng-dropzone></div>
+            </div>
         </div>
     </div>
     <br/>

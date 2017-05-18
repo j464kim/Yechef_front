@@ -1,0 +1,55 @@
+<div class="container" id="RatingList" loader>
+    <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+    <div class="row">
+        <h1>Average Rating:</h1>
+        <div class="average">
+            Taste: {{DishCtrl.avg.taste_rating}}
+            <ng-rate-it ng-model="DishCtrl.avg.taste_rating" max="5" read-only="true"></ng-rate-it>
+            Visual: {{DishCtrl.avg.visual_rating}}
+            <ng-rate-it ng-model="DishCtrl.avg.visual_rating" max="5" read-only="true"></ng-rate-it>
+            Quantity: {{DishCtrl.avg.quantity_rating}}
+            <ng-rate-it ng-model="DishCtrl.avg.quantity_rating" max="5" read-only="true"></ng-rate-it>
+        </div>
+        <div class="row">
+            TODO: Seperate RATE CREATE PAGE FOR BETTER UX AND USER FLOW <br>
+
+            Taste
+            <ng-rate-it ng-model="DishCtrl.taste" step="1.0"></ng-rate-it>
+            {{DishCtrl.taste}}
+            <br/>
+            Visual
+            <ng-rate-it ng-model="DishCtrl.visual" step="1.0"></ng-rate-it>
+            {{DishCtrl.visual}}
+            <br/>
+            Quantity
+            <ng-rate-it ng-model="DishCtrl.quantity" step="1.0"></ng-rate-it>
+            {{DishCtrl.quantity}}
+            <br/>
+            Description:<br>
+            <textarea ng-model="DishCtrl.comment"/><br>
+            <br><br>
+            <a ng-click="DishCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
+
+        </div>
+        <div class="row" ng-repeat="rating in DishCtrl.ratings">
+            <br>
+            <div><strong>Author:</strong>
+                {{rating.author_id}}
+            </div>
+            <div><strong>Taste:</strong> {{rating.taste_rating}}
+                <ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
+            </div>
+            <div><strong>Visual:</strong> {{rating.visual_rating}}
+                <ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
+            </div>
+            <div><strong>Quantity:</strong> {{rating.quantity_rating}}
+                <ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
+            </div>
+            <div><strong>Comment:</strong>
+                {{rating.comment}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="btn btn-primary" ng-click="DishCtrl.getRatings()">Load More</a>

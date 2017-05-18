@@ -14,9 +14,11 @@ angular
         'ui.router',
         'satellizer',
         'ui.bootstrap',
+        'ngRateIt',
 
         // main modules
         'dish',
+		'rating',
 		'kitchen',
 
         // services

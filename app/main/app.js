@@ -20,12 +20,14 @@ angular
 		'kitchen',
 		'mediaUpload',
 
-		// services
-		'http.interceptor',
-	])
-	.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-		//push http interceptor
-		$httpProvider.interceptors.push('httpRequestInterceptor');
+        // services
+        'http.interceptor',
+
+    // dev helper
+        'dev',
+    ]).config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+        //push http interceptor
+        $httpProvider.interceptors.push('httpRequestInterceptor');
 
 		// Default route
 		$stateProvider

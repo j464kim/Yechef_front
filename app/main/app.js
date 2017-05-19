@@ -23,6 +23,9 @@ angular
 
         // services
         'http.interceptor',
+
+        // dev helper
+        'dev',
     ])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //push http interceptor

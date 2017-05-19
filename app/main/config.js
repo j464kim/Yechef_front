@@ -16,6 +16,7 @@ angular.module('configuration', [])
 
         // social configurations
         var facebookAppId = '789389204557240';
+        var googleAppId = '716914948245-t5k325iea7jmqhk8kolu59cdt6v4ssrr.apps.googleusercontent.com';
 
 
         /* jshint undef: false */
@@ -38,7 +39,8 @@ angular.module('configuration', [])
             env: env,
             debugMode: debugMode,
             endpoint: endpoint,
-            facebookAppId : facebookAppId
+            facebookAppId : facebookAppId,
+            googleAppId: googleAppId
         };
 
     })());

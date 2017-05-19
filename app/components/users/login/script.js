@@ -8,6 +8,11 @@ angular.module('user.login', [
 
 .config(function($authProvider, config) {
 
+    $authProvider.google({
+      clientId: config.googleAppId,
+      url: config.endpoint + 'auth/google',
+    });
+
     $authProvider.facebook({
       clientId: config.facebookAppId,
       url: config.endpoint + 'auth/facebook',
@@ -34,7 +39,18 @@ angular.module('user.login', [
 		}
 
 		function _socialLogin(provider) {
-			$auth.authenticate(provider).then();
+			$auth.authenticate(provider).then(
+				function(response) {
+					console.log(response);
+				},
+				function(response) {
+					console.error(response);
+				}
+			);
+		}
+
+		function _exchangeAccessToken() {
+
 		}
 		/*********************
 		*	Public Functions

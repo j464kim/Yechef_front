@@ -18,7 +18,6 @@ angular
 		// main modules
 		'dish',
 		'kitchen',
-		'dropzone',
 		'mediaUpload',
 
 		// services

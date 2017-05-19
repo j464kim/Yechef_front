@@ -38,17 +38,16 @@
         </div>
     </div>
     <div class="kitchenImage">
-        <label class="control-label" for="kitchenImage">Image:</label>
+        <label class="control-label" for="dropzone">Image:</label>
         <div class="controls">
             <div ng-app="mediaUpload" ng-controller="MediaController">
-                <div class="dropzone" id="kitchenImage" dropzone="dropzoneConfig" ng-dropzone></div>
-                <a type="submit" id="submit-media" class="btn btn-small btn-primary">Create a Kitchen!</a>
+                <div class="dropzone" id="dropzone" ng-dropzone></div>
             </div>
         </div>
     </div>
     <br/>
     <div class="submit">
-        <!--<a type="submit" ng-click="KitchenCtrl.createKitchen()" id="submit-media" class="btn btn-small btn-primary">Create a Kitchen!</a>-->
+        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
         <a type="button" ui-sref="kitchen.list" class="btn btn-small">cancel</a>
     </div>
     <br/>

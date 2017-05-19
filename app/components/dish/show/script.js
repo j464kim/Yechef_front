@@ -28,6 +28,7 @@ angular.module('dish.show', [
             this.visual = 0;
             this.quantity = 0;
             this.comment = '';
+            this.dishId = dishId;
             /*********************
              *    Private Functions
              **********************/
@@ -52,24 +53,26 @@ angular.module('dish.show', [
             function _getRatings() {
                 var pageNum = that.currentPage || that.currentPage++;
 
-                RatingAPI.list(dishId, '', pageNum).then(function (response) {
-                    console.log(response);
-                    that.ratings = that.ratings.concat(response.data);
-                    that.totalItems = response.total;
-                    that.currentPage = response.currentPage;
-                }, function (response) {
-                    // TODO handle error state ie. front end display
-                    console.error(response);
-                });
+                RatingAPI.list(dishId, '', pageNum).then(
+                    function (response) {
+                        console.log(response);
+                        that.ratings = that.ratings.concat(response.data);
+                        that.totalItems = response.total;
+                        that.currentPage = response.currentPage;
+                    }, function (response) {
+                        // TODO handle error state ie. front end display
+                        console.error(response);
+                    });
             }
 
             function _getAverage() {
-                RatingAPI.list(dishId, 'avg', 0).then(function (response) {
-                    console.log(response);
-                    that.avg = response;
-                }, function (response) {
-                    console.error(response);
-                });
+                RatingAPI.list(dishId, 'avg', 0).then(
+                    function (response) {
+                        console.log(response);
+                        that.avg = response;
+                    }, function (response) {
+                        console.error(response);
+                    });
             }
 
             // /*********************
@@ -78,8 +81,18 @@ angular.module('dish.show', [
             this.getRatings = _getRatings;
             this.getAvg = _getAverage;
             this.rateDish = function () {
-                alert("Taste: " + this.taste + " Visual: " + this.visual + " Quantity: " + this.quantity + "Comment: " + this.comment);
-            }
+                RatingAPI.create(dishId, that.taste, that.visual, that.quantity, that.comment).then(
+                    function (response) {
+                        $state.reload();
+                    })
+            };
+            this.destroyRating = function ($ratingId) {
+                RatingAPI.destroy(dishId, $ratingId).then(
+                    function (response) {
+                        $state.reload();
+                    }
+                )
+            };
 
             /*********************
              *    Initialization

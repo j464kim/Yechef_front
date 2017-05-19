@@ -68,12 +68,11 @@ angular.module('rating.api', [
             };
 
             //TODO: Author
-            function create(dishId, ratingId, taste_rating, visual_rating, quantity_rating, comment) {
+            function create(dishId, taste_rating, visual_rating, quantity_rating, comment) {
                 return $q(function (resolve, reject) {
                     RatingResource.create(
                         {
                             dishId: dishId,
-                            ratingId: ratingId,
                             taste_rating: taste_rating,
                             visual_rating: visual_rating,
                             quantity_rating: quantity_rating,

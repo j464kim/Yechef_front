@@ -15,7 +15,7 @@ angular.module('dish.create', [
 
             function _createDish() {
                 //TODO: Add User permission so that only registered users can create dish
-                DishesAPI.create(that.name, that.description)
+                DishesAPI.create(that.name, that.description, that.price, that.kitchen_id)
                     .then(function (response) {
                         $state.go('dish.show', {"id": response.id});
                     }, function (response) {

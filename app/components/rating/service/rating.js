@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('dishes.api', [
+angular.module('rating.api', [
     'configuration'
 ])
 
-    .factory('DishesResource', ['$resource', 'config',
+    .factory('RatingResource', ['$resource', 'config',
         function ($resource, config) {
-            var api_endpoint = config.endpoint + 'dishes/';
+            var api_endpoint = config.endpoint + 'dishes/:dishId/rating/';
 
-            return $resource(api_endpoint + ':id', {id: '@id'}, {
+            return $resource(api_endpoint + ':ratingId', {dishId: '@dishId', ratingId: '@ratingId'}, {
                 list: {
                     method: 'GET',
                 },
@@ -28,18 +28,19 @@ angular.module('dishes.api', [
         }
     ])
 
-    .service('DishesAPI', ['$q', 'DishesResource',
-        function ($q, DishesResource) {
+    .service('RatingAPI', ['$q', 'RatingResource',
+        function ($q, RatingResource) {
 
-            function list(pageNum) {
+            function list(dishId, ratingId, pageNum) {
                 if (isNaN(pageNum)) {
                     return;
                 }
                 pageNum = pageNum || 0;
-
                 return $q(function (resolve, reject) {
-                    DishesResource.list(
+                    RatingResource.list(
                         {
+                            dishId: dishId,
+                            ratingId: ratingId,
                             page: pageNum
                         }
                     ).$promise.then(function (response) {
@@ -50,12 +51,13 @@ angular.module('dishes.api', [
                 });
             };
 
-            function show(dishId) {
+            function show(dishId, ratingId) {
 
                 return $q(function (resolve, reject) {
-                    DishesResource.show(
+                    RatingResource.show(
                         {
-                            id: dishId
+                            dishId: dishId,
+                            ratingId: ratingId
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);
@@ -65,14 +67,17 @@ angular.module('dishes.api', [
                 });
             };
 
-            function create(name, description, price, kitchen_id) {
+            //TODO: Author
+            function create(dishId, ratingId, taste_rating, visual_rating, quantity_rating, comment) {
                 return $q(function (resolve, reject) {
-                    DishesResource.create(
+                    RatingResource.create(
                         {
-                            name: name,
-                            description: description,
-                            price: price,
-                            kitchen_id: kitchen_id,
+                            dishId: dishId,
+                            ratingId: ratingId,
+                            taste_rating: taste_rating,
+                            visual_rating: visual_rating,
+                            quantity_rating: quantity_rating,
+                            comment: comment
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);
@@ -82,15 +87,16 @@ angular.module('dishes.api', [
                 });
             };
 
-            function update(dishId, name, description, price, kitchen_id) {
+            function update(dishId, ratingId, taste_rating, visual_rating, quantity_rating, comment) {
                 return $q(function (resolve, reject) {
-                    DishesResource.update(
+                    RatingResource.update(
                         {
-                            id: dishId,
-                            name: name,
-                            description: description,
-                            price: price,
-                            kitchen_id: kitchen_id,
+                            dishId: dishId,
+                            ratingId: ratingId,
+                            taste_rating: taste_rating,
+                            visual_rating: visual_rating,
+                            quantity_rating: quantity_rating,
+                            comment: comment
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);
@@ -100,12 +106,13 @@ angular.module('dishes.api', [
                 });
             };
 
-            function destroy(dishId) {
+            function destroy(dishId, ratingId) {
 
                 return $q(function (resolve, reject) {
-                    DishesResource.destroy(
+                    RatingResource.destroy(
                         {
-                            id: dishId,
+                            dishId: dishId,
+                            ratingId: ratingId,
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);

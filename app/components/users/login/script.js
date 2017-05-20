@@ -2,25 +2,13 @@
 
 angular.module('user.login', [
 	'user.api',
-	'satellizer',
-	'configuration'
+	'configuration',
+	'LocalStorageModule'
 ])
 
-.config(function($authProvider, config) {
 
-    $authProvider.google({
-      clientId: config.googleAppId,
-      url: config.endpoint + 'auth/google',
-    });
-
-    $authProvider.facebook({
-      clientId: config.facebookAppId,
-      url: config.endpoint + 'auth/facebook',
-    });
-})
-
-.controller('UserLoginController', ['$state', 'UserAPI', '$auth',
-	function($state, UserAPI, $auth){
+.controller('UserLoginController', ['$state', 'UserAPI', 'localStorageService',
+	function($state, UserAPI, localStorageService){
 
 		/*********************
 		*	Private Variables
@@ -31,6 +19,9 @@ angular.module('user.login', [
 		/*********************
 		*	Public Variables
 		**********************/
+		this.email = '';
+		this.password = '';
+
 		/*********************
 		*	Private Functions
 		**********************/
@@ -38,9 +29,16 @@ angular.module('user.login', [
 		function _init() {	
 		}
 
-		function _socialLogin(provider) {
-			$auth.authenticate(provider).then(
+		function _login() {
+			UserAPI.login(
+				this.email,
+				this.password
+			).then(
 				function(response) {
+					//set access token
+					localStorageService.set('access_token', response.access_token);
+					localStorageService.set('refresh_token', response.refresh_token);
+					localStorageService.set('expires_in', response.expires_in);
 					console.log(response);
 				},
 				function(response) {
@@ -49,13 +47,43 @@ angular.module('user.login', [
 			);
 		}
 
-		function _exchangeAccessToken() {
+		function _socialLogin(provider) {
+			UserAPI.socialLogin(
+				provider
+			).then(
+				function(response) {
+					//set access token
+					localStorageService.set('access_token', response.access_token);
+					localStorageService.set('refresh_token', response.refresh_token);
+					localStorageService.set('expires_in', response.expires_in);
+					console.log(response);
+				},
+				function(response) {
+					console.error(response);
+				}
+			);
+		}
 
+		function _logout() {
+			UserAPI.logout().then(
+				function(response) {
+					//remove access token
+					localStorageService.remove('access_token');
+					localStorageService.remove('refresh_token');
+					localStorageService.remove('expires_in');
+					console.log(response);
+				},
+				function(response) {
+					console.error(response);
+				}
+			);
 		}
 		/*********************
 		*	Public Functions
 		**********************/
+		this.login = _login;
 		this.socialLogin = _socialLogin;
+		this.logout = _logout;
 
 
 		/*********************

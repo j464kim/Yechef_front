@@ -4,11 +4,21 @@ angular.module('http.interceptor', [
     'configuration'
 ])
 
-    .factory('httpRequestInterceptor', ['$q', 'config',
-        function ($q, config) {
+    .factory('httpRequestInterceptor', ['$q', 'config', 'localStorageService',
+        function ($q, config, localStorageService) {
 
-            var request = function (config) {
-                return config;
+            var request = function (httpConfig) {
+                httpConfig.headers = httpConfig.headers || {};
+
+                httpConfig.headers.Authorization = 'Bearer ' + localStorageService.get('access_token');
+
+                httpConfig.params = httpConfig.params || {};
+                // inser PHPStorm debug session when in debug mode
+                // console.log();
+                if(config.debugMode === true){
+                    httpConfig.params.XDEBUG_SESSION_START = "PHPSTORM";
+                }
+                return httpConfig;
             };
 
 

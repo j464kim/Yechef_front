@@ -1,21 +1,22 @@
-angular.module('mediaUpload', [])
+angular.module('mediaUpload', ['configuration'])
 
-	.controller('MediaController', ['$scope', function ($scope) {
+	.controller('MediaController', ['$scope', 'config', function ($scope, config) {
+		console.log(config.endpoint);
 
 		/*********************
 		 *  Private Functions
 		 **********************/
 		function _dropzoneInit() {
 			var myDropzone = new Dropzone('#dropzone', {
-				url: '//laravel.dev/api/media',
+				url: config.endpoint + 'media/',
 				method: 'POST',
-				maxFiles: 3,
-				maxFileSize: 4, // 4mb
-				acceptedFiles: 'image/jpeg, images/jpg, image/png',
-				parallelUploads: 10,
-				uploadMultiple: true,
-				autoProcessQueue: false,
-				addRemoveLinks: true,
+				maxFiles: config.maxFiles,
+				maxFileSize: config.maxFileSize,
+				acceptedFiles: config.acceptedFiles,
+				parallelUploads: config.parallelUploads,
+				uploadMultiple: config.uploadMultiple,
+				autoProcessQueue: config.autoProcessQueue,
+				addRemoveLinks: config.addRemoveLinks,
 				init: function () {
 					myDropzone = this; // closure
 

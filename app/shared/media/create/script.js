@@ -1,7 +1,6 @@
 angular.module('mediaUpload', ['configuration'])
 
-	.controller('MediaController', ['$scope', 'config', function ($scope, config) {
-		console.log(config.endpoint);
+	.controller('MediaController', ['config', function (config) {
 
 		/*********************
 		 *  Private Functions
@@ -21,7 +20,6 @@ angular.module('mediaUpload', ['configuration'])
 					myDropzone = this; // closure
 
 					myDropzone.on("complete", function (file) {
-						// alert("Image is uploaded.");
 						myDropzone.removeFile(file);
 					});
 

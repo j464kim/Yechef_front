@@ -29,7 +29,6 @@ angular.module('kitchen.create', [
 
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
-					console.log('new Kitchen is: ');
 					console.log(newKitchen);
 
 					_uploadKitchenMedia(newKitchen);
@@ -47,8 +46,6 @@ angular.module('kitchen.create', [
 				var dropzoneInstance = Dropzone.forElement("#dropzone");
 
 				dropzoneInstance.on("sending", function (file, xhr, formData) {
-					console.log('mediable id is: ');
-					console.log(response.id);
 					formData.append('mediable_id', response.id);
 					formData.append('mediable_type', 'App\\Models\\Kitchen');
 				});

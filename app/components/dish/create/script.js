@@ -18,7 +18,6 @@ angular.module('dish.create', [
 				DishesAPI.create(that.name, that.description)
 					.then(function (response) {
 						var newDish = response;
-						console.log('new Dish is: ');
 						console.log(newDish);
 
 						_uploadDishMedia(newDish);
@@ -36,8 +35,6 @@ angular.module('dish.create', [
 				var dropzoneInstance = Dropzone.forElement("#dropzone");
 
 				dropzoneInstance.on("sending", function (file, xhr, formData) {
-					console.log('mediable id is: ');
-					console.log(response.id);
 					formData.append('mediable_id', response.id);
 					formData.append('mediable_type', 'App\\Models\\Dish');
 				});

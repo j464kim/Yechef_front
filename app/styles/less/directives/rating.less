@@ -1,4 +1,9 @@
 @import "../../../../node_modules/compass-mixins/lib/compass/css3";
+
+@filled_star_color: #666;
+@readonly_filled_star_color: #fd0;
+@empty_star_color: #ddd;
+
 .rating {
     margin: 0;
     padding: 0;
@@ -6,18 +11,18 @@
 
 li {
     padding: 1px;
-    color: #ddd;
+    color: @empty_star_color;
     font-size: 20px;
     text-shadow: .05em .05em #aaa;
     list-style-type: none;
     display: inline-block;
     cursor: pointer;
 &.filled {
-     color: #fd0; //#21568b
+     color: @readonly_filled_star_color; //#21568b
  }
 }
 &.readonly li.filled {
-     color: #666;
+     color: @filled_star_color;
  }
 }
 

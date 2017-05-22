@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dish.show', [
-    'dishes.api', 'rating.api',
+    'dishes.api',
+    'rating.api',
 ])
 
     .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'RatingAPI',
@@ -12,7 +13,6 @@ angular.module('dish.show', [
              **********************/
                 // reference to this controller
             var that = this;
-            var dishId = $stateParams.id;
 
             /*********************
              *    Public Variables
@@ -22,13 +22,13 @@ angular.module('dish.show', [
             this.ratings = [];
             this.avg = [];
             this.readonly = true;
+            this.dishId = $stateParams.id;
 
             //Rating Inputs
             this.taste = 0;
             this.visual = 0;
             this.quantity = 0;
             this.comment = '';
-            this.dishId = dishId;
             /*********************
              *    Private Functions
              **********************/
@@ -40,7 +40,7 @@ angular.module('dish.show', [
             }
 
             function _showDish() {
-                DishesAPI.show(dishId)
+                DishesAPI.show(that.dishId)
                     .then(function (response) {
                         that.dish = response;
                     }, function (response) {
@@ -53,7 +53,7 @@ angular.module('dish.show', [
             function _getRatings() {
                 var pageNum = that.currentPage || that.currentPage++;
 
-                RatingAPI.list(dishId, '', pageNum).then(
+                RatingAPI.list(that.dishId, '', pageNum).then(
                     function (response) {
                         console.log(response);
                         that.ratings = that.ratings.concat(response.data);
@@ -66,7 +66,7 @@ angular.module('dish.show', [
             }
 
             function _getAverage() {
-                RatingAPI.list(dishId, 'avg', 0).then(
+                RatingAPI.list(that.dishId, 'avg', 0).then(
                     function (response) {
                         console.log(response);
                         that.avg = response;
@@ -81,15 +81,19 @@ angular.module('dish.show', [
             this.getRatings = _getRatings;
             this.getAvg = _getAverage;
             this.rateDish = function () {
-                RatingAPI.create(dishId, that.taste, that.visual, that.quantity, that.comment).then(
+                RatingAPI.create(that.dishId, that.taste, that.visual, that.quantity, that.comment).then(
                     function (response) {
                         $state.reload();
+                    }, function (response) {
+                        console.error(response);
                     })
             };
             this.destroyRating = function ($ratingId) {
-                RatingAPI.destroy(dishId, $ratingId).then(
+                RatingAPI.destroy(that.dishId, $ratingId).then(
                     function (response) {
                         $state.reload();
+                    }, function (response) {
+                        console.error(response);
                     }
                 )
             };

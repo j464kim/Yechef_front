@@ -107,4 +107,4 @@ angular.module('dish.show', [
              *    EVENTS
              **********************/
         }
-    ])
+    ]);

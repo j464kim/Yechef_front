@@ -52,3 +52,4 @@ grunt serve
 
 ## TODO
 - implement the tests, try to make this project as a test driven project 
+- For social login, implement the satellizer cordova plugin https://github.com/sahat/satellizer

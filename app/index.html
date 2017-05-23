@@ -43,8 +43,9 @@
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li><a ui-sref="dish.listInfinite">Dishes</a></li>
-            <li><a ui-sref="kitchen.list">Kitchens</a></li>
+                <li><a ui-sref="dish.listInfinite">Dishes</a></li>
+                <li><a ui-sref="kitchen.list">Kitchens</a></li>
+                <li><a ui-sref="user.login">Login</a></li>
             </ul>
           </div>
         </div>
@@ -89,6 +90,7 @@
 <script src="bower_components/satellizer/dist/satellizer.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
 <script src="bower_components/filereader.js/filereader.js"></script>
 <script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
@@ -117,6 +119,10 @@
 <script src="components/kitchens/destroy/script.js"></script>
 <script src="components/kitchens/service/kitchens.js"></script>
 <script src="shared/media/create/script.js"></script>
+
+<script src="components/users/index.js"></script>
+<script src="components/users/service/users.js"></script>
+<script src="components/users/login/script.js"></script>
 
 <!-- directives -->
 <script src="directives/loader/loader.js"></script>

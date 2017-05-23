@@ -18,6 +18,7 @@ angular
 		// main modules
 		'dish',
 		'kitchen',
+        'user',
 		'mediaUpload',
 
         // services

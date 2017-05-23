@@ -33,7 +33,7 @@ angular.module('dishes.api', [
 
             function list(pageNum) {
                 if (isNaN(pageNum)) {
-                    return;
+                    //return;
                 }
                 pageNum = pageNum || 0;
 

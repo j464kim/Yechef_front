@@ -33,7 +33,7 @@ angular.module('rating.api', [
 
             function list(dishId, ratingId, pageNum) {
                 if (isNaN(pageNum)) {
-                    return;
+                    //return;
                 }
                 pageNum = pageNum || 0;
                 return $q(function (resolve, reject) {

@@ -14,9 +14,10 @@ angular.module('http.interceptor', [
 
                 httpConfig.params = httpConfig.params || {};
                 // inser PHPStorm debug session when in debug mode
-                // console.log();
+                // console.log(httpConfig);
                 if(config.debugMode === true){
-                    httpConfig.params.XDEBUG_SESSION_START = "PHPSTORM";
+                    //TODO: This breaks the ng-rate-it template from being loaded.
+                    // httpConfig.params.XDEBUG_SESSION_START = "PHPSTORM";
                 }
                 return httpConfig;
             };

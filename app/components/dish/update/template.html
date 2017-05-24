@@ -2,13 +2,20 @@
     <div class="col-md-6">
         <img ng-src="{{DishCtrl.dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
     </div>
-    <form>
-        Name:<br>
-        <input type="text" ng-model="DishCtrl.name"><br>
-        Description:<br>
-        <textarea ng-model="DishCtrl.description"/><br>
-        <br><br>
-        <a ng-click="DishCtrl.updateDish()" class="btn btn-primary">Update</a>
-        <a ng-click="DishCtrl.cancel()" class="btn btn-primary">Cancel</a>
+    <form class="form-horizontal">
+        <div class="form-group">
+            Name:<br>
+            <input type="text" class="form-control" ng-model="DishCtrl.name" required/><br>
+            Price:<br>
+            <input type="number" class="form-control" placeholder="price" ng-model="DishCtrl.price"
+                   ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/><br>
+            Description:<br>
+            <textarea class="form-control" ng-model="DishCtrl.description" required/><br>
+            Kitchen ID:
+            <input type="text" class="form-control" ng-model="DishCtrl.kitchen_id" required/>
+            <br><br>
+            <a ng-click="DishCtrl.updateDish()" class="btn btn-primary">Update</a>
+            <a ng-click="DishCtrl.cancel()" class="btn btn-danger">Cancel</a>
+        </div>
     </form>
 </div>

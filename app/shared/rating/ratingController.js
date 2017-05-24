@@ -68,6 +68,16 @@ angular.module('rating', [
             this.getAvg = _getAverage;
 
             this.rateDish = function () {
+                //TODO: All ratings must be at minimum 1.
+                if (that.taste < 1) {
+
+                }
+                if (that.visual < 1) {
+
+                }
+                if (that.quantity < 1) {
+
+                }
                 RatingAPI.create(that.dishId, that.taste, that.visual, that.quantity, that.comment).then(
                     function (response) {
                         $state.reload();

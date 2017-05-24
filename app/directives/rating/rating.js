@@ -1,4 +1,4 @@
-angular.module('rating', [])
+angular.module('rating')
     .directive('ratings', function () {
         return {
             restrict: 'A',

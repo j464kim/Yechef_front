@@ -1,37 +1,37 @@
-<div class="container" id="RatingList" loader>
+<div class="container" id="RatingList" ng-controller="RatingController as RatingCtrl" loader>
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
     <div class="row">
         <h1>Average Rating:</h1>
         <div class="average">
-            Taste: {{DishCtrl.avg.taste_rating}}
-            <ng-rate-it ng-model="DishCtrl.avg.taste_rating" max="5" read-only="true"></ng-rate-it>
-            Visual: {{DishCtrl.avg.visual_rating}}
-            <ng-rate-it ng-model="DishCtrl.avg.visual_rating" max="5" read-only="true"></ng-rate-it>
-            Quantity: {{DishCtrl.avg.quantity_rating}}
-            <ng-rate-it ng-model="DishCtrl.avg.quantity_rating" max="5" read-only="true"></ng-rate-it>
+            Taste: {{RatingCtrl.avg.taste_rating}}
+            <ng-rate-it ng-model="RatingCtrl.avg.taste_rating" max="5" read-only="true"></ng-rate-it>
+            Visual: {{RatingCtrl.avg.visual_rating}}
+            <ng-rate-it ng-model="RatingCtrl.avg.visual_rating" max="5" read-only="true"></ng-rate-it>
+            Quantity: {{RatingCtrl.avg.quantity_rating}}
+            <ng-rate-it ng-model="RatingCtrl.avg.quantity_rating" max="5" read-only="true"></ng-rate-it>
         </div>
         <div class="row">
             TODO: Seperate RATE CREATE PAGE FOR BETTER UX AND USER FLOW <br>
 
             Taste
-            <ng-rate-it ng-model="DishCtrl.taste" step="1.0"></ng-rate-it>
-            {{DishCtrl.taste}}
+            <ng-rate-it ng-model="RatingCtrl.taste" step="1.0"></ng-rate-it>
+            {{RatingCtrl.taste}}
             <br/>
             Visual
-            <ng-rate-it ng-model="DishCtrl.visual" step="1.0"></ng-rate-it>
-            {{DishCtrl.visual}}
+            <ng-rate-it ng-model="RatingCtrl.visual" step="1.0"></ng-rate-it>
+            {{RatingCtrl.visual}}
             <br/>
             Quantity
-            <ng-rate-it ng-model="DishCtrl.quantity" step="1.0"></ng-rate-it>
-            {{DishCtrl.quantity}}
+            <ng-rate-it ng-model="RatingCtrl.quantity" step="1.0"></ng-rate-it>
+            {{RatingCtrl.quantity}}
             <br/>
             Description:<br>
-            <textarea ng-model="DishCtrl.comment"/><br>
+            <textarea ng-model="RatingCtrl.comment"/><br>
             <br><br>
-            <a ng-click="DishCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
+            <a ng-click="RatingCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
 
         </div>
-        <div class="row" ng-repeat="rating in DishCtrl.ratings">
+        <div class="row" ng-repeat="rating in RatingCtrl.ratings">
             <br>
             <div><strong>Author:</strong>
                 {{rating.author_id}}
@@ -48,9 +48,9 @@
             <div><strong>Comment:</strong>
                 {{rating.comment}}
             </div>
-            <a ng-click="DishCtrl.destroyRating(rating.id)" class="btn">Delete</a>
+            <a ng-click="RatingCtrl.destroyRating(rating.id)" class="btn">Delete</a>
         </div>
     </div>
+    <a class="btn btn-primary" ng-click="RatingCtrl.getRatings()">Load More</a>
 </div>
 
-<a class="btn btn-primary" ng-click="DishCtrl.getRatings()">Load More</a>

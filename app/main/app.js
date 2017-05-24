@@ -1,15 +1,16 @@
 'use strict';
 
 angular
-	.module('yechefFrontApp', [
-		// angular modules
-		'ngAnimate',
-		'ngCookies',
-		'ngResource',
-		'ngRoute',
-		'ngSanitize',
-		'ngTouch',
+    .module('yechefFrontApp', [
+        // angular modules
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
         'ngRateIt',
+        'xeditable',
 
         // libraries
         'ui.router',
@@ -18,27 +19,31 @@ angular
 
         // main modules
         'dish',
-		'rating',
-		'kitchen',
+        'rating',
+        'kitchen',
         'user',
-		'mediaUpload',
+        'mediaUpload',
 
         // services
         'http.interceptor',
 
-    // dev helper
+        // dev helper
         'dev',
-    ]).config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    ])
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //push http interceptor
         $httpProvider.interceptors.push('httpRequestInterceptor');
 
-		// Default route
-		$stateProvider
-			.state('home', {
-				url: '/',
-				templateUrl: 'homepage/template.html',
-			});
+        // Default route
+        $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: 'homepage/template.html',
+            });
 
-		// For any unmatched url, redirect to /
-		$urlRouterProvider.otherwise('/');
-	});
+        // For any unmatched url, redirect to /
+        $urlRouterProvider.otherwise('/');
+    })
+    .run(function (editableOptions) {
+        editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'
+    });

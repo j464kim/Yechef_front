@@ -46,9 +46,15 @@
                 <ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
             </div>
             <div><strong>Comment:</strong>
-                {{rating.comment}}
+                <span editable-textarea="rating.comment" e-form="textBtnForm"
+                      onbeforesave="RatingCtrl.updateComment(rating.id, rating.taste_rating, rating.visual_rating, rating.quantity_rating, $data)">
+                    {{rating.comment || 'empty'}}
+                </span>
+                <button class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+                    edit
+                </button>
+                <a ng-click="RatingCtrl.destroyRating(rating.id)" class="btn">Delete</a>
             </div>
-            <a ng-click="RatingCtrl.destroyRating(rating.id)" class="btn">Delete</a>
         </div>
     </div>
     <a class="btn btn-primary" ng-click="RatingCtrl.getRatings()">Load More</a>

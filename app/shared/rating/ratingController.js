@@ -3,8 +3,8 @@
 angular.module('rating', [
     'rating.api',
 ])
-    .controller('RatingController', ['$state', '$stateParams', 'RatingAPI',
-        function ($state, $stateParams, RatingAPI) {
+    .controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q',
+        function ($state, $stateParams, RatingAPI, $q) {
             /*********************
              *    Private Variables
              **********************/
@@ -66,6 +66,7 @@ angular.module('rating', [
             //  **********************/
             this.getRatings = _getRatings;
             this.getAvg = _getAverage;
+
             this.rateDish = function () {
                 RatingAPI.create(that.dishId, that.taste, that.visual, that.quantity, that.comment).then(
                     function (response) {
@@ -74,6 +75,21 @@ angular.module('rating', [
                         console.error(response);
                     })
             };
+
+            this.updateComment = function (ratingId, taste, visual, quantity, comment) {
+                var defer = $q.defer();
+                RatingAPI.update(that.dishId, ratingId, taste, visual, quantity, comment).then(
+                    function (response) {
+                        console.log(response);
+                        defer.resolve(true);
+                    }, function (response) {
+                        console.error(response);
+                        defer.resolve(false);
+                    }
+                );
+                return defer.promise;
+            };
+
             this.destroyRating = function ($ratingId) {
                 RatingAPI.destroy(that.dishId, $ratingId).then(
                     function (response) {

@@ -20,11 +20,13 @@ angular.module('rating', [
             this.avg = [];
             this.readonly = true;
             this.dishId = $stateParams.id;
+            this.bestAvgName = '';
 
             //Rating Inputs
             this.taste = 0;
             this.visual = 0;
             this.quantity = 0;
+            this.bestAvg = 0;
             this.comment = '';
 
             /*********************
@@ -56,6 +58,17 @@ angular.module('rating', [
                     function (response) {
                         console.log(response);
                         that.avg = response;
+                        that.bestAvg = that.avg.taste_rating;
+                        that.bestAvgName = 'Taste';
+                        if (that.bestAvg < that.avg.visual_rating) {
+                            that.bestAvg = that.avg.visual_rating;
+                            that.bestAvgName = 'Visual';
+                        }
+                        if (that.bestAvg < that.avg.quantity_rating) {
+                            that.bestAvg = that.avg.quantity_rating;
+                            that.bestAvgName = 'Quantity';
+                        }
+                        that.bestAvg = Number(that.bestAvg).toFixed(2);
                     }, function (response) {
                         console.error(response);
                     });

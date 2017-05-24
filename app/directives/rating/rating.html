@@ -1,59 +1,100 @@
-<div class="container" id="RatingList" ng-controller="RatingController as RatingCtrl" loader>
+<div class="container" id="RatingList" loader>
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
     <div class="row">
-        <h1>Average Rating:</h1>
-        <div class="average">
-            Taste: {{RatingCtrl.avg.taste_rating}}
-            <ng-rate-it ng-model="RatingCtrl.avg.taste_rating" max="5" read-only="true"></ng-rate-it>
-            Visual: {{RatingCtrl.avg.visual_rating}}
-            <ng-rate-it ng-model="RatingCtrl.avg.visual_rating" max="5" read-only="true"></ng-rate-it>
-            Quantity: {{RatingCtrl.avg.quantity_rating}}
-            <ng-rate-it ng-model="RatingCtrl.avg.quantity_rating" max="5" read-only="true"></ng-rate-it>
+        <div class="col-md-8">
+            <!--TODO: Seperate RATE CREATE PAGE FOR BETTER UX AND USER FLOW <br>-->
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-10">
+                        Comment:<br>
+                        <textarea class="form-control" ng-model="RatingCtrl.comment" required/>
+                    </div>
+                    <div class="col-md-offset-2">
+                        <br>
+                        <a ng-click="RatingCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-md-3">Taste:</div>
+                    <div class="col-md-9">
+                        <ng-rate-it resetable="false" ng-model="RatingCtrl.taste" step="1.0"></ng-rate-it>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-md-3">Visual:</div>
+                    <div class="col-md-9">
+                        <ng-rate-it resetable="false" ng-model="RatingCtrl.visual" step="1.0"></ng-rate-it>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-3">Quantity:</div>
+                    <div class="col-md-9">
+                        <ng-rate-it resetable="false" ng-model="RatingCtrl.quantity" step="1.0"></ng-rate-it>
+                    </div>
+                </div>
+            </form>
+
         </div>
+    </div>
+    <div class="row" ng-repeat="rating in RatingCtrl.ratings">
+        <br>
         <div class="row">
-            TODO: Seperate RATE CREATE PAGE FOR BETTER UX AND USER FLOW <br>
+            <div class="col-sm-1">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div>
+                <strong>(User) {{rating.author_id}} </strong>
+            </div>
+            <div class="col-sm-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="col-md-10">
+                            <div class="col-md-3">
+                                <div class="col-md-3">
+                                    Taste:
+                                </div>
+                                <div class="col-md-9">
+                                    <ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
 
-            Taste
-            <ng-rate-it ng-model="RatingCtrl.taste" step="1.0"></ng-rate-it>
-            {{RatingCtrl.taste}}
-            <br/>
-            Visual
-            <ng-rate-it ng-model="RatingCtrl.visual" step="1.0"></ng-rate-it>
-            {{RatingCtrl.visual}}
-            <br/>
-            Quantity
-            <ng-rate-it ng-model="RatingCtrl.quantity" step="1.0"></ng-rate-it>
-            {{RatingCtrl.quantity}}
-            <br/>
-            Description:<br>
-            <textarea ng-model="RatingCtrl.comment"/><br>
-            <br><br>
-            <a ng-click="RatingCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
-
-        </div>
-        <div class="row" ng-repeat="rating in RatingCtrl.ratings">
-            <br>
-            <div><strong>Author:</strong>
-                {{rating.author_id}}
-            </div>
-            <div><strong>Taste:</strong> {{rating.taste_rating}}
-                <ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
-            </div>
-            <div><strong>Visual:</strong> {{rating.visual_rating}}
-                <ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
-            </div>
-            <div><strong>Quantity:</strong> {{rating.quantity_rating}}
-                <ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
-            </div>
-            <div><strong>Comment:</strong>
-                <span editable-textarea="rating.comment" e-form="textBtnForm"
-                      onbeforesave="RatingCtrl.updateComment(rating.id, rating.taste_rating, rating.visual_rating, rating.quantity_rating, $data)">
+                                <div class="col-md-3">
+                                    Visual:
+                                </div>
+                                <div class="col-md-9">
+                                    <ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-3">
+                                    Quantity:
+                                </div>
+                                <div class="col-md-9">
+                                    <ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pull-right">
+                                <button class="btn btn-default" ng-click="textBtnForm.$show()"
+                                        ng-hide="textBtnForm.$visible">
+                                    edit
+                                </button>
+                                <a ng-click="RatingCtrl.destroyRating(rating.id)" class="btn">Delete</a>
+                            </div>
+                        </div>
+                        <span class="text-muted">
+                                {{rating.updated_at}}
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <span e-style="width: 343%;" editable-textarea="rating.comment" e-form="textBtnForm"
+                              onbeforesave="RatingCtrl.updateComment(rating.id, rating.taste_rating, rating.visual_rating, rating.quantity_rating, $data)">
                     {{rating.comment || 'empty'}}
-                </span>
-                <button class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-                    edit
-                </button>
-                <a ng-click="RatingCtrl.destroyRating(rating.id)" class="btn">Delete</a>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

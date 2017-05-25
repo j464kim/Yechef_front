@@ -14,6 +14,7 @@ angular
         'ui.router',
         'satellizer',
         'ui.bootstrap',
+        'http-auth-interceptor',
 
         // main modules
         'dish',
@@ -22,6 +23,10 @@ angular
 
         // services
         'http.interceptor',
+        'auth.api',
+
+        // configuration
+        'configuration'
     ])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //push http interceptor

@@ -19,6 +19,9 @@ angular.module('configuration', [])
         var googleAppId = '716914948245-t5k325iea7jmqhk8kolu59cdt6v4ssrr.apps.googleusercontent.com';
 
 
+        // cookie expiration in days
+        var cookieExpirationInDays = 3;
+
         /* jshint undef: false */
         switch (env) {
             case 'DEBUG':
@@ -40,7 +43,8 @@ angular.module('configuration', [])
             debugMode: debugMode,
             endpoint: endpoint,
             facebookAppId : facebookAppId,
-            googleAppId: googleAppId
+            googleAppId: googleAppId,
+            cookieExpirationInDays: cookieExpirationInDays
         };
 
     })());

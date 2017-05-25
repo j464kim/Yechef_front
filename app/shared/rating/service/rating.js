@@ -51,22 +51,6 @@ angular.module('rating.api', [
                 });
             };
 
-            function show(dishId, ratingId) {
-
-                return $q(function (resolve, reject) {
-                    RatingResource.show(
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
             //TODO: Author
             function create(dishId, taste_rating, visual_rating, quantity_rating, comment) {
                 return $q(function (resolve, reject) {
@@ -123,7 +107,6 @@ angular.module('rating.api', [
 
             return {
                 list: list,
-                show: show,
                 create: create,
                 update: update,
                 destroy: destroy,

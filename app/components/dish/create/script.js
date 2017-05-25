@@ -15,7 +15,7 @@ angular.module('dish.create', [
 
             function _createDish() {
                 //TODO: Add User permission so that only registered users can create dish
-                DishesAPI.create(that.name, that.description, that.price, that.kitchen_id)
+                DishesAPI.create(that.dish)
                     .then(function (response) {
                         _uploadDishMedia(response);
                         $state.go('dish.show', {"id": response.id});

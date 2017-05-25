@@ -1,7 +1,7 @@
 angular.module('rating')
     .directive('ratings', function () {
         return {
-            restrict: 'A',
+            restrict: 'E',
             templateUrl: 'directives/rating/rating.html',
         }
     });

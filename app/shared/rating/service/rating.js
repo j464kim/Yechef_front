@@ -12,9 +12,6 @@ angular.module('rating.api', [
                 list: {
                     method: 'GET',
                 },
-                show: {
-                    method: 'GET',
-                },
                 create: {
                     method: 'POST',
                 },
@@ -52,17 +49,13 @@ angular.module('rating.api', [
             };
 
             //TODO: Author
-            function create(dishId, taste_rating, visual_rating, quantity_rating, comment) {
+            function create(dishId, rating) {
                 return $q(function (resolve, reject) {
-                    RatingResource.create(
+                    RatingResource.create(rating,
                         {
                             dishId: dishId,
-                            taste_rating: taste_rating,
-                            visual_rating: visual_rating,
-                            quantity_rating: quantity_rating,
-                            comment: comment
-                        }
-                    ).$promise.then(function (response) {
+                        })
+                        .$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {
                         reject(response)
@@ -70,16 +63,12 @@ angular.module('rating.api', [
                 });
             };
 
-            function update(dishId, ratingId, taste_rating, visual_rating, quantity_rating, comment) {
+            function update(dishId, ratingId, rating) {
                 return $q(function (resolve, reject) {
-                    RatingResource.update(
+                    RatingResource.update(rating,
                         {
                             dishId: dishId,
                             ratingId: ratingId,
-                            taste_rating: taste_rating,
-                            visual_rating: visual_rating,
-                            quantity_rating: quantity_rating,
-                            comment: comment
                         }
                     ).$promise.then(function (response) {
                         resolve(response.body);

@@ -30,10 +30,6 @@ angular.module('dish.update', [
                 DishesAPI.show(dishId)
                     .then(function (response) {
                         that.dish = response;
-                        that.name = response.name;
-                        that.description = response.description;
-                        that.price = response.price;
-                        that.kitchen_id = response.kitchen_id;
                     }, function (response) {
                         // TODO handle error state
                         console.error(response);
@@ -41,7 +37,7 @@ angular.module('dish.update', [
             }
 
             function _updateDish() {
-                DishesAPI.update(that.dish.id, that.name, that.description, that.price, that.kitchen_id)
+                DishesAPI.update(that.dish, that.dish.id)
                     .then(function (response) {
                         $state.go('dish.show', {"id": response.id});
                     }, function (response) {

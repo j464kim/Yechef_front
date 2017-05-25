@@ -23,11 +23,7 @@ angular.module('rating', [
             this.bestAvgName = '';
 
             //Rating Inputs
-            this.taste = 0;
-            this.visual = 0;
-            this.quantity = 0;
             this.bestAvg = 0;
-            this.comment = '';
 
             /*********************
              *    Private Functions
@@ -69,6 +65,9 @@ angular.module('rating', [
                             that.bestAvgName = 'Quantity';
                         }
                         that.bestAvg = Number(that.bestAvg).toFixed(2);
+                        that.avg.taste_rating = Number(that.avg.taste_rating).toFixed(2);
+                        that.avg.visual_rating = Number(that.avg.visual_rating).toFixed(2);
+                        that.avg.quantity_rating = Number(that.avg.quantity_rating).toFixed(2);
                     }, function (response) {
                         console.error(response);
                     });
@@ -80,34 +79,19 @@ angular.module('rating', [
             this.getRatings = _getRatings;
             this.getAvg = _getAverage;
 
-            this.rateDish = function () {
-                //TODO: All ratings must be at minimum 1.
-                if (that.taste < 1) {
-
-                }
-                if (that.visual < 1) {
-
-                }
-                if (that.quantity < 1) {
-
-                }
-                RatingAPI.create(that.dishId, that.taste, that.visual, that.quantity, that.comment).then(
-                    function (response) {
-                        $state.reload();
-                    }, function (response) {
-                        console.error(response);
-                    })
-            };
-
-            this.updateComment = function (ratingId, taste, visual, quantity, comment) {
+            this.updateComment = function (rating, comment) {
                 var defer = $q.defer();
-                RatingAPI.update(that.dishId, ratingId, taste, visual, quantity, comment).then(
+                // Needed to restore old comment value in case the update fails
+                var originalComment = rating.comment;
+                rating.comment = comment;
+                RatingAPI.update(that.dishId, rating.id, rating).then(
                     function (response) {
-                        console.log(response);
                         defer.resolve(true);
+                        console.log(response);
                     }, function (response) {
-                        console.error(response);
+                        rating.comment = originalComment;
                         defer.resolve(false);
+                        console.error(response);
                     }
                 );
                 return defer.promise;

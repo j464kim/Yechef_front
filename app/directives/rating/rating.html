@@ -2,38 +2,7 @@
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
     <div class="row">
         <div class="col-md-8">
-            <!--TODO: Seperate RATE CREATE PAGE FOR BETTER UX AND USER FLOW <br>-->
-            <form class="form-horizontal">
-                <div class="row">
-                    <div class="col-md-10">
-                        Comment:<br>
-                        <textarea class="form-control" ng-model="RatingCtrl.comment" required/>
-                    </div>
-                    <div class="col-md-offset-2">
-                        <br>
-                        <a ng-click="RatingCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-3">Taste:</div>
-                    <div class="col-md-9">
-                        <ng-rate-it resetable="false" ng-model="RatingCtrl.taste" step="1.0"></ng-rate-it>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-3">Visual:</div>
-                    <div class="col-md-9">
-                        <ng-rate-it resetable="false" ng-model="RatingCtrl.visual" step="1.0"></ng-rate-it>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="col-md-3">Quantity:</div>
-                    <div class="col-md-9">
-                        <ng-rate-it resetable="false" ng-model="RatingCtrl.quantity" step="1.0"></ng-rate-it>
-                    </div>
-                </div>
-            </form>
-
+            <ng-include src="'shared/rating/create/ratingCreate.html'"></ng-include>
         </div>
     </div>
     <div class="row" ng-repeat="rating in RatingCtrl.ratings">
@@ -90,7 +59,7 @@
                     </div>
                     <div class="panel-body">
                         <span e-style="width: 343%;" editable-textarea="rating.comment" e-form="textBtnForm"
-                              onbeforesave="RatingCtrl.updateComment(rating.id, rating.taste_rating, rating.visual_rating, rating.quantity_rating, $data)">
+                              onbeforesave="RatingCtrl.updateComment(rating, $data)">
                     {{rating.comment || 'empty'}}
                         </span>
                     </div>

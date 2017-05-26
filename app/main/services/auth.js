@@ -1,207 +1,235 @@
 'use strict';
 
 angular.module('auth.api', [
-	'satellizer',
-	'ngCookies'
+    'satellizer',
+    'ngCookies'
 ])
 
-.config(function($authProvider, config, $cookiesProvider) {
+    .config(function ($authProvider, config, $cookiesProvider) {
 
-    $authProvider.google({
-      clientId: config.googleAppId,
-      url: config.endpoint + 'auth/google',
-    });
+        $authProvider.google({
+            clientId: config.googleAppId,
+            url: config.endpoint + 'auth/google',
+        });
 
-    $authProvider.facebook({
-      clientId: config.facebookAppId,
-      url: config.endpoint + 'auth/facebook',
-    });
+        $authProvider.facebook({
+            clientId: config.facebookAppId,
+            url: config.endpoint + 'auth/facebook',
+        });
 
-    // set cookie expiration
-    var expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() + config.cookieExpirationInDays);
-    $cookiesProvider.defaults.expires = expireDate;
-})
+        // set cookie expiration
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() + config.cookieExpirationInDays);
+        $cookiesProvider.defaults.expires = expireDate;
+    })
 
-.service('AuthResource', ['$resource', 'config', '$http', '$auth',
-	function($resource, config, $http, $auth) {
-		var api_endpoint = config.endpoint;
+    .service('AuthResource', ['$resource', 'config', '$http', '$auth',
+        function ($resource, config, $http, $auth) {
+            var api_endpoint = config.endpoint;
 
-		function login(email, password) {
-			return $http({
-				method: 'POST',
-				url: api_endpoint + 'login',
-				params: {
-					email: email,
-					password: password
-				}
-			});
-		};
+            function register(newUser) {
+                console.log(newUser);
+                return $http({
+                    method: 'POST',
+                    url: api_endpoint + 'register',
+                    params: newUser,
+                })
+            }
 
-		function logout() {
-			return $http({
-				method: 'POST',
-				url: api_endpoint + 'logout'
-			});
-		};
+            function login(email, password) {
+                return $http({
+                    method: 'POST',
+                    url: api_endpoint + 'login',
+                    params: {
+                        email: email,
+                        password: password
+                    }
+                });
+            };
 
-		function socialLogin(provider) {
-			return $auth.authenticate(provider)
-		};
+            function logout() {
+                return $http({
+                    method: 'POST',
+                    url: api_endpoint + 'logout'
+                });
+            };
 
-		function refreshToken(refreshToken) {
-			return $http({
-				method: 'POST',
-				url: api_endpoint + 'refresh-token',
-				params: {
-					refresh_token: refreshToken
-				}
-			})
-		};
+            function socialLogin(provider) {
+                return $auth.authenticate(provider)
+            };
 
-		return {
-			login: login,
-			logout: logout,
-			socialLogin: socialLogin,
-			refreshToken: refreshToken
-		};
-	}
-])
+            function refreshToken(refreshToken) {
+                return $http({
+                    method: 'POST',
+                    url: api_endpoint + 'refresh-token',
+                    params: {
+                        refresh_token: refreshToken
+                    }
+                })
+            };
 
-.service('sessionService', ['$cookies',
-	function($cookies){
-		var token = {};
+            return {
+                register: register,
+                login: login,
+                logout: logout,
+                socialLogin: socialLogin,
+                refreshToken: refreshToken
+            };
+        }
+    ])
 
-		function setSession(accessToken, refreshToken, expireIn, tokenType) {
-			// storage refreshToken in cookie
-			$cookies.put('refresh_token', refreshToken);
-			// calculate expire time
-			var expireDate = new Date (new Date().getTime() + (1000 * expireIn));
-			// storage accessToken in cookie
-            $cookies.put("access_token", accessToken, {'expires': expireDate});
+    .service('sessionService', ['$cookies',
+        function ($cookies) {
+            var token = {};
 
-			token = {
-				accessToken: accessToken,
-				refreshToken: refreshToken, 
-				expireIn: expireIn, 
-				tokenType: tokenType
-			}
-		}
+            function setSession(accessToken, refreshToken, expireIn, tokenType) {
+                // storage refreshToken in cookie
+                $cookies.put('refresh_token', refreshToken);
+                // calculate expire time
+                var expireDate = new Date(new Date().getTime() + (1000 * expireIn));
+                // storage accessToken in cookie
+                $cookies.put("access_token", accessToken, {'expires': expireDate});
 
-		function revokeSession() {
-			$cookies.remove('refresh_token');
-			$cookies.remove('token_expires_at');
-			token = {};
-		}
+                token = {
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    expireIn: expireIn,
+                    tokenType: tokenType
+                }
+            }
 
-		function getAccessToken() {
-			if(token.accessToken && token.tokenType){
-				return token.tokenType + ' ' + token.accessToken;
-			}
-			return null;
-		}
+            function revokeSession() {
+                $cookies.remove('refresh_token');
+                $cookies.remove('token_expires_at');
+                token = {};
+            }
 
-		function getRefreshToken() {
-			return $cookies.get('refresh_token');
-		}
+            function getAccessToken() {
+                if (token.accessToken && token.tokenType) {
+                    return token.tokenType + ' ' + token.accessToken;
+                }
+                return null;
+            }
 
-		function isLogin() {
-			if($cookies.get('refresh_token')) {
-				return true;
-			}
-			return false;
-		}
+            function getRefreshToken() {
+                return $cookies.get('refresh_token');
+            }
 
-		return {
-			setSession: setSession,
-			revokeSession: revokeSession,
-			getAccessToken: getAccessToken,
-			getRefreshToken: getRefreshToken,
-			isLogin: isLogin,
-		}
-	}
-])
+            function isLogin() {
+                if ($cookies.get('refresh_token')) {
+                    return true;
+                }
+                return false;
+            }
 
-.service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService',
-	function($q, AuthResource, sessionService, authService){
+            return {
+                setSession: setSession,
+                revokeSession: revokeSession,
+                getAccessToken: getAccessToken,
+                getRefreshToken: getRefreshToken,
+                isLogin: isLogin,
+            }
+        }
+    ])
 
-		function login(email, password) {
+    .service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService',
+        function ($q, AuthResource, sessionService, authService) {
 
-			return $q(function(resolve, reject) {
-				AuthResource.login(email, password).then(function(response){
-					var data = response.data.body;
-					sessionService.setSession(
-						data.access_token,
-						data.refresh_token,
-						data.expires_in,
-						data.token_type
-					);
-					resolve(data);
-				}, function(response) {
-					reject(response);
-				});
-			});
-		};
+            function register(newUser) {
+                return $q(function (resolve, reject) {
+                    AuthResource.register(newUser).then(function (response) {
+                        var data = response.data.body;
+                        sessionService.setSession(
+                            data.access_token,
+                            data.refresh_token,
+                            data.expires_in,
+                            data.token_type
+                        );
+                        resolve(data);
+                    }, function (response) {
+                        reject(response)
+                    });
+                });
+            };
 
+            function login(email, password) {
 
-		function socialLogin(provider) {
-			return $q(function(resolve, reject) {
-				AuthResource.socialLogin(provider).then(function(response){
-					var data = response.data.body;
-					sessionService.setSession(
-						data.access_token,
-						data.refresh_token,
-						data.expires_in,
-						data.token_type
-					);
-					authService.loginConfirmed();
-					resolve(data);
-				}, function(response) {
-					authService.loginCancelled();
-					reject(response);
-				});
-			}); 
-		};
-
-
-		function logout() {
-			return $q(function(resolve, reject) {
-				AuthResource.logout().then(function(response){
-					sessionService.revokeSession();
-					resolve(response.data.body);
-				}, function(response) {
-					reject(response);
-				});
-			});
-		};
+                return $q(function (resolve, reject) {
+                    AuthResource.login(email, password).then(function (response) {
+                        var data = response.data.body;
+                        sessionService.setSession(
+                            data.access_token,
+                            data.refresh_token,
+                            data.expires_in,
+                            data.token_type
+                        );
+                        resolve(data);
+                    }, function (response) {
+                        reject(response);
+                    });
+                });
+            };
 
 
-		function refreshToken(){
-			return $q(function(resolve, reject) {
-				var refreshToken = sessionService.getRefreshToken()
-				AuthResource.refreshToken(refreshToken).then(function(response){
-					var data = response.data.body;
-					sessionService.setSession(
-						data.access_token,
-						data.refresh_token,
-						data.expires_in,
-						data.token_type
-					);
-					authService.loginConfirmed();
-					resolve(data);
-				}, function(response) {
-					authService.loginCancelled();
-					reject(response);
-				});
-			}); 
-		};
+            function socialLogin(provider) {
+                return $q(function (resolve, reject) {
+                    AuthResource.socialLogin(provider).then(function (response) {
+                        var data = response.data.body;
+                        sessionService.setSession(
+                            data.access_token,
+                            data.refresh_token,
+                            data.expires_in,
+                            data.token_type
+                        );
+                        authService.loginConfirmed();
+                        resolve(data);
+                    }, function (response) {
+                        authService.loginCancelled();
+                        reject(response);
+                    });
+                });
+            };
 
 
-		return {
-			login: login,
-			socialLogin: socialLogin,
-			logout: logout,
-			refreshToken: refreshToken
-		};
-	}
-]);
+            function logout() {
+                return $q(function (resolve, reject) {
+                    AuthResource.logout().then(function (response) {
+                        sessionService.revokeSession();
+                        resolve(response.data.body);
+                    }, function (response) {
+                        reject(response);
+                    });
+                });
+            };
+
+
+            function refreshToken() {
+                return $q(function (resolve, reject) {
+                    var refreshToken = sessionService.getRefreshToken()
+                    AuthResource.refreshToken(refreshToken).then(function (response) {
+                        var data = response.data.body;
+                        sessionService.setSession(
+                            data.access_token,
+                            data.refresh_token,
+                            data.expires_in,
+                            data.token_type
+                        );
+                        authService.loginConfirmed();
+                        resolve(data);
+                    }, function (response) {
+                        authService.loginCancelled();
+                        reject(response);
+                    });
+                });
+            };
+
+
+            return {
+                register: register,
+                login: login,
+                socialLogin: socialLogin,
+                logout: logout,
+                refreshToken: refreshToken
+            };
+        }
+    ]);

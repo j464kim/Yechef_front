@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <div class="col-md-4" ng-repeat="dish in DishCtrl.dishes">
-            <img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
+            <img ui-sref="dish.show({id: {{dish.id}}})" ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
 
             <h4 class="card-title">{{dish.name}}</h4>
             <p class="card-text">{{dish.description}}</p>

@@ -34,7 +34,7 @@ angular.module('kitchen.destroy', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			that.destroyKitchen = _destroyKitchen;
+			this.destroyKitchen = _destroyKitchen;
 
 
 			/*********************

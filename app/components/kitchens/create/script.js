@@ -1,30 +1,27 @@
 'use strict';
 
 angular.module('kitchen.create', [
-	'kitchen.api',
+	'kitchen.api'
 ])
 
 	.controller('KitchenCreateController', ['$state', 'KitchenAPI',
 		function ($state, KitchenAPI) {
-
-
-			// $controller('MediaController', {mediaScope: $scope});
-			// mediaScope.processQueue();
 
 			/*********************
 			 *  Private Variables
 			 **********************/
 			// reference to this controller
 
+
 			/*********************
 			 *  Public Variables
 			 **********************/
 			var that = this;
 
+
 			/*********************
 			 *  Private Functions
 			 **********************/
-
 			function _createKitchen() {
 
 				KitchenAPI.create(that.kitchen).then(function (response) {
@@ -63,6 +60,7 @@ angular.module('kitchen.create', [
 			/*********************
 			 *  Initialization
 			 **********************/
+
 
 			/*********************
 			 *  EVENTS

@@ -1,26 +1,27 @@
 'use strict';
 
 angular
-	.module('yechefFrontApp', [
-		// angular modules
-		'ngAnimate',
-		'ngCookies',
-		'ngResource',
-		'ngRoute',
-		'ngSanitize',
-		'ngTouch',
+    .module('yechefFrontApp', [
+        // angular modules
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
 
         // libraries
         'ui.router',
+        'ui.mask',
         'satellizer',
         'ui.bootstrap',
         'http-auth-interceptor',
 
-		// main modules
-		'dish',
-		'kitchen',
+        // main modules
+        'dish',
+        'kitchen',
         'user',
-		'mediaUpload',
+        'mediaUpload',
 
         // services
         'http.interceptor',
@@ -37,13 +38,13 @@ angular
         //push http interceptor
         $httpProvider.interceptors.push('httpRequestInterceptor');
 
-		// Default route
-		$stateProvider
-			.state('home', {
-				url: '/',
-				templateUrl: 'homepage/template.html',
-			});
+        // Default route
+        $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: 'homepage/template.html',
+            });
 
-		// For any unmatched url, redirect to /
-		$urlRouterProvider.otherwise('/');
-	});
+        // For any unmatched url, redirect to /
+        $urlRouterProvider.otherwise('/');
+    });

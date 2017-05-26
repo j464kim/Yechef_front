@@ -30,8 +30,7 @@
         <div class="form-group">
             <label for="phone">Phone Number (Optional)</label>
             <input type="text" name="phone" id="phone" class="form-control"
-                   ng-model="RegisterCtrl.newUser.phone"
-                   required/>
+                   ng-model="RegisterCtrl.newUser.phone" ui-mask="+?9 999 999 9999" />
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Password</label>
@@ -39,14 +38,19 @@
                    ng-model="RegisterCtrl.newUser.password" required/>
             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password_confirm.$dirty && form.password_confirm.$error.required }">
+        <div class="form-group"
+             ng-class="{ 'has-error': form.password_confirm.$dirty && form.password_confirm.$error.required }">
             <label for="password_confirm">Password Confirm</label>
             <input type="password" name="password_confirm" id="password_confirm" class="form-control"
                    ng-model="RegisterCtrl.newUser.password_confirmation" required/>
             <span ng-show="form.password_confirm.$dirty && form.password_confirm.$error.required" class="help-block">Password Confirm is required</span>
+            <span ng-show="RegisterCtrl.newUser.password !== RegisterCtrl.newUser.password_confirmation">Password mismatch</span>
         </div>
         <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Register</button>
+            <button type="submit"
+                    ng-disabled="form.$invalid || RegisterCtrl.newUser.password !== RegisterCtrl.newUser.password_confirmation"
+                    class="btn btn-primary">Register
+            </button>
         </div>
     </form>
     <button class="btn btn-primary" ng-click="RegisterCtrl.socialLogin('google')">Google Login</button>

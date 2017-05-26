@@ -34,6 +34,7 @@ angular.module('user.register', [
                             localStorageService.set('refresh_token', response.refresh_token);
                             localStorageService.set('expires_in', response.expires_in);
                             console.log(response);
+                            $state.go('home');
                         },
                         function (response) {
                             console.error(response);
@@ -51,6 +52,7 @@ angular.module('user.register', [
                         localStorageService.set('refresh_token', response.refresh_token);
                         localStorageService.set('expires_in', response.expires_in);
                         console.log(response);
+                        $state.go('home');
                     },
                     function (response) {
                         console.error(response);

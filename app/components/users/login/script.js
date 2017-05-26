@@ -36,7 +36,8 @@ angular.module('user.login', [
 				function(response) {
 					//set access token
 					console.log(response);
-				},
+                    $state.go('home');
+                },
 				function(response) {
 					console.error(response);
 				}
@@ -49,7 +50,8 @@ angular.module('user.login', [
 			).then(
 				function(response) {
 					console.log(response);
-				},
+                    $state.go('home');
+                },
 				function(response) {
 					console.error(response);
 				}
@@ -60,11 +62,16 @@ angular.module('user.login', [
 			AuthAPI.logout().then(
 				function(response) {
 					console.log(response);
+					$state.go('home');
 				},
 				function(response) {
 					console.error(response);
 				}
 			);
+		}
+
+		function _isLoggedin() {
+			return localStorageService.get('access_token') !== null;
 		}
 		/*********************
 		*	Public Functions
@@ -72,6 +79,7 @@ angular.module('user.login', [
 		this.login = _login;
 		this.socialLogin = _socialLogin;
 		this.logout = _logout;
+		this.isLoggedin = _isLoggedin;
 
 
 		/*********************

@@ -25,13 +25,15 @@ angular
         // services
         'http.interceptor',
         'auth.api',
+        'main.controller',
 
         // configuration
         'configuration',
 
         // dev helper
         'dev',
-    ]).config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    ])
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //push http interceptor
         $httpProvider.interceptors.push('httpRequestInterceptor');
 

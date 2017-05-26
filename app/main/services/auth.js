@@ -101,6 +101,10 @@ angular.module('auth.api', [
 			return null;
 		}
 
+		function getRefreshToken() {
+			return $cookies.get('refresh_token');
+		}
+
 		function isLogin() {
 			if($cookies.get('refresh_token')) {
 				return true;
@@ -112,13 +116,14 @@ angular.module('auth.api', [
 			setSession: setSession,
 			revokeSession: revokeSession,
 			getAccessToken: getAccessToken,
+			getRefreshToken: getRefreshToken,
 			isLogin: isLogin,
 		}
 	}
 ])
 
-.service('AuthAPI', ['$q', 'AuthResource', 'sessionService',
-	function($q, AuthResource, sessionService){
+.service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService',
+	function($q, AuthResource, sessionService, authService){
 
 		function login(email, password) {
 
@@ -149,8 +154,10 @@ angular.module('auth.api', [
 						data.expires_in,
 						data.token_type
 					);
+					authService.loginConfirmed();
 					resolve(data);
 				}, function(response) {
+					authService.loginCancelled();
 					reject(response);
 				});
 			}); 
@@ -171,11 +178,19 @@ angular.module('auth.api', [
 
 		function refreshToken(){
 			return $q(function(resolve, reject) {
+				var refreshToken = sessionService.getRefreshToken()
 				AuthResource.refreshToken(refreshToken).then(function(response){
-					console.log(response);
-					resolve(response);
+					var data = response.data.body;
+					sessionService.setSession(
+						data.access_token,
+						data.refresh_token,
+						data.expires_in,
+						data.token_type
+					);
+					authService.loginConfirmed();
+					resolve(data);
 				}, function(response) {
-					console.log(response);
+					authService.loginCancelled();
 					reject(response);
 				});
 			}); 

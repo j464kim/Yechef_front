@@ -3,8 +3,8 @@
 angular.module('rating', [
     'rating.api',
 ])
-    .controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q',
-        function ($state, $stateParams, RatingAPI, $q) {
+    .controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q', 'devHelper',
+        function ($state, $stateParams, RatingAPI, $q, devHelper) {
             /*********************
              *    Private Variables
              **********************/
@@ -39,7 +39,7 @@ angular.module('rating', [
 
                 RatingAPI.list(that.dishId, '', pageNum).then(
                     function (response) {
-                        console.log(response);
+                        devHelper.log(response);
                         that.ratings = that.ratings.concat(response.data);
                         that.totalItems = response.total;
                         that.currentPage = response.currentPage;
@@ -52,7 +52,7 @@ angular.module('rating', [
             function _getAverage() {
                 RatingAPI.list(that.dishId, 'avg', 0).then(
                     function (response) {
-                        console.log(response);
+                        devHelper.log(response);
                         that.avg = response;
                         that.bestAvg = that.avg.taste_rating;
                         that.bestAvgName = 'Taste';
@@ -87,7 +87,7 @@ angular.module('rating', [
                 RatingAPI.update(that.dishId, rating.id, rating).then(
                     function (response) {
                         defer.resolve(true);
-                        console.log(response);
+                        devHelper.log(response);
                     }, function (response) {
                         rating.comment = originalComment;
                         defer.resolve(false);

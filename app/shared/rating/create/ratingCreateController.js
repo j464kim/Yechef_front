@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('rating')
-    .controller('RatingCreateController', ['$state', '$stateParams', 'RatingAPI',
-        function ($state, $stateParams, RatingAPI) {
+    .controller('RatingCreateController', ['$state', '$stateParams', 'RatingAPI', 'devHelper',
+        function ($state, $stateParams, RatingAPI, devHelper) {
             /*********************
              *    Private Variables
              **********************/
@@ -38,7 +38,7 @@ angular.module('rating')
             //  **********************/
             this.rateDish = function () {
                 if (!_validateInputs()) {
-                    console.log("Invalid Rating Inputs");
+                    devHelper.log("Invalid Rating Inputs");
                     return;
                 }
                 RatingAPI.create(that.dishId, that.rating).then(

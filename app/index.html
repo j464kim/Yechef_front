@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="styles/validation.css">
     <!-- endbuild -->
 </head>
-<body ng-app="yechefFrontApp">
+<body ng-app="yechefFrontApp" ng-controller="MainCtrl as MCL">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -45,16 +45,16 @@
                 <ul class="nav navbar-nav" ng-controller="UserLoginController as LoginCtrl">
                     <li><a ui-sref="dish.listInfinite">Dishes</a></li>
                     <li><a ui-sref="kitchen.list">Kitchens</a></li>
-                        <li><a ui-sref="user.register" ng-show="!LoginCtrl.isLoggedin()">Register</a></li>
-                        <li><a ui-sref="user.login" ng-show="!LoginCtrl.isLoggedin()">Login</a></li>
-                        <li><a class="btn" ng-click="LoginCtrl.logout()" ng-show="LoginCtrl.isLoggedin()">LogOut</a></li>
+                    <li><a ui-sref="user.register" ng-show="!MCL.isLoggedin()">Register</a></li>
+                    <li><a ui-sref="user.login" ng-show="!MCL.isLoggedin()">Login</a></li>
+                    <li><a class="btn" ng-click="LoginCtrl.logout()" ng-show="MCL.isLoggedin()">LogOut</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container" ng-controller="MainCtrl">
+<div class="container">
     <section ui-view></section>
 </div>
 

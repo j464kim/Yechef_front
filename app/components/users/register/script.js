@@ -3,12 +3,11 @@
 angular.module('user.register', [
     'user.api',
     'configuration',
-    'LocalStorageModule'
 ])
 
 
-    .controller('UserRegisterController', ['$state', 'UserAPI', 'localStorageService',
-        function ($state, UserAPI, localStorageService) {
+    .controller('UserRegisterController', ['$state', 'AuthAPI',
+        function ($state, AuthAPI) {
 
             /*********************
              *    Private Variables
@@ -26,13 +25,10 @@ angular.module('user.register', [
              **********************/
 
             function _register() {
-                UserAPI.register(that.newUser)
+                AuthAPI.register(that.newUser)
                     .then(
                         function (response) {
                             //set access token
-                            localStorageService.set('access_token', response.access_token);
-                            localStorageService.set('refresh_token', response.refresh_token);
-                            localStorageService.set('expires_in', response.expires_in);
                             console.log(response);
                             $state.go('home');
                         },
@@ -42,29 +38,10 @@ angular.module('user.register', [
                     );
             }
 
-            function _socialLogin(provider) {
-                UserAPI.socialLogin(
-                    provider
-                ).then(
-                    function (response) {
-                        //set access token
-                        localStorageService.set('access_token', response.access_token);
-                        localStorageService.set('refresh_token', response.refresh_token);
-                        localStorageService.set('expires_in', response.expires_in);
-                        console.log(response);
-                        $state.go('home');
-                    },
-                    function (response) {
-                        console.error(response);
-                    }
-                );
-            }
-
             /*********************
              *    Public Functions
              **********************/
             this.register = _register;
-            this.socialLogin = _socialLogin;
 
             /*********************
              *    EVENTS

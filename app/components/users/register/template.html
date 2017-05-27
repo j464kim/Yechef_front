@@ -30,7 +30,7 @@
         <div class="form-group">
             <label for="phone">Phone Number (Optional)</label>
             <input type="text" name="phone" id="phone" class="form-control"
-                   ng-model="RegisterCtrl.newUser.phone" ui-mask="+?9 999 999 9999" />
+                   ng-model="RegisterCtrl.newUser.phone" ui-mask="+?9 999 999 9999"/>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Password</label>
@@ -53,8 +53,10 @@
             </button>
         </div>
     </form>
-    <button class="btn btn-primary" ng-click="RegisterCtrl.socialLogin('google')">Google Login</button>
-    <button class="btn btn-primary" ng-click="RegisterCtrl.socialLogin('facebook')">Facebook Login</button>
+    <div ng-controller="UserLoginController as LoginCtrl">
+        <button class="btn btn-primary" ng-click="LoginCtrl.socialLogin('google')">Google Login</button>
+        <button class="btn btn-primary" ng-click="LoginCtrl.socialLogin('facebook')">Facebook Login</button>
+    </div>
     <div class="row">
         <p>Already a member?</p>
         <button class="btn btn-primary" ui-sref="user.login">Login</button>

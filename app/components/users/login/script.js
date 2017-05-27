@@ -70,17 +70,12 @@ angular.module('user.login', [
 			);
 		}
 
-		function _isLoggedin() {
-			return localStorageService.get('access_token') !== null;
-		}
 		/*********************
 		*	Public Functions
 		**********************/
 		this.login = _login;
 		this.socialLogin = _socialLogin;
 		this.logout = _logout;
-		this.isLoggedin = _isLoggedin;
-
 
 		/*********************
 		*	Initialization
@@ -91,7 +86,5 @@ angular.module('user.login', [
 		*	EVENTS
 		**********************/
 
-
-		
 	}
 ]);

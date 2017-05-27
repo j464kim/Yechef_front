@@ -1,26 +1,26 @@
 'use strict';
 
-angular.module('like', [
-	'like_api'
+angular.module('reaction', [
+	'reaction_api'
 ])
 
-	.directive('likeDirective', function () {
+	.directive('reactionDirective', function () {
 		return {
 			restrict: 'EA',
 			transclude: true,
 			scope: {
-				likable: '='
+				reactionable: '='
 			},
-			templateUrl: 'shared/like/template.html',
+			templateUrl: 'shared/reaction/template.html',
 			controller: function ($scope) {
 				console.log('inside directive: ');
-				console.log($scope.likable);
+				console.log($scope.reactionable);
 			}
 		};
 	})
 
-	.controller('LikeController', ['$scope', 'LikeAPI',
-		function ($scope, LikeAPI) {
+	.controller('ReactionController', ['$scope', 'ReactionAPI',
+		function ($scope, ReactionAPI) {
 
 			/*********************
 			 *  Private Variables
@@ -47,14 +47,14 @@ angular.module('like', [
 
 			function _getReactions() {
 
-				var likable = $scope.likable;
-				var likeObj = {
-					likableId: likable.id,
+				var reactionable = $scope.reactionable;
+				var reactionObj = {
+					reactionableId: reactionable.id,
 					// TODO: set it to 1 for now until (1) is done
 					userId: 1
 				};
 
-				LikeAPI.index(likeObj, 'getReactions').then(function (response) {
+				ReactionAPI.index(reactionObj, 'getReactions').then(function (response) {
 					that.numLikes = response.numLikes;
 					that.numDislikes = response.numDislikes;
 					that.userReactionId = response.userReactionId;
@@ -62,7 +62,7 @@ angular.module('like', [
 
 					_findUserReaction(that.userReactionKind);
 
-					console.log(likeObj);
+					console.log(reactionObj);
 
 				}, function (response) {
 					// TODO handle error state
@@ -70,15 +70,15 @@ angular.module('like', [
 				});
 			}
 
-			function _addReaction(likableId, isLike) {
+			function _addReaction(reactionableId, kind) {
 				var reactionObj = {
-					likableId: likableId,
-					isLike: isLike,
+					reactionableId: reactionableId,
+					kind: kind,
 					// TODO: set it to 1 for now until (1) is done
 					userId: 1
 				};
 
-				LikeAPI.store(reactionObj).then(function (response) {
+				ReactionAPI.store(reactionObj).then(function (response) {
 					var newReaction = response;
 					var oldReactionKind = newReaction.oldReactionKind;
 					console.log(newReaction);
@@ -87,7 +87,7 @@ angular.module('like', [
 					_toggleReaction(false, oldReactionKind);
 
 					// toggle the button & update # likes/dislikes on the fly
-					_toggleReaction(true, isLike)
+					_toggleReaction(true, kind)
 
 				}, function (response) {
 					// TODO handle error state
@@ -101,21 +101,21 @@ angular.module('like', [
 			// We need to open a socket in order to get just created like entry because page refresh every time
 			// like is toggled isn't an ideal behavior
 			// As a workaround, I will pass some extra information into request in order to look for the added reaction
-			function _removeReaction(likableId, isLike) {
+			function _removeReaction(reactionableId, kind) {
 
 				var reactionObj = {
-					likableId: likableId,
+					reactionableId: reactionableId,
 					// TODO: set it to 1 for now until (1) is done
 					userId: 1
 				};
 
 				var userReactionId = 1; // placeholder for now until (1) is implemented
-				LikeAPI.destroy(reactionObj, userReactionId).then(function (response) {
+				ReactionAPI.destroy(reactionObj, userReactionId).then(function (response) {
 					var removedReaction = response;
 					console.log(removedReaction);
 
 					// toggle the button & update # likes/dislikes on the fly
-					_toggleReaction(false, isLike);
+					_toggleReaction(false, kind);
 
 				}, function (response) {
 					// TODO handle error state
@@ -123,9 +123,9 @@ angular.module('like', [
 				});
 			}
 
-			function _toggleReaction(toAdd, isLike) {
+			function _toggleReaction(toAdd, kind) {
 				if (toAdd) {
-					switch (isLike) {
+					switch (kind) {
 						case 0:
 							console.log('disliked');
 							that.disliked = true;
@@ -138,7 +138,7 @@ angular.module('like', [
 							break;
 					}
 				} else {
-					switch (isLike) {
+					switch (kind) {
 						case 0:
 							console.log('un-disliked');
 							that.disliked = false;

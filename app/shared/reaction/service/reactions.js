@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('like_api', [
+angular.module('reaction_api', [
 	'configuration'
 ])
 
-	.factory('LikeResource', ['$resource', 'config',
+	.factory('ReactionResource', ['$resource', 'config',
 		function ($resource, config) {
-			var apiEndpoint = config.endpoint + 'likes/';
+			var apiEndpoint = config.endpoint + 'reactions/';
 			return $resource(apiEndpoint + ':id', {id: '@id'}, {
 				index: {
 					method: 'POST'
@@ -21,13 +21,13 @@ angular.module('like_api', [
 		}
 	])
 
-	.service('LikeAPI', ['$q', 'LikeResource',
-		function ($q, LikeResource) {
+	.service('ReactionAPI', ['$q', 'ReactionResource',
+		function ($q, ReactionResource) {
 
 			function index(reactionObj, getReactions) {
 
 				return $q(function (resolve, reject) {
-					LikeResource.index(
+					ReactionResource.index(
 						reactionObj,
 						{
 							id: getReactions
@@ -41,10 +41,10 @@ angular.module('like_api', [
 				});
 			}
 
-			function store(likeObject) {
+			function store(reactionObj) {
 
 				return $q(function (resolve, reject) {
-					LikeResource.store(likeObject)
+					ReactionResource.store(reactionObj)
 						.$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -56,7 +56,7 @@ angular.module('like_api', [
 			function destroy(reactionObj, reactionId) {
 
 				return $q(function (resolve, reject) {
-					LikeResource.destroy(
+					ReactionResource.destroy(
 						reactionObj,
 						{
 							id: reactionId

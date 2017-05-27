@@ -20,7 +20,7 @@ angular
 		'kitchen',
         'user',
 		'mediaUpload',
-		'like',
+		'reaction',
 
         // services
         'http.interceptor',

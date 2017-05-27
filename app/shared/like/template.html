@@ -1,8 +1,0 @@
-<div class="container" ng-controller="LikeController as vm">
-
-    <span ng-if="!vm.liked"><i class="fa fa-thumbs-o-up" ng-click="vm.addReaction(likable.id, 1)"></i>{{vm.numLikes}}</span>
-    <span ng-if="vm.liked"><i class="fa fa-thumbs-up" ng-click="vm.removeReaction(likable.id, 1)"></i>{{vm.numLikes}}</span>
-    <span ng-if="!vm.disliked"><i class="fa fa-thumbs-o-down" ng-click="vm.addReaction(likable.id, 0)"></i>{{vm.numDislikes}}</span>
-    <span ng-if="vm.disliked"><i class="fa fa-thumbs-down" ng-click="vm.removeReaction(likable.id, 0)"></i>{{vm.numDislikes}}</span>
-
-</div>

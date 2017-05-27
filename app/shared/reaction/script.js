@@ -12,10 +12,6 @@ angular.module('reaction', [
 				reactionable: '='
 			},
 			templateUrl: 'shared/reaction/template.html',
-			controller: function ($scope) {
-				console.log('inside directive: ');
-				console.log($scope.reactionable);
-			}
 		};
 	})
 
@@ -45,6 +41,10 @@ angular.module('reaction', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
+
+			// Is there a way HTML can access constant value of its controller?
+			this.DISLIKE = 0;
+			this.LIKE = 1;
 
 			/*********************
 			 *  Private Functions
@@ -76,7 +76,7 @@ angular.module('reaction', [
 				});
 			}
 
-			function _addReaction(reactionable, kind) {
+			function _addReaction(kind) {
 
 				reactionObj.kind = kind;
 
@@ -103,7 +103,7 @@ angular.module('reaction', [
 			// We need to open a socket in order to get just created like entry because page refresh every time
 			// like is toggled isn't an ideal behavior
 			// As a workaround, I will pass some extra information into request in order to look for the added reaction
-			function _removeReaction(reactionable, kind) {
+			function _removeReaction(kind) {
 
 				var userReactionId = 1; // placeholder for now until (1) is implemented
 				ReactionAPI.destroy(reactionObj, userReactionId).then(function (response) {

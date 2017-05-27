@@ -1,6 +1,7 @@
 angular.module('mediaUpload', ['configuration'])
 
-	.controller('MediaController', ['config', function (config) {
+	.controller('MediaController', ['config', 'devHelper',
+		function (config, devHelper) {
 
 		/*********************
 		 *  Private Functions
@@ -24,7 +25,7 @@ angular.module('mediaUpload', ['configuration'])
 					});
 
 					myDropzone.on("success", function (file, xhr, formData) {
-						console.log('image is successfully uploaded');
+                        devHelper.log('image is successfully uploaded');
 					});
 				}
 			});

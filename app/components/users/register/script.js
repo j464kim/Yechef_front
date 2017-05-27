@@ -6,8 +6,8 @@ angular.module('user.register', [
 ])
 
 
-    .controller('UserRegisterController', ['$state', 'AuthAPI',
-        function ($state, AuthAPI) {
+    .controller('UserRegisterController', ['$state', 'AuthAPI', 'devHelper',
+        function ($state, AuthAPI, devHelper) {
 
             /*********************
              *    Private Variables
@@ -29,7 +29,7 @@ angular.module('user.register', [
                     .then(
                         function (response) {
                             //set access token
-                            console.log(response);
+                            devHelper.log(response);
                             $state.go('home');
                         },
                         function (response) {

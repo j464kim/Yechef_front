@@ -23,12 +23,12 @@ angular.module('auth.api', [
         $cookiesProvider.defaults.expires = expireDate;
     })
 
-    .service('AuthResource', ['$resource', 'config', '$http', '$auth',
-        function ($resource, config, $http, $auth) {
+    .service('AuthResource', ['$resource', 'config', '$http', '$auth', 'devHelper',
+        function ($resource, config, $http, $auth, devHelper) {
             var api_endpoint = config.endpoint;
 
             function register(newUser) {
-                console.log(newUser);
+                devHelper.log(newUser);
                 return $http({
                     method: 'POST',
                     url: api_endpoint + 'register',

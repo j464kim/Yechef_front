@@ -26,7 +26,20 @@ angular.module('reaction', [
 			 *  Private Variables
 			 **********************/
 			// reference to this controller
+			var reactionable = $scope.reactionable;
+			// figure out which eloquent model it belongs to
+			if (reactionable.email) {
+				var reactionable_type = 'App\\Models\\Kitchen'
+			} else if (reactionable.slug) {
+				var reactionable_type = 'App\\Models\\Dish'
+			}
 
+			var reactionObj = {
+				reactionableId: reactionable.id,
+				reactionableType: reactionable_type,
+				// TODO: set it to 1 for now until (1) is done
+				userId: 1
+			};
 
 			/*********************
 			 *  Public Variables
@@ -47,13 +60,6 @@ angular.module('reaction', [
 
 			function _getReactions() {
 
-				var reactionable = $scope.reactionable;
-				var reactionObj = {
-					reactionableId: reactionable.id,
-					// TODO: set it to 1 for now until (1) is done
-					userId: 1
-				};
-
 				ReactionAPI.index(reactionObj, 'getReactions').then(function (response) {
 					that.numLikes = response.numLikes;
 					that.numDislikes = response.numDislikes;
@@ -70,13 +76,9 @@ angular.module('reaction', [
 				});
 			}
 
-			function _addReaction(reactionableId, kind) {
-				var reactionObj = {
-					reactionableId: reactionableId,
-					kind: kind,
-					// TODO: set it to 1 for now until (1) is done
-					userId: 1
-				};
+			function _addReaction(reactionable, kind) {
+
+				reactionObj.kind = kind;
 
 				ReactionAPI.store(reactionObj).then(function (response) {
 					var newReaction = response;
@@ -101,13 +103,7 @@ angular.module('reaction', [
 			// We need to open a socket in order to get just created like entry because page refresh every time
 			// like is toggled isn't an ideal behavior
 			// As a workaround, I will pass some extra information into request in order to look for the added reaction
-			function _removeReaction(reactionableId, kind) {
-
-				var reactionObj = {
-					reactionableId: reactionableId,
-					// TODO: set it to 1 for now until (1) is done
-					userId: 1
-				};
+			function _removeReaction(reactionable, kind) {
 
 				var userReactionId = 1; // placeholder for now until (1) is implemented
 				ReactionAPI.destroy(reactionObj, userReactionId).then(function (response) {

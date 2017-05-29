@@ -15,8 +15,8 @@ angular.module('reaction', [
 		};
 	})
 
-	.controller('ReactionController', ['$scope', 'ReactionAPI', '$state',
-		function ($scope, ReactionAPI, $state) {
+	.controller('ReactionController', ['$scope', 'ReactionAPI', '$state', 'devHelper',
+		function ($scope, ReactionAPI, $state, devHelper) {
 
 			/*********************
 			 *  Private Variables
@@ -67,7 +67,7 @@ angular.module('reaction', [
 
 					_findUserReaction(that.userReactionKind);
 
-					console.log(reactionObj);
+					devHelper.log(reactionObj);
 
 				}, function (response) {
 					// TODO handle error state
@@ -82,7 +82,7 @@ angular.module('reaction', [
 				ReactionAPI.store(reactionObj).then(function (response) {
 					var newReaction = response;
 					var oldReactionKind = newReaction.oldReactionKind;
-					console.log(newReaction);
+					devHelper.log(newReaction);
 
 					// un-toggle existing reaction
 					_decrementReaction(oldReactionKind);
@@ -107,7 +107,7 @@ angular.module('reaction', [
 				var userReactionId = 1; // placeholder for now until (1) is implemented
 				ReactionAPI.destroy(reactionObj, userReactionId).then(function (response) {
 					var removedReaction = response;
-					console.log(removedReaction);
+					devHelper.log(removedReaction);
 
 					// toggle the button & update # likes/dislikes on the fly
 					_decrementReaction(kind);
@@ -121,12 +121,12 @@ angular.module('reaction', [
 			function _incrementReaction(kind) {
 				switch (kind) {
 					case 0:
-						console.log('disliked');
+						devHelper.log('disliked');
 						that.disliked = true;
 						that.numDislikes += 1;
 						break;
 					case 1:
-						console.log('liked');
+						devHelper.log('liked');
 						that.liked = true;
 						that.numLikes += 1;
 						break;
@@ -136,12 +136,12 @@ angular.module('reaction', [
 			function _decrementReaction(kind) {
 				switch (kind) {
 					case 0:
-						console.log('un-disliked');
+						devHelper.log('un-disliked');
 						that.disliked = false;
 						that.numDislikes -= 1;
 						break;
 					case 1:
-						console.log('un-liked');
+						devHelper.log('un-liked');
 						that.liked = false;
 						that.numLikes -= 1;
 						break;

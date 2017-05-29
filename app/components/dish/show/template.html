@@ -9,5 +9,10 @@
             <a ui-sref="dish.update({id: DishCtrl.dish.id})" class="btn btn-primary">Edit Dish</a>
             <a ui-sref="dish.destroy({id: DishCtrl.dish.id})" class="btn btn-primary">Delete</a>
         </div>
+
+        <!--Must load it "after" kitchen data is available-->
+        <div ng-if="DishCtrl.dish">
+            <reaction-directive reactionable="DishCtrl.dish"></reaction-directive>
+        </div>
     </div>
 </div>

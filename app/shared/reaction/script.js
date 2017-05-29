@@ -15,20 +15,19 @@ angular.module('reaction', [
 		};
 	})
 
-	.controller('ReactionController', ['$scope', 'ReactionAPI',
-		function ($scope, ReactionAPI) {
+	.controller('ReactionController', ['$scope', 'ReactionAPI', '$state',
+		function ($scope, ReactionAPI, $state) {
 
 			/*********************
 			 *  Private Variables
 			 **********************/
 			// reference to this controller
 			var reactionable = $scope.reactionable;
+
 			// figure out which eloquent model it belongs to
-			if (reactionable.email) {
-				var reactionable_type = 'App\\Models\\Kitchen'
-			} else if (reactionable.slug) {
-				var reactionable_type = 'App\\Models\\Dish'
-			}
+			var stateName = $state.current.name;
+			var modelName = stateName.split(".")[0];
+			var reactionable_type = 'App\\Models\\' + modelName;
 
 			var reactionObj = {
 				reactionableId: reactionable.id,
@@ -86,10 +85,10 @@ angular.module('reaction', [
 					console.log(newReaction);
 
 					// un-toggle existing reaction
-					_toggleReaction(false, oldReactionKind);
+					_decrementReaction(oldReactionKind);
 
 					// toggle the button & update # likes/dislikes on the fly
-					_toggleReaction(true, kind)
+					_incrementReaction(kind)
 
 				}, function (response) {
 					// TODO handle error state
@@ -111,7 +110,7 @@ angular.module('reaction', [
 					console.log(removedReaction);
 
 					// toggle the button & update # likes/dislikes on the fly
-					_toggleReaction(false, kind);
+					_decrementReaction(kind);
 
 				}, function (response) {
 					// TODO handle error state
@@ -119,33 +118,33 @@ angular.module('reaction', [
 				});
 			}
 
-			function _toggleReaction(toAdd, kind) {
-				if (toAdd) {
-					switch (kind) {
-						case 0:
-							console.log('disliked');
-							that.disliked = true;
-							that.numDislikes += 1;
-							break;
-						case 1:
-							console.log('liked');
-							that.liked = true;
-							that.numLikes += 1;
-							break;
-					}
-				} else {
-					switch (kind) {
-						case 0:
-							console.log('un-disliked');
-							that.disliked = false;
-							that.numDislikes -= 1;
-							break;
-						case 1:
-							console.log('un-liked');
-							that.liked = false;
-							that.numLikes -= 1;
-							break;
-					}
+			function _incrementReaction(kind) {
+				switch (kind) {
+					case 0:
+						console.log('disliked');
+						that.disliked = true;
+						that.numDislikes += 1;
+						break;
+					case 1:
+						console.log('liked');
+						that.liked = true;
+						that.numLikes += 1;
+						break;
+				}
+			}
+
+			function _decrementReaction(kind) {
+				switch (kind) {
+					case 0:
+						console.log('un-disliked');
+						that.disliked = false;
+						that.numDislikes -= 1;
+						break;
+					case 1:
+						console.log('un-liked');
+						that.liked = false;
+						that.numLikes -= 1;
+						break;
 				}
 			}
 

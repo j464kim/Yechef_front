@@ -6,7 +6,7 @@
 <div class="container" id="kitchenList" loader>
 
     <div class="col-md-6">
-        <img ng-model="media" alt="Card image cap" style="width:100%;">
+        <img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
     </div>
     <div class="col-md-6">
         <div class="kitchenName">
@@ -37,9 +37,7 @@
 
         <!--Must load it "after" kitchen data is available-->
         <div ng-if="KitchenCtrl.kitchen">
-            <div class="container" ng-controller="ReactionController">
-                <reaction-directive reactionable="KitchenCtrl.kitchen"></reaction-directive>
-            </div>
+            <reaction-directive reactionable="KitchenCtrl.kitchen"></reaction-directive>
         </div>
     </div>
 </div>

@@ -30,7 +30,7 @@ angular.module('kitchen.show', [
 				KitchenAPI.show(kitchenId).then(function (response) {
 					console.log(response);
 					that.kitchen = response;
-					$scope.media = response.medias[0].url;
+					that.media = response.medias[0].url;
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

@@ -1,8 +1,6 @@
 <div>
-    <div class="container" ng-controller="ReactionController as vm">
-        <span ng-if="!vm.liked"><i class="large-icon fa fa-thumbs-o-up" ng-click="vm.addReaction(vm.LIKE)"></i>{{vm.numLikes}}</span>
-        <span ng-if="vm.liked"><i class="large-icon fa fa-thumbs-up" ng-click="vm.removeReaction(vm.LIKE)"></i>{{vm.numLikes}}</span>
-        <span ng-if="!vm.disliked"><i class="large-icon fa fa-thumbs-o-down" ng-click="vm.addReaction(vm.DISLIKE)"></i>{{vm.numDislikes}}</span>
-        <span ng-if="vm.disliked"><i class="large-icon fa fa-thumbs-down" ng-click="vm.removeReaction(vm.DISLIKE)"></i>{{vm.numDislikes}}</span>
-    </div>
+    <span ng-if="!liked"><i class="large-icon fa fa-thumbs-o-up" ng-click="addReaction(LIKE)"></i>{{numLikes}}</span>
+    <span ng-if="liked"><i class="large-icon fa fa-thumbs-up" ng-click="removeReaction(LIKE)"></i>{{numLikes}}</span>
+    <span ng-if="!disliked"><i class="large-icon fa fa-thumbs-o-down" ng-click="addReaction(DISLIKE)"></i>{{numDislikes}}</span>
+    <span ng-if="disliked"><i class="large-icon fa fa-thumbs-down" ng-click="removeReaction(DISLIKE)"></i>{{numDislikes}}</span>
 </div>

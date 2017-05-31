@@ -7,7 +7,7 @@ angular.module('reaction', [
 	.directive('reactionDirective', function () {
 		return {
 			restrict: 'EA',
-			transclude: true,
+			replace: true,
 			scope: {
 				reactionable: '='
 			},

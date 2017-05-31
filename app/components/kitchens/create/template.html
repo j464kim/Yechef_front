@@ -6,35 +6,47 @@
 </head>
 <body>
 
-<form novalidate name="kitchenCreateForm" class="css-validation">
-    <div class="kitchenName">
-        <label class="control-label" for="name">Name:</label>
+<form name="kitchenForm" class="css-validation" novalidate>
+    <div class="kitchenName" ng-class="{ 'has-error' : kitchenForm.name.$invalid && !kitchenForm.name.$pristine }">
+        <label class="control-label">Name:</label>
         <div class="controls">
-            <input type="text" id="name" ng-model="KitchenCtrl.kitchen.name" required/>
+            <input type="text" name="name" ng-model="KitchenCtrl.kitchen.name" ng-minlength="3" ng-maxlength="12"
+                   required/>
+            <p ng-show="kitchenForm.name.$error.minlength" class="help-block">Kitchen name is too short.</p>
+            <p ng-show="kitchenForm.name.$error.maxlength" class="help-block">Kitchen name is too long.</p>
+            <div ng-hide="kitchenForm.name.$error.minlength || kitchenForm.name.$error.maxlength">
+                <p ng-show="kitchenForm.name.$invalid && !kitchenForm.name.$pristine" class="help-block">Kitchen name is required.</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="kitchenAddress" ng-class="{ 'has-error' : kitchenForm.address.$invalid && !kitchenForm.address.$pristine }">
+        <label class="control-label">Address:</label>
+        <div class="controls">
+            <input type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
+            <p ng-show="kitchenForm.address.$invalid && !kitchenForm.address.$pristine" class="help-block">Address is required.</p>
         </div>
     </div>
-    <div class="kitchenAddress">
-        <label class="control-label" for="address">Address:</label>
+    <div class="kitchenPhone" ng-class="{ 'has-error' : kitchenForm.phone.$invalid && !kitchenForm.phone.$pristine }">
+        <label class="control-label">Phone:</label>
         <div class="controls">
-            <input type="text" id="address" ng-model="KitchenCtrl.kitchen.address" required/>
+            <input type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
+            <p ng-show="kitchenForm.phone.$invalid && !kitchenForm.phone.$pristine" class="help-block">Phone number is required.</p>
         </div>
     </div>
-    <div class="kitchenPhone">
-        <label class="control-label" for="phone">Phone:</label>
+    <div class="kitchenEmail" ng-class="{ 'has-error' : kitchenForm.email.$invalid && !kitchenForm.email.$pristine }">
+        <label class="control-label">Email:</label>
         <div class="controls">
-            <input type="text" id="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
+            <input type="email" name="email" ng-model="KitchenCtrl.kitchen.email" required/>
+            <p ng-show="kitchenForm.email.$invalid && !kitchenForm.email.$pristine" class="help-block">Enter a valid
+                email.</p>
         </div>
     </div>
-    <div class="kitchenEmail">
-        <label class="control-label" for="email">Email:</label>
+    <div class="kitchenDescription" ng-class="{ 'has-error' : kitchenForm.description.$invalid && !kitchenForm.description.$pristine }">
+        <label class="control-label">Description:</label>
         <div class="controls">
-            <input type="email" id="email" ng-model="KitchenCtrl.kitchen.email" required/>
-        </div>
-    </div>
-    <div class="kitchenDescription">
-        <label class="control-label" for="kitchenDescription">Description:</label>
-        <div class="controls">
-            <input type="text" id="kitchenDescription" ng-model="KitchenCtrl.kitchen.description"/>
+            <input type="text" name="description" ng-model="KitchenCtrl.kitchen.description" required/>
+            <p ng-show="kitchenForm.description.$invalid && !kitchenForm.description.$pristine" class="help-block">Description is required.</p>
         </div>
     </div>
     <div class="kitchenImage">
@@ -47,7 +59,8 @@
     </div>
     <br/>
     <div class="submit">
-        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
+        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary"
+           ng-disabled="kitchenForm.$invalid">Create a Kitchen!</a>
         <a type="button" ui-sref="kitchen.list" class="btn btn-small">cancel</a>
     </div>
     <br/>

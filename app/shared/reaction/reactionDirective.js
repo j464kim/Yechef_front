@@ -4,7 +4,7 @@ angular.module('reaction', [
 	'reaction_api'
 ])
 
-	.directive('reactionDirective', function () {
+	.directive('reactionButton', function () {
 		return {
 			restrict: 'EA',
 			replace: true,

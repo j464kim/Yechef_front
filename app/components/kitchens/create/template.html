@@ -29,9 +29,11 @@
     <!--Phone-->
     <div class="kitchenPhone">
         <label>Phone:</label>
-        <input type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
+        <input type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone"
+               ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
         <div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$dirty' ng-cloak>
             <div ng-message="required">Phone number is required</div>
+            <div ng-message="pattern">Must be a valid 10 digit phone number</div>
         </div>
     </div>
     <!--Email-->

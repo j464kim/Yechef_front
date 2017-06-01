@@ -9,6 +9,7 @@ angular
 		'ngRoute',
 		'ngSanitize',
 		'ngTouch',
+		'ngMessages',
 
 		// libraries
 		'ui.router',

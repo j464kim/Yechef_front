@@ -6,61 +6,61 @@
 </head>
 <body>
 
-<form name="kitchenForm" class="css-validation" novalidate>
-    <div class="kitchenName" ng-class="{ 'has-error' : kitchenForm.name.$invalid && !kitchenForm.name.$pristine }">
-        <label class="control-label">Name:</label>
-        <div class="controls">
-            <input type="text" name="name" ng-model="KitchenCtrl.kitchen.name" ng-minlength="3" ng-maxlength="12"
-                   required/>
-            <p ng-show="kitchenForm.name.$error.minlength" class="help-block">Kitchen name is too short.</p>
-            <p ng-show="kitchenForm.name.$error.maxlength" class="help-block">Kitchen name is too long.</p>
-            <div ng-hide="kitchenForm.name.$error.minlength || kitchenForm.name.$error.maxlength">
-                <p ng-show="kitchenForm.name.$invalid && !kitchenForm.name.$pristine" class="help-block">Kitchen name is required.</p>
-            </div>
-        </div>
-
-    </div>
-    <div class="kitchenAddress" ng-class="{ 'has-error' : kitchenForm.address.$invalid && !kitchenForm.address.$pristine }">
-        <label class="control-label">Address:</label>
-        <div class="controls">
-            <input type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
-            <p ng-show="kitchenForm.address.$invalid && !kitchenForm.address.$pristine" class="help-block">Address is required.</p>
+<form class="form-validation" name="form" novalidate>
+    <!--Name-->
+    <div class="kitchenName">
+        <label>Name:</label>
+        <input type="text" name="name" ng-model="KitchenCtrl.kitchen.name"
+               ng-minlength="3" ng-maxlength="12" required/>
+        <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$dirty' ng-cloak>
+            <div ng-message="required">Kitchen Name is required</div>
+            <div ng-message="minlength">Kitchen Name must have minimum 6 characters</div>
+            <div ng-message="maxlength">Kitchen Name must have maximum 10 characters</div>
         </div>
     </div>
-    <div class="kitchenPhone" ng-class="{ 'has-error' : kitchenForm.phone.$invalid && !kitchenForm.phone.$pristine }">
-        <label class="control-label">Phone:</label>
-        <div class="controls">
-            <input type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
-            <p ng-show="kitchenForm.phone.$invalid && !kitchenForm.phone.$pristine" class="help-block">Phone number is required.</p>
+    <!--Address-->
+    <div class="kitchenAddress">
+        <label>Address:</label>
+        <input type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
+        <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$dirty' ng-cloak>
+            <div ng-message="required">Address is required</div>
         </div>
     </div>
-    <div class="kitchenEmail" ng-class="{ 'has-error' : kitchenForm.email.$invalid && !kitchenForm.email.$pristine }">
-        <label class="control-label">Email:</label>
-        <div class="controls">
-            <input type="email" name="email" ng-model="KitchenCtrl.kitchen.email" required/>
-            <p ng-show="kitchenForm.email.$invalid && !kitchenForm.email.$pristine" class="help-block">Enter a valid
-                email.</p>
+    <!--Phone-->
+    <div class="kitchenPhone">
+        <label>Phone:</label>
+        <input type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
+        <div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$dirty' ng-cloak>
+            <div ng-message="required">Phone number is required</div>
         </div>
     </div>
-    <div class="kitchenDescription" ng-class="{ 'has-error' : kitchenForm.description.$invalid && !kitchenForm.description.$pristine }">
-        <label class="control-label">Description:</label>
-        <div class="controls">
-            <input type="text" name="description" ng-model="KitchenCtrl.kitchen.description" required/>
-            <p ng-show="kitchenForm.description.$invalid && !kitchenForm.description.$pristine" class="help-block">Description is required.</p>
+    <!--Email-->
+    <div class="kitchenEmail">
+        <label>Email:</label>
+        <input type="email" name="email" ng-model="KitchenCtrl.kitchen.email" required/>
+        <div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$dirty' ng-cloak>
+            <div ng-message="required">Email is required</div>
+            <div ng-message="email">Must be a valid email</div>
+        </div>
+    </div>
+    <!--Description-->
+    <div class="kitchenDescription">
+        <label>Description:</label>
+        <input type="text" name="description" ng-model="KitchenCtrl.kitchen.description" required/>
+        <div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$dirty' ng-cloak>
+            <div ng-message="required">Description is required</div>
         </div>
     </div>
     <div class="kitchenImage">
-        <label class="control-label" for="dropzone">Image:</label>
-        <div class="controls">
-            <div ng-app="mediaUpload" ng-controller="MediaController">
-                <div class="dropzone" id="dropzone" ng-dropzone></div>
-            </div>
+        <label for="dropzone">Image:</label>
+        <div ng-app="mediaUpload" ng-controller="MediaController">
+            <div class="dropzone" id="dropzone" ng-dropzone></div>
         </div>
     </div>
     <br/>
     <div class="submit">
         <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary"
-           ng-disabled="kitchenForm.$invalid">Create a Kitchen!</a>
+           ng-disabled="form.$invalid">Create a Kitchen!</a>
         <a type="button" ui-sref="kitchen.list" class="btn btn-small">cancel</a>
     </div>
     <br/>

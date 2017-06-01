@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/dropzone/dist/min/dropzone.min.js',
       'bower_components/ng-dropzone/dist/ng-dropzone.js',
       'bower_components/ng-buffer-dropzone/dist/ng-dropzone.js',
+      'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

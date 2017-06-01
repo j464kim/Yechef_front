@@ -16,7 +16,8 @@
     "font-awesome": "^4.7.0",
     "angular-local-storage": "^0.6.0",
     "ng-dropzone": "ngdropzone#^2.0.2",
-    "ng-buffer-dropzone": "ngdropzone-buffer#^1.0.0"
+    "ng-buffer-dropzone": "ngdropzone-buffer#^1.0.0",
+    "angular-messages": "^1.6.4"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

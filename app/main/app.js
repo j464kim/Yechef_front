@@ -10,6 +10,7 @@ angular
 		'ngSanitize',
 		'ngTouch',
 		'ngMessages',
+		'ui.mask',
 
 		// libraries
 		'ui.router',

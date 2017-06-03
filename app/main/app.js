@@ -10,10 +10,11 @@ angular
 		'ngSanitize',
 		'ngTouch',
 
-		// libraries
-		'ui.router',
-		'satellizer',
-		'ui.bootstrap',
+        // libraries
+        'ui.router',
+        'satellizer',
+        'ui.bootstrap',
+        'http-auth-interceptor',
 
 		// main modules
 		'dish',
@@ -23,10 +24,16 @@ angular
 
         // services
         'http.interceptor',
+        'auth.api',
+        'main.controller',
 
-    // dev helper
+        // configuration
+        'configuration',
+
+        // dev helper
         'dev',
-    ]).config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    ])
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         //push http interceptor
         $httpProvider.interceptors.push('httpRequestInterceptor');
 

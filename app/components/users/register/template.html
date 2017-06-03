@@ -5,6 +5,7 @@
              ng-class="{ 'has-error': (form.email.$dirty && form.email.$error.required) || (form.email.$invalid && form.email.$error.email) }">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" class="form-control" ng-model="RegisterCtrl.newUser.email"
+                   ng-maxlength="255"
                    required/>
             <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
             <span ng-show="form.email.$invalid && form.email.$error.email" class="help-block">Not a valid email</span>
@@ -13,19 +14,21 @@
              ng-class="{ 'has-error': (form.first_name.$dirty && form.first_name.$error.required) }">
             <label for="first_name">First Name</label>
             <input type="text" name="first_name" id="first_name" class="form-control"
-                   ng-model="RegisterCtrl.newUser.first_name"
+                   ng-model="RegisterCtrl.newUser.first_name" ng-maxlength="255"
                    required/>
             <span ng-show="form.first_name.$dirty && form.first_name.$error.required"
                   class="help-block">First Name is required</span>
+            <span ng-show="form.first_name.$invalid && !form.first_name.$error.required" class="help-block">First name can be at most 255 characters</span>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error': (form.last_name.$dirty && form.last_name.$error.required) }">
             <label for="last_name">Last Name</label>
             <input type="text" name="last_name" id="last_name" class="form-control"
-                   ng-model="RegisterCtrl.newUser.last_name"
+                   ng-model="RegisterCtrl.newUser.last_name" ng-maxlength="255"
                    required/>
-            <span ng-show="form.first_name.$dirty && form.first_name.$error.required"
+            <span ng-show="form.last_name.$dirty && form.last_name.$error.required"
                   class="help-block">Last Name is required</span>
+            <span ng-show="form.last_name.$invalid && !form.last_name.$error.required" class="help-block">First name can be at most 255 characters</span>
         </div>
         <div class="form-group">
             <label for="phone">Phone Number (Optional)</label>
@@ -34,14 +37,15 @@
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control"
+            <input type="password" name="password" id="password" class="form-control" ng-minlength="6"
                    ng-model="RegisterCtrl.newUser.password" required/>
             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+            <span ng-show="form.password.$invalid" class="help-block">Password must be at least 6 characters.</span>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error': form.password_confirm.$dirty && form.password_confirm.$error.required }">
             <label for="password_confirm">Password Confirm</label>
-            <input type="password" name="password_confirm" id="password_confirm" class="form-control"
+            <input type="password" name="password_confirm" id="password_confirm" class="form-control" ng-minlength="6"
                    ng-model="RegisterCtrl.newUser.password_confirmation" required/>
             <span ng-show="form.password_confirm.$dirty && form.password_confirm.$error.required" class="help-block">Password Confirm is required</span>
             <span ng-show="RegisterCtrl.newUser.password !== RegisterCtrl.newUser.password_confirmation">Password mismatch</span>

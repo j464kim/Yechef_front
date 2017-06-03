@@ -48,7 +48,6 @@ angular.module('rating.api', [
                 });
             };
 
-            //TODO: Author
             function create(dishId, rating) {
                 return $q(function (resolve, reject) {
                     RatingResource.create(rating,

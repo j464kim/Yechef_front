@@ -5,7 +5,7 @@ angular.module('directive.loader', [])
         restrict: 'EA',
         transclude: true,
         scope: true,
-        templateUrl: 'directives/loader/loader.html',
+        templateUrl: 'shared/loader/loaderDirective.html',
         link: function (scope, elem) {
             scope.isLoading = function () {
                 return $http.pendingRequests.length > 0;

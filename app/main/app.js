@@ -16,6 +16,7 @@ angular
         'ui.router',
         'satellizer',
         'ui.bootstrap',
+        'http-auth-interceptor',
 
         // main modules
         'dish',
@@ -26,6 +27,11 @@ angular
 
         // services
         'http.interceptor',
+        'auth.api',
+        'main.controller',
+
+        // configuration
+        'configuration',
 
         // dev helper
         'dev',

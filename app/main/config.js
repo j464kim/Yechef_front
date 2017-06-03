@@ -26,6 +26,9 @@ angular.module('configuration', [])
         var autoProcessQueue = false;
         var addRemoveLinks = true;
 
+        // cookie expiration in days
+        var cookieExpirationInDays = 3;
+
         /* jshint undef: false */
         switch (env) {
             case 'DEBUG':
@@ -46,8 +49,9 @@ angular.module('configuration', [])
             env: env,
             debugMode: debugMode,
             endpoint: endpoint,
-            facebookAppId: facebookAppId,
+            facebookAppId : facebookAppId,
             googleAppId: googleAppId,
+            cookieExpirationInDays: cookieExpirationInDays,
             maxFiles: maxFiles,
             maxFileSize: maxFileSize,
             acceptedFiles: acceptedFiles,

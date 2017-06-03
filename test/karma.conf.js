@@ -33,7 +33,7 @@ module.exports = function(config) {
       'bower_components/satellizer/dist/satellizer.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/angular-http-auth/src/http-auth-interceptor.js',
       'bower_components/dropzone/dist/min/dropzone.min.js',
       'bower_components/ng-dropzone/dist/ng-dropzone.js',
       'bower_components/ng-buffer-dropzone/dist/ng-dropzone.js',

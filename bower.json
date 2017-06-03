@@ -15,7 +15,7 @@
     "angular-ui-router": "^0.4.2",
     "angular-bootstrap": "^2.5.0",
     "font-awesome": "^4.7.0",
-    "angular-local-storage": "^0.6.0",
+    "angular-http-auth": "^1.5.0",
     "ng-dropzone": "ngdropzone#^2.0.2",
     "ng-buffer-dropzone": "ngdropzone-buffer#^1.0.0",
     "angular-xeditable": "^0.7.1"

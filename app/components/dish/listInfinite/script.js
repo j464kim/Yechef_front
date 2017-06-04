@@ -4,8 +4,8 @@ angular.module('dish.list.infinite', [
     'dishes.api',
 ])
 
-    .controller('DishListInfiniteController', ['$state', 'DishesAPI',
-        function ($state, DishesAPI) {
+    .controller('DishListInfiniteController', ['$state', 'DishesAPI', 'devHelper',
+        function ($state, DishesAPI, devHelper) {
 
             /*********************
              *    Private Variables
@@ -32,7 +32,7 @@ angular.module('dish.list.infinite', [
                 var pageNum = that.currentPage || that.currentPage++;
 
                 DishesAPI.list(pageNum).then(function (response) {
-                    console.log(response);
+                    devHelper.log(response);
                     that.dishes = that.dishes.concat(response.data);
                     that.totalItems = response.total;
                     that.currentPage = response.current_page;

@@ -4,8 +4,8 @@ angular.module('dish.create', [
 	'dishes.api',
 ])
 
-	.controller('DishCreateController', ['$state', 'DishesAPI',
-		function ($state, DishesAPI) {
+	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper',
+		function ($state, DishesAPI, devHelper) {
 
 			/*********************
 			 *    Private Variables
@@ -18,7 +18,7 @@ angular.module('dish.create', [
 				DishesAPI.create(that.name, that.description)
 					.then(function (response) {
 						var newDish = response;
-						console.log(newDish);
+                        devHelper.log(newDish);
 
 						_uploadDishMedia(newDish);
 

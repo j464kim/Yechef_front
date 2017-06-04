@@ -15,7 +15,6 @@ angular
 
                 httpConfig.params = httpConfig.params || {};
                 // inser PHPStorm debug session when in debug mode
-                // console.log();
                 if(config.debugMode === true){
                     httpConfig.params.XDEBUG_SESSION_START = "PHPSTORM";
                 }

@@ -14,13 +14,13 @@ angular.module('user.api', [])
 	}
 ])
 
-.service('UserhAPI', ['$q', 'UserResource',
+.service('UserAPI', ['$q', 'UserResource',
 	function($q, UserResource){
 
 		function list(email, password) {
 
 			return $q(function(resolve, reject) {
-				UserhAPI.list().then(function(response){
+				UserAPI.list().then(function(response){
 					resolve(response.body);
 				}, function(response) {
 					console.log(seconds, expireAt);

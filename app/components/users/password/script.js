@@ -5,8 +5,8 @@ angular.module('user.password', [
 ])
 
 
-	.controller('PasswordController', ['$stateParams', 'PasswordAPI',
-		function ($stateParams, PasswordAPI) {
+	.controller('PasswordController', ['$stateParams', 'PasswordAPI', 'devHelper',
+		function ($stateParams, PasswordAPI, devHelper) {
 
 			/*********************
 			 *    Private Variables
@@ -27,7 +27,6 @@ angular.module('user.password', [
 			 **********************/
 
 			function _init() {
-				console.log('loaded passwordController');
 			}
 
 			function _showResetForm() {
@@ -36,7 +35,7 @@ angular.module('user.password', [
 				).then(
 					function (response) {
 						//set access token
-						console.log(response);
+						devHelper.log(response);
 					},
 					function (response) {
 						console.error(response);
@@ -45,14 +44,12 @@ angular.module('user.password', [
 			};
 
 			function _sendResetLinkEmail() {
-				console.log('_sendResetLinkEmail to ' + that.email);
 				PasswordAPI.sendResetLinkEmail(
 					that.email
 				).then(
 					function (response) {
 						//set access token
-						console.log('success');
-						console.log(response);
+						devHelper.log(response);
 					},
 					function (response) {
 						console.error(response);
@@ -69,7 +66,7 @@ angular.module('user.password', [
 				).then(
 					function (response) {
 						//set access token
-						console.log(response);
+						devHelper.log(response);
 					},
 					function (response) {
 						console.error(response);

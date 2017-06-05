@@ -221,7 +221,6 @@ angular.module('auth.api', [
 			};
 
 			function sendResetLinkEmail(email) {
-				console.log('will send POST');
 
 				return $http({
 					method: 'POST',
@@ -271,7 +270,6 @@ angular.module('auth.api', [
 
 				return $q(function (resolve, reject) {
 					PasswordResource.sendResetLinkEmail(email).then(function (response) {
-						console.log('API succeeded');
 						resolve(response.body);
 					}, function (response) {
 						reject(response);

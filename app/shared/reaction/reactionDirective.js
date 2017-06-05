@@ -3,15 +3,16 @@
 angular.module('reaction', [
 	'reaction_api'
 ])
+	.constant('constant', {'DISLIKE': 0, 'LIKE': 1})
 
-	.directive('reactionButton', function () {
+	.directive('reactionButton', ['constant', function (constant) {
 		return {
 			restrict: 'EA',
 			replace: true,
 			scope: {
 				reactionable: '='
 			},
-			templateUrl: 'shared/reaction/template.html',
+			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
 			controller: function ($scope, ReactionAPI, $state, devHelper) {
 
@@ -38,8 +39,8 @@ angular.module('reaction', [
 				 **********************/
 
 				// Is there a way HTML can access constant value of its controller?
-				$scope.DISLIKE = 0;
-				$scope.LIKE = 1;
+				$scope.DISLIKE = constant.DISLIKE;
+				$scope.LIKE = constant.LIKE;
 
 				/*********************
 				 *  Private Functions
@@ -47,6 +48,7 @@ angular.module('reaction', [
 
 				function _init() {
 					_getReactions();
+					// console.log(constant.DISLIKE);
 				}
 
 				// TODO(1): Along with the numeber of likes/dislikes, $scope function will retrieve current user's reaction information
@@ -62,7 +64,6 @@ angular.module('reaction', [
 						$scope.userReactionKind = response.userReactionKind;
 
 						_findUserReaction($scope.userReactionKind);
-
 						devHelper.log(reactionObj);
 
 					}, function (response) {
@@ -173,4 +174,4 @@ angular.module('reaction', [
 
 			}
 		};
-	});
+	}]);

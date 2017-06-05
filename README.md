@@ -34,9 +34,12 @@ grunt serve
 - Try to keep everything moduler, in the angular way, put all business logic in a service and inject it into your controllers, only leave the simpliest page behavior in your controllers.
 - For every new big chunk of funcationality, create a new folder in app folder. ie. for dishes related pages, create a folder of `app/dishes` and create subfolders inside it for each of the pages, eg. dishes list page should be placed inside `app/dishes/list`, inside this folder you can then defined your controller and html templates.
 
-## Code structure
+## Code structure / Naming
 - The components folder will contain the actual independent sections for your Angular app.
 - The shared folder will contain the individual features that your app will have. These features will ideally be directives that you will want to reuse on multiple pages.
+- Keep the Names Consistent: When writing components and you need multiple files for the component, try to name them in a consistent pattern. For example, kitchenShow.html, kitchenServices.js, kitchenController.js, kitchenDirective.js.
+Reference : https://scotch.io/tutorials/angularjs-best-practices-directory-structure
+
 
 ## Naming convention
 - Directory / File 
@@ -52,4 +55,4 @@ grunt serve
 
 ## TODO
 - implement the tests, try to make this project as a test driven project 
-- For social login, implement the satellizer cordova plugin https://github.com/sahat/satellizer
+- ~For social login, implement the satellizer cordova plugin https://github.com/sahat/satellizer~

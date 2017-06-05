@@ -1,20 +1,20 @@
 'use strict';
 
-angular.module('http.interceptor', [
-    'configuration'
-])
+angular
+    .module('http.interceptor', [
+        'configuration'
+    ])
 
-    .factory('httpRequestInterceptor', ['$q', 'config', 'localStorageService',
-        function ($q, config, localStorageService) {
+    .factory('httpRequestInterceptor', ['$q', 'config', 'sessionService',
+        function ($q, config, sessionService) {
 
             var request = function (httpConfig) {
                 httpConfig.headers = httpConfig.headers || {};
 
-                httpConfig.headers.Authorization = 'Bearer ' + localStorageService.get('access_token');
+                httpConfig.headers.Authorization = sessionService.getAccessToken();
 
                 httpConfig.params = httpConfig.params || {};
                 // inser PHPStorm debug session when in debug mode
-                // console.log();
                 if(config.debugMode === true){
                     httpConfig.params.XDEBUG_SESSION_START = "PHPSTORM";
                 }
@@ -23,13 +23,15 @@ angular.module('http.interceptor', [
 
 
             var response = function (response) {
+                var httpCode = response.status;
+
                 if (config.debugMode === true) {
-                    var httpCode = response.status;
                     if (httpCode !== 200) {
                         console.error('##Response Status of ' + httpCode + ' returned');
                         console.error('##Response Body: ', response);
                     }
                 }
+
                 return response;
             };
 

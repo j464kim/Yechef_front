@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="styles/less/icon.less">
     <!-- endbuild -->
 </head>
-<body ng-app="yechefFrontApp">
+<body ng-app="yechefFrontApp" ng-controller="MainCtrl as MCL">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -43,12 +43,14 @@
 
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
-                <li><a ui-sref="dish.listInfinite">Dishes</a></li>
-                <li><a ui-sref="kitchen.list">Kitchens</a></li>
-                <li><a ui-sref="user.login">Login</a></li>
-            </ul>
-          </div>
+                <ul class="nav navbar-nav" ng-controller="UserLoginController as LoginCtrl">
+                    <li><a ui-sref="dish.listInfinite">Dishes</a></li>
+                    <li><a ui-sref="kitchen.list">Kitchens</a></li>
+                    <li><a ui-sref="user.register" ng-show="!MCL.isLoggedin()">Register</a></li>
+                    <li><a ui-sref="user.login" ng-show="!MCL.isLoggedin()">Login</a></li>
+                    <li><a class="btn" ng-click="LoginCtrl.logout()" ng-show="MCL.isLoggedin()">LogOut</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -91,18 +93,21 @@
 <script src="bower_components/satellizer/dist/satellizer.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
 <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
 <script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
 <script src="bower_components/ng-buffer-dropzone/dist/ng-dropzone.js"></script>
+<script src="bower_components/angular-ui-mask/dist/mask.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="main/app.js"></script>
 <script src="main/config.js"></script>
+<script src="main/mainController.js"></script>
 <script src="main/services/httpInterceptor.js"></script>
+<script src="main/services/auth.js"></script>
 <script src="main/services/devHelper.js"></script>
 
-<script src="main/app.js"></script>
 <script src="components/dish/list/script.js"></script>
 <script src="components/dish/listInfinite/script.js"></script>
 <script src="components/dish/show/script.js"></script>
@@ -125,6 +130,7 @@
 <script src="components/users/index.js"></script>
 <script src="components/users/service/users.js"></script>
 <script src="components/users/login/script.js"></script>
+<script src="components/users/register/script.js"></script>
 
 <!-- directives -->
 <script src="directives/loader/loader.js"></script>

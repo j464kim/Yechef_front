@@ -17,7 +17,8 @@
     "angular-http-auth": "^1.5.0",
     "ng-dropzone": "ngdropzone#^2.0.2",
     "ng-buffer-dropzone": "ngdropzone-buffer#^1.0.0",
-    "angular-ui-mask": "^1.8.7"
+    "angular-ui-mask": "^1.8.7",
+    "ngSmoothScroll": "^2.0.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

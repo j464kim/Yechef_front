@@ -7,7 +7,10 @@ angular.module('configuration', [])
             env,
             debugMode;
 
-        env = 'DEBUG';
+        var envProd = 'PROD';
+        var envDebug = 'DEBUG';
+
+        env = envDebug;
 
         // remember to add the last /
         var debugAPI = '//laravel.dev/api/';
@@ -31,11 +34,11 @@ angular.module('configuration', [])
 
         /* jshint undef: false */
         switch (env) {
-            case 'DEBUG':
+            case envDebug:
                 endpoint = debugAPI;
                 debugMode = true;
                 break;
-            case 'PROD':
+            case envProd:
                 endpoint = productAPI;
                 debugMode = false;
                 break;
@@ -47,6 +50,8 @@ angular.module('configuration', [])
 
         return {
             env: env,
+            envProd: envProd,
+            envDebug: envDebug,
             debugMode: debugMode,
             endpoint: endpoint,
             facebookAppId : facebookAppId,

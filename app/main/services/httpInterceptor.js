@@ -15,7 +15,6 @@ angular
 
                 httpConfig.params = httpConfig.params || {};
                 // inser PHPStorm debug session when in debug mode
-                // console.log(httpConfig);
                 if(config.debugMode === true){
                     //TODO: This breaks the ng-rate-it template from being loaded.
                     // httpConfig.params.XDEBUG_SESSION_START = "PHPSTORM";

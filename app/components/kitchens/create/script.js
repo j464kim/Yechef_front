@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI',
-		function ($state, KitchenAPI) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper',
+		function ($state, KitchenAPI, devHelper) {
 
 
 			// $controller('MediaController', {mediaScope: $scope});
@@ -29,7 +29,7 @@ angular.module('kitchen.create', [
 
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
-					console.log(newKitchen);
+                    devHelper.log(newKitchen);
 
 					_uploadKitchenMedia(newKitchen);
 

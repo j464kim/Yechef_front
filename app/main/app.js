@@ -14,6 +14,7 @@ angular
 
         // libraries
         'ui.router',
+        'ui.mask',
         'satellizer',
         'ui.bootstrap',
         'http-auth-interceptor',

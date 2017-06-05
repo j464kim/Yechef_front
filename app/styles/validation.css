@@ -2338,6 +2338,46 @@
 }
 /* FONT */
 /* COLOR */
+.bg-primary {
+  color: #fff;
+  background-color: green;
+}
+.bg-primary:hover {
+  background-color: #001a00;
+}
+.bg-secondary {
+  color: #fff;
+  background-color: blue;
+}
+.bg-secondary:hover {
+  background-color: #000099;
+}
+.bg-ternary {
+  color: inherit;
+  background-color: yellow;
+}
+.bg-ternary:hover {
+  background-color: #999900;
+}
+.bg-quaternary {
+  color: #fff;
+  background-color: red;
+}
+.bg-quaternary:hover {
+  background-color: #990000;
+}
+.font-primary {
+  color: green;
+}
+.font-secondary {
+  color: blue;
+}
+.font-ternary {
+  color: yellow;
+}
+.font-quaternary {
+  color: red;
+}
 body {
   font-family: 'Raleway', sans-serif;
 }
@@ -2367,34 +2407,6 @@ h6 {
 .with-sub-index ol li:before {
   content: counters(item, ".") " ";
   counter-increment: item;
-}
-.bg-primary {
-  color: #fff;
-  background-color: green;
-}
-.bg-primary:hover {
-  background-color: #001a00;
-}
-.bg-secondary {
-  color: #fff;
-  background-color: blue;
-}
-.bg-secondary:hover {
-  background-color: #000099;
-}
-.bg-ternary {
-  color: inherit;
-  background-color: yellow;
-}
-.bg-ternary:hover {
-  background-color: #999900;
-}
-.bg-quaternary {
-  color: #fff;
-  background-color: red;
-}
-.bg-quaternary:hover {
-  background-color: #990000;
 }
 .color-block {
   padding: 30px 0;

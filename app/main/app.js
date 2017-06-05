@@ -19,6 +19,7 @@ angular
         'http-auth-interceptor',
 
         // main modules
+        'style-guide',
         'dish',
         'kitchen',
         'user',

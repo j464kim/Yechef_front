@@ -46,7 +46,7 @@
                     <li><a ui-sref="dish.listInfinite">Dishes</a></li>
                     <li><a ui-sref="kitchen.list">Kitchens</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl">
+                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
                     <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
                     <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
                     <li><a ng-if="MCL.isLoggedin()">My Kitchen</a></li>

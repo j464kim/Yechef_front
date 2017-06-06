@@ -29,6 +29,13 @@ angular.module('configuration', [])
         var autoProcessQueue = false;
         var addRemoveLinks = true;
 
+        // Nationality
+        var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
+                    Chinese, Ecuadorian, English, Ethiopian, French, German, Greek, Hungarian, Indian, Indonesian, \
+                    Irish, Israeli, Italian, Jamaican, Japanese, Korean, Malaysian, Maltese, Mexican, Moroccan, \
+                    Nepalese, Oceanic, Pakistani, Palestinian, Peruvian, Philippine, Polish, Portuguese, Russian, \
+                    Sami, Scottish, Sicilian, Singaporean, Spanish, Thai, Tibetan, Uzbek, Vietnamese';
+
         // cookie expiration in days
         var cookieExpirationInDays = 3;
 
@@ -64,6 +71,7 @@ angular.module('configuration', [])
             uploadMultiple: uploadMultiple,
             autoProcessQueue: autoProcessQueue,
             addRemoveLinks: addRemoveLinks,
+            nationalities: nationalities,
         };
 
     })());

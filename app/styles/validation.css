@@ -2340,10 +2340,10 @@
 /* COLOR */
 .bg-primary {
   color: #fff;
-  background-color: green;
+  background-color: #50C875;
 }
 .bg-primary:hover {
-  background-color: #001a00;
+  background-color: #2b8747;
 }
 .bg-secondary {
   color: #fff;
@@ -2367,7 +2367,7 @@
   background-color: #990000;
 }
 .font-primary {
-  color: green;
+  color: #50C875;
 }
 .font-secondary {
   color: blue;
@@ -2408,10 +2408,18 @@ h6 {
   content: counters(item, ".") " ";
   counter-increment: item;
 }
+.md-button.md-primary {
+  background-color: #50C875;
+}
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
 .color-block {
   padding: 30px 0;
   text-align: center;
-  @transition (1s);
+  transition: 1s;
 }
 .loader-wrapper {
   min-height: 300px;
@@ -2432,9 +2440,4 @@ h6 {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-}
-.navbar-brand {
-  transform: translateX(-50%);
-  left: 50%;
-  position: absolute;
 }

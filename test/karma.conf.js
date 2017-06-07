@@ -39,6 +39,12 @@ module.exports = function(config) {
       'bower_components/ng-buffer-dropzone/dist/ng-dropzone.js',
       'bower_components/angular-xeditable/dist/js/xeditable.js',
       'bower_components/angular-ui-mask/dist/mask.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-material/angular-material.js',
+      'bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js',
+      'bower_components/moment/moment.js',
+      'bower_components/angular-material-datetimepicker/js/angular-material-datetimepicker.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -4,6 +4,7 @@
  */
 /* FONT PATH
  * -------------------------- */
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower|Raleway);
 @font-face {
   font-family: 'FontAwesome';
   src: url('../../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');
@@ -2334,6 +2335,91 @@
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+/* FONT */
+/* COLOR */
+.bg-primary {
+  color: #fff;
+  background-color: #50C875;
+}
+.bg-primary:hover {
+  background-color: #2b8747;
+}
+.bg-secondary {
+  color: #fff;
+  background-color: blue;
+}
+.bg-secondary:hover {
+  background-color: #000099;
+}
+.bg-ternary {
+  color: inherit;
+  background-color: yellow;
+}
+.bg-ternary:hover {
+  background-color: #999900;
+}
+.bg-quaternary {
+  color: #fff;
+  background-color: red;
+}
+.bg-quaternary:hover {
+  background-color: #990000;
+}
+.font-primary {
+  color: #50C875;
+}
+.font-secondary {
+  color: blue;
+}
+.font-ternary {
+  color: yellow;
+}
+.font-quaternary {
+  color: red;
+}
+body {
+  font-family: 'Raleway', sans-serif;
+}
+.secondary-font {
+  font-family: 'Indie Flower', cursive;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 10px 0;
+}
+/* Show all ol li items indexes */
+/* eg: */
+/* 1. title */
+/* 		1.1 description*/
+/* 		...*/
+/* Usage: put in wrapper of the desired list */
+.with-sub-index ol {
+  counter-reset: item;
+}
+.with-sub-index ol li {
+  display: block;
+}
+.with-sub-index ol li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
+.md-button.md-primary {
+  background-color: #50C875;
+}
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+.color-block {
+  padding: 30px 0;
+  text-align: center;
+  transition: 1s;
 }
 .loader-wrapper {
   min-height: 300px;

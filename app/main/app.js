@@ -11,6 +11,8 @@ angular
         'ngTouch',
         'ngRateIt',
         'xeditable',
+        'ngMaterial',
+        'ngMaterialDatePicker',
 
         // libraries
         'ui.router',
@@ -20,6 +22,7 @@ angular
         'http-auth-interceptor',
 
         // main modules
+        'style-guide',
         'dish',
         'rating',
         'kitchen',

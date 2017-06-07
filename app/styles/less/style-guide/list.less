@@ -1,0 +1,17 @@
+
+/* Show all ol li items indexes */
+/* eg: */
+/* 1. title */
+/* 		1.1 description*/
+/* 		...*/
+/* Usage: put in wrapper of the desired list */
+.with-sub-index ol{
+	counter-reset: item;
+	li {
+		display: block;
+		&:before {
+			content: counters(item, ".") " ";
+			counter-increment: item;
+		}
+	}
+}

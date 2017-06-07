@@ -7,7 +7,10 @@ angular.module('configuration', [])
             env,
             debugMode;
 
-        env = 'DEBUG';
+        var envProd = 'PROD';
+        var envDebug = 'DEBUG';
+
+        env = envDebug;
 
         // remember to add the last /
         var debugAPI = '//laravel.dev/api/';
@@ -26,16 +29,23 @@ angular.module('configuration', [])
         var autoProcessQueue = false;
         var addRemoveLinks = true;
 
+        // Nationality
+        var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
+                    Chinese, Ecuadorian, English, Ethiopian, French, German, Greek, Hungarian, Indian, Indonesian, \
+                    Irish, Israeli, Italian, Jamaican, Japanese, Korean, Malaysian, Maltese, Mexican, Moroccan, \
+                    Nepalese, Oceanic, Pakistani, Palestinian, Peruvian, Philippine, Polish, Portuguese, Russian, \
+                    Sami, Scottish, Sicilian, Singaporean, Spanish, Thai, Tibetan, Uzbek, Vietnamese';
+
         // cookie expiration in days
         var cookieExpirationInDays = 3;
 
         /* jshint undef: false */
         switch (env) {
-            case 'DEBUG':
+            case envDebug:
                 endpoint = debugAPI;
                 debugMode = true;
                 break;
-            case 'PROD':
+            case envProd:
                 endpoint = productAPI;
                 debugMode = false;
                 break;
@@ -47,6 +57,8 @@ angular.module('configuration', [])
 
         return {
             env: env,
+            envProd: envProd,
+            envDebug: envDebug,
             debugMode: debugMode,
             endpoint: endpoint,
             facebookAppId : facebookAppId,
@@ -59,6 +71,7 @@ angular.module('configuration', [])
             uploadMultiple: uploadMultiple,
             autoProcessQueue: autoProcessQueue,
             addRemoveLinks: addRemoveLinks,
+            nationalities: nationalities,
         };
 
     })());

@@ -13,12 +13,12 @@
             </md-toolbar>
             <md-content ng-controller="LeftCtrl">
                 <div class="list-group">
-                    <a ui-sref=".info" class="list-group-item">Basic Information</a>
+                    <a ui-sref=".info.view" class="list-group-item">Basic Information</a>
                     <a ui-sref=".order" class="list-group-item">My Orders</a>
                     <a ui-sref=".forked" class="list-group-item">Forked Dishes</a>
                     <a ui-sref=".subscribe" class="list-group-item">Subscribed Kitchens</a>
                     <a ui-sref=".privacySetting" class="list-group-item">Privacy Settings</a>
-                    <a ui-sref=".payment" class="list-group-item">Payment / Payout</a>
+                    <a ui-sref=".payment.list" class="list-group-item">Payment</a>
 
                 </div>
                 <md-button ng-click="close()" class="md-primary" hide-gt-md>
@@ -41,13 +41,13 @@
                         Toggle left
                     </md-button>
                 </div>
-                <div>
-                    <md-button ng-click="toggleRight()"
-                               ng-hide="isOpenRight()"
-                               class="md-primary">
-                        Toggle right
-                    </md-button>
-                </div>
+                <!--<div>-->
+                    <!--<md-button ng-click="toggleRight()"-->
+                               <!--ng-hide="isOpenRight()"-->
+                               <!--class="md-primary">-->
+                        <!--Toggle right-->
+                    <!--</md-button>-->
+                <!--</div>-->
             </div>
 
             <div flex></div>

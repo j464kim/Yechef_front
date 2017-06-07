@@ -34,7 +34,17 @@ angular.module('user', [
 			})
 			.state('user.profile.info', {
 				url: '/info',
-				templateUrl: 'components/users/profile/partial/userInfo.html',
+				abstract: true,
+				template: '<ui-view/>'
+			})
+			.state('user.profile.info.view', {
+				url: '/view',
+				templateUrl: 'components/users/profile/partial/userInfoView.html',
+				controller: 'userMainController as userMainCtrl',
+			})
+			.state('user.profile.info.edit', {
+				url: '/edit',
+				templateUrl: 'components/users/profile/partial/userInfoEdit.html',
 				controller: 'userMainController as userMainCtrl',
 			})
 			.state('user.profile.order', {
@@ -59,12 +69,22 @@ angular.module('user', [
 			})
 			.state('user.profile.payment', {
 				url: '/payment',
-				templateUrl: 'components/users/profile/partial/userPayment.html',
+				abstract: true,
+				template: '<ui-view/>',
+			})
+			.state('user.profile.payment.list', {
+				url: '/list',
+				templateUrl: 'components/users/profile/partial/userPaymentList.html',
 				controller: 'userMainController as userMainCtrl',
 			})
-			.state('user.profile.payout', {
-				url: '/payout',
-				templateUrl: 'components/users/profile/partial/userPayout.html',
+			.state('user.profile.payment.create', {
+				url: '/create',
+				templateUrl: 'components/users/profile/partial/userPaymentCreate.html',
+				controller: 'userMainController as userMainCtrl',
+			})
+			.state('user.profile.payment.edit', {
+				url: '/edit',
+				templateUrl: 'components/users/profile/partial/userPaymentEdit.html',
 				controller: 'userMainController as userMainCtrl',
 			});
 	});

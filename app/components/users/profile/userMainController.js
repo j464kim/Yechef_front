@@ -5,7 +5,26 @@ angular.module('user.profile', ['ngMaterial'])
 		$scope.isOpenRight = function () {
 			return $mdSidenav('right').isOpen();
 		};
+		$scope.privacy = {
+			phone: false,
+			forkedDish: true,
+			subscribedKitchen: false
 
+		};
+		$scope.paymentCards = [
+			{
+				type: 'VISA',
+				number: '1111-2222-3333-4444'
+			},
+			{
+				type: 'MASTER',
+				number: '1111-2222-3333-4444'
+			},
+			{
+				type: 'AMEX',
+				number: '1111-2222-3333-4444'
+			}
+		]
 		/**
 		 * Supplies a function that will continue to operate until the
 		 * time is up.

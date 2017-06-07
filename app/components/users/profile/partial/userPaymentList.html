@@ -1,0 +1,23 @@
+<h2>MY PAYMENT</h2>
+<hr/>
+<h3>
+    Credit Cards
+    <i class="fa fa-credit-card" aria-hidden="true"></i>
+</h3>
+<div>
+    <md-list flex>
+        <md-subheader class="md-no-sticky">3 Credit Card Information</md-subheader>
+        <md-list-item ui-sref="user.profile.payment.edit" class="md-3-line" ng-repeat="card in paymentCards" ng-click="null">
+            <div class="md-list-item-text" layout="column">
+                <span>
+                    {{ card.type }}
+                    <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                </span>
+
+                <h4>{{ card.number }}</h4>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
+<button ui-sref="user.profile.payment.create">Add New Payment Method</button>

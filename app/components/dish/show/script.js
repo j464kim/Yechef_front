@@ -12,11 +12,11 @@ angular.module('dish.show', [
              **********************/
                 // reference to this controller
             var that = this;
-            var dishId = $stateParams.id;
 
             /*********************
              *    Public Variables
              **********************/
+            this.dishId = $stateParams.id;
 
             /*********************
              *    Private Functions
@@ -27,18 +27,15 @@ angular.module('dish.show', [
             }
 
             function _showDish() {
-                DishesAPI.show(dishId)
+                DishesAPI.show(that.dishId)
                     .then(function (response) {
                         that.dish = response;
                     }, function (response) {
                         // TODO handle error state
                         console.error(response);
                     });
-            }
 
-            // /*********************
-            //  *    Public Functions
-            //  **********************/
+            }
 
             /*********************
              *    Initialization

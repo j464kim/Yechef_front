@@ -9,6 +9,10 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
+        'ngRateIt',
+        'xeditable',
+        'ngMaterial',
+        'ngMaterialDatePicker',
 
         // libraries
         'ui.router',
@@ -18,7 +22,9 @@ angular
         'http-auth-interceptor',
 
         // main modules
+        'style-guide',
         'dish',
+        'rating',
         'kitchen',
         'user',
         'mediaUpload',
@@ -48,4 +54,7 @@ angular
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/');
+    })
+    .run(function (editableOptions) {
+        editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'
     });

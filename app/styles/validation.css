@@ -4,6 +4,7 @@
  */
 /* FONT PATH
  * -------------------------- */
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower|Raleway);
 @font-face {
   font-family: 'FontAwesome';
   src: url('../../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');
@@ -2343,6 +2344,91 @@
 .large-icon:hover {
   color: darkblue;
 }
+/* FONT */
+/* COLOR */
+.bg-primary {
+  color: #fff;
+  background-color: #50C875;
+}
+.bg-primary:hover {
+  background-color: #2b8747;
+}
+.bg-secondary {
+  color: #fff;
+  background-color: blue;
+}
+.bg-secondary:hover {
+  background-color: #000099;
+}
+.bg-ternary {
+  color: inherit;
+  background-color: yellow;
+}
+.bg-ternary:hover {
+  background-color: #999900;
+}
+.bg-quaternary {
+  color: #fff;
+  background-color: red;
+}
+.bg-quaternary:hover {
+  background-color: #990000;
+}
+.font-primary {
+  color: #50C875;
+}
+.font-secondary {
+  color: blue;
+}
+.font-ternary {
+  color: yellow;
+}
+.font-quaternary {
+  color: red;
+}
+body {
+  font-family: 'Raleway', sans-serif;
+}
+.secondary-font {
+  font-family: 'Indie Flower', cursive;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 10px 0;
+}
+/* Show all ol li items indexes */
+/* eg: */
+/* 1. title */
+/* 		1.1 description*/
+/* 		...*/
+/* Usage: put in wrapper of the desired list */
+.with-sub-index ol {
+  counter-reset: item;
+}
+.with-sub-index ol li {
+  display: block;
+}
+.with-sub-index ol li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
+.md-button.md-primary {
+  background-color: #50C875;
+}
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+.color-block {
+  padding: 30px 0;
+  text-align: center;
+  transition: 1s;
+}
 .loader-wrapper {
   min-height: 300px;
   height: 100%;
@@ -2362,4 +2448,38 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+.rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.rating li {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.rating li.filled {
+  color: #fd0;
+}
+.rating.readonly li.filled {
+  color: #666;
+}
+.average-rating-container {
+  position: relative;
+  height: 31px;
+  width: 103px;
+  overflow: hidden;
+}
+.average-rating-container .background,
+.average-rating-container .foreground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }

@@ -1,6 +1,9 @@
 <div class="container" id="dishList" loader>
     <div class="col-sm-8">
-        <button type="button" class="btn btn-default" ng-click="DishCtrl.isSearchCollapsed = !DishCtrl.isSearchCollapsed">Refine Search
+        <button type="button" class="btn btn-default"
+                ng-click="DishCtrl.isSearchCollapsed = !DishCtrl.isSearchCollapsed">Refine Search
+            <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
+            <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
         </button>
         <div uib-collapse="DishCtrl.isSearchCollapsed">
             <md-content class="md-padding">

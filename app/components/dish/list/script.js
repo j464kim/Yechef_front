@@ -19,11 +19,13 @@ angular.module('dish.list', [
             this.totalItems = 0;
             this.currentPage = 0;
             this.dishes = [];
-            that.map = {
+            this.isSearchCollapsed = true;
+
+            this.map = {
                 center: {latitude: 45, longitude: -73},
                 zoom: 13
             };
-            that.map.options = {
+            this.map.options = {
                 scrollwheel: false,
                 disableDefaultUI: true,
                 zoomControl: true,

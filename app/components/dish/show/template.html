@@ -57,6 +57,11 @@
         <div class="col-md-4">
             Popular Posts
         </div>
+
+        <!--Must load it "after" Dish data is available-->
+        <div ng-if="DishCtrl.dish">
+            <reaction-button reactionable="DishCtrl.dish"></reaction-button>
+        </div>
     </div>
     <br><br>
     <ratings></ratings>

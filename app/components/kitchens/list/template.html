@@ -4,7 +4,7 @@
         <button ui-sref="kitchen.create" id="btn-add" class="btn btn-primary">New Kitchen</button>
         <br/>
         <div class="col-md-6" ng-repeat="kitchen in KitchenCtrl.kitchens">
-            <img ng-src="{{kitchen.medias[0].url}}" alt="Card image cap"
+            <img ui-sref="kitchen.show({id: kitchen.id})" ng-src="{{kitchen.medias[0].url}}" alt="Card image cap"
                  style="width:100%;">
 
             <h4 class="card-title">{{kitchen.name}}</h4>

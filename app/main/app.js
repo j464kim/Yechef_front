@@ -28,6 +28,7 @@ angular
         'kitchen',
         'user',
         'mediaUpload',
+		'reaction',
 
         // services
         'http.interceptor',

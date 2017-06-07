@@ -2,40 +2,42 @@
 <html>
 <head>
 </head>
-
 <body>
 <div class="container" id="kitchenList" loader>
 
-    <div class="row">
-        <div class="col-md-6">
-            <br/>
-            <img ng-src="{{KitchenCtrl.kitchen.medias[0].url}}" alt="Card image cap" style="width:100%;">
-
-            <div class="kitchenName">
-                <label class="control-label" for="kitchenName">Name:</label>
-                <span class="card-text" id="kitchenName">{{KitchenCtrl.kitchen.name}}</span>
-            </div>
-            <div class="kitchenEmail">
-                <label class="control-label" for="kitchenEmail">Email:</label>
-                <span class="card-text" id="kitchenEmail">{{KitchenCtrl.kitchen.email}}</span>
-            </div>
-            <div class="kitchenPhone">
-                <label class="control-label" for="kitchenPhone">Phone:</label>
-                <span class="card-text" id="kitchenPhone">{{KitchenCtrl.kitchen.phone}}</span>
-            </div>
-            <div class="kitchenAddress">
-                <label class="control-label" for="kitchenAddress">Address:</label>
-                <span class="card-text" id="kitchenAddress">{{KitchenCtrl.kitchen.address}}</span>
-            </div>
-            <div class="kitchenAddress">
-                <label class="control-label" for="kitchenDescription">Description:</label>
-                <span class="card-text" id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</span>
-            </div>
-            <button ui-sref="kitchen.edit({id: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
-            </button>
-            <span ng-controller="KitchenDestroyController as vm">
+    <div class="col-md-6">
+        <img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
+    </div>
+    <div class="col-md-6">
+        <div class="kitchenName">
+            <label class="control-label" for="kitchenName">Name:</label>
+            <span class="card-text" id="kitchenName">{{KitchenCtrl.kitchen.name}}</span>
+        </div>
+        <div class="kitchenEmail">
+            <label class="control-label" for="kitchenEmail">Email:</label>
+            <span class="card-text" id="kitchenEmail">{{KitchenCtrl.kitchen.email}}</span>
+        </div>
+        <div class="kitchenPhone">
+            <label class="control-label" for="kitchenPhone">Phone:</label>
+            <span class="card-text" id="kitchenPhone">{{KitchenCtrl.kitchen.phone}}</span>
+        </div>
+        <div class="kitchenAddress">
+            <label class="control-label" for="kitchenAddress">Address:</label>
+            <span class="card-text" id="kitchenAddress">{{KitchenCtrl.kitchen.address}}</span>
+        </div>
+        <div class="kitchenDescription">
+            <label class="control-label" for="kitchenDescription">Description:</label>
+            <span class="card-text" id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</span>
+        </div>
+        <button ui-sref="kitchen.edit({id: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
+        </button>
+        <span ng-controller="KitchenDestroyController as vm">
                     <button ng-click="vm.destroyKitchen()" class="btn btn-danger btn-sm btn-delete">Delete</button>
                 </span>
+
+        <!--Must load it "after" kitchen data is available-->
+        <div ng-if="KitchenCtrl.kitchen">
+            <reaction-button reactionable="KitchenCtrl.kitchen"></reaction-button>
         </div>
     </div>
 </div>

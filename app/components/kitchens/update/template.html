@@ -11,7 +11,8 @@
             <div class="col-md-6">
                 <br/>
                 <img ng-src="{{KitchenCtrl.kitchen.medias[0].url}}" alt="Card image cap" style="width:100%;">
-
+            </div>
+            <div class="col-md-6">
                 <div class="kitchenName">
                     <label class="control-label" for="kitchenName">Name:</label>
                     <input class="card-text" id="kitchenName" ng-model="KitchenCtrl.kitchen.name"/>
@@ -34,7 +35,8 @@
                 </div>
                 <div class="submit">
                     <a ng-click="KitchenCtrl.updateKitchen()" class="btn btn-small btn-primary">Update the Kitchen!</a>
-                    <a type="button" ui-sref="kitchen.show({id: KitchenCtrl.kitchen.id})" class="btn btn-small">cancel</a>
+                    <a type="button" ui-sref="kitchen.show({id: KitchenCtrl.kitchen.id})"
+                       class="btn btn-small">cancel</a>
                 </div>
             </div>
         </div>

@@ -30,6 +30,7 @@ angular.module('kitchen.show', [
 				KitchenAPI.show(kitchenId).then(function (response) {
                     devHelper.log(response);
 					that.kitchen = response;
+					that.media = response.medias[0].url;
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

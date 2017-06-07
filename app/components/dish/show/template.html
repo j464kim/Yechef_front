@@ -1,13 +1,68 @@
-<div class="container" id="dishShow" loader>
+<div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl" loader>
     <div class="row">
         <div class="col-md-4">
+            <div class="col-md-8">
+                <h3 class="card-title">{{DishCtrl.dish.name}}</h3>
+            </div>
+            <div class="col-md-push-4">
+                <small>{{RatingCtrl.bestAvgName}}</small>
+                <ng-rate-it ng-model="RatingCtrl.bestAvg" max="5" read-only="true" step="0.01"></ng-rate-it>
+                <small>{{RatingCtrl.bestAvg}} stars ({{RatingCtrl.totalItems}} reviews)</small>
+            </div>
             <img ng-src="{{DishCtrl.dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
+            <br><br>
+            <a ui-sref="kitchen.show({id: DishCtrl.dish.kitchen_id})">Kitchen: {{DishCtrl.dish.kitchen_id}}</a>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-4">
+                <h3 class="card">${{DishCtrl.dish.price}}</h3>
+                <a class="btn btn-warning">Add to Card</a>
+            </div>
+            <div class="col-md-8">
+                <strong> 269 forked </strong>
+                <div class="average">
+                    <div class="col-md-4">Taste:</div>
+                    <div class="col-md-6">
+                        <ng-rate-it ng-model="RatingCtrl.avg.taste_rating" max="5" read-only="true"
+                                    step="0.01"></ng-rate-it>
+                    </div>
+                    <div class="col-md-2">
+                        ({{RatingCtrl.avg.taste_rating}})
+                    </div>
+                    <div class="col-md-4">Visual:</div>
+                    <div class="col-md-6">
+                        <ng-rate-it ng-model="RatingCtrl.avg.visual_rating" max="5" read-only="true"
+                                    step="0.01"></ng-rate-it>
+                    </div>
+                    <div class="col-md-2">
+                        ({{RatingCtrl.avg.visual_rating}})
+                    </div>
+                    <div class="col-md-4">Quantity:</div>
+                    <div class="col-md-6">
+                        <ng-rate-it ng-model="RatingCtrl.avg.quantity_rating" max="5" read-only="true"
+                                    step="0.01"></ng-rate-it>
+                    </div>
+                    <div class="col-md-2">
+                        ({{RatingCtrl.avg.quantity_rating}})
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br><br>
+                <p class="card-text">{{DishCtrl.dish.description}}</p>
+                <a ui-sref="dish.update({id: DishCtrl.dish.id})" class="btn btn-primary">Edit Dish</a>
+                <a ui-sref="dish.destroy({id: DishCtrl.dish.id})" class="btn btn-primary">Delete</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            Popular Posts
+        </div>
 
-            <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
-            <p class="card-text">{{DishCtrl.dish.description}}</p>
-
-            <a ui-sref="dish.update({id: DishCtrl.dish.id})" class="btn btn-primary">Edit Dish</a>
-            <a ui-sref="dish.destroy({id: DishCtrl.dish.id})" class="btn btn-primary">Delete</a>
+        <!--Must load it "after" Dish data is available-->
+        <div ng-if="DishCtrl.dish">
+            <reaction-button reactionable="DishCtrl.dish"></reaction-button>
         </div>
     </div>
+    <br><br>
+    <ratings></ratings>
 </div>

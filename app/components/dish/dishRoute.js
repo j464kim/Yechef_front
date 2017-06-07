@@ -29,7 +29,7 @@ angular.module('dish', [
             .state('dish.show', {
                 url: '/show/{id}',
                 templateUrl: '/components/dish/show/template.html',
-                controller: 'DishShowController as DishCtrl'
+                controller: 'DishShowController as DishCtrl',
             })
             .state('dish.create', {
                 url: '/new',

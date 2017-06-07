@@ -1,0 +1,39 @@
+<h2>MY PRIVACY</h2>
+<hr/>
+<div class="inset" ng-cloak>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Activity</th>
+            <th>Private</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Phone Number</td>
+            <td>
+                <md-switch ng-model="privacy.phone" aria-label="phonePrivacy" class="md-warn">
+                    {{ privacy.phone }}
+                </md-switch>
+            </td>
+        </tr>
+        <tr>
+            <td>Forked Dishes</td>
+            <td>
+                <md-switch ng-model="privacy.forkedDish" aria-label="phonePrivacy" class="md-warn">
+                    {{ privacy.forkedDish }}
+                </md-switch>
+            </td>
+        </tr>
+        <tr>
+            <td>Subscribed Kitchens</td>
+            <td>
+                <md-switch ng-model="privacy.subscribedKitchen" aria-label="phonePrivacy" class="md-warn">
+                    {{ privacy.subscribedKitchen }}
+                </md-switch>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

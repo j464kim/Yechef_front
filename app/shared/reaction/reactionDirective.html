@@ -1,0 +1,6 @@
+<div>
+    <span ng-if="!liked"><i class="large-icon fa fa-thumbs-o-up" ng-click="addReaction(LIKE)"></i>{{numLikes}}</span>
+    <span ng-if="liked"><i class="large-icon fa fa-thumbs-up" ng-click="removeReaction(LIKE)"></i>{{numLikes}}</span>
+    <span ng-if="!disliked"><i class="large-icon fa fa-thumbs-o-down" ng-click="addReaction(DISLIKE)"></i>{{numDislikes}}</span>
+    <span ng-if="disliked"><i class="large-icon fa fa-thumbs-down" ng-click="removeReaction(DISLIKE)"></i>{{numDislikes}}</span>
+</div>

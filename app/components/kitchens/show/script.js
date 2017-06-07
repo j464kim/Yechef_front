@@ -4,8 +4,8 @@ angular.module('kitchen.show', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI',
-		function ($stateParams, KitchenAPI) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper',
+		function ($stateParams, KitchenAPI, devHelper) {
 
 			/*********************
 			 *  Private Variables
@@ -28,8 +28,9 @@ angular.module('kitchen.show', [
 
 			function _showKitchen() {
 				KitchenAPI.show(kitchenId).then(function (response) {
-					console.log(response);
+                    devHelper.log(response);
 					that.kitchen = response;
+					that.media = response.medias[0].url;
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

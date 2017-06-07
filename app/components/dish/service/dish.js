@@ -32,6 +32,9 @@ angular.module('dishes.api', [
         function ($q, DishesResource) {
 
             function list(pageNum) {
+                if (isNaN(pageNum)) {
+                    //return;
+                }
                 pageNum = pageNum || 0;
 
                 return $q(function (resolve, reject) {
@@ -62,14 +65,10 @@ angular.module('dishes.api', [
                 });
             };
 
-            function create(name, description) {
+            function create(dish) {
                 return $q(function (resolve, reject) {
-                    DishesResource.create(
-                        {
-                            name: name,
-                            description: description
-                        }
-                    ).$promise.then(function (response) {
+                    DishesResource.create(dish)
+                        .$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {
                         reject(response)
@@ -77,15 +76,10 @@ angular.module('dishes.api', [
                 });
             };
 
-            function update(dishId, name, description) {
+            function update(dish, dishId) {
                 return $q(function (resolve, reject) {
-                    DishesResource.update(
-                        {
-                            id: dishId,
-                            name: name,
-                            description: description
-                        }
-                    ).$promise.then(function (response) {
+                    DishesResource.update(dish, dishId)
+                        .$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {
                         reject(response)

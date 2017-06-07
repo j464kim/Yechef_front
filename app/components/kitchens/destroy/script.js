@@ -2,8 +2,8 @@ angular.module('kitchen.destroy', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$state',
-		function ($stateParams, KitchenAPI, $state) {
+	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper',
+		function ($stateParams, KitchenAPI, $state, devHelper) {
 
 			/*********************
 			 *  Private Variables
@@ -22,7 +22,7 @@ angular.module('kitchen.destroy', [
 
 			function _destroyKitchen() {
 				KitchenAPI.destroy(kitchenId).then(function (response) {
-					console.log(response);
+                    devHelper.log(response);
 					that.kitchen = response;
 					$state.go('kitchen.list');
 				}, function (response) {
@@ -34,7 +34,7 @@ angular.module('kitchen.destroy', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			that.destroyKitchen = _destroyKitchen;
+			this.destroyKitchen = _destroyKitchen;
 
 
 			/*********************

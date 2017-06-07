@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('dish.create', [
-	'dishes.api',
+    'dishes.api',
 ])
 
-	.controller('DishCreateController', ['$state', 'DishesAPI',
-		function ($state, DishesAPI) {
+	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper',
+		function ($state, DishesAPI, devHelper) {
 
-			/*********************
+      /*********************
 			 *    Private Variables
 			 **********************/
 				// reference to this controller
@@ -15,10 +15,10 @@ angular.module('dish.create', [
 
 			function _createDish() {
 				//TODO: Add User permission so that only registered users can create dish
-				DishesAPI.create(that.name, that.description)
+				DishesAPI.create(that.dish)
 					.then(function (response) {
 						var newDish = response;
-						console.log(newDish);
+                        devHelper.log(newDish);
 
 						_uploadDishMedia(newDish);
 

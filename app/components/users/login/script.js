@@ -2,13 +2,12 @@
 
 angular.module('user.login', [
 	'user.api',
-	'configuration',
-	'LocalStorageModule'
+	'configuration'
 ])
 
 
-.controller('UserLoginController', ['$state', 'UserAPI', 'localStorageService',
-	function($state, UserAPI, localStorageService){
+.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper',
+	function($state, AuthAPI, devHelper){
 
 		/*********************
 		*	Private Variables
@@ -30,17 +29,15 @@ angular.module('user.login', [
 		}
 
 		function _login() {
-			UserAPI.login(
+			AuthAPI.login(
 				this.email,
 				this.password
 			).then(
 				function(response) {
 					//set access token
-					localStorageService.set('access_token', response.access_token);
-					localStorageService.set('refresh_token', response.refresh_token);
-					localStorageService.set('expires_in', response.expires_in);
-					console.log(response);
-				},
+                    devHelper.log(response);
+                    $state.go('home');
+                },
 				function(response) {
 					console.error(response);
 				}
@@ -48,16 +45,13 @@ angular.module('user.login', [
 		}
 
 		function _socialLogin(provider) {
-			UserAPI.socialLogin(
+			AuthAPI.socialLogin(
 				provider
 			).then(
 				function(response) {
-					//set access token
-					localStorageService.set('access_token', response.access_token);
-					localStorageService.set('refresh_token', response.refresh_token);
-					localStorageService.set('expires_in', response.expires_in);
-					console.log(response);
-				},
+                    devHelper.log(response);
+                    $state.go('home');
+                },
 				function(response) {
 					console.error(response);
 				}
@@ -65,26 +59,23 @@ angular.module('user.login', [
 		}
 
 		function _logout() {
-			UserAPI.logout().then(
+			AuthAPI.logout().then(
 				function(response) {
-					//remove access token
-					localStorageService.remove('access_token');
-					localStorageService.remove('refresh_token');
-					localStorageService.remove('expires_in');
-					console.log(response);
+                    devHelper.log(response);
+					$state.go('home');
 				},
 				function(response) {
 					console.error(response);
 				}
 			);
 		}
+
 		/*********************
 		*	Public Functions
 		**********************/
 		this.login = _login;
 		this.socialLogin = _socialLogin;
 		this.logout = _logout;
-
 
 		/*********************
 		*	Initialization
@@ -95,7 +86,5 @@ angular.module('user.login', [
 		*	EVENTS
 		**********************/
 
-
-		
 	}
 ]);

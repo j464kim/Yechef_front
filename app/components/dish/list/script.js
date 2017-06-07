@@ -19,7 +19,15 @@ angular.module('dish.list', [
             this.totalItems = 0;
             this.currentPage = 0;
             this.dishes = [];
-            that.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
+            that.map = {
+                center: {latitude: 45, longitude: -73},
+                zoom: 13
+            };
+            that.map.options = {
+                scrollwheel: false,
+                disableDefaultUI: true,
+                zoomControl: true,
+            };
 
             /*********************
              *    Private Functions
@@ -63,7 +71,9 @@ angular.module('dish.list', [
                 // write your code here
                 // (google is defined)
                 devHelper.log(maps);
+                that.map.options.zoomControlOptions = {
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                };
             });
-
         }
     ])

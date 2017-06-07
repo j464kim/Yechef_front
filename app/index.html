@@ -5,10 +5,18 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/filereader.js/filereader.js"></script>
+    <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
+    <script src="bower_components/ng-buffer-dropzone/dist/ng-dropzone.js"></script>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
     <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
@@ -109,11 +117,10 @@
 <script src="bower_components/filereader.js/filereader.js"></script>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-rateit/dist/ng-rateit.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -121,6 +128,8 @@
 <script src="bower_components/satellizer/dist/satellizer.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
 <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
 <script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
@@ -157,6 +166,9 @@
 <script src="components/kitchens/update/script.js"></script>
 <script src="components/kitchens/destroy/script.js"></script>
 <script src="components/kitchens/service/kitchens.js"></script>
+<script src="shared/rating/service/ratingService.js"></script>
+<script src="shared/rating/ratingController.js"></script>
+<script src="shared/rating/create/ratingCreateController.js"></script>
 <script src="shared/media/create/script.js"></script>
 
 <script src="components/users/userRoute.js"></script>
@@ -168,6 +180,7 @@
 <script src="style-guide/index.js"></script>
 
 <!-- directives -->
-<script src="directives/loader/loader.js"></script>
+<script src="shared/loader/loaderDirective.js"></script>
+<script src="shared/rating/ratingDirective.js"></script>
 </body>
 </html>

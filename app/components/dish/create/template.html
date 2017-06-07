@@ -1,21 +1,37 @@
 <div class="container">
-    <form>
-        Name:<br>
-        <input type="text" ng-model="DishCtrl.name"><br>
-        Description:<br>
-        <textarea ng-model="DishCtrl.description"/><br>
-
-        <div class="DishImage">
-            <label class="control-label" for="dropzone">Image:</label>
-            <div class="controls">
-                <div ng-app="mediaUpload" ng-controller="MediaController">
-                    <div class="dropzone" id="dropzone" ng-dropzone></div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label" for="name">
+                Name:<br>
+            </label>
+            <input type="text" id="name" class="form-control" ng-model="DishCtrl.dish.name" required/>
+            <br>
+            <label class="control-label" for="price">
+                Price:<br>
+            </label>
+            <input type="number" id="price" class="form-control" placeholder="price" ng-model="DishCtrl.dish.price"
+                   ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1.00" required/><br>
+            <br>
+            <label class="control-label" for="description">
+                Description:<br>
+            </label>
+            <textarea class="form-control" id="description" ng-model="DishCtrl.dish.description" required></textarea>
+            <br>
+            <label class="control-label" for="kitchen_id">
+                Kitchen ID:
+            </label>
+            <input type="text" id="kitchen_id" class="form-control" ng-model="DishCtrl.dish.kitchen_id" required/>
+            <br><br>
+            <div class="DishImage">
+                <label class="control-label" for="dropzone">Image:</label>
+                <div class="controls">
+                    <div ng-app="mediaUpload" ng-controller="MediaController">
+                        <div class="dropzone" id="dropzone" ng-dropzone></div>
+                    </div>
                 </div>
             </div>
+            <a ng-click="DishCtrl.createDish()" class="btn btn-primary">Create</a>
+            <a ng-click="DishCtrl.cancel()" class="btn btn-danger">Cancel</a>
         </div>
-
-        <br><br>
-        <a ng-click="DishCtrl.createDish()" class="btn btn-primary">Create</a>
-        <a ng-click="DishCtrl.cancel()" class="btn btn-primary">Cancel</a>
     </form>
 </div>

@@ -1,0 +1,43 @@
+//@import "../../../../node_modules/compass-mixins/lib/compass/css3";
+
+@filled_star_color: #666;
+@readonly_filled_star_color: #fd0;
+@empty_star_color: #ddd;
+
+.rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+li {
+    padding: 1px;
+    color: @empty_star_color;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+&.filled {
+     color: @readonly_filled_star_color; //#21568b
+ }
+}
+&.readonly li.filled {
+     color: @filled_star_color;
+ }
+}
+
+.average-rating-container {
+    position:relative;
+    height:31px;
+    width:103px;
+    overflow:hidden;
+
+.background,
+.foreground {
+    position: absolute;
+    top:0;
+    left:0;
+    overflow:hidden;
+    white-space: nowrap;
+}
+}

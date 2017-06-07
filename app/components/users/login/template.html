@@ -2,7 +2,7 @@
     <h2>Login</h2>
     <form name="form" ng-submit="LoginCtrl.login()" role="form">
         <div class="form-group" ng-class="{ 'has-error': (form.email.$dirty && form.email.$error.required) || (form.email.$invalid && form.email.$error.email) }">
-            <label for="email">Username</label>
+            <label for="email">Email</label>
             <input type="email" name="email" id="email" class="form-control" ng-model="LoginCtrl.email" required/>
             <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
             <span ng-show="form.email.$invalid && form.email.$error.email" class="help-block">Not a valid email</span>

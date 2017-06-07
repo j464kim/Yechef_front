@@ -10,6 +10,7 @@ angular
         'ngSanitize',
         'ngTouch',
         'ngMaterial',
+        'ngMaterialDatePicker',
 
         // libraries
         'ui.router',

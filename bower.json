@@ -19,7 +19,8 @@
     "ng-buffer-dropzone": "ngdropzone-buffer#^1.0.0",
     "angular-ui-mask": "^1.8.7",
     "angular-material": "^1.1.4",
-    "ngSmoothScroll": "^2.0.0"
+    "ngSmoothScroll": "^2.0.0",
+    "angular-material-datetimepicker": "^1.5.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

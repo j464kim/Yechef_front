@@ -1,14 +1,24 @@
 <div class="container" id="dishList" loader>
-    <div class="row">
-        <div class="col-md-4" ng-repeat="dish in DishCtrl.dishes">
-            <img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
+    <div class="col-sm-8">
+        <div class="row dish_create">
+            <a ui-sref="dish.create" class="btn btn-warning">Dish Createt</a>
+        </div>
+        <div class="row">
+            <div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
+                <img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
 
-            <h4 class="card-title">{{dish.name}}</h4>
-            <p class="card-text">{{dish.description}}</p>
-            <a ui-sref="dish.show({id: {{dish.id}}})" class="btn btn-primary">View Detail</a>
+                <h4 class="card-title">{{dish.name}}</h4>
+                <p class="card-text">{{dish.description}}</p>
+                <a ui-sref="dish.show({id: {{dish.id}}})" class="btn btn-primary">View Detail</a>
+            </div>
+
+            <!--TODO: Change items-per-page to 18-->
+            <ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" items-per-page="8"
+                ng-change="DishCtrl.getDishes()"></ul>
         </div>
     </div>
-</div>
 
-<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"
-    ng-change="DishCtrl.getDishes()"></ul>
+    <div class="col-sm-4 sticky-div" flex="none" style="  position: fixed; right:0; top:5;">
+        <ui-gmap-google-map center='DishCtrl.map.center' zoom='DishCtrl.map.zoom'></ui-gmap-google-map>
+    </div>
+</div>

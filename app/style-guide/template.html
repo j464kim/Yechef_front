@@ -32,6 +32,9 @@
                 </li>
             </ol>
         </li>
+        <li>
+            <a href="#" scroll-to="pagination">Pagination</a>
+        </li>
     </ol>
 </div>
 
@@ -337,6 +340,20 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default" id="pagination">
+    <div class="panel-heading">
+        <h3>Pagination</h3>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <ul uib-pagination total-items="200" ng-model="DishCtrl.currentPage" items-per-page="8"
+                boundary-links="true" force-ellipses="true" max-size="5"
+                ng-change=""></ul>
         </div>
     </div>
 </div>

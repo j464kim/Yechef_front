@@ -2444,8 +2444,11 @@ h6 {
 body {
   padding-top: 70px;
 }
+.angular-google-map {
+  height: 90%;
+}
 .angular-google-map-container {
-  height: 600px;
+  height: 100%;
   position: fixed;
   top: 0;
 }

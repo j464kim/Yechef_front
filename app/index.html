@@ -5,11 +5,20 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/filereader.js/filereader.js"></script>
+    <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
+    <script src="bower_components/ng-buffer-dropzone/dist/ng-dropzone.js"></script>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
     <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
     <!-- endbower -->
@@ -17,6 +26,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/validation.css">
+    <link rel="stylesheet" href="styles/less/icon.less">
     <!-- endbuild -->
 </head>
 <body ng-app="yechefFrontApp" ng-controller="MainCtrl as MCL">
@@ -48,27 +58,33 @@
                     <li><a ui-sref="dish.list">Dishes</a></li>
                     <li><a ui-sref="kitchen.list">Kitchens</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
+                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl"
+                             ng-cloak>
                     <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
                     <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
                     <li><a ng-if="MCL.isLoggedin()">My Kitchen</a></li>
                     <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
-                    <li class="dropdown" ng-if="MCL.isLoggedin()">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="http://placehold.it/18x18" class="profile-image img-circle">
-                            <label>Username</label> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href=""><i class="fa fa-id-badge"></i> Profile</a></li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-navicon"></i> Orders</a></li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-heart-o"></i> Forked</a></li>
-                            <li class="divider"></li>
-                            <li><a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
-                            </li>
-                        </ul>
+                    <li class="md-body-1" ng-if="MCL.isLoggedin()">
+                        <md-menu>
+                            <a ng-click="$mdMenu.open()">
+                                <img src="http://placehold.it/18x18" class="profile-image img-circle"/>
+                                <label>Username</label>
+                            </a>
+                            <md-menu-content>
+                                <md-menu-item>
+                                    <a ui-sref="user.profile.main"><i class="fa fa-id-badge"></i> Profile</a>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <a href=""><i class="fa fa-navicon"></i> Orders</a>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <a href=""><i class="fa fa-heart-o"></i> Forked</a>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
                     </li>
                 </ul>
             </div>
@@ -89,25 +105,23 @@
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 <script>
-    !function (A, n, g, u, l, a, r) {
-        A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
-                (A[l].q = A[l].q || []).push(arguments)
-            }, A[l].l = +new Date, a = n.createElement(g),
-            r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+	!function (A, n, g, u, l, a, r) {
+		A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+				(A[l].q = A[l].q || []).push(arguments)
+			}, A[l].l = +new Date, a = n.createElement(g),
+			r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+	}(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
+	ga('create', 'UA-XXXXX-X');
+	ga('send', 'pageview');
 </script>
-
 <script src="bower_components/filereader.js/filereader.js"></script>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-rateit/dist/ng-rateit.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -116,12 +130,10 @@
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
-<script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
-<script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
-<script src="bower_components/ng-buffer-dropzone/dist/ng-dropzone.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
 <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
-<script src="bower_components/angular-messages/angular-messages.js"></script>
 <script src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js"></script>
 <script src="bower_components/moment/moment.js"></script>
@@ -159,16 +171,23 @@
 <script src="components/kitchens/update/script.js"></script>
 <script src="components/kitchens/destroy/script.js"></script>
 <script src="components/kitchens/service/kitchens.js"></script>
+<script src="shared/rating/service/ratingService.js"></script>
+<script src="shared/rating/ratingController.js"></script>
+<script src="shared/rating/create/ratingCreateController.js"></script>
 <script src="shared/media/create/script.js"></script>
+<script src="shared/reaction/reactionDirective.js"></script>
+<script src="shared/reaction/service/reactionService.js"></script>
 
-<script src="components/users/index.js"></script>
+<script src="components/users/userRoute.js"></script>
 <script src="components/users/service/users.js"></script>
 <script src="components/users/login/script.js"></script>
 <script src="components/users/register/script.js"></script>
+<script src="components/users/profile/userMainController.js"></script>
 
 <script src="style-guide/index.js"></script>
 
 <!-- directives -->
-<script src="directives/loader/loader.js"></script>
+<script src="shared/loader/loaderDirective.js"></script>
+<script src="shared/rating/ratingDirective.js"></script>
 </body>
 </html>

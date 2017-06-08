@@ -9,6 +9,8 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
+        'ngRateIt',
+        'xeditable',
         'ngMaterial',
         'ngMaterialDatePicker',
 
@@ -23,9 +25,11 @@ angular
         // main modules
         'style-guide',
         'dish',
+        'rating',
         'kitchen',
         'user',
         'mediaUpload',
+		'reaction',
 
         // services
         'http.interceptor',
@@ -57,4 +61,7 @@ angular
             v: '3.27', //defaults to latest 3.X anyhow
             libraries: 'geometry,visualization'
         });
+    })
+    .run(function (editableOptions) {
+        editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'
     });

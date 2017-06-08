@@ -7,24 +7,21 @@ angular.module('kitchen.create', [
 	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper',
 		function ($state, KitchenAPI, devHelper) {
 
-
-			// $controller('MediaController', {mediaScope: $scope});
-			// mediaScope.processQueue();
-
 			/*********************
 			 *  Private Variables
 			 **********************/
 			// reference to this controller
+
 
 			/*********************
 			 *  Public Variables
 			 **********************/
 			var that = this;
 
+
 			/*********************
 			 *  Private Functions
 			 **********************/
-
 			function _createKitchen() {
 
 				KitchenAPI.create(that.kitchen).then(function (response) {
@@ -63,6 +60,7 @@ angular.module('kitchen.create', [
 			/*********************
 			 *  Initialization
 			 **********************/
+
 
 			/*********************
 			 *  EVENTS

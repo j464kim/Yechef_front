@@ -2421,6 +2421,14 @@ h6 {
   text-align: center;
   transition: 1s;
 }
+.large-icon {
+  font-size: 40px;
+  cursor: pointer;
+  user-select: none;
+}
+.large-icon:hover {
+  color: darkblue;
+}
 .loader-wrapper {
   min-height: 300px;
   height: 100%;
@@ -2440,6 +2448,40 @@ h6 {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+.rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.rating li {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.rating li.filled {
+  color: #fd0;
+}
+.rating.readonly li.filled {
+  color: #666;
+}
+.average-rating-container {
+  position: relative;
+  height: 31px;
+  width: 103px;
+  overflow: hidden;
+}
+.average-rating-container .background,
+.average-rating-container .foreground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 body {
   padding-top: 70px;

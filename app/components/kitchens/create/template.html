@@ -6,48 +6,62 @@
 </head>
 <body>
 
-<form novalidate name="kitchenCreateForm" class="css-validation">
+<form class="form-validation" name="form" novalidate>
+    <!--Name-->
     <div class="kitchenName">
-        <label class="control-label" for="name">Name:</label>
-        <div class="controls">
-            <input type="text" id="name" ng-model="KitchenCtrl.kitchen.name" required/>
+        <label>Name:</label>
+        <input type="text" name="name" ng-model="KitchenCtrl.kitchen.name"
+               ng-minlength="5" ng-maxlength="40" required/>
+        <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$dirty' ng-cloak>
+            <div ng-message="required">Kitchen Name is required</div>
+            <div ng-message="minlength">Kitchen Name must have minimum 5 characters</div>
+            <div ng-message="maxlength">Kitchen Name must have maximum 40 characters</div>
         </div>
     </div>
+    <!--Address-->
     <div class="kitchenAddress">
-        <label class="control-label" for="address">Address:</label>
-        <div class="controls">
-            <input type="text" id="address" ng-model="KitchenCtrl.kitchen.address" required/>
+        <label>Address:</label>
+        <input type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
+        <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$dirty' ng-cloak>
+            <div ng-message="required">Address is required</div>
         </div>
     </div>
+    <!--Phone-->
     <div class="kitchenPhone">
-        <label class="control-label" for="phone">Phone:</label>
-        <div class="controls">
-            <input type="text" id="phone" ng-model="KitchenCtrl.kitchen.phone" required/>
+        <label>Phone:</label>
+        <input type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone" ui-mask="+9-999-999-9999" required/>
+        <div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$dirty' ng-cloak>
+            <div ng-message="required">Phone number is required</div>
+            <div ng-message="pattern">Must be a valid 10 digit phone number</div>
         </div>
     </div>
+    <!--Email-->
     <div class="kitchenEmail">
-        <label class="control-label" for="email">Email:</label>
-        <div class="controls">
-            <input type="email" id="email" ng-model="KitchenCtrl.kitchen.email" required/>
+        <label>Email:</label>
+        <input type="email" name="email" ng-model="KitchenCtrl.kitchen.email" required/>
+        <div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$dirty' ng-cloak>
+            <div ng-message="required">Email is required</div>
+            <div ng-message="email">Must be a valid email</div>
         </div>
     </div>
+    <!--Description-->
     <div class="kitchenDescription">
-        <label class="control-label" for="kitchenDescription">Description:</label>
-        <div class="controls">
-            <input type="text" id="kitchenDescription" ng-model="KitchenCtrl.kitchen.description"/>
+        <label>Description:</label>
+        <input type="text" name="description" ng-model="KitchenCtrl.kitchen.description" required/>
+        <div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$dirty' ng-cloak>
+            <div ng-message="required">Description is required</div>
         </div>
     </div>
     <div class="kitchenImage">
-        <label class="control-label" for="dropzone">Image:</label>
-        <div class="controls">
-            <div ng-app="mediaUpload" ng-controller="MediaController">
-                <div class="dropzone" id="dropzone" ng-dropzone></div>
-            </div>
+        <label for="dropzone">Image:</label>
+        <div ng-app="mediaUpload" ng-controller="MediaController">
+            <div class="dropzone" id="dropzone" ng-dropzone></div>
         </div>
     </div>
     <br/>
     <div class="submit">
-        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary">Create a Kitchen!</a>
+        <a type="submit" ng-click="KitchenCtrl.createKitchen()" class="btn btn-small btn-primary"
+           ng-disabled="form.$invalid">Create a Kitchen!</a>
         <a type="button" ui-sref="kitchen.list" class="btn btn-small">cancel</a>
     </div>
     <br/>

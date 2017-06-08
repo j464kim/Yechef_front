@@ -107,8 +107,10 @@ angular.module('auth.api', [
             function getAccessToken() {
                 if (token.accessToken && token.tokenType) {
                     return token.tokenType + ' ' + token.accessToken;
+                } else {
+                    revokeSession();
+                    return null;
                 }
-                return null;
             }
 
             function getRefreshToken() {

@@ -12,6 +12,8 @@
             <a ui-sref="dish.show({id: {{dish.id}}})" class="btn btn-primary">View Detail</a>
         </div>
     </div>
-</div>
 
-<button class="btn btn-primary" ng-click="DishCtrl.getDishes()">Load More</button>
+    <div class="col-sm-4">
+        <ui-gmap-google-map center='DishCtrl.map.center' zoom='DishCtrl.map.zoom'></ui-gmap-google-map>
+    </div>
+</div>

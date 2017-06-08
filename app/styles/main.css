@@ -2483,3 +2483,14 @@ h6 {
   overflow: hidden;
   white-space: nowrap;
 }
+body {
+  padding-top: 70px;
+}
+.angular-google-map {
+  height: 90%;
+}
+.angular-google-map-container {
+  height: 100%;
+  position: fixed;
+  top: 0;
+}

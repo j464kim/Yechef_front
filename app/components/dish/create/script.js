@@ -48,7 +48,7 @@ angular.module('dish.create', [
 			this.createDish = _createDish;
 			this.cancel = function cancel() {
 				if (confirm("Do you want to go back?")) {
-					$state.go('dish.listInfinite');
+					$state.go('dish.list');
 				}
 			};
 

@@ -16,15 +16,15 @@ angular.module('dish', [
                 abstract: true,
                 template: '<ui-view/>'
             })
-            // .state('dish.list', {
-            //     url: 'list',
-            //     templateUrl: '/components/dish/list/template.html',
-            //     controller: 'DishListController as DishCtrl',
+            // .state('dish.listInfinite', {
+            //     url: 'es',
+            //     templateUrl: '/components/dish/listInfinite/template.html',
+            //     controller: 'DishListInfiniteController as DishCtrl',
             // })
-            .state('dish.listInfinite', {
+            .state('dish.list', {
                 url: 'es',
-                templateUrl: '/components/dish/listInfinite/template.html',
-                controller: 'DishListInfiniteController as DishCtrl',
+                templateUrl: '/components/dish/list/template.html',
+                controller: 'DishListController as DishCtrl',
             })
             .state('dish.show', {
                 url: '/show/{id}',

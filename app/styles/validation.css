@@ -2336,14 +2336,6 @@
   overflow: visible;
   clip: auto;
 }
-.large-icon {
-  font-size: 40px;
-  cursor: pointer;
-  user-select: none;
-}
-.large-icon:hover {
-  color: darkblue;
-}
 /* FONT */
 /* COLOR */
 .bg-primary {
@@ -2429,6 +2421,14 @@ h6 {
   text-align: center;
   transition: 1s;
 }
+.large-icon {
+  font-size: 40px;
+  cursor: pointer;
+  user-select: none;
+}
+.large-icon:hover {
+  color: darkblue;
+}
 .loader-wrapper {
   min-height: 300px;
   height: 100%;
@@ -2482,4 +2482,15 @@ h6 {
   left: 0;
   overflow: hidden;
   white-space: nowrap;
+}
+body {
+  padding-top: 70px;
+}
+.angular-google-map {
+  height: 90%;
+}
+.angular-google-map-container {
+  height: 100%;
+  position: fixed;
+  top: 0;
 }

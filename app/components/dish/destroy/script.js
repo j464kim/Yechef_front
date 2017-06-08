@@ -34,7 +34,7 @@ angular.module('dish.destroy', [
                 if (confirm("Do you want to delete the dish?")) {
                     DishesAPI.destroy(dishId)
                         .then(function (response) {
-                            $state.go('dish.listInfinite');
+                            $state.go('dish.list');
                         }, function (response) {
                             // TODO handle error state
                             console.error(response);

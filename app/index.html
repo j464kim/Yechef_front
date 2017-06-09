@@ -61,7 +61,7 @@
                 <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
                     <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
                     <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
-                    <li><a ng-if="MCL.isLoggedin()">My Kitchen</a></li>
+                    <li><a ui-sref="user.kitchen" ng-if="MCL.isLoggedin()">My Kitchen</a></li>
                     <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
 
                     <li class="dropdown" ng-if="MCL.isLoggedin()">
@@ -175,6 +175,7 @@
 
 <script src="components/users/userRoute.js"></script>
 <script src="components/users/profile/userProfileRoute.js"></script>
+<script src="components/users/kitchen/userKitchenRoute.js"></script>
 <script src="components/users/service/users.js"></script>
 <script src="components/users/login/script.js"></script>
 <script src="components/users/register/script.js"></script>

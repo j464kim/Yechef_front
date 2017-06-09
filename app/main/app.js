@@ -29,6 +29,7 @@ angular
         'kitchen',
         'user',
         'profile',
+        'userKitchen',
         'mediaUpload',
 		'reaction',
 

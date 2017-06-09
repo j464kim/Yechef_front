@@ -15,12 +15,12 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
-    <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css" />
-    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css"/>
+    <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css"/>
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css"/>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -58,33 +58,28 @@
                     <li><a ui-sref="dish.list">Dishes</a></li>
                     <li><a ui-sref="kitchen.list">Kitchens</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl"
-                             ng-cloak>
+                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
                     <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
                     <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
                     <li><a ng-if="MCL.isLoggedin()">My Kitchen</a></li>
                     <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
-                    <li class="md-body-1" ng-if="MCL.isLoggedin()">
-                        <md-menu>
-                            <a ng-click="$mdMenu.open()">
-                                <img src="http://placehold.it/18x18" class="profile-image img-circle"/>
-                                <label>Username</label>
-                            </a>
-                            <md-menu-content>
-                                <md-menu-item>
-                                    <a ui-sref="user.profile.main"><i class="fa fa-id-badge"></i> Profile</a>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <a href=""><i class="fa fa-navicon"></i> Orders</a>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <a href=""><i class="fa fa-heart-o"></i> Forked</a>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu>
+
+                    <li class="dropdown" ng-if="MCL.isLoggedin()">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="http://placehold.it/18x18" class="profile-image img-circle">
+                            <label>Username</label> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="user.profile.main"><i class="fa fa-id-badge"></i> Profile</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href=""><i class="fa fa-navicon"></i> Orders</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href=""><i class="fa fa-heart-o"></i> Forked</a></li>
+                            <li class="divider"></li>
+                            <li><a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

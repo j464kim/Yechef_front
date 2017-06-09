@@ -108,7 +108,7 @@ angular.module('auth.api', [
                 if (token.accessToken && token.tokenType) {
                     return token.tokenType + ' ' + token.accessToken;
                 } else {
-                    revokeSession();
+                    // revokeSession();
                     return null;
                 }
             }

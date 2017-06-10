@@ -1,2 +1,57 @@
+<style>
+    .kitchenImage {
+        height: 100%;
+        width: 100%;
+    }
+</style>
 <h2>General Info</h2>
 <hr>
+<div class="container">
+    <label class="h3">Owner</label>
+    <input type="text" class="owenerEmail">
+    <button type="submit">Add</button>
+</div>
+
+<md-list>
+    <md-list-item ng-repeat="person in people" ng-click="goToPerson(person.name, $event)" class="noright">
+        <img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar"/>
+        <p>{{ person.name }}</p>
+        <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
+        <i class="material-icons md-24 md-secondary md-hue-3">message</i>
+        <i class="material-icons md-24 md-secondary md-hue-3">phone</i>
+
+    </md-list-item>
+</md-list>
+<hr>
+<div>
+    <label class="h3">My Kitchen</label>
+    <button ui-sref="user.kitchen.general.edit">Edit</button>
+</div>
+<div class="col-md-8">
+    <img class="kitchenImage" src="http://hbu.h-cdn.co/assets/16/18/980x666/mercury-kitchen.jpg">
+</div>
+<div class="col-md-4">
+    <div class="ktichenName">
+        <label>Name:</label>
+        <span>Choppa's First Kitchen</span>
+    </div>
+    <div class="kitchenPhone">
+        <label>Phone:</label>
+        <span>514-898-8523</span>
+    </div>
+    <div class="kitchenAddress">
+        <label>Address:</label>
+        <span>168 King St. Apt1102, Waterloo ON CANADA</span>
+    </div>
+    <div class="kitchenEmail">
+        <label>Email:</label>
+        <span>kwnsrnjs12@gmail.com</span>
+    </div>
+    <div class="kitchenDescription">
+        <label>Description:</label>
+        <span>angmotti kimotti ang!</span>
+    </div>
+</div>
+
+
+

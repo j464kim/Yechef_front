@@ -17,8 +17,18 @@ body {
 .angular-google-map {
   height: 90%;
 }
+
 .angular-google-map-container {
   height: 100%;
   position: fixed;
   top: 0;
+}
+
+.row-no-padding {
+  margin-left: 0;
+  margin-right: 0;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }

@@ -50,15 +50,17 @@
                             md-items="item in sctrl.querySearch(sctrl.searchText)"
                             md-item-text="item.display"
                             md-min-length="0"
-                            placeholder="Choose Nationality">
+                            placeholder="Choose Nationality"
+                            md-require-match>
                         <md-item-template>
                             <span md-highlight-text="sctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
                         </md-item-template>
                         <md-not-found>
                             No states matching "{{sctrl.searchText}}" were found.
-                            <a ng-click="sctrl.newState(sctrl.searchText)">Create a new one!</a>
                         </md-not-found>
+                        <div ng-message="md-require-match">Please select an existing nationality.</div>
                     </md-autocomplete>
+
                     <br/><br/>
                     <md-checkbox ng-model="sctrl.vegan">Vegan</md-checkbox>
                     <md-checkbox ng-model="sctrl.vegetarian">Vegetarian</md-checkbox>

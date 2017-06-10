@@ -4,8 +4,8 @@ angular.module('dish.show', [
     'dishes.api',
 ])
 
-    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI',
-        function ($state, $stateParams, DishesAPI) {
+    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI',
+        function ($state, $stateParams, DishesAPI, KitchenAPI) {
 
             /*********************
              *    Private Variables
@@ -30,11 +30,21 @@ angular.module('dish.show', [
                 DishesAPI.show(that.dishId)
                     .then(function (response) {
                         that.dish = response;
+                        _getKitchen(that.dish.kitchen_id);
                     }, function (response) {
                         // TODO handle error state
                         console.error(response);
                     });
 
+            }
+
+            function _getKitchen(kitchenId) {
+                KitchenAPI.show(kitchenId).then(function (response) {
+                    that.kitchen = response;
+                }, function (response) {
+                    // TODO handle error state
+                    console.error(response);
+                });
             }
 
             /*********************

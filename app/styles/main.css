@@ -2429,16 +2429,15 @@ h6 {
 .large-icon:hover {
   color: darkblue;
 }
+.kitchen-image {
+  height: 100%;
+  width: 100%;
+}
 .kitchen-owner {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   margin: 0 auto;
-}
-.kitchen-owner {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
 }
 input {
   width: 100%;
@@ -2446,12 +2445,26 @@ input {
 button {
   margin-bottom: 10px;
 }
+.select-kitchen {
+  float: right;
+  color: black;
+  margin: 0 0 0.5em 0.5em;
+}
+#add-kitchen {
+  float: right;
+  color: white;
+  display: inline;
+}
 .kitchen-title {
   font-size: 24px;
   font-weight: bold;
 }
 .owner-info {
   text-align: center;
+}
+.kitchen-dashboard-header {
+  margin: 0.7em;
+  display: inline;
 }
 .loader-wrapper {
   min-height: 300px;

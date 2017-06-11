@@ -9,7 +9,19 @@
                 md-whiteframe="4">
 
             <md-toolbar class="md-theme-indigo">
-                <h1 ui-sref=".main" class="md-toolbar-tools">My Kitchen</h1>
+                <div class="kitchen-dashboard-header">
+                    <label>My Kitchen</label>
+                    <a>
+                        <i ui-sref="kitchen.create" class="material-icons" id="add-kitchen">playlist_add</i>
+                    </a>
+                </div>
+
+                <div class="select-kitchen">
+                    <select>
+                        <option selected="selected"><a>1st Kitchen (Toronto)</a></option>
+                        <option><a>2nd kitchen (Montreal)</a></option>
+                    </select>
+                </div>
             </md-toolbar>
             <md-content ng-controller="LeftCtrl">
                 <div class="list-group">
@@ -19,7 +31,6 @@
                     <a ui-sref=".order" class="list-group-item">Orders</a>
                     <a ui-sref=".subscriber" class="list-group-item">Subscribers</a>
                     <a ui-sref=".payout.view" class="list-group-item">Payout</a>
-
                 </div>
                 <md-button ng-click="close()" class="md-primary" hide-gt-md>
                     Close Sidenav Left

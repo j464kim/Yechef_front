@@ -28,6 +28,8 @@ angular
         'rating',
         'kitchen',
         'user',
+        'profile',
+        'userKitchen',
         'mediaUpload',
 		'reaction',
 

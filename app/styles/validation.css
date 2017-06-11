@@ -2429,6 +2429,13 @@ h6 {
 .large-icon:hover {
   color: darkblue;
 }
+.kitchen-image {
+  height: 100%;
+  width: 100%;
+}
+input {
+  width: 100%;
+}
 .loader-wrapper {
   min-height: 300px;
   height: 100%;

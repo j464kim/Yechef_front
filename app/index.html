@@ -15,12 +15,12 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css"/>
-    <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css"/>
-    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css"/>
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
-    <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
+    <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -61,7 +61,7 @@
                 <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
                     <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
                     <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
-                    <li><a ng-if="MCL.isLoggedin()">My Kitchen</a></li>
+                    <li><a ui-sref="user.kitchen.dashboard" ng-if="MCL.isLoggedin()">My Kitchen</a></li>
                     <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
 
                     <li class="dropdown" ng-if="MCL.isLoggedin()">
@@ -141,7 +141,13 @@
 <script src="bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js"></script>
 <script src="bower_components/js-rich-marker/src/richmarker.js"></script>
 <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+<script src="bower_components/chart.js/dist/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
 <!-- endbower -->
+<!-- CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<!-- end CDN -->
 <!-- endbuild -->
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="main/app.js"></script>
@@ -174,10 +180,13 @@
 <script src="shared/reaction/service/reactionService.js"></script>
 
 <script src="components/users/userRoute.js"></script>
+<script src="components/users/profile/userProfileRoute.js"></script>
+<script src="components/users/kitchen/userKitchenRoute.js"></script>
 <script src="components/users/service/users.js"></script>
 <script src="components/users/login/script.js"></script>
 <script src="components/users/register/script.js"></script>
 <script src="components/users/profile/userMainController.js"></script>
+<script src="components/users/kitchen/userKitchenController.js"></script>
 
 <script src="style-guide/index.js"></script>
 

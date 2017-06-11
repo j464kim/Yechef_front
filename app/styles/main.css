@@ -2436,6 +2436,10 @@ h6 {
 input {
   width: 100%;
 }
+.kitchen-title {
+  font-size: 24px;
+  font-weight: bold;
+}
 .loader-wrapper {
   min-height: 300px;
   height: 100%;

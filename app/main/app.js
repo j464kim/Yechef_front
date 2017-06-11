@@ -10,6 +10,7 @@ angular
         'ngSanitize',
         'ngTouch',
         'ngRateIt',
+        'ngMessages',
         'xeditable',
         'ngMaterial',
         'ngMaterialDatePicker',

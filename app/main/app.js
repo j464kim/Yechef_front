@@ -11,6 +11,7 @@ angular
         'ngTouch',
         'ngRateIt',
         'xeditable',
+        'ngMessages',
         'ngMaterial',
         'ngMaterialDatePicker',
 

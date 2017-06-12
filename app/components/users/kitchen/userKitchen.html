@@ -22,13 +22,20 @@
                         Create Your First Kitchen!
                     </md-button>
                     <select name="myCurrentKitchen" ng-if="UkCtrl.myKitchens.length > 0"
-                            ng-model="UkCtrl.myCurrentKitchen" ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens">
-                        <option value="" disabled>Select Kitchen to manage</option>
+                            ng-model="UkCtrl.myCurrentKitchen"
+                            ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens">
+                        <option value="" disabled>Select Kitchen</option>
                     </select>
                 </div>
             </md-toolbar>
             <md-content ng-controller="LeftCtrl">
-                <div class="list-group">
+                <div class="list-group text-center" ng-if="!UkCtrl.myCurrentKitchen">
+                    <br/>
+                    <i class="fa fa-arrow-up"></i>
+                    Select your kitchen to manage!
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                <div class="list-group" ng-if="UkCtrl.myCurrentKitchen">
                     <a ui-sref=".dashboard" class="list-group-item">Dashboard</a>
                     <a ui-sref=".general.view" class="list-group-item">General Info</a>
                     <a ui-sref=".dish" class="list-group-item">Dishes</a>
@@ -48,7 +55,7 @@
             <div layout="column" layout-align="top center">
 
                 <!--Main Content-->
-                <div ui-view></div>
+                <div ui-view ng-if="UkCtrl.myCurrentKitchen"></div>
 
                 <div>
                     <md-button ng-click="toggleLeft()"

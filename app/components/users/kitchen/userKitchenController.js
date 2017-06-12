@@ -6,8 +6,6 @@ angular.module('user.kitchen', [
 	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI) {
 		var that = this;
 
-		this.myCurrentKitchen = {};
-		this.myCurrentKitchen.name = "ANG";
 		function _init() {
 			_getMyKitchens();
 		}

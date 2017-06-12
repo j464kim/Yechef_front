@@ -8,14 +8,17 @@ angular.module('user.kitchen', [
 
         this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
         that.myCurrentKitchen = $stateParams.myCurrentKitchen;
+        that.isKitchenSelected = false;
 
         function _init() {
             _getMyKitchens();
-            _prepareEdit();
         }
 
+        $scope.$watch(function() {return that.myCurrentKitchen}, function(newVal, oldVal) {
+			_prepareEdit();
+        });
+
         function _prepareEdit() {
-            console.log(that.myCurrentKitchen);
             that.myCurrentKitchenToEdit = Object.assign({}, that.myCurrentKitchen);
         };
 
@@ -56,6 +59,7 @@ angular.module('user.kitchen', [
                     var kitchen = that.myKitchens[index];
                     if (kitchen.id == that.myCurrentKitchenId) {
                         that.myCurrentKitchen = kitchen;
+                        that.isKitchenSelected = true;
                         return true;
                     }
                 }

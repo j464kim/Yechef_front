@@ -1,17 +1,15 @@
 <div class="container" id="kitchenList" loader>
     <div class="col-md-4 col-md-offset-4">
-
-        <form novalidate name="form" class="css-validation">
+        <form novalidate name="form">
+            <h2 class="text-center">Edit Kitchen</h2>
             <div class="row">
-                <br/>
-                <img ng-src="{{KitchenCtrl.kitchen.medias[0].url}}" alt="Card image cap" style="width:100%;">
-                <br/>
-                <br/>
+                <img ng-src="{{KitchenCtrl.kitchen.medias[0].url}}" class="image-show" alt="Card image cap" style="width:100%;">
             </div>
+            <!--Name-->
             <div class="row">
                 <div class="kitchenName">
                     <md-input-container class="md-block">
-                        <label for="name">Kitchen Name:</label>
+                        <label for="name">Kitchen Name</label>
                         <input id="name" type="text" name="name" ng-model="KitchenCtrl.kitchen.name"
                                ng-minlength="5" ng-maxlength="40" required/>
                         <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$dirty' ng-cloak>
@@ -20,10 +18,11 @@
                             <div ng-message="maxlength">Kitchen Name must have maximum 40 characters</div>
                         </div>
                     </md-input-container>
-                </div> <!--Address-->
+                </div>
+                <!--Address-->
                 <div class="kitchenAddress">
                     <md-input-container class="md-block">
-                        <label for="address">Address:</label>
+                        <label for="address">Address</label>
                         <input id="address" type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
                         <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$dirty'
                              ng-cloak>
@@ -34,7 +33,7 @@
                 <!--Phone-->
                 <div class="kitchenPhone">
                     <md-input-container class="md-block">
-                        <label for="phone">Phone:</label>
+                        <label for="phone">Phone</label>
                         <input id="phone" type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone"
                                ui-mask="+9-999-999-9999"
                                placeholder="" required/>
@@ -47,7 +46,7 @@
                 <!--Email-->
                 <div class="kitchenEmail">
                     <md-input-container class="md-block">
-                        <label for="email">Email:</label>
+                        <label for="email">Email</label>
                         <input id="email" type="email" name="email" ng-model="KitchenCtrl.kitchen.email" required/>
                         <div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$dirty' ng-cloak>
                             <div ng-message="required">Email is required</div>
@@ -58,7 +57,7 @@
                 <!--Description-->
                 <div class="kitchenDescription">
                     <md-input-container class="md-block">
-                        <label for="description">Description:</label>
+                        <label for="description">Description</label>
                         <textarea md-maxlength="200" id="description" name="description"
                                   ng-model="KitchenCtrl.kitchen.description" required></textarea>
                         <div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$dirty'
@@ -67,12 +66,14 @@
                         </div>
                     </md-input-container>
                 </div>
+                <!--Image-->
                 <div class="kitchenImage">
-                    <label for="dropzone">Image:</label>
+                    <label for="dropzone">Image</label>
                     <div ng-app="mediaUpload" ng-controller="MediaController">
                         <div class="dropzone" id="dropzone" ng-dropzone></div>
                     </div>
                 </div>
+                <!--Button-->
                 <div class="submit">
                     <div class="col-sm-1">
                         <md-button class="md-raised md-primary" ng-click="KitchenCtrl.updateKitchen()"

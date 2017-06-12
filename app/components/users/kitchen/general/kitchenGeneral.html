@@ -7,9 +7,9 @@
 </div>
 
 <md-list>
-    <md-list-item ng-repeat="person in people" ng-click="goToPerson(person.name, $event)" class="noright">
-        <img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar"/>
-        <p>{{ person.name }}</p>
+    <md-list-item ng-repeat="person in UkCtrl.kitchenAdmins" ng-click="goToPerson(person.name, $event)" class="noright">
+        <img alt="{{ person.email }}" ng-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk" class="md-avatar"/>
+        <p> <span ng-if="person.pivot.verified == 0">(Pending...)</span> {{ person.first_name }} {{ person.last_name }}</p>
         <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
         <i class="material-icons md-24 md-secondary md-hue-3">message</i>
         <i class="material-icons md-24 md-secondary md-hue-3">phone</i>

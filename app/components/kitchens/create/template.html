@@ -6,10 +6,10 @@
                 <div class="kitchenName">
                     <md-input-container class="md-block">
 
-                        <label for="name">Kitchen Name:</label>
+                        <label for="name">Kitchen Name</label>
                         <input id="name" type="text" name="name" ng-model="KitchenCtrl.kitchen.name"
                                ng-minlength="5" ng-maxlength="40" required/>
-                        <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$dirty' ng-cloak>
+                        <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$touched' ng-cloak>
                             <div ng-message="required">Kitchen Name is required</div>
                             <div ng-message="minlength">Kitchen Name must have minimum 5 characters</div>
                             <div ng-message="maxlength">Kitchen Name must have maximum 40 characters</div>
@@ -19,9 +19,9 @@
                 <!--Address-->
                 <div class="kitchenAddress">
                     <md-input-container class="md-block">
-                        <label for="address">Address:</label>
+                        <label for="address">Address</label>
                         <input id="address" type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
-                        <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$dirty'
+                        <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
                              ng-cloak>
                             <div ng-message="required">Address is required</div>
                         </div>
@@ -30,11 +30,10 @@
                 <!--Phone-->
                 <div class="kitchenPhone">
                     <md-input-container class="md-block">
-                        <label for="phone">Phone:</label>
+                        <label for="phone">Phone</label><br>
                         <input id="phone" type="text" name="phone" ng-model="KitchenCtrl.kitchen.phone"
-                               ui-mask="+9-999-999-9999"
-                               placeholder="" required/>
-                        <div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$dirty' ng-cloak>
+                               ui-mask="+9-999-999-9999" required/>
+                        <div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$touched' ng-cloak>
                             <div ng-message="required">Phone number is required</div>
                             <div ng-message="pattern">Must be a valid 10 digit phone number</div>
                         </div>
@@ -43,9 +42,9 @@
                 <!--Email-->
                 <div class="kitchenEmail">
                     <md-input-container class="md-block">
-                        <label for="email">Email:</label>
+                        <label for="email">Email</label>
                         <input id="email" type="email" name="email" ng-model="KitchenCtrl.kitchen.email" required/>
-                        <div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$dirty' ng-cloak>
+                        <div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$touched' ng-cloak>
                             <div ng-message="required">Email is required</div>
                             <div ng-message="email">Must be a valid email</div>
                         </div>
@@ -54,17 +53,17 @@
                 <!--Description-->
                 <div class="kitchenDescription">
                     <md-input-container class="md-block">
-                        <label for="description">Description:</label>
+                        <label for="description">Description</label>
                         <textarea md-maxlength="200" id="description" rows="3" name="description"
                                   ng-model="KitchenCtrl.kitchen.description" required></textarea>
-                        <div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$dirty'
+                        <div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$touched'
                              ng-cloak>
                             <div ng-message="required">Description is required</div>
                         </div>
                     </md-input-container>
                 </div>
                 <div class="kitchenImage">
-                    <label for="dropzone">Image:</label>
+                    <label for="dropzone">Image</label>
                     <div ng-app="mediaUpload" ng-controller="MediaController">
                         <div class="dropzone" id="dropzone" ng-dropzone></div>
                     </div>

@@ -1,27 +1,62 @@
-<div class="col-md-6 col-md-offset-3">
-    <h2>Login</h2>
-    <form name="form" ng-submit="LoginCtrl.login()" role="form">
-        <div class="form-group" ng-class="{ 'has-error': (form.email.$dirty && form.email.$error.required) || (form.email.$invalid && form.email.$error.email) }">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control" ng-model="LoginCtrl.email" required/>
-            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
-            <span ng-show="form.email.$invalid && form.email.$error.email" class="help-block">Not a valid email</span>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control" ng-model="LoginCtrl.password" required/>
-            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-        </div>
-        <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
-            <a ui-sref="user.register" class="btn btn-link">Register</a>
-        </div>
-    </form>
-
-    <button class="btn btn-primary" ng-click="LoginCtrl.socialLogin('google')">Google Login</button>
-    <button class="btn btn-primary" ng-click="LoginCtrl.socialLogin('facebook')">Facebook Login</button>
-
-    <a class="btn btn-link" ui-sref="user.linkRequest">
-        Forgot Your Password?
-    </a>
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+        <form class="form-validation" name="form" ng-submit="LoginCtrl.login()" novalidate>
+            <div class="form-group">
+                <h2 class="text-center">Login</h2><br>
+                <!--Email-->
+                <div class="user-email">
+                    <md-input-container class="md-block">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" ng-model="LoginCtrl.email" required/>
+                        <div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Email is required</div>
+                            <div ng-message="email">Must be a valid email</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <!--Password-->
+                <div class="user-password">
+                    <md-input-container class="md-block">
+                        <label for="userPassword">Password</label>
+                        <input id="userPassword" type="password" name="password"
+                               ng-model="LoginCtrl.password"
+                               ng-minlength="6" required/>
+                        <div class="field-message" ng-messages="form.password.$error"
+                             ng-if='form.password.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Password is required</div>
+                            <div ng-message="minlength">Password must have minimum 6 characters</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <!--Button-->
+                <div class="row submit">
+                    <div class="col-sm-1">
+                        <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">Login
+                        </md-button>
+                    </div>
+                    <div class="col-sm-offset-7 col-sm-1">
+                        <!--TODO: Implement back-to previous page-->
+                        <md-button ui-sref="home" class="md-raised md-warn">Cancel</md-button>
+                    </div>
+                </div>
+                <div class="row">
+                    <md-button ng-click="LoginCtrl.socialLogin('google')" class="md-raised md-button md-ink-ripple">
+                        Login with <i class="fa fa-google font-quaternary" aria-hidden="true"></i>
+                    </md-button>
+                    <md-button ng-click="LoginCtrl.socialLogin('facebook')"
+                               class="md-raised md-button md-ink-ripple">
+                        Login with <i class="fa fa-facebook font-secondary" aria-hidden="true"></i>
+                    </md-button>
+                    <md-button class="bg-primary" ui-sref="user.register">To Register</md-button>
+                </div>
+                <div class="row text-center">
+                    <a class="btn btn-link" ui-sref="user.linkRequest">
+                        Forgot Your Password?
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

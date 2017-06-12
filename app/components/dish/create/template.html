@@ -73,7 +73,7 @@
                 <br/>
                 <div class="row">
                     <div class="col-sm-1">
-                        <md-button class="md-raised md-primary" ng-click="DishCtrl.createDish()">Create</md-button>
+                        <md-button class="md-raised md-primary" ng-click="DishCtrl.createDish()" ng-disabled="form.$invalid">Create</md-button>
                     </div>
                     <div class="col-sm-offset-7 col-sm-1">
                         <md-button class="md-raised md-warn" ng-click="DishCtrl.cancel()">Cancel</md-button>

@@ -12,6 +12,7 @@ angular
         'ngRateIt',
         'ngMessages',
         'xeditable',
+        'ngMessages',
         'ngMaterial',
         'ngMaterialDatePicker',
 

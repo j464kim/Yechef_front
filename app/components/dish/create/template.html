@@ -2,25 +2,32 @@
     <div class="col-md-4 col-md-offset-4">
         <form class="form-validation" name="form" novalidate>
             <div class="form-group">
+                <h2 class="text-center">New Dish</h2><br>
                 <div class="row">
+                    <!--Name-->
                     <md-input-container class="md-block">
-                        <label for="name">
-                            Dish Name
-                        </label>
-                        <input type="text" id="name" ng-model="DishCtrl.dish.name" required/>
+                        <label for="dishName">Dish Name</label>
+                        <input type="text" id="dishName" name="name" ng-model="DishCtrl.dish.name" required/>
+                        <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Name is required</div>
+                        </div>
                     </md-input-container>
-
+                    <!--Price-->
                     <md-input-container class="md-block">
-                        <label for="price">
-                            Price
-                        </label>
-                        <input type="number" id="price" placeholder="10.00"
+                        <label for="dishPrice">Price</label>
+                        <input type="number" id="dishPrice" name="price"
                                ng-model="DishCtrl.dish.price"
                                ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+                        <div class="field-message" ng-messages="form.price.$error" ng-if='form.price.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Price is required</div>
+                        </div>
                     </md-input-container>
-
+                    <!--Nationality-->
                     <md-autocomplete
-                            md-require-match
+                            flex required
+                            md-input-name="nationality" md-require-match
                             md-floating-label="Nationality"
                             md-no-cache="true"
                             md-selected-item="DishCtrl.selectedNationality"
@@ -35,17 +42,28 @@
                         <md-not-found>
                             No states matching "{{DishCtrl.searchNationality}}" were found.
                         </md-not-found>
-                        <div ng-message="md-require-match">Please select an existing nationality.</div>
+                        <div ng-messages="form.nationality.$error" ng-if="form.nationality.$touched">
+                            <div ng-message="required">Dish <b>must</b> have a nationality.</div>
+                            <div ng-message="md-require-match">Please select an existing nationality.
+                            </div>
+                            <div ng-message="maxlength">Your entry is too long.</div>
+                        </div>
                     </md-autocomplete>
-                    <br/><br/>
-
+                    <br/>
+                    <!--Description-->
                     <md-input-container class="md-block">
-                        <label for="description">Description</label>
-                        <textarea md-maxlength="200" id="description" rows="3" ng-model="DishCtrl.dish.description"
+                        <label for="dishDescription">Description</label>
+                        <textarea md-maxlength="200" id="dishDescription" name="description" rows="3"
+                                  ng-model="DishCtrl.dish.description"
                                   placeholder="Typical Korean Kimchi Ramen"
-                                  md-select-on-focus required></textarea>
+                                  md-select-on-focus required>
+                    </textarea>
+                        <div ng-messages="form.description.$error" ng-if="form.description.$touched">
+                            <div ng-message="required">Description is required.</div>
+                            <div ng-message="maxlength">Your description should be less than 200 letters.</div>
+                        </div>
                     </md-input-container>
-
+                    <!--Image-->
                     <div class="DishImage">
                         <label class="control-label" for="dropzone">Image:</label>
                         <div class="controls">
@@ -56,6 +74,7 @@
                     </div>
                 </div>
                 <br/>
+                <!--Button-->
                 <div class="row">
                     <div class="col-md-1">
                         <md-button class="md-raised md-primary" ng-click="DishCtrl.createDish()"

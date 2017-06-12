@@ -33,7 +33,7 @@ angular.module('kitchen', [
 			})
 			.state('kitchen.show', {
 				url: '/show/{id}',
-				templateUrl: 'components/kitchens/show/template.html',
+				templateUrl: 'components/kitchens/show/kitchenShow.html',
 				controller: 'KitchenShowController as KitchenCtrl'
 			});
 

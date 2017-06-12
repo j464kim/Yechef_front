@@ -19,7 +19,7 @@
 <hr>
 <div>
     <label class="h3">My Kitchen</label>
-    <button ui-sref="user.kitchen.general.edit" ng-click="UkCtrl.prepareEdit()">Edit</button>
+    <button ui-sref="user.kitchen.general.edit({myCurrentKitchenId: UkCtrl.myCurrentKitchen.id})" ng-click="UkCtrl.prepareEdit()"}>Edit</button>
 </div>
 <div class="col-md-8">
     <img class="kitchen-image" ng-src="{{UkCtrl.myCurrentKitchen.medias[0].url}}">

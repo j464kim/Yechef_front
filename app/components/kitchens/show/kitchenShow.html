@@ -63,7 +63,7 @@
             <p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
         </div>
 
-        <button ui-sref="kitchen.edit({id: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
+        <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
         </button>
         <span ng-controller="KitchenDestroyController as vm">
                     <button ng-click="vm.destroyKitchen()" class="btn btn-danger btn-sm btn-delete">Delete</button>

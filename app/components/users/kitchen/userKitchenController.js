@@ -6,11 +6,18 @@ angular.module('user.kitchen', [
     .controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams) {
         var that = this;
 
-        this.myCurrentKitchen = $stateParams.myCurrentKitchen;
+        this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
+        that.myCurrentKitchen = $stateParams.myCurrentKitchen;
 
         function _init() {
             _getMyKitchens();
+            _prepareEdit();
         }
+
+        function _prepareEdit() {
+            console.log(that.myCurrentKitchen);
+            that.myCurrentKitchenToEdit = Object.assign({}, that.myCurrentKitchen);
+        };
 
         function _getMyKitchens() {
             UserAPI.list('getMyKitchens').then(
@@ -26,9 +33,14 @@ angular.module('user.kitchen', [
         function _updateKitchen() {
             KitchenAPI.update(that.myCurrentKitchenToEdit, that.myCurrentKitchen.id).then(function (response) {
                 var updatedKitchen = response;
-                that.myCurrentKitchenToEdit = updatedKitchen;
+                that.myCurrentKitchen.name = updatedKitchen.name;
+                that.myCurrentKitchen.phone = updatedKitchen.phone;
+                that.myCurrentKitchen.address = updatedKitchen.address;
+                that.myCurrentKitchen.email = updatedKitchen.email;
+                that.myCurrentKitchen.description = updatedKitchen.description;
+                that.myCurrentKitchen.medias = updatedKitchen.medias;
                 devHelper.log(response);
-                $state.go('user.kitchen.general.view', {'myCurrentKitchen': updatedKitchen});
+                $state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
             }, function (response) {
                 // TODO handle error state
                 console.error(response);
@@ -36,15 +48,22 @@ angular.module('user.kitchen', [
         }
 
         this.updateKitchen = _updateKitchen;
+        this.prepareEdit = _prepareEdit;
 
-        this.preSelect = function (id) {
-            if (that.myCurrentKitchen) {
-                return that.myCurrentKitchen.id === id;
+        this.preSelect = function () {
+            if (that.myCurrentKitchenId) {
+                for (index in that.myKitchens) {
+                    var kitchen = that.myKitchens[index];
+                    if (kitchen.id == that.myCurrentKitchenId) {
+                        that.myCurrentKitchen = kitchen;
+                        return true;
+                    }
+                }
             }
         };
 
-        this.prepareEdit = function () {
-            that.myCurrentKitchenToEdit = Object.assign({}, that.myCurrentKitchen);
+        this.selectChanged = function () {
+            $state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id, 'myCurrentKitchen': that.myCurrentKitchen});
         };
 
         $scope.people = [

@@ -6,8 +6,8 @@ angular.module('user.login', [
 ])
 
 
-.controller('UserLoginController', ['$state', 'AuthAPI',
-	function($state, AuthAPI){
+.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper',
+	function($state, AuthAPI, devHelper){
 
 		/*********************
 		*	Private Variables
@@ -35,8 +35,9 @@ angular.module('user.login', [
 			).then(
 				function(response) {
 					//set access token
-					console.log(response);
-				},
+                    devHelper.log(response);
+                    $state.go('home');
+                },
 				function(response) {
 					console.error(response);
 				}
@@ -48,8 +49,9 @@ angular.module('user.login', [
 				provider
 			).then(
 				function(response) {
-					console.log(response);
-				},
+                    devHelper.log(response);
+                    $state.go('home');
+                },
 				function(response) {
 					console.error(response);
 				}
@@ -59,20 +61,21 @@ angular.module('user.login', [
 		function _logout() {
 			AuthAPI.logout().then(
 				function(response) {
-					console.log(response);
+                    devHelper.log(response);
+					$state.go('home');
 				},
 				function(response) {
 					console.error(response);
 				}
 			);
 		}
+
 		/*********************
 		*	Public Functions
 		**********************/
 		this.login = _login;
 		this.socialLogin = _socialLogin;
 		this.logout = _logout;
-
 
 		/*********************
 		*	Initialization
@@ -83,7 +86,5 @@ angular.module('user.login', [
 		*	EVENTS
 		**********************/
 
-
-		
 	}
 ]);

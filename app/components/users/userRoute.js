@@ -2,6 +2,7 @@
 
 angular.module('user', [
 	'user.login',
+	'user.register',
 	'user.password',
 ])
 
@@ -17,6 +18,11 @@ angular.module('user', [
 				url: '/login',
 				templateUrl: 'components/users/login/template.html',
 				controller: 'UserLoginController as LoginCtrl',
+			})
+			.state('user.register', {
+				url: '/register',
+				templateUrl: 'components/users/register/template.html',
+				controller: 'UserRegisterController as RegisterCtrl',
 			})
 			.state('user.linkRequest', {
 				url: '/password/reset',

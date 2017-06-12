@@ -1,13 +1,154 @@
-<div class="container" id="dishShow" loader>
+<div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl" loader>
     <div class="row">
-        <div class="col-md-4">
-            <img ng-src="{{DishCtrl.dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
+        <div class="col-md-9">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-9 col col-md-offset-7">
+                        <div class="col-md-3 text-right">
+                            <a>269 <i class="fa fa-cutlery" aria-hidden="true"></i></a></div>
+                        <div class="col-md-1 text-right">
+                            <a><i class="fa fa-share-alt fa-x"></i></a></div>
+                        <div class="col-md-1 text-right">
+                            <a ui-sref="dish.update({id: DishCtrl.dish.id})"><i class="fa fa-edit fa-x"></i></a></div>
+                        <div class="col-md-1 text-right">
+                            <a ui-sref="dish.destroy({id: DishCtrl.dish.id})"><i class="fa fa-close fa-x"></i></a></div>
+                    </div>
+                </div>
+                <div class="row" style="background-color: ghostwhite">
+                    <div class="col-md-9">
+                        <h4><strong class="card-title">{{DishCtrl.dish.name}}</strong></h4>
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <h4><strong> ${{DishCtrl.dish.price}}</strong></h4>
+                    </div>
+                </div>
 
-            <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
-            <p class="card-text">{{DishCtrl.dish.description}}</p>
-
-            <a ui-sref="dish.update({id: DishCtrl.dish.id})" class="btn btn-primary">Edit Dish</a>
-            <a ui-sref="dish.destroy({id: DishCtrl.dish.id})" class="btn btn-primary">Delete</a>
+                <br/>
+                <div class="row">
+                    <div class="col">
+                        <img ng-src="{{DishCtrl.dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
+                    </div>
+                </div>
+                <div class="row"><br/>
+                    <div class="average">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                Taste
+                                <ng-rate-it ng-model="RatingCtrl.avg.taste_rating" max="5" read-only="true"
+                                            star-width="14" step="0.01"></ng-rate-it>
+                                ({{RatingCtrl.avg.taste_rating}})
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                Visual
+                                <ng-rate-it ng-model="RatingCtrl.avg.visual_rating" max="5" read-only="true"
+                                            star-width="14" step="0.01"></ng-rate-it>
+                                ({{RatingCtrl.avg.visual_rating}})
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                Quantity
+                                <ng-rate-it ng-model="RatingCtrl.avg.quantity_rating" max="5" read-only="true"
+                                            star-width="14" step="0.01"></ng-rate-it>
+                                ({{RatingCtrl.avg.quantity_rating}})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3 form-group-md">
+                        <md-input-container>
+                            <label for="amount">Amount</label>
+                            <input class="s" type="number" id="amount"/>
+                        </md-input-container>
+                    </div>
+                    <div class="col-md-9">
+                        <br/>
+                        <div class="row row-no-padding">
+                            <div class="col-sm-5">
+                                <a class="btn btn-small btn-warning" style="width: 95%">Add <i class="fa fa-cart-plus"
+                                                                                               aria-hidden="true"></i></a>
+                            </div>
+                            <div class="col-sm-5">
+                                <a class="btn btn-small btn-primary" style="width: 95%">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" ng-cloak>
+                        <md-content>
+                            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                                <md-tab label="Description">
+                                    <md-content class="md-padding">
+                                        <p>Cooked by: <a> {{DishCtrl.kitchen.name}} </a></p>
+                                        <br/>
+                                        <p class="card-text">{{DishCtrl.dish.description}}</p>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Ingredients">
+                                    <md-content class="md-padding">
+                                        <p>salt 1g</p>
+                                        <p>chicken 500g</p>
+                                        <p>water 500ml</p>
+                                        <p>2 eggs</p>
+                                        <p>angmotti</p>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-12"><br/>
+                        <strong>Reviews / Ratings ({{RatingCtrl.totalItems}})</strong>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <ratings></ratings>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            Popular Posts
+            <div class="row">
+                <div class="col-md-10">
+                    <img ui-sref="dish.show({id: {{DishCtrl.dish.id}}})" ng-src="{{DishCtrl.dish.medias[0].url}}"
+                         alt="Card image cap" style="width:100%;">
+                    <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
+                    <h6 class="card">${{DishCtrl.dish.price}}</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <img ui-sref="dish.show({id: {{DishCtrl.dish.id}}})" ng-src="{{DishCtrl.dish.medias[0].url}}"
+                         alt="Card image cap" style="width:100%;">
+                    <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
+                    <h6 class="card">${{DishCtrl.dish.price}}</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <img ui-sref="dish.show({id: {{DishCtrl.dish.id}}})" ng-src="{{DishCtrl.dish.medias[0].url}}"
+                         alt="Card image cap" style="width:100%;">
+                    <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
+                    <h6 class="card">${{DishCtrl.dish.price}}</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <img ui-sref="dish.show({id: {{DishCtrl.dish.id}}})" ng-src="{{DishCtrl.dish.medias[0].url}}"
+                         alt="Card image cap" style="width:100%;">
+                    <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
+                    <h6 class="card">${{DishCtrl.dish.price}}</h6>
+                </div>
+            </div>
         </div>
     </div>
 </div>

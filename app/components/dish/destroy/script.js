@@ -4,8 +4,8 @@ angular.module('dish.destroy', [
     'dishes.api',
 ])
 
-    .controller('DishDestroyController', ['$state', '$stateParams', 'DishesAPI', '$scope',
-        function ($state, $stateParams, DishesAPI, $scope) {
+    .controller('DishDestroyController', ['$state', '$stateParams', 'DishesAPI', 'devHelper',
+        function ($state, $stateParams, DishesAPI, devHelper) {
 
             /*********************
              *    Private Variables
@@ -29,12 +29,12 @@ angular.module('dish.destroy', [
              *    Public Functions
              **********************/
             function _destroyDish() {
-                console.log(dishId);
+                devHelper.log(dishId);
                 //TODO: Probably better to use ng directive to handle confirmation popup
                 if (confirm("Do you want to delete the dish?")) {
                     DishesAPI.destroy(dishId)
                         .then(function (response) {
-                            $state.go('dish.listInfinite');
+                            $state.go('dish.list');
                         }, function (response) {
                             // TODO handle error state
                             console.error(response);

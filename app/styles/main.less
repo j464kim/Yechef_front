@@ -1,7 +1,38 @@
-
 @import "../../bower_components/font-awesome/less/font-awesome";
+
 @fa-font-path: "../../bower_components/font-awesome/fonts";
 
-@import 'less/mixins';
+@import 'less/style-guide/main';
+@import 'less/pages/main';
+@import 'less/icon';
+@import 'less/color-scheme';
+@import 'less/image';
+@import 'less/form';
+@import 'less/font';
+@import 'less/group';
 
 @import 'less/directives/loader';
+@import 'less/directives/rating';
+
+body {
+  padding-top: 70px;
+}
+
+.angular-google-map {
+  height: 90%;
+}
+
+.angular-google-map-container {
+  height: 100%;
+  position: fixed;
+  top: 0;
+}
+
+.row-no-padding {
+  margin-left: 0;
+  margin-right: 0;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

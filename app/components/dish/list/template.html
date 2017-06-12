@@ -1,14 +1,126 @@
 <div class="container" id="dishList" loader>
-    <div class="row">
-        <div class="col-md-4" ng-repeat="dish in DishCtrl.dishes">
-            <img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
+    <div class="col-sm-8">
+        <div class="row">
+            <button type="button" class="btn btn-default"
+                    ng-click="DishCtrl.isSearchCollapsed = !DishCtrl.isSearchCollapsed">Refine Search
+                <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
+                <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
+            </button>
+            <div uib-collapse="DishCtrl.isSearchCollapsed">
+                <md-content class="md-padding">
+                    <div class="col-sm-3">
+                        <div class="row no-gutters">
+                            <md-input-container>
+                                <input type="text" id="food">
+                                <label for="food">Food (ex. Seafood)</label>
+                                <br/> <br/><br/>
+                                <md-checkbox ng-model="sctrl.deliverOnly">Deliver Only</md-checkbox>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="row no-gutters">
+                            <md-input-container>
+                                <input type="text" id="City">
+                                <label for="City">City</label>
+                                <br/><br/>
+                                <md-slider-container>
+                                    <md-slider flex ng-init="sctrl.distance=0" min="0" max="10"
+                                               ng-model="sctrl.distance"
+                                               aria-label="distance"
+                                               id="distance-slider">
+                                    </md-slider>
+                                </md-slider-container>
+                                <span>Distance: {{sctrl.distance}} km</span>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <md-input-container>
+                            <input type="text" id="price">
+                            <label for="price">Price limit</label>
+                            <br/><br/><br/>
+                            <md-checkbox ng-model="sctrl.vegan">Vegan</md-checkbox>
+                            <md-checkbox ng-model="sctrl.vegetarian">Vegetarian</md-checkbox>
+                        </md-input-container>
+                    </div>
+                    <div class="col-sm-3">
+                        <div ng-controller="SearchCtrl as sctrl" layout="column" ng-cloak>
+                            <form ng-submit="$event.preventDefault()">
+                                <md-autocomplete
+                                        ng-disabled="sctrl.isDisabled"
+                                        md-no-cache="true"
+                                        md-selected-item="sctrl.selectedItem"
+                                        md-search-text-change="sctrl.searchTextChange(sctrl.searchText)"
+                                        md-search-text="sctrl.searchText"
+                                        md-selected-item-change="sctrl.selectedItemChange(item)"
+                                        md-items="item in sctrl.querySearch(sctrl.searchText)"
+                                        md-item-text="item.display"
+                                        md-min-length="0"
+                                        placeholder="Choose Nationality">
+                                    <md-item-template>
+                                <span md-highlight-text="sctrl.searchText"
+                                      md-highlight-flags="^i">{{item.display}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No states matching "{{sctrl.searchText}}" were found.
+                                        <a ng-click="sctrl.newState(sctrl.searchText)">Create a new one!</a>
+                                    </md-not-found>
+                                </md-autocomplete>
+                                <br/><br/>
+                                <md-checkbox ng-model="sctrl.glutenFree">Gluten-free</md-checkbox>
+                            </form>
+                        </div>
+                    </div>
+                </md-content>
 
-            <h4 class="card-title">{{dish.name}}</h4>
-            <p class="card-text">{{dish.description}}</p>
-            <a ui-sref="dish.show({id: {{dish.id}}})" class="btn btn-primary">View Detail</a>
+                <div class="row no-gutters">
+                    <div class="col-sm-3">
+                        <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline">
+                            <md-option value="hottest">Hottest</md-option>
+                            <md-option value="price_asc">Price (Ascending)</md-option>
+                            <md-option value="price_dsc">Price (Descending)</md-option>
+                            <md-option value="taste">Taste</md-option>
+                            <md-option value="visual">Visual</md-option>
+                            <md-option value="quantity">Quantity</md-option>
+                        </md-select>
+                    </div>
+                    <div class="col-sm-push-7 col-sm-3">
+                        <md-button class="md-raised md-warn">Search</md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row dish_create">
+            <a ui-sref="dish.create" class="btn btn-warning">Dish Create (TO REMOVE)</a>
+        </div>
+        <div class="row">
+            <div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
+                <a ui-sref="dish.show({id: {{dish.id}}})">
+                    <div class="row">
+                        <img ng-src="{{dish.medias[0].url}}" alt="Card image cap"
+                             style="width:90%;">
+                    </div>
+                    <div class="row">
+                        <h4 class="card-title">
+                            {{dish.name}}</h4>
+                        <h6 class="card">${{dish.price}}</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+                <!--TODO: Change items-per-page to 18-->
+                <ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" items-per-page="8"
+                    boundary-links="true" force-ellipses="true" max-size="5"
+                    ng-change="DishCtrl.getDishes()"></ul>
+            </div>
         </div>
     </div>
-</div>
 
-<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"
-    ng-change="DishCtrl.getDishes()"></ul>
+    <div class="col-sm-4" style="position: fixed; right:0; top:5; height: 100vh">
+        <ui-gmap-google-map center='DishCtrl.map.center' zoom='DishCtrl.map.zoom'
+                            options="DishCtrl.map.options"></ui-gmap-google-map>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div id="RatingList" loader>
+    <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-8">-->
+    <!--<ng-include src="'shared/rating/create/ratingCreate.html'"></ng-include>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="row" ng-repeat="rating in RatingCtrl.ratings">
+        <br>
+        <div class="row">
+            <div class="col-sm-1">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div>
+                <strong>(User) {{rating.user_id}} </strong>
+            </div>
+            <div class="col-sm-11">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="col-md-10">
+                            <div class="col-md-3">
+                                <div class="col-md-1">
+                                    Taste:
+                                </div>
+                                <div class="col-md-11">
+                                    <ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="col-md-1">
+                                    Visual:
+                                </div>
+                                <div class="col-md-11">
+                                    <ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-1">
+                                    Quantity:
+                                </div>
+                                <div class="col-md-11">
+                                    <ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pull-right">
+                                <button class="btn btn-default" ng-click="textBtnForm.$show()"
+                                        ng-hide="textBtnForm.$visible">
+                                    edit
+                                </button>
+                                <a ng-click="RatingCtrl.destroyRating(rating.id)" class="btn">Delete</a>
+                            </div>
+                        </div>
+                        <span class="text-muted">
+                                {{rating.updated_at}}
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <span e-style="width: 343%;" editable-textarea="rating.comment" e-form="textBtnForm"
+                              onbeforesave="RatingCtrl.updateComment(rating, $data)">
+                    {{rating.comment || 'empty'}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <a class="btn btn-primary" ng-click="RatingCtrl.getRatings()">Load More</a>
+    </div>
+</div>
+

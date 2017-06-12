@@ -1,24 +1,27 @@
 'use strict';
 
 angular.module('dish.create', [
-	'dishes.api',
+    'dishes.api',
 ])
 
-	.controller('DishCreateController', ['$state', 'DishesAPI',
-		function ($state, DishesAPI) {
+	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout',
+		function ($state, DishesAPI, devHelper, config, $q, $timeout) {
 
-			/*********************
+      /*********************
 			 *    Private Variables
 			 **********************/
 				// reference to this controller
 			var that = this;
 
+			this.nationalities = _loadNationalities();
+			this.querySearch = querySearch;
+
 			function _createDish() {
 				//TODO: Add User permission so that only registered users can create dish
-				DishesAPI.create(that.name, that.description)
+				DishesAPI.create(that.dish)
 					.then(function (response) {
 						var newDish = response;
-						console.log(newDish);
+                        devHelper.log(newDish);
 
 						_uploadDishMedia(newDish);
 
@@ -42,13 +45,52 @@ angular.module('dish.create', [
 				dropzoneInstance.processQueue();
 			}
 
+            /**
+             * Search for nationalities... use $timeout to simulate
+             * remote dataservice call.
+             */
+            function querySearch(query) {
+                var results = query ? that.nationalities.filter(createFilterFor(query)) : that.nationalities,
+                    deferred;
+                deferred = $q.defer();
+                $timeout(function () {
+                    deferred.resolve(results);
+                }, Math.random() * 1000, false);
+                return deferred.promise;
+            }
+
+            /**
+             * Build `states` list of key/value pairs
+             */
+            function _loadNationalities() {
+
+                return (config.nationalities).split(/, +/g).map(function (nationality) {
+                    return {
+                        value: nationality.toLowerCase(),
+                        display: nationality
+                    };
+                });
+            }
+
+            /**
+             * Create filter function for a query string
+             */
+            function createFilterFor(query) {
+                var lowercaseQuery = angular.lowercase(query);
+
+                return function filterFn(nationality) {
+                    return (nationality.value.indexOf(lowercaseQuery) === 0);
+                };
+
+            }
+
 			/*********************
 			 *    Public Functions
 			 **********************/
 			this.createDish = _createDish;
 			this.cancel = function cancel() {
 				if (confirm("Do you want to go back?")) {
-					$state.go('dish.listInfinite');
+					$state.go('dish.list');
 				}
 			};
 

@@ -4,8 +4,8 @@ angular.module('dish.update', [
     'dishes.api',
 ])
 
-    .controller('DishUpdateController', ['$state', '$stateParams', 'DishesAPI',
-        function ($state, $stateParams, DishesAPI) {
+    .controller('DishUpdateController', ['$state', '$stateParams', 'DishesAPI', 'config', '$q', '$timeout',
+        function ($state, $stateParams, DishesAPI, config, $q, $timeout) {
 
             /*********************
              *    Private Variables
@@ -17,6 +17,8 @@ angular.module('dish.update', [
             /*********************
              *    Public Variables
              **********************/
+            this.nationalities = _loadNationalities();
+            this.querySearch = querySearch;
 
             /*********************
              *    Private Functions
@@ -30,8 +32,6 @@ angular.module('dish.update', [
                 DishesAPI.show(dishId)
                     .then(function (response) {
                         that.dish = response;
-                        that.name = response.name;
-                        that.description = response.description;
                     }, function (response) {
                         // TODO handle error state
                         console.error(response);
@@ -39,13 +39,52 @@ angular.module('dish.update', [
             }
 
             function _updateDish() {
-                DishesAPI.update(that.dish.id, that.name, that.description)
+                DishesAPI.update(that.dish, that.dish.id)
                     .then(function (response) {
                         $state.go('dish.show', {"id": response.id});
                     }, function (response) {
                         //     TODO handle error state
                         console.error(response);
                     });
+            }
+
+            /**
+             * Search for nationalities... use $timeout to simulate
+             * remote dataservice call.
+             */
+            function querySearch(query) {
+                var results = query ? that.nationalities.filter(createFilterFor(query)) : that.nationalities,
+                    deferred;
+                deferred = $q.defer();
+                $timeout(function () {
+                    deferred.resolve(results);
+                }, Math.random() * 1000, false);
+                return deferred.promise;
+            }
+
+            /**
+             * Build `states` list of key/value pairs
+             */
+            function _loadNationalities() {
+
+                return (config.nationalities).split(/, +/g).map(function (nationality) {
+                    return {
+                        value: nationality.toLowerCase(),
+                        display: nationality
+                    };
+                });
+            }
+
+            /**
+             * Create filter function for a query string
+             */
+            function createFilterFor(query) {
+                var lowercaseQuery = angular.lowercase(query);
+
+                return function filterFn(nationality) {
+                    return (nationality.value.indexOf(lowercaseQuery) === 0);
+                };
+
             }
 
             /*********************

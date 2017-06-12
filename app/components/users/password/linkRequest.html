@@ -5,8 +5,8 @@
                 <div class="panel-heading">Reset Password</div>
                 <div class="panel-body">
 
-                    <form class="form-horizontal" role="form" method="POST">
-
+                    <form class="form-horizontal" ng-submit="PasswordCtrl.sendResetLinkEmail()" role="form"
+                          method="POST">
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -18,16 +18,17 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button ng-click="PasswordCtrl.sendResetLinkEmail()" type="submit"
-                                        class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     Send Password Reset Link
                                 </button>
                             </div>
                         </div>
                     </form>
+
                     <button ui-sref="user.resetPassword" class="btn btn-primary">
                         Go to reset password
                     </button>
+
                 </div>
             </div>
         </div>

@@ -24,6 +24,7 @@ angular.module('kitchen.show', [
 
 			function _init() {
 				_showKitchen();
+				_getkitchenAdmins();
 			}
 
 			function _showKitchen() {
@@ -33,6 +34,16 @@ angular.module('kitchen.show', [
 					that.media = response.medias[0].url;
 				}, function (response) {
 					// TODO handle error state
+					console.error(response);
+				});
+			}
+
+			function _getkitchenAdmins() {
+				KitchenAPI.admins(kitchenId).then(function (response) {
+					console.log(response);
+					that.kitchenAdmins = response;
+				}, function (response) {
+					//TODO handle error state
 					console.error(response);
 				});
 			}

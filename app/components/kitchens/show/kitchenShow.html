@@ -53,17 +53,17 @@
     </div>
     <div class="col-md-6">
 
-        <div class="pull-right owner-info">
+        <div class="pull-right owner-info" ng-repeat="person in KitchenCtrl.kitchenAdmins">
             <div>
                 <button>Message</button>
             </div>
             <img class="kitchen-owner"
                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
-            <h3 id="kitchenOwnerName">JunGwon Kim</h3>
+            <h3 id="kitchenOwnerName">{{person.first_name}} {{person.last_name}}</h3>
             <p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
         </div>
 
-        <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Edit
+        <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})" class="btn btn-default btn-sm btn-edit">Manage My Kitchen
         </button>
         <span ng-controller="KitchenDestroyController as vm">
                     <button ng-click="vm.destroyKitchen()" class="btn btn-danger btn-sm btn-delete">Delete</button>

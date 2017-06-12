@@ -37,7 +37,7 @@ angular.module('user.kitchen', [
 		};
 
 		function _getkitchenAdmins() {
-			KitchenAPI.show(that.myCurrentKitchenId + "/admins").then(function (response) {
+			KitchenAPI.admins(that.myCurrentKitchenId).then(function (response) {
 				console.log(response);
 				that.kitchenAdmins = response;
 			}, function (response) {

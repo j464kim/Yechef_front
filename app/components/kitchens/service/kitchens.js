@@ -99,12 +99,28 @@ angular.module('kitchen.api', [
 				});
 			}
 
+			function admins(kitchenId) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.show(
+						{
+							id: kitchenId + "/admins"
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				list: list,
 				show: show,
 				create: create,
 				update: update,
-				destroy: destroy
+				destroy: destroy,
+				admins: admins,
 			};
 		}
 	]);

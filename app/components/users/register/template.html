@@ -80,11 +80,12 @@
                         <md-input-container class="md-block">
                             <label for="userConfirmPassword">Confirm Password</label>
                             <input id="userConfirmPassword" type="password" name="confirmPassword"
-                                   ng-model="RegisterCtrl.newUser.password_confirmation" ng-minlength="6" required/>
+                                   ng-model="RegisterCtrl.newUser.password_confirmation"
+                                   compare-to="RegisterCtrl.newUser.password" required/>
                             <div class="field-message" ng-messages="form.confirmPassword.$error"
                                  ng-if='form.confirmPassword.$touched' ng-cloak>
                                 <div ng-message="required">Password Confirmation is required</div>
-                                <div ng-message="minlength">Password Confirmation must have minimum 6 characters</div>
+                                <div ng-message="compareTo">Password doesn't match</div>
                             </div>
                         </md-input-container>
                     </div>

@@ -3,7 +3,26 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper) {
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI) {
+		var that = this;
+
+		this.myCurrentKitchen = {};
+		this.myCurrentKitchen.name = "ANG";
+		function _init() {
+			_getMyKitchens();
+		}
+
+		function _getMyKitchens() {
+            UserAPI.list('getMyKitchens').then(
+                function (response) {
+                    devHelper.log(response);
+                    that.myKitchens = response;
+                }, function (response) {
+                    // TODO handle error state ie. front end display
+                    console.error(response);
+                });
+        };
+
 		$scope.people = [
 			{ name: 'Janet Perkins', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk', newMessage: true },
 			{ name: 'Mary Johnson', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa345vyMQ2BOYz7ih_ZDsRjaX7JWACP9oqEw2Bv8m5bKsYlO7Z', newMessage: false },
@@ -20,6 +39,8 @@ angular.module('user.kitchen', [
 					.targetEvent(event)
 			);
 		};
+
+		_init();
 
 	})
 

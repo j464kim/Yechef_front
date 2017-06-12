@@ -1,4 +1,4 @@
-<div ng-controller="userMainController" layout="column" style="height:600px;" ng-cloak>
+<div ng-controller="userKitchenController as UkCtrl" layout="column" style="height:600px;" ng-cloak>
 
     <section layout="row" flex>
 
@@ -17,9 +17,13 @@
                 </div>
 
                 <div class="select-kitchen">
-                    <select>
-                        <option selected="selected"><a>1st Kitchen (Toronto)</a></option>
-                        <option><a>2nd kitchen (Montreal)</a></option>
+                    <span ng-if="UkCtrl.myKitchens === undefined">Loading Kitchens...</span>
+                    <md-button class="md-raised md-warn" ui-sref="kitchen.create" ng-if="UkCtrl.myKitchens.length == 0">
+                        Create Your First Kitchen!
+                    </md-button>
+                    <select name="myCurrentKitchen" ng-if="UkCtrl.myKitchens.length > 0"
+                            ng-model="UkCtrl.myCurrentKitchen" ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens">
+                        <option value="" disabled>Select Kitchen to manage</option>
                     </select>
                 </div>
             </md-toolbar>

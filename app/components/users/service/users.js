@@ -17,10 +17,12 @@ angular.module('user.api', [])
     .service('UserAPI', ['$q', 'UserResource',
         function ($q, UserResource) {
 
-            function list(email, password) {
+            function list(option) {
 
                 return $q(function (resolve, reject) {
-                    UserAPI.list().then(function (response) {
+                    UserResource.list({
+                        id: option,
+                    }).$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {
                         console.log(seconds, expireAt);

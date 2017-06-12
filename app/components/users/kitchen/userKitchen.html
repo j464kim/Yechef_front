@@ -23,7 +23,8 @@
                     </md-button>
                     <select name="myCurrentKitchen" ng-if="UkCtrl.myKitchens.length > 0"
                             ng-model="UkCtrl.myCurrentKitchen"
-                            ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens">
+                            ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens"
+                            ng-selected="UkCtrl.preSelect(myKitchen.id)">
                         <option value="" disabled>Select Kitchen</option>
                     </select>
                 </div>

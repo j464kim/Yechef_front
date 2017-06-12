@@ -19,30 +19,30 @@
 <hr>
 <div>
     <label class="h3">My Kitchen</label>
-    <button ui-sref="user.kitchen.general.edit">Edit</button>
+    <button ui-sref="user.kitchen.general.edit" ng-click="UkCtrl.prepareEdit()">Edit</button>
 </div>
 <div class="col-md-8">
-    <img class="kitchen-image" src="http://hbu.h-cdn.co/assets/16/18/980x666/mercury-kitchen.jpg">
+    <img class="kitchen-image" ng-src="{{UkCtrl.myCurrentKitchen.medias[0].url}}">
 </div>
 <div class="col-md-4">
     <div class="ktichenName">
-        <label>Name:</label>
-        <span>Choppa's First Kitchen</span>
+        <label>Kitchen Name:</label> <br/>
+        <span>{{UkCtrl.myCurrentKitchen.name}}</span>
     </div>
     <div class="kitchenPhone">
-        <label>Phone:</label>
-        <span>514-898-8523</span>
+        <label>Phone:</label> <br/>
+        <span>{{UkCtrl.myCurrentKitchen.phone}}</span>
     </div>
     <div class="kitchenAddress">
-        <label>Address:</label>
-        <span>168 King St. Apt1102, Waterloo ON CANADA</span>
+        <label>Address:</label> <br/>
+        <span>{{UkCtrl.myCurrentKitchen.address}}</span>
     </div>
     <div class="kitchenEmail">
-        <label>Email:</label>
-        <span>kwnsrnjs12@gmail.com</span>
+        <label>Email:</label> <br/>
+        <span>{{UkCtrl.myCurrentKitchen.email}}</span>
     </div>
     <div class="kitchenDescription">
-        <label>Description:</label>
-        <span>angmotti kimotti ang!</span>
+        <label>Description:</label> <br/>
+        <span>{{UkCtrl.myCurrentKitchen.description}}</span>
     </div>
 </div>

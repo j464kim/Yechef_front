@@ -2439,6 +2439,11 @@ h6 {
   border-radius: 50%;
   margin: 0 auto;
 }
+.image-show {
+  height: 100%;
+  width: 100%;
+  margin: 1em 0 2em 0;
+}
 .full-width {
   width: 100%;
 }

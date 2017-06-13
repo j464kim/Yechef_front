@@ -23,11 +23,11 @@ angular.module('reaction', [
 				var reactionable = $scope.reactionable;
 
 				// figure out which eloquent model it belongs to
-				var reactionable_type = genericService.getModelType($state);
+				var reactionableInfo = genericService.getModelType($state);
 
 				var reactionObj = {
 					reactionableId: reactionable.id,
-					reactionableType: reactionable_type,
+					reactionableType: reactionableInfo['type'],
 					// TODO: set it to 1 for now until (1) is done
 					userId: 1
 				};
@@ -36,7 +36,7 @@ angular.module('reaction', [
 				 *  Public Variables
 				 **********************/
 
-				$scope.TYPE = modelName;
+				$scope.TYPE = reactionableInfo['name'];
 				$scope.DISLIKE = constant.DISLIKE;
 				$scope.LIKE = constant.LIKE;
 				$scope.FORK = constant.FORK;

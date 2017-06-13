@@ -7,7 +7,12 @@ angular.module('helper', [])
 				var modelName = stateName.split(".")[0];
 				var modelType = 'App\\Models\\' + modelName;
 
-				return modelType;
+				var modelInfo = {
+					'name': modelName,
+					'type': modelType,
+				}
+
+				return modelInfo;
 			}
 		}
 

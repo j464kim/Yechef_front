@@ -43,11 +43,11 @@ angular.module('kitchen.create', [
 				var dropzoneInstance = Dropzone.forElement("#dropzone");
 
 				// figure out the model type to pass into dropzone controller
-				var mediable_type = genericService.getModelType($state);
+				var mediableInfo = genericService.getModelType($state);
 
 				dropzoneInstance.on("sending", function (file, xhr, formData) {
 					formData.append('mediable_id', response.id);
-					formData.append('mediable_type', mediable_type);
+					formData.append('mediable_type', mediableInfo['type']);
 				});
 
 				dropzoneInstance.processQueue();

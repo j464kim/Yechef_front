@@ -21,14 +21,18 @@ angular.module('kitchen.destroy', [
 			 **********************/
 
 			function _destroyKitchen() {
-				KitchenAPI.destroy(kitchenId).then(function (response) {
-                    devHelper.log(response);
-					that.kitchen = response;
-					$state.go('kitchen.list');
-				}, function (response) {
-					// TODO handle error state
-					console.error(response);
-				});
+				if (confirm("Do you want to delete the dish?")) {
+					KitchenAPI.destroy(kitchenId).then(function (response) {
+						devHelper.log(response);
+						that.kitchen = response;
+						$state.go('kitchen.list');
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+				} else {
+				}
+
 			}
 
 			/*********************

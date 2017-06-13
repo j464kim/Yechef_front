@@ -8,8 +8,11 @@
 
 <md-list>
     <md-list-item ng-repeat="person in UkCtrl.kitchenAdmins" ng-click="goToPerson(person.name, $event)" class="noright">
-        <img alt="{{ person.email }}" ng-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk" class="md-avatar"/>
-        <p> <span ng-if="person.pivot.verified == 0">(Pending...)</span> {{ person.first_name }} {{ person.last_name }}</p>
+        <img alt="{{ person.email }}"
+             ng-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk"
+             class="md-avatar"/>
+        <p><span ng-if="person.pivot.verified == 0">(Pending...)</span> {{ person.first_name }} {{ person.last_name }}
+        </p>
         <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
         <i class="material-icons md-24 md-secondary md-hue-3">message</i>
         <i class="material-icons md-24 md-secondary md-hue-3">phone</i>
@@ -17,32 +20,48 @@
     </md-list-item>
 </md-list>
 <hr>
-<div>
-    <label class="h3">My Kitchen</label>
-    <button ui-sref="user.kitchen.general.edit({myCurrentKitchenId: UkCtrl.myCurrentKitchen.id})" ng-click="UkCtrl.prepareEdit()"}>Edit</button>
+<div class="row">
+    <div class="col-md-12">
+        <label class="h3">My Kitchen</label>
+        <md-button flex="1" class="md-raised md-primary"
+                   ui-sref="user.kitchen.general.edit({myCurrentKitchenId: UkCtrl.myCurrentKitchen.id})"
+                   ng-click="UkCtrl.prepareEdit()">Edit
+        </md-button>
+        <md-button flex="1" class="md-raised" ui-sref="kitchen.show({id: UkCtrl.myCurrentKitchen.id})">View</md-button>
+    </div>
+    <div class="col-md-8">
+        <img class="kitchen-image" ng-src="{{UkCtrl.myCurrentKitchen.medias[0].url}}">
+    </div>
+    <div class="col-md-4">
+        <div class="ktichenName">
+            <label>Kitchen Name:</label> <br/>
+            <span>{{UkCtrl.myCurrentKitchen.name}}</span>
+        </div>
+        <div class="kitchenPhone">
+            <label>Phone:</label> <br/>
+            <span>{{UkCtrl.myCurrentKitchen.phone}}</span>
+        </div>
+        <div class="kitchenAddress">
+            <label>Address:</label> <br/>
+            <span>{{UkCtrl.myCurrentKitchen.address}}</span>
+        </div>
+        <div class="kitchenEmail">
+            <label>Email:</label> <br/>
+            <span>{{UkCtrl.myCurrentKitchen.email}}</span>
+        </div>
+        <div class="kitchenDescription">
+            <label>Description:</label> <br/>
+            <span>{{UkCtrl.myCurrentKitchen.description}}</span>
+        </div>
+    </div>
 </div>
-<div class="col-md-8">
-    <img class="kitchen-image" ng-src="{{UkCtrl.myCurrentKitchen.medias[0].url}}">
-</div>
-<div class="col-md-4">
-    <div class="ktichenName">
-        <label>Kitchen Name:</label> <br/>
-        <span>{{UkCtrl.myCurrentKitchen.name}}</span>
-    </div>
-    <div class="kitchenPhone">
-        <label>Phone:</label> <br/>
-        <span>{{UkCtrl.myCurrentKitchen.phone}}</span>
-    </div>
-    <div class="kitchenAddress">
-        <label>Address:</label> <br/>
-        <span>{{UkCtrl.myCurrentKitchen.address}}</span>
-    </div>
-    <div class="kitchenEmail">
-        <label>Email:</label> <br/>
-        <span>{{UkCtrl.myCurrentKitchen.email}}</span>
-    </div>
-    <div class="kitchenDescription">
-        <label>Description:</label> <br/>
-        <span>{{UkCtrl.myCurrentKitchen.description}}</span>
+
+<br/>
+<div class="row">
+    <hr/>
+    <div class="col-md-12">
+    <span ng-controller="KitchenDestroyController as vm">
+        <md-button ng-click="vm.destroyKitchen()" class="md-raised md-warn">Close the kitchen</md-button>
+    </span>
     </div>
 </div>

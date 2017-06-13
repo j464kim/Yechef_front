@@ -55,9 +55,6 @@
                 <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})"
                         class="btn btn-default btn-sm btn-edit">Manage My Kitchen
                 </button>
-                <span ng-controller="KitchenDestroyController as vm">
-                    <button ng-click="vm.destroyKitchen()" class="btn btn-danger btn-sm btn-delete">Delete</button>
-                </span>
                 <!--Must load it "after" kitchen data is available-->
                 <div ng-if="KitchenCtrl.kitchen" class="pull-right">
                     <reaction-button reactionable="KitchenCtrl.kitchen"></reaction-button>

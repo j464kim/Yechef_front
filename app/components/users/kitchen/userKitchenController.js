@@ -3,7 +3,7 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams) {
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -13,6 +13,7 @@ angular.module('user.kitchen', [
 		function _init() {
 			_getMyKitchens();
 			_getkitchenAdmins();
+			_getUsers();
 		}
 
 		$scope.$watch(function () {
@@ -46,6 +47,21 @@ angular.module('user.kitchen', [
 			});
 		}
 
+		function _getUsers() {
+			UserAPI.list('list').then(
+				function (response) {
+					devHelper.log(response);
+					that.users = response;
+					that.users = that.users.map(function (user) {
+						user.value = user.email.toLowerCase();
+						return user;
+					});
+				}, function (response) {
+					//TODO handle error state
+					console.error(response);
+				});
+		};
+
 		function _updateKitchen() {
 			KitchenAPI.update(that.myCurrentKitchenToEdit, that.myCurrentKitchen.id).then(function (response) {
 				var updatedKitchen = response;
@@ -62,6 +78,32 @@ angular.module('user.kitchen', [
 				console.error(response);
 			});
 		}
+
+		/**
+		 * Search for repos... use $timeout to simulate
+		 * remote dataservice call.
+		 */
+		function querySearch(query) {
+			var results = query ? that.users.filter(createFilterFor(query)) : that.users,
+				deferred;
+			deferred = $q.defer();
+			$timeout(function () {
+				deferred.resolve(results);
+			}, Math.random() * 1000, false);
+			return deferred.promise;
+		}
+
+
+		/**
+		 * Create filter function for a query string
+		 */
+		function createFilterFor(query) {
+			var lowercaseQuery = angular.lowercase(query);
+			return function filterFn(item) {
+				return (item.value.indexOf(lowercaseQuery) === 0);
+			};
+		};
+
 
 		this.updateKitchen = _updateKitchen;
 		this.prepareEdit = _prepareEdit;
@@ -83,17 +125,12 @@ angular.module('user.kitchen', [
 			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id, 'myCurrentKitchen': that.myCurrentKitchen});
 		};
 
-
-		$scope.doSecondaryAction = function (event) {
-			$mdDialog.show(
-				$mdDialog.alert()
-					.title('Secondary Action')
-					.textContent('Secondary actions can be used for one click actions')
-					.ariaLabel('Secondary click demo')
-					.ok('Neat!')
-					.targetEvent(event)
-			);
+		this.addAdmin = function () {
+			console.log(that.adminToAdd);
+			alert(that.adminToAdd + that.myCurrentKitchen.id);
 		};
+
+		that.querySearch = querySearch;
 
 		_init();
 

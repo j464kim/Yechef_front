@@ -2,16 +2,42 @@
 <hr>
 <div class="row">
     <label class="h3">Owner</label>
-    <input type="text" class="owenerEmail">
-    <button type="submit">Add</button>
+    <div layout="column" ng-cloak>
+        <md-content layout-padding layout="column">
+            <form ng-submit="$event.preventDefault()">
+                <div layout="row">
+                    <md-autocomplete flex
+                            md-selected-item="UkCtrl.adminToAdd"
+                            md-search-text="UkCtrl.searchAdminText"
+                            md-items="item in UkCtrl.querySearch(UkCtrl.searchAdminText)"
+                            md-item-text="item.email"
+                            md-min-length="1"
+                            placeholder="Enter Email"
+                            md-menu-class="autocomplete-custom-template">
+                        <md-item-template>
+                        <span class="item-title">
+                            <span> {{item.email}} </span>
+                        </span>
+                            <span class="item-metadata">
+                            <span>
+                                <strong>  ({{item.first_name}} {{item.last_name}})</strong>
+                            </span>
+                        </span>
+                        </md-item-template>
+                    </md-autocomplete>
+                    <md-button style="height:111%; margin-top:0;" class="md-raised md-primary" ng-click="UkCtrl.addAdmin()">Add</md-button>
+                </div>
+            </form>
+        </md-content>
+    </div>
     <md-list>
         <md-list-item ng-repeat="person in UkCtrl.kitchenAdmins" ng-click="goToPerson(person.name, $event)"
                       class="noright">
             <img alt="{{ person.email }}"
                  ng-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk"
                  class="md-avatar"/>
-            <p><span ng-if="person.pivot.verified == 0">(Pending...)</span> {{ person.first_name }} {{ person.last_name
-                }}
+            <p><span ng-if="person.pivot.verified == 0">[Pending...]</span> <strong>{{ person.first_name }} {{ person.last_name
+                }}</strong>    ({{person.email}})
             </p>
             <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
             <i class="material-icons md-24 md-secondary md-hue-3">message</i>

@@ -14,7 +14,7 @@ angular.module('reaction', [
 			},
 			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
-			controller: function ($scope, ReactionAPI, $state, devHelper) {
+			controller: function ($scope, ReactionAPI, $state, devHelper, genericService) {
 
 				/*********************
 				 *  Private Variables
@@ -23,9 +23,7 @@ angular.module('reaction', [
 				var reactionable = $scope.reactionable;
 
 				// figure out which eloquent model it belongs to
-				var stateName = $state.current.name;
-				var modelName = stateName.split(".")[0];
-				var reactionable_type = 'App\\Models\\' + modelName;
+				var reactionable_type = genericService.getModelType($state);
 
 				var reactionObj = {
 					reactionableId: reactionable.id,

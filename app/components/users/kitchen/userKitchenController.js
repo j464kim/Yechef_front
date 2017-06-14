@@ -38,8 +38,8 @@ angular.module('user.kitchen', [
 		};
 
 		function _getkitchenAdmins() {
-			KitchenAPI.admins(that.myCurrentKitchenId).then(function (response) {
-				console.log(response);
+			KitchenAPI.getAdmins(that.myCurrentKitchenId).then(function (response) {
+				devHelper.log(response);
 				that.kitchenAdmins = response;
 			}, function (response) {
 				//TODO handle error state
@@ -126,8 +126,26 @@ angular.module('user.kitchen', [
 		};
 
 		this.addAdmin = function () {
-			console.log(that.adminToAdd);
-			alert(that.adminToAdd + that.myCurrentKitchen.id);
+			devHelper.log(that.adminToAdd);
+			KitchenAPI.addAdmin(that.adminToAdd.id, that.myCurrentKitchenId).then(function (response) {
+				devHelper.log(response);
+				_getkitchenAdmins();
+			}, function (response) {
+				//TODO handle error state
+				console.error(response);
+			});
+		};
+
+		this.removeAdmin = function (adminId) {
+			if (confirm("Remove this admin??")) {
+				KitchenAPI.removeAdmin(adminId, that.myCurrentKitchenId).then(function (response) {
+					devHelper.log(response);
+					_getkitchenAdmins();
+				}, function (response) {
+					//TODO handle error state
+					console.error(response);
+				});
+			}
 		};
 
 		that.querySearch = querySearch;

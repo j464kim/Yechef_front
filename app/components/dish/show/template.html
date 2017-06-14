@@ -7,6 +7,7 @@
                         <div ng-if="DishCtrl.dish" class="pull-left">
                             <!--Must load it "after" Dish data is available-->
                             <reaction-button reactionable="DishCtrl.dish"></reaction-button>
+
                         </div>
                         <a><i class="fa fa-share-alt fa-x"></i></a>
                         <a ui-sref="dish.update({id: DishCtrl.dish.id})"><i class="fa fa-edit fa-x"></i></a>

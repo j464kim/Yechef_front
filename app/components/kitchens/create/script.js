@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper',
-		function ($state, KitchenAPI, devHelper) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService',
+		function ($state, KitchenAPI, devHelper, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -42,9 +42,12 @@ angular.module('kitchen.create', [
 				// instantiate Dropzone
 				var dropzoneInstance = Dropzone.forElement("#dropzone");
 
+				// figure out the model type to pass into dropzone controller
+				var mediableInfo = genericService.getModelType($state);
+
 				dropzoneInstance.on("sending", function (file, xhr, formData) {
 					formData.append('mediable_id', response.id);
-					formData.append('mediable_type', 'App\\Models\\Kitchen');
+					formData.append('mediable_type', mediableInfo['type']);
 				});
 
 				dropzoneInstance.processQueue();

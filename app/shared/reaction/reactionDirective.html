@@ -1,6 +1,12 @@
 <div>
-    <span ng-if="!liked"><i class="large-icon fa fa-thumbs-o-up" ng-click="addReaction(LIKE)"></i>{{numLikes}}</span>
-    <span ng-if="liked"><i class="large-icon fa fa-thumbs-up" ng-click="removeReaction(LIKE)"></i>{{numLikes}}</span>
-    <span ng-if="!disliked"><i class="large-icon fa fa-thumbs-o-down" ng-click="addReaction(DISLIKE)"></i>{{numDislikes}}</span>
-    <span ng-if="disliked"><i class="large-icon fa fa-thumbs-down" ng-click="removeReaction(DISLIKE)"></i>{{numDislikes}}</span>
+    <div ng-if="TYPE === 'kitchen'">
+        <span ng-if="!liked"><i class="large-icon fa fa-thumbs-o-up" ng-click="addReaction(LIKE)"></i>{{numLikes}}</span>
+        <span ng-if="liked"><i class="large-icon fa fa-thumbs-up" ng-click="removeReaction(LIKE)"></i>{{numLikes}}</span>
+        <span ng-if="!disliked"><i class="large-icon fa fa-thumbs-o-down" ng-click="addReaction(DISLIKE)"></i>{{numDislikes}}</span>
+        <span ng-if="disliked"><i class="large-icon fa fa-thumbs-down" ng-click="removeReaction(DISLIKE)"></i>{{numDislikes}}</span>
+    </div>
+    <div ng-if="TYPE === 'dish'">
+        <span ng-if="!forked">{{numForks}}<img ng-src="images/fork_empty.ico" ng-click="addReaction(FORK)" class="small-image-icon"></span>
+        <span ng-if="forked">{{numForks}}<img ng-src="images/fork_active.ico" ng-click="removeReaction(FORK)" class="small-image-icon"></span>
+    </div>
 </div>

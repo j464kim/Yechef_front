@@ -3,15 +3,15 @@
         <div class="col-md-9">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-9 col col-md-offset-7">
-                        <div class="col-md-3 text-right">
-                            <a>269 <i class="fa fa-cutlery" aria-hidden="true"></i></a></div>
-                        <div class="col-md-1 text-right">
-                            <a><i class="fa fa-share-alt fa-x"></i></a></div>
-                        <div class="col-md-1 text-right">
-                            <a ui-sref="dish.update({id: DishCtrl.dish.id})"><i class="fa fa-edit fa-x"></i></a></div>
-                        <div class="col-md-1 text-right">
-                            <a ui-sref="dish.destroy({id: DishCtrl.dish.id})"><i class="fa fa-close fa-x"></i></a></div>
+                    <div class="pull-right">
+                        <div ng-if="DishCtrl.dish" class="pull-left">
+                            <!--Must load it "after" Dish data is available-->
+                            <reaction-button reactionable="DishCtrl.dish"></reaction-button>
+
+                        </div>
+                        <a><i class="fa fa-share-alt fa-x"></i></a>
+                        <a ui-sref="dish.update({id: DishCtrl.dish.id})"><i class="fa fa-edit fa-x"></i></a>
+                        <a ui-sref="dish.destroy({id: DishCtrl.dish.id})"><i class="fa fa-close fa-x"></i></a>
                     </div>
                 </div>
                 <div class="row" style="background-color: ghostwhite">

@@ -39,7 +39,7 @@ angular.module('kitchen.show', [
 			}
 
 			function _getkitchenAdmins() {
-				KitchenAPI.admins(kitchenId).then(function (response) {
+				KitchenAPI.getAdmins(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchenAdmins = response;
 				}, function (response) {

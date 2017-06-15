@@ -3,7 +3,7 @@
 angular.module('reaction', [
 	'reaction_api'
 ])
-	.constant('constant', {'DISLIKE': 0, 'LIKE': 1})
+	.constant('constant', {'DISLIKE': 0, 'LIKE': 1, 'FORK': 2})
 
 	.directive('reactionButton', ['constant', function (constant) {
 		return {
@@ -14,7 +14,7 @@ angular.module('reaction', [
 			},
 			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
-			controller: function ($scope, ReactionAPI, $state, devHelper) {
+			controller: function ($scope, ReactionAPI, $state, devHelper, genericService) {
 
 				/*********************
 				 *  Private Variables
@@ -23,13 +23,11 @@ angular.module('reaction', [
 				var reactionable = $scope.reactionable;
 
 				// figure out which eloquent model it belongs to
-				var stateName = $state.current.name;
-				var modelName = stateName.split(".")[0];
-				var reactionable_type = 'App\\Models\\' + modelName;
+				var reactionableInfo = genericService.getModelType($state);
 
 				var reactionObj = {
 					reactionableId: reactionable.id,
-					reactionableType: reactionable_type,
+					reactionableType: reactionableInfo['type'],
 					// TODO: set it to 1 for now until (1) is done
 					userId: 1
 				};
@@ -38,9 +36,11 @@ angular.module('reaction', [
 				 *  Public Variables
 				 **********************/
 
-				// Is there a way HTML can access constant value of its controller?
+				$scope.TYPE = reactionableInfo['name'];
 				$scope.DISLIKE = constant.DISLIKE;
 				$scope.LIKE = constant.LIKE;
+				$scope.FORK = constant.FORK;
+
 
 				/*********************
 				 *  Private Functions
@@ -48,7 +48,6 @@ angular.module('reaction', [
 
 				function _init() {
 					_getReactions();
-					// console.log(constant.DISLIKE);
 				}
 
 				// TODO(1): Along with the numeber of likes/dislikes, $scope function will retrieve current user's reaction information
@@ -60,6 +59,7 @@ angular.module('reaction', [
 					ReactionAPI.index(reactionObj, 'getReactions').then(function (response) {
 						$scope.numLikes = response.numLikes;
 						$scope.numDislikes = response.numDislikes;
+						$scope.numForks = response.numForks;
 						$scope.userReactionId = response.userReactionId;
 						$scope.userReactionKind = response.userReactionKind;
 
@@ -118,14 +118,19 @@ angular.module('reaction', [
 				function _incrementReaction(kind) {
 					switch (kind) {
 						case 0:
-							devHelper.log('disliked');
+							devHelper.log('Disliked');
 							$scope.disliked = true;
 							$scope.numDislikes += 1;
 							break;
 						case 1:
-							devHelper.log('liked');
+							devHelper.log('Liked');
 							$scope.liked = true;
 							$scope.numLikes += 1;
+							break;
+						case 2:
+							devHelper.log('Forked');
+							$scope.forked = true;
+							$scope.numForks += 1;
 							break;
 					}
 				}
@@ -133,14 +138,19 @@ angular.module('reaction', [
 				function _decrementReaction(kind) {
 					switch (kind) {
 						case 0:
-							devHelper.log('un-disliked');
+							devHelper.log('Un-Disliked');
 							$scope.disliked = false;
 							$scope.numDislikes -= 1;
 							break;
 						case 1:
-							devHelper.log('un-liked');
+							devHelper.log('Un-Liked');
 							$scope.liked = false;
 							$scope.numLikes -= 1;
+							break;
+						case 2:
+							devHelper.log('Un-Forked');
+							$scope.forked = false;
+							$scope.numForks -= 1;
 							break;
 					}
 				}
@@ -152,6 +162,9 @@ angular.module('reaction', [
 							break;
 						case 1:
 							$scope.liked = true;
+							break;
+						case 2:
+							$scope.forked = true;
 							break;
 					}
 				}

@@ -86,12 +86,12 @@ angular.module('auth.api', [
 			// calculate expire time
 			var expireDate = new Date (new Date().getTime() + (1000 * expireIn));
 			// storage accessToken in cookie
-            $cookies.put("access_token", accessToken, {'expires': expireDate});
+            $cookies.put("access_token", tokenType + ' '+ accessToken, {'expires': expireDate});
 
 			token = {
 				accessToken: accessToken,
-				refreshToken: refreshToken, 
-				expireIn: expireIn, 
+				refreshToken: refreshToken,
+				expireIn: expireIn,
 				tokenType: tokenType
 			}
 		}
@@ -102,10 +102,11 @@ angular.module('auth.api', [
 			token = {};
 		}
 
-		function getAccessToken() {
-			if(token.accessToken && token.tokenType){
-				return token.tokenType + ' ' + token.accessToken;
-			} else {
+            function getAccessToken() {
+                var accessToken = $cookies.get('access_token');
+                if (accessToken ) {
+                    return accessToken;
+                } else {
                     // revokeSession();
 			return null;
 		}}
@@ -186,20 +187,20 @@ angular.module('auth.api', [
 					authService.loginCancelled();
 					reject(response);
 				});
-			}); 
-		};
-
-
-		function logout() {
-			return $q(function(resolve, reject) {
-				AuthResource.logout().then(function(response){
-					sessionService.revokeSession();
-					resolve(response.data.body);
-				}, function(response) {
-					reject(response);
-				});
 			});
 		};
+
+
+            function logout() {
+                return $q(function (resolve, reject) {
+                    AuthResource.logout().then(function (response) {
+                        sessionService.revokeSession();
+                        resolve(response.data.body);
+                    }, function (response) {
+                        reject(response);
+                    });
+                });
+            };
 
 
 		function refreshToken(){
@@ -219,7 +220,7 @@ angular.module('auth.api', [
 					authService.loginCancelled();
 					reject(response);
 				});
-			}); 
+			});
 		};
 
 

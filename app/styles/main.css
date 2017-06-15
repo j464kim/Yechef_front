@@ -2444,6 +2444,9 @@ h6 {
   width: 100%;
   margin: 1em 0 2em 0;
 }
+.small-image-icon {
+  width: 50%;
+}
 .full-width {
   width: 100%;
 }

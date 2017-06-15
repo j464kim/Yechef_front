@@ -35,6 +35,7 @@ angular
 		'mediaUpload',
 		'reaction',
 		'directive.confirmPassword',
+		'helper',
 
 		// services
 		'http.interceptor',

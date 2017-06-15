@@ -6,85 +6,103 @@ angular.module('user.login', [
 ])
 
 
-.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper',
-	function($state, AuthAPI, devHelper){
+	.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper',
+		function ($state, AuthAPI, devHelper) {
 
-		/*********************
-		*	Private Variables
-		**********************/
-		// reference to this controller
-		var that = this;
+			/*********************
+			 *    Private Variables
+			 **********************/
+				// reference to this controller
+			var that = this;
 
-		/*********************
-		*	Public Variables
-		**********************/
-		this.email = '';
-		this.password = '';
+			/*********************
+			 *    Public Variables
+			 **********************/
+			this.email = '';
+			this.password = '';
 
-		/*********************
-		*	Private Functions
-		**********************/
+			/*********************
+			 *    Private Functions
+			 **********************/
 
-		function _init() {	
+			function _init() {
+			}
+
+			function _login() {
+				AuthAPI.login(
+					this.email,
+					this.password
+				).then(
+					function (response) {
+						AuthAPI.setCurrentUser().then(
+							function (currentUser) {
+								devHelper.log(currentUser);
+								$state.go('home');
+							},
+							function (error) {
+								console.error(error);
+							}
+						);
+						;
+						//set access token
+						devHelper.log(response);
+					},
+					function (response) {
+						console.error(response);
+					}
+				);
+			}
+
+			function _socialLogin(provider) {
+				AuthAPI.socialLogin(
+					provider
+				).then(
+					function (response) {
+						AuthAPI.setCurrentUser().then(
+							function (currentUser) {
+								devHelper.log(currentUser);
+								$state.go('home');
+							},
+							function (error) {
+								console.error(error);
+							}
+						);
+						;
+						devHelper.log(response);
+					},
+					function (response) {
+						console.error(response);
+					}
+				);
+			}
+
+			function _logout() {
+				AuthAPI.logout().then(
+					function (response) {
+						devHelper.log(response);
+						$state.go('home');
+					},
+					function (response) {
+						console.error(response);
+					}
+				);
+			}
+
+			/*********************
+			 *    Public Functions
+			 **********************/
+			this.login = _login;
+			this.socialLogin = _socialLogin;
+			this.logout = _logout;
+
+			/*********************
+			 *    Initialization
+			 **********************/
+			_init();
+
+			/*********************
+			 *    EVENTS
+			 **********************/
+
 		}
-
-		function _login() {
-			AuthAPI.login(
-				this.email,
-				this.password
-			).then(
-				function(response) {
-					//set access token
-                    devHelper.log(response);
-                    $state.go('home');
-                },
-				function(response) {
-					console.error(response);
-				}
-			);
-		}
-
-		function _socialLogin(provider) {
-			AuthAPI.socialLogin(
-				provider
-			).then(
-				function(response) {
-                    devHelper.log(response);
-                    $state.go('home');
-                },
-				function(response) {
-					console.error(response);
-				}
-			);
-		}
-
-		function _logout() {
-			AuthAPI.logout().then(
-				function(response) {
-                    devHelper.log(response);
-					$state.go('home');
-				},
-				function(response) {
-					console.error(response);
-				}
-			);
-		}
-
-		/*********************
-		*	Public Functions
-		**********************/
-		this.login = _login;
-		this.socialLogin = _socialLogin;
-		this.logout = _logout;
-
-		/*********************
-		*	Initialization
-		**********************/
-		_init();
-
-		/*********************
-		*	EVENTS
-		**********************/
-
-	}
-]);
+	]);

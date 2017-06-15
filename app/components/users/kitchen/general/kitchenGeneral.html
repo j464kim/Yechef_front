@@ -45,7 +45,7 @@
             <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
             <i class="material-icons md-24 md-secondary md-hue-3">message</i>
             <i class="material-icons md-24 md-secondary md-hue-3">phone</i>
-            <i class="material-icons md-24 md-secondary md-hue-3" ng-click="UkgCtrl.removeAdmin(person.id)">delete</i>
+            <i class="material-icons md-24 md-secondary md-hue-3" ng-disabled="currentUser.id == person.id" ng-click="UkgCtrl.removeAdmin(person.id)">delete</i>
         </md-list-item>
     </md-list>
     <hr>

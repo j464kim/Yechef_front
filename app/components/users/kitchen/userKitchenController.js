@@ -17,7 +17,7 @@ angular.module('user.kitchen', [
 		$scope.$watch(function () {
 			return that.myCurrentKitchen
 		}, function (newVal, oldVal) {
-			that.myCurrentKitchenToEdit = Object.assign({}, newVal);
+			that.myCurrentKitchenToEdit = angular.copy(newVal);
 		});
 
 		function _getMyKitchens() {

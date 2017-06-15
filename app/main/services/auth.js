@@ -4,7 +4,6 @@ angular.module('auth.api', [
 	'satellizer',
 	'ngCookies'
 ])
-
 	.config(function ($authProvider, config, $cookiesProvider) {
 
 		$authProvider.google({
@@ -22,7 +21,6 @@ angular.module('auth.api', [
 		expireDate.setDate(expireDate.getDate() + config.cookieExpirationInDays);
 		$cookiesProvider.defaults.expires = expireDate;
 	})
-
 	.service('AuthResource', ['$resource', 'config', '$http', '$auth', 'devHelper',
 		function ($resource, config, $http, $auth, devHelper) {
 			var api_endpoint = config.endpoint;
@@ -85,7 +83,6 @@ angular.module('auth.api', [
 			};
 		}
 	])
-
 	.service('sessionService', ['$cookies',
 		function ($cookies) {
 			var token = {};
@@ -153,7 +150,6 @@ angular.module('auth.api', [
 			}
 		}
 	])
-
 	.service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService', '$rootScope',
 		function ($q, AuthResource, sessionService, authService, $rootScope) {
 
@@ -192,7 +188,6 @@ angular.module('auth.api', [
 				});
 			};
 
-
 			function socialLogin(provider) {
 				return $q(function (resolve, reject) {
 					AuthResource.socialLogin(provider).then(function (response) {
@@ -212,7 +207,6 @@ angular.module('auth.api', [
 				});
 			};
 
-
 			function logout() {
 				return $q(function (resolve, reject) {
 					AuthResource.logout().then(function (response) {
@@ -224,7 +218,6 @@ angular.module('auth.api', [
 					});
 				});
 			};
-
 
 			function refreshToken() {
 				return $q(function (resolve, reject) {
@@ -259,7 +252,6 @@ angular.module('auth.api', [
 				});
 			}
 
-
 			return {
 				register: register,
 				login: login,
@@ -267,6 +259,94 @@ angular.module('auth.api', [
 				logout: logout,
 				refreshToken: refreshToken,
 				setCurrentUser: setCurrentUser,
+			};
+		}
+	])
+	.service('PasswordResource', ['$resource', 'config', '$http',
+		function ($resource, config, $http) {
+			var api_endpoint = config.endpoint;
+
+			function showResetForm(email, token) {
+				return $http({
+					method: 'GET',
+					url: api_endpoint + 'password/reset/' + token,
+					params: {
+						email: email,
+					}
+				});
+			};
+
+			function sendResetLinkEmail(email) {
+
+				return $http({
+					method: 'POST',
+					url: api_endpoint + 'password/email',
+					params: {
+						email: email,
+					}
+				});
+			};
+
+			function resetPassword(token, email, password, password_confirmation) {
+				return $http({
+					method: 'POST',
+					url: api_endpoint + 'password/reset',
+					params: {
+						token: token,
+						email: email,
+						password: password,
+						password_confirmation: password_confirmation,
+					}
+				})
+			};
+
+			return {
+				showResetForm: showResetForm,
+				sendResetLinkEmail: sendResetLinkEmail,
+				resetPassword: resetPassword,
+			};
+		}
+	])
+	.service('PasswordAPI', ['$q', 'PasswordResource',
+		function ($q, PasswordResource) {
+
+			function showResetForm(email, token) {
+
+				return $q(function (resolve, reject) {
+					PasswordResource.showResetForm(email, token).then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function sendResetLinkEmail(email) {
+
+				return $q(function (resolve, reject) {
+					PasswordResource.sendResetLinkEmail(email).then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function resetPassword(token, email, password, password_confirmation) {
+
+				return $q(function (resolve, reject) {
+					PasswordResource.resetPassword(token, email, password, password_confirmation).then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			return {
+				showResetForm: showResetForm,
+				sendResetLinkEmail: sendResetLinkEmail,
+				resetPassword: resetPassword,
 			};
 		}
 	]);

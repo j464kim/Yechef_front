@@ -2463,6 +2463,10 @@ button {
   color: white;
   display: inline;
 }
+#add-admin {
+  margin-top: 0;
+  height: 111%;
+}
 .kitchen-title {
   font-size: 24px;
   font-weight: bold;

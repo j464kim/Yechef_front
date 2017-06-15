@@ -1,6 +1,14 @@
 /* Generic Services */
 angular.module('helper', [])
-	.factory("genericService", function () {
+	.factory("genericService", function ($q, $timeout) {
+
+		function createFilterFor (query) {
+			var lowercaseQuery = angular.lowercase(query);
+			return function filterFn(item) {
+				return (item.value.indexOf(lowercaseQuery) === 0);
+			};
+		};
+
 		return {
 			getModelType: function ($state) {
 				var stateName = $state.current.name;
@@ -13,7 +21,16 @@ angular.module('helper', [])
 				}
 
 				return modelInfo;
-			}
-		}
+			},
 
+			querySearch: function (query, list) {
+				var results = query ? list.filter(createFilterFor(query)) : list,
+					deferred;
+				deferred = $q.defer();
+				$timeout(function () {
+					deferred.resolve(results);
+				}, Math.random() * 1000, false);
+				return deferred.promise;
+			},
+		}
 	});

@@ -3,7 +3,7 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q) {
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -12,19 +12,13 @@ angular.module('user.kitchen', [
 
 		function _init() {
 			_getMyKitchens();
-			_getkitchenAdmins();
-			_getUsers();
 		}
 
 		$scope.$watch(function () {
 			return that.myCurrentKitchen
 		}, function (newVal, oldVal) {
-			_prepareEdit();
+			that.myCurrentKitchenToEdit = Object.assign({}, newVal);
 		});
-
-		function _prepareEdit() {
-			that.myCurrentKitchenToEdit = Object.assign({}, that.myCurrentKitchen);
-		};
 
 		function _getMyKitchens() {
 			UserAPI.list('getMyKitchens').then(
@@ -36,77 +30,6 @@ angular.module('user.kitchen', [
 					console.error(response);
 				});
 		};
-
-		function _getkitchenAdmins() {
-			KitchenAPI.getAdmins(that.myCurrentKitchenId).then(function (response) {
-				devHelper.log(response);
-				that.kitchenAdmins = response;
-			}, function (response) {
-				//TODO handle error state
-				console.error(response);
-			});
-		}
-
-		function _getUsers() {
-			UserAPI.list('list').then(
-				function (response) {
-					devHelper.log(response);
-					that.users = response;
-					that.users = that.users.map(function (user) {
-						user.value = user.email.toLowerCase();
-						return user;
-					});
-				}, function (response) {
-					//TODO handle error state
-					console.error(response);
-				});
-		};
-
-		function _updateKitchen() {
-			KitchenAPI.update(that.myCurrentKitchenToEdit, that.myCurrentKitchen.id).then(function (response) {
-				var updatedKitchen = response;
-				that.myCurrentKitchen.name = updatedKitchen.name;
-				that.myCurrentKitchen.phone = updatedKitchen.phone;
-				that.myCurrentKitchen.address = updatedKitchen.address;
-				that.myCurrentKitchen.email = updatedKitchen.email;
-				that.myCurrentKitchen.description = updatedKitchen.description;
-				that.myCurrentKitchen.medias = updatedKitchen.medias;
-				devHelper.log(response);
-				$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
-			}, function (response) {
-				// TODO handle error state
-				console.error(response);
-			});
-		}
-
-		/**
-		 * Search for repos... use $timeout to simulate
-		 * remote dataservice call.
-		 */
-		function querySearch(query) {
-			var results = query ? that.users.filter(createFilterFor(query)) : that.users,
-				deferred;
-			deferred = $q.defer();
-			$timeout(function () {
-				deferred.resolve(results);
-			}, Math.random() * 1000, false);
-			return deferred.promise;
-		}
-
-
-		/**
-		 * Create filter function for a query string
-		 */
-		function createFilterFor(query) {
-			var lowercaseQuery = angular.lowercase(query);
-			return function filterFn(item) {
-				return (item.value.indexOf(lowercaseQuery) === 0);
-			};
-		};
-
-
-		this.updateKitchen = _updateKitchen;
-		this.prepareEdit = _prepareEdit;
 
 		this.preSelect = function () {
 			if (that.myCurrentKitchenId) {
@@ -124,31 +47,6 @@ angular.module('user.kitchen', [
 		this.selectChanged = function () {
 			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id, 'myCurrentKitchen': that.myCurrentKitchen});
 		};
-
-		this.addAdmin = function () {
-			devHelper.log(that.adminToAdd);
-			KitchenAPI.addAdmin(that.adminToAdd.id, that.myCurrentKitchenId).then(function (response) {
-				devHelper.log(response);
-				_getkitchenAdmins();
-			}, function (response) {
-				//TODO handle error state
-				console.error(response);
-			});
-		};
-
-		this.removeAdmin = function (adminId) {
-			if (confirm("Remove this admin??")) {
-				KitchenAPI.removeAdmin(adminId, that.myCurrentKitchenId).then(function (response) {
-					devHelper.log(response);
-					_getkitchenAdmins();
-				}, function (response) {
-					//TODO handle error state
-					console.error(response);
-				});
-			}
-		};
-
-		that.querySearch = querySearch;
 
 		_init();
 

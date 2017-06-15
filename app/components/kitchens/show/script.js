@@ -24,7 +24,7 @@ angular.module('kitchen.show', [
 
 			function _init() {
 				_showKitchen();
-				_getkitchenAdmins();
+				_getKitchenAdmins();
 			}
 
 			function _showKitchen() {
@@ -38,7 +38,7 @@ angular.module('kitchen.show', [
 				});
 			}
 
-			function _getkitchenAdmins() {
+			function _getKitchenAdmins() {
 				KitchenAPI.getAdmins(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchenAdmins = response;

@@ -2445,13 +2445,10 @@ h6 {
   margin: 1em 0 2em 0;
 }
 .small-image-icon {
-  width: 50%;
+  width: 35%;
 }
 .full-width {
   width: 100%;
-}
-button {
-  margin-bottom: 10px;
 }
 .select-kitchen {
   float: right;
@@ -2467,9 +2464,22 @@ button {
   margin-top: 0;
   height: 111%;
 }
+.small-margin {
+  margin: 0.5em;
+}
 .kitchen-title {
   font-size: 24px;
   font-weight: bold;
+}
+#dishPrice {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.font-size-1-2em {
+  font-size: 1.2em;
+}
+.font-size-1-6em {
+  font-size: 1.6em;
 }
 .owner-info {
   text-align: center;
@@ -2477,6 +2487,30 @@ button {
 .kitchen-dashboard-header {
   margin: 0.7em;
   display: inline;
+}
+.fork-container {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.dish-show-left {
+  padding-right: 1.5em;
+}
+.dish-show-right {
+  padding-left: 1.5em;
+  width: 350px;
+}
+.margin-bottom-1em {
+  margin-bottom: 1em;
+}
+.padding-1em {
+  padding: 1em;
+}
+.dish-show-header {
+  background-color: ghostwhite;
+  padding: 0.5em;
+}
+.white-background {
+  background-color: white;
 }
 .loader-wrapper {
   min-height: 300px;

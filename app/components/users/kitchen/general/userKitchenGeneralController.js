@@ -2,7 +2,7 @@ angular.module('user.kitchen.general', [
 	'ngMaterial',
 ])
 
-	.controller('userKitchenGeneralController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService) {
+	.controller('userKitchenGeneralController', function ($rootScope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -29,7 +29,9 @@ angular.module('user.kitchen.general', [
 				function (response) {
 					devHelper.log(response);
 					that.users = response;
-					that.users = that.users.map(function (user) {
+					that.users = that.users.filter(function (el) {
+						return el.id != $rootScope.currentUser.id;
+					}).map(function (user) {
 						user.value = user.email.toLowerCase();
 						return user;
 					});

@@ -1,159 +1,124 @@
 <div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl" loader>
-    <div class="col-md-9">
-        <div class="col-md-6">
-            <!--Above Dish-->
-            <div class="row">
-                <div class="pull-right">
-                    <!--Fork Button-->
-                    <div ng-if="DishCtrl.dish" class="pull-left">
-                        <!--Must load it "after" Dish data is available-->
-                        <reaction-button reactionable="DishCtrl.dish"></reaction-button>
-                    </div>
-                    <a><i class="fa fa-share-alt fa-x"></i></a>
-                    <a ui-sref="dish.update({id: DishCtrl.dish.id})"><i class="fa fa-edit fa-x"></i></a>
-                    <a ui-sref="dish.destroy({id: DishCtrl.dish.id})"><i class="fa fa-close fa-x"></i></a>
-                </div>
-            </div>
-            <!--Dish Name & Price-->
-            <div class="row" style="background-color: ghostwhite">
-                <div class="col-md-9">
-                    <h4><strong class="card-title">{{DishCtrl.dish.name}}</strong></h4>
-                </div>
-                <div class="col-md-3 text-right">
-                    <h4><strong> ${{DishCtrl.dish.price}}</strong></h4>
-                </div>
-            </div>
-            <br/>
-            <!--Dish Image-->
-            <div class="row">
-                <div class="col">
-                    <img ng-src="{{DishCtrl.dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
-                </div>
+
+    <div class="col-md-8 dish-show-left">
+        <!--Dish Header-->
+        <div class="row dish-show-header">
+            <!--Dish Name-->
+            <div class="col-md-4">
+                <h3 class="dish-show-name">{{DishCtrl.dish.name}}</h3>
             </div>
             <!--Dish Rating-->
-            <div class="row"><br/>
-                <div class="average">
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            Taste
-                            <ng-rate-it ng-model="RatingCtrl.avg.taste_rating" max="5" read-only="true"
-                                        star-width="14" step="0.01"></ng-rate-it>
-                            ({{RatingCtrl.avg.taste_rating}})
-                        </div>
+            <div class="average col-md-8">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        Taste ({{RatingCtrl.avg.taste_rating}})
+                        <ng-rate-it ng-model="RatingCtrl.avg.taste_rating" max="5" read-only="true"
+                                    star-width="14" step="0.01"></ng-rate-it>
                     </div>
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            Visual
-                            <ng-rate-it ng-model="RatingCtrl.avg.visual_rating" max="5" read-only="true"
-                                        star-width="14" step="0.01"></ng-rate-it>
-                            ({{RatingCtrl.avg.visual_rating}})
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        Visual ({{RatingCtrl.avg.visual_rating}})
+                        <ng-rate-it ng-model="RatingCtrl.avg.visual_rating" max="5" read-only="true"
+                                    star-width="14" step="0.01"></ng-rate-it>
                     </div>
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            Quantity
-                            <ng-rate-it ng-model="RatingCtrl.avg.quantity_rating" max="5" read-only="true"
-                                        star-width="14" step="0.01"></ng-rate-it>
-                            ({{RatingCtrl.avg.quantity_rating}})
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        Quantity ({{RatingCtrl.avg.quantity_rating}})
+                        <ng-rate-it ng-model="RatingCtrl.avg.quantity_rating" max="5" read-only="true"
+                                    star-width="14" step="0.01"></ng-rate-it>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <!--Order-->
-            <div class="row">
-                <div class="col-md-3 form-group-md">
-                    <md-input-container>
-                        <label for="amount">Amount</label>
-                        <input class="s" type="number" id="amount"/>
-                    </md-input-container>
-                </div>
-                <div class="col-md-9">
-                    <br/>
-                    <div class="row row-no-padding">
-                        <div class="col-sm-5">
-                            <a class="btn btn-small btn-warning" style="width: 95%">Add <i class="fa fa-cart-plus"
-                                                                                           aria-hidden="true"></i></a>
-                        </div>
-                        <div class="col-sm-5">
-                            <a class="btn btn-small btn-primary" style="width: 95%">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Description / Igredients-->
-            <div class="row">
-                <div class="col-md-12" ng-cloak>
-                    <md-content>
-                        <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-                            <md-tab label="Description">
-                                <md-content class="md-padding">
-                                    <p>Cooked by: <a> {{DishCtrl.kitchen.name}} </a></p>
-                                    <br/>
-                                    <p class="card-text">{{DishCtrl.dish.description}}</p>
-                                </md-content>
-                            </md-tab>
-                            <md-tab label="Ingredients">
-                                <md-content class="md-padding">
-                                    <p>salt 1g</p>
-                                    <p>chicken 500g</p>
-                                    <p>water 500ml</p>
-                                    <p>2 eggs</p>
-                                    <p>angmotti</p>
-                                </md-content>
-                            </md-tab>
-                        </md-tabs>
-                    </md-content>
-                </div>
-            </div>
+        <!--Dish Image-->
+        <div class="row margin-bottom-1em">
+            <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width" alt="Card image cap">
         </div>
         <!--Buyers Reviews / Ratings-->
         <div class="row">
-            <div class="row">
-                <div class="col-md-12"><br/>
-                    <strong>Reviews / Ratings ({{RatingCtrl.totalItems}})</strong>
-                </div>
+            <div>
+                <h4>Reviews / Ratings ({{RatingCtrl.totalItems}})</h4>
             </div>
-            <div class="col-sm-12">
+            <div class="dish-rating">
                 <ratings></ratings>
             </div>
         </div>
     </div>
-    <!--Similar Dishes-->
-    <div class="col-md-3">
-        Popular Posts
-        <div class="row">
-            <div class="col-md-10">
-                <img ui-sref="dish.show({id: DishCtrl.dish.id})" ng-src="{{DishCtrl.dish.medias[0].url}}"
-                     alt="Card image cap" style="width:100%;">
-                <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
-                <h6 class="card">${{DishCtrl.dish.price}}</h6>
+    <div class="col-md-4">
+        <div class="dish-show-right affix">
+            <!--Description & Ingredients-->
+            <div class="row margin-bottom-1em">
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                        <md-tab label="Description">
+                            <md-content class="md-padding">
+                                <p>Cooked by: <a> {{DishCtrl.kitchen.name}} </a></p>
+                                <br/>
+                                <p class="card-text">{{DishCtrl.dish.description}}</p>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Ingredients">
+                            <md-content class="md-padding">
+                                <p>salt 1g</p>
+                                <p>chicken 500g</p>
+                                <p>water 500ml</p>
+                                <p>2 eggs</p>
+                                <p>angmotti</p>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
-                <img ui-sref="dish.show({id: DishCtrl.dish.id})" ng-src="{{DishCtrl.dish.medias[0].url}}"
-                     alt="Card image cap" style="width:100%;">
-                <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
-                <h6 class="card">${{DishCtrl.dish.price}}</h6>
+            <!--Order & Price-->
+            <div class="row margin-bottom-1em">
+                <md-content class="dish-show-order padding-1em">
+                    <div class="text-center">
+                        <div class="col-md-6">
+                            <!--Amount Selector-->
+                            <label>Amount</label>
+                            <input type="number" min="1" max="10" class="form-control bfh-number">
+                            <!--Dish Price-->
+                            <div class="row">
+                                <span id="dishPrice">${{DishCtrl.dish.price}}</span>
+                            </div>
+                        </div>
+                        <!--Order & Add-to-cart-->
+                        <div class="col-md-6">
+                            <div>
+                                <div class="row">
+                                    <button class="small-margin btn-default btn-md">
+                                        Add To Cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <button class="small-margin btn-danger btn-lg">Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-content>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
-                <img ui-sref="dish.show({id: DishCtrl.dish.id})" ng-src="{{DishCtrl.dish.medias[0].url}}"
-                     alt="Card image cap" style="width:100%;">
-                <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
-                <h6 class="card">${{DishCtrl.dish.price}}</h6>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
-                <img ui-sref="dish.show({id: DishCtrl.dish.id})" ng-src="{{DishCtrl.dish.medias[0].url}}"
-                     alt="Card image cap" style="width:100%;">
-                <h4 class="card-title">{{DishCtrl.dish.name}}</h4>
-                <h6 class="card">${{DishCtrl.dish.price}}</h6>
+            <!--Social Media-->
+            <div class="row text-center">
+                <md-content class="padding-1em">
+                    <div ng-if="DishCtrl.dish" class="col-md-6">
+                        <span class="font-size-1-2em">Fork this Dish</span>
+                        <!--Must load it "after" Dish data is available-->
+                        <reaction-button reactionable="DishCtrl.dish"></reaction-button>
+                    </div>
+                    <div class="col-md-6 font-size-1-2em">
+                        Share it with
+                        <div class="row font-size-1-6em">
+                            <a><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                            <a><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a><i class="fa fa-pinterest-square" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </md-content>
             </div>
         </div>
     </div>
+
 </div>

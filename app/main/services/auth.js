@@ -139,7 +139,6 @@ angular.module('auth.api', [
 			}
 
 			function getCurrentUser() {
-				console.log($cookies.getObject('current_user'));
 				return $cookies.getObject('current_user');
 			}
 

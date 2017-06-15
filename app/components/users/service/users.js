@@ -19,18 +19,18 @@ angular.module('user.api', [])
 
             function list(email, password) {
 
-                return $q(function (resolve, reject) {
-                    UserAPI.list().then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        console.log(seconds, expireAt);
-                        reject(response);
-                    });
-                });
-            };
-
-            return {
-                list: list
-            };
-        }
-    ]);
+			return $q(function(resolve, reject) {
+				UserAPI.list().then(function(response){
+					resolve(response.body);
+				}, function(response) {
+					console.log(seconds, expireAt);
+					reject(response);
+				});
+			});
+		};
+		
+		return {
+			list: list
+		};
+	}
+]);

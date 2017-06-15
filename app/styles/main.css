@@ -2505,6 +2505,9 @@ h6 {
   background-color: ghostwhite;
   padding: 0.5em;
 }
+.white-background {
+  background-color: white;
+}
 .loader-wrapper {
   min-height: 300px;
   height: 100%;

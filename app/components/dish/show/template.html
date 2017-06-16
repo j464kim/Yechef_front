@@ -54,7 +54,7 @@
                     <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
                         <md-tab label="Description">
                             <md-content class="md-padding">
-                                <p>Cooked by: <a> {{DishCtrl.kitchen.name}} </a></p>
+                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})"> {{DishCtrl.kitchen.name}} </a></p>
                                 <br/>
                                 <p class="card-text">{{DishCtrl.dish.description}}</p>
                             </md-content>

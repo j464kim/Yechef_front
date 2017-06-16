@@ -99,6 +99,21 @@ angular.module('kitchen.api', [
 				});
 			}
 
+			function getDishes(kitchenId) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.show(
+						{
+							id: kitchenId + "/dishes"
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			function getAdmins(kitchenId) {
 
 				return $q(function (resolve, reject) {
@@ -153,7 +168,8 @@ angular.module('kitchen.api', [
 				destroy: destroy,
 				getAdmins: getAdmins,
 				addAdmin: addAdmin,
-				removeAdmin: removeAdmin
+				removeAdmin: removeAdmin,
+				getDishes: getDishes,
 			};
 		}
 	]);

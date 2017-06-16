@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-if="DishCtrl.hasAccess">
     <div class="col-md-4 col-md-offset-4">
         <div class="row">
             <div class="col-md-6">
@@ -6,50 +6,69 @@
             </div>
         </div>
         <div class="row">
-            <form class="form-horizontal">
+            <form class="form-validation" name="form" novalidate>
                 <div class="form-group">
-
                     <md-input-container class="md-block">
                         <label for="name">
-                            Name
+                            Dish Name
                         </label>
-                        <input type="text" id="name" ng-model="DishCtrl.dish.name" required/>
+                        <input type="text" id="name" name="name" ng-model="DishCtrl.dish.name" required/>
+                        <div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Name is required</div>
+                        </div>
                     </md-input-container>
 
                     <md-input-container class="md-block">
                         <label for="price">
                             Price
                         </label>
-                        <input type="number" id="price" placeholder="10.00"
+                        <input type="number" id="price" placeholder="10.00" name="price"
                                ng-model="DishCtrl.dish.price"
                                ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+                        <div class="field-message" ng-messages="form.price.$error" ng-if='form.price.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Price is required</div>
+                        </div>
                     </md-input-container>
 
                     <md-autocomplete
+                            flex required
                             md-require-match
+                            md-input-name="nationality"
                             md-floating-label="Nationality"
                             md-no-cache="true"
-                            md-selected-item="DishCtrl.selectedNationality"
+                            md-selected-item="DishCtrl.dish.nationality"
                             md-search-text="DishCtrl.searchNationality"
-                            md-items="item in DishCtrl.querySearch(DishCtrl.searchNationality)"
+                            md-items="item in DishCtrl.querySearch(DishCtrl.searchNationality, DishCtrl.nationalities)"
                             md-item-text="item.display"
                             md-min-length="0"
                             placeholder="Choose Nationality">
                         <md-item-template>
-                            <span md-highlight-text="DishCtrl.searchNationality" md-highlight-flags="^i">{{item.display}}</span>
+                            <span md-highlight-text="DishCtrl.searchNationality" md-highlight-flags="i">{{item.display}}</span>
                         </md-item-template>
                         <md-not-found>
                             No states matching "{{DishCtrl.searchNationality}}" were found.
                         </md-not-found>
-                        <div ng-message="md-require-match">Please select an existing nationality.</div>
+                        <div ng-messages="form.nationality.$error" ng-if="form.nationality.$touched">
+                            <div ng-message="required">Dish <b>must</b> have a nationality.</div>
+                            <div ng-message="md-require-match">Please select an existing nationality.
+                            </div>
+                            <div ng-message="maxlength">Your entry is too long.</div>
+                        </div>
                     </md-autocomplete>
                     <br/><br/>
 
                     <md-input-container class="md-block">
                         <label for="description">Description</label>
-                        <textarea md-maxlength="200" id="description" rows="3" ng-model="DishCtrl.dish.description"
+                        <textarea md-maxlength="200" id="description" rows="3" name="description"
+                                  ng-model="DishCtrl.dish.description"
                                   placeholder="Typical Korean Kimchi Ramen"
                                   md-select-on-focus required></textarea>
+                        <div ng-messages="form.description.$error" ng-if="form.description.$touched">
+                            <div ng-message="required">Description is required.</div>
+                            <div ng-message="maxlength">Your description should be less than 200 letters.</div>
+                        </div>
                     </md-input-container>
 
                     <div class="DishImage">
@@ -61,10 +80,31 @@
                         </div>
                     </div>
                     <br/>
+                    <div class="row pull-center text-center">
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="DishCtrl.dish.gluten_free" ng-true-value="1"
+                                         ng-false-value="0" aria-label="gluten_free">
+                                Gluten-free
+                            </md-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="DishCtrl.dish.vegan" ng-true-value="1"
+                                         ng-false-value="0" aria-label="vegan">
+                                Vegan
+                            </md-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="DishCtrl.dish.vegetarian" ng-true-value="1"
+                                         ng-false-value="0" aria-label="vegetarian">
+                                Vegetarian
+                            </md-checkbox>
+                        </div>
+                    </div>
+                    <br/>
 
                     <div class="row">
                         <div class="col-sm-1">
-                            <md-button class="md-raised md-primary" ng-click="DishCtrl.updateDish()">Update</md-button>
+                            <md-button class="md-raised md-primary" ng-click="DishCtrl.updateDish()" ng-disabled="form.$invalid">Update</md-button>
                         </div>
                         <div class="col-sm-offset-7 col-sm-1">
                             <md-button class="md-raised md-warn" ng-click="DishCtrl.cancel()">Cancel</md-button>

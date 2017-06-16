@@ -14,7 +14,7 @@ angular.module('reaction', [
 			},
 			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
-			controller: function ($scope, ReactionAPI, $state, devHelper, genericService) {
+			controller: function ($rootScope, $scope, ReactionAPI, $state, devHelper, genericService) {
 
 				/*********************
 				 *  Private Variables
@@ -24,12 +24,17 @@ angular.module('reaction', [
 
 				// figure out which eloquent model it belongs to
 				var reactionableInfo = genericService.getModelType($state);
+				var userId = null;
+
+				if ($rootScope.currentUser) {
+					userId = $rootScope.currentUser.id;
+				}
 
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
 					// TODO: set it to 1 for now until (1) is done
-					userId: 1
+					userId: userId
 				};
 
 				/*********************

@@ -4,6 +4,7 @@ angular.module('userKitchen', [
 	'user',
 	'user.kitchen',
 	'user.kitchen.general',
+	'user.kitchen.dish',
 ])
 
 	.config(function ($stateProvider) {
@@ -36,6 +37,7 @@ angular.module('userKitchen', [
 			.state('user.kitchen.dish', {
 				url: '/dish',
 				templateUrl: 'components/users/kitchen/dish/kitchenDish.html',
+				controller: 'kitchenDishController as KdCtrl',
 			})
 			.state('user.kitchen.order', {
 				url: '/order',

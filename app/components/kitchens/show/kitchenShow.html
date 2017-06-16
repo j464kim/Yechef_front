@@ -23,10 +23,11 @@
                 <i class="material-icons">send</i>
                 <label>Share</label>
             </a>
-            <a>
-                <i class="material-icons">playlist_add_check</i>
-                <label>Subscribe</label>
-            </a>
+            <div ng-if="KitchenCtrl.kitchen" class="pull-right">
+                <a>
+                    <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
+                </a>
+            </div>
         </div>
         <div class="col-md-8 pull-right">
             <a>
@@ -57,7 +58,7 @@
                 </button>
                 <!--Must load it "after" kitchen data is available-->
                 <div ng-if="KitchenCtrl.kitchen" class="pull-right">
-                    <reaction-button reactionable="KitchenCtrl.kitchen"></reaction-button>
+                    <reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
                 </div>
             </div>
         </div>

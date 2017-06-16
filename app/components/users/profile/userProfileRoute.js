@@ -28,8 +28,9 @@ angular.module('profile', [
 				controller: 'UserGeneralController as ugCtrl',
 			})
 			.state('user.profile.info.edit', {
-				url: '/edit',
+				url: '/{id}/edit',
 				templateUrl: 'components/users/profile/general/userInfoEdit.html',
+				controller: 'UserGeneralController as ugCtrl',
 			})
 			.state('user.profile.order', {
 				url: '/myOrder',

@@ -3,23 +3,52 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper) {
-		$scope.people = [
-			{ name: 'Janet Perkins', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk', newMessage: true },
-			{ name: 'Mary Johnson', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa345vyMQ2BOYz7ih_ZDsRjaX7JWACP9oqEw2Bv8m5bKsYlO7Z', newMessage: false },
-			{ name: 'Peter Carlsson', img: 'http://cfile231.uf.daum.net/image/225F964253A15B0C24800A', newMessage: false }
-		];
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams) {
+		var that = this;
 
-		$scope.doSecondaryAction = function(event) {
-			$mdDialog.show(
-				$mdDialog.alert()
-					.title('Secondary Action')
-					.textContent('Secondary actions can be used for one click actions')
-					.ariaLabel('Secondary click demo')
-					.ok('Neat!')
-					.targetEvent(event)
-			);
+		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
+		that.myCurrentKitchen = $stateParams.myCurrentKitchen;
+		that.isKitchenSelected = false;
+
+		function _init() {
+			_getMyKitchens();
+		}
+
+		$scope.$watch(function () {
+			return that.myCurrentKitchen
+		}, function (newVal, oldVal) {
+			that.myCurrentKitchenToEdit = angular.copy(newVal);
+		});
+
+		function _getMyKitchens() {
+			UserAPI.list('getMyKitchens').then(
+				function (response) {
+					devHelper.log(response);
+					that.myKitchens = response;
+				}, function (response) {
+					// TODO handle error state ie. front end display
+					console.error(response);
+				});
 		};
+
+		this.preSelect = function () {
+			if (that.myCurrentKitchenId) {
+				for (index in that.myKitchens) {
+					var kitchen = that.myKitchens[index];
+					if (kitchen.id == that.myCurrentKitchenId) {
+						that.myCurrentKitchen = kitchen;
+						that.isKitchenSelected = true;
+						return true;
+					}
+				}
+			}
+		};
+
+		this.selectChanged = function () {
+			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id, 'myCurrentKitchen': that.myCurrentKitchen});
+		};
+
+		_init();
 
 	})
 

@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('kitchen.show', [
-	'kitchen.api'
+	'kitchen.api', 'ngMaterial'
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper',
-		function ($stateParams, KitchenAPI, devHelper) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog',
+		function ($stateParams, KitchenAPI, devHelper, $mdDialog) {
 
 			/*********************
 			 *  Private Variables
@@ -24,6 +24,7 @@ angular.module('kitchen.show', [
 
 			function _init() {
 				_showKitchen();
+				_getKitchenAdmins();
 			}
 
 			function _showKitchen() {
@@ -37,10 +38,31 @@ angular.module('kitchen.show', [
 				});
 			}
 
+			function _getKitchenAdmins() {
+				KitchenAPI.getAdmins(kitchenId).then(function (response) {
+					devHelper.log(response);
+					that.kitchenAdmins = response;
+				}, function (response) {
+					//TODO handle error state
+					console.error(response);
+				});
+			}
+
 			/*********************
 			 *  Public Functions
 			 **********************/
+			this.showChefs =  function(ev) {
+				$mdDialog.show({
+					contentElement: '#showChefs',
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose: true
+				});
+			};
 
+			this.closeDialog = function (){
+				$mdDialog.cancel();
+			};
 
 			/*********************
 			 *  Initialization

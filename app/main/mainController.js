@@ -5,6 +5,17 @@ angular.module('main.controller', [])
 	.controller('MainCtrl', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService',
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService) {
 
+			var that = this;
+
+			$rootScope.previousState;
+			$rootScope.previousParams;
+			$rootScope.currentState;
+			$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+				$rootScope.previousState = from.name;
+				$rootScope.previousParams = fromParams;
+				$rootScope.currentState = to.name;
+			});
+
 			$scope.$on('event:auth-loginRequired', function (event, data) {
 				devHelper.log('refreshing token...');
 				AuthAPI.refreshToken().then(function () {
@@ -14,6 +25,14 @@ angular.module('main.controller', [])
 					$state.go('user.login');
 				});
 			});
+
+			$rootScope.$on('currentUserChanged', function (event, currentUser) {
+				$rootScope.currentUser = currentUser;
+			});
+
+			if (!$rootScope.currentUser) {
+				$rootScope.currentUser = sessionService.getCurrentUser();
+			}
 
 			this.isLoggedin = sessionService.isLogin;
 		}

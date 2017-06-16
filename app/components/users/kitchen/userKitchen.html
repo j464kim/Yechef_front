@@ -1,4 +1,4 @@
-<div ng-controller="userMainController" layout="column" style="height:600px;" ng-cloak>
+<div layout="column" style="height:600px;" ng-cloak>
 
     <section layout="row" flex>
 
@@ -17,14 +17,26 @@
                 </div>
 
                 <div class="select-kitchen">
-                    <select>
-                        <option selected="selected"><a>1st Kitchen (Toronto)</a></option>
-                        <option><a>2nd kitchen (Montreal)</a></option>
+                    <span ng-if="UkCtrl.myKitchens === undefined">Loading Kitchens...</span>
+                    <md-button class="md-raised md-warn" ui-sref="kitchen.create" ng-if="UkCtrl.myKitchens.length == 0">
+                        Create Your First Kitchen!
+                    </md-button>
+                    <select name="myCurrentKitchen" ng-if="UkCtrl.myKitchens.length > 0"
+                            ng-model="UkCtrl.myCurrentKitchen" ng-change="UkCtrl.selectChanged()"
+                            ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens"
+                            ng-selected="UkCtrl.preSelect()">
+                        <option value="" disabled>Select Kitchen</option>
                     </select>
                 </div>
             </md-toolbar>
             <md-content ng-controller="LeftCtrl">
-                <div class="list-group">
+                <div class="list-group text-center" ng-if="!UkCtrl.myCurrentKitchen">
+                    <br/>
+                    <i class="fa fa-arrow-up"></i>
+                    Select your kitchen to manage!
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                <div class="list-group" ng-if="UkCtrl.myCurrentKitchen">
                     <a ui-sref=".dashboard" class="list-group-item">Dashboard</a>
                     <a ui-sref=".general.view" class="list-group-item">General Info</a>
                     <a ui-sref=".dish" class="list-group-item">Dishes</a>
@@ -39,12 +51,12 @@
 
         </md-sidenav>
 
-        <md-content flex layout-padding>
+        <md-content flex layout-padding style="background-color: white">
 
             <div layout="column" layout-align="top center">
 
                 <!--Main Content-->
-                <div ui-view></div>
+                <div ui-view ng-if="UkCtrl.myCurrentKitchen"></div>
 
                 <div>
                     <md-button ng-click="toggleLeft()"

@@ -2460,6 +2460,10 @@ h6 {
   color: white;
   display: inline;
 }
+#add-admin {
+  margin-top: 0;
+  height: 111%;
+}
 .small-margin {
   margin: 0.5em;
 }
@@ -2580,4 +2584,9 @@ body {
 .row-no-padding [class*="col-"] {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+md-toast.md-top.md-center {
+  left: 50%;
+  margin-top: 75px;
+  transform: translate3d(-50%, 0, 0);
 }

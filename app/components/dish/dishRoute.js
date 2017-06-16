@@ -32,7 +32,7 @@ angular.module('dish', [
                 controller: 'DishShowController as DishCtrl',
             })
             .state('dish.create', {
-                url: '/new',
+                url: '/new/{kid}',
                 templateUrl: '/components/dish/create/template.html',
                 controller: 'DishCreateController as DishCtrl',
             })

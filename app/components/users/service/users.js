@@ -25,14 +25,26 @@ angular.module('user.api', [])
                     }).$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {
-                        console.log(seconds, expireAt);
                         reject(response);
                     });
                 });
             };
 
+            function getMyKitchens() {
+				return $q(function (resolve, reject) {
+					UserResource.list({
+						id: 'getMyKitchens',
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
             return {
-                list: list
+                list: list,
+				getMyKitchens: getMyKitchens
             };
         }
     ]);

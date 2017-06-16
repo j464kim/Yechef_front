@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-if="DishCtrl.hasAccess">
     <div class="col-md-4 col-md-offset-4">
         <form class="form-validation" name="form" novalidate>
             <div class="form-group">
@@ -32,7 +32,7 @@
                             md-no-cache="true"
                             md-selected-item="DishCtrl.selectedNationality"
                             md-search-text="DishCtrl.searchNationality"
-                            md-items="item in DishCtrl.querySearch(DishCtrl.searchNationality)"
+                            md-items="item in DishCtrl.querySearch(DishCtrl.searchNationality, DishCtrl.nationalities)"
                             md-item-text="item.display"
                             md-min-length="0"
                             placeholder="Choose Nationality">

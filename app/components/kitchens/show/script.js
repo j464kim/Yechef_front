@@ -4,8 +4,8 @@ angular.module('kitchen.show', [
 	'kitchen.api', 'ngMaterial'
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog',
-		function ($stateParams, KitchenAPI, devHelper, $mdDialog) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope',
+		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope) {
 
 			/*********************
 			 *  Private Variables
@@ -17,7 +17,7 @@ angular.module('kitchen.show', [
 			/*********************
 			 *  Public Variables
 			 **********************/
-
+			this.isMine = false;
 			/*********************
 			 *  Private Functions
 			 **********************/
@@ -29,7 +29,7 @@ angular.module('kitchen.show', [
 
 			function _showKitchen() {
 				KitchenAPI.show(kitchenId).then(function (response) {
-                    devHelper.log(response);
+					devHelper.log(response);
 					that.kitchen = response;
 					that.media = response.medias[0].url;
 				}, function (response) {
@@ -42,6 +42,15 @@ angular.module('kitchen.show', [
 				KitchenAPI.getAdmins(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchenAdmins = response;
+					if ($rootScope.currentUser) {
+						for (var i in that.kitchenAdmins) {
+
+							if (that.kitchenAdmins[i].id === $rootScope.currentUser.id) {
+								that.isMine = true;
+								break;
+							}
+						}
+					}
 				}, function (response) {
 					//TODO handle error state
 					console.error(response);
@@ -51,7 +60,7 @@ angular.module('kitchen.show', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.showChefs =  function(ev) {
+			this.showChefs = function (ev) {
 				$mdDialog.show({
 					contentElement: '#showChefs',
 					parent: angular.element(document.body),
@@ -60,7 +69,7 @@ angular.module('kitchen.show', [
 				});
 			};
 
-			this.closeDialog = function (){
+			this.closeDialog = function () {
 				$mdDialog.cancel();
 			};
 

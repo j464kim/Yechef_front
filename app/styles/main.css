@@ -2590,3 +2590,8 @@ md-toast.md-top.md-center {
   margin-top: 75px;
   transform: translate3d(-50%, 0, 0);
 }
+#description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

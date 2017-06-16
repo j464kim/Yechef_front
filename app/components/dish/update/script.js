@@ -19,13 +19,13 @@ angular.module('dish.update', [
 			 **********************/
 			this.nationalities = _loadNationalities();
 			this.hasAccess = false;
+			this.kitchen = {};
 
 			/*********************
 			 *    Private Functions
 			 **********************/
 
 			function _init() {
-				_checkAccess();
 				_showDish(dishId);
 			}
 
@@ -50,6 +50,7 @@ angular.module('dish.update', [
 				DishesAPI.show(dishId)
 					.then(function (response) {
 						that.dish = response;
+						_checkAccess();
 						that.dish.nationality = {
 							value: that.dish.nationality,
 							display: that.dish.nationality.charAt(0).toUpperCase() + that.dish.nationality.slice(1)
@@ -64,7 +65,7 @@ angular.module('dish.update', [
 				that.dish.nationality = that.dish.nationality.value;
 				DishesAPI.update(that.dish, that.dish.id)
 					.then(function (response) {
-						$state.go('dish.show', {"id": response.id});
+						$state.go('user.kitchen.dish', {"myCurrentKitchenId": that.dish.kitchen_id});
 					}, function (response) {
 						//     TODO handle error state
 						console.error(response);
@@ -91,7 +92,7 @@ angular.module('dish.update', [
 			this.updateDish = _updateDish;
 			this.cancel = function cancel() {
 				if (confirm("Do you want to go back?")) {
-					$state.go('dish.show', {"id": dishId});
+					$state.go('user.kitchen.dish', {"myCurrentKitchenId": that.dish.kitchen_id});
 				}
 			};
 

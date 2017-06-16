@@ -2,7 +2,7 @@ angular.module('user.kitchen.dish', [
 	'ngMaterial',
 ])
 
-	.controller('kitchenDishController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService, $mdToast) {
+	.controller('kitchenDishController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, DishesAPI) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -20,6 +20,22 @@ angular.module('user.kitchen.dish', [
 				console.error(response);
 			});
 		}
+
+		function _destroyDish(dishId) {
+			devHelper.log(dishId);
+			//TODO: Probably better to use ng directive to handle confirmation popup
+			if (confirm("Do you want to delete the dish?")) {
+				DishesAPI.destroy(dishId)
+					.then(function (response) {
+						_getDishes();
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+			}
+		}
+
+		this.destroyDish = _destroyDish;
 
 		_init();
 

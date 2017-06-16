@@ -45,7 +45,7 @@
                             md-min-length="0"
                             placeholder="Choose Nationality">
                         <md-item-template>
-                            <span md-highlight-text="DishCtrl.searchNationality" md-highlight-flags="^i">{{item.display}}</span>
+                            <span md-highlight-text="DishCtrl.searchNationality" md-highlight-flags="i">{{item.display}}</span>
                         </md-item-template>
                         <md-not-found>
                             No states matching "{{DishCtrl.searchNationality}}" were found.
@@ -77,6 +77,27 @@
                             <div ng-app="mediaUpload" ng-controller="MediaController">
                                 <div class="dropzone" id="dropzone" ng-dropzone></div>
                             </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row pull-center text-center">
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="DishCtrl.dish.gluten_free" ng-true-value="1"
+                                         ng-false-value="0" aria-label="gluten_free">
+                                Gluten-free
+                            </md-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="DishCtrl.dish.vegan" ng-true-value="1"
+                                         ng-false-value="0" aria-label="vegan">
+                                Vegan
+                            </md-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="DishCtrl.dish.vegetarian" ng-true-value="1"
+                                         ng-false-value="0" aria-label="vegetarian">
+                                Vegetarian
+                            </md-checkbox>
                         </div>
                     </div>
                     <br/>

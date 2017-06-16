@@ -50,6 +50,10 @@ angular.module('dish.update', [
 				DishesAPI.show(dishId)
 					.then(function (response) {
 						that.dish = response;
+						that.dish.nationality = {
+							value: that.dish.nationality,
+							display: that.dish.nationality.charAt(0).toUpperCase() + that.dish.nationality.slice(1)
+						};
 					}, function (response) {
 						// TODO handle error state
 						console.error(response);
@@ -57,6 +61,7 @@ angular.module('dish.update', [
 			}
 
 			function _updateDish() {
+				that.dish.nationality = that.dish.nationality.value;
 				DishesAPI.update(that.dish, that.dish.id)
 					.then(function (response) {
 						$state.go('dish.show', {"id": response.id});

@@ -17,6 +17,11 @@ angular.module('dish.create', [
 			this.nationalities = _loadNationalities();
 			this.hasAccess = false;
 
+			that.dish = {};
+			that.dish.gluten_free = false;
+			that.dish.vegetarian = false;
+			that.dish.vegan = false;
+
 			function init() {
 				_checkAccess();
 			}
@@ -41,6 +46,8 @@ angular.module('dish.create', [
 			function _createDish() {
 				//TODO: Add User permission so that only registered users can create dish
 				that.dish.kitchen_id = that.kitchenId;
+				that.dish.nationality = that.dish.nationality.value;
+
 				DishesAPI.create(that.dish)
 					.then(function (response) {
 						var newDish = response;

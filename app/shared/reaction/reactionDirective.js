@@ -3,18 +3,19 @@
 angular.module('reaction', [
 	'reaction_api'
 ])
-	.constant('constant', {'DISLIKE': 0, 'LIKE': 1, 'FORK': 2})
+	.constant('constant', {'DISLIKE': 0, 'LIKE': 1, 'FORK': 2, 'SUBSCRIBE': 3})
 
 	.directive('reactionButton', ['constant', function (constant) {
 		return {
 			restrict: 'EA',
 			replace: true,
 			scope: {
-				reactionable: '='
+				reactionable: '=',
+				for: '=',
 			},
 			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
-			controller: function ($scope, ReactionAPI, $state, devHelper, genericService) {
+			controller: function ($scope, ReactionAPI, $state, devHelper, genericService, $rootScope) {
 
 				/*********************
 				 *  Private Variables
@@ -28,18 +29,17 @@ angular.module('reaction', [
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
-					// TODO: set it to 1 for now until (1) is done
-					userId: 1
+					userId: $rootScope.currentUser.id
 				};
 
 				/*********************
 				 *  Public Variables
 				 **********************/
-
 				$scope.TYPE = reactionableInfo['name'];
 				$scope.DISLIKE = constant.DISLIKE;
 				$scope.LIKE = constant.LIKE;
 				$scope.FORK = constant.FORK;
+				$scope.SUBSCRIBE = constant.SUBSCRIBE;
 
 
 				/*********************
@@ -57,11 +57,12 @@ angular.module('reaction', [
 				function _getReactions() {
 
 					ReactionAPI.index(reactionObj, 'getReactions').then(function (response) {
+						$scope.userReactionId = response.userReactionId;
+						$scope.userReactionKind = response.userReactionKind;
 						$scope.numLikes = response.numLikes;
 						$scope.numDislikes = response.numDislikes;
 						$scope.numForks = response.numForks;
-						$scope.userReactionId = response.userReactionId;
-						$scope.userReactionKind = response.userReactionKind;
+						$scope.numSubscribes = response.numSubscribes;
 
 						_findUserReaction($scope.userReactionKind);
 						devHelper.log(reactionObj);
@@ -132,6 +133,11 @@ angular.module('reaction', [
 							$scope.forked = true;
 							$scope.numForks += 1;
 							break;
+						case 3:
+							devHelper.log('Subscribed');
+							$scope.subscribed = true;
+							$scope.numSubscribes += 1;
+							break;
 					}
 				}
 
@@ -152,6 +158,11 @@ angular.module('reaction', [
 							$scope.forked = false;
 							$scope.numForks -= 1;
 							break;
+						case 3:
+							devHelper.log('Un-Subscribed');
+							$scope.subscribed = false;
+							$scope.numSubscribes -= 1;
+							break;
 					}
 				}
 
@@ -165,6 +176,9 @@ angular.module('reaction', [
 							break;
 						case 2:
 							$scope.forked = true;
+							break;
+						case 3:
+							$scope.subscribed = true;
 							break;
 					}
 				}

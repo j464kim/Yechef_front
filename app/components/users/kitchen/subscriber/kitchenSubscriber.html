@@ -1,24 +1,22 @@
-<div class="row" id="subscribers" loader>
-    <div class="col-md-12">
-        <h2>Subscribed Users</h2>
-    </div>
-</div>
+<div class="col-md-12">
+<h2>Subscribed Users</h2>
 <hr>
-<div class="row justify-content-start">
-    <br/>
-    <div class="col-md-3" ng-repeat="subscriber in KsCtrl.subscribers">
-        <div class="col-md-12">
-            <div class="row">
-                <img ng-src="{{subscriber.medias[0].url}}"
-                     src="http://lorempixel.com/400/200/people/YeChef" alt="{{subscriber.medias[0].url}}"/>
+</div>
+<div layout-fill layout="column" id="subscribers" loader>
+    <md-list class="fixedRows" ng-cloak>
+        <label for="search">Search</label>
+        <input layout-fill flex id="search" type="text" placeholder="email"/>
+        <md-divider></md-divider>
+        <md-subheader class="md-no-sticky">{{KsCtrl.subscribers.length}} users subscribed to the kitchen!
+        </md-subheader>
+        <md-list-item class="md-2-line contact-item" ng-repeat="subscriber in KsCtrl.subscribers">
+            <img ng-src="{{subscriber.medias[0].url}}" class="md-avatar"
+                 src="http://lorempixel.com/400/200/people/YeChef" alt="{{subscriber.last_name}}"/>
+            <div class="md-list-item-text compact">
+                <h3>{{subscriber.first_name}} {{subscriber.last_name}}</h3>
+                <p>{{subscriber.email}}</p>
             </div>
-            <div class="row">
-                <h4 class="card-title">{{subscriber.first_name}} {{subscriber.last_name}}</h4>
-                <md-tooltip md-direction="top">{{subscriber.email}}</md-tooltip>
-            </div>
-        </div>
-        <br/>
-
-    </div>
-
+            <i class="material-icons md-24 md-secondary md-hue-3">message</i>
+        </md-list-item>
+    </md-list>
 </div>

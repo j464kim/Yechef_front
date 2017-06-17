@@ -66,7 +66,7 @@ angular.module('user.api', [])
 			return {
 				list: list,
 				show: show,
-				update: update
+				update: update,
 			};
 		}
 	]);

@@ -23,7 +23,6 @@ angular.module('user.profile.general', [
 			 **********************/
 
 			function _init() {
-				console.log('show user');
 				_showUser();
 			}
 

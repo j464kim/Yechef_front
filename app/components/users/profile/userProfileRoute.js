@@ -4,13 +4,14 @@ angular.module('profile', [
 	'user',
 	'user.profile',
 	'user.profile.general',
+	'user.profile.subscribe'
 ])
 
 	.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('user.profile', {
-				url: '/profile',
+				url: '/profile/{id}',
 				templateUrl: 'components/users/profile/userProfile.html',
 			})
 			.state('user.profile.main', {
@@ -23,12 +24,12 @@ angular.module('profile', [
 				template: '<ui-view/>',
 			})
 			.state('user.profile.info.view', {
-				url: '/{id}',
+				url: '',
 				templateUrl: 'components/users/profile/general/userInfoView.html',
 				controller: 'UserGeneralController as ugCtrl',
 			})
 			.state('user.profile.info.edit', {
-				url: '/{id}/edit',
+				url: '/edit',
 				templateUrl: 'components/users/profile/general/userInfoEdit.html',
 				controller: 'UserGeneralController as ugCtrl',
 			})
@@ -41,8 +42,9 @@ angular.module('profile', [
 				templateUrl: 'components/users/profile/fork/userFork.html',
 			})
 			.state('user.profile.subscribe', {
-				url: '/subscribe',
+				url: '/subscription',
 				templateUrl: 'components/users/profile/subscription/userSubscribe.html',
+				controller: 'UserSubscribeController as usCtrl',
 			})
 			.state('user.profile.privacySetting', {
 				url: '/privacySetting',

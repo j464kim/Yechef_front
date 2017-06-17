@@ -160,6 +160,21 @@ angular.module('kitchen.api', [
 				});
 			}
 
+			function getSubscribers(kitchenId) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.show(
+						{
+							id: kitchenId + "/subscribers"
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				list: list,
 				show: show,
@@ -170,6 +185,7 @@ angular.module('kitchen.api', [
 				addAdmin: addAdmin,
 				removeAdmin: removeAdmin,
 				getDishes: getDishes,
+				getSubscribers: getSubscribers,
 			};
 		}
 	]);

@@ -4,7 +4,8 @@ angular.module('profile', [
 	'user',
 	'user.profile',
 	'user.profile.general',
-	'user.profile.subscribe'
+	'user.profile.subscribe',
+	'user.profile.fork'
 ])
 
 	.config(function ($stateProvider) {
@@ -40,6 +41,7 @@ angular.module('profile', [
 			.state('user.profile.forked', {
 				url: '/forked',
 				templateUrl: 'components/users/profile/fork/userFork.html',
+				controller: 'UserForkController as ufCtrl',
 			})
 			.state('user.profile.subscribe', {
 				url: '/subscription',

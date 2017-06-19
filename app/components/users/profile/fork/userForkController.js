@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('user.profile.subscribe', [
+angular.module('user.profile.fork', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserSubscribeController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
+	.controller('UserForkController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
 		function ($stateParams, $state, UserAPI, devHelper) {
 
 			/*********************
@@ -23,14 +23,14 @@ angular.module('user.profile.subscribe', [
 			 **********************/
 
 			function _init() {
-				_getSubscriptions();
+				_getForkedDishes();
 			}
 
-			function _getSubscriptions() {
-				UserAPI.list('getSubscriptions').then(
+			function _getForkedDishes() {
+				UserAPI.list('getForks').then(
 					function (response) {
 						devHelper.log(response);
-						that.subscribedKitchens = response;
+						that.forkedDishes = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
 						console.error(response);

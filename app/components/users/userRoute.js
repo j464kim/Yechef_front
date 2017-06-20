@@ -24,12 +24,22 @@ angular.module('user', [
 				templateUrl: 'components/users/register/template.html',
 				controller: 'UserRegisterController as RegisterCtrl',
 			})
-			.state('user.linkRequest', {
+			.state('user.password', {
+				url: '/password',
+				abstract: true,
+				template: '<ui-view/>'
+			})
+			.state('user.password.resetRequest', {
 				url: '/password/reset',
-				templateUrl: 'components/users/password/linkRequest.html',
+				templateUrl: 'components/users/password/resetRequest.html',
 				controller: 'PasswordController as PasswordCtrl',
 			})
-			.state('user.resetPassword', {
+			.state('user.password.updateRequest', {
+				url: '/password/change',
+				templateUrl: 'components/users/password/updateRequest.html',
+				controller: 'PasswordController as PasswordCtrl',
+			})
+			.state('user.password.resetPassword', {
 				url: '/password/reset/{token}',
 				templateUrl: 'components/users/password/resetPassword.html',
 				controller: 'PasswordController as PasswordCtrl',

@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Change Password</div>
+                <div class="panel-body">
+
+                    <form class="form-horizontal" ng-submit="PasswordCtrl.updatePassword()" role="form"
+                          method="POST">
+                        <!--Current Password-->
+                        <div class="form-group">
+                            <label for="oldPassword" class="col-md-4 control-label">Current Password</label>
+
+                            <div class="col-md-6">
+                                <input id="oldPassword" type="password" class="form-control" name="oldPassword"
+                                       ng-model="PasswordCtrl.oldPassword" required>
+                            </div>
+                        </div>
+                        <!--New Password-->
+                        <div class="form-group">
+                            <label for="newPassword" class="col-md-4 control-label">New Password</label>
+
+                            <div class="col-md-6">
+                                <input id="newPassword" type="password" class="form-control" name="newPassword"
+                                       ng-model="PasswordCtrl.newPassword" required>
+                            </div>
+                        </div>
+                        <!--New Password Confirmation-->
+                        <div class="form-group">
+                            <label for="newPassword_confirmation" class="col-md-4 control-label">Confirm Password</label>
+
+                            <div class="col-md-6">
+                                <input id="newPassword_confirmation" type="password" class="form-control" name="newPassword_confirmation"
+                                       ng-model="PasswordCtrl.newPassword_confirmation" required>
+                            </div>
+                        </div>
+                        <!--Button-->
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Send Link For Password Change
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,7 +31,6 @@ angular
 		'kitchen',
 		'user',
 		'profile',
-		'cart',
 		'userKitchen',
 		'mediaUpload',
 		'reaction',

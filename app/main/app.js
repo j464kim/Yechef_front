@@ -31,11 +31,16 @@ angular
 		'kitchen',
 		'user',
 		'profile',
+		'cart',
 		'userKitchen',
 		'mediaUpload',
 		'reaction',
 		'directive.confirmPassword',
 		'helper',
+		'ngCart',
+		'ngCart.directives',
+		'ngCart.fulfilment',
+
 
 		// services
 		'http.interceptor',

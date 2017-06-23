@@ -62,6 +62,10 @@
                     <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
                     <li><a ui-sref="user.kitchen.dashboard" ng-if="MCL.isLoggedin()">My Kitchen</a></li>
                     <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
+                    <li>
+                        <a ui-sref="cart.view" ng-if="MCL.isLoggedin()">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> My Cart</a>
+                    </li>
 
                     <li class="dropdown" ng-if="MCL.isLoggedin()" ng-cloak>
                         <a class="dropdown-toggle" data-toggle="dropdown">
@@ -190,7 +194,11 @@
 <script src="components/users/profile/userMainController.js"></script>
 <script src="components/users/kitchen/userKitchenController.js"></script>
 <script src="components/users/kitchen/general/userKitchenGeneralController.js"></script>
-
+<script src="components/cart/cartRoute.js"></script>
+<script src="components/cart/cartController.js"></script>
+<script src="components/cart/src/ngCart.js"></script>
+<script src="components/cart/src/ngCart.directives.js"></script>
+<script src="components/cart/src/ngCart.fulfilment.js"></script>
 
 <script src="style-guide/index.js"></script>
 

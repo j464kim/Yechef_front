@@ -38,9 +38,6 @@ angular
 		'reaction',
 		'directive.confirmPassword',
 		'helper',
-		'ngCart',
-		'ngCart.directives',
-		'ngCart.fulfilment',
 
 
 		// services

@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('cart', [
-	'cart.ngCart',
+	'cart.api',
+	'ngCart',
+	'ngCart.directives',
+	'ngCart.fulfilment',
 ])
 
 	.config(function ($stateProvider) {
@@ -15,6 +18,5 @@ angular.module('cart', [
 			.state('cart.view', {
 				url: '/view',
 				templateUrl: 'components/cart/showCart.html',
-				controller: 'NgCartController as cartCtrl'
 			})
 	});

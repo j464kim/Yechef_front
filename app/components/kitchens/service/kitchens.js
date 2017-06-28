@@ -23,6 +23,10 @@ angular.module('kitchen.api', [
 				},
 				destroy: {
 					method: 'DELETE'
+				},
+				checkOwnership: {
+					method: 'POST',
+					url: apiEndpoint + 'checkOwnership',
 				}
 			});
 		}
@@ -175,6 +179,18 @@ angular.module('kitchen.api', [
 				});
 			}
 
+			function checkOwnership(kitchenId) {
+				return $q(function (resolve, reject) {
+					KitchenResource.checkOwnership({
+						kitchen_id: kitchenId,
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
@@ -186,6 +202,7 @@ angular.module('kitchen.api', [
 				removeAdmin: removeAdmin,
 				getDishes: getDishes,
 				getSubscribers: getSubscribers,
+				checkOwnership: checkOwnership,
 			};
 		}
 	]);

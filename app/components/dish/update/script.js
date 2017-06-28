@@ -26,20 +26,15 @@ angular.module('dish.update', [
 			 **********************/
 
 			function _init() {
-				_showDish(dishId);
+				_checkAccess(dishId);
 			}
 
-			function _checkAccess() {
-				UserAPI.getMyKitchens().then(
+			function _checkAccess(dishId) {
+				DishesAPI.checkOwnership(dishId).then(
 					function (response) {
 						devHelper.log(response);
-						for (var i in response) {
-							if (response[i].id == that.dish.kitchen_id) {
-								that.hasAccess = true;
-								return;
-							}
-						}
-						$state.go('home');
+						that.hasAccess = true;
+						_showDish();
 					}, function (response) {
 						// TODO handle error state
 						console.error(response);
@@ -50,7 +45,6 @@ angular.module('dish.update', [
 				DishesAPI.show(dishId)
 					.then(function (response) {
 						that.dish = response;
-						_checkAccess();
 						that.dish.nationality = {
 							value: that.dish.nationality,
 							display: that.dish.nationality.charAt(0).toUpperCase() + that.dish.nationality.slice(1)

@@ -4,8 +4,8 @@ angular.module('dish.create', [
 	'dishes.api',
 ])
 
-	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout', 'genericService', '$stateParams', 'UserAPI',
-		function ($state, DishesAPI, devHelper, config, $q, $timeout, genericService, $stateParams, UserAPI) {
+	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout', 'genericService', '$stateParams', 'KitchenAPI',
+		function ($state, DishesAPI, devHelper, config, $q, $timeout, genericService, $stateParams, KitchenAPI) {
 
 			/*********************
 			 *    Private Variables
@@ -27,16 +27,10 @@ angular.module('dish.create', [
 			}
 
 			function _checkAccess() {
-				UserAPI.getMyKitchens().then(
+				KitchenAPI.checkOwnership(that.kitchenId).then(
 					function (response) {
 						devHelper.log(response);
-						for (var i in response) {
-							if (response[i].id == that.kitchenId) {
-								that.hasAccess = true;
-								return;
-							}
-						}
-						$state.go('home');
+						that.hasAccess = true;
 					}, function (response) {
 						// TODO handle error state
 						console.error(response);

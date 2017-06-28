@@ -5,8 +5,8 @@ angular.module('user.password', [
 ])
 
 
-	.controller('PasswordController', ['$stateParams', 'PasswordAPI', 'devHelper',
-		function ($stateParams, PasswordAPI, devHelper) {
+	.controller('PasswordController', ['$stateParams', '$state', 'PasswordAPI', 'devHelper', '$rootScope',
+		function ($stateParams, $state, PasswordAPI, devHelper, $rootScope) {
 
 			/*********************
 			 *    Private Variables
@@ -29,25 +29,10 @@ angular.module('user.password', [
 			function _init() {
 			}
 
-			function _showResetForm() {
-				PasswordAPI.showResetForm(
-					that.email
-				).then(
-					function (response) {
-						//set access token
-						devHelper.log(response);
-					},
-					function (response) {
-						console.error(response);
-					}
-				);
-			};
-
 			function _sendResetLinkEmail() {
 				PasswordAPI.sendResetLinkEmail(
 					that.email
-				).then(
-					function (response) {
+				).then(function (response) {
 						//set access token
 						devHelper.log(response);
 					},
@@ -63,10 +48,25 @@ angular.module('user.password', [
 					that.email,
 					that.password,
 					that.password_confirmation
-				).then(
-					function (response) {
+				).then(function (response) {
 						//set access token
 						devHelper.log(response);
+						$state.go('user.profile.info.view', {'id': $rootScope.currentUser.id});
+					},
+					function (response) {
+						console.error(response);
+					}
+				);
+			};
+
+			function _updatePassword() {
+				PasswordAPI.updatePassword(
+					that.oldPassword,
+					that.newPassword,
+					that.newPassword_confirmation
+				).then(function (response) {
+						devHelper.log(response);
+						$state.go('user.profile.info.view', {'id': $rootScope.currentUser.id});
 					},
 					function (response) {
 						console.error(response);
@@ -77,9 +77,9 @@ angular.module('user.password', [
 			/*********************
 			 *    Public Functions
 			 **********************/
-			this.showResetForm = _showResetForm;
 			this.sendResetLinkEmail = _sendResetLinkEmail;
 			this.resetPassword = _resetPassword;
+			this.updatePassword = _updatePassword;
 
 
 			/*********************

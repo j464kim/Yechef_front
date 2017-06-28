@@ -300,26 +300,27 @@ angular.module('auth.api', [
 				})
 			};
 
+			function updatePassword(oldPassword, newPassword, newPassword_confirmation) {
+				return $http({
+					method: 'POST',
+					url: api_endpoint + 'password/update',
+					params: {
+						oldPassword: oldPassword,
+						newPassword: newPassword,
+						newPassword_confirmation: newPassword_confirmation
+					}
+				})
+			};
+
 			return {
-				showResetForm: showResetForm,
 				sendResetLinkEmail: sendResetLinkEmail,
 				resetPassword: resetPassword,
+				updatePassword: updatePassword,
 			};
 		}
 	])
 	.service('PasswordAPI', ['$q', 'PasswordResource',
 		function ($q, PasswordResource) {
-
-			function showResetForm(email, token) {
-
-				return $q(function (resolve, reject) {
-					PasswordResource.showResetForm(email, token).then(function (response) {
-						resolve(response.body);
-					}, function (response) {
-						reject(response);
-					});
-				});
-			};
 
 			function sendResetLinkEmail(email) {
 
@@ -343,10 +344,21 @@ angular.module('auth.api', [
 				});
 			};
 
+			function updatePassword(oldPassword, newPassword, newPassword_confirmation) {
+
+				return $q(function (resolve, reject) {
+					PasswordResource.updatePassword(oldPassword, newPassword, newPassword_confirmation).then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
 			return {
-				showResetForm: showResetForm,
 				sendResetLinkEmail: sendResetLinkEmail,
 				resetPassword: resetPassword,
+				updatePassword: updatePassword,
 			};
 		}
 	]);

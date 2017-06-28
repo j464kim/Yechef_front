@@ -24,13 +24,14 @@
             <td>Tax ({{ ngCart.getTaxRate() }}%):</td>
             <td>{{ ngCart.getTax() | currency }}</td>
         </tr>
-        <tr ng-show="ngCart.getShipping()">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Shipping:</td>
-            <td>{{ ngCart.getShipping() | currency }}</td>
-        </tr>
+        <!--TODO: Will be optionally put later depending on shipping availability-->
+        <!--<tr ng-show="ngCart.getShipping()">-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td>Shipping:</td>-->
+            <!--<td>{{ ngCart.getShipping() | currency }}</td>-->
+        <!--</tr>-->
         <tr>
             <td></td>
             <td></td>

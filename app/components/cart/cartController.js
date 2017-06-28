@@ -24,14 +24,13 @@ angular.module('ngCart.directives', [
 				_onRefresh();
 
 				ngCart.setTaxRate(7.5);
-				ngCart.setShipping(2.99);
+				// ngCart.setShipping(2.99);
 			}
 
 			/*********************
 			 *  Private Functions
 			 **********************/
 			function _onRefresh() {
-				console.log('Cart initialized');
 				$rootScope.$on('ngCart:change', function () {
 					ngCart.$save();
 				});
@@ -123,9 +122,6 @@ angular.module('ngCart.directives', [
 
 				// if the item is already in cart
 				if (typeof inCart === 'object') {
-
-					console.log('item in cart is ');
-					devHelper.log(inCart);
 
 					_updateQty(inCart, quantity, false);
 

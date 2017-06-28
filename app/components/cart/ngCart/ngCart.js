@@ -146,7 +146,7 @@ angular.module('ngCart', [
 	}])
 
 	// called from $restore
-	.factory('ngCartItem', ['$rootScope', '$log', 'devHelper', function ($rootScope, $log, devHelper) {
+	.factory('ngCartItem', ['$rootScope', 'devHelper', function ($rootScope, devHelper) {
 
 		var item = function (id, name, price, quantity, data) {
 			this.setId(id);
@@ -156,11 +156,10 @@ angular.module('ngCart', [
 			this.setData(data);
 		};
 
-
 		item.prototype.setId = function (id) {
 			if (id) this._id = id;
 			else {
-				$log.error('An ID must be provided');
+				console.error('An ID must be provided');
 			}
 		};
 
@@ -168,11 +167,10 @@ angular.module('ngCart', [
 			return this._id;
 		};
 
-
 		item.prototype.setName = function (name) {
 			if (name) this._name = name;
 			else {
-				$log.error('A name must be provided');
+				console.error('A name must be provided');
 			}
 		};
 		item.prototype.getName = function () {
@@ -183,18 +181,17 @@ angular.module('ngCart', [
 			var priceFloat = parseFloat(price);
 			if (priceFloat) {
 				if (priceFloat <= 0) {
-					$log.error('A price must be over 0');
+					console.error('A price must be over 0');
 				} else {
 					this._price = (priceFloat);
 				}
 			} else {
-				$log.error('A price must be provided');
+				console.error('A price must be provided');
 			}
 		};
 		item.prototype.getPrice = function () {
 			return this._price;
 		};
-
 
 		item.prototype.setQuantity = function (quantity, relative) {
 
@@ -212,7 +209,7 @@ angular.module('ngCart', [
 
 			} else {
 				this._quantity = 1;
-				$log.info('Quantity must be an integer and was defaulted to 1');
+				devHelper.log('Quantity must be an integer and was defaulted to 1');
 			}
 			$rootScope.$broadcast('ngCart:change', {});
 
@@ -228,7 +225,7 @@ angular.module('ngCart', [
 
 		item.prototype.getData = function () {
 			if (this._data) return this._data;
-			else $log.info('This item has no data');
+			else devHelper.log('This item has no data');
 		};
 
 

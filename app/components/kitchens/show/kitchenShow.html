@@ -19,10 +19,13 @@
     </div>
     <div class="row">
         <div class="col-md-4 text-center">
-            <a>
-                <i class="material-icons">send</i>
-                <label>Share</label>
-            </a>
+            <label>Share: </label>
+            <a><i class="fa fa-2x fa-facebook-square" socialshare
+                  socialshare-provider="facebook" socialshare-url="{{document.URL}}" aria-hidden="true"></i></a>
+            <a><i class="fa fa-2x fa-twitter-square" socialshare
+                  socialshare-provider="twitter" socialshare-url="{{document.URL}}"  aria-hidden="true"></i></a>
+            <a><i class="fa fa-2x fa-pinterest-square" socialshare
+                  socialshare-provider="pinterest" socialshare-url="{{document.URL}}"  aria-hidden="true"></i></a>
             <div ng-if="KitchenCtrl.kitchen" class="pull-right">
                 <a>
                     <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>

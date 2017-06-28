@@ -6,8 +6,8 @@ angular.module('user.register', [
 ])
 
 
-	.controller('UserRegisterController', ['$state', 'AuthAPI', 'devHelper', '$mdToast',
-		function ($state, AuthAPI, devHelper, $mdToast) {
+	.controller('UserRegisterController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
+		function ($state, AuthAPI, devHelper, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -47,14 +47,7 @@ angular.module('user.register', [
 							} else {
 								message = response.data.message;
 							}
-							$mdToast.show(
-								$mdToast.simple()
-									.textContent(message)
-									.position('top center')
-									.highlightClass('md-warn')
-									.capsule(true)
-									.hideDelay(3000)
-							);
+							genericService.showToast(message);
 							console.error(response);
 						}
 					);

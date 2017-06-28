@@ -2,7 +2,7 @@ angular.module('user.kitchen.general', [
 	'ngMaterial',
 ])
 
-	.controller('userKitchenGeneralController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService, $mdToast) {
+	.controller('userKitchenGeneralController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -63,14 +63,7 @@ angular.module('user.kitchen.general', [
 				_getKitchenAdmins();
 			}, function (response) {
 				//TODO handle error state
-				$mdToast.show(
-					$mdToast.simple()
-						.textContent(response.data.message)
-						.position('top center')
-						.highlightClass('md-warn')
-						.capsule(true)
-						.hideDelay(3000)
-				);
+				genericService.showToast(response.data.message);
 				console.error(response);
 			});
 		};

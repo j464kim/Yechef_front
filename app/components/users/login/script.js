@@ -6,8 +6,8 @@ angular.module('user.login', [
 ])
 
 
-	.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper', '$mdToast',
-		function ($state, AuthAPI, devHelper, $mdToast) {
+	.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
+		function ($state, AuthAPI, devHelper, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -47,14 +47,7 @@ angular.module('user.login', [
 						devHelper.log(response);
 					},
 					function (response) {
-						$mdToast.show(
-							$mdToast.simple()
-								.textContent(response.data.message)
-								.position('top center')
-								.highlightClass('md-warn')
-								.capsule(true)
-								.hideDelay(3000)
-						);
+						genericService.showToast(response.data.message);
 						console.error(response);
 					}
 				);
@@ -78,14 +71,7 @@ angular.module('user.login', [
 						devHelper.log(response);
 					},
 					function (response) {
-						$mdToast.show(
-							$mdToast.simple()
-								.textContent(response)
-								.position('top center')
-								.highlightClass('md-warn')
-								.capsule(true)
-								.hideDelay(3000)
-						);
+						genericService.showToast(response);
 						console.error(response);
 					}
 				);

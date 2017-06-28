@@ -6,7 +6,7 @@
     </div>
 </div>
 <hr>
-<div class="row justify-content-start">
+<div class="row">
     <br/>
     <div class="col-md-3" ng-repeat="dish in KdCtrl.dishes">
         <div class="col-md-12">
@@ -18,7 +18,7 @@
             <div class="row" ui-sref="dish.show({id: {{dish.id}}})">
                 <img ui-sref="dish.show({id: {{dish.id}}})" ng-src="{{dish.medias[0].url}}"
                      src="http://lorempixel.com/400/200/abstract/Yechef"
-                     alt="{{dish.medias[0].url}}"
+                     alt="{{dish.name}}"
                      style="width:100%;">
             </div>
             <div class="row">

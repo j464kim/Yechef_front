@@ -47,7 +47,7 @@ angular.module('dish.update', [
 						that.dish = response;
 						that.dish.nationality = {
 							value: that.dish.nationality,
-							display: that.dish.nationality.charAt(0).toUpperCase() + that.dish.nationality.slice(1)
+							display: that.dish.nationality
 						};
 					}, function (response) {
 						// TODO handle error state

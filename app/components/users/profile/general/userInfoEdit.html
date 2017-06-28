@@ -1,0 +1,47 @@
+<h2>EDIT INFO</h2>
+<hr>
+<form class="form-validation" name="form" role="form" novalidate>
+    <!--First Name-->
+    <md-input-container class="md-block">
+        <div class="firstName">
+            <label class="control-label" for="firstName">First Name:</label>
+            <input type="text" class="card-text" name="firstName" id="firstName" ng-model="ugCtrl.user.first_name"
+                   required/>
+            <div class="field-message" ng-messages="form.firstName.$error" ng-if='form.firstName.$touched' ng-cloak>
+                <div ng-message="required">First Name is required</div>
+            </div>
+        </div>
+    </md-input-container>
+    <!--Last Name-->
+    <md-input-container class="md-block">
+        <div class="lastName">
+            <label class="control-label" for="lastName">Last Name:</label>
+            <input type="text" class="card-text" name="lastName" id="lastName" ng-model="ugCtrl.user.last_name"
+                   required/>
+            <div class="field-message" ng-messages="form.lastName.$error" ng-if='form.lastName.$touched' ng-cloak>
+                <div ng-message="required">Last Name is required</div>
+            </div>
+        </div>
+    </md-input-container>
+    <!--Phone-->
+    <md-input-container class="md-block">
+        <div class="userPhone">
+            <label class="control-label" for="userPhone">Phone:</label>
+            <input type="text" class="card-text" name="phone" id="userPhone" ng-model="ugCtrl.user.phone"
+                   ui-mask="+9-999-999-9999"
+                   placeholder="" required/>
+            <div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$touched' ng-cloak>
+                <div ng-message="required">Phone number is required</div>
+                <div ng-message="pattern">Must be a valid 10 digit phone number</div>
+            </div>
+        </div>
+    </md-input-container>
+    <!--Button-->
+    <md-button class="md-raised md-primary" ng-click="ugCtrl.updateUser()" ng-disabled="form.$invalid">
+        Update
+    </md-button>
+    <md-button ui-sref="user.profile.info.view">
+        Back
+    </md-button>
+</form>
+

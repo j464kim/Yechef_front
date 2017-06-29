@@ -30,6 +30,7 @@ angular
 		'rating',
 		'kitchen',
 		'user',
+		'checkout',
 		'profile',
 		'userKitchen',
 		'mediaUpload',

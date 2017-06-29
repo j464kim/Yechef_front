@@ -1,0 +1,23 @@
+<h2>MY FORK</h2>
+<hr/>
+
+<div class="container" id="kitchenList" loader>
+    <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+    <div class="row">
+        <div class="col-md-2" ng-repeat="dish in ufCtrl.forkedDishes">
+            <md-card>
+                <img class="md-user-avatar" ui-sref="dish.show({id: dish.id})" ng-src="{{dish.medias[0].url}}">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-subhead">{{dish.name}}</span>
+                        <span class="md-subhead">{{dish.price}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+        </div>
+    </div>
+</div>
+
+
+
+<button class="btn btn-primary">Load More</button>

@@ -1,0 +1,16 @@
+<h2>MY INFO</h2>
+<hr>
+<div class="userName">
+    <label>Name:</label>
+    <span>{{ugCtrl.user.first_name + ' ' + ugCtrl.user.last_name}}</span>
+</div>
+<div class="userEmail">
+    <label>Email:</label>
+    <span>{{ugCtrl.user.email}}</span>
+</div>
+<div class="userPhone">
+    <label>Phone:</label>
+    <span>{{ugCtrl.user.phone}}</span>
+</div>
+<button ui-sref="user.profile.info.edit({id: currentUser.id})">Edit</button>
+<button ui-sref="user.password.updateRequest">Change Password</button>

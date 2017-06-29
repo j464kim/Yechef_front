@@ -68,7 +68,7 @@
                             <img src="http://placehold.it/18x18" class="profile-image img-circle">
                             <label>{{currentUser.first_name}}</label> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a ui-sref="user.profile.main"><i class="fa fa-id-badge"></i> Profile</a></li>
+                            <li><a ui-sref="user.profile.main({id: currentUser.id})"><i class="fa fa-id-badge"></i> Profile</a></li>
                             <li class="divider"></li>
                             <li>
                                 <a href=""><i class="fa fa-navicon"></i> Orders</a></li>
@@ -187,12 +187,14 @@
 <script src="components/users/login/script.js"></script>
 <script src="components/users/password/script.js"></script>
 <script src="components/users/register/script.js"></script>
-<script src="components/users/profile/userMainController.js"></script>
+<script src="components/users/profile/main/userMainController.js"></script>
 <script src="components/users/kitchen/userKitchenController.js"></script>
 <script src="components/users/kitchen/general/userKitchenGeneralController.js"></script>
 <script src="components/users/kitchen/dish/kitchenDishController.js"></script>
 <script src="components/users/kitchen/subscriber/kitchenSubscribers.js"></script>
-
+<script src="components/users/profile/general/userGeneralController.js"></script>
+<script src="components/users/profile/subscription/userSubscribeController.js"></script>
+<script src="components/users/profile/fork/userForkController.js"></script>
 
 <script src="style-guide/index.js"></script>
 

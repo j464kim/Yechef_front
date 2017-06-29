@@ -37,7 +37,7 @@ angular.module('main.controller', [])
 			this.isLoggedin = sessionService.isLogin;
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', function (config, $q, $timeout, devHelper) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper','$state', function (config, $q, $timeout, devHelper,$state) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -103,6 +103,24 @@ angular.module('main.controller', [])
 				return (nationality.value.indexOf(lowercaseQuery) === 0);
 			};
 
+		}
+
+		this.searchDish = function () {
+			if (!self.nationality.value) {
+				self.nationality.value = 'all';
+			}
+			if (!self.sortBy) {
+				self.sortBy = 'hottest';
+			}
+			$state.go('dish.list', {
+				q: self.q,
+				vegan: self.vegan,
+				vegetarian: self.vegetarian,
+				min_price: self.min_price,
+				max_price: self.max_price,
+				nationality: self.nationality.value,
+				sortBy: self.sortBy,
+			});
 		}
 	}
 	]);

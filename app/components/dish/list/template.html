@@ -6,7 +6,7 @@
                 <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
                 <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
             </button>
-            <div uib-collapse="DishCtrl.isSearchCollapsed">
+            <div uib-collapse="DishCtrl.isSearchCollapsed" ng-controller="SearchCtrl as sctrl" >
                 <md-content class="md-padding">
                     <div class="col-sm-3">
                         <div class="row no-gutters">
@@ -45,7 +45,7 @@
                         </md-input-container>
                     </div>
                     <div class="col-sm-3">
-                        <div ng-controller="SearchCtrl as sctrl" layout="column" ng-cloak>
+                        <div layout="column" ng-cloak>
                             <form ng-submit="$event.preventDefault()">
                                 <md-autocomplete
                                         ng-disabled="sctrl.isDisabled"
@@ -91,9 +91,6 @@
                 </div>
             </div>
         </div>
-        <div class="row dish_create">
-            <a ui-sref="dish.create" class="btn btn-warning">Dish Create (TO REMOVE)</a>
-        </div>
         <div class="row">
             <div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
                 <a ui-sref="dish.show({id: {{dish.id}}})">
@@ -112,7 +109,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-2">
                 <!--TODO: Change items-per-page to 18-->
-                <ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" items-per-page="8"
+                <ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" items-per-page="18"
                     boundary-links="true" force-ellipses="true" max-size="5"
                     ng-change="DishCtrl.getDishes()"></ul>
             </div>

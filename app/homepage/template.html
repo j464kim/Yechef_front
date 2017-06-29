@@ -2,14 +2,14 @@
     <div class="col-sm-1">
 
     </div>
-    <md-content class="md-padding">
+    <md-content class="md-padding" ng-controller="SearchCtrl as sctrl" >
         <div class="col-sm-2">
             <div class="row no-gutters">
                 <md-input-container>
-                    <input type="text" id="food">
-                    <label for="food">Food (ex. Seafood)</label>
+                    <input type="text" id="food" ng-model="sctrl.q">
+                    <label for="food">Key word (ex. Seafood)</label>
                     <br/> <br/><br/>
-                    <md-checkbox ng-model="sctrl.deliverOnly">Deliver Only</md-checkbox>
+                    <md-checkbox ng-model="sctrl.deliverOnly" disabled="true">Deliver Only</md-checkbox>
                 </md-input-container>
             </div>
         </div>
@@ -30,15 +30,23 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <md-input-container>
-                <input type="text" id="price">
-                <label for="price">Price limit</label>
-                <br/><br/><br/>
+                <div class="col-sm-6">
+                    <md-input-container>
+                        <input type="text" id="min_price" ng-model="sctrl.min_price">
+                        <label for="min_price">min</label>
+                    </md-input-container>
+                </div>
+
+                <div class="col-sm-6">
+                    <md-input-container>
+                        <input type="text" id="max_price" ng-model="sctrl.max_price">
+                        <label for="max_price">max</label>
+                    </md-input-container>
+                </div>
                 <md-checkbox ng-model="sctrl.glutenFree">Gluten-free</md-checkbox>
-            </md-input-container>
         </div>
         <div class="col-sm-3">
-            <div ng-controller="SearchCtrl as sctrl" layout="column" ng-cloak>
+            <div layout="column" ng-cloak>
                 <form ng-submit="$event.preventDefault()">
                     <md-autocomplete
                             ng-disabled="sctrl.isDisabled"
@@ -69,7 +77,8 @@
         </div>
         <div class="col-sm-2">
             <div class="row no-gutters">
-                <md-button class="md-raised md-warn">Search</md-button> <br/>
+                <md-button class="md-raised md-warn" ng-click="sctrl.searchDish()">Search</md-button>
+                <br/>
                 <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline">
                     <md-option value="hottest">Hottest</md-option>
                     <md-option value="price_asc">Price (Ascending)</md-option>

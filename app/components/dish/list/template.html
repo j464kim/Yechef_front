@@ -22,7 +22,7 @@
                     <div class="col-sm-2">
                         <div class="row no-gutters">
                             <md-input-container>
-                                <input type="text" id="City" ng-model="sctrl.city">
+                                <input type="text" id="City" options="sctrl.autocompleteOptions" g-places-autocomplete ng-model="sctrl.city" />
                                 <label for="City">City</label>
                                 <br/><br/>
                                 <md-slider-container>

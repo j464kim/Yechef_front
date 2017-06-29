@@ -54,6 +54,11 @@ angular.module('home', [])
 			alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
 		}
 
+
+		this.autocompleteOptions = {
+			types: ['(regions)']
+		}
+
 		// ******************************
 		// Internal methods
 		// ******************************

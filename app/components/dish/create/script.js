@@ -15,7 +15,6 @@ angular.module('dish.create', [
 
 			this.kitchenId = $stateParams.kid;
 			this.nationalities = _loadNationalities();
-			this.hasAccess = false;
 
 			that.dish = {};
 			that.dish.gluten_free = false;
@@ -30,7 +29,6 @@ angular.module('dish.create', [
 				KitchenAPI.checkOwnership(that.kitchenId).then(
 					function (response) {
 						devHelper.log(response);
-						that.hasAccess = true;
 					}, function (response) {
 						// TODO handle error state
 						console.error(response);

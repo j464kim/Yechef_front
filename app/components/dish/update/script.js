@@ -18,7 +18,6 @@ angular.module('dish.update', [
 			 *    Public Variables
 			 **********************/
 			this.nationalities = _loadNationalities();
-			this.hasAccess = false;
 			this.kitchen = {};
 
 			/*********************
@@ -33,7 +32,6 @@ angular.module('dish.update', [
 				DishesAPI.checkOwnership(dishId).then(
 					function (response) {
 						devHelper.log(response);
-						that.hasAccess = true;
 						_showDish();
 					}, function (response) {
 						// TODO handle error state

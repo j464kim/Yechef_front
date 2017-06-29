@@ -2,7 +2,7 @@
     <div class="col-sm-1">
 
     </div>
-    <md-content class="md-padding" ng-controller="SearchCtrl as sctrl" >
+    <md-content class="md-padding" ng-controller="SearchCtrl as sctrl">
         <div class="col-sm-2">
             <div class="row no-gutters">
                 <md-input-container>
@@ -30,28 +30,27 @@
             </div>
         </div>
         <div class="col-sm-2">
-                <div class="col-sm-6">
-                    <md-input-container>
-                        <input type="text" id="min_price" ng-model="sctrl.min_price">
-                        <label for="min_price">min</label>
-                    </md-input-container>
-                </div>
+            <label class="col-sm-offset-2">Price Range</label>
+            <div class="col-sm-6">
+                <md-input-container>
+                    <input type="text" id="min_price" ng-model="sctrl.min_price" ui-mask="9999">
+                    <label for="min_price">min</label>
+                </md-input-container>
+            </div>
 
-                <div class="col-sm-6">
-                    <md-input-container>
-                        <input type="text" id="max_price" ng-model="sctrl.max_price">
-                        <label for="max_price">max</label>
-                    </md-input-container>
-                </div>
-                <md-checkbox ng-model="sctrl.glutenFree">Gluten-free</md-checkbox>
+            <div class="col-sm-6">
+                <md-input-container>
+                    <input type="text" id="max_price" ng-model="sctrl.max_price" ui-mask="9999">
+                    <label for="max_price">max</label>
+                </md-input-container>
+            </div>
         </div>
         <div class="col-sm-3">
             <div layout="column" ng-cloak>
                 <form ng-submit="$event.preventDefault()">
                     <md-autocomplete
-                            ng-disabled="sctrl.isDisabled"
                             md-no-cache="true"
-                            md-selected-item="sctrl.selectedItem"
+                            md-selected-item="sctrl.selectedNationality"
                             md-search-text-change="sctrl.searchTextChange(sctrl.searchText)"
                             md-search-text="sctrl.searchText"
                             md-selected-item-change="sctrl.selectedItemChange(item)"
@@ -70,8 +69,9 @@
                     </md-autocomplete>
 
                     <br/><br/>
-                    <md-checkbox ng-model="sctrl.vegan">Vegan</md-checkbox>
-                    <md-checkbox ng-model="sctrl.vegetarian">Vegetarian</md-checkbox>
+                    <md-checkbox ng-model="sctrl.vegan" ng-true-value="1">Vegan</md-checkbox>
+                    <md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1">Vegetarian</md-checkbox>
+                    <md-checkbox ng-model="sctrl.gluten_free" ng-true-value="1">Gluten-free</md-checkbox>
                 </form>
             </div>
         </div>

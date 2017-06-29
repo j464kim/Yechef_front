@@ -37,7 +37,7 @@ angular.module('main.controller', [])
 			this.isLoggedin = sessionService.isLogin;
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper','$state', function (config, $q, $timeout, devHelper,$state) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', function (config, $q, $timeout, devHelper, $state) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -106,8 +106,10 @@ angular.module('main.controller', [])
 		}
 
 		this.searchDish = function () {
-			if (!self.nationality.value) {
-				self.nationality.value = 'all';
+			if (!self.selectedNationality) {
+				self.nationality = 'all';
+			} else {
+				self.nationality = self.selectedNationality.value;
 			}
 			if (!self.sortBy) {
 				self.sortBy = 'hottest';
@@ -116,9 +118,10 @@ angular.module('main.controller', [])
 				q: self.q,
 				vegan: self.vegan,
 				vegetarian: self.vegetarian,
+				gluten_free: self.gluten_free,
 				min_price: self.min_price,
 				max_price: self.max_price,
-				nationality: self.nationality.value,
+				nationality: self.nationality,
 				sortBy: self.sortBy,
 			});
 		}

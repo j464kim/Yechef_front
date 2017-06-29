@@ -22,7 +22,7 @@ angular.module('dish', [
 			//     controller: 'DishListInfiniteController as DishCtrl',
 			// })
 			.state('dish.list', {
-				url: 'es?q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy',
+				url: 'es?q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy&city&distance',
 				templateUrl: '/components/dish/list/template.html',
 				controller: 'DishListController as DishCtrl',
 			})

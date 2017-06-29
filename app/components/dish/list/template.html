@@ -6,22 +6,23 @@
                 <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
                 <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
             </button>
-            <div uib-collapse="DishCtrl.isSearchCollapsed" ng-controller="SearchCtrl as sctrl" >
+            <div uib-collapse="DishCtrl.isSearchCollapsed" ng-controller="SearchCtrl as sctrl"
+                 ng-init="DishCtrl.getSearchParams(sctrl)">
                 <md-content class="md-padding">
                     <div class="col-sm-3">
                         <div class="row no-gutters">
                             <md-input-container>
-                                <input type="text" id="food">
-                                <label for="food">Food (ex. Seafood)</label>
+                                <input type="text" id="food" ng-model="sctrl.q">
+                                <label for="food">Key word (ex. Seafood)</label>
                                 <br/> <br/><br/>
-                                <md-checkbox ng-model="sctrl.deliverOnly">Deliver Only</md-checkbox>
+                                <md-checkbox ng-model="sctrl.deliverOnly" disabled>Deliver Only</md-checkbox>
                             </md-input-container>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="row no-gutters">
                             <md-input-container>
-                                <input type="text" id="City">
+                                <input type="text" id="City" ng-model="sctrl.city">
                                 <label for="City">City</label>
                                 <br/><br/>
                                 <md-slider-container>
@@ -35,22 +36,27 @@
                             </md-input-container>
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <md-input-container>
-                            <input type="text" id="price">
-                            <label for="price">Price limit</label>
-                            <br/><br/><br/>
-                            <md-checkbox ng-model="sctrl.vegan">Vegan</md-checkbox>
-                            <md-checkbox ng-model="sctrl.vegetarian">Vegetarian</md-checkbox>
-                        </md-input-container>
+                    <div class="col-sm-3">
+                        <label class="col-sm-offset-2">Price Range</label>
+                        <div class="col-sm-6">
+                            <md-input-container>
+                                <input type="text" id="min_price" ng-model="sctrl.min_price">
+                                <label for="max_price">min</label>
+                            </md-input-container>
+                        </div>
+                        <div class="col-sm-6">
+                            <md-input-container>
+                                <input type="text" id="max_price" ng-model="sctrl.max_price">
+                                <label for="max_price">max</label>
+                            </md-input-container>
+                        </div>
                     </div>
                     <div class="col-sm-3">
                         <div layout="column" ng-cloak>
                             <form ng-submit="$event.preventDefault()">
                                 <md-autocomplete
-                                        ng-disabled="sctrl.isDisabled"
                                         md-no-cache="true"
-                                        md-selected-item="sctrl.selectedItem"
+                                        md-selected-item="sctrl.selectedNationality"
                                         md-search-text-change="sctrl.searchTextChange(sctrl.searchText)"
                                         md-search-text="sctrl.searchText"
                                         md-selected-item-change="sctrl.selectedItemChange(item)"
@@ -68,7 +74,15 @@
                                     </md-not-found>
                                 </md-autocomplete>
                                 <br/><br/>
-                                <md-checkbox ng-model="sctrl.glutenFree">Gluten-free</md-checkbox>
+                                <md-checkbox ng-model="sctrl.gluten_free" ng-true-value="1"
+                                             ng-checked="sctrl.gluten_free == 1">Gluten-free
+                                </md-checkbox>
+                                <md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1"
+                                             ng-checked="sctrl.vegetarian == 1">Vegetarian
+                                </md-checkbox>
+                                <md-checkbox ng-model="sctrl.vegan" ng-true-value="1" ng-checked="sctrl.vegan == 1">
+                                    Vegan
+                                </md-checkbox>
                             </form>
                         </div>
                     </div>
@@ -76,21 +90,27 @@
 
                 <div class="row no-gutters">
                     <div class="col-sm-3">
-                        <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline">
-                            <md-option value="hottest">Hottest</md-option>
-                            <md-option value="price_asc">Price (Ascending)</md-option>
-                            <md-option value="price_dsc">Price (Descending)</md-option>
-                            <md-option value="taste">Taste</md-option>
-                            <md-option value="visual">Visual</md-option>
-                            <md-option value="quantity">Quantity</md-option>
+                        <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline" ng-init="console.log(sctrl.sortBy)">
+                            <md-option ng-value="'hottest'" ng-selected="sctrl.sortBy === 'hottest'">Hottest</md-option>
+                            <md-option ng-value="'price_asc'" ng-selected="sctrl.sortBy === 'price_asc'">Price
+                                (Ascending)
+                            </md-option>
+                            <md-option ng-value="'price_dsc'" ng-selected="sctrl.sortBy === 'price_dsc'">Price
+                                (Descending)
+                            </md-option>
+                            <md-option ng-value="'taste'" ng-selected="sctrl.sortBy === 'taste'">Taste</md-option>
+                            <md-option ng-value="'visual'" ng-selected="sctrl.sortBy === 'visual'">Visual</md-option>
+                            <md-option ng-value="'quantity'" ng-selected="sctrl.sortBy === 'quantity'">Quantity
+                            </md-option>
                         </md-select>
                     </div>
                     <div class="col-sm-push-7 col-sm-3">
-                        <md-button class="md-raised md-warn">Search</md-button>
+                        <md-button class="md-raised md-warn" ng-click="sctrl.searchDish()">Search</md-button>
                     </div>
                 </div>
             </div>
         </div>
+        <hr/>
         <div class="row">
             <div class="col-md-6" ng-repeat="dish in DishCtrl.dishes">
                 <a ui-sref="dish.show({id: {{dish.id}}})">
@@ -106,6 +126,7 @@
                 </a>
             </div>
         </div>
+        <hr/>
         <div class="row">
             <div class="col-md-10 col-md-offset-2">
                 <!--TODO: Change items-per-page to 18-->

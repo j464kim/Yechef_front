@@ -72,6 +72,20 @@ angular.module('dish.list', [
 			 *    Public Functions
 			 **********************/
 			this.getDishes = _getDishes;
+			this.getSearchParams = function(sctrl) {
+				sctrl.q = $stateParams.q;
+				sctrl.selectedNationality = {};
+				sctrl.selectedNationality.value = $stateParams.nationality? $stateParams.nationality : 'all';
+				sctrl.selectedNationality.display = $stateParams.nationality? $stateParams.nationality : 'all';
+				sctrl.vegan = $stateParams.vegan;
+				sctrl.vegetarian = $stateParams.vegetarian;
+				sctrl.gluten_free = $stateParams.gluten_free;
+				sctrl.min_price = $stateParams.min_price;
+				sctrl.max_price = $stateParams.max_price;
+				sctrl.sortBy = $stateParams.sortBy;
+				sctrl.distance = $stateParams.distance;
+				sctrl.city = $stateParams.city;
+			}
 
 
 			/*********************

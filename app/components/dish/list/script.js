@@ -49,6 +49,7 @@ angular.module('dish.list', [
 				that.options.gluten_free = $stateParams.gluten_free;
 				that.options.min_price = $stateParams.min_price;
 				that.options.max_price = $stateParams.max_price;
+				that.options.city = $stateParams.city;
 			}
 
 			function _getDishes() {

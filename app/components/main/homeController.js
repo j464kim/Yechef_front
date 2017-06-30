@@ -37,7 +37,7 @@ angular.module('home', [])
 			this.isLoggedIn = sessionService.isLogin;
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', function (config, $q, $timeout, devHelper, $state) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'uiGmapGoogleMapApi', function (config, $q, $timeout, devHelper, $state, uiGmapGoogleMapApi) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -50,14 +50,35 @@ angular.module('home', [])
 
 		self.nationality = newNationality;
 
-		function newNationality(nationality) {
-			alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
-		}
-
+		uiGmapGoogleMapApi.then(function (maps) {
+			// write your code here
+			// (google is defined)
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					function (position) {
+						self.currentLocation = position;
+						var latlng = new maps.LatLng(position.coords.latitude, position.coords.longitude);
+						var geocoder = new maps.Geocoder();
+						geocoder.geocode({'latLng': latlng}, function (results, status) {
+							// Do something with result
+							if (!self.city) {
+								self.city = results[1];
+							}
+						});
+					});
+			} else {
+				console.error("Geolocation is not supported by this browser.");
+			}
+		});
 
 		this.autocompleteOptions = {
 			types: ['(regions)']
 		}
+
+		function newNationality(nationality) {
+			alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
+		}
+
 
 		// ******************************
 		// Internal methods
@@ -111,6 +132,7 @@ angular.module('home', [])
 		}
 
 		this.searchDish = function () {
+			console.log(self.city);
 			if (!self.selectedNationality) {
 				self.nationality = 'all';
 			} else {
@@ -128,6 +150,7 @@ angular.module('home', [])
 				max_price: self.max_price,
 				nationality: self.nationality,
 				sortBy: self.sortBy,
+				city: self.city.formatted_address,
 			});
 		}
 	}

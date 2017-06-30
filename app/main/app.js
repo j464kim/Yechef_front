@@ -31,6 +31,7 @@ angular
 		'rating',
 		'kitchen',
 		'user',
+		'checkout',
 		'profile',
 		'cart',
 		'userKitchen',

@@ -39,15 +39,15 @@ angular.module('user.kitchen.general', [
 				});
 		};
 
-		function _updateKitchen(myCurrentKitchenToEdit, mainCtrl) {
+		function _updateKitchen(myCurrentKitchenToEdit, ukCtrl) {
 			KitchenAPI.update(myCurrentKitchenToEdit, that.myCurrentKitchen.id).then(function (response) {
 				var updatedKitchen = response;
-				mainCtrl.myCurrentKitchen.name = updatedKitchen.name;
-				mainCtrl.myCurrentKitchen.phone = updatedKitchen.phone;
-				mainCtrl.myCurrentKitchen.address = updatedKitchen.address;
-				mainCtrl.myCurrentKitchen.email = updatedKitchen.email;
-				mainCtrl.myCurrentKitchen.description = updatedKitchen.description;
-				mainCtrl.myCurrentKitchen.medias = updatedKitchen.medias;
+				ukCtrl.myCurrentKitchen.name = updatedKitchen.name;
+				ukCtrl.myCurrentKitchen.phone = updatedKitchen.phone;
+				ukCtrl.myCurrentKitchen.address = updatedKitchen.address;
+				ukCtrl.myCurrentKitchen.email = updatedKitchen.email;
+				ukCtrl.myCurrentKitchen.description = updatedKitchen.description;
+				ukCtrl.myCurrentKitchen.medias = updatedKitchen.medias;
 				devHelper.log(response);
 				$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
 			}, function (response) {

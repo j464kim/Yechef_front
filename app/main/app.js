@@ -46,6 +46,7 @@ angular
 		'http.interceptor',
 		'auth.api',
 		'search.api',
+		'map.api',
 
 		// configuration
 		'configuration',

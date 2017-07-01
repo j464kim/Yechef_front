@@ -37,7 +37,7 @@ angular.module('home', [])
 			this.isLoggedIn = sessionService.isLogin;
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'uiGmapGoogleMapApi', function (config, $q, $timeout, devHelper, $state, uiGmapGoogleMapApi) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', '$stateParams', function (config, $q, $timeout, devHelper, $state, MapAPI, $stateParams) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -50,26 +50,53 @@ angular.module('home', [])
 
 		self.nationality = newNationality;
 
-		uiGmapGoogleMapApi.then(function (maps) {
-			// write your code here
-			// (google is defined)
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(
-					function (position) {
-						self.currentLocation = position;
-						var latlng = new maps.LatLng(position.coords.latitude, position.coords.longitude);
-						var geocoder = new maps.Geocoder();
-						geocoder.geocode({'latLng': latlng}, function (results, status) {
-							// Do something with result
-							if (!self.city) {
-								self.city = results[1];
-							}
-						});
-					});
-			} else {
-				console.error("Geolocation is not supported by this browser.");
-			}
-		});
+		self.sampleMarkers = [];
+
+		for (var i = 0; i < 10; i++) {
+			var ret = {
+				latitude: 43 + i,
+				longitude: -79 + i,
+				title: 'm' + i
+			};
+			ret["id"] = i;
+			self.sampleMarkers[i] = ret;
+		}
+
+		this.map = {
+			center: {latitude: 43, longitude: -79},
+			zoom: 13
+		};
+
+		this.map.options = {
+			scrollwheel: false,
+			disableDefaultUI: true,
+			zoomControl: true,
+		};
+		this.map.options.zoomControlOptions = {
+			position: google.maps.ControlPosition.TOP_RIGHT,
+		};
+
+		if ($stateParams.city) {
+			MapAPI.geocode($stateParams.city).then(function (result) {
+				console.log(result);
+				self.map.center.latitude = result[0].geometry.location.lat();
+				self.map.center.longitude = result[0].geometry.location.lng();
+			});
+		}
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				function (position) {
+					self.currentLocation = position;
+					MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
+						function (result) {
+							self.city = result[1];
+						}
+					);
+				});
+		} else {
+			console.error("Geolocation is not supported by this browser.");
+		}
 
 		this.autocompleteOptions = {
 			types: ['(regions)']
@@ -132,7 +159,7 @@ angular.module('home', [])
 		}
 
 		this.searchDish = function () {
-			console.log(self.city);
+			// console.log(self.city);
 			if (!self.selectedNationality) {
 				self.nationality = 'all';
 			} else {

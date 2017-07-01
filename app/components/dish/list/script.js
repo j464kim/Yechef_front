@@ -4,8 +4,8 @@ angular.module('dish.list', [
 	'dishes.api',
 ])
 
-	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'uiGmapGoogleMapApi', 'SearchAPI', '$stateParams',
-		function ($state, DishesAPI, devHelper, uiGmapGoogleMapApi, SearchAPI, $stateParams) {
+	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams',
+		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams) {
 
 			/*********************
 			 *    Private Variables
@@ -21,16 +21,6 @@ angular.module('dish.list', [
 			this.dishes = [];
 			this.isSearchCollapsed = true;
 			this.options = {};
-
-			this.map = {
-				center: {latitude: 45, longitude: -73},
-				zoom: 13
-			};
-			this.map.options = {
-				scrollwheel: false,
-				disableDefaultUI: true,
-				zoomControl: true,
-			};
 
 			/*********************
 			 *    Private Functions
@@ -97,13 +87,5 @@ angular.module('dish.list', [
 			/*********************
 			 *    EVENTS
 			 **********************/
-			uiGmapGoogleMapApi.then(function (maps) {
-				// write your code here
-				// (google is defined)
-				devHelper.log(maps);
-				that.map.options.zoomControlOptions = {
-					position: google.maps.ControlPosition.TOP_RIGHT,
-				};
-			});
 		}
 	])

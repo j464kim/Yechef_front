@@ -1,4 +1,4 @@
-<div class="container" id="dishList" loader>
+<div class="container" id="dishList" ng-controller="SearchCtrl as sctrl" loader>
     <div class="col-sm-8">
         <div class="row">
             <button type="button" class="btn btn-default"
@@ -6,7 +6,7 @@
                 <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
                 <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
             </button>
-            <div uib-collapse="DishCtrl.isSearchCollapsed" ng-controller="SearchCtrl as sctrl"
+            <div uib-collapse="DishCtrl.isSearchCollapsed"
                  ng-init="DishCtrl.getSearchParams(sctrl)">
                 <md-content class="md-padding">
                     <div class="col-sm-3">
@@ -22,7 +22,8 @@
                     <div class="col-sm-2">
                         <div class="row no-gutters">
                             <md-input-container>
-                                <input type="text" id="City" options="sctrl.autocompleteOptions" g-places-autocomplete ng-model="sctrl.city" />
+                                <input type="text" id="City" options="sctrl.autocompleteOptions" g-places-autocomplete
+                                       ng-model="sctrl.city"/>
                                 <label for="City">City</label>
                                 <br/><br/>
                                 <md-slider-container>
@@ -90,7 +91,8 @@
 
                 <div class="row no-gutters">
                     <div class="col-sm-3">
-                        <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline" ng-init="console.log(sctrl.sortBy)">
+                        <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline"
+                                   ng-init="console.log(sctrl.sortBy)">
                             <md-option ng-value="'hottest'" ng-selected="sctrl.sortBy === 'hottest'">Hottest</md-option>
                             <md-option ng-value="'price_asc'" ng-selected="sctrl.sortBy === 'price_asc'">Price
                                 (Ascending)
@@ -138,7 +140,10 @@
     </div>
 
     <div class="col-sm-4" style="position: fixed; right:0; top:5; height: 100vh">
-        <ui-gmap-google-map center='DishCtrl.map.center' zoom='DishCtrl.map.zoom'
-                            options="DishCtrl.map.options"></ui-gmap-google-map>
+        <ui-gmap-google-map center='sctrl.map.center' zoom='sctrl.map.zoom'
+                            options="sctrl.map.options" ng-cloak>
+            <ui-gmap-markers models="sctrl.sampleMarkers" coords="'self'" icon="'icon'">
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
     </div>
 </div>

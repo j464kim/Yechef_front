@@ -25,16 +25,13 @@ angular.module('reaction', [
 
 				// figure out which eloquent model it belongs to
 				var reactionableInfo = genericService.getModelType($state);
-				var userId = null;
 
-				if ($rootScope.currentUser) {
-					userId = $rootScope.currentUser.id;
-				}
+				var userID = $rootScope.currentUser ? $rootScope.currentUser.id : null;
 
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
-					userId: userId
+					userId: userID
 				};
 
 				/*********************

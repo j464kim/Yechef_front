@@ -4,8 +4,8 @@ angular.module('dish.create', [
 	'dishes.api',
 ])
 
-	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout', 'genericService',
-		function ($state, DishesAPI, devHelper, config, $q, $timeout, genericService) {
+	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout', 'genericService', '$stateParams', 'KitchenAPI',
+		function ($state, DishesAPI, devHelper, config, $q, $timeout, genericService, $stateParams, KitchenAPI) {
 
 			/*********************
 			 *    Private Variables
@@ -13,16 +13,37 @@ angular.module('dish.create', [
 				// reference to this controller
 			var that = this;
 
+			this.kitchenId = $stateParams.kid;
 			this.nationalities = _loadNationalities();
-			this.querySearch = querySearch;
+
+			that.dish = {};
+			that.dish.gluten_free = false;
+			that.dish.vegetarian = false;
+			that.dish.vegan = false;
+
+			function init() {
+				_checkAccess();
+			}
+
+			function _checkAccess() {
+				KitchenAPI.checkOwnership(that.kitchenId).then(
+					function (response) {
+						devHelper.log(response);
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+			}
 
 			function _createDish() {
 				//TODO: Add User permission so that only registered users can create dish
+				that.dish.kitchen_id = that.kitchenId;
+				that.dish.nationality = that.dish.nationality.value;
+
 				DishesAPI.create(that.dish)
 					.then(function (response) {
 						var newDish = response;
 						devHelper.log(newDish);
-
 						_uploadDishMedia(newDish);
 
 						$state.go('dish.show', {"id": newDish.id});
@@ -48,21 +69,7 @@ angular.module('dish.create', [
 				dropzoneInstance.processQueue();
 			}
 
-			/**
-			 * Search for nationalities... use $timeout to simulate
-			 * remote dataservice call.
-			 */
-			function querySearch(query) {
-				var results = query ? that.nationalities.filter(createFilterFor(query)) : that.nationalities,
-					deferred;
-				deferred = $q.defer();
-				$timeout(function () {
-					deferred.resolve(results);
-				}, Math.random() * 1000, false);
-				return deferred.promise;
-			}
-
-			/**
+						/**
 			 * Build `states` list of key/value pairs
 			 */
 			function _loadNationalities() {
@@ -75,27 +82,18 @@ angular.module('dish.create', [
 				});
 			}
 
-			/**
-			 * Create filter function for a query string
-			 */
-			function createFilterFor(query) {
-				var lowercaseQuery = angular.lowercase(query);
-
-				return function filterFn(nationality) {
-					return (nationality.value.indexOf(lowercaseQuery) === 0);
-				};
-
-			}
-
 			/*********************
 			 *    Public Functions
 			 **********************/
+			this.querySearch = genericService.querySearch;
 			this.createDish = _createDish;
 			this.cancel = function cancel() {
 				if (confirm("Do you want to go back?")) {
 					$state.go('dish.list');
 				}
 			};
+
+			init();
 
 			/*********************
 			 *    EVENTS

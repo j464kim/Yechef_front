@@ -15,7 +15,7 @@ angular.module('reaction', [
 			},
 			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
-			controller: function ($scope, ReactionAPI, $state, devHelper, genericService, $rootScope) {
+			controller: function ($rootScope, $scope, ReactionAPI, $state, devHelper, genericService) {
 
 				/*********************
 				 *  Private Variables

@@ -44,7 +44,6 @@ angular
 		// services
 		'http.interceptor',
 		'auth.api',
-		'main.controller',
 		'search.api',
 
 		// configuration

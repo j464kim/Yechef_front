@@ -6,8 +6,8 @@ angular.module('user.register', [
 ])
 
 
-	.controller('UserRegisterController', ['$state', 'AuthAPI', 'devHelper',
-		function ($state, AuthAPI, devHelper) {
+	.controller('UserRegisterController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
+		function ($state, AuthAPI, devHelper, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -41,6 +41,13 @@ angular.module('user.register', [
 							devHelper.log(response);
 						},
 						function (response) {
+							var message;
+							if (response.data.message.includes('already')) {
+								message = 'The email is already taken';
+							} else {
+								message = response.data.message;
+							}
+							genericService.showToast(message);
 							console.error(response);
 						}
 					);

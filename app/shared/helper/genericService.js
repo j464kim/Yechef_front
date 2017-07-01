@@ -1,6 +1,6 @@
 /* Generic Services */
 angular.module('helper', [])
-	.factory("genericService", function ($q, $timeout) {
+	.factory("genericService", function ($q, $timeout, $mdToast) {
 
 		function createFilterFor (query) {
 			var lowercaseQuery = angular.lowercase(query);
@@ -32,5 +32,16 @@ angular.module('helper', [])
 				}, Math.random() * 1000, false);
 				return deferred.promise;
 			},
+
+			showToast: function(message) {
+				$mdToast.show(
+					$mdToast.simple()
+						.textContent(message)
+						.position('top center')
+						.highlightClass('md-warn')
+						.capsule(true)
+						.hideDelay(3000)
+				);
+			}
 		}
 	});

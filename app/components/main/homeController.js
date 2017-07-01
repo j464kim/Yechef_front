@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('main.controller', [])
+angular.module('home', [])
 
-	.controller('MainCtrl', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService',
+	.controller('HomeController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService',
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService) {
 
 			var that = this;
@@ -34,7 +34,7 @@ angular.module('main.controller', [])
 				$rootScope.currentUser = sessionService.getCurrentUser();
 			}
 
-			this.isLoggedin = sessionService.isLogin;
+			this.isLoggedIn = sessionService.isLogin;
 		}
 	])
 	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', function (config, $q, $timeout, devHelper, $state) {

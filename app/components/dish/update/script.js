@@ -1,111 +1,102 @@
 'use strict';
 
 angular.module('dish.update', [
-    'dishes.api',
+	'dishes.api',
 ])
 
-    .controller('DishUpdateController', ['$state', '$stateParams', 'DishesAPI', 'config', '$q', '$timeout',
-        function ($state, $stateParams, DishesAPI, config, $q, $timeout) {
+	.controller('DishUpdateController', ['$state', '$stateParams', 'DishesAPI', 'config', '$q', '$timeout', 'genericService', 'UserAPI', 'devHelper',
+		function ($state, $stateParams, DishesAPI, config, $q, $timeout, genericService, UserAPI, devHelper) {
 
-            /*********************
-             *    Private Variables
-             **********************/
-                // reference to this controller
-            var that = this;
-            var dishId = $stateParams.id;
+			/*********************
+			 *    Private Variables
+			 **********************/
+				// reference to this controller
+			var that = this;
+			var dishId = $stateParams.id;
 
-            /*********************
-             *    Public Variables
-             **********************/
-            this.nationalities = _loadNationalities();
-            this.querySearch = querySearch;
+			/*********************
+			 *    Public Variables
+			 **********************/
+			this.nationalities = _loadNationalities();
+			this.kitchen = {};
 
-            /*********************
-             *    Private Functions
-             **********************/
+			/*********************
+			 *    Private Functions
+			 **********************/
 
-            function _init() {
-                _showDish(dishId);
-            }
+			function _init() {
+				_checkAccess(dishId);
+			}
 
-            function _showDish() {
-                DishesAPI.show(dishId)
-                    .then(function (response) {
-                        that.dish = response;
-                    }, function (response) {
-                        // TODO handle error state
-                        console.error(response);
-                    });
-            }
+			function _checkAccess(dishId) {
+				DishesAPI.checkOwnership(dishId).then(
+					function (response) {
+						devHelper.log(response);
+						_showDish();
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+			}
 
-            function _updateDish() {
-                DishesAPI.update(that.dish, that.dish.id)
-                    .then(function (response) {
-                        $state.go('dish.show', {"id": response.id});
-                    }, function (response) {
-                        //     TODO handle error state
-                        console.error(response);
-                    });
-            }
+			function _showDish() {
+				DishesAPI.show(dishId)
+					.then(function (response) {
+						that.dish = response;
+						that.dish.nationality = {
+							value: that.dish.nationality,
+							display: that.dish.nationality
+						};
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+			}
 
-            /**
-             * Search for nationalities... use $timeout to simulate
-             * remote dataservice call.
-             */
-            function querySearch(query) {
-                var results = query ? that.nationalities.filter(createFilterFor(query)) : that.nationalities,
-                    deferred;
-                deferred = $q.defer();
-                $timeout(function () {
-                    deferred.resolve(results);
-                }, Math.random() * 1000, false);
-                return deferred.promise;
-            }
+			function _updateDish() {
+				that.dish.nationality = that.dish.nationality.value;
+				DishesAPI.update(that.dish, that.dish.id)
+					.then(function (response) {
+						$state.go('user.kitchen.dish', {"myCurrentKitchenId": that.dish.kitchen_id});
+					}, function (response) {
+						//     TODO handle error state
+						console.error(response);
+					});
+			}
 
-            /**
-             * Build `states` list of key/value pairs
-             */
-            function _loadNationalities() {
+			/**
+			 * Build `states` list of key/value pairs
+			 */
+			function _loadNationalities() {
 
-                return (config.nationalities).split(/, +/g).map(function (nationality) {
-                    return {
-                        value: nationality.toLowerCase(),
-                        display: nationality
-                    };
-                });
-            }
+				return (config.nationalities).split(/, +/g).map(function (nationality) {
+					return {
+						value: nationality.toLowerCase(),
+						display: nationality
+					};
+				});
+			}
 
-            /**
-             * Create filter function for a query string
-             */
-            function createFilterFor(query) {
-                var lowercaseQuery = angular.lowercase(query);
+			/*********************
+			 *    Public Functions
+			 **********************/
+			this.querySearch = genericService.querySearch;
+			this.updateDish = _updateDish;
+			this.cancel = function cancel() {
+				if (confirm("Do you want to go back?")) {
+					$state.go('user.kitchen.dish', {"myCurrentKitchenId": that.dish.kitchen_id});
+				}
+			};
 
-                return function filterFn(nationality) {
-                    return (nationality.value.indexOf(lowercaseQuery) === 0);
-                };
+			/*********************
+			 *    Initialization
+			 **********************/
+			_init();
 
-            }
-
-            /*********************
-             *    Public Functions
-             **********************/
-            this.updateDish = _updateDish;
-            this.cancel = function cancel() {
-                if (confirm("Do you want to go back?")) {
-                    $state.go('dish.show', {"id": dishId});
-                }
-            };
-
-            /*********************
-             *    Initialization
-             **********************/
-            _init();
-
-            /*********************
-             *    EVENTS
-             **********************/
+			/*********************
+			 *    EVENTS
+			 **********************/
 
 
-        }
-    ])
+		}
+	])

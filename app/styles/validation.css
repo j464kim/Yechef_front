@@ -2481,6 +2481,14 @@ h6 {
 .font-size-1-6em {
   font-size: 1.6em;
 }
+#description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body {
+  padding-top: 70px;
+}
 .owner-info {
   text-align: center;
 }
@@ -2511,6 +2519,27 @@ h6 {
 }
 .white-background {
   background-color: white;
+}
+.row-no-padding {
+  margin-left: 0;
+  margin-right: 0;
+}
+.row-no-padding [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.angular-google-map {
+  height: 90%;
+}
+.angular-google-map-container {
+  height: 100%;
+  position: fixed;
+  top: 0;
+}
+md-toast.md-top.md-center {
+  left: 50%;
+  margin-top: 75px;
+  transform: translate3d(-50%, 0, 0);
 }
 .loader-wrapper {
   min-height: 300px;
@@ -2565,33 +2594,4 @@ h6 {
   left: 0;
   overflow: hidden;
   white-space: nowrap;
-}
-body {
-  padding-top: 70px;
-}
-.angular-google-map {
-  height: 90%;
-}
-.angular-google-map-container {
-  height: 100%;
-  position: fixed;
-  top: 0;
-}
-.row-no-padding {
-  margin-left: 0;
-  margin-right: 0;
-}
-.row-no-padding [class*="col-"] {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-md-toast.md-top.md-center {
-  left: 50%;
-  margin-top: 75px;
-  transform: translate3d(-50%, 0, 0);
-}
-#description {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

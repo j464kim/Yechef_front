@@ -4,8 +4,8 @@ angular.module('dish.list', [
 	'dishes.api',
 ])
 
-	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams',
-		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams) {
+	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI',
+		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI) {
 
 			/*********************
 			 *    Private Variables
@@ -21,6 +21,8 @@ angular.module('dish.list', [
 			this.dishes = [];
 			this.isSearchCollapsed = true;
 			this.options = {};
+			this.dishMapMarkers = [];
+
 
 			/*********************
 			 *    Private Functions
@@ -51,11 +53,26 @@ angular.module('dish.list', [
 					that.dishes = response.data;
 					that.totalItems = response.total;
 					that.currentPage = response.current_page;
-					devHelper.log(that.totalItems);
-					devHelper.log(that.currentPage);
+					_locateDishes();
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);
+				});
+			}
+
+			function _locateDishes() {
+				that.dishes.forEach(function(dish) {
+					MapAPI.geocode(dish.kitchen.address).then(
+						function (result) {
+							var ret = {
+								latitude: result[0].geometry.location.lat(),
+								longitude: result[0].geometry.location.lng(),
+								title: 'm' + dish.id
+							};
+							ret["id"] = dish.id;
+							that.dishMapMarkers.push(ret);
+						}
+					)
 				});
 			}
 
@@ -63,11 +80,11 @@ angular.module('dish.list', [
 			 *    Public Functions
 			 **********************/
 			this.getDishes = _getDishes;
-			this.getSearchParams = function(sctrl) {
+			this.getSearchParams = function (sctrl) {
 				sctrl.q = $stateParams.q;
 				sctrl.selectedNationality = {};
-				sctrl.selectedNationality.value = $stateParams.nationality? $stateParams.nationality : 'all';
-				sctrl.selectedNationality.display = $stateParams.nationality? $stateParams.nationality : 'all';
+				sctrl.selectedNationality.value = $stateParams.nationality ? $stateParams.nationality : 'all';
+				sctrl.selectedNationality.display = $stateParams.nationality ? $stateParams.nationality : 'all';
 				sctrl.vegan = $stateParams.vegan;
 				sctrl.vegetarian = $stateParams.vegetarian;
 				sctrl.gluten_free = $stateParams.gluten_free;

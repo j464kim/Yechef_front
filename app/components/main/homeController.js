@@ -22,6 +22,7 @@ angular.module('home', [])
 					devHelper.log('Token successfully refreshed');
 				}, function () {
 					devHelper.log('Fail to refresh token, redirecting to login page');
+					sessionService.revokeSession();
 					$state.go('user.login');
 				});
 			});
@@ -50,18 +51,6 @@ angular.module('home', [])
 
 		self.nationality = newNationality;
 
-		self.sampleMarkers = [];
-
-		for (var i = 0; i < 10; i++) {
-			var ret = {
-				latitude: 43 + i,
-				longitude: -79 + i,
-				title: 'm' + i
-			};
-			ret["id"] = i;
-			self.sampleMarkers[i] = ret;
-		}
-
 		this.map = {
 			center: {latitude: 43, longitude: -79},
 			zoom: 13
@@ -78,7 +67,6 @@ angular.module('home', [])
 
 		if ($stateParams.city) {
 			MapAPI.geocode($stateParams.city).then(function (result) {
-				console.log(result);
 				self.map.center.latitude = result[0].geometry.location.lat();
 				self.map.center.longitude = result[0].geometry.location.lng();
 			});
@@ -159,7 +147,6 @@ angular.module('home', [])
 		}
 
 		this.searchDish = function () {
-			// console.log(self.city);
 			if (!self.selectedNationality) {
 				self.nationality = 'all';
 			} else {

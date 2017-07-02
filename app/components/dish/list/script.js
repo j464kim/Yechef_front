@@ -61,15 +61,15 @@ angular.module('dish.list', [
 			}
 
 			function _locateDishes() {
-				that.dishes.forEach(function(dish) {
-					MapAPI.geocode(dish.kitchen.address).then(
+				Object.keys(that.dishes).forEach(function(dish) {
+					MapAPI.geocode(that.dishes[dish].kitchen.address).then(
 						function (result) {
 							var ret = {
 								latitude: result[0].geometry.location.lat(),
 								longitude: result[0].geometry.location.lng(),
 								title: 'm' + dish.id
 							};
-							ret["id"] = dish.id;
+							ret["id"] = that.dishes[dish].id;
 							that.dishMapMarkers.push(ret);
 						}
 					)

@@ -1,7 +1,7 @@
 angular.module('mediaUpload', ['configuration'])
 
-	.controller('MediaController', ['config', 'devHelper',
-		function (config, devHelper) {
+	.controller('MediaController', ['config', 'devHelper', 'sessionService',
+		function (config, devHelper,sessionService) {
 
 		/*********************
 		 *  Private Functions
@@ -17,6 +17,9 @@ angular.module('mediaUpload', ['configuration'])
 				uploadMultiple: config.uploadMultiple,
 				autoProcessQueue: config.autoProcessQueue,
 				addRemoveLinks: config.addRemoveLinks,
+				headers: {
+					'Authorization': sessionService.getAccessToken()
+				},
 				init: function () {
 					myDropzone = this; // closure
 

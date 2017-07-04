@@ -27,7 +27,8 @@ angular.module('search.api', [
                 // pageNum = pageNum || 0;
 
                 return $q(function (resolve, reject) {
-					SearchResource.dish(options
+					SearchResource.dish(
+					    options
                     ).$promise.then(function (response) {
                         resolve(response.body);
                     }, function (response) {

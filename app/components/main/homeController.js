@@ -112,7 +112,7 @@ angular.module('home', [])
 				self.nationality = self.selectedNationality.value;
 			}
 			if (!self.sortBy) {
-				self.sortBy = 'hottest';
+				self.sortBy = 'newest';
 			}
 			$state.go('dish.list', {
 				q: self.q,

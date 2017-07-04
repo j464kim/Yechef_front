@@ -4,7 +4,7 @@
             <button type="button" class="btn btn-default"
                     ng-click="DishCtrl.isSearchCollapsed = !DishCtrl.isSearchCollapsed">Refine Search
                 <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
-                <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
+                <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrlDishCtrl.isSearchCollapsed"></i>
             </button>
             <div uib-collapse="DishCtrl.isSearchCollapsed" ng-controller="SearchCtrl as sctrl"
                  ng-init="DishCtrl.getSearchParams(sctrl)">
@@ -91,13 +91,13 @@
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline" ng-init="console.log(sctrl.sortBy)">
-                            <md-option ng-value="'hottest'" ng-selected="sctrl.sortBy === 'hottest'">Hottest</md-option>
-                            <md-option ng-value="'price_asc'" ng-selected="sctrl.sortBy === 'price_asc'">Price
+                            <md-option ng-value="'cheapest'" ng-selected="sctrl.sortBy === 'price_asc'">Price
                                 (Ascending)
                             </md-option>
-                            <md-option ng-value="'price_dsc'" ng-selected="sctrl.sortBy === 'price_dsc'">Price
+                            <md-option ng-value="'expensive'" ng-selected="sctrl.sortBy === 'price_dsc'">Price
                                 (Descending)
                             </md-option>
+                            <md-option ng-value="'newest'" ng-selected="sctrl.sortBy === 'newest'">Newest</md-option>
                             <md-option ng-value="'taste'" ng-selected="sctrl.sortBy === 'taste'">Taste</md-option>
                             <md-option ng-value="'visual'" ng-selected="sctrl.sortBy === 'visual'">Visual</md-option>
                             <md-option ng-value="'quantity'" ng-selected="sctrl.sortBy === 'quantity'">Quantity

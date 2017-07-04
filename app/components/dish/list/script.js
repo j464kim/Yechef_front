@@ -49,6 +49,7 @@ angular.module('dish.list', [
 				that.options.gluten_free = $stateParams.gluten_free;
 				that.options.min_price = $stateParams.min_price;
 				that.options.max_price = $stateParams.max_price;
+				that.options.sortBy = $stateParams.sortBy;
 			}
 
 			function _getDishes() {
@@ -72,11 +73,11 @@ angular.module('dish.list', [
 			 *    Public Functions
 			 **********************/
 			this.getDishes = _getDishes;
-			this.getSearchParams = function(sctrl) {
+			this.getSearchParams = function (sctrl) {
 				sctrl.q = $stateParams.q;
 				sctrl.selectedNationality = {};
-				sctrl.selectedNationality.value = $stateParams.nationality? $stateParams.nationality : 'all';
-				sctrl.selectedNationality.display = $stateParams.nationality? $stateParams.nationality : 'all';
+				sctrl.selectedNationality.value = $stateParams.nationality ? $stateParams.nationality : 'all';
+				sctrl.selectedNationality.display = $stateParams.nationality ? $stateParams.nationality : 'all';
 				sctrl.vegan = $stateParams.vegan;
 				sctrl.vegetarian = $stateParams.vegetarian;
 				sctrl.gluten_free = $stateParams.gluten_free;
@@ -86,7 +87,6 @@ angular.module('dish.list', [
 				sctrl.distance = $stateParams.distance;
 				sctrl.city = $stateParams.city;
 			}
-
 
 			/*********************
 			 *    Initialization

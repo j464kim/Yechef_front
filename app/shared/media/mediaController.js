@@ -40,12 +40,11 @@ angular.module('mediaUpload', [
 
 						myDropzone.on("removedfile", function (file) {
 							devHelper.log('removed the media');
-							mediaService.removeUploadedMedia(myDropzone);
+							mediaService.retrieveMediaToBeRemoved(file.media_id);
 						});
 					}
 				});
 
-				mediaService.previewUploadedMedias(myDropzone);
 			}
 
 			/*********************
@@ -53,7 +52,5 @@ angular.module('mediaUpload', [
 			 **********************/
 			_dropzoneInit();
 			mediaService.init();
-
-
 		}]
 	);

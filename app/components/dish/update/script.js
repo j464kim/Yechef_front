@@ -48,6 +48,7 @@ angular.module('dish.update', [
 							value: that.dish.nationality,
 							display: that.dish.nationality
 						};
+						mediaService.previewUploadedMedia(that.dish);
 					}, function (response) {
 						// TODO handle error state
 						console.error(response);

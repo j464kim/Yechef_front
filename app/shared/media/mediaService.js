@@ -7,12 +7,17 @@ angular.module('mediaUpload')
 
 				// instantiate Dropzone
 				this.dropzoneInstance = Dropzone.forElement("#dropzone");
+
+				// initiate uploaded media ids for removal
+				this.mediaIds = [];
 			};
 
 			this.uploadMedia = function (mediable) {
 
 				// figure out the model type to pass into dropzone controller
 				var mediableInfo = genericService.getModelType($state);
+
+				this._removeSelectedUploadedMedia(this.mediaIds);
 
 				this.dropzoneInstance.on("sending", function (file, xhr, formData) {
 					formData.append('mediable_id', mediable.id);
@@ -22,18 +27,22 @@ angular.module('mediaUpload')
 				this.dropzoneInstance.processQueue();
 			};
 
-			this.previewUploadedMedias = function (myDropzone) {
+			this.previewUploadedMedia = function (mediable) {
 
-				MediaAPI.show(20).then(function (response) {
+				// figure out the model type
+				var mediableInfo = genericService.getModelType($state);
+
+				MediaAPI.show(mediableInfo['name'], mediable.id).then(function (response) {
 
 					devHelper.log(response);
 					var medias = response;
+					var dropzoneInstance = Dropzone.forElement("#dropzone");
 
 					for (var i = 0; i < medias.length; i++) {
-						var mockFile = {name: i, size: 12345};
+						var mockFile = {media_id: medias[i].id, size: 12345};
 
-						myDropzone.options.addedfile.call(myDropzone, mockFile);
-						myDropzone.options.thumbnail.call(myDropzone, mockFile, medias[i].url);
+						dropzoneInstance.options.addedfile.call(dropzoneInstance, mockFile);
+						dropzoneInstance.options.thumbnail.call(dropzoneInstance, mockFile, medias[i].url);
 					}
 
 				}, function (response) {
@@ -42,18 +51,26 @@ angular.module('mediaUpload')
 				});
 			};
 
-			this.removeUploadedMedia = function () {
-				console.log('destroy uploaded media');
+			this.retrieveMediaToBeRemoved = function (mediaId) {
 
-				MediaAPI.destroy(20).then(function (response) {
+				this.mediaIds.push(mediaId);
+				devHelper.log(this.mediaIds);
+			};
 
-					devHelper.log(response);
-					var deletedMedia = response;
+			this._removeSelectedUploadedMedia = function (mediaIds) {
 
-				}, function (response) {
-					// TODO handle error state
-					console.error(response);
-				});
+				for (var i = 0; i < mediaIds.length; i++) {
+
+					MediaAPI.destroy(mediaIds[i]).then(function (response) {
+
+						devHelper.log(response);
+						var deletedMedia = response;
+
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+				}
 			}
 
 		}

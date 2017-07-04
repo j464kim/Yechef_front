@@ -7,7 +7,7 @@ angular.module('media.api', [
 	.factory('MediaResource', ['$resource', 'config',
 		function ($resource, config) {
 			var apiEndpoint = config.endpoint + 'media/';
-			return $resource(apiEndpoint + ':id', {id: '@id'}, {
+			return $resource(apiEndpoint + ':id' + '/' + ':modelName', {id: '@id', modelName: '@modelName'}, {
 				show: {
 					method: 'GET'
 				},
@@ -21,11 +21,12 @@ angular.module('media.api', [
 	.service('MediaAPI', ['$q', 'MediaResource',
 		function ($q, MediaResource) {
 
-			function show(mediableId) {
+			function show(modelName, mediableId) {
 
 				return $q(function (resolve, reject) {
 					MediaResource.show(
 						{
+							modelName: modelName,
 							id: mediableId
 						}
 					)

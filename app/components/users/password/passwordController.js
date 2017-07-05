@@ -34,7 +34,7 @@ angular.module('user.password', [
 					that.email
 				).then(function (response) {
 						//set access token
-						devHelper.log(response);
+						devHelper.log('reset link was sent to the email');
 					},
 					function (response) {
 						console.error(response);
@@ -51,7 +51,7 @@ angular.module('user.password', [
 				).then(function (response) {
 						//set access token
 						devHelper.log(response);
-						$state.go('user.profile.info.view', {'id': $rootScope.currentUser.id});
+						$state.go('home');
 					},
 					function (response) {
 						console.error(response);
@@ -65,7 +65,7 @@ angular.module('user.password', [
 					that.newPassword,
 					that.newPassword_confirmation
 				).then(function (response) {
-						devHelper.log(response);
+						devHelper.log('successfully updated the password');
 						$state.go('user.profile.info.view', {'id': $rootScope.currentUser.id});
 					},
 					function (response) {

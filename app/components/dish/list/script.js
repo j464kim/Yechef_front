@@ -21,8 +21,41 @@ angular.module('dish.list', [
 			this.dishes = [];
 			this.isSearchCollapsed = true;
 			this.options = {};
+			this.mapCtrl = {};
 			this.dishMapMarkers = [];
 
+			this.map = {
+				center: {latitude: 0, longitude: 0},
+				zoom: 10
+			};
+
+			this.map.options = {
+				scrollwheel: false,
+				disableDefaultUI: true,
+				zoomControl: true,
+				minZoom: 5,
+				maxZoom: 15,
+				noClear: false,
+			};
+
+			this.map.options.zoomControlOptions = {
+				position: google.maps.ControlPosition.TOP_RIGHT,
+			};
+
+
+			this.mapEvents = {
+				//This turns of events and hits against scope from gMap events this does speed things up
+				// adding a blacklist for watching your controller scope should even be better
+				//        blacklist: ['drag', 'dragend','dragstart','zoom_changed', 'center_changed'],
+				idle: function (map, eventName, originalEventArgs) {
+					that.options.NE_lat = map.getBounds().getNorthEast().lat();
+					that.options.SW_lat = map.getBounds().getSouthWest().lat();
+					that.options.NE_lng = map.getBounds().getNorthEast().lng();
+					that.options.SW_lng = map.getBounds().getSouthWest().lng();
+					_getDishes();
+					that.mapCtrl.refresh();
+				},
+			};
 
 			/*********************
 			 *    Private Functions
@@ -30,7 +63,12 @@ angular.module('dish.list', [
 
 			function _init() {
 				_initSearchOptions();
-				_getDishes();
+				console.log($stateParams.city);
+				MapAPI.geocode($stateParams.city).then(function (result) {
+					that.map.center.latitude = result[0].geometry.location.lat();
+					that.map.center.longitude = result[0].geometry.location.lng();
+					that.mapCtrl.refresh();
+				});
 			}
 
 			function _initSearchOptions() {
@@ -61,13 +99,13 @@ angular.module('dish.list', [
 			}
 
 			function _locateDishes() {
-				Object.keys(that.dishes).forEach(function(dish) {
+				Object.keys(that.dishes).forEach(function (dish) {
 					MapAPI.geocode(that.dishes[dish].kitchen.address).then(
 						function (result) {
 							var ret = {
 								latitude: result[0].geometry.location.lat(),
 								longitude: result[0].geometry.location.lng(),
-								title: 'm' + dish.id
+								title: 'm' + that.dishes[dish].id
 							};
 							ret["id"] = that.dishes[dish].id;
 							that.dishMapMarkers.push(ret);

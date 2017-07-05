@@ -38,7 +38,7 @@ angular.module('home', [])
 			this.isLoggedIn = sessionService.isLogin;
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', '$stateParams', function (config, $q, $timeout, devHelper, $state, MapAPI, $stateParams) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -50,27 +50,6 @@ angular.module('home', [])
 		self.searchTextChange = searchTextChange;
 
 		self.nationality = newNationality;
-
-		this.map = {
-			center: {latitude: 43, longitude: -79},
-			zoom: 13
-		};
-
-		this.map.options = {
-			scrollwheel: false,
-			disableDefaultUI: true,
-			zoomControl: true,
-		};
-		this.map.options.zoomControlOptions = {
-			position: google.maps.ControlPosition.TOP_RIGHT,
-		};
-
-		if ($stateParams.city) {
-			MapAPI.geocode($stateParams.city).then(function (result) {
-				self.map.center.latitude = result[0].geometry.location.lat();
-				self.map.center.longitude = result[0].geometry.location.lng();
-			});
-		}
 
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(

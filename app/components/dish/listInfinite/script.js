@@ -4,8 +4,8 @@ angular.module('dish.list.infinite', [
     'dishes.api',
 ])
 
-    .controller('DishListInfiniteController', ['$state', 'DishesAPI', 'devHelper', 'uiGmapGoogleMapApi',
-        function ($state, DishesAPI, devHelper, uiGmapGoogleMapApi) {
+    .controller('DishListInfiniteController', ['$state', 'DishesAPI', 'devHelper',
+        function ($state, DishesAPI, devHelper) {
 
             /*********************
              *    Private Variables
@@ -19,7 +19,6 @@ angular.module('dish.list.infinite', [
             this.totalItems = 0;
             this.currentPage = 0;
             this.dishes = [];
-            that.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
 
             /*********************
              *    Private Functions
@@ -56,11 +55,6 @@ angular.module('dish.list.infinite', [
             /*********************
              *    EVENTS
              **********************/
-            uiGmapGoogleMapApi.then(function (maps) {
-                // write your code here
-                // (google is defined)
-                console.log(maps);
-            });
 
         }
     ])

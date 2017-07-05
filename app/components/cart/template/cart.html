@@ -57,6 +57,13 @@
     </table>
 </div>
 
+<!--Order-->
+<div class="pull-right">
+    <div class="row">
+        <button class="small-margin btn-danger btn-lg" ui-sref="checkout.billing({amount: ngCart.totalCost()})">Order</button>
+    </div>
+</div>
+
 <style>
     .ngCart.cart span[ng-click] {
         cursor: pointer;

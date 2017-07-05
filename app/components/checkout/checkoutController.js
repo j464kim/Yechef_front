@@ -4,8 +4,8 @@ angular.module('checkout.billing', [
 	'checkout.api',
 ])
 
-	.controller('CheckoutController', ['$state', 'CheckoutAPI', 'devHelper', 'config', '$rootScope',
-		function ($state, CheckoutAPI, devHelper, config, $rootScope) {
+	.controller('CheckoutController', ['$stateParams', 'CheckoutAPI', 'devHelper', 'config', '$rootScope',
+		function ($stateParams, CheckoutAPI, devHelper, config, $rootScope) {
 
 			/*********************
 			 *  Private Variables
@@ -18,7 +18,7 @@ angular.module('checkout.billing', [
 			 **********************/
 			var that = this;
 			// TODO: placeholder for amount
-			var amount = 10;
+			var amount = $stateParams.amount;
 
 			// Create a Stripe client
 			Stripe.setPublishableKey('pk_test_RZjSNtHLydLfeylIF2BkP6s5');
@@ -41,7 +41,7 @@ angular.module('checkout.billing', [
 			}
 
 			function _chargePayment(status, response) {
-				CheckoutAPI.charge(response.id, $rootScope.currentUser.email, amount*100, config.currency).then(function (response) {
+				CheckoutAPI.charge(response.id, $rootScope.currentUser.email, amount * 100, config.currency).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('charged successfully');
 				}, function (response) {

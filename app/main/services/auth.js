@@ -25,6 +25,16 @@ angular.module('auth.api', [
 		function ($resource, config, $http, $auth, devHelper) {
 			var api_endpoint = config.endpoint;
 
+			function verifyEmail(email) {
+				return $http({
+					method: 'POST',
+					url: api_endpoint + 'register/verify',
+					params: {
+						email: email,
+					}
+				});
+			}
+
 			function register(newUser) {
 				devHelper.log(newUser);
 				return $http({
@@ -74,6 +84,7 @@ angular.module('auth.api', [
 			};
 
 			return {
+				verifyEmail: verifyEmail,
 				register: register,
 				login: login,
 				logout: logout,
@@ -152,6 +163,16 @@ angular.module('auth.api', [
 	])
 	.service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService', '$rootScope',
 		function ($q, AuthResource, sessionService, authService, $rootScope) {
+
+			function verifyEmail(email) {
+				return $q(function (resolve, reject) {
+					AuthResource.verifyEmail(email).then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			}
 
 			function register(newUser) {
 				return $q(function (resolve, reject) {
@@ -253,6 +274,7 @@ angular.module('auth.api', [
 			}
 
 			return {
+				verifyEmail: verifyEmail,
 				register: register,
 				login: login,
 				socialLogin: socialLogin,

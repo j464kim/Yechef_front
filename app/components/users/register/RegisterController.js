@@ -6,7 +6,7 @@ angular.module('user.register', [
 ])
 
 
-	.controller('UserRegisterController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
+	.controller('RegisterController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
 		function ($state, AuthAPI, devHelper, genericService) {
 
 			/*********************
@@ -23,6 +23,19 @@ angular.module('user.register', [
 			/*********************
 			 *    Private Functions
 			 **********************/
+
+			function _verifyEmail() {
+				AuthAPI.verifyEmail(
+					that.email
+				).then(function (response) {
+						//set access token
+						devHelper.log('Sent email verify link');
+					},
+					function (response) {
+						console.error(response);
+					}
+				);
+			}
 
 			function _register() {
 				AuthAPI.register(that.newUser)
@@ -57,6 +70,7 @@ angular.module('user.register', [
 			 *    Public Functions
 			 **********************/
 			this.register = _register;
+			this.verifyEmail = _verifyEmail;
 
 			/*********************
 			 *    EVENTS

@@ -27,12 +27,12 @@ angular.module('user', [
 			.state('user.register.verify', {
 				url: '/verify',
 				templateUrl: 'components/users/register/verifyEmail.html',
-				controller: 'UserRegisterController as RegisterCtrl',
+				controller: 'RegisterController as RegisterCtrl',
 			})
 			.state('user.register.create', {
 				url: '/{token}',
-				templateUrl: 'components/users/register/template.html',
-				controller: 'UserRegisterController as RegisterCtrl',
+				templateUrl: 'components/users/register/register.html',
+				controller: 'RegisterController as RegisterCtrl',
 			})
 			.state('user.password', {
 				url: '/password',

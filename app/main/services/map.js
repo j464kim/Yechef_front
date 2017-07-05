@@ -17,9 +17,9 @@ angular.module('map.api', [
 							defer.resolve(results);
 						});
 					}
-				)
+				);
 				return defer.promise;
-			};
+			}
 
 			function rgeocode(latitude, longitude) {
 				var defer = $q.defer();
@@ -32,9 +32,9 @@ angular.module('map.api', [
 							defer.resolve(results);
 						});
 					}
-				)
+				);
 				return defer.promise;
-			};
+			}
 
 
 			return {

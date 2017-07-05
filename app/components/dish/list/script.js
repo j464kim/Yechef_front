@@ -42,6 +42,24 @@ angular.module('dish.list', [
 				position: google.maps.ControlPosition.TOP_RIGHT,
 			};
 
+			this.circle =
+				{
+					id: 0,
+					center: {
+						latitude: 0,
+						longitude: 0
+					},
+					radius: 50,
+					stroke: {
+						color: '#08B21F',
+						weight: 2,
+						opacity: 1
+					},
+					fill: {
+						color: '#08B21F',
+						opacity: 0.5
+					},
+				};
 
 			this.mapEvents = {
 				//This turns of events and hits against scope from gMap events this does speed things up
@@ -63,12 +81,16 @@ angular.module('dish.list', [
 
 			function _init() {
 				_initSearchOptions();
-				console.log($stateParams.city);
 				MapAPI.geocode($stateParams.city).then(function (result) {
-					that.map.center.latitude = result[0].geometry.location.lat();
-					that.map.center.longitude = result[0].geometry.location.lng();
-					that.mapCtrl.refresh();
-				});
+						if (result) {
+							that.map.center.latitude = result[0].geometry.location.lat();
+							that.map.center.longitude = result[0].geometry.location.lng();
+							that.options.userLat = result[0].geometry.location.lat();
+							that.options.userLng = result[0].geometry.location.lng();
+							that.mapCtrl.refresh();
+						}
+					}
+				);
 			}
 
 			function _initSearchOptions() {
@@ -85,32 +107,48 @@ angular.module('dish.list', [
 			function _getDishes() {
 
 				that.options.page = that.currentPage || that.currentPage++;
-
-				SearchAPI.dish(that.options).then(function (response) {
-					devHelper.log(response);
-					that.dishes = response.data;
-					that.totalItems = response.total;
-					that.currentPage = response.current_page;
-					_locateDishes();
-				}, function (response) {
-					// TODO handle error state
-					console.error(response);
-				});
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(
+						function (position) {
+							that.options.userLat = position.coords.latitude;
+							that.options.userLng = position.coords.longitude;
+							that.circle.center.latitude = position.coords.latitude;
+							that.circle.center.longitude = position.coords.longitude;
+							SearchAPI.dish(that.options).then(function (response) {
+								devHelper.log(response);
+								that.dishes = response.data;
+								that.totalItems = response.total;
+								that.currentPage = response.current_page;
+								_locateDishes();
+							}, function (response) {
+								// TODO handle error state
+								console.error(response);
+							});
+						});
+				}
+				else {
+					SearchAPI.dish(that.options).then(function (response) {
+						devHelper.log(response);
+						that.dishes = response.data;
+						that.totalItems = response.total;
+						that.currentPage = response.current_page;
+						_locateDishes();
+					}, function (response) {
+						// TODO handle error state
+						console.error(response);
+					});
+				}
 			}
 
 			function _locateDishes() {
 				Object.keys(that.dishes).forEach(function (dish) {
-					MapAPI.geocode(that.dishes[dish].kitchen.address).then(
-						function (result) {
-							var ret = {
-								latitude: result[0].geometry.location.lat(),
-								longitude: result[0].geometry.location.lng(),
-								title: 'm' + that.dishes[dish].id
-							};
-							ret["id"] = that.dishes[dish].id;
-							that.dishMapMarkers.push(ret);
-						}
-					)
+					var ret = {
+						latitude: that.dishes[dish].lat,
+						longitude: that.dishes[dish].lng,
+						title: 'm' + that.dishes[dish].id
+					};
+					ret["id"] = that.dishes[dish].id;
+					that.dishMapMarkers.push(ret);
 				});
 			}
 
@@ -130,7 +168,7 @@ angular.module('dish.list', [
 				sctrl.max_price = $stateParams.max_price;
 				sctrl.sortBy = $stateParams.sortBy;
 				sctrl.distance = $stateParams.distance;
-				sctrl.city = $stateParams.city;
+				sctrl.city = {formatted_address: $stateParams.city};
 			}
 
 

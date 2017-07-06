@@ -18,16 +18,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 text-center">
-            <label>Share: </label>
+        <div class="col-md-3 text-center">
+            <label>Share it with</label>
             <share-button for="kitchen"></share-button>
-            <div ng-if="KitchenCtrl.kitchen" class="pull-right">
-                <a>
-                    <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
-                </a>
-            </div>
         </div>
-        <div class="col-md-8 pull-right">
+        <div class="col-md-6 text-center">
             <a>
                 <i class="material-icons">mail</i>
                 <label>{{KitchenCtrl.kitchen.email}}</label>
@@ -39,6 +34,11 @@
             <a>
                 <i class="material-icons">place</i>
                 <label>{{KitchenCtrl.kitchen.address}}</label>
+            </a>
+        </div>
+        <div class="col-md-3 pull-right" ng-if="KitchenCtrl.kitchen">
+            <a>
+                <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
             </a>
         </div>
     </div>

@@ -26,8 +26,8 @@
                                        ng-model="sctrl.city"/>
                                 <label for="City">City</label>
                                 <br/> <br/><br/>
-                                <md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1"
-                                             ng-checked="sctrl.vegetarian == 1">Vegetarian
+                                <md-checkbox ng-model="sctrl.gluten_free" ng-true-value="1"
+                                             ng-checked="sctrl.gluten_free == 1">Gluten-free
                                 </md-checkbox>
                             </md-input-container>
                         </div>
@@ -70,8 +70,8 @@
                                     </md-not-found>
                                 </md-autocomplete>
                                 <br/><br/>
-                                <md-checkbox ng-model="sctrl.gluten_free" ng-true-value="1"
-                                             ng-checked="sctrl.gluten_free == 1">Gluten-free
+                                <md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1"
+                                             ng-checked="sctrl.vegetarian == 1">Vegetarian
                                 </md-checkbox>
                                 <md-checkbox ng-model="sctrl.vegan" ng-true-value="1" ng-checked="sctrl.vegan == 1">
                                     Vegan
@@ -89,20 +89,13 @@
             </div>
             <div class="row no-gutters">
                 <div class="col-sm-3">
-                    <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline"
-                               ng-init="console.log(sctrl.sortBy)">
-                        <md-option ng-value="'hottest'" ng-selected="sctrl.sortBy === 'hottest'">Hottest</md-option>
-                        <md-option ng-value="'cheapest'" ng-selected="sctrl.sortBy === 'price_asc'">Price
-                            (Ascending)
-                        </md-option>
-                        <md-option ng-value="'expensive'" ng-selected="sctrl.sortBy === 'price_dsc'">Price
-                            (Descending)
-                        </md-option>
-                        <md-option ng-value="'newest'" ng-selected="sctrl.sortBy === 'newest'">Newest</md-option>
-                        <md-option ng-value="'taste'" ng-selected="sctrl.sortBy === 'taste'">Taste</md-option>
-                        <md-option ng-value="'visual'" ng-selected="sctrl.sortBy === 'visual'">Visual</md-option>
-                        <md-option ng-value="'quantity'" ng-selected="sctrl.sortBy === 'quantity'">Quantity
-                        </md-option>
+                    <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline" ng-change="sctrl.searchDish()">
+                        <md-option value="price_asc">Price (Ascending)</md-option>
+                        <md-option value="price_dsc">Price (Descending)</md-option>
+                        <md-option value="newest">Newest</md-option>
+                        <md-option value="taste">Taste</md-option>
+                        <md-option value="visual">Visual</md-option>
+                        <md-option value="quantity">Quantity</md-option>
                     </md-select>
                 </div>
                 <div class="col-sm-3">

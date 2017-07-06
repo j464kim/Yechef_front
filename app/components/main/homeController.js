@@ -48,11 +48,11 @@ angular.module('home', [])
 		self.querySearch = querySearch;
 		self.selectedItemChange = selectedItemChange;
 		self.searchTextChange = searchTextChange;
-
 		self.nationality = newNationality;
 
+		self.distance = 0;
+
 		if ($state.is('home')) {
-			console.log("ANG??");
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(
 					function (position) {

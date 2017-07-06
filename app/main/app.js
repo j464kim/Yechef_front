@@ -23,7 +23,6 @@ angular
 		'ui.bootstrap',
 		'http-auth-interceptor',
 		'uiGmapgoogle-maps',
-		'720kb.socialshare',
 
 		// main modules
 		'style-guide',

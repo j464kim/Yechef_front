@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kitchen.show', [
-	'kitchen.api', 'ngMaterial'
+	'kitchen.api', 'ngMaterial', 'share',
 ])
 
 	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog',
@@ -29,7 +29,7 @@ angular.module('kitchen.show', [
 
 			function _showKitchen() {
 				KitchenAPI.show(kitchenId).then(function (response) {
-                    devHelper.log(response);
+					devHelper.log(response);
 					that.kitchen = response;
 					that.media = response.medias[0].url;
 				}, function (response) {
@@ -51,7 +51,7 @@ angular.module('kitchen.show', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.showChefs =  function(ev) {
+			this.showChefs = function (ev) {
 				$mdDialog.show({
 					contentElement: '#showChefs',
 					parent: angular.element(document.body),
@@ -60,7 +60,7 @@ angular.module('kitchen.show', [
 				});
 			};
 
-			this.closeDialog = function (){
+			this.closeDialog = function () {
 				$mdDialog.cancel();
 			};
 

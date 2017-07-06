@@ -6,7 +6,7 @@
                 <i class="fa fa-caret-up" aria-hidden="true" ng-if="!DishCtrl.isSearchCollapsed"></i>
                 <i class="fa fa-caret-down" aria-hidden="true" ng-if="DishCtrl.isSearchCollapsed"></i>
             </button>
-            <div uib-collapse="DishCtrl.isSearchCollapsed" ng-controller="SearchCtrl as sctrl"
+            <div uib-collapse="DishCtrl.isSearchCollapsed"
                  ng-init="DishCtrl.getSearchParams(sctrl)">
                 <md-content class="md-padding">
                     <div class="col-sm-3">

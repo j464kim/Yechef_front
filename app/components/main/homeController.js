@@ -48,7 +48,6 @@ angular.module('home', [])
 		self.querySearch = querySearch;
 		self.selectedItemChange = selectedItemChange;
 		self.searchTextChange = searchTextChange;
-		self.distance = 0;
 
 		self.nationality = newNationality;
 

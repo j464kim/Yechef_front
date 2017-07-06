@@ -113,7 +113,7 @@
                         </md-slider>
                     </md-slider-container>
                     <span ng-if="sctrl.distance != 0">Max Distance: {{sctrl.distance}} km</span>
-                    <span ng-if="sctrl.distance == 0">Max Distance: Any</span>
+                    <span ng-if="sctrl.distance == 0 || sctrl.distance === undefined">Max Distance: Any</span>
                 </div>
             </div>
         </div>

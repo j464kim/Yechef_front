@@ -20,13 +20,13 @@
                     <label for="City">City</label>
                     <br/><br/>
                     <md-slider-container>
-                        <md-slider flex ng-init="sctrl.distance=0" min="0" max="100" ng-model="sctrl.distance"
+                        <md-slider flex min="0" max="100" ng-model="sctrl.distance"
                                    aria-label="distance"
                                    id="distance-slider">
                         </md-slider>
                     </md-slider-container>
                     <span ng-if="sctrl.distance != 0">Max Distance: {{sctrl.distance}} km</span>
-                    <span ng-if="sctrl.distance == 0">Max Distance: Any</span>
+                    <span ng-if="sctrl.distance == 0 || sctrl.distance === undefined">Max Distance: Any</span>
                 </md-input-container>
             </div>
         </div>

@@ -30,7 +30,7 @@ angular.module('user.register', [
 				AuthAPI.sendVerifyLink(
 					that.newUser.email
 				).then(function (response) {
-						//set access token
+
 						devHelper.log('Successfully sent email verify link');
 						$state.go('home');
 					},
@@ -44,7 +44,7 @@ angular.module('user.register', [
 				AuthAPI.confirmEmail(
 					that.token
 				).then(function (response) {
-						//set access token
+
 						devHelper.log('Successfully confirmed that user is verified');
 						$state.go('home');
 					},
@@ -58,16 +58,7 @@ angular.module('user.register', [
 				AuthAPI.register(that.newUser)
 					.then(
 						function (response) {
-							// AuthAPI.setCurrentUser().then(
-							// 	function (currentUser) {
-							// 		devHelper.log(currentUser);
-							// 		$state.go('home');
-							// 	},
-							// 	function (error) {
-							// 		console.error(error);
-							// 	}
-							// );
-							//set access token
+
 							_verifyEmail();
 							devHelper.log(response);
 						},

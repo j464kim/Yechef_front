@@ -196,12 +196,6 @@ angular.module('auth.api', [
 				return $q(function (resolve, reject) {
 					AuthResource.register(newUser).then(function (response) {
 						var data = response.data.body;
-						sessionService.setSession(
-							data.access_token,
-							data.refresh_token,
-							data.expires_in,
-							data.token_type
-						);
 						resolve(data);
 					}, function (response) {
 						reject(response)

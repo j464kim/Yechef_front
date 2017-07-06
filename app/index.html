@@ -28,71 +28,22 @@
     <link rel="stylesheet" href="styles/validation.css">
     <!-- endbuild -->
 </head>
-<body ng-app="yechefFrontApp" ng-controller="MainCtrl as MCL">
+<body ng-app="yechefFrontApp">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <!-- Add your site or application content here -->
-<div class="header">
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
+<div class="header" ng-controller="HomeController as homeCtrl">
+    <page-header login="homeCtrl.isLoggedIn()"></page-header>
 
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#js-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" ui-sref="home">YeChef</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="js-navbar-collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a ui-sref="style-guide">Style Guide</a></li>
-                    <li><a ui-sref="dish.list">Dishes</a></li>
-                    <li><a ui-sref="kitchen.list">Kitchens</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
-                    <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
-                    <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
-                    <li><a ui-sref="user.kitchen.dashboard" ng-if="MCL.isLoggedin()">My Kitchen</a></li>
-                    <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
-
-                    <li class="dropdown" ng-if="MCL.isLoggedin()" ng-cloak>
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="http://placehold.it/18x18" class="profile-image img-circle">
-                            <label>{{currentUser.first_name}}</label> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a ui-sref="user.profile.main({id: currentUser.id})"><i class="fa fa-id-badge"></i> Profile</a></li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-navicon"></i> Orders</a></li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-heart-o"></i> Forked</a></li>
-                            <li class="divider"></li>
-                            <li><a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <section ui-view></section>
-</div>
-
-<div class="footer">
     <div class="container">
-        <!--<p>This is the footer</p>-->
+        <section ui-view></section>
+    </div>
+
+    <div class="footer">
+        <page-footer login="homeCtrl.isLoggedIn()"></page-footer>
     </div>
 </div>
 
@@ -145,18 +96,21 @@
 <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
 <!-- endbower -->
 <!-- CDN -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://js.stripe.com/v2/"></script>
+
 <!-- end CDN -->
 <!-- endbuild -->
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="main/app.js"></script>
 <script src="main/config.js"></script>
-<script src="main/mainController.js"></script>
+<script src="components/main/homeController.js"></script>
 <script src="main/services/httpInterceptor.js"></script>
 <script src="main/services/auth.js"></script>
 <script src="main/services/devHelper.js"></script>
 
+<script src="components/main/header/headerDirective.js"></script>
+<script src="components/main/footer/footerDirective.js"></script>
 <script src="components/dish/list/script.js"></script>
 <script src="components/dish/listInfinite/script.js"></script>
 <script src="components/dish/show/script.js"></script>
@@ -175,7 +129,9 @@
 <script src="shared/rating/service/ratingService.js"></script>
 <script src="shared/rating/ratingController.js"></script>
 <script src="shared/rating/create/ratingCreateController.js"></script>
-<script src="shared/media/create/script.js"></script>
+<script src="shared/media/mediaController.js"></script>
+<script src="shared/media/mediaService.js"></script>
+<script src="shared/media/service/media.js"></script>
 <script src="shared/reaction/reactionDirective.js"></script>
 <script src="shared/reaction/service/reactionService.js"></script>
 <script src="shared/share/shareDirective.js"></script>
@@ -186,16 +142,27 @@
 <script src="components/users/profile/userProfileRoute.js"></script>
 <script src="components/users/kitchen/userKitchenRoute.js"></script>
 <script src="components/users/service/users.js"></script>
-<script src="components/users/login/script.js"></script>
-<script src="components/users/password/script.js"></script>
-<script src="components/users/register/script.js"></script>
+<script src="components/users/login/loginController.js"></script>
+<script src="components/users/password/passwordController.js"></script>
+<script src="components/users/register/RegisterController.js"></script>
 <script src="components/users/profile/main/userMainController.js"></script>
 <script src="components/users/kitchen/userKitchenController.js"></script>
 <script src="components/users/kitchen/general/userKitchenGeneralController.js"></script>
+<script src="components/users/kitchen/dish/kitchenDishController.js"></script>
+<script src="components/users/kitchen/subscriber/kitchenSubscribers.js"></script>
 <script src="components/users/profile/general/userGeneralController.js"></script>
 <script src="components/users/profile/subscription/userSubscribeController.js"></script>
 <script src="components/users/profile/fork/userForkController.js"></script>
+<script src="components/checkout/checkoutRoute.js"></script>
+<script src="components/checkout/checkoutController.js"></script>
+<script src="components/checkout/checkoutService.js"></script>
 
+<script src="components/cart/cartRoute.js"></script>
+<script src="components/cart/cartService.js"></script>
+<script src="components/cart/cartController.js"></script>
+<script src="components/cart/ngCart/ngCart.js"></script>
+<script src="components/cart/ngCart/ngCart.directives.js"></script>
+<script src="components/cart/ngCart/ngCart.fulfilment.js"></script>
 
 <script src="style-guide/index.js"></script>
 

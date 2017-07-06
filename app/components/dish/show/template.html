@@ -54,7 +54,7 @@
                     <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
                         <md-tab label="Description">
                             <md-content class="md-padding">
-                                <p>Cooked by: <a> {{DishCtrl.kitchen.name}} </a></p>
+                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})"> {{DishCtrl.kitchen.name}} </a></p>
                                 <br/>
                                 <p class="card-text">{{DishCtrl.dish.description}}</p>
                             </md-content>
@@ -77,8 +77,10 @@
                     <div class="text-center">
                         <div class="col-md-6">
                             <!--Amount Selector-->
-                            <label>Amount</label>
-                            <input type="number" min="1" max="10" class="form-control bfh-number">
+                            <ngcart-addtocart id="{{ DishCtrl.dish.id }}" name="{{ DishCtrl.dish.name }}"
+                                              price="{{ DishCtrl.dish.price }}" quantity="1"
+                                              quantity-max="30" data="item">
+                            </ngcart-addtocart>
                             <!--Dish Price-->
                             <div class="row">
                                 <span id="dishPrice">${{DishCtrl.dish.price}}</span>
@@ -86,15 +88,8 @@
                         </div>
                         <!--Order & Add-to-cart-->
                         <div class="col-md-6">
-                            <div>
-                                <div class="row">
-                                    <button class="small-margin btn-default btn-md">
-                                        Add To Cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                <div class="row">
-                                    <button class="small-margin btn-danger btn-lg">Order</button>
-                                </div>
+                            <div class="row">
+                                <button class="small-margin btn-danger btn-lg" ui-sref="checkout.billing">Order</button>
                             </div>
                         </div>
                     </div>
@@ -104,7 +99,6 @@
             <div class="row text-center">
                 <md-content class="padding-1em">
                     <div ng-if="DishCtrl.dish" class="col-md-6">
-                        <span class="font-size-1-2em">Fork this Dish</span>
                         <!--Must load it "after" Dish data is available-->
                         <reaction-button reactionable="DishCtrl.dish" for="'fork'"></reaction-button>
                     </div>

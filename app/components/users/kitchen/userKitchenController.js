@@ -21,7 +21,7 @@ angular.module('user.kitchen', [
 		});
 
 		function _getMyKitchens() {
-			UserAPI.list('getMyKitchens').then(
+			UserAPI.getMyKitchens().then(
 				function (response) {
 					devHelper.log(response);
 					that.myKitchens = response;

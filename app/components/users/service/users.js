@@ -63,10 +63,23 @@ angular.module('user.api', [])
 				});
 			}
 
+			function getMyKitchens() {
+				return $q(function (resolve, reject) {
+					UserResource.list({
+						id: 'getMyKitchens',
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
 				update: update,
+				getMyKitchens: getMyKitchens
 			};
 		}
 	]);

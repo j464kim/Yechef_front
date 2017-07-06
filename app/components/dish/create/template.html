@@ -30,9 +30,9 @@
                             md-input-name="nationality" md-require-match
                             md-floating-label="Nationality"
                             md-no-cache="true"
-                            md-selected-item="DishCtrl.selectedNationality"
+                            md-selected-item="DishCtrl.dish.nationality"
                             md-search-text="DishCtrl.searchNationality"
-                            md-items="item in DishCtrl.querySearch(DishCtrl.searchNationality)"
+                            md-items="item in DishCtrl.querySearch(DishCtrl.searchNationality, DishCtrl.nationalities)"
                             md-item-text="item.display"
                             md-min-length="0"
                             placeholder="Choose Nationality">
@@ -71,6 +71,27 @@
                                 <div class="dropzone" id="dropzone" ng-dropzone></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row pull-center text-center">
+                    <div class="col-md-4">
+                        <md-checkbox ng-model="DishCtrl.dish.gluten_free" ng-true-value="1"
+                                     ng-false-value="0" aria-label="gluten_free">
+                            Gluten-free
+                        </md-checkbox>
+                    </div>
+                    <div class="col-md-4">
+                        <md-checkbox ng-model="DishCtrl.dish.vegan" ng-true-value="1"
+                                     ng-false-value="0" aria-label="vegan">
+                            Vegan
+                        </md-checkbox>
+                    </div>
+                    <div class="col-md-4">
+                        <md-checkbox ng-model="DishCtrl.dish.vegetarian" ng-true-value="1"
+                                     ng-false-value="0" aria-label="vegetarian">
+                            Vegetarian
+                        </md-checkbox>
                     </div>
                 </div>
                 <br/>

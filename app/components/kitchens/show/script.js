@@ -4,8 +4,8 @@ angular.module('kitchen.show', [
 	'kitchen.api', 'ngMaterial', 'share',
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog',
-		function ($stateParams, KitchenAPI, devHelper, $mdDialog) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope',
+		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope) {
 
 			/*********************
 			 *  Private Variables
@@ -17,7 +17,7 @@ angular.module('kitchen.show', [
 			/*********************
 			 *  Public Variables
 			 **********************/
-
+			this.isMine = false;
 			/*********************
 			 *  Private Functions
 			 **********************/
@@ -42,6 +42,15 @@ angular.module('kitchen.show', [
 				KitchenAPI.getAdmins(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchenAdmins = response;
+					if ($rootScope.currentUser) {
+						for (var i in that.kitchenAdmins) {
+
+							if (that.kitchenAdmins[i].id === $rootScope.currentUser.id) {
+								that.isMine = true;
+								break;
+							}
+						}
+					}
 				}, function (response) {
 					//TODO handle error state
 					console.error(response);

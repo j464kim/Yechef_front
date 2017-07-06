@@ -25,6 +25,23 @@ angular.module('auth.api', [
 		function ($resource, config, $http, $auth, devHelper) {
 			var api_endpoint = config.endpoint;
 
+			function sendVerifyLink(email) {
+				return $http({
+					method: 'POST',
+					url: api_endpoint + 'register/verify',
+					params: {
+						email: email,
+					}
+				});
+			}
+
+			function confirmEmail(token) {
+				return $http({
+					method: 'GET',
+					url: api_endpoint + 'register/confirm/' + token
+				});
+			}
+
 			function register(newUser) {
 				devHelper.log(newUser);
 				return $http({
@@ -74,6 +91,8 @@ angular.module('auth.api', [
 			};
 
 			return {
+				sendVerifyLink: sendVerifyLink,
+				confirmEmail: confirmEmail,
 				register: register,
 				login: login,
 				logout: logout,
@@ -153,16 +172,30 @@ angular.module('auth.api', [
 	.service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService', '$rootScope',
 		function ($q, AuthResource, sessionService, authService, $rootScope) {
 
+			function sendVerifyLink(email) {
+				return $q(function (resolve, reject) {
+					AuthResource.sendVerifyLink(email).then(function (response) {
+						resolve(response.data);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			}
+
+			function confirmEmail(token) {
+				return $q(function (resolve, reject) {
+					AuthResource.confirmEmail(token).then(function (response) {
+						resolve(response.data);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			}
+
 			function register(newUser) {
 				return $q(function (resolve, reject) {
 					AuthResource.register(newUser).then(function (response) {
 						var data = response.data.body;
-						sessionService.setSession(
-							data.access_token,
-							data.refresh_token,
-							data.expires_in,
-							data.token_type
-						);
 						resolve(data);
 					}, function (response) {
 						reject(response)
@@ -253,6 +286,8 @@ angular.module('auth.api', [
 			}
 
 			return {
+				sendVerifyLink: sendVerifyLink,
+				confirmEmail: confirmEmail,
 				register: register,
 				login: login,
 				socialLogin: socialLogin,

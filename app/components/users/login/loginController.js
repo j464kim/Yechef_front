@@ -6,8 +6,8 @@ angular.module('user.login', [
 ])
 
 
-	.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper',
-		function ($state, AuthAPI, devHelper) {
+	.controller('LoginController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
+		function ($state, AuthAPI, devHelper, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -43,11 +43,11 @@ angular.module('user.login', [
 								console.error(error);
 							}
 						);
-						;
 						//set access token
 						devHelper.log(response);
 					},
 					function (response) {
+						genericService.showToast(response.data.message);
 						console.error(response);
 					}
 				);
@@ -71,6 +71,7 @@ angular.module('user.login', [
 						devHelper.log(response);
 					},
 					function (response) {
+						genericService.showToast(response);
 						console.error(response);
 					}
 				);

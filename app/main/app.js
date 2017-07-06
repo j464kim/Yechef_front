@@ -25,22 +25,25 @@ angular
 		'uiGmapgoogle-maps',
 
 		// main modules
+		'home',
 		'style-guide',
 		'dish',
 		'rating',
 		'kitchen',
 		'user',
+		'checkout',
 		'profile',
+		'cart',
 		'userKitchen',
 		'mediaUpload',
 		'reaction',
 		'directive.confirmPassword',
 		'helper',
 
+
 		// services
 		'http.interceptor',
 		'auth.api',
-		'main.controller',
 
 		// configuration
 		'configuration',
@@ -56,7 +59,7 @@ angular
 		$stateProvider
 			.state('home', {
 				url: '/',
-				templateUrl: 'homepage/template.html',
+				templateUrl: 'components/main/homepage.html',
 			});
 
 		// For any unmatched url, redirect to /

@@ -1,2 +1,22 @@
+<div class="col-md-12">
 <h2>Subscribed Users</h2>
 <hr>
+</div>
+<div layout-fill layout="column" id="subscribers" loader>
+    <md-list class="fixedRows" ng-cloak>
+        <label for="search">Search</label>
+        <input layout-fill flex id="search" type="text" placeholder="email"/>
+        <md-divider></md-divider>
+        <md-subheader class="md-no-sticky">{{KsCtrl.subscribers.length}} users subscribed to the kitchen!
+        </md-subheader>
+        <md-list-item class="md-2-line contact-item" ng-repeat="subscriber in KsCtrl.subscribers">
+            <img ng-src="{{subscriber.medias[0].url}}" class="md-avatar"
+                 src="http://lorempixel.com/400/200/people/YeChef" alt="{{subscriber.last_name}}"/>
+            <div class="md-list-item-text compact">
+                <h3>{{subscriber.first_name}} {{subscriber.last_name}}</h3>
+                <p>{{subscriber.email}}</p>
+            </div>
+            <i class="material-icons md-24 md-secondary md-hue-3">message</i>
+        </md-list-item>
+    </md-list>
+</div>

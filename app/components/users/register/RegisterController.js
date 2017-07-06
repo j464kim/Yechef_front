@@ -6,8 +6,8 @@ angular.module('user.register', [
 ])
 
 
-	.controller('RegisterController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
-		function ($state, AuthAPI, devHelper, genericService) {
+	.controller('RegisterController', ['$state', '$stateParams', 'AuthAPI', 'devHelper', 'genericService',
+		function ($state, $stateParams, AuthAPI, devHelper, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -19,17 +19,34 @@ angular.module('user.register', [
 			 *    Private Variables
 			 **********************/
 			this.newUser = {};
+			this.token = $stateParams.token;
+
 
 			/*********************
 			 *    Private Functions
 			 **********************/
 
 			function _verifyEmail() {
-				AuthAPI.verifyEmail(
-					that.email
+				AuthAPI.sendVerifyLink(
+					that.newUser.email
 				).then(function (response) {
 						//set access token
-						devHelper.log('Sent email verify link');
+						devHelper.log('Successfully sent email verify link');
+						$state.go('home');
+					},
+					function (response) {
+						console.error(response);
+					}
+				);
+			}
+
+			function _confirmEmail() {
+				AuthAPI.confirmEmail(
+					that.token
+				).then(function (response) {
+						//set access token
+						devHelper.log('Successfully confirmed that user is verified');
+						$state.go('home');
 					},
 					function (response) {
 						console.error(response);
@@ -41,16 +58,17 @@ angular.module('user.register', [
 				AuthAPI.register(that.newUser)
 					.then(
 						function (response) {
-							AuthAPI.setCurrentUser().then(
-								function (currentUser) {
-									devHelper.log(currentUser);
-									$state.go('home');
-								},
-								function (error) {
-									console.error(error);
-								}
-							);
+							// AuthAPI.setCurrentUser().then(
+							// 	function (currentUser) {
+							// 		devHelper.log(currentUser);
+							// 		$state.go('home');
+							// 	},
+							// 	function (error) {
+							// 		console.error(error);
+							// 	}
+							// );
 							//set access token
+							_verifyEmail();
 							devHelper.log(response);
 						},
 						function (response) {
@@ -66,11 +84,20 @@ angular.module('user.register', [
 					);
 			}
 
+
 			/*********************
 			 *    Public Functions
 			 **********************/
 			this.register = _register;
-			this.verifyEmail = _verifyEmail;
+
+
+			/*********************
+			 *  Initialization
+			 **********************/
+			if (this.token) {
+				_confirmEmail();
+			}
+
 
 			/*********************
 			 *    EVENTS

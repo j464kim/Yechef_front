@@ -24,14 +24,13 @@ angular.module('user', [
 				abstract: true,
 				template: '<ui-view/>'
 			})
-			.state('user.register.verify', {
-				url: '/verify',
-				templateUrl: 'components/users/register/verifyEmail.html',
+			.state('user.register.new', {
+				url: '',
+				templateUrl: 'components/users/register/register.html',
 				controller: 'RegisterController as RegisterCtrl',
 			})
-			.state('user.register.create', {
+			.state('user.register.confirm', {
 				url: '/{token}',
-				templateUrl: 'components/users/register/register.html',
 				controller: 'RegisterController as RegisterCtrl',
 			})
 			.state('user.password', {

@@ -25,13 +25,20 @@ angular.module('auth.api', [
 		function ($resource, config, $http, $auth, devHelper) {
 			var api_endpoint = config.endpoint;
 
-			function verifyEmail(email) {
+			function sendVerifyLink(email) {
 				return $http({
 					method: 'POST',
 					url: api_endpoint + 'register/verify',
 					params: {
 						email: email,
 					}
+				});
+			}
+
+			function confirmEmail(token) {
+				return $http({
+					method: 'GET',
+					url: api_endpoint + 'register/confirm/' + token
 				});
 			}
 
@@ -84,7 +91,8 @@ angular.module('auth.api', [
 			};
 
 			return {
-				verifyEmail: verifyEmail,
+				sendVerifyLink: sendVerifyLink,
+				confirmEmail: confirmEmail,
 				register: register,
 				login: login,
 				logout: logout,
@@ -164,9 +172,19 @@ angular.module('auth.api', [
 	.service('AuthAPI', ['$q', 'AuthResource', 'sessionService', 'authService', '$rootScope',
 		function ($q, AuthResource, sessionService, authService, $rootScope) {
 
-			function verifyEmail(email) {
+			function sendVerifyLink(email) {
 				return $q(function (resolve, reject) {
-					AuthResource.verifyEmail(email).then(function (response) {
+					AuthResource.sendVerifyLink(email).then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			}
+
+			function confirmEmail(token) {
+				return $q(function (resolve, reject) {
+					AuthResource.confirmEmail(token).then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response)
@@ -274,7 +292,8 @@ angular.module('auth.api', [
 			}
 
 			return {
-				verifyEmail: verifyEmail,
+				sendVerifyLink: sendVerifyLink,
+				confirmEmail: confirmEmail,
 				register: register,
 				login: login,
 				socialLogin: socialLogin,

@@ -102,6 +102,7 @@ angular.module('dish.list', [
 				that.options.min_price = $stateParams.min_price;
 				that.options.max_price = $stateParams.max_price;
 				that.options.city = $stateParams.city;
+				that.options.distance = $stateParams.distance;
 			}
 
 			function _getDishes() {
@@ -170,7 +171,6 @@ angular.module('dish.list', [
 				sctrl.distance = $stateParams.distance;
 				sctrl.city = {formatted_address: $stateParams.city};
 			}
-
 
 			/*********************
 			 *    Initialization

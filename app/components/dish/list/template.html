@@ -105,8 +105,8 @@
                     </md-select>
                 </div>
                 <div class="col-sm-3">
-                    <md-slider-container>
-                        <md-slider flex ng-init="sctrl.distance=0" min="0" max="100"
+                    <md-slider-container ng-mouseup="sctrl.searchDish()">
+                        <md-slider flex min="0" max="100"
                                    ng-model="sctrl.distance"
                                    aria-label="distance"
                                    id="distance-slider">

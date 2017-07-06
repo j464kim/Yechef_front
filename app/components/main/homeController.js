@@ -51,18 +51,21 @@ angular.module('home', [])
 
 		self.nationality = newNationality;
 
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(
-				function (position) {
-					self.currentLocation = position;
-					MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
-						function (result) {
-							self.city = result[1];
-						}
-					);
-				});
-		} else {
-			console.error("Geolocation is not supported by this browser.");
+		if ($state.is('home')) {
+			console.log("ANG??");
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					function (position) {
+						self.currentLocation = position;
+						MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
+							function (result) {
+								self.city = result[1];
+							}
+						);
+					});
+			} else {
+				console.error("Geolocation is not supported by this browser.");
+			}
 		}
 
 		this.autocompleteOptions = {
@@ -144,6 +147,7 @@ angular.module('home', [])
 				nationality: self.nationality,
 				sortBy: self.sortBy,
 				city: self.city.formatted_address,
+				distance: self.distance,
 			});
 		}
 	}

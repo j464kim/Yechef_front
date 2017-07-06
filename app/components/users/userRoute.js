@@ -16,8 +16,8 @@ angular.module('user', [
 			})
 			.state('user.login', {
 				url: '/login',
-				templateUrl: 'components/users/login/template.html',
-				controller: 'UserLoginController as LoginCtrl',
+				templateUrl: 'components/users/login/login.html',
+				controller: 'LoginController as LoginCtrl',
 			})
 			.state('user.register', {
 				url: '/register',

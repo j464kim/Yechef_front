@@ -31,8 +31,11 @@ angular.module('user.register', [
 					that.newUser.email
 				).then(function (response) {
 
+						var data = response;
 						devHelper.log('Successfully sent email verify link');
+						devHelper.log(data.body);
 						$state.go('home');
+						genericService.showToast(data.message);
 					},
 					function (response) {
 						console.error(response);
@@ -45,8 +48,11 @@ angular.module('user.register', [
 					that.token
 				).then(function (response) {
 
+						var data = response;
 						devHelper.log('Successfully confirmed that user is verified');
-						$state.go('home');
+						devHelper.log(data.body);
+						$state.go('user.login');
+						genericService.showToast(data.message);
 					},
 					function (response) {
 						console.error(response);

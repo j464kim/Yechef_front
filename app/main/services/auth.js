@@ -175,7 +175,7 @@ angular.module('auth.api', [
 			function sendVerifyLink(email) {
 				return $q(function (resolve, reject) {
 					AuthResource.sendVerifyLink(email).then(function (response) {
-						resolve(response.body);
+						resolve(response.data);
 					}, function (response) {
 						reject(response)
 					});
@@ -185,7 +185,7 @@ angular.module('auth.api', [
 			function confirmEmail(token) {
 				return $q(function (resolve, reject) {
 					AuthResource.confirmEmail(token).then(function (response) {
-						resolve(response.body);
+						resolve(response.data);
 					}, function (response) {
 						reject(response)
 					});

@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
+    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -61,6 +63,7 @@
 	ga('send', 'pageview');
 </script>
 <script src="bower_components/filereader.js/filereader.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -93,6 +96,8 @@
 <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
 <script src="bower_components/chart.js/dist/Chart.js"></script>
 <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+<script src="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
 <!-- endbower -->
 <!-- CDN -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -108,6 +113,7 @@
 <script src="main/services/auth.js"></script>
 <script src="main/services/devHelper.js"></script>
 <script src="main/services/search.js"></script>
+<script src="main/services/map.js"></script>
 
 <script src="components/main/header/headerDirective.js"></script>
 <script src="components/main/footer/footerDirective.js"></script>

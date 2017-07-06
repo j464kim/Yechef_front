@@ -16,16 +16,17 @@
         <div class="col-sm-2">
             <div class="row no-gutters">
                 <md-input-container>
-                    <input type="text" id="City">
+                    <input type="text" id="City" options="sctrl.autocompleteOptions" g-places-autocomplete ng-model="sctrl.city"/>
                     <label for="City">City</label>
                     <br/><br/>
                     <md-slider-container>
-                        <md-slider flex ng-init="sctrl.distance=0" min="0" max="10" ng-model="sctrl.distance"
+                        <md-slider flex min="0" max="100" ng-model="sctrl.distance"
                                    aria-label="distance"
                                    id="distance-slider">
                         </md-slider>
                     </md-slider-container>
-                    <span>Distance: {{sctrl.distance}} km</span>
+                    <span ng-if="sctrl.distance != 0">Max Distance: {{sctrl.distance}} km</span>
+                    <span ng-if="sctrl.distance == 0 || sctrl.distance === undefined">Max Distance: Any</span>
                 </md-input-container>
             </div>
         </div>

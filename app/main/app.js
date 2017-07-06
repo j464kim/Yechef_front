@@ -23,6 +23,7 @@ angular
 		'ui.bootstrap',
 		'http-auth-interceptor',
 		'uiGmapgoogle-maps',
+		'google.places',
 
 		// main modules
 		'home',
@@ -45,6 +46,7 @@ angular
 		'http.interceptor',
 		'auth.api',
 		'search.api',
+		'map.api',
 
 		// configuration
 		'configuration',

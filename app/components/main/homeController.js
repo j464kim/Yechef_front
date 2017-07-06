@@ -22,6 +22,7 @@ angular.module('home', [])
 					devHelper.log('Token successfully refreshed');
 				}, function () {
 					devHelper.log('Fail to refresh token, redirecting to login page');
+					sessionService.revokeSession();
 					$state.go('user.login');
 				});
 			});
@@ -37,7 +38,7 @@ angular.module('home', [])
 			this.isLoggedIn = sessionService.isLogin;
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', function (config, $q, $timeout, devHelper, $state) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -47,12 +48,35 @@ angular.module('home', [])
 		self.querySearch = querySearch;
 		self.selectedItemChange = selectedItemChange;
 		self.searchTextChange = searchTextChange;
+		self.distance = 0;
 
 		self.nationality = newNationality;
+
+		if ($state.is('home')) {
+			console.log("ANG??");
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					function (position) {
+						self.currentLocation = position;
+						MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
+							function (result) {
+								self.city = result[1];
+							}
+						);
+					});
+			} else {
+				console.error("Geolocation is not supported by this browser.");
+			}
+		}
+
+		this.autocompleteOptions = {
+			types: ['(regions)']
+		}
 
 		function newNationality(nationality) {
 			alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
 		}
+
 
 		// ******************************
 		// Internal methods
@@ -123,6 +147,8 @@ angular.module('home', [])
 				max_price: self.max_price,
 				nationality: self.nationality,
 				sortBy: self.sortBy,
+				city: self.city.formatted_address,
+				distance: self.distance,
 			});
 		}
 	}

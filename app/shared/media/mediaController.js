@@ -35,6 +35,7 @@ angular.module('mediaUpload', [
 						});
 
 						myDropzone.on("maxfilesexceeded", function (file) {
+							//TODO: update UI accordingly
 							devHelper.log('You can only upload upto 3 images');
 						});
 

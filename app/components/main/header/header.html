@@ -18,7 +18,7 @@
                 <li><a ui-sref="dish.list">Dishes</a></li>
                 <li><a ui-sref="kitchen.list">Kitchens</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
+            <ul class="nav navbar-nav navbar-right" ng-controller="LoginController as LoginCtrl" ng-cloak>
                 <li><a ui-sref="cart.view">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> My Cart</a></li>
                 <!--For The Logged In-->
@@ -42,7 +42,7 @@
                     </ul>
                 </li>
                 <!--For Guests-->
-                <li ng-if="!login"><a ui-sref="user.register">Register</a></li>
+                <li ng-if="!login"><a ui-sref="user.register.new">Register</a></li>
                 <li ng-if="!login"><a ui-sref="user.login">Login</a></li>
             </ul>
         </div>

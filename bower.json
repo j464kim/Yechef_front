@@ -25,7 +25,8 @@
     "ngSmoothScroll": "^2.0.0",
     "angular-material-datetimepicker": "^1.5.1",
     "angular-google-maps": "^2.4.1",
-    "angular-chart.js": "^1.1.1"
+    "angular-chart.js": "^1.1.1",
+    "angular-socialshare": "angularjs-socialshare#^2.3.11"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

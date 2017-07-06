@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('dish.show', [
+    'share',
     'dishes.api',
 ])
 

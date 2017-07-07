@@ -1,9 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <a><i class="fa fa-facebook-square" aria-hidden="true">Facebook</i></a>
-            <a><i class="fa fa-instagram" aria-hidden="true">Instagram</i></a>
-            <a><i class="fa fa-pinterest-square" aria-hidden="true">Pinterest</i></a>
         </div>
         <div class="col-md-6">
             <p class="text-center kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
@@ -40,6 +37,7 @@
             <a>
                 <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
             </a>
+
         </div>
     </div>
 </div>
@@ -51,7 +49,8 @@
         <div class="col-md-6 padding">
             <div class="row">
                 <img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
-                <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})" ng-if="KitchenCtrl.isMine"
+                <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})"
+                        ng-if="KitchenCtrl.isMine"
                         class="btn btn-default btn-sm btn-edit">Manage My Kitchen
                 </button>
                 <!--Must load it "after" kitchen data is available-->

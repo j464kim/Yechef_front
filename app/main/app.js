@@ -15,6 +15,7 @@ angular
 		'ngMessages',
 		'ngMaterial',
 		'ngMaterialDatePicker',
+		'directive.loader',
 
 		// libraries
 		'ui.router',

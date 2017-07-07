@@ -2551,7 +2551,7 @@ md-toast.md-top.md-center {
   width: 100%;
   height: 100%;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 .loader-wrapper .loader-overlay .loader {
   position: absolute;

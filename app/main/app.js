@@ -16,6 +16,7 @@ angular
 		'ngMaterial',
 		'ngMaterialDatePicker',
 		'directive.loader',
+		'angular-loading-bar',
 
 		// libraries
 		'ui.router',

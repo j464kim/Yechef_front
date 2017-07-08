@@ -36,6 +36,9 @@
 <![endif]-->
 
 <div id="pageContent" ng-controller="MainController as MainCtrl">
+    <!-- defines the theme pixel -->
+    <theme-pixel color="MainCtrl.color"></theme-pixel>
+
     <page-header login="MainCtrl.isLoggedIn()"></page-header>
 
     <div class="container">
@@ -138,6 +141,7 @@
 <script src="shared/share/shareDirective.js"></script>
 <script src="shared/confirmPassword/confirmPasswordDirective.js"></script>
 <script src="shared/helper/genericService.js"></script>
+<script src="shared/themePixel/themePixelDirective.js"></script>
 
 <script src="components/users/userRoute.js"></script>
 <script src="components/users/profile/userProfileRoute.js"></script>

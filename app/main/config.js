@@ -23,13 +23,6 @@ angular.module('configuration', [])
 		// TODO: configure locale to know which type of currency
 		var currency = 'cad';
 
-		// Color scheme
-		// HAS TO BE IN HEX FORM
-		var primaryColor = '#50C875';
-		var secondaryColor = '#0000FF'; // blue
-		var ternaryColor = '#00FF00'; // yelow
-		var quaternaryColor = '#FF0000'; //red
-
 		// image upload
 		var maxFiles = 3;
 		var maxFileSize = 4; // 4mb
@@ -82,11 +75,7 @@ angular.module('configuration', [])
 			autoProcessQueue: autoProcessQueue,
 			addRemoveLinks: addRemoveLinks,
 			nationalities: nationalities,
-			currency: currency,
-			primaryColor: primaryColor,
-			secondaryColor: secondaryColor,
-			ternaryColor: ternaryColor,
-			quaternaryColor: quaternaryColor,
+			currency: currency
 		};
 
 	})());

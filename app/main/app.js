@@ -40,6 +40,7 @@ angular
 		'mediaUpload',
 		'reaction',
 		'directive.confirmPassword',
+		'directive.themePixel',
 		'helper',
 		'header',
 		'footer',

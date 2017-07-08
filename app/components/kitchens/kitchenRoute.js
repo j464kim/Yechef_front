@@ -18,17 +18,17 @@ angular.module('kitchen', [
 			})
 			.state('kitchen.list', {
 				url: '/list',
-				templateUrl: 'components/kitchens/list/template.html',
+				templateUrl: 'components/kitchens/list/kitchenList.html',
 				controller: 'KitchenListController as KitchenCtrl'
 			})
 			.state('kitchen.create', {
 				url: '/new',
-				templateUrl: 'components/kitchens/create/template.html',
+				templateUrl: 'components/kitchens/create/kitchenCreate.html',
 				controller: 'KitchenCreateController as KitchenCtrl'
 			})
 			.state('kitchen.edit', {
 				url: '/edit/{id}',
-				templateUrl: 'components/kitchens/update/template.html',
+				templateUrl: 'components/kitchens/update/kitchenUpdate.html',
 				controller: 'KitchenUpdateController as KitchenCtrl'
 			})
 			.state('kitchen.show', {

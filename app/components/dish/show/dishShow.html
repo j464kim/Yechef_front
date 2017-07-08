@@ -32,9 +32,29 @@
                 </div>
             </div>
         </div>
-        <!--Dish Image-->
-        <div class="row margin-bottom-1em" loader>
-            <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width" alt="Card image cap">
+        <!--Dish Image Carousel-->
+        <div class="row margin-bottom-1em carousel slide"  id="dishCarousel" data-ride="carousel" loader>
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#dishCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#dishCarousel" data-slide-to="1"></li>
+                <li data-target="#dishCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width item active">
+                <img ng-src="{{DishCtrl.dish.medias[1].url}}" class="full-width item">
+                <img ng-src="{{DishCtrl.dish.medias[2].url}}" class="full-width item">
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" data-target="#dishCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" data-target="#dishCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
         <!--Buyers Reviews / Ratings-->
         <div class="row">
@@ -54,7 +74,8 @@
                     <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
                         <md-tab label="Description">
                             <md-content class="md-padding">
-                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})"> {{DishCtrl.kitchen.name}} </a></p>
+                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})">
+                                    {{DishCtrl.kitchen.name}} </a></p>
                                 <br/>
                                 <p class="card-text">{{DishCtrl.dish.description}}</p>
                             </md-content>

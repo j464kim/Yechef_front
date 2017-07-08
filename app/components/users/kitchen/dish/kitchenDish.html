@@ -1,4 +1,4 @@
-<div class="row" id="dishList" loader>
+<div class="row" id="dishList">
     <div class="col-md-12">
         <h2>My Dishes</h2>
         <a class="pull-right" ui-sref="dish.create({kid: UkCtrl.myCurrentKitchenId})"><i class="fa fa-plus"></i> Add
@@ -8,7 +8,7 @@
 <hr>
 <div class="row">
     <br/>
-    <div class="col-md-3" ng-repeat="dish in KdCtrl.dishes">
+    <div class="col-md-3" ng-repeat="dish in KdCtrl.dishes" loader>
         <div class="col-md-12">
 
             <div class="row">

@@ -32,6 +32,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "grunt uglify",
+    "start": "node server.js",
     "test": "karma start test/karma.conf.js"
   },
   "dependencies": {

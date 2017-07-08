@@ -93,10 +93,10 @@
     </md-content>
     <div class="col-sm-offset-1">
         <h3>Featrued Dishes</h3>
-        <div ng-controller="DishListInfiniteController as DishCtrl" id="featuredDishList" loader>
+        <div ng-controller="DishListInfiniteController as DishCtrl" id="featuredDishList">
             <ul uib-pager items-per-page="3" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"></ul>
             <div class="row">
-                <div class="col-md-4" ng-repeat="n in [0,1,2]">
+                <div class="col-md-4" ng-repeat="n in [0,1,2]" loader>
                     <img ng-src="{{DishCtrl.dishes[n].medias[0].url}}" alt="Card image cap" style="width:100%;">
 
                     <h4 class="card-title">{{DishCtrl.dishes[n].name}}</h4>

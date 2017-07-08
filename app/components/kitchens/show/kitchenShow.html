@@ -1,9 +1,7 @@
 <div class="container">
+    <!--Header-->
     <div class="row">
         <div class="col-md-3">
-            <a><i class="fa fa-facebook-square" aria-hidden="true">Facebook</i></a>
-            <a><i class="fa fa-instagram" aria-hidden="true">Instagram</i></a>
-            <a><i class="fa fa-pinterest-square" aria-hidden="true">Pinterest</i></a>
         </div>
         <div class="col-md-6">
             <p class="text-center kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
@@ -17,6 +15,7 @@
             <label>524 Reviews</label>
         </div>
     </div>
+    <!--Sub Header-->
     <div class="row">
         <div class="col-md-3 text-center">
             <label>Share it with</label>
@@ -40,18 +39,20 @@
             <a>
                 <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
             </a>
+
         </div>
     </div>
 </div>
 <hr>
 
-<div class="container" id="kitchenList" loader>
-
+<div class="container" id="kitchenList">
     <div class="row">
+        <!--Kitchen Image-->
         <div class="col-md-6 padding">
-            <div class="row">
+            <div class="row" loader>
                 <img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
-                <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})" ng-if="KitchenCtrl.isMine"
+                <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})"
+                        ng-if="KitchenCtrl.isMine"
                         class="btn btn-default btn-sm btn-edit">Manage My Kitchen
                 </button>
                 <!--Must load it "after" kitchen data is available-->
@@ -60,14 +61,17 @@
                 </div>
             </div>
         </div>
+        <!--About Kitchen-->
         <div class="col-md-6">
             <div class="row">
+                <!--Kitchen Description-->
                 <div class="col-md-8">
                     <p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
                 </div>
+                <!--Kitchen Chef-->
                 <div class="col-md-4">
                     <div class="owner-info pull-right"
-                         ng-if="KitchenCtrl.kitchenAdmins[0].pivot.role == 1 && KitchenCtrl.kitchenAdmins[0].pivot.verified == 1">
+                         ng-if="KitchenCtrl.kitchenAdmins[0].pivot.role == 1 && KitchenCtrl.kitchenAdmins[0].pivot.verified == 1" loader>
                         <h4>Chef</h4>
                         <img class="kitchen-owner"
                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
@@ -85,9 +89,11 @@
             </div>
         </div>
     </div>
+    <!--Kitchen Dishes-->
     <div class="row">
         <h2>Dishes</h2>
     </div>
+    <!--See more chefs-->
     <div style="visibility: hidden">
         <div class="md-dialog-container" id="showChefs">
             <md-dialog layout-padding>

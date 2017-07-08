@@ -1,4 +1,4 @@
-<div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl" loader>
+<div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl">
 
     <div class="col-md-8 dish-show-left">
         <!--Dish Header-->
@@ -33,7 +33,7 @@
             </div>
         </div>
         <!--Dish Image-->
-        <div class="row margin-bottom-1em">
+        <div class="row margin-bottom-1em" loader>
             <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width" alt="Card image cap">
         </div>
         <!--Buyers Reviews / Ratings-->
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="dish-show-right affix">
+        <div class="dish-show-right affix" loader>
             <!--Description & Ingredients-->
             <div class="row margin-bottom-1em">
                 <md-content>

@@ -2429,6 +2429,20 @@ h6 {
 .large-icon:hover {
   color: darkblue;
 }
+/* TODO: what are these for?? */
+/* bg color defination */
+.bg-primary {
+  background-color: #50C875;
+}
+.bg-secondary {
+  background-color: blue;
+}
+.bg-ternary {
+  background-color: yellow;
+}
+.bg-quaternary {
+  background-color: red;
+}
 .kitchen-image {
   height: 100%;
   width: 100%;

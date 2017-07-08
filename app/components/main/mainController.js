@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('home', [])
+angular.module('main', [])
 
-	.controller('HomeController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService) {
+	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider) {
 
 			var that = this;
 
@@ -35,6 +35,12 @@ angular.module('home', [])
 			}
 
 			this.isLoggedIn = sessionService.isLogin;
+
+
+			// themeing
+			themeProvider.theme('default').primaryPalette('yellow').accentPalette('green');
+			$mdTheming.generateTheme('default');
+			themeProvider.setDefaultTheme('default');
 		}
 	])
 	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', function (config, $q, $timeout, devHelper) {

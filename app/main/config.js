@@ -10,7 +10,7 @@ angular.module('configuration', [])
 		var envProd = 'PROD';
 		var envDebug = 'DEBUG';
 
-		env = envDebug;
+		env = envProd;
 
 		// remember to add the last /
 		var debugAPI = '//laravel.dev/api/';

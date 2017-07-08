@@ -3,8 +3,8 @@
 
 <div class="container" id="kitchenList">
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
-    <div class="row" loader>
-        <div class="col-md-2" ng-repeat="dish in ufCtrl.forkedDishes">
+    <div class="row">
+        <div class="col-md-2" ng-repeat="dish in ufCtrl.forkedDishes" loader>
             <md-card>
                 <img class="md-user-avatar" ui-sref="dish.show({id: dish.id})" ng-src="{{dish.medias[0].url}}">
                 <md-card-title>

@@ -2542,7 +2542,7 @@ md-toast.md-top.md-center {
   transform: translate3d(-50%, 0, 0);
 }
 .loader-wrapper {
-  min-height: 300px;
+  min-height: 0;
   height: 100%;
   position: relative;
 }

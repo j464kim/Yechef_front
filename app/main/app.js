@@ -42,6 +42,8 @@ angular
 		'reaction',
 		'directive.confirmPassword',
 		'helper',
+		'header',
+		'footer',
 
 
 		// services

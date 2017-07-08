@@ -34,7 +34,7 @@
   },
   "scripts": {
     "postinstall": "npm install -g bower; bower install --force-latest; grunt build",
-    "start": "bower update; bower install; grunt serve",
+    "start": "bower install; grunt serve",
     "test": "karma start test/karma.conf.js"
   },
   "dependencies": {

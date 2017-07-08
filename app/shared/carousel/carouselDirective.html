@@ -1,0 +1,25 @@
+<div class="row margin-bottom-1em carousel slide" ng-show="medias.length !== 0" id="dishCarousel"
+     data-ride="carousel" loader>
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li ng-if="medias[0]" data-target="#dishCarousel" data-slide-to="0" class="active"></li>
+        <li ng-if="medias[1]" data-target="#dishCarousel" data-slide-to="1"></li>
+        <li ng-if="medias[2]" data-target="#dishCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <img ng-if="medias[0]" ng-src="{{medias[0].url}}"
+             class="full-width item active">
+        <img ng-if="medias[1]" ng-src="{{medias[1].url}}" class="full-width item">
+        <img ng-if="medias[2]" ng-src="{{medias[2].url}}" class="full-width item">
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" data-target="#dishCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" data-target="#dishCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

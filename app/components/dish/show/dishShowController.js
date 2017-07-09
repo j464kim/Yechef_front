@@ -2,6 +2,7 @@
 
 angular.module('dish.show', [
     'share',
+    'carousel',
     'dishes.api',
 ])
 

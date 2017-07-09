@@ -2,6 +2,7 @@
 <hr>
 <div class="row">
     <label class="h3">Owner</label>
+    <!--Manage Kitchen Owners-->
     <div layout="column" ng-cloak>
         <md-content layout-padding layout="column">
             <form ng-submit="$event.preventDefault()">
@@ -14,7 +15,7 @@
                                      md-min-length="1"
                                      placeholder="Enter Email"
                                      md-menu-class="autocomplete-custom-template" ng-cloak>
-                        <md-item-template>
+                        <md-item-template loader>
                         <span class="item-title">
                             <span> {{item.email}} </span>
                         </span>
@@ -51,6 +52,7 @@
     <hr>
 </div>
 <div class="row">
+    <!--Manage My Kitchen-->
     <div class="col-md-12">
         <label class="h3">My Kitchen</label>
         <md-button flex="1" class="md-raised md-primary"
@@ -58,10 +60,10 @@
         </md-button>
         <md-button flex="1" class="md-raised" ui-sref="kitchen.show({id: UkCtrl.myCurrentKitchen.id})">View</md-button>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8" loader>
         <img class="kitchen-image" ng-src="{{UkCtrl.myCurrentKitchen.medias[0].url}}">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" loader>
         <div class="ktichenName">
             <label>Kitchen Name:</label> <br/>
             <span>{{UkCtrl.myCurrentKitchen.name}}</span>

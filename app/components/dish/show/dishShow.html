@@ -1,4 +1,4 @@
-<div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl" loader>
+<div class="container" id="dishShow" ng-controller="RatingController as RatingCtrl">
 
     <div class="col-md-8 dish-show-left">
         <!--Dish Header-->
@@ -32,9 +32,29 @@
                 </div>
             </div>
         </div>
-        <!--Dish Image-->
-        <div class="row margin-bottom-1em">
-            <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width" alt="Card image cap">
+        <!--Dish Image Carousel-->
+        <div class="row margin-bottom-1em carousel slide"  id="dishCarousel" data-ride="carousel" loader>
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#dishCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#dishCarousel" data-slide-to="1"></li>
+                <li data-target="#dishCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width item active">
+                <img ng-src="{{DishCtrl.dish.medias[1].url}}" class="full-width item">
+                <img ng-src="{{DishCtrl.dish.medias[2].url}}" class="full-width item">
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" data-target="#dishCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" data-target="#dishCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
         <!--Buyers Reviews / Ratings-->
         <div class="row">
@@ -47,14 +67,15 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="dish-show-right affix">
+        <div class="dish-show-right affix" loader>
             <!--Description & Ingredients-->
             <div class="row margin-bottom-1em">
                 <md-content>
                     <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
                         <md-tab label="Description">
                             <md-content class="md-padding">
-                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})"> {{DishCtrl.kitchen.name}} </a></p>
+                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})">
+                                    {{DishCtrl.kitchen.name}} </a></p>
                                 <br/>
                                 <p class="card-text">{{DishCtrl.dish.description}}</p>
                             </md-content>
@@ -98,11 +119,7 @@
                     </div>
                     <div class="col-md-6 font-size-1-2em">
                         Share it with
-                        <div class="row font-size-1-6em">
-                            <a><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-                            <a><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            <a><i class="fa fa-pinterest-square" aria-hidden="true"></i></a>
-                        </div>
+                        <share-button for="dish"></share-button>
                     </div>
                 </md-content>
             </div>

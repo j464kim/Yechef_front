@@ -15,6 +15,8 @@ angular
 		'ngMessages',
 		'ngMaterial',
 		'ngMaterialDatePicker',
+		'directive.loader',
+		'angular-loading-bar',
 
 		// libraries
 		'ui.router',
@@ -39,6 +41,8 @@ angular
 		'reaction',
 		'directive.confirmPassword',
 		'helper',
+		'header',
+		'footer',
 
 
 		// services

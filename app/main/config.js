@@ -14,7 +14,7 @@ angular.module('configuration', [])
 
 		// remember to add the last /
 		var debugAPI = '//laravel.dev/api/';
-		var productAPI = '//laravel.dev/api/';
+		var productAPI = '//serene-hamlet-46448.herokuapp.com/api/';
 
 		// social configurations
 		var facebookAppId = '789389204557240';

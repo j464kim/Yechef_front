@@ -2,10 +2,11 @@
 
 angular.module('dish.create', [
 	'dishes.api',
+	'mediaUpload',
 ])
 
-	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout', 'genericService', '$stateParams', 'KitchenAPI',
-		function ($state, DishesAPI, devHelper, config, $q, $timeout, genericService, $stateParams, KitchenAPI) {
+	.controller('DishCreateController', ['$state', 'DishesAPI', 'devHelper', 'config', '$q', '$timeout', 'genericService', '$stateParams', 'KitchenAPI', 'mediaService',
+		function ($state, DishesAPI, devHelper, config, $q, $timeout, genericService, $stateParams, KitchenAPI, mediaService) {
 
 			/*********************
 			 *    Private Variables
@@ -44,8 +45,7 @@ angular.module('dish.create', [
 					.then(function (response) {
 						var newDish = response;
 						devHelper.log(newDish);
-						_uploadDishMedia(newDish);
-
+						mediaService.uploadMedia(newDish);
 						$state.go('dish.show', {"id": newDish.id});
 					}, function (response) {
 						// TODO handle error state
@@ -53,23 +53,7 @@ angular.module('dish.create', [
 					});
 			}
 
-			function _uploadDishMedia(response) {
-
-				// instantiate Dropzone
-				var dropzoneInstance = Dropzone.forElement("#dropzone");
-
-				// figure out the model type to pass into dropzone controller
-				var mediableInfo = genericService.getModelType($state);
-
-				dropzoneInstance.on("sending", function (file, xhr, formData) {
-					formData.append('mediable_id', response.id);
-					formData.append('mediable_type', mediableInfo['type']);
-				});
-
-				dropzoneInstance.processQueue();
-			}
-
-						/**
+			/**
 			 * Build `states` list of key/value pairs
 			 */
 			function _loadNationalities() {

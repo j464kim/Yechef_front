@@ -23,22 +23,22 @@ angular.module('dish', [
 			// })
 			.state('dish.list', {
 				url: 'es',
-				templateUrl: '/components/dish/list/template.html',
+				templateUrl: '/components/dish/list/dishList.html',
 				controller: 'DishListController as DishCtrl',
 			})
 			.state('dish.show', {
 				url: '/show/{id}',
-				templateUrl: '/components/dish/show/template.html',
+				templateUrl: '/components/dish/show/dishShow.html',
 				controller: 'DishShowController as DishCtrl',
 			})
 			.state('dish.create', {
 				url: '/new/{kid}',
-				templateUrl: '/components/dish/create/template.html',
+				templateUrl: '/components/dish/create/dishCreate.html',
 				controller: 'DishCreateController as DishCtrl',
 			})
 			.state('dish.update', {
 				url: '/edit/{id}',
-				templateUrl: '/components/dish/update/template.html',
+				templateUrl: '/components/dish/update/dishUpdate.html',
 				controller: 'DishUpdateController as DishCtrl',
 			})
 			.state('dish.destroy', {

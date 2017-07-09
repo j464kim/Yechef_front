@@ -6,7 +6,7 @@ angular.module('user.login', [
 ])
 
 
-	.controller('UserLoginController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
+	.controller('LoginController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
 		function ($state, AuthAPI, devHelper, genericService) {
 
 			/*********************

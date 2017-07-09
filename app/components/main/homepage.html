@@ -2,48 +2,56 @@
     <div class="col-sm-1">
 
     </div>
-    <md-content class="md-padding">
+    <md-content class="md-padding" ng-controller="SearchCtrl as sctrl">
         <div class="col-sm-2">
             <div class="row no-gutters">
                 <md-input-container>
-                    <input type="text" id="food">
-                    <label for="food">Food (ex. Seafood)</label>
+                    <input type="text" id="food" ng-model="sctrl.q">
+                    <label for="food">Key word (ex. Seafood)</label>
                     <br/> <br/><br/>
-                    <md-checkbox ng-model="sctrl.deliverOnly">Deliver Only</md-checkbox>
+                    <md-checkbox ng-model="sctrl.deliverOnly" disabled="true">Deliver Only</md-checkbox>
                 </md-input-container>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="row no-gutters">
                 <md-input-container>
-                    <input type="text" id="City">
+                    <input type="text" id="City" options="sctrl.autocompleteOptions" g-places-autocomplete ng-model="sctrl.city"/>
                     <label for="City">City</label>
                     <br/><br/>
                     <md-slider-container>
-                        <md-slider flex ng-init="sctrl.distance=0" min="0" max="10" ng-model="sctrl.distance"
+                        <md-slider flex min="0" max="100" ng-model="sctrl.distance"
                                    aria-label="distance"
                                    id="distance-slider">
                         </md-slider>
                     </md-slider-container>
-                    <span>Distance: {{sctrl.distance}} km</span>
+                    <span ng-if="sctrl.distance != 0">Max Distance: {{sctrl.distance}} km</span>
+                    <span ng-if="sctrl.distance == 0 || sctrl.distance === undefined">Max Distance: Any</span>
                 </md-input-container>
             </div>
         </div>
         <div class="col-sm-2">
-            <md-input-container>
-                <input type="text" id="price">
-                <label for="price">Price limit</label>
-                <br/><br/><br/>
-                <md-checkbox ng-model="sctrl.glutenFree">Gluten-free</md-checkbox>
-            </md-input-container>
+            <label class="col-sm-offset-2">Price Range</label>
+            <div class="col-sm-6">
+                <md-input-container>
+                    <input type="text" id="min_price" ng-model="sctrl.min_price">
+                    <label for="min_price">min</label>
+                </md-input-container>
+            </div>
+
+            <div class="col-sm-6">
+                <md-input-container>
+                    <input type="text" id="max_price" ng-model="sctrl.max_price">
+                    <label for="max_price">max</label>
+                </md-input-container>
+            </div>
         </div>
         <div class="col-sm-3">
-            <div ng-controller="SearchCtrl as sctrl" layout="column" ng-cloak>
+            <div layout="column" ng-cloak>
                 <form ng-submit="$event.preventDefault()">
                     <md-autocomplete
-                            ng-disabled="sctrl.isDisabled"
                             md-no-cache="true"
-                            md-selected-item="sctrl.selectedItem"
+                            md-selected-item="sctrl.selectedNationality"
                             md-search-text-change="sctrl.searchTextChange(sctrl.searchText)"
                             md-search-text="sctrl.searchText"
                             md-selected-item-change="sctrl.selectedItemChange(item)"
@@ -62,18 +70,20 @@
                     </md-autocomplete>
 
                     <br/><br/>
-                    <md-checkbox ng-model="sctrl.vegan">Vegan</md-checkbox>
-                    <md-checkbox ng-model="sctrl.vegetarian">Vegetarian</md-checkbox>
+                    <md-checkbox ng-model="sctrl.vegan" ng-true-value="1">Vegan</md-checkbox>
+                    <md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1">Vegetarian</md-checkbox>
+                    <md-checkbox ng-model="sctrl.gluten_free" ng-true-value="1">Gluten-free</md-checkbox>
                 </form>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="row no-gutters">
-                <md-button class="md-raised md-warn">Search</md-button> <br/>
+                <md-button class="md-raised md-warn" ng-click="sctrl.searchDish()">Search</md-button>
+                <br/>
                 <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline">
-                    <md-option value="hottest">Hottest</md-option>
                     <md-option value="price_asc">Price (Ascending)</md-option>
                     <md-option value="price_dsc">Price (Descending)</md-option>
+                    <md-option value="newest">Newest</md-option>
                     <md-option value="taste">Taste</md-option>
                     <md-option value="visual">Visual</md-option>
                     <md-option value="quantity">Quantity</md-option>
@@ -81,20 +91,21 @@
             </div>
         </div>
     </md-content>
+    <br>
     <div class="col-sm-offset-1">
-        <h3>Featrued Dishes</h3>
-        <div ng-controller="DishListInfiniteController as DishCtrl" id="featuredDishList">
-            <ul uib-pager items-per-page="3" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"></ul>
+        <h3 class="text-center">Featrued Dishes</h3>
+        <div ng-controller="FeaturedDishController as DishCtrl" id="featuredDishList">
+            <ul uib-pager items-per-page="6" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" ng-change="DishCtrl.getFeaturedDishes()"></ul>
             <div class="row">
-                <div class="col-md-4" ng-repeat="n in [0,1,2]" loader>
-                    <img ng-src="{{DishCtrl.dishes[n].medias[0].url}}" alt="Card image cap" style="width:100%;">
+                <div class="col-md-4" ng-repeat="dish in DishCtrl.dishes" loader>
+                    <a ui-sref="dish.show({id: dish.id})">
+                        <img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
 
-                    <h4 class="card-title">{{DishCtrl.dishes[n].name}}</h4>
-                    <p class="card-text">{{DishCtrl.dishes[n].description}}</p>
-                    <a ui-sref="dish.show({id: DishCtrl.dishes[n].id})" class="btn btn-primary">View Detail</a>
+                        <h4 class="card-title">{{dish.name}}</h4>
+                        <p class="card-text">{{dish.price}}</p>
+                    </a>
                 </div>
             </div>
-            <ul uib-pager items-per-page="3" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"></ul>
         </div>
     </div>
 </div>

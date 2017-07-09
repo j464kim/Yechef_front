@@ -37,55 +37,61 @@ angular.module('directive.themePixel', [
 				var quaternary		= quaternaryElem.css('background-color') || defaultColor;
 				var quaternaryFont	= quaternaryElem.css('color') || defaultFontColor;
 
+				primaryFont = genericService.parseRgbStr(primaryFont);
+				secondaryFont = genericService.parseRgbStr(secondaryFont);
+				ternaryFont = genericService.parseRgbStr(ternaryFont);
+				quaternaryFont = genericService.parseRgbStr(quaternaryFont);
+
+
 				var primaryTheme = {
-					"50": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, 0.25, true)},
-					"100": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, 0.2, true)},
-					"200": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, 0.15, true)},
-					"300": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, 0.1, true)},
-					"400": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, 0.05, true)},
-					"500": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, 0, true)},
-					"600": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, -0.05, true)},
-					"700": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, -0.1, true)},
-					"800": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, -0.15, true)},
-					"900": {contrast: genericService.parseRgbStr(primaryFont), value: genericService.shadeRGBColor(primary, -0.2, true)},
-					"A100": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.2, true)},
-					"A200": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.1, true)},
-					"A400": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, -0.1, true)},
-					"A700": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, -0.2, true)}
+					"50": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, 0.25, true)},
+					"100": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, 0.2, true)},
+					"200": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, 0.15, true)},
+					"300": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, 0.1, true)},
+					"400": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, 0.05, true)},
+					"500": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, 0, true)},
+					"600": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, -0.05, true)},
+					"700": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, -0.1, true)},
+					"800": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, -0.15, true)},
+					"900": {contrast: primaryFont, value: genericService.shadeRGBColor(primary, -0.2, true)},
+					"A100": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.2, true)},
+					"A200": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.1, true)},
+					"A400": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, -0.1, true)},
+					"A700": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, -0.2, true)}
 				};
 
 				var secondaryTheme = {
-					"50": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.25, true)},
-					"100": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.2, true)},
-					"200": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.15, true)},
-					"300": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.1, true)},
-					"400": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0.05, true)},
-					"500": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, 0, true)},
-					"600": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, -0.05, true)},
-					"700": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, -0.1, true)},
-					"800": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, -0.15, true)},
-					"900": {contrast: genericService.parseRgbStr(secondaryFont), value: genericService.shadeRGBColor(secondary, -0.2, true)},
-					"A100": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.2, true)},
-					"A200": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.1, true)},
-					"A400": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, -0.1, true)},
-					"A700": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, -0.2, true)}
+					"50": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.25, true)},
+					"100": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.2, true)},
+					"200": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.15, true)},
+					"300": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.1, true)},
+					"400": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0.05, true)},
+					"500": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, 0, true)},
+					"600": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, -0.05, true)},
+					"700": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, -0.1, true)},
+					"800": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, -0.15, true)},
+					"900": {contrast: secondaryFont, value: genericService.shadeRGBColor(secondary, -0.2, true)},
+					"A100": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.2, true)},
+					"A200": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.1, true)},
+					"A400": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, -0.1, true)},
+					"A700": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, -0.2, true)}
 				};
 
 				var ternaryTheme = {
-					"50": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.25, true)},
-					"100": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.2, true)},
-					"200": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.15, true)},
-					"300": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.1, true)},
-					"400": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0.05, true)},
-					"500": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, 0, true)},
-					"600": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, -0.05, true)},
-					"700": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, -0.1, true)},
-					"800": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, -0.15, true)},
-					"900": {contrast: genericService.parseRgbStr(ternaryFont), value: genericService.shadeRGBColor(ternary, -0.2, true)},
-					"A100": {contrast: genericService.parseRgbStr(quaternaryFont), value: genericService.shadeRGBColor(quaternary, 0.2, true)},
-					"A200": {contrast: genericService.parseRgbStr(quaternaryFont), value: genericService.shadeRGBColor(quaternary, 0.1, true)},
-					"A400": {contrast: genericService.parseRgbStr(quaternaryFont), value: genericService.shadeRGBColor(quaternary, -0.1, true)},
-					"A700": {contrast: genericService.parseRgbStr(quaternaryFont), value: genericService.shadeRGBColor(quaternary, -0.2, true)}
+					"50": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.25, true)},
+					"100": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.2, true)},
+					"200": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.15, true)},
+					"300": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.1, true)},
+					"400": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0.05, true)},
+					"500": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, 0, true)},
+					"600": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, -0.05, true)},
+					"700": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, -0.1, true)},
+					"800": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, -0.15, true)},
+					"900": {contrast: ternaryFont, value: genericService.shadeRGBColor(ternary, -0.2, true)},
+					"A100": {contrast: quaternaryFont, value: genericService.shadeRGBColor(quaternary, 0.2, true)},
+					"A200": {contrast: quaternaryFont, value: genericService.shadeRGBColor(quaternary, 0.1, true)},
+					"A400": {contrast: quaternaryFont, value: genericService.shadeRGBColor(quaternary, -0.1, true)},
+					"A700": {contrast: quaternaryFont, value: genericService.shadeRGBColor(quaternary, -0.2, true)}
 				};
 
 				$scope.themes = {

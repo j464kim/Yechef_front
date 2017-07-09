@@ -19,7 +19,6 @@ angular.module('dish.list.feature', [
             this.totalItems = 0;
             this.currentPage = 0;
             this.dishes = [];
-            that.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
 
             /*********************
              *    Private Functions

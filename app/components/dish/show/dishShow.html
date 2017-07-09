@@ -107,6 +107,18 @@
                     </div>
                 </md-content>
             </div>
+            <!--Gmap-->
+            <br/><br/><br/>
+            <div class="row center margin-bottom-1em" id='map-dish-show'>
+                    <ui-gmap-google-map center='DishCtrl.map.center'
+                                        zoom='DishCtrl.map.zoom'
+                                        control="DishCtrl.mapCtrl"
+                                        options="DishCtrl.map.options"
+                                        ng-cloak>
+                        <ui-gmap-marker coords="DishCtrl.marker.coords" idkey="DishCtrl.marker.id">
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>
+            </div>
         </div>
     </div>
 

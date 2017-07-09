@@ -2541,6 +2541,17 @@ md-toast.md-top.md-center {
   margin-top: 75px;
   transform: translate3d(-50%, 0, 0);
 }
+#map-dish-list {
+  position: fixed;
+  right: 0;
+  top: 5;
+  height: 100vh;
+}
+#map-dish-show {
+  padding-left: 20px;
+  height: 40vh;
+  width: 95%;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

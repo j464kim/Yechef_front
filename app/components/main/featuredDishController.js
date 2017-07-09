@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('dish.list.infinite', [
+angular.module('dish.list.feature', [
     'dishes.api',
 ])
 
-    .controller('DishListInfiniteController', ['$state', 'DishesAPI', 'devHelper',
+    .controller('FeaturedDishController', ['$state', 'DishesAPI', 'devHelper',
         function ($state, DishesAPI, devHelper) {
 
             /*********************
@@ -25,17 +25,17 @@ angular.module('dish.list.infinite', [
              **********************/
 
             function _init() {
-                _getDishes();
+                _getFeaturedDishes();
             }
 
-            function _getDishes() {
+            function _getFeaturedDishes() {
                 var pageNum = that.currentPage || that.currentPage++;
 
                 DishesAPI.list(pageNum).then(function (response) {
                     devHelper.log(response);
-                    that.dishes = that.dishes.concat(response.data);
-                    that.totalItems = response.total;
-                    that.currentPage = response.current_page;
+					that.dishes = response.data;
+					that.totalItems = response.total;
+					that.currentPage = response.current_page;
                 }, function (response) {
                     // TODO handle error state
                     console.error(response);
@@ -45,7 +45,7 @@ angular.module('dish.list.infinite', [
             /*********************
              *    Public Functions
              **********************/
-            this.getDishes = _getDishes;
+            this.getFeaturedDishes = _getFeaturedDishes;
 
             /*********************
              *    Initialization
@@ -55,6 +55,5 @@ angular.module('dish.list.infinite', [
             /*********************
              *    EVENTS
              **********************/
-
         }
     ])

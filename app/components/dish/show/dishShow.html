@@ -32,10 +32,8 @@
                 </div>
             </div>
         </div>
-        <!--Dish Image-->
-        <div class="row margin-bottom-1em" loader>
-            <img ng-src="{{DishCtrl.dish.medias[0].url}}" class="full-width" alt="Card image cap">
-        </div>
+        <!--Dish Image Carousel-->
+        <carousel medias="DishCtrl.dish.medias"></carousel>
         <!--Buyers Reviews / Ratings-->
         <div class="row">
             <div>
@@ -54,7 +52,8 @@
                     <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
                         <md-tab label="Description">
                             <md-content class="md-padding">
-                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})"> {{DishCtrl.kitchen.name}} </a></p>
+                                <p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})">
+                                    {{DishCtrl.kitchen.name}} </a></p>
                                 <br/>
                                 <p class="card-text">{{DishCtrl.dish.description}}</p>
                             </md-content>

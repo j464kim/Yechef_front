@@ -25,6 +25,7 @@ angular.module('kitchen.show', [
 			function _init() {
 				_showKitchen();
 				_getKitchenAdmins();
+				_getDishes();
 			}
 
 			function _showKitchen() {
@@ -51,6 +52,16 @@ angular.module('kitchen.show', [
 							}
 						}
 					}
+				}, function (response) {
+					//TODO handle error state
+					console.error(response);
+				});
+			}
+
+			function _getDishes() {
+				KitchenAPI.getDishes(kitchenId).then(function (response) {
+					devHelper.log(response);
+					that.dishes = response;
 				}, function (response) {
 					//TODO handle error state
 					console.error(response);

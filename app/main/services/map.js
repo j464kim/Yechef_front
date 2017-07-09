@@ -36,10 +36,32 @@ angular.module('map.api', [
 				return defer.promise;
 			}
 
+			function getMapOption() {
+				var map = {
+					center: {latitude: 0, longitude: 0},
+					zoom: 10
+				};
+
+				map.options = {
+					scrollwheel: false,
+					disableDefaultUI: true,
+					zoomControl: true,
+					minZoom: 5,
+					maxZoom: 15,
+					noClear: false,
+				};
+
+				map.options.zoomControlOptions = {
+					position: google.maps.ControlPosition.TOP_RIGHT,
+				};
+				return map;
+			}
+
 
 			return {
 				geocode: geocode,
 				rgeocode: rgeocode,
+				getMapOption: getMapOption,
 			};
 		}
 	]);

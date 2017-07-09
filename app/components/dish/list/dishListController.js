@@ -24,23 +24,7 @@ angular.module('dish.list', [
 			this.mapCtrl = {};
 			this.dishMapMarkers = [];
 
-			this.map = {
-				center: {latitude: 0, longitude: 0},
-				zoom: 10
-			};
-
-			this.map.options = {
-				scrollwheel: false,
-				disableDefaultUI: true,
-				zoomControl: true,
-				minZoom: 5,
-				maxZoom: 15,
-				noClear: false,
-			};
-
-			this.map.options.zoomControlOptions = {
-				position: google.maps.ControlPosition.TOP_RIGHT,
-			};
+			this.map = MapAPI.getMapOption();
 
 			this.circle =
 				{

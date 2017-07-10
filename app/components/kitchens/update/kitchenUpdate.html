@@ -23,7 +23,7 @@
                 <div class="kitchenAddress">
                     <md-input-container class="md-block">
                         <label for="address">Address</label>
-                        <input id="address" type="text" name="address" ng-model="KitchenCtrl.kitchen.address" required/>
+                        <input id="address" type="text" name="address" g-places-autocomplete ng-model="KitchenCtrl.kitchen.address" required/>
                         <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$dirty'
                              ng-cloak>
                             <div ng-message="required">Address is required</div>

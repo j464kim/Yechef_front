@@ -42,6 +42,8 @@ angular.module('configuration', [])
 		// cookie expiration in days
 		var cookieExpirationInDays = 3;
 
+		var dishSearchParams = 'q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy&city&distance';
+
 		/* jshint undef: false */
 		switch (env) {
 			case envDebug:
@@ -75,7 +77,8 @@ angular.module('configuration', [])
 			autoProcessQueue: autoProcessQueue,
 			addRemoveLinks: addRemoveLinks,
 			nationalities: nationalities,
-			currency: currency
+			currency: currency,
+			dishSearchParams: dishSearchParams,
 		};
 
 	})());

@@ -36,7 +36,7 @@ angular.module('user.profile.general', [
 
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -48,7 +48,7 @@ angular.module('user.profile.general', [
 					$state.go('user.profile.info.view', {'id': updatedUser.id});
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

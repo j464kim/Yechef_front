@@ -22,6 +22,7 @@ angular.module('main', [])
 					devHelper.log('Token successfully refreshed');
 				}, function () {
 					devHelper.log('Fail to refresh token, redirecting to login page');
+					sessionService.revokeSession();
 					$state.go('user.login');
 				});
 			});
@@ -62,7 +63,7 @@ angular.module('main', [])
 			});
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', function (config, $q, $timeout, devHelper) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -72,12 +73,34 @@ angular.module('main', [])
 		self.querySearch = querySearch;
 		self.selectedItemChange = selectedItemChange;
 		self.searchTextChange = searchTextChange;
-
 		self.nationality = newNationality;
+
+		self.distance = 0;
+
+		if ($state.is('home')) {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					function (position) {
+						self.currentLocation = position;
+						MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
+							function (result) {
+								self.city = result[1];
+							}
+						);
+					});
+			} else {
+				devHelper.log("Geolocation is not supported by this browser.", 'error');
+			}
+		}
+
+		this.autocompleteOptions = {
+			types: ['(regions)']
+		}
 
 		function newNationality(nationality) {
 			alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
 		}
+
 
 		// ******************************
 		// Internal methods
@@ -128,6 +151,29 @@ angular.module('main', [])
 				return (nationality.value.indexOf(lowercaseQuery) === 0);
 			};
 
+		}
+
+		this.searchDish = function () {
+			if (!self.selectedNationality) {
+				self.nationality = 'all';
+			} else {
+				self.nationality = self.selectedNationality.value;
+			}
+			if (!self.sortBy) {
+				self.sortBy = 'newest';
+			}
+			$state.go('dish.list', {
+				q: self.q,
+				vegan: self.vegan,
+				vegetarian: self.vegetarian,
+				gluten_free: self.gluten_free,
+				min_price: self.min_price,
+				max_price: self.max_price,
+				nationality: self.nationality,
+				sortBy: self.sortBy,
+				city: self.city.formatted_address,
+				distance: self.distance,
+			});
 		}
 	}
 	]);

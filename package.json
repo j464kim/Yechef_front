@@ -33,7 +33,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall": "npm install -g bower; bower install --force; grunt build",
+    "postinstall": "npm install -g bower; bower install --force; grunt build; sed -i 's/env = envDebug/env = envProd/' app/main/config.js",
     "start": "grunt serve",
     "test": "karma start test/karma.conf.js"
   },

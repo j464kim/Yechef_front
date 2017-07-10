@@ -24,6 +24,10 @@ angular.module('kitchen.create', [
 			 **********************/
 			function _createKitchen() {
 
+				console.log(that.kitchen);
+				if (typeof that.kitchen.address === 'object') {
+					that.kitchen.address = that.kitchen.address.formatted_address;
+				}
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
                     devHelper.log(newKitchen);
@@ -33,7 +37,7 @@ angular.module('kitchen.create', [
 					$state.go('kitchen.show', {'id': newKitchen.id});
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

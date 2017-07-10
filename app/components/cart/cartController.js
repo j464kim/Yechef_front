@@ -64,7 +64,7 @@ angular.module('ngCart.directives', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 
 				} else {
@@ -104,7 +104,7 @@ angular.module('ngCart.directives', [
 						devHelper.log(response);
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 
@@ -131,7 +131,7 @@ angular.module('ngCart.directives', [
 							devHelper.log(response);
 						}, function (response) {
 							// TODO handle error state
-							console.error(response);
+							devHelper.log(response, 'error');
 						});
 					}
 
@@ -147,7 +147,7 @@ angular.module('ngCart.directives', [
 							devHelper.log(response);
 						}, function (response) {
 							// TODO handle error state
-							console.error(response);
+							devHelper.log(response, 'error');
 						});
 					}
 
@@ -176,7 +176,7 @@ angular.module('ngCart.directives', [
 						devHelper.log(response);
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 

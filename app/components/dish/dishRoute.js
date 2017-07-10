@@ -9,7 +9,7 @@ angular.module('dish', [
 	'dish.destroy',
 ])
 
-	.config(function ($stateProvider) {
+	.config(function ($stateProvider, config) {
 		$stateProvider
 			.state('dish', {
 				url: '/dish',
@@ -17,7 +17,7 @@ angular.module('dish', [
 				template: '<ui-view/>'
 			})
 			.state('dish.list', {
-				url: 'es',
+				url: 'es?' + config.dishSearchParams,
 				templateUrl: '/components/dish/list/dishList.html',
 				controller: 'DishListController as DishCtrl',
 			})

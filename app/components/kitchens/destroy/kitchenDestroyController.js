@@ -28,7 +28,7 @@ angular.module('kitchen.destroy', [
 						$state.go('kitchen.list');
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				} else {
 				}

@@ -45,7 +45,7 @@ angular.module('rating', [
                         that.currentPage = response.currentPage;
                     }, function (response) {
                         // TODO handle error state ie. front end display
-                        console.error(response);
+						devHelper.log(response, 'error');
                     });
             }
 
@@ -69,7 +69,7 @@ angular.module('rating', [
                         that.avg.visual_rating = Number(that.avg.visual_rating).toFixed(2);
                         that.avg.quantity_rating = Number(that.avg.quantity_rating).toFixed(2);
                     }, function (response) {
-                        console.error(response);
+						devHelper.log(response, 'error');
                     });
             }
 
@@ -91,7 +91,7 @@ angular.module('rating', [
                     }, function (response) {
                         rating.comment = originalComment;
                         defer.resolve(false);
-                        console.error(response);
+						devHelper.log(response, 'error');
                     }
                 );
                 return defer.promise;
@@ -102,7 +102,7 @@ angular.module('rating', [
                     function (response) {
                         $state.reload();
                     }, function (response) {
-                        console.error(response);
+						devHelper.log(response, 'error');
                     }
                 )
             };

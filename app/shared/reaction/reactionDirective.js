@@ -71,7 +71,7 @@ angular.module('reaction', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 
@@ -92,7 +92,7 @@ angular.module('reaction', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 
@@ -114,7 +114,7 @@ angular.module('reaction', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 

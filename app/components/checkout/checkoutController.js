@@ -46,7 +46,7 @@ angular.module('checkout.billing', [
 					devHelper.log('charged successfully');
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

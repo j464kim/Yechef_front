@@ -64,7 +64,7 @@ angular.module('home', [])
 						);
 					});
 			} else {
-				console.error("Geolocation is not supported by this browser.");
+				devHelper.log("Geolocation is not supported by this browser.", 'error');
 			}
 		}
 

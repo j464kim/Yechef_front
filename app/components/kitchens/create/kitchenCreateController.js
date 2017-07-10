@@ -37,7 +37,7 @@ angular.module('kitchen.create', [
 					$state.go('kitchen.show', {'id': newKitchen.id});
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

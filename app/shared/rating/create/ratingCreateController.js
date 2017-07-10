@@ -45,7 +45,7 @@ angular.module('rating')
                     function (response) {
                         $state.reload();
                     }, function (response) {
-                        console.error(response);
+						devHelper.log(response, 'error');
                     })
             };
 

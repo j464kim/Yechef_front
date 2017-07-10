@@ -37,7 +37,7 @@ angular.module('dish.destroy', [
                             $state.go('dish.list');
                         }, function (response) {
                             // TODO handle error state
-                            console.error(response);
+							devHelper.log(response, 'error');
                         });
                 } else {
                     $state.go('dish.show', {"id": dishId});

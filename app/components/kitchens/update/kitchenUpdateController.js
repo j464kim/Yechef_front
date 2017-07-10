@@ -32,7 +32,7 @@ angular.module('kitchen.update', [
 					that.kitchen = response;
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -43,7 +43,7 @@ angular.module('kitchen.update', [
 					$state.go('kitchen.show', {'id': updatedKitchen.id});
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

@@ -91,7 +91,7 @@ angular.module('dish.list', [
 								_locateDishes();
 							}, function (response) {
 								// TODO handle error state
-								console.error(response);
+								devHelper.log(response, 'error');
 							});
 						});
 				}
@@ -104,7 +104,7 @@ angular.module('dish.list', [
 						_locateDishes();
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 			}

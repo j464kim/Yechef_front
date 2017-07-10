@@ -20,7 +20,7 @@ angular.module('user.kitchen.general', [
 				that.kitchenAdmins = response;
 			}, function (response) {
 				//TODO handle error state
-				console.error(response);
+				devHelper.log(response, 'error');
 			});
 		}
 
@@ -35,7 +35,7 @@ angular.module('user.kitchen.general', [
 					});
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 		};
 
@@ -52,7 +52,7 @@ angular.module('user.kitchen.general', [
 				$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
 			}, function (response) {
 				// TODO handle error state
-				console.error(response);
+				devHelper.log(response, 'error');
 			});
 		}
 
@@ -64,7 +64,7 @@ angular.module('user.kitchen.general', [
 			}, function (response) {
 				//TODO handle error state
 				genericService.showToast(response.data.message);
-				console.error(response);
+				devHelper.log(response, 'error');
 			});
 		};
 
@@ -75,7 +75,7 @@ angular.module('user.kitchen.general', [
 					_getKitchenAdmins();
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 		};

@@ -38,7 +38,7 @@ angular.module('dish.list.feature', [
 					that.currentPage = response.current_page;
                 }, function (response) {
                     // TODO handle error state
-                    console.error(response);
+					devHelper.log(response, 'error');
                 });
             }
 

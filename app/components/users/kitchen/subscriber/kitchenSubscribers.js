@@ -17,7 +17,7 @@ angular.module('user.kitchen.subscriber', [
 				that.subscribers = response;
 			}, function (response) {
 				//TODO handle error state
-				console.error(response);
+				devHelper.log(response, 'error');
 			});
 		}
 

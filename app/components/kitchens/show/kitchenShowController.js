@@ -41,7 +41,7 @@ angular.module('kitchen.show', [
 					_locateKitchen(that.kitchen.address);
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -75,7 +75,7 @@ angular.module('kitchen.show', [
 					}
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -85,7 +85,7 @@ angular.module('kitchen.show', [
 					that.dishes = response;
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

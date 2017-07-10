@@ -37,16 +37,18 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<!-- Add your site or application content here -->
-<div class="header" ng-controller="HomeController as homeCtrl">
-    <page-header login="homeCtrl.isLoggedIn()"></page-header>
+<div id="pageContent" ng-controller="MainController as MainCtrl">
+    <!-- defines the theme pixel -->
+    <theme-pixel themes="MainCtrl.themes"></theme-pixel>
+
+    <page-header login="MainCtrl.isLoggedIn()"></page-header>
 
     <div class="container">
         <section ui-view></section>
     </div>
 
     <div class="footer">
-        <page-footer login="homeCtrl.isLoggedIn()"></page-footer>
+        <page-footer login="MainCtrl.isLoggedIn()"></page-footer>
     </div>
 </div>
 
@@ -111,7 +113,7 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="main/app.js"></script>
 <script src="main/config.js"></script>
-<script src="components/main/homeController.js"></script>
+<script src="components/main/MainController.js"></script>
 <script src="main/services/httpInterceptor.js"></script>
 <script src="main/services/auth.js"></script>
 <script src="main/services/devHelper.js"></script>
@@ -146,6 +148,7 @@
 <script src="shared/share/shareDirective.js"></script>
 <script src="shared/confirmPassword/confirmPasswordDirective.js"></script>
 <script src="shared/helper/genericService.js"></script>
+<script src="shared/themePixel/themePixelDirective.js"></script>
 <script src="shared/carousel/carouselDirective.js"></script>
 
 <script src="components/users/userRoute.js"></script>

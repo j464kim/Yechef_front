@@ -28,7 +28,7 @@ angular
 		'google.places',
 
 		// main modules
-		'home',
+		'main',
 		'style-guide',
 		'dish',
 		'rating',
@@ -41,6 +41,7 @@ angular
 		'mediaUpload',
 		'reaction',
 		'directive.confirmPassword',
+		'directive.themePixel',
 		'helper',
 		'header',
 		'footer',
@@ -58,7 +59,14 @@ angular
 		// dev helper
 		'dev',
 	])
-	.config(function ($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+	.config(function (
+		$stateProvider, 
+		$urlRouterProvider, 
+		$httpProvider, 
+		uiGmapGoogleMapApiProvider, 
+		$mdThemingProvider, 
+		$provide
+	) {
 		//push http interceptor
 		$httpProvider.interceptors.push('httpRequestInterceptor');
 
@@ -77,6 +85,9 @@ angular
 			v: '3.27', //defaults to latest 3.X anyhow
 			libraries: 'geometry,visualization'
 		});
+
+		$mdThemingProvider.generateThemesOnDemand(true);
+		$provide.value('themeProvider', $mdThemingProvider);
 	})
 	.run(function (editableOptions) {
 		editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'

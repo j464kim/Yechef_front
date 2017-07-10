@@ -26,6 +26,7 @@
     "angular-material-datetimepicker": "^1.5.1",
     "angular-google-maps": "^2.4.1",
     "angular-chart.js": "^1.1.1",
+    "angular-google-places-autocomplete": "^0.2.7",
     "angular-socialshare": "angularjs-socialshare#^2.3.11",
     "angular-loading-bar": "^0.9.0"
   },

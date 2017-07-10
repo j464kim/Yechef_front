@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('dish.list.infinite', [
+angular.module('dish.list.feature', [
     'dishes.api',
 ])
 
-    .controller('DishListInfiniteController', ['$state', 'DishesAPI', 'devHelper', 'uiGmapGoogleMapApi',
-        function ($state, DishesAPI, devHelper, uiGmapGoogleMapApi) {
+    .controller('FeaturedDishController', ['$state', 'DishesAPI', 'devHelper',
+        function ($state, DishesAPI, devHelper) {
 
             /*********************
              *    Private Variables
@@ -19,24 +19,23 @@ angular.module('dish.list.infinite', [
             this.totalItems = 0;
             this.currentPage = 0;
             this.dishes = [];
-            that.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
 
             /*********************
              *    Private Functions
              **********************/
 
             function _init() {
-                _getDishes();
+                _getFeaturedDishes();
             }
 
-            function _getDishes() {
+            function _getFeaturedDishes() {
                 var pageNum = that.currentPage || that.currentPage++;
 
                 DishesAPI.list(pageNum).then(function (response) {
                     devHelper.log(response);
-                    that.dishes = that.dishes.concat(response.data);
-                    that.totalItems = response.total;
-                    that.currentPage = response.current_page;
+					that.dishes = response.data;
+					that.totalItems = response.total;
+					that.currentPage = response.current_page;
                 }, function (response) {
                     // TODO handle error state
                     console.error(response);
@@ -46,7 +45,7 @@ angular.module('dish.list.infinite', [
             /*********************
              *    Public Functions
              **********************/
-            this.getDishes = _getDishes;
+            this.getFeaturedDishes = _getFeaturedDishes;
 
             /*********************
              *    Initialization
@@ -56,11 +55,5 @@ angular.module('dish.list.infinite', [
             /*********************
              *    EVENTS
              **********************/
-            uiGmapGoogleMapApi.then(function (maps) {
-                // write your code here
-                // (google is defined)
-                console.log(maps);
-            });
-
         }
     ])

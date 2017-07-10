@@ -55,6 +55,8 @@ module.exports = function(config) {
       'bower_components/angular-google-maps/dist/angular-google-maps.js',
       'bower_components/chart.js/dist/Chart.js',
       'bower_components/angular-chart.js/dist/angular-chart.js',
+      'bower_components/angular-google-places-autocomplete/src/autocomplete.js',
+      'bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js',
       'bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-mocks/angular-mocks.js',

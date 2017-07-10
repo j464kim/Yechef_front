@@ -103,6 +103,18 @@
             </div>
         </div>
     </div>
+    <!-- Gmap -->
+    <br/><br/><br/>
+    <div class="row" id='map-kitchen-show'>
+        <ui-gmap-google-map center='KitchenCtrl.map.center'
+                            zoom='KitchenCtrl.map.zoom'
+                            control="KitchenCtrl.mapCtrl"
+                            options="KitchenCtrl.map.options"
+                            ng-cloak>
+            <ui-gmap-marker coords="KitchenCtrl.marker.coords" idkey="KitchenCtrl.marker.id">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
     <!--See more chefs-->
     <div style="visibility: hidden">
         <div class="md-dialog-container" id="showChefs">

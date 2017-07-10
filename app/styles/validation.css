@@ -2552,6 +2552,9 @@ md-toast.md-top.md-center {
   height: 40vh;
   width: 95%;
 }
+#map-kitchen-show {
+  height: 50vh;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

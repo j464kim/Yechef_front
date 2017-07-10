@@ -31,7 +31,6 @@ angular.module('dish.show', [
 
 			function _init() {
 				_showDish();
-
 			}
 
 			function _showDish() {

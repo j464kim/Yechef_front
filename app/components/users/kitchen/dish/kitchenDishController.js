@@ -17,7 +17,7 @@ angular.module('user.kitchen.dish', [
 				that.dishes = response;
 			}, function (response) {
 				//TODO handle error state
-				console.error(response);
+				devHelper.log(response, 'error');
 			});
 		}
 
@@ -30,7 +30,7 @@ angular.module('user.kitchen.dish', [
 						_getDishes();
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 		}

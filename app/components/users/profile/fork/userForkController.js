@@ -33,7 +33,7 @@ angular.module('user.profile.fork', [
 						that.forkedDishes = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			};
 

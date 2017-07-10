@@ -36,7 +36,7 @@ angular.module('dish.update', [
 						_showDish();
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 
@@ -51,7 +51,7 @@ angular.module('dish.update', [
 						mediaService.previewUploadedMedia(that.dish);
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 
@@ -68,7 +68,7 @@ angular.module('dish.update', [
 							});
 					}, function (response) {
 						//     TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 

@@ -37,7 +37,7 @@ angular.module('kitchen.list', [
                     that.currentPage = response.currentPage;
                 }, function (response) {
                     // TODO handle error state ie. front end display
-                    console.error(response);
+					devHelper.log(response, 'error');
                 });
             }
 

@@ -6,8 +6,8 @@ angular.module('dish.show', [
     'dishes.api',
 ])
 
-    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI',
-        function ($state, $stateParams, DishesAPI, KitchenAPI) {
+    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper',
+        function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper) {
 
             /*********************
              *    Private Variables
@@ -35,7 +35,7 @@ angular.module('dish.show', [
                         _getKitchen(that.dish.kitchen_id);
                     }, function (response) {
                         // TODO handle error state
-                        console.error(response);
+						devHelper.log(response, 'error');
                     });
 
             }
@@ -45,7 +45,7 @@ angular.module('dish.show', [
                     that.kitchen = response;
                 }, function (response) {
                     // TODO handle error state
-                    console.error(response);
+					devHelper.log(response, 'error');
                 });
             }
 

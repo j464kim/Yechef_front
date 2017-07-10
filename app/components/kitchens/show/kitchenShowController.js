@@ -35,7 +35,7 @@ angular.module('kitchen.show', [
 					that.media = response.medias[0].url;
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -54,7 +54,7 @@ angular.module('kitchen.show', [
 					}
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -64,7 +64,7 @@ angular.module('kitchen.show', [
 					that.dishes = response;
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 

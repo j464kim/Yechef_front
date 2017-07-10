@@ -38,7 +38,7 @@ angular.module('user.register', [
 						genericService.showToast(data.message);
 					},
 					function (response) {
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			}
@@ -55,7 +55,7 @@ angular.module('user.register', [
 						genericService.showToast(data.message);
 					},
 					function (response) {
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			}
@@ -76,7 +76,7 @@ angular.module('user.register', [
 								message = response.data.message;
 							}
 							genericService.showToast(message);
-							console.error(response);
+							devHelper.log(response, 'error');
 						}
 					);
 			}

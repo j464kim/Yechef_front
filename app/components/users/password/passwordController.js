@@ -37,7 +37,7 @@ angular.module('user.password', [
 						devHelper.log('reset link was sent to the email');
 					},
 					function (response) {
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			};
@@ -54,7 +54,7 @@ angular.module('user.password', [
 						$state.go('home');
 					},
 					function (response) {
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			};
@@ -69,7 +69,7 @@ angular.module('user.password', [
 						$state.go('user.profile.info.view', {'id': $rootScope.currentUser.id});
 					},
 					function (response) {
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			};

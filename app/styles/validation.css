@@ -2347,36 +2347,36 @@
 }
 .bg-secondary {
   color: #fff;
-  background-color: #FAFAFA;
+  background-color: #e7e7e7;
 }
 .bg-secondary:hover {
-  background-color: #c7c7c7;
+  background-color: #b4b4b4;
 }
 .bg-ternary {
   color: inherit;
-  background-color: #EEA5C5;
+  background-color: #B53389;
 }
 .bg-ternary:hover {
-  background-color: #de4f8e;
+  background-color: #651d4d;
 }
 .bg-quaternary {
   color: #fff;
-  background-color: #b53389;
+  background-color: #EEA5C5;
 }
 .bg-quaternary:hover {
-  background-color: #651d4d;
+  background-color: #de4f8e;
 }
 .font-primary {
   color: #88B04B;
 }
 .font-secondary {
-  color: #FAFAFA;
+  color: #e7e7e7;
 }
 .font-ternary {
-  color: #EEA5C5;
+  color: #B53389;
 }
 .font-quaternary {
-  color: #b53389;
+  color: #EEA5C5;
 }
 body {
   font-family: 'Raleway', sans-serif;
@@ -2438,16 +2438,16 @@ h6 {
   background-color: #88B04B;
 }
 .bg-secondary {
-  color: #fff;
-  background-color: #FAFAFA;
+  color: #000;
+  background-color: #e7e7e7;
 }
 .bg-ternary {
   color: #fff;
-  background-color: #EEA5C5;
+  background-color: #B53389;
 }
 .bg-quaternary {
   color: #fff;
-  background-color: #b53389;
+  background-color: #EEA5C5;
 }
 .kitchen-image {
   height: 100%;
@@ -2486,6 +2486,9 @@ h6 {
 }
 .small-margin {
   margin: 0.5em;
+}
+md-checkbox.md-checked .md-icon {
+  background-color: #88B04B;
 }
 .kitchen-title {
   font-size: 24px;

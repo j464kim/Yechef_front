@@ -20,7 +20,7 @@
                     <label for="City">City</label>
                     <br/><br/>
                     <md-slider-container>
-                        <md-slider flex min="0" max="100" ng-model="sctrl.distance"
+                        <md-slider class="md-primary" flex min="0" max="100" ng-model="sctrl.distance"
                                    aria-label="distance"
                                    id="distance-slider">
                         </md-slider>
@@ -78,7 +78,7 @@
         </div>
         <div class="col-sm-2">
             <div class="row no-gutters">
-                <md-button class="md-raised md-warn" ng-click="sctrl.searchDish()">Search</md-button>
+                <md-button class="md-raised md-primary" ng-click="sctrl.searchDish()">Search</md-button>
                 <br/>
                 <md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline">
                     <md-option value="price_asc">Price (Ascending)</md-option>

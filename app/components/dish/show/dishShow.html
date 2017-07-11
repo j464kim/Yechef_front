@@ -95,7 +95,7 @@
                 </md-content>
             </div>
             <!--Social Media-->
-            <div class="row text-center">
+            <div class="row margin-bottom-1em text-center">
                 <md-content class="padding-1em">
                     <div ng-if="DishCtrl.dish" class="col-md-6">
                         <!--Must load it "after" Dish data is available-->
@@ -108,8 +108,7 @@
                 </md-content>
             </div>
             <!--Gmap-->
-            <br/><br/>
-            <div class="row center margin-bottom-1em" ng-if="DishCtrl.kitchen">
+            <div class="row center" ng-if="DishCtrl.kitchen">
                 <google-map-show for="dish" address="{{DishCtrl.kitchen.address}}"></google-map-show>
             </div>
         </div>

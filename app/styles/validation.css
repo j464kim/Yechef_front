@@ -2524,11 +2524,17 @@ body {
   padding-right: 1.5em;
 }
 .dish-show-right {
+  overflow-y: scroll;
   padding-left: 1.5em;
+  padding-right: 1.5em;
   width: 350px;
+  height: 90%;
 }
 .margin-bottom-1em {
   margin-bottom: 1em;
+}
+.margin-top-2em {
+  margin-top: 2em;
 }
 .padding-1em {
   padding: 1em;
@@ -2561,19 +2567,20 @@ md-toast.md-top.md-center {
   margin-top: 75px;
   transform: translate3d(-50%, 0, 0);
 }
+::-webkit-scrollbar {
+  display: none;
+}
 #map-dish-list {
   position: fixed;
   right: 0;
-  top: 5;
-  height: 100vh;
+  height: 100%;
 }
 #map-dish-show {
-  padding-left: 20px;
-  height: 40vh;
-  width: 95%;
+  padding: 0 1em 0 1em;
+  height: 24em;
 }
 #map-kitchen-show {
-  height: 50vh;
+  height: 34em;
 }
 .loader-wrapper {
   min-height: 0;

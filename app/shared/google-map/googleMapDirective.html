@@ -1,5 +1,6 @@
 <div>
     <div ng-if="for === 'dish'" id='map-dish-show'>
+        <label><i class="material-icons">place</i>{{address}}</label>
         <ui-gmap-google-map ng-init="init()"
                             center='map.center'
                             zoom='map.zoom'
@@ -12,6 +13,7 @@
     </div>
 
     <div ng-if="for === 'kitchen'" id='map-kitchen-show'>
+        <label><i class="material-icons">place</i>{{address}}</label>
         <ui-gmap-google-map ng-init="init()"
                             center='map.center'
                             zoom='map.zoom'

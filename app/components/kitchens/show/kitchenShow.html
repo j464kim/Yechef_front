@@ -100,12 +100,7 @@
         </div>
     </div>
     <!-- Gmap -->
-    <br/><br/><br/>
-    <div class="row" ng-if="KitchenCtrl.kitchen">
-        <a>
-            <i class="material-icons">place</i>
-            <label>{{KitchenCtrl.kitchen.address}}</label>
-        </a>
+    <div class="row margin-top-2em" ng-if="KitchenCtrl.kitchen">
         <google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}"></google-map-show>
     </div>
     <!--See more chefs-->

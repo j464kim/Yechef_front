@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kitchen.show', [
-	'kitchen.api', 'ngMaterial', 'share',
+	'kitchen.api', 'ngMaterial', 'share', 'googleMapShow',
 ])
 
 	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope',
@@ -18,6 +18,7 @@ angular.module('kitchen.show', [
 			 *  Public Variables
 			 **********************/
 			this.isMine = false;
+
 			/*********************
 			 *  Private Functions
 			 **********************/
@@ -89,7 +90,7 @@ angular.module('kitchen.show', [
 			 **********************/
 			_init();
 
-
+			
 			/*********************
 			 *  EVENTS
 			 **********************/

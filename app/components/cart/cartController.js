@@ -102,6 +102,7 @@ angular.module('ngCart.directives', [
 				if ($rootScope.currentUser) {
 					CartAPI.update(inCart._id, inCart._quantity).then(function (response) {
 						devHelper.log(response);
+						devHelper.log(inCart._name + ' in cart is successfully updated');
 					}, function (response) {
 						// TODO handle error state
 						console.error(response);
@@ -124,16 +125,6 @@ angular.module('ngCart.directives', [
 				if (typeof inCart === 'object') {
 
 					_updateQty(inCart, quantity, false);
-
-					if ($rootScope.currentUser) {
-						CartAPI.update(id, quantity).then(function (response) {
-							devHelper.log(name + ' in cart is successfully updated');
-							devHelper.log(response);
-						}, function (response) {
-							// TODO handle error state
-							console.error(response);
-						});
-					}
 
 					// for a new item
 				} else {

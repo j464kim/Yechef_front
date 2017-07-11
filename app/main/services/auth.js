@@ -244,7 +244,7 @@ angular.module('auth.api', [
 				return $q(function (resolve, reject) {
 					AuthResource.logout().then(function (response) {
 						sessionService.revokeSession();
-						$rootScope.currentUser = null;
+						for (var property in $rootScope.currentUser) delete $rootScope.currentUser[property];
 						resolve(response.data.body);
 					}, function (response) {
 						reject(response);
@@ -277,7 +277,7 @@ angular.module('auth.api', [
 					AuthResource.getLoggedInUser().then(function (response) {
 						var currentUser = response.data.body;
 						sessionService.setCurrentUser(currentUser);
-						$rootScope.$broadcast('currentUserChanged', currentUser);
+						$rootScope.$broadcast('auth:currentUserChanged', currentUser);
 						resolve(currentUser);
 					}, function (response) {
 						reject(response);

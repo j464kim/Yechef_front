@@ -6,6 +6,9 @@ angular.module('main', [])
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
 
 			var that = this;
+			if(!$rootScope.currentUser) {
+				$rootScope.currentUser = {};
+			}
 
 			$rootScope.previousState;
 			$rootScope.previousParams;
@@ -27,12 +30,12 @@ angular.module('main', [])
 				});
 			});
 
-			$rootScope.$on('currentUserChanged', function (event, currentUser) {
-				$rootScope.currentUser = currentUser;
+			$rootScope.$on('auth:currentUserChanged', function (event, currentUser) {
+				angular.extend($rootScope.currentUser, currentUser);
 			});
 
-			if (!$rootScope.currentUser) {
-				$rootScope.currentUser = sessionService.getCurrentUser();
+			if (_.isEmpty($rootScope.currentUser)) {
+				angular.extend($rootScope.currentUser, sessionService.getCurrentUser());
 			}
 
 			this.isLoggedIn = sessionService.isLogin;

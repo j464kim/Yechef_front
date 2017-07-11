@@ -1,0 +1,25 @@
+<div>
+    <div ng-if="for === 'dish'" id='map-dish-show'>
+        <ui-gmap-google-map ng-init="init()"
+                            center='map.center'
+                            zoom='map.zoom'
+                            control="mapCtrl"
+                            options="map.options"
+                            ng-cloak>
+            <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+
+    <div ng-if="for === 'kitchen'" id='map-kitchen-show'>
+        <ui-gmap-google-map ng-init="init()"
+                            center='map.center'
+                            zoom='map.zoom'
+                            control="mapCtrl"
+                            options="map.options"
+                            ng-cloak>
+            <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+</div>

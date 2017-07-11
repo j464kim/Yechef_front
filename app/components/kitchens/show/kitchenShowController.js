@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('kitchen.show', [
-	'kitchen.api', 'ngMaterial', 'share',
+	'kitchen.api', 'ngMaterial', 'share', 'googleMapShow',
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope', 'MapAPI',
-		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope, MapAPI) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope',
+		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope) {
 
 			/*********************
 			 *  Private Variables
@@ -18,11 +18,7 @@ angular.module('kitchen.show', [
 			 *  Public Variables
 			 **********************/
 			this.isMine = false;
-			this.map = MapAPI.getMapOption();
-			this.map.options.gestureHandling = 'none';
-			this.map.zoom = 20;
-			this.mapCtrl = {};
-			this.marker = {id: 0};
+
 			/*********************
 			 *  Private Functions
 			 **********************/
@@ -38,26 +34,10 @@ angular.module('kitchen.show', [
 					devHelper.log(response);
 					that.kitchen = response;
 					that.media = response.medias[0].url;
-					_locateKitchen(that.kitchen.address);
 				}, function (response) {
 					// TODO handle error state
 					devHelper.log(response, 'error');
 				});
-			}
-
-			function _locateKitchen(address) {
-				MapAPI.geocode(address).then(function (result) {
-						if (result) {
-							that.map.center.latitude = result[0].geometry.location.lat();
-							that.map.center.longitude = result[0].geometry.location.lng();
-							that.marker.coords = {
-								latitude: result[0].geometry.location.lat(),
-								longitude: result[0].geometry.location.lng()
-							};
-							that.mapCtrl.refresh();
-						}
-					}
-				);
 			}
 
 			function _getKitchenAdmins() {
@@ -110,7 +90,7 @@ angular.module('kitchen.show', [
 			 **********************/
 			_init();
 
-
+			
 			/*********************
 			 *  EVENTS
 			 **********************/

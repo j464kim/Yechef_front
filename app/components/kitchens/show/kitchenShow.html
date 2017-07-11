@@ -101,19 +101,12 @@
     </div>
     <!-- Gmap -->
     <br/><br/><br/>
-    <div class="row" id='map-kitchen-show'>
+    <div class="row" ng-if="KitchenCtrl.kitchen">
         <a>
             <i class="material-icons">place</i>
             <label>{{KitchenCtrl.kitchen.address}}</label>
         </a>
-        <ui-gmap-google-map center='KitchenCtrl.map.center'
-                            zoom='KitchenCtrl.map.zoom'
-                            control="KitchenCtrl.mapCtrl"
-                            options="KitchenCtrl.map.options"
-                            ng-cloak>
-            <ui-gmap-marker coords="KitchenCtrl.marker.coords" idkey="KitchenCtrl.marker.id">
-            </ui-gmap-marker>
-        </ui-gmap-google-map>
+        <google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}"></google-map-show>
     </div>
     <!--See more chefs-->
     <div style="visibility: hidden">

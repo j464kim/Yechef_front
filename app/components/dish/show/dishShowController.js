@@ -4,10 +4,11 @@ angular.module('dish.show', [
 	'share',
 	'carousel',
 	'dishes.api',
+	'googleMapShow',
 ])
 
-	.controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper', 'MapAPI',
-		function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper, MapAPI) {
+	.controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper',
+		function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper) {
 
 			/*********************
 			 *    Private Variables
@@ -19,11 +20,6 @@ angular.module('dish.show', [
 			 *    Public Variables
 			 **********************/
 			this.dishId = $stateParams.id;
-			this.map = MapAPI.getMapOption();
-			this.map.options.gestureHandling = 'none';
-			this.map.zoom = 20;
-			this.mapCtrl = {};
-			this.marker = {id: 0};
 
 			/*********************
 			 *    Private Functions
@@ -50,26 +46,10 @@ angular.module('dish.show', [
 				KitchenAPI.show(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchen = response;
-					_locateKitchen(that.kitchen.address);
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);
 				});
-			}
-
-			function _locateKitchen(address) {
-				MapAPI.geocode(address).then(function (result) {
-						if (result) {
-							that.map.center.latitude = result[0].geometry.location.lat();
-							that.map.center.longitude = result[0].geometry.location.lng();
-							that.marker.coords = {
-								latitude: result[0].geometry.location.lat(),
-								longitude: result[0].geometry.location.lng()
-							};
-							that.mapCtrl.refresh();
-						}
-					}
-				);
 			}
 
 			/*********************

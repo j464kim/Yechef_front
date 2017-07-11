@@ -15,6 +15,8 @@ angular
 		'ngMessages',
 		'ngMaterial',
 		'ngMaterialDatePicker',
+		'directive.loader',
+		'angular-loading-bar',
 
 		// libraries
 		'ui.router',
@@ -23,24 +25,33 @@ angular
 		'ui.bootstrap',
 		'http-auth-interceptor',
 		'uiGmapgoogle-maps',
+		'google.places',
 
 		// main modules
+		'main',
 		'style-guide',
 		'dish',
 		'rating',
 		'kitchen',
 		'user',
+		'checkout',
 		'profile',
+		'cart',
 		'userKitchen',
 		'mediaUpload',
 		'reaction',
 		'directive.confirmPassword',
+		'directive.themePixel',
 		'helper',
+		'header',
+		'footer',
+
 
 		// services
 		'http.interceptor',
 		'auth.api',
-		'main.controller',
+		'search.api',
+		'map.api',
 
 		// configuration
 		'configuration',
@@ -48,7 +59,14 @@ angular
 		// dev helper
 		'dev',
 	])
-	.config(function ($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+	.config(function (
+		$stateProvider, 
+		$urlRouterProvider, 
+		$httpProvider, 
+		uiGmapGoogleMapApiProvider, 
+		$mdThemingProvider, 
+		$provide
+	) {
 		//push http interceptor
 		$httpProvider.interceptors.push('httpRequestInterceptor');
 
@@ -56,7 +74,7 @@ angular
 		$stateProvider
 			.state('home', {
 				url: '/',
-				templateUrl: 'homepage/template.html',
+				templateUrl: 'components/main/homepage.html',
 			});
 
 		// For any unmatched url, redirect to /
@@ -67,6 +85,9 @@ angular
 			v: '3.27', //defaults to latest 3.X anyhow
 			libraries: 'geometry,visualization'
 		});
+
+		$mdThemingProvider.generateThemesOnDemand(true);
+		$provide.value('themeProvider', $mdThemingProvider);
 	})
 	.run(function (editableOptions) {
 		editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'

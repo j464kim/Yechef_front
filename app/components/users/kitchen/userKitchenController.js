@@ -21,13 +21,13 @@ angular.module('user.kitchen', [
 		});
 
 		function _getMyKitchens() {
-			UserAPI.list('getMyKitchens').then(
+			UserAPI.getMyKitchens().then(
 				function (response) {
 					devHelper.log(response);
 					that.myKitchens = response;
 				}, function (response) {
 					// TODO handle error state ie. front end display
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 		};
 

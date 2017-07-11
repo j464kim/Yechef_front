@@ -27,13 +27,13 @@ angular.module('user.profile.fork', [
 			}
 
 			function _getForkedDishes() {
-				UserAPI.list('getForks').then(
+				UserAPI.list('getForkedDishes').then(
 					function (response) {
 						devHelper.log(response);
 						that.forkedDishes = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			};
 

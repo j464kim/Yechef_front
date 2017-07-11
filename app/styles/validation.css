@@ -2340,43 +2340,43 @@
 /* COLOR */
 .bg-primary {
   color: #fff;
-  background-color: #50C875;
+  background-color: #88B04B;
 }
 .bg-primary:hover {
-  background-color: #2b8747;
+  background-color: #51682d;
 }
 .bg-secondary {
   color: #fff;
-  background-color: blue;
+  background-color: #FAFAFA;
 }
 .bg-secondary:hover {
-  background-color: #000099;
+  background-color: #c7c7c7;
 }
 .bg-ternary {
   color: inherit;
-  background-color: yellow;
+  background-color: #EEA5C5;
 }
 .bg-ternary:hover {
-  background-color: #999900;
+  background-color: #de4f8e;
 }
 .bg-quaternary {
   color: #fff;
-  background-color: red;
+  background-color: #b53389;
 }
 .bg-quaternary:hover {
-  background-color: #990000;
+  background-color: #651d4d;
 }
 .font-primary {
-  color: #50C875;
+  color: #88B04B;
 }
 .font-secondary {
-  color: blue;
+  color: #FAFAFA;
 }
 .font-ternary {
-  color: yellow;
+  color: #EEA5C5;
 }
 .font-quaternary {
-  color: red;
+  color: #b53389;
 }
 body {
   font-family: 'Raleway', sans-serif;
@@ -2409,7 +2409,7 @@ h6 {
   counter-increment: item;
 }
 .md-button.md-primary {
-  background-color: #50C875;
+  background-color: #88B04B;
 }
 .navbar-brand {
   transform: translateX(-50%);
@@ -2428,6 +2428,26 @@ h6 {
 }
 .large-icon:hover {
   color: darkblue;
+}
+/* TODO: what are these for?? */
+/* bg color defination */
+/* these color schemes are used for js to fetch color setting */
+/* DO NOT change the class name and make sure to define all properties */
+.bg-primary {
+  color: #fff;
+  background-color: #88B04B;
+}
+.bg-secondary {
+  color: #fff;
+  background-color: #FAFAFA;
+}
+.bg-ternary {
+  color: #fff;
+  background-color: #EEA5C5;
+}
+.bg-quaternary {
+  color: #fff;
+  background-color: #b53389;
 }
 .kitchen-image {
   height: 100%;
@@ -2481,6 +2501,14 @@ h6 {
 .font-size-1-6em {
   font-size: 1.6em;
 }
+#description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body {
+  padding-top: 70px;
+}
 .owner-info {
   text-align: center;
 }
@@ -2512,8 +2540,29 @@ h6 {
 .white-background {
   background-color: white;
 }
+.row-no-padding {
+  margin-left: 0;
+  margin-right: 0;
+}
+.row-no-padding [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.angular-google-map {
+  height: 90%;
+}
+.angular-google-map-container {
+  height: 100%;
+  position: fixed;
+  top: 0;
+}
+md-toast.md-top.md-center {
+  left: 50%;
+  margin-top: 75px;
+  transform: translate3d(-50%, 0, 0);
+}
 .loader-wrapper {
-  min-height: 300px;
+  min-height: 0;
   height: 100%;
   position: relative;
 }
@@ -2522,7 +2571,7 @@ h6 {
   width: 100%;
   height: 100%;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 .loader-wrapper .loader-overlay .loader {
   position: absolute;
@@ -2565,28 +2614,4 @@ h6 {
   left: 0;
   overflow: hidden;
   white-space: nowrap;
-}
-body {
-  padding-top: 70px;
-}
-.angular-google-map {
-  height: 90%;
-}
-.angular-google-map-container {
-  height: 100%;
-  position: fixed;
-  top: 0;
-}
-.row-no-padding {
-  margin-left: 0;
-  margin-right: 0;
-}
-.row-no-padding [class*="col-"] {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-md-toast.md-top.md-center {
-  left: 50%;
-  margin-top: 75px;
-  transform: translate3d(-50%, 0, 0);
 }

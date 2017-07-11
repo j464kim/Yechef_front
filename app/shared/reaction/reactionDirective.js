@@ -15,7 +15,7 @@ angular.module('reaction', [
 			},
 			templateUrl: 'shared/reaction/reactionDirective.html',
 			// isolated scope
-			controller: function ($scope, ReactionAPI, $state, devHelper, genericService, $rootScope) {
+			controller: function ($rootScope, $scope, ReactionAPI, $state, devHelper, genericService) {
 
 				/*********************
 				 *  Private Variables
@@ -26,10 +26,12 @@ angular.module('reaction', [
 				// figure out which eloquent model it belongs to
 				var reactionableInfo = genericService.getModelType($state);
 
+				var userID = $rootScope.currentUser ? $rootScope.currentUser.id : null;
+
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
-					userId: $rootScope.currentUser.id
+					userId: userID
 				};
 
 				/*********************
@@ -69,7 +71,7 @@ angular.module('reaction', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 
@@ -90,7 +92,7 @@ angular.module('reaction', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 
@@ -112,7 +114,7 @@ angular.module('reaction', [
 
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 				}
 

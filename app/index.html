@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
+    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -28,71 +31,24 @@
     <link rel="stylesheet" href="styles/validation.css">
     <!-- endbuild -->
 </head>
-<body ng-app="yechefFrontApp" ng-controller="MainCtrl as MCL">
+<body ng-app="yechefFrontApp">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<!-- Add your site or application content here -->
-<div class="header">
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
+<div id="pageContent" ng-controller="MainController as MainCtrl">
+    <!-- defines the theme pixel -->
+    <theme-pixel themes="MainCtrl.themes"></theme-pixel>
 
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#js-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    <page-header login="MainCtrl.isLoggedIn()"></page-header>
 
-                <a class="navbar-brand" ui-sref="home">YeChef</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="js-navbar-collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a ui-sref="style-guide">Style Guide</a></li>
-                    <li><a ui-sref="dish.list">Dishes</a></li>
-                    <li><a ui-sref="kitchen.list">Kitchens</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="UserLoginController as LoginCtrl" ng-cloak>
-                    <li><a ui-sref="user.register" ng-if="!MCL.isLoggedin()">Register</a></li>
-                    <li><a ui-sref="user.login" ng-if="!MCL.isLoggedin()">Login</a></li>
-                    <li><a ui-sref="user.kitchen.dashboard" ng-if="MCL.isLoggedin()">My Kitchen</a></li>
-                    <li><a ng-if="MCL.isLoggedin()">Messages</a></li>
-
-                    <li class="dropdown" ng-if="MCL.isLoggedin()" ng-cloak>
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="http://placehold.it/18x18" class="profile-image img-circle">
-                            <label>{{currentUser.first_name}}</label> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a ui-sref="user.profile.main({id: currentUser.id})"><i class="fa fa-id-badge"></i> Profile</a></li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-navicon"></i> Orders</a></li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-heart-o"></i> Forked</a></li>
-                            <li class="divider"></li>
-                            <li><a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <section ui-view></section>
-</div>
-
-<div class="footer">
     <div class="container">
-        <!--<p>This is the footer</p>-->
+        <section ui-view></section>
+    </div>
+
+    <div class="footer">
+        <page-footer login="MainCtrl.isLoggedIn()"></page-footer>
     </div>
 </div>
 
@@ -110,6 +66,7 @@
 	ga('send', 'pageview');
 </script>
 <script src="bower_components/filereader.js/filereader.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDr7nGo9_dS9bzUh_325enuj_lpcDt5Bz0"></script>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -142,58 +99,83 @@
 <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
 <script src="bower_components/chart.js/dist/Chart.js"></script>
 <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+<script src="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
+<script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
 <!-- endbower -->
 <!-- CDN -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://js.stripe.com/v2/"></script>
+
 <!-- end CDN -->
 <!-- endbuild -->
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="main/app.js"></script>
 <script src="main/config.js"></script>
-<script src="main/mainController.js"></script>
+<script src="components/main/MainController.js"></script>
 <script src="main/services/httpInterceptor.js"></script>
 <script src="main/services/auth.js"></script>
 <script src="main/services/devHelper.js"></script>
+<script src="main/services/search.js"></script>
+<script src="main/services/map.js"></script>
 
-<script src="components/dish/list/script.js"></script>
-<script src="components/dish/listInfinite/script.js"></script>
-<script src="components/dish/show/script.js"></script>
-<script src="components/dish/create/script.js"></script>
-<script src="components/dish/update/script.js"></script>
-<script src="components/dish/destroy/script.js"></script>
+<script src="components/main/header/headerDirective.js"></script>
+<script src="components/main/footer/footerDirective.js"></script>
+<script src="components/dish/list/dishListController.js"></script>
+<script src="components/main/featuredDishController.js"></script>
+<script src="components/dish/show/dishShowController.js"></script>
+<script src="components/dish/create/dishCreateController.js"></script>
+<script src="components/dish/update/dishUpdateController.js"></script>
+<script src="components/dish/destroy/dishDestroyController.js"></script>
 <script src="components/dish/service/dish.js"></script>
 <script src="components/dish/dishRoute.js"></script>
 <script src="components/kitchens/kitchenRoute.js"></script>
-<script src="components/kitchens/list/script.js"></script>
-<script src="components/kitchens/show/script.js"></script>
-<script src="components/kitchens/create/script.js"></script>
-<script src="components/kitchens/update/script.js"></script>
-<script src="components/kitchens/destroy/script.js"></script>
-<script src="components/kitchens/service/kitchens.js"></script>
+<script src="components/kitchens/list/kitchenListController.js"></script>
+<script src="components/kitchens/show/kitchenShowController.js"></script>
+<script src="components/kitchens/create/kitchenCreateController.js"></script>
+<script src="components/kitchens/update/kitchenUpdateController.js"></script>
+<script src="components/kitchens/destroy/kitchenDestroyController.js"></script>
+<script src="components/kitchens/service/kitchen.js"></script>
 <script src="shared/rating/service/ratingService.js"></script>
 <script src="shared/rating/ratingController.js"></script>
 <script src="shared/rating/create/ratingCreateController.js"></script>
-<script src="shared/media/create/script.js"></script>
+<script src="shared/media/mediaController.js"></script>
+<script src="shared/media/mediaService.js"></script>
+<script src="shared/media/service/media.js"></script>
 <script src="shared/reaction/reactionDirective.js"></script>
 <script src="shared/reaction/service/reactionService.js"></script>
+<script src="shared/share/shareDirective.js"></script>
 <script src="shared/confirmPassword/confirmPasswordDirective.js"></script>
 <script src="shared/helper/genericService.js"></script>
+<script src="shared/themePixel/themePixelDirective.js"></script>
+<script src="shared/carousel/carouselDirective.js"></script>
 
 <script src="components/users/userRoute.js"></script>
 <script src="components/users/profile/userProfileRoute.js"></script>
 <script src="components/users/kitchen/userKitchenRoute.js"></script>
 <script src="components/users/service/users.js"></script>
-<script src="components/users/login/script.js"></script>
-<script src="components/users/password/script.js"></script>
-<script src="components/users/register/script.js"></script>
+<script src="components/users/login/loginController.js"></script>
+<script src="components/users/password/passwordController.js"></script>
+<script src="components/users/register/RegisterController.js"></script>
 <script src="components/users/profile/main/userMainController.js"></script>
 <script src="components/users/kitchen/userKitchenController.js"></script>
 <script src="components/users/kitchen/general/userKitchenGeneralController.js"></script>
+<script src="components/users/kitchen/dish/kitchenDishController.js"></script>
+<script src="components/users/kitchen/subscriber/kitchenSubscribers.js"></script>
 <script src="components/users/profile/general/userGeneralController.js"></script>
 <script src="components/users/profile/subscription/userSubscribeController.js"></script>
 <script src="components/users/profile/fork/userForkController.js"></script>
+<script src="components/checkout/checkoutRoute.js"></script>
+<script src="components/checkout/checkoutController.js"></script>
+<script src="components/checkout/checkoutService.js"></script>
 
+<script src="components/cart/cartRoute.js"></script>
+<script src="components/cart/cartService.js"></script>
+<script src="components/cart/cartController.js"></script>
+<script src="components/cart/ngCart/ngCart.js"></script>
+<script src="components/cart/ngCart/ngCart.directives.js"></script>
+<script src="components/cart/ngCart/ngCart.fulfilment.js"></script>
 
 <script src="style-guide/index.js"></script>
 

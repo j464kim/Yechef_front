@@ -1,2 +1,32 @@
-<h2>My Dishes</h2>
+<div class="row" id="dishList">
+    <div class="col-md-12">
+        <h2>My Dishes</h2>
+        <a class="pull-right" ui-sref="dish.create({kid: UkCtrl.myCurrentKitchenId})"><i class="fa fa-plus"></i> Add
+            Dish</a>
+    </div>
+</div>
 <hr>
+<div class="row">
+    <br/>
+    <div class="col-md-3" ng-repeat="dish in KdCtrl.dishes" loader>
+        <div class="col-md-12">
+
+            <div class="row">
+                <a ng-click="KdCtrl.destroyDish(dish.id)"><i class="fa fa-close pull-right"></i></a>
+                <a ui-sref="dish.update({id: {{dish.id}}})"><i class="pull-right fa fa-edit "></i></a>
+            </div>
+            <div class="row" ui-sref="dish.show({id: {{dish.id}}})">
+                <img ui-sref="dish.show({id: {{dish.id}}})" ng-src="{{dish.medias[0].url}}"
+                     src="http://lorempixel.com/400/200/abstract/Yechef"
+                     alt="{{dish.name}}"
+                     style="width:100%;">
+            </div>
+            <div class="row">
+                <a ui-sref="dish.show({id: {{dish.id}}})"><h4 class="card-title">{{dish.name}}</h4></a>
+                <h6 class="card">${{dish.price}}</h6>
+            </div>
+
+            <br/>
+        </div>
+    </div>
+</div>

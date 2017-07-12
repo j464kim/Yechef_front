@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main', [])
+angular.module('main', ['ngMaterial'])
 
 	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'genericService',
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {

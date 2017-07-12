@@ -2527,11 +2527,17 @@ body {
   padding-right: 1.5em;
 }
 .dish-show-right {
+  overflow-y: scroll;
   padding-left: 1.5em;
+  padding-right: 1.5em;
   width: 350px;
+  height: 90%;
 }
 .margin-bottom-1em {
   margin-bottom: 1em;
+}
+.margin-top-2em {
+  margin-top: 2em;
 }
 .padding-1em {
   padding: 1em;
@@ -2572,6 +2578,21 @@ md-tabs md-ink-bar {
 md-content.md-default-theme,
 md-content {
   background-color: #E7E7E7;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+#map-dish-list {
+  position: fixed;
+  right: 0;
+  height: 100%;
+}
+#map-dish-show {
+  padding: 0 1em 0 1em;
+  height: 24em;
+}
+#map-kitchen-show {
+  height: 34em;
 }
 .loader-wrapper {
   min-height: 0;

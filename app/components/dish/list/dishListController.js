@@ -26,24 +26,7 @@ angular.module('dish.list', [
 
 			this.map = MapAPI.getMapOption();
 
-			this.circle =
-				{
-					id: 0,
-					center: {
-						latitude: 0,
-						longitude: 0
-					},
-					radius: 50,
-					stroke: {
-						color: '#08B21F',
-						weight: 2,
-						opacity: 1
-					},
-					fill: {
-						color: '#08B21F',
-						opacity: 0.5
-					},
-				};
+			this.circle = MapAPI.getCircle();
 
 			this.mapEvents = {
 				//This turns of events and hits against scope from gMap events this does speed things up

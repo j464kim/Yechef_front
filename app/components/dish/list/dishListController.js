@@ -29,35 +29,32 @@ angular.module('dish.list', [
 			this.map = MapAPI.getMapOption();
 			this.circle = MapAPI.getCircle();
 			this.window = {
-				marker: {},
+				ctrl: {},
 				show: false,
 				closeClick: function () {
 					this.show = false;
 				},
 				options: {
 					pixelOffset: {
-						height: -40,
+						height: -15,
 						width: 0
 					}
 				},
 				content: ''
 			};
+
 			this.markersEvents = {
 				click: function (marker, eventName, model) {
-					devHelper.log('Click marker');
 					that.window.model = model;
-					that.windowClass = model.id;
+					var dish = _findDishById(model.id);
+					that.window.content = dish.name + '<br/>'+ dish.price;
 					that.window.show = true;
 				},
 				mouseover: function (marker, eventName, model) {
-					// console.log('Click marker');
-					// that.window.model = model;
-					// that.window.show = true;
+					model.options.icon = 'images/google_map_icon_active.png';
 				},
 				mouseout: function (marker, eventName, model) {
-					// console.log('Click marker');
-					// that.window.model = model;
-					// that.window.show = true;
+					model.options.icon = 'images/google_map_icon.png';
 				}
 			};
 
@@ -74,14 +71,17 @@ angular.module('dish.list', [
 					that.mapCtrl.refresh();
 				},
 				click: function (map, eventName, originalEventArgs) {
-					that.window.show = false;
+					var windows = that.window.ctrl.getChildWindows();
+					for (var i = 0; i < windows.length; i++){
+						windows[i].hideWindow()
+					}
 				}
 			};
 
 			this.dishMouseEnter = function (dish) {
 				var marker = _findDishMarker(dish);
-				marker.options.zIndex = 86;
-				marker.options.icon = null;//'images/ic_local_dining_black_24dp_1x.png';
+				marker.options.zIndex = 181;
+				marker.options.icon = 'images/google_map_icon_active.png';
 				that.window.content = '$ ' + dish.price;
 				that.window.model = marker;
 				that.window.show = true;
@@ -90,7 +90,7 @@ angular.module('dish.list', [
 			this.dishMouseLeave = function (dish) {
 				var marker = _findDishMarker(dish);
 				marker.options.zIndex = marker.latitude;
-				marker.options.icon = 'images/ic_restaurant_black_24dp_1x.png';
+				marker.options.icon = 'images/google_map_icon.png';
 				that.window.show = false;
 			};
 
@@ -100,6 +100,16 @@ angular.module('dish.list', [
 						return that.dishMapMarkers[i];
 					}
 				}
+				devHelper.log('No marker found with id: ' + dish.id, 'error');
+			};
+
+			function _findDishById(id) {
+				for (var i in that.dishes) {
+					if (that.dishes[i].id === id) {
+						return that.dishes[i];
+					}
+				}
+				devHelper.log('No Dish found with id: ' + id, 'error');
 			};
 
 			/*********************
@@ -112,9 +122,13 @@ angular.module('dish.list', [
 						if (result) {
 							that.map.center.latitude = result[0].geometry.location.lat();
 							that.map.center.longitude = result[0].geometry.location.lng();
+							that.map.zoom = 14;
 							that.options.userLat = result[0].geometry.location.lat();
 							that.options.userLng = result[0].geometry.location.lng();
-							that.mapCtrl.refresh({latitude: that.map.center.latitude, longitude: that.map.center.longitude});
+							that.mapCtrl.refresh({
+								latitude: that.map.center.latitude,
+								longitude: that.map.center.longitude
+							});
 						}
 					}
 				);
@@ -177,7 +191,7 @@ angular.module('dish.list', [
 						options: {
 							title: that.dishes[dish].name,
 							zIndex: that.dishes[dish].lat,
-							icon: 'images/ic_restaurant_black_24dp_1x.png',
+							icon: 'images/google_map_icon.png',
 						},
 					};
 					ret["id"] = that.dishes[dish].id;

@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('user.profile.general', [
+angular.module('user.profile.privacy', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserGeneralController', ['$state', 'UserAPI', 'devHelper', '$rootScope', 'AuthAPI',
-		function ($state, UserAPI, devHelper, $rootScope, AuthAPI) {
+	.controller('UserPrivacyController', ['$state', 'UserAPI', 'devHelper', '$rootScope', 'genericService', 'AuthAPI',
+		function ($state, UserAPI, devHelper, $rootScope, genericService, AuthAPI) {
 
 			/*********************
 			 *  Private Variables
@@ -42,14 +42,17 @@ angular.module('user.profile.general', [
 
 			function _updateUser() {
 				devHelper.log('update user');
+				console.log(that.user);
+				console.log(userId);
 				UserAPI.update(that.user, userId).then(function (response) {
 					var updatedUser = response;
 					devHelper.log(updatedUser);
 					AuthAPI.setCurrentUser();
-					$state.go('user.profile.info.view', {'id': updatedUser.id});
+					genericService.showToast('Successfully Updated Privacy Settings');
 				}, function (response) {
 					// TODO handle error state
 					devHelper.log(response, 'error');
+					genericService.showToast('Error Updating Privacy Settings...');
 				});
 			}
 

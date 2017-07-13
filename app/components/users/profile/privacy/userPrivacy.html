@@ -5,35 +5,33 @@
         <thead>
         <tr>
             <th>Activity</th>
-            <th>Private</th>
+            <th>Public</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>Phone Number</td>
             <td>
-                <md-switch ng-model="privacy.phone" aria-label="phonePrivacy" class="md-warn">
-                    {{ privacy.phone }}
+                <md-switch ng-model="uvCtrl.user.show_phone" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
                 </md-switch>
             </td>
         </tr>
         <tr>
             <td>Forked Dishes</td>
             <td>
-                <md-switch ng-model="privacy.forkedDish" aria-label="phonePrivacy" class="md-warn">
-                    {{ privacy.forkedDish }}
+                <md-switch ng-model="uvCtrl.user.show_forks" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
                 </md-switch>
             </td>
         </tr>
         <tr>
             <td>Subscribed Kitchens</td>
             <td>
-                <md-switch ng-model="privacy.subscribedKitchen" aria-label="phonePrivacy" class="md-warn">
-                    {{ privacy.subscribedKitchen }}
+                <md-switch ng-model="uvCtrl.user.show_subscription" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
                 </md-switch>
             </td>
         </tr>
         </tbody>
     </table>
+    <md-button class="md-primary md-raised" type="submit" ng-click="uvCtrl.updateUser()">Update Privacy Setting</md-button>
 </div>
 

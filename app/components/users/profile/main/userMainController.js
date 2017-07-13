@@ -1,15 +1,12 @@
 angular.module('user.profile', ['ngMaterial'])
-	.controller('userMainController', function ($scope, $timeout, $mdSidenav, devHelper) {
+	.controller('userMainController', function ($scope, $timeout, $mdSidenav, devHelper, sessionService, $state) {
+		if (!sessionService.isLogin()) {
+			$state.go('user.login');
+		}
 		$scope.toggleLeft = buildDelayedToggler('left');
 		$scope.toggleRight = buildToggler('right');
 		$scope.isOpenRight = function () {
 			return $mdSidenav('right').isOpen();
-		};
-		$scope.privacy = {
-			phone: false,
-			forkedDish: true,
-			subscribedKitchen: false
-
 		};
 		$scope.paymentCards = [
 			{

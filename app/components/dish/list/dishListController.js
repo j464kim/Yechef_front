@@ -35,19 +35,19 @@ angular.module('dish.list', [
 					this.show = false;
 				},
 				options: {
+					content: '',
 					pixelOffset: {
 						height: -15,
 						width: 0
 					}
 				},
-				content: ''
 			};
 
 			this.markersEvents = {
 				click: function (marker, eventName, model) {
 					that.window.model = model;
 					var dish = _findDishById(model.id);
-					that.window.content = dish.name + '<br/>'+ dish.price;
+					that.window.options.content = dish.name + "<br/>" + dish.price;
 					that.window.show = true;
 				},
 				mouseover: function (marker, eventName, model) {
@@ -82,7 +82,7 @@ angular.module('dish.list', [
 				var marker = _findDishMarker(dish);
 				marker.options.zIndex = 181;
 				marker.options.icon = 'images/google_map_icon_active.png';
-				that.window.content = '$ ' + dish.price;
+				that.window.options.content = '$ ' + dish.price;
 				that.window.model = marker;
 				that.window.show = true;
 			};

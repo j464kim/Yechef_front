@@ -26,106 +26,13 @@ angular.module('dish.list', [
 			this.dishMapMarkers = [];
 			this.dishMapMarkerControl = {};
 
-			this.map = MapAPI.getMapOption();
-			this.circle = MapAPI.getCircle();
-			this.window = {
-				ctrl: {},
-				show: false,
-				closeClick: function () {
-					this.show = false;
-				},
-				options: {
-					content: '',
-					pixelOffset: {
-						height: -15,
-						width: 0
-					}
-				},
-			};
-
-			this.markersEvents = {
-				click: function (marker, eventName, model) {
-					that.window.model = model;
-					var dish = _findDishById(model.id);
-					that.window.options.content = dish.name + "<br/>" + dish.price;
-					that.window.show = true;
-				}
-			};
-
-			this.mapEvents = {
-				//This turns of events and hits against scope from gMap events this does speed things up
-				// adding a blacklist for watching your controller scope should even be better
-				//        blacklist: ['drag', 'dragend','dragstart','zoom_changed', 'center_changed'],
-				idle: function (map, eventName, originalEventArgs) {
-					that.options.NE_lat = map.getBounds().getNorthEast().lat();
-					that.options.SW_lat = map.getBounds().getSouthWest().lat();
-					that.options.NE_lng = map.getBounds().getNorthEast().lng();
-					that.options.SW_lng = map.getBounds().getSouthWest().lng();
-					_getDishes();
-					that.mapCtrl.refresh();
-				},
-				click: function (map, eventName, originalEventArgs) {
-					var windows = that.window.ctrl.getChildWindows();
-					for (var i = 0; i < windows.length; i++){
-						windows[i].hideWindow()
-					}
-				}
-			};
-
-			this.dishMouseEnter = function (dish) {
-				var marker = _findDishMarker(dish);
-				marker.options.zIndex = 181;
-				marker.options.icon = 'images/google_map_icon_active.png';
-				that.window.options.content = '$ ' + dish.price;
-				that.window.model = marker;
-				that.window.show = true;
-			};
-
-			this.dishMouseLeave = function (dish) {
-				var marker = _findDishMarker(dish);
-				marker.options.zIndex = marker.latitude;
-				marker.options.icon = 'images/google_map_icon.png';
-				that.window.show = false;
-			};
-
-			function _findDishMarker(dish) {
-				for (var i in that.dishMapMarkers) {
-					if (that.dishMapMarkers[i].id === dish.id) {
-						return that.dishMapMarkers[i];
-					}
-				}
-				devHelper.log('No marker found with id: ' + dish.id, 'error');
-			};
-
-			function _findDishById(id) {
-				for (var i in that.dishes) {
-					if (that.dishes[i].id === id) {
-						return that.dishes[i];
-					}
-				}
-				devHelper.log('No Dish found with id: ' + id, 'error');
-			};
-
 			/*********************
 			 *    Private Functions
 			 **********************/
 
 			function _init() {
 				_initSearchOptions();
-				MapAPI.geocode($stateParams.city).then(function (result) {
-						if (result) {
-							that.map.center.latitude = result[0].geometry.location.lat();
-							that.map.center.longitude = result[0].geometry.location.lng();
-							that.map.zoom = 14;
-							that.options.userLat = result[0].geometry.location.lat();
-							that.options.userLng = result[0].geometry.location.lng();
-							that.mapCtrl.refresh({
-								latitude: that.map.center.latitude,
-								longitude: that.map.center.longitude
-							});
-						}
-					}
-				);
+				_initGmap();
 			}
 
 			function _initSearchOptions() {
@@ -177,7 +84,59 @@ angular.module('dish.list', [
 				}
 			}
 
+			function _initGmap() {
+				that.map = MapAPI.getMapOption();
+				that.circle = MapAPI.getCircle();
+				that.window = MapAPI.getWindow();
+
+				that.markersEvents = {
+					click: function (marker, eventName, model) {
+						that.window.model = model;
+						var dish = _findDishById(model.id);
+						that.window.options.content = dish.name + "<br/>" + dish.price;
+						that.window.show = true;
+					}
+				};
+
+				that.mapEvents = {
+					//This turns of events and hits against scope from gMap events this does speed things up
+					// adding a blacklist for watching your controller scope should even be better
+					//        blacklist: ['drag', 'dragend','dragstart','zoom_changed', 'center_changed'],
+					idle: function (map, eventName, originalEventArgs) {
+						that.options.NE_lat = map.getBounds().getNorthEast().lat();
+						that.options.SW_lat = map.getBounds().getSouthWest().lat();
+						that.options.NE_lng = map.getBounds().getNorthEast().lng();
+						that.options.SW_lng = map.getBounds().getSouthWest().lng();
+						_getDishes();
+						that.mapCtrl.refresh();
+					},
+					click: function (map, eventName, originalEventArgs) {
+						var windows = that.window.ctrl.getChildWindows();
+						for (var i = 0; i < windows.length; i++) {
+							windows[i].hideWindow()
+						}
+					}
+				};
+
+				MapAPI.geocode($stateParams.city).then(function (result) {
+						if (result) {
+							that.map.center.latitude = result[0].geometry.location.lat();
+							that.map.center.longitude = result[0].geometry.location.lng();
+							that.map.zoom = 14;
+							that.options.userLat = result[0].geometry.location.lat();
+							that.options.userLng = result[0].geometry.location.lng();
+							that.mapCtrl.refresh({
+								latitude: that.map.center.latitude,
+								longitude: that.map.center.longitude
+							});
+						}
+					}
+				);
+			}
+
 			function _locateDishes() {
+				//clear the array
+				that.dishMapMarkers = [];
 				Object.keys(that.dishes).forEach(function (dish) {
 					var ret = {
 						latitude: that.dishes[dish].lat,
@@ -193,10 +152,29 @@ angular.module('dish.list', [
 				});
 			}
 
+			function _findDishMarker(dish) {
+				for (var i in that.dishMapMarkers) {
+					if (that.dishMapMarkers[i].id === dish.id) {
+						return that.dishMapMarkers[i];
+					}
+				}
+				devHelper.log('No marker found with id: ' + dish.id, 'error');
+			}
+
+			function _findDishById(id) {
+				for (var i in that.dishes) {
+					if (that.dishes[i].id === id) {
+						return that.dishes[i];
+					}
+				}
+				devHelper.log('No Dish found with id: ' + id, 'error');
+			}
+
 			/*********************
 			 *    Public Functions
 			 **********************/
 			this.getDishes = _getDishes;
+
 			this.getSearchParams = function (sctrl) {
 				sctrl.q = $stateParams.q;
 				sctrl.selectedNationality = {};
@@ -210,7 +188,23 @@ angular.module('dish.list', [
 				sctrl.sortBy = $stateParams.sortBy;
 				sctrl.distance = Number($stateParams.distance);
 				sctrl.city = {formatted_address: $stateParams.city};
-			}
+			};
+
+			this.dishMouseEnter = function (dish) {
+				var marker = _findDishMarker(dish);
+				marker.options.zIndex = null;
+				marker.options.icon = 'images/google_map_icon_active.png';
+				that.window.options.content = '$ ' + dish.price;
+				that.window.model = marker;
+				that.window.show = true;
+			};
+
+			this.dishMouseLeave = function (dish) {
+				var marker = _findDishMarker(dish);
+				marker.options.zIndex = marker.latitude;
+				marker.options.icon = 'images/google_map_icon.png';
+				that.window.show = false;
+			};
 
 			/*********************
 			 *    Initialization

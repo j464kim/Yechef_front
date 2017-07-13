@@ -78,12 +78,30 @@ angular.module('map.api', [
 				return circle;
 			}
 
+			function getWindow() {
+				var window = {
+					ctrl: {},
+					show: false,
+					closeClick: function () {
+						this.show = false;
+					},
+					options: {
+						content: '',
+						pixelOffset: {
+							height: -15,
+							width: 0
+						}
+					},
+				};
+				return window;
+			}
 
 			return {
 				geocode: geocode,
 				rgeocode: rgeocode,
 				getMapOption: getMapOption,
 				getCircle: getCircle,
+				getWindow: getWindow,
 			};
 		}
 	]);

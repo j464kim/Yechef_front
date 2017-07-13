@@ -19,7 +19,7 @@ angular.module('userKitchen', [
 				controller: 'userKitchenController as UkCtrl',
 			})
 			.state('user.kitchen.dashboard', {
-				url: '/dasborad',
+				url: '/dashboard',
 				templateUrl: 'components/users/kitchen/dashboard/kitchenDashboard.html',
 			})
 			.state('user.kitchen.general', {

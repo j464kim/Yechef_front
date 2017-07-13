@@ -49,12 +49,6 @@ angular.module('dish.list', [
 					var dish = _findDishById(model.id);
 					that.window.options.content = dish.name + "<br/>" + dish.price;
 					that.window.show = true;
-				},
-				mouseover: function (marker, eventName, model) {
-					model.options.icon = 'images/google_map_icon_active.png';
-				},
-				mouseout: function (marker, eventName, model) {
-					model.options.icon = 'images/google_map_icon.png';
 				}
 			};
 

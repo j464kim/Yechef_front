@@ -157,7 +157,7 @@ angular.module('ngCart.directives', [
 			};
 
 			this.removeItemById = function (id) {
-				console.log('removeItem');
+				devHelper.log('removeItem');
 				var cart = ngCart.getCart();
 				angular.forEach(cart.items, function (item, index) {
 					if (item.getId() === id) {

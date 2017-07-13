@@ -13,7 +13,6 @@ angular.module('user.profile.fork', [
 				// reference to this controller
 
 			var that = this;
-			var userId = $stateParams.id;
 			/*********************
 			 *  Public Variables
 			 **********************/

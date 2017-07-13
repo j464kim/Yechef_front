@@ -13,7 +13,6 @@ angular.module('user.profile.subscribe', [
 				// reference to this controller
 
 			var that = this;
-			var userId = $stateParams.id;
 			/*********************
 			 *  Public Variables
 			 **********************/

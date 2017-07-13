@@ -12,7 +12,7 @@ angular.module('profile', [
 
 		$stateProvider
 			.state('user.profile', {
-				url: '/profile/{id}',
+				url: '/profile',
 				templateUrl: 'components/users/profile/userProfile.html',
 			})
 			.state('user.profile.main', {

@@ -4,8 +4,8 @@ angular.module('user.profile.general', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserGeneralController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
-		function ($stateParams, $state, UserAPI, devHelper) {
+	.controller('UserGeneralController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$rootScope',
+		function ($stateParams, $state, UserAPI, devHelper, $rootScope) {
 
 			/*********************
 			 *  Private Variables
@@ -13,7 +13,7 @@ angular.module('user.profile.general', [
 				// reference to this controller
 
 			var that = this;
-			var userId = $stateParams.id;
+			var userId = $rootScope.currentUser.id;
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -41,7 +41,7 @@ angular.module('user.profile.general', [
 			}
 
 			function _updateUser() {
-				console.log('update user');
+				devHelper.log('update user');
 				UserAPI.update(that.user, userId).then(function (response) {
 					var updatedUser = response;
 					devHelper.log(updatedUser);

@@ -24,7 +24,7 @@ angular.module('kitchen.create', [
 			 **********************/
 			function _createKitchen() {
 
-				console.log(that.kitchen);
+				devHelper.log(that.kitchen);
 				if (typeof that.kitchen.address === 'object') {
 					that.kitchen.address = that.kitchen.address.formatted_address;
 				}

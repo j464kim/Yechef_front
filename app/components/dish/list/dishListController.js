@@ -5,8 +5,8 @@ angular.module('dish.list', [
 	'ngMaterial',
 ])
 
-	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI',
-		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI) {
+	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService',
+		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -49,7 +49,6 @@ angular.module('dish.list', [
 			}
 
 			function _getDishes() {
-
 				that.options.page = that.currentPage || that.currentPage++;
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(
@@ -67,10 +66,12 @@ angular.module('dish.list', [
 							}, function (response) {
 								// TODO handle error state
 								devHelper.log(response, 'error');
+								genericService.showToast(response.data.message);
 							});
 						});
 				}
 				else {
+					devHelper.log("navigator.geolocation is not available", 'error');
 					SearchAPI.dish(that.options).then(function (response) {
 						devHelper.log(response);
 						that.dishes = response.data;
@@ -80,6 +81,7 @@ angular.module('dish.list', [
 					}, function (response) {
 						// TODO handle error state
 						devHelper.log(response, 'error');
+						genericService.showToast(response.data.message);
 					});
 				}
 			}
@@ -136,7 +138,7 @@ angular.module('dish.list', [
 
 			function _locateDishes() {
 				//clear the array
-				that.dishMapMarkers = [];
+				that.dishMapMarkers.splice(0, that.dishMapMarkers.length);
 				Object.keys(that.dishes).forEach(function (dish) {
 					var ret = {
 						latitude: that.dishes[dish].lat,

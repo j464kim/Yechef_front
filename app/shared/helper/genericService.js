@@ -40,7 +40,7 @@ angular.module('helper', [])
 						.position('top center')
 						.highlightClass('md-warn')
 						.capsule(true)
-						.hideDelay(3000)
+						.hideDelay(5000)
 				);
 			},
 

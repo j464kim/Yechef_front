@@ -114,7 +114,7 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-6" ng-repeat="dish in DishCtrl.dishes" loader>
+            <div class="col-md-6" ng-repeat="dish in DishCtrl.dishes" ng-mouseenter="DishCtrl.dishMouseEnter(dish)" ng-mouseleave="DishCtrl.dishMouseLeave(dish)" loader>
                 <a ui-sref="dish.show({id: {{dish.id}}})">
                     <div class="row">
                         <img ng-src="{{dish.medias[0].url}}" alt="Card image cap"
@@ -153,10 +153,20 @@
                             control="DishCtrl.mapCtrl"
                             options="DishCtrl.map.options"
                             ng-cloak>
+            <ui-gmap-window
+                    show="DishCtrl.window.show"
+                    coords="DishCtrl.window.model"
+                    options="DishCtrl.window.options"
+                    closeClick="DishCtrl.window.closeClick()">
+                <div>{{DishCtrl.window.content}}</div>
+            </ui-gmap-window>
             <ui-gmap-markers
                     models="DishCtrl.dishMapMarkers"
                     coords="'self'"
-                    icon="'icon'">
+                    icon="'icon'"
+                    options="'options'"
+                    events="DishCtrl.markersEvents"
+                    control="DishCtrl.dishMapMarkerControl">
             </ui-gmap-markers>
             <ui-gmap-circle center='DishCtrl.circle.center'
                             radius='DishCtrl.circle.radius'

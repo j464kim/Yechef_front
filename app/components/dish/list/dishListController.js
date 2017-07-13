@@ -24,10 +24,42 @@ angular.module('dish.list', [
 			this.options = {};
 			this.mapCtrl = {};
 			this.dishMapMarkers = [];
+			this.dishMapMarkerControl = {};
 
 			this.map = MapAPI.getMapOption();
-
 			this.circle = MapAPI.getCircle();
+			this.window = {
+				marker: {},
+				show: false,
+				closeClick: function () {
+					this.show = false;
+				},
+				options: {
+					pixelOffset: {
+						height: -40,
+						width: 0
+					}
+				},
+				content: ''
+			};
+			this.markersEvents = {
+				click: function (marker, eventName, model) {
+					devHelper.log('Click marker');
+					that.window.model = model;
+					that.windowClass = model.id;
+					that.window.show = true;
+				},
+				mouseover: function (marker, eventName, model) {
+					// console.log('Click marker');
+					// that.window.model = model;
+					// that.window.show = true;
+				},
+				mouseout: function (marker, eventName, model) {
+					// console.log('Click marker');
+					// that.window.model = model;
+					// that.window.show = true;
+				}
+			};
 
 			this.mapEvents = {
 				//This turns of events and hits against scope from gMap events this does speed things up
@@ -41,6 +73,33 @@ angular.module('dish.list', [
 					_getDishes();
 					that.mapCtrl.refresh();
 				},
+				click: function (map, eventName, originalEventArgs) {
+					that.window.show = false;
+				}
+			};
+
+			this.dishMouseEnter = function (dish) {
+				var marker = _findDishMarker(dish);
+				marker.options.zIndex = 86;
+				marker.options.icon = null;//'images/ic_local_dining_black_24dp_1x.png';
+				that.window.content = '$ ' + dish.price;
+				that.window.model = marker;
+				that.window.show = true;
+			};
+
+			this.dishMouseLeave = function (dish) {
+				var marker = _findDishMarker(dish);
+				marker.options.zIndex = marker.latitude;
+				marker.options.icon = 'images/ic_restaurant_black_24dp_1x.png';
+				that.window.show = false;
+			};
+
+			function _findDishMarker(dish) {
+				for (var i in that.dishMapMarkers) {
+					if (that.dishMapMarkers[i].id === dish.id) {
+						return that.dishMapMarkers[i];
+					}
+				}
 			};
 
 			/*********************
@@ -55,7 +114,7 @@ angular.module('dish.list', [
 							that.map.center.longitude = result[0].geometry.location.lng();
 							that.options.userLat = result[0].geometry.location.lat();
 							that.options.userLng = result[0].geometry.location.lng();
-							that.mapCtrl.refresh();
+							that.mapCtrl.refresh({latitude: that.map.center.latitude, longitude: that.map.center.longitude});
 						}
 					}
 				);
@@ -115,7 +174,11 @@ angular.module('dish.list', [
 					var ret = {
 						latitude: that.dishes[dish].lat,
 						longitude: that.dishes[dish].lng,
-						title: 'm' + that.dishes[dish].id
+						options: {
+							title: that.dishes[dish].name,
+							zIndex: that.dishes[dish].lat,
+							icon: 'images/ic_restaurant_black_24dp_1x.png',
+						},
 					};
 					ret["id"] = that.dishes[dish].id;
 					that.dishMapMarkers.push(ret);

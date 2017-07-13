@@ -39,7 +39,7 @@ angular.module('map.api', [
 			function getMapOption() {
 				var map = {
 					center: {latitude: 0, longitude: 0},
-					zoom: 10
+					zoom: 13
 				};
 
 				map.options = {

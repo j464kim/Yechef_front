@@ -19,6 +19,7 @@ angular.module('checkout.billing', [
 			var that = this;
 			// TODO: placeholder for amount
 			var amount = $stateParams.amount;
+			var stripeAmount = Math.round(amount * 100);
 
 			// Create a Stripe client
 			Stripe.setPublishableKey('pk_test_RZjSNtHLydLfeylIF2BkP6s5');
@@ -41,9 +42,9 @@ angular.module('checkout.billing', [
 			}
 
 			function _chargePayment(status, response) {
-				CheckoutAPI.charge(response.id, $rootScope.currentUser.email, amount * 100, config.currency).then(function (response) {
+				CheckoutAPI.charge(response.id, stripeAmount, config.currency).then(function (response) {
 					devHelper.log(response);
-					devHelper.log('charged successfully');
+					devHelper.log('Authorization hold successful');
 				}, function (response) {
 					// TODO handle error state
 					console.error(response);

@@ -8,13 +8,12 @@ angular.module('checkout.api', [
 		function ($resource, config, $http) {
 			var apiEndpoint = config.endpoint;
 
-			function charge(token, email, amount, currency) {
+			function charge(token, amount, currency) {
 				return $http({
 					method: 'POST',
 					url: apiEndpoint + 'charge-payment',
 					params: {
 						token: token,
-						email: email,
 						amount: amount,
 						currency: currency
 					}
@@ -30,9 +29,9 @@ angular.module('checkout.api', [
 	.service('CheckoutAPI', ['$q', 'CheckoutResource',
 		function ($q, CheckoutResource) {
 
-			function charge(token, email, amount, currency) {
+			function charge(token, amount, currency) {
 				return $q(function (resolve, reject) {
-					CheckoutResource.charge(token, email, amount, currency).then(function (response) {
+					CheckoutResource.charge(token, amount, currency).then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);

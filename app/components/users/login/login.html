@@ -29,32 +29,34 @@
                             <div ng-message="minlength">Password must have minimum 6 characters</div>
                         </div>
                     </md-input-container>
+                    <md-checkbox flex class="md-primary">remember me</md-checkbox>
                 </div>
                 <!--Button-->
-                <div class="row submit">
-                    <div class="col-sm-1">
-                        <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">Login
-                        </md-button>
-                    </div>
-                    <div class="col-sm-offset-7 col-sm-1">
-                        <!--TODO: Implement back-to previous page-->
-                        <md-button ui-sref="home" class="md-raised md-warn">Cancel</md-button>
+                <div class="row submit" layout="column">
+                    <md-button flex class="md-raised md-primary" type="submit" ng-disabled="form.$invalid">Login
+                    </md-button>
+                    <div>
+                        <div class="pull-left">
+                            <a class="btn btn-link" ui-sref="user.password.resetRequest">
+                                Forgot Password
+                            </a>
+                        </div>
+                        <div class="pull-right">
+                            <a class="btn btn-link" ui-sref="user.register.new">Register</a>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <md-button ng-click="LoginCtrl.socialLogin('google')" class="md-raised md-button md-ink-ripple">
-                        Login with <i class="fa fa-google font-quaternary" aria-hidden="true"></i>
-                    </md-button>
-                    <md-button ng-click="LoginCtrl.socialLogin('facebook')"
-                               class="md-raised md-button md-ink-ripple">
-                        Login with <i class="fa fa-facebook font-secondary" aria-hidden="true"></i>
-                    </md-button>
-                    <md-button class="bg-primary" ui-sref="user.register.new">To Register</md-button>
-                </div>
+                <hr/>
                 <div class="row text-center">
-                    <a class="btn btn-link" ui-sref="user.password.resetRequest">
-                        Forgot Your Password?
-                    </a>
+                    <h4 class="text-center">Login with Social Media</h4>
+                    <button ng-click="LoginCtrl.socialLogin('google')"
+                               class="loginBtn loginBtn--google">
+                        Google
+                    </button>
+                    <button ng-click="LoginCtrl.socialLogin('facebook')"
+                               class="loginBtn loginBtn--facebook">
+                        Facebook
+                    </button>
                 </div>
             </div>
         </form>

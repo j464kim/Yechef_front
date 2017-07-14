@@ -13,10 +13,12 @@
     <span>{{ugCtrl.user.phone}}</span>
 </div>
 <!--Button-->
-<md-button class="md-raised md-primary" ui-sref="user.profile.info.edit({id: currentUser.id})">
+<div layout="column">
+
+<md-button flex class="md-raised md-primary" ui-sref="user.profile.info.edit({id: currentUser.id})">
     Edit My Info
 </md-button>
-<br/>
-<md-button class="md-raised" ui-sref="user.password.updateRequest">
+<md-button flex class="md-raised" ui-sref="user.password.updateRequest">
     Change Password
 </md-button>
+</div>

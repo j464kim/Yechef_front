@@ -76,8 +76,8 @@
                         <h4>Chef</h4>
                         <img class="kitchen-owner"
                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
-                        <h4 id="kitchenOwnerName">{{KitchenCtrl.kitchenAdmins[0].first_name}}
-                            {{KitchenCtrl.kitchenAdmins[0].last_name}}</h4>
+                        <a ui-sref="user.show({id: KitchenCtrl.kitchenAdmins[0].id})"><h4 id="kitchenOwnerName">{{KitchenCtrl.kitchenAdmins[0].first_name}}
+                            {{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
                         <div>
                             <md-button class="md-raised md-primary">Message</md-button>
                             <br/>
@@ -122,7 +122,7 @@
                              ng-if="person.pivot.role == 1 && person.pivot.verified == 1">
                             <img class="kitchen-owner"
                                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
-                            <h4 id="kitchenChefName">{{person.first_name}} {{person.last_name}}</h4>
+                            <a ui-sref="user.show({id: person.id})"><h4 id="kitchenChefName">{{person.first_name}} {{person.last_name}}</h4></a>
                             <div>
                                 <md-button class="md-raised md-primary">Message</md-button>
                                 <br/>

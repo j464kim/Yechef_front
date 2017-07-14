@@ -1,0 +1,8 @@
+<div>USER SHOW PAGE <br/>
+    {{UserShowCtrl.user.id}}
+    {{UserShowCtrl.user.first_name}}
+    {{UserShowCtrl.user.last_name}}
+    <div ng-if="UserShowCtrl.user.show_phone === 1">{{UserShowCtrl.user.phone}}</div>
+    <div ng-if="UserShowCtrl.user.show_subscription === 1">ANG</div>
+    <div ng-if="UserShowCtrl.user.show_forks === 1">mOTTI</div>
+</div>

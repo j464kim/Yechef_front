@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('user.profile.privacy', [
-	'user.api', 'ngMaterial'
+	'user.api',
+	'ngMaterial'
 ])
 
 	.controller('UserPrivacyController', ['$state', 'UserAPI', 'devHelper', '$rootScope', 'genericService', 'AuthAPI',

@@ -4,6 +4,7 @@ angular.module('user', [
 	'user.login',
 	'user.register',
 	'user.password',
+	'user.show'
 ])
 
 	.config(function ($stateProvider) {
@@ -52,5 +53,10 @@ angular.module('user', [
 				url: '/reset/{token}',
 				templateUrl: 'components/users/password/resetPassword.html',
 				controller: 'PasswordController as PasswordCtrl',
+			})
+			.state('user.show', {
+				url: '/show/{id}',
+				templateUrl: 'components/users/show/userShow.html',
+				controller: 'UserShowController as UserShowCtrl'
 			});
 	});

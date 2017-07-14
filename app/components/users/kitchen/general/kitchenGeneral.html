@@ -43,10 +43,11 @@
                 person.last_name
                 }}</strong> ({{person.email}})
             </p>
-            <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
+            <i ng-click="UkgCtrl.showAdmin(person.id)" class="material-icons md-24 md-secondary md-hue-3">info</i>
             <i class="material-icons md-24 md-secondary md-hue-3">message</i>
             <i class="material-icons md-24 md-secondary md-hue-3">phone</i>
-            <i class="material-icons md-24 md-secondary md-hue-3" ng-disabled="currentUser.id == person.id" ng-click="UkgCtrl.removeAdmin(person.id)">delete</i>
+            <i class="material-icons md-24 md-secondary md-hue-3" ng-disabled="currentUser.id == person.id"
+               ng-click="UkgCtrl.removeAdmin(person.id)">delete</i>
         </md-list-item>
     </md-list>
     <hr>
@@ -91,8 +92,12 @@
 <div class="row">
     <hr/>
     <div class="col-md-12">
-    <span ng-controller="KitchenDestroyController as vm">
-        <md-button ng-click="vm.destroyKitchen()" class="md-raised md-warn">Close the kitchen</md-button>
-    </span>
+        <uib-accordion>
+            <div uib-accordion-group class="panel-default" heading="Close Kitchen">
+            <span ng-controller="KitchenDestroyController as vm">
+                <md-button ng-click="vm.destroyKitchen()" class="md-raised md-warn">Close the kitchen</md-button>
+            </span>
+            </div>
+        </uib-accordion>
     </div>
 </div>

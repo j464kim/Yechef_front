@@ -2564,6 +2564,11 @@ md-toast.md-top.md-center {
 .list-group-hover .list-group-item:hover {
   background-color: #e7e7e7;
 }
+.panel-default > .panel-heading {
+  background-color: #FAFAFA;
+  border-color: #EEA5C5;
+  color: #333;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

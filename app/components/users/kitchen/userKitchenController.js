@@ -41,6 +41,9 @@ angular.module('user.kitchen', [
 						return true;
 					}
 				}
+			} else {
+				//If No current Kitchen is set, just set the first kitchen to be selected
+				$state.go('.', {'myCurrentKitchenId': that.myKitchens[0].id, 'myCurrentKitchen': that.myKitchens[0]});
 			}
 		};
 

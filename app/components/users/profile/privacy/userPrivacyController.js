@@ -31,10 +31,12 @@ angular.module('user.profile.privacy', [
 				UserAPI.show(userId).then(function (response) {
 					that.user = response;
 					devHelper.log(that.user);
+					that.old_show_phone = that.user.show_phone;
+					that.old_show_subscription = that.user.show_subscription;
+					that.old_show_forks = that.user.show_forks;
 
 					//TODO: user media to be ready soon
 					// that.media = response.medias[0].url;
-
 				}, function (response) {
 					// TODO handle error state
 					devHelper.log(response, 'error');
@@ -43,8 +45,6 @@ angular.module('user.profile.privacy', [
 
 			function _updateUser() {
 				devHelper.log('update user');
-				console.log(that.user);
-				console.log(userId);
 				UserAPI.update(that.user, userId).then(function (response) {
 					var updatedUser = response;
 					devHelper.log(updatedUser);
@@ -62,6 +62,11 @@ angular.module('user.profile.privacy', [
 			 **********************/
 			this.updateUser = _updateUser;
 
+			this.validate = function () {
+				return that.old_show_forks === that.user.show_phone &&
+					that.old_show_subscription === that.user.show_subscription &&
+					that.old_show_forks === that.user.show_forks;
+			};
 			/*********************
 			 *  Initialization
 			 **********************/

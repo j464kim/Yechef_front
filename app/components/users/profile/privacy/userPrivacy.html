@@ -1,6 +1,6 @@
 <h2>MY PRIVACY</h2>
 <hr/>
-<div class="inset" ng-cloak>
+<div class="inset" ng-cloak loader>
     <table class="table">
         <thead>
         <tr>
@@ -32,6 +32,6 @@
         </tr>
         </tbody>
     </table>
-    <md-button class="md-primary md-raised" type="submit" ng-click="uvCtrl.updateUser()">Update Privacy Setting</md-button>
+    <md-button class="md-primary md-raised" ng-disabled="uvCtrl.validate()" type="submit" ng-click="uvCtrl.updateUser()">Update Privacy Setting</md-button>
 </div>
 

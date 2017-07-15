@@ -53,7 +53,7 @@
                 <img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
                 <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})"
                         ng-if="KitchenCtrl.isMine"
-                        class="btn btn-default btn-sm btn-edit">Manage My Kitchen
+                        class="btn btn-danger btn-sm btn-edit">Manage My Kitchen
                 </button>
                 <!--Must load it "after" kitchen data is available-->
                 <div ng-if="KitchenCtrl.kitchen" class="pull-right">
@@ -81,7 +81,7 @@
                         <div>
                             <md-button class="md-raised md-primary">Message</md-button>
                             <br/>
-                            <a ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
+                            <a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
                         </div>
                     </div>
                     <hr/>

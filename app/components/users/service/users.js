@@ -16,6 +16,11 @@ angular.module('user.api', [])
 				update: {
 					method: 'PUT'
 				},
+				getInfo: {
+					methbod: 'GET',
+					url: api_endpoint + ':userId' + "/" + ':option',
+					params: {userId: '@userId', option: '@option'}
+				}
 			});
 		}
 	])
@@ -63,10 +68,73 @@ angular.module('user.api', [])
 				});
 			}
 
+			function getKitchens(userId) {
+				return $q(function (resolve, reject) {
+					UserResource.getInfo({
+						option: 'getKitchens',
+						userId: userId
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getForkedDishes(userId) {
+				return $q(function (resolve, reject) {
+					UserResource.getInfo({
+						option: 'getForkedDishes',
+						userId: userId
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getSubscriptions(userId) {
+				return $q(function (resolve, reject) {
+					UserResource.getInfo({
+						option: 'getSubscriptions',
+						userId: userId
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
 			function getMyKitchens() {
 				return $q(function (resolve, reject) {
 					UserResource.list({
-						id: 'getMyKitchens',
+						id: 'getMyKitchens'
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getMyForkedDishes() {
+				return $q(function (resolve, reject) {
+					UserResource.list({
+						id: 'getMyForkedDishes'
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getMySubscriptions() {
+				return $q(function (resolve, reject) {
+					UserResource.list({
+						id: 'getMySubscriptions'
 					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -79,7 +147,12 @@ angular.module('user.api', [])
 				list: list,
 				show: show,
 				update: update,
-				getMyKitchens: getMyKitchens
+				getKitchens: getKitchens,
+				getForkedDishes: getForkedDishes,
+				getSubscriptions: getSubscriptions,
+				getMyKitchens: getMyKitchens,
+				getMyForkedDishes: getMyForkedDishes,
+				getMySubscriptions: getMySubscriptions
 			};
 		}
 	]);

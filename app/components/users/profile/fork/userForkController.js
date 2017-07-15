@@ -26,7 +26,7 @@ angular.module('user.profile.fork', [
 			}
 
 			function _getForkedDishes() {
-				UserAPI.list('getForkedDishes').then(
+				UserAPI.getMyForkedDishes().then(
 					function (response) {
 						devHelper.log(response);
 						that.forkedDishes = response;

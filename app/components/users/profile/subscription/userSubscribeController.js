@@ -26,7 +26,7 @@ angular.module('user.profile.subscribe', [
 			}
 
 			function _getSubscriptions() {
-				UserAPI.list('getSubscriptions').then(
+				UserAPI.getMySubscriptions().then(
 					function (response) {
 						devHelper.log(response);
 						that.subscribedKitchens = response;

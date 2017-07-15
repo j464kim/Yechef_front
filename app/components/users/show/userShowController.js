@@ -80,7 +80,7 @@ angular.module('user.show', [
 					that.kitchensTotalItems = response.total;
 					that.kitchensCurrentPage = response.current_page;
 					if (response.last_page <= that.kitchensCurrentPage) {
-						that.kitchenLoadButton = false;
+						that.kitchensLoadButton = false;
 					}
 					devHelper.log(that.kitchens);
 

@@ -10,6 +10,10 @@ angular.module('user.kitchen', [
 		that.myCurrentKitchen = $stateParams.myCurrentKitchen;
 		that.isKitchenSelected = false;
 
+
+		this.myKitchensTotalItems = 0;
+		this.myKitchensCurrentPage = 0;
+
 		function _init() {
 			_getMyKitchens();
 		}
@@ -21,10 +25,16 @@ angular.module('user.kitchen', [
 		});
 
 		function _getMyKitchens() {
-			UserAPI.getMyKitchens().then(
+			var pageNum = ++that.myKitchensCurrentPage;
+			UserAPI.getMyKitchens(pageNum).then(
 				function (response) {
 					devHelper.log(response);
-					that.myKitchens = response;
+					if (!that.myKitchens) {
+						that.myKitchens = [];
+					}
+					that.myKitchens = that.myKitchens.concat(response.data);
+					that.myKitchensTotalItems = response.total;
+					that.myKitchensCurrentPage = response.current_page;
 				}, function (response) {
 					// TODO handle error state ie. front end display
 					devHelper.log(response, 'error');

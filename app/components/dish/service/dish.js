@@ -36,9 +36,6 @@ angular.module('dishes.api', [
 		function ($q, DishesResource) {
 
 			function list(pageNum) {
-				if (isNaN(pageNum)) {
-					//return;
-				}
 				pageNum = pageNum || 0;
 
 				return $q(function (resolve, reject) {

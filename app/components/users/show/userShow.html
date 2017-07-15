@@ -8,7 +8,8 @@
             <h4 ng-if="UserShowCtrl.user.verified === 1"><i class="fa fa-star" aria-hidden="true"></i> Best Cook</h4>
             <h4 ng-if="UserShowCtrl.user.verified === 1"><i class="fa fa-heart"
                                                             aria-hidden="true"></i> Power Buyer</h4>
-            <a class="btn-link" href="" ng-click=""><i class="md-warn fa fa-frown-o" aria-hidden="true"></i> Report this User</a>
+            <a class="btn-link" href="" ng-click=""><i class="md-warn fa fa-frown-o" aria-hidden="true"></i> Report this
+                User</a>
         </div>
         <div class="col-md-6">
             <h1 class="text-center">{{UserShowCtrl.user.first_name}} {{UserShowCtrl.user.last_name}}</h1>
@@ -30,13 +31,96 @@
     <!--Main Contents-->
     <div class="row" loader>
         <!--User's kitchens-->
-        <div class="row">
-            <div class="col-md-3" id="user-show-kitchens">
-                <h3>Cooking in..</h3>
-                <hr/>
+        <div class="row" ng-if="UserShowCtrl.kitchens">
+            <div class="row">
+                <div class="col-md-3" id="user-show-kitchens">
+                    <h3>Cooking in..</h3>
+                    <hr/>
+                </div>
+                <div ng-if="UserShowCtrl.kitchens.length === 0">
+                    Nothing to show
+                </div>
+            </div>
+            <div class="row">
+                <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+                <div class="col-md-4" ng-repeat="kitchen in UserShowCtrl.kitchens" loader>
+                    <md-card>
+                        <img class="md-user-avatar" ui-sref="kitchen.show({id: kitchen.id})"
+                             ng-src="{{kitchen.medias[0].url}}">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-subhead">{{kitchen.name}}</span>
+                                <span class="md-subhead">{{kitchen.phone}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </div>
+            </div>
+            <div class="row" layout="column" ng-if="UserShowCtrl.kitchensLoadButton">
+                <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getKitchens()">Load More</md-button>
             </div>
         </div>
-        <div ng-if="UserShowCtrl.user.show_forks === 1">Forks</div>
-        <div ng-if="UserShowCtrl.user.show_subscription === 1">Subscribed Kitchens</div>
+
+        <!--User's forked dishes-->
+        <div class="row" ng-if="UserShowCtrl.user.show_forks === 1">
+            <div class="row">
+                <div class="col-md-3" id="user-show-forked-dishes">
+                    <h3>Forked Dishes</h3>
+                    <hr/>
+                </div>
+                <div ng-if="UserShowCtrl.forkedDishes.length === 0">
+                    Nothing to show
+                </div>
+            </div>
+            <div class="row">
+                <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+                <div class="col-md-3" ng-repeat="dish in UserShowCtrl.forkedDishes" loader>
+                    <md-card>
+                        <img class="md-user-avatar" ui-sref="dish.show({id: dish.id})"
+                             ng-src="{{dish.medias[0].url}}">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-subhead">{{dish.name}}</span>
+                                <span class="md-subhead">{{dish.price}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </div>
+            </div>
+            <div class="row" layout="column" ng-if="UserShowCtrl.forkedDishesLoadButton">
+                <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getForkedDishes()">Load More</md-button>
+            </div>
+        </div>
+
+        <!--User's subscribed kitchens-->
+        <div class="row" ng-if="UserShowCtrl.user.show_subscription === 1">
+            <div class="row">
+                <div class="col-md-3" id="user-show-subscribed-kitchens">
+                    <h3>Subscribed Kitchens</h3>
+                    <hr/>
+                </div>
+                <div ng-if="UserShowCtrl.subscribedKitchens.length === 0">
+                    Nothing to show
+                </div>
+            </div>
+            <div class="row">
+                <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+                <div class="col-md-4" ng-repeat="kitchen in UserShowCtrl.subscribedKitchens" loader>
+                    <md-card>
+                        <img class="md-user-avatar" ui-sref="kitchen.show({id: kitchen.id})"
+                             ng-src="{{kitchen.medias[0].url}}">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-subhead">{{kitchen.name}}</span>
+                                <span class="md-subhead">{{kitchen.phone}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </div>
+            </div>
+            <div class="row" layout="column" ng-if="UserShowCtrl.subscribedKitchensLoadButton">
+                <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getSubscriptions()">Load More</md-button>
+            </div>
+        </div>
     </div>
 </div>

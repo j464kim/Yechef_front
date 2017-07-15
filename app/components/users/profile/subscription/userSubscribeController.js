@@ -16,6 +16,10 @@ angular.module('user.profile.subscribe', [
 			/*********************
 			 *  Public Variables
 			 **********************/
+			this.currentPage = 0;
+			this.subscribedKitchens = [];
+			this.totalItems = 0;
+			this.loadButton = true;
 
 			/*********************
 			 *  Private Functions
@@ -26,10 +30,16 @@ angular.module('user.profile.subscribe', [
 			}
 
 			function _getSubscriptions() {
-				UserAPI.getMySubscriptions().then(
+				var pageNum = ++that.currentPage;
+				UserAPI.getMySubscriptions(pageNum).then(
 					function (response) {
 						devHelper.log(response);
-						that.subscribedKitchens = response;
+						that.subscribedKitchens = that.subscribedKitchens.concat(response.data);
+						that.totalItems = response.total;
+						that.currentPage = response.current_page;
+						if (response.last_page <= that.currentPage) {
+							that.loadButton = false;
+						}
 					}, function (response) {
 						// TODO handle error state ie. front end display
 						devHelper.log(response, 'error');
@@ -39,6 +49,7 @@ angular.module('user.profile.subscribe', [
 			/*********************
 			 *  Public Functions
 			 **********************/
+			this.getSubscriptions = _getSubscriptions;
 
 			/*********************
 			 *  Initialization

@@ -29,9 +29,6 @@ angular.module('rating.api', [
         function ($q, RatingResource) {
 
             function list(dishId, ratingId, pageNum) {
-                if (isNaN(pageNum)) {
-                    //return;
-                }
                 pageNum = pageNum || 0;
                 return $q(function (resolve, reject) {
                     RatingResource.list(

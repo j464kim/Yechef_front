@@ -3,19 +3,19 @@
 
 <div class="row" id="kitchenList">
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
-        <div class="col-md-3" ng-repeat="dish in ufCtrl.forkedDishes" loader>
-            <md-card>
-                <img class="md-user-avatar" ui-sref="dish.show({id: dish.id})" ng-src="{{dish.medias[0].url}}">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-subhead">{{dish.name}}</span>
-                        <span class="md-subhead">{{dish.price}}</span>
-                    </md-card-title-text>
-                </md-card-title>
-            </md-card>
-        </div>
+    <div class="col-md-3" ng-repeat="dish in ufCtrl.forkedDishes" loader>
+        <md-card>
+            <img class="md-user-avatar" ui-sref="dish.show({id: dish.id})" ng-src="{{dish.medias[0].url}}">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-subhead">{{dish.name}}</span>
+                    <span class="md-subhead">{{dish.price}}</span>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+    </div>
 </div>
 
-<div class="row" layout="column">
-    <md-button class="md-raised md-primary">Load More</md-button>
+<div class="row" layout="column" ng-if="ufCtrl.loadButton">
+    <md-button class="md-raised md-primary" ng-click="ufCtrl.getForkedDishes()">Load More</md-button>
 </div>

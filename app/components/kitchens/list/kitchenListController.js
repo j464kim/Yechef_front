@@ -34,7 +34,7 @@ angular.module('kitchen.list', [
                     devHelper.log(response);
                     that.kitchens = that.kitchens.concat(response.data);
                     that.totalItems = response.total;
-                    that.currentPage = response.currentPage;
+                    that.currentPage = response.current_page;
                 }, function (response) {
                     // TODO handle error state ie. front end display
 					devHelper.log(response, 'error');

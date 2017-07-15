@@ -21,10 +21,7 @@ angular.module('search.api', [
         function ($q, SearchResource) {
 
             function dish(options, pageNum) {
-                if (isNaN(pageNum)) {
-                    //return;
-                }
-                // pageNum = pageNum || 0;
+                pageNum = pageNum || 0;
 
                 return $q(function (resolve, reject) {
 					SearchResource.dish(

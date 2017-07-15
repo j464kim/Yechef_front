@@ -113,7 +113,6 @@ angular.module('user.show', [
 				}, function (response) {
 					// TODO handle error state
 					devHelper.log(response, 'error');
-					genericService.showToast(response.data.message);
 				});
 
 			}
@@ -136,7 +135,6 @@ angular.module('user.show', [
 				}, function (response) {
 					// TODO handle error state
 					devHelper.log(response, 'error');
-					genericService.showToast(response.data.message);
 				});
 
 			}

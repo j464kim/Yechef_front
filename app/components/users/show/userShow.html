@@ -34,7 +34,7 @@
         <div class="row" ng-if="UserShowCtrl.kitchens">
             <div class="row">
                 <div class="col-md-3" id="user-show-kitchens">
-                    <h3>Cooking in..</h3>
+                    <h3>Cooking in</h3>
                     <hr/>
                 </div>
                 <div ng-if="UserShowCtrl.kitchens.length === 0">
@@ -56,8 +56,10 @@
                     </md-card>
                 </div>
             </div>
-            <div class="row" layout="column" ng-if="UserShowCtrl.kitchensLoadButton">
-                <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getKitchens()">Load More</md-button>
+            <div class="row" ng-if="UserShowCtrl.kitchensLoadButton">
+                <div class="text-center">
+                    <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getKitchens()">Load More</md-button>
+                </div>
             </div>
         </div>
 
@@ -87,8 +89,11 @@
                     </md-card>
                 </div>
             </div>
-            <div class="row" layout="column" ng-if="UserShowCtrl.forkedDishesLoadButton">
-                <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getForkedDishes()">Load More</md-button>
+            <div class="row" ng-if="UserShowCtrl.forkedDishesLoadButton">
+                <div class="text-center">
+                    <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getForkedDishes()">Load More
+                    </md-button>
+                </div>
             </div>
         </div>
 
@@ -118,8 +123,11 @@
                     </md-card>
                 </div>
             </div>
-            <div class="row" layout="column" ng-if="UserShowCtrl.subscribedKitchensLoadButton">
-                <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getSubscriptions()">Load More</md-button>
+            <div class="row" ng-if="UserShowCtrl.subscribedKitchensLoadButton">
+                <div class="text-center">
+                    <md-button class="md-raised md-primary" ng-click="UserShowCtrl.getSubscriptions()">Load More
+                    </md-button>
+                </div>
             </div>
         </div>
     </div>

@@ -60,16 +60,18 @@
 					</tr>
 					</tbody>
 				</table>
+				<!--Order-->
+				<div class="pull-right">
+					<div class="row">
+						<button class="small-margin btn-danger btn-lg" ui-sref="checkout.billing({amount: ngCart.totalCost(cart.items[0]._kitchenId), kitchenId: cart.items[0]._kitchenId})">
+							To
+							Request Order
+						</button>
+					</div>
+				</div>
+				<br><br>
 			</div>
 		</div>
-		<!--Order-->
-		<div class="pull-right">
-			<div class="row">
-				<button class="small-margin btn-danger btn-lg" ui-sref="checkout.billing({amount: ngCart.totalCost()})">
-					To
-					Request Order
-				</button>
-			</div>
-		</div>
+
 	</div>
 </div>

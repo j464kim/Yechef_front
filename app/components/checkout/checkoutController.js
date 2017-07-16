@@ -17,8 +17,8 @@ angular.module('checkout.billing', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
-			// TODO: placeholder for amount
 			var amount = $stateParams.amount;
+			var kitchenId = $stateParams.kitchenId;
 			var stripeAmount = Math.round(amount * 100);
 
 			// Create a Stripe client
@@ -42,7 +42,7 @@ angular.module('checkout.billing', [
 			}
 
 			function _chargePayment(status, response) {
-				CheckoutAPI.charge(response.id, stripeAmount, config.currency).then(function (response) {
+				CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Authorization hold successful');
 				}, function (response) {
@@ -50,7 +50,6 @@ angular.module('checkout.billing', [
 					console.error(response);
 				});
 			}
-
 
 			/*********************
 			 *  Public Functions

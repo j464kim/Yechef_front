@@ -8,16 +8,15 @@
                     ng-options=" v for v in qtyOpt"></select>
         </span>
         <a class="btn btn-sm btn-primary"
-           ng-click="cartCtrl.addItem(id, name, price, quantity, data)"
+           ng-click="cartCtrl.addItem(id, name, price, quantity, data, kitchenId)"
            ng-transclude>
             <i class="material-icons">add_shopping_cart</i>Add
         </a>
-
     </div>
-    <mark ng-show="inCart()">
-        This item is in your cart.
-        <a ng-click="cartCtrl.removeItemById(id)" style="cursor: pointer;">
-            <i class="material-icons">remove_shopping_cart</i>Remove
-        </a>
-    </mark>
+    <!--<mark ng-show="inCart()">-->
+        <!--This item is in your cart.-->
+        <!--<a ng-click="cartCtrl.removeItemById(id, kitchenId)" style="cursor: pointer;">-->
+            <!--<i class="material-icons">remove_shopping_cart</i>Remove-->
+        <!--</a>-->
+    <!--</mark>-->
 </div>

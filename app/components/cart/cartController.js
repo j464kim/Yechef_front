@@ -8,7 +8,6 @@ angular.module('ngCart.directives', [
 
 			$scope.ngCart = ngCart;
 
-
 			/*********************
 			 *  Private Variables
 			 **********************/
@@ -35,32 +34,37 @@ angular.module('ngCart.directives', [
 					ngCart.$save();
 				});
 
-				if (angular.isObject(store.get('cart'))) {
+				if (angular.isObject(store.get('cart')) || $rootScope.currentUser) {
 					that.restore(store.get('cart'));
 
 				} else {
-					devHelper.log('new cart is created');
+					devHelper.log('You do not have a cart yet');
 					ngCart.init();
 				}
 			}
 
 			this.restore = function (storedCart) {
-				ngCart.init();
-				ngCart.$cart.shipping = storedCart.shipping;
-				ngCart.$cart.tax = storedCart.tax;
 
+				// ngCart.$cart.shipping = storedCart.shipping;
+				// ngCart.$cart.tax = storedCart.tax;
 				if ($rootScope.currentUser) {
 					CartAPI.list().then(function (response) {
-
 						devHelper.log('successfully retrieved cart information from db');
 						devHelper.log(response);
-						storedCart = response;
+						ngCart.initDb(response);
 
 						// Iterate through each item in cart session and create a new instance of ngCartItem for each one
 						// technically, every time page is refreshed, new items(in local storage) are being added to cart
-						angular.forEach(storedCart.items, function (item) {
-							ngCart.$cart.items.push(new ngCartItem(item.id, item.name, item.eachPrice, item.quantity, item.data));
+						angular.forEach(response, function (cart) {
+							angular.forEach(cart.items, function (item) {
+								ngCart.$cart[item.kitchenId].items.push(new ngCartItem(item.id, item.name, item.eachPrice, item.quantity, item.data, item.kitchenId));
+							});
 						});
+
+						console.log('restored cart from db: ');
+						devHelper.log(ngCart.getCart());
+						ngCart.setTaxRate(7.5);
+						that.carts = ngCart.getCart();
 
 					}, function (response) {
 						// TODO handle error state
@@ -68,17 +72,29 @@ angular.module('ngCart.directives', [
 					});
 
 				} else {
+					ngCart.init(storedCart);
 					devHelper.log('Retrieving cart from local storage..');
-
+					console.log('storageCart: ');
 					devHelper.log(storedCart);
 					// Iterate through each item in cart session and create a new instance of ngCartItem for each one
 					// technically, every time page is refreshed, new items(in local storage) are being added to cart
-					angular.forEach(storedCart.items, function (item) {
-						ngCart.$cart.items.push(new ngCartItem(item._id, item._name, item._price, item._quantity, item.data));
-					});
+
+					if (storedCart) {
+						for (var key in storedCart) {
+							angular.forEach(storedCart[key].items, function (item) {
+								console.log('stroedCart key: ' + key);
+								var storedItem = new ngCartItem(item._id, item._name, item._price, item._quantity, item._data, item._kitchenId);
+								devHelper.log(ngCart.$cart);
+								ngCart.$cart[key].items.push(storedItem);
+
+								// ngCart.$cart[1].items.push(new ngCartItem(item._id, item._name, item._price, item._quantity, item.data));
+							});
+						}
+					}
+					that.carts = ngCart.getCart();
+					ngCart.$save();
 				}
 
-				ngCart.$save();
 			};
 
 			function _updateQty(inCart, quantity, relative) {
@@ -117,9 +133,10 @@ angular.module('ngCart.directives', [
 			 **********************/
 			this.updateQty = _updateQty;
 
-			this.addItem = function (id, name, price, quantity, data) {
+			this.addItem = function (id, name, price, quantity, data, kitchenId) {
 
-				var inCart = ngCart.getItemById(id);
+				ngCart.init(store.get('cart'), kitchenId);
+				var inCart = ngCart.getItemById(id, kitchenId);
 
 				// if the item is already in cart
 				if (typeof inCart === 'object') {
@@ -128,13 +145,26 @@ angular.module('ngCart.directives', [
 
 					// for a new item
 				} else {
-					var newItem = new ngCartItem(id, name, price, quantity, data);
-					ngCart.$cart.items.push(newItem);
+					// create a new instance of cart item
+					var newItem = new ngCartItem(id, name, price, quantity, data, kitchenId);
+
+					// store it into $cart object
+					console.log('trying to push item to cart.. ');
+					devHelper.log(newItem);
+					ngCart.$cart[kitchenId].items.push(newItem);
+
+					console.log('new item added to cart ' + kitchenId);
+					devHelper.log(ngCart.$cart);
+
 					$rootScope.$broadcast('ngCart:itemAdded', newItem);
+					ngCart.$save();
+
+					console.log('check if cart is saved to storage');
+					devHelper.log(store.get('cart'));
 
 					if ($rootScope.currentUser) {
 						CartAPI.create(id, quantity).then(function (response) {
-							devHelper.log('item is successfully added to Cart');
+							devHelper.log('a new item is successfully added to Cart');
 							devHelper.log(response);
 						}, function (response) {
 							// TODO handle error state
@@ -147,19 +177,28 @@ angular.module('ngCart.directives', [
 				$rootScope.$broadcast('ngCart:change', {});
 			};
 
-			this.removeItemById = function (id) {
-				console.log('removeItem');
-				var cart = ngCart.getCart();
+			this.removeItemById = function (id, kitchenId) {
+				console.log('trying to remove item of dish ' + id);
+
+				var cart = ngCart.getCart(kitchenId);
 				angular.forEach(cart.items, function (item, index) {
+					devHelper.log(item);
 					if (item.getId() === id) {
 						cart.items.splice(index, 1);
 						devHelper.log(item._name + ' is successfully removed from cart');
 					}
 				});
-				ngCart.setCart(cart);
+				ngCart.$cart[kitchenId] = cart;
+				ngCart.setCart(ngCart.getCart());
 
 				$rootScope.$broadcast('ngCart:itemRemoved', {});
 				$rootScope.$broadcast('ngCart:change', {});
+
+				if (ngCart.getTotalItems() == 0) {
+					console.log('there is no item in cart - empty cart object');
+					ngCart.setCart({});
+					devHelper.log(ngCart.getCart());
+				}
 
 				if ($rootScope.currentUser) {
 					CartAPI.destroy(id).then(function (response) {

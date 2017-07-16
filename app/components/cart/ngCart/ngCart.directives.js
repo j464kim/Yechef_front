@@ -9,6 +9,7 @@ angular.module('ngCart.directives')
 			controller: 'CartController as cartCtrl',
 			scope: {
 				id: '@',
+				kitchenId: '@',
 				name: '@',
 				quantity: '@',
 				quantityMax: '@',
@@ -25,6 +26,7 @@ angular.module('ngCart.directives')
 			},
 			link: function (scope, element, attrs) {
 				scope.attrs = attrs;
+
 				scope.inCart = function () {
 					return ngCart.getItemById(parseInt(attrs.id));
 				};

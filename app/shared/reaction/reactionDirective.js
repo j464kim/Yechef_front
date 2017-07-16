@@ -31,6 +31,7 @@ angular.module('reaction', [
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
+					reactionableKind: constant[$scope.for.toUpperCase()],
 					userId: userID
 				};
 
@@ -42,7 +43,6 @@ angular.module('reaction', [
 				$scope.LIKE = constant.LIKE;
 				$scope.FORK = constant.FORK;
 				$scope.SUBSCRIBE = constant.SUBSCRIBE;
-
 
 				/*********************
 				 *  Private Functions

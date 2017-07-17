@@ -7,11 +7,11 @@ angular.module('carousel', [])
 			templateUrl: 'shared/carousel/carouselDirective.html',
 			scope: {
 				medias: '=',
-				myInterval: '@'
+				interval: '@'
 			},
-			controller: function($scope) {
-				if (!$scope.myInterval) {
-					$scope.myInterval = 5000;
+			controller: function($scope, config) {
+				if (!$scope.interval) {
+					$scope.interval = config.carouselDefaultInterval;
 				}
 				$scope.noWrapSlides = false;
 				$scope.active = 0;

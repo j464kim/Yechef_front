@@ -32,6 +32,9 @@ angular.module('configuration', [])
 		var autoProcessQueue = false;
 		var addRemoveLinks = true;
 
+		//carousel
+		var carouselDefaultInterval = 5000; //ms
+
 		// Nationality
 		var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
                     Chinese, Ecuadorian, English, Ethiopian, French, German, Greek, Hungarian, Indian, Indonesian, \
@@ -79,6 +82,7 @@ angular.module('configuration', [])
 			nationalities: nationalities,
 			currency: currency,
 			dishSearchParams: dishSearchParams,
+			carouselDefaultInterval: carouselDefaultInterval,
 		};
 
 	})());

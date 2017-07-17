@@ -30,6 +30,15 @@ angular.module('ngCart', [
 
 				// kitchenId = 0;
 				this.$cart = {};
+
+				if(kitchenId) {
+					this.$cart[kitchenId] = {
+						shipping: null,
+						taxRate: null,
+						tax: null,
+						items: []
+					}
+				}
 				// this.$cart[kitchenId] = {
 				// 	shipping: null,
 				// 	taxRate: null,
@@ -40,6 +49,7 @@ angular.module('ngCart', [
 
 			else {
 				// if there is already an item in storage
+				// this.$cart = storedCart;
 
 				if (kitchenId) {
 					// on adding items to cart, assign kitchenId as a key of cart object
@@ -99,6 +109,9 @@ angular.module('ngCart', [
 		};
 
 		this.getItemById = function (itemId, kitchenId) {
+			if (!this.getCart(kitchenId)) {
+				return false;
+			}
 			var items = this.getCart(kitchenId).items;
 			var build = false;
 			angular.forEach(items, function (item) {
@@ -327,7 +340,6 @@ angular.module('ngCart', [
 		};
 
 		item.prototype.setQuantity = function (quantity, relative) {
-
 			var quantityInt = parseInt(quantity);
 			if (quantityInt % 1 === 0) {
 				if (relative === true) {
@@ -396,7 +408,6 @@ angular.module('ngCart', [
 			},
 
 			set: function (key, val) {
-
 				if (val === undefined) {
 					$window.localStorage.removeItem(key);
 				} else {

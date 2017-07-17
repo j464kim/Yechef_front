@@ -24,6 +24,7 @@ angular.module('ngCart.directives', [
 
 				ngCart.setTaxRate(7.5);
 				// ngCart.setShipping(2.99);
+				$scope.isCartReady = true;
 			}
 
 			/*********************
@@ -86,7 +87,6 @@ angular.module('ngCart.directives', [
 								var storedItem = new ngCartItem(item._id, item._name, item._price, item._quantity, item._data, item._kitchenId);
 								devHelper.log(ngCart.$cart);
 								ngCart.$cart[key].items.push(storedItem);
-
 								// ngCart.$cart[1].items.push(new ngCartItem(item._id, item._name, item._price, item._quantity, item.data));
 							});
 						}
@@ -134,7 +134,6 @@ angular.module('ngCart.directives', [
 			this.updateQty = _updateQty;
 
 			this.addItem = function (id, name, price, quantity, data, kitchenId) {
-
 				ngCart.init(store.get('cart'), kitchenId);
 				var inCart = ngCart.getItemById(id, kitchenId);
 
@@ -173,7 +172,7 @@ angular.module('ngCart.directives', [
 					}
 
 				}
-
+				$scope.isInCart = true;
 				$rootScope.$broadcast('ngCart:change', {});
 			};
 
@@ -209,6 +208,7 @@ angular.module('ngCart.directives', [
 						console.error(response);
 					});
 				}
+				$scope.isInCart = false;
 
 			};
 

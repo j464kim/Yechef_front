@@ -26,13 +26,14 @@ angular.module('ngCart.directives')
 			},
 			link: function (scope, element, attrs) {
 				scope.attrs = attrs;
+				scope.isInCart = false;
 
 				scope.inCart = function () {
-					return ngCart.getItemById(parseInt(attrs.id));
+					scope.isInCart =  ngCart.getItemById(parseInt(attrs.id), attrs.kitchenId);
 				};
 
-				if (scope.inCart()) {
-					scope.q = ngCart.getItemById(parseInt(attrs.id)).getQuantity();
+				if (scope.isInCart) {
+					scope.q = ngCart.getItemById(parseInt(attrs.id),attrs.kitchenId).getQuantity();
 				} else {
 					scope.q = parseInt(scope.quantity);
 				}

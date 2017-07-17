@@ -79,7 +79,7 @@ angular.module('user.api', [])
 				list: list,
 				show: show,
 				update: update,
-				getMyKitchens: getMyKitchens
+				getMyKitchens: getMyKitchens,
 			};
 		}
 	]);

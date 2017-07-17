@@ -1,18 +1,19 @@
 'use strict';
 
-angular.module('user.profile.order', [
+angular.module('user.kitchen.order', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope',
-		function ($stateParams, $state, UserAPI, devHelper, $scope) {
+	.controller('KitchenOrderController', ['$stateParams', '$state', 'KitchenAPI', 'devHelper', '$scope',
+		function ($stateParams, $state, KitchenAPI, devHelper, $scope) {
 
 			/*********************
 			 *  Private Variables
 			 **********************/
 				// reference to this controller
 
-			var that = this;
+			var that = this
+			var kitchenId = $stateParams.myCurrentKitchenId;
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -22,11 +23,11 @@ angular.module('user.profile.order', [
 			 **********************/
 
 			function _init() {
-				_getUserOrders();
+				_getKitchenOrders();
 			}
 
-			function _getUserOrders() {
-				UserAPI.list('getOrders').then(
+			function _getKitchenOrders() {
+				KitchenAPI.getOrders(kitchenId).then(
 					function (response) {
 						devHelper.log(response);
 						that.orders = response;
@@ -35,6 +36,7 @@ angular.module('user.profile.order', [
 						console.error(response);
 					});
 			};
+
 
 			/*********************
 			 *  Public Functions

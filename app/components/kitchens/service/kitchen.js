@@ -191,6 +191,21 @@ angular.module('kitchen.api', [
 				});
 			};
 
+			function getOrders(kitchenId) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.show(
+						{
+							id: kitchenId + "/orders"
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				list: list,
 				show: show,
@@ -203,6 +218,7 @@ angular.module('kitchen.api', [
 				getDishes: getDishes,
 				getSubscribers: getSubscribers,
 				checkOwnership: checkOwnership,
+				getOrders: getOrders,
 			};
 		}
 	]);

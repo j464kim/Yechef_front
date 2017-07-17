@@ -5,7 +5,8 @@ angular.module('profile', [
 	'user.profile',
 	'user.profile.general',
 	'user.profile.subscribe',
-	'user.profile.fork'
+	'user.profile.fork',
+	'user.profile.order'
 ])
 
 	.config(function ($stateProvider) {
@@ -37,6 +38,7 @@ angular.module('profile', [
 			.state('user.profile.order', {
 				url: '/myOrder',
 				templateUrl: 'components/users/profile/order/userOrder.html',
+				controller: 'UserOrderController as uoCtrl',
 			})
 			.state('user.profile.forked', {
 				url: '/forked',

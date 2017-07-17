@@ -28,10 +28,16 @@ angular.module('reaction', [
 
 				var userID = $rootScope.currentUser ? $rootScope.currentUser.id : null;
 
+				var reactionableKind = constant[$scope.for.toUpperCase()];
+				if (!reactionableKind) {
+					reactionableKind = 0;
+					devHelper.log('Unknown reactionable kind: ' + $scope.for.toUpperCase(), 'error');
+				}
+
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
-					reactionableKind: constant[$scope.for.toUpperCase()],
+					reactionableKind: reactionableKind,
 					userId: userID
 				};
 

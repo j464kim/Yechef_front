@@ -68,13 +68,13 @@ angular.module('user.api', [])
 				});
 			}
 
-			function getKitchens(userId, pageNum) {
+			function getKitchens(userId, pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.getInfo({
 						option: 'getKitchens',
 						userId: userId,
 						page: pageNum,
-						perPage: 3
+						perPage: perPage
 					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -83,13 +83,13 @@ angular.module('user.api', [])
 				});
 			};
 
-			function getForkedDishes(userId, pageNum) {
+			function getForkedDishes(userId, pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.getInfo({
 						option: 'getForkedDishes',
 						userId: userId,
 						page: pageNum,
-						perPage: 4,
+						perPage: perPage
 					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -98,13 +98,13 @@ angular.module('user.api', [])
 				});
 			};
 
-			function getSubscriptions(userId, pageNum) {
+			function getSubscriptions(userId, pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.getInfo({
 						option: 'getSubscriptions',
 						userId: userId,
 						page: pageNum,
-						perPage: 3
+						perPage: perPage
 					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -113,11 +113,11 @@ angular.module('user.api', [])
 				});
 			};
 
-			function getMyKitchens(pageNum) {
+			function getMyKitchens(pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.list({
 						page: pageNum,
-						perPage: 100,
+						perPage: perPage,
 						id: 'getMyKitchens'
 					}).$promise.then(function (response) {
 						resolve(response.body);
@@ -127,11 +127,11 @@ angular.module('user.api', [])
 				});
 			};
 
-			function getMyForkedDishes(pageNum) {
+			function getMyForkedDishes(pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.list({
 						page: pageNum,
-						perPage: 12,
+						perPage: perPage,
 						id: 'getMyForkedDishes'
 					}).$promise.then(function (response) {
 						resolve(response.body);
@@ -141,11 +141,11 @@ angular.module('user.api', [])
 				});
 			};
 
-			function getMySubscriptions(pageNum) {
+			function getMySubscriptions(pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.list({
 						page: pageNum,
-						perPage: 12,
+						perPage: perPage,
 						id: 'getMySubscriptions'
 					}).$promise.then(function (response) {
 						resolve(response.body);

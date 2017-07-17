@@ -26,7 +26,7 @@ angular.module('user.kitchen', [
 
 		function _getMyKitchens() {
 			var pageNum = ++that.myKitchensCurrentPage;
-			UserAPI.getMyKitchens(pageNum).then(
+			UserAPI.getMyKitchens(pageNum, 100).then(
 				function (response) {
 					devHelper.log(response);
 					if (!that.myKitchens) {

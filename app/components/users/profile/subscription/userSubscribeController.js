@@ -31,7 +31,7 @@ angular.module('user.profile.subscribe', [
 
 			function _getSubscriptions() {
 				var pageNum = ++that.currentPage;
-				UserAPI.getMySubscriptions(pageNum).then(
+				UserAPI.getMySubscriptions(pageNum, 12).then(
 					function (response) {
 						devHelper.log(response);
 						that.subscribedKitchens = that.subscribedKitchens.concat(response.data);

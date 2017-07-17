@@ -244,7 +244,9 @@ angular.module('auth.api', [
 				return $q(function (resolve, reject) {
 					AuthResource.logout().then(function (response) {
 						sessionService.revokeSession();
-						for (var property in $rootScope.currentUser) delete $rootScope.currentUser[property];
+						for (var property in $rootScope.currentUser) {
+							delete $rootScope.currentUser[property];
+						}
 						resolve(response.data.body);
 					}, function (response) {
 						reject(response);

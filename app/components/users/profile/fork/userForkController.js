@@ -31,7 +31,7 @@ angular.module('user.profile.fork', [
 
 			function _getForkedDishes() {
 				var pageNum = ++that.currentPage;
-				UserAPI.getMyForkedDishes(pageNum).then(
+				UserAPI.getMyForkedDishes(pageNum, 12).then(
 					function (response) {
 						devHelper.log(response);
 						that.forkedDishes = that.forkedDishes.concat(response.data);

@@ -18,6 +18,7 @@ angular.module('user.profile.privacy', [
 			/*********************
 			 *  Public Variables
 			 **********************/
+			this.loaded = false;
 
 			/*********************
 			 *  Private Functions
@@ -34,6 +35,7 @@ angular.module('user.profile.privacy', [
 					that.old_show_phone = that.user.show_phone;
 					that.old_show_subscription = that.user.show_subscription;
 					that.old_show_forks = that.user.show_forks;
+					that.loaded = true;
 
 					//TODO: user media to be ready soon
 					// that.media = response.medias[0].url;

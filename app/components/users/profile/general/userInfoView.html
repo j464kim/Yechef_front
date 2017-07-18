@@ -14,11 +14,13 @@
 </div>
 <!--Button-->
 <div layout="column">
-
-<md-button flex class="md-raised md-primary" ui-sref="user.profile.info.edit({id: currentUser.id})">
-    Edit My Info
-</md-button>
-<md-button flex class="md-raised" ui-sref="user.password.updateRequest">
-    Change Password
-</md-button>
+    <md-button flex class="md-raised md-primary" ui-sref="user.show({id: currentUser.id})">
+        View
+    </md-button>
+    <md-button flex class="md-raised md-warn" ui-sref="user.profile.info.edit({id: currentUser.id})">
+        Edit My Info
+    </md-button>
+    <md-button flex class="md-raised" ui-sref="user.password.updateRequest">
+        Change Password
+    </md-button>
 </div>

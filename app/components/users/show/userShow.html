@@ -21,6 +21,11 @@
                     <i class="fa fa-phone" aria-hidden="true"></i> {{UserShowCtrl.user.phone}}
                 </h4>
             </div>
+            <div class="text-center" ng-if="currentUser.id === UserShowCtrl.user.id">
+                <md-button flex class="md-raised md-warn" ui-sref="user.profile.info.edit({id: currentUser.id})">
+                    Edit my profile
+                </md-button>
+            </div>
         </div>
         <div class="col-md-3">
             <!--Image Carousel-->
@@ -33,11 +38,11 @@
         <!--User's kitchens-->
         <div class="row" ng-if="UserShowCtrl.kitchens">
             <div class="row">
-                <div class="col-md-3" id="user-show-kitchens">
+                <div class="col-md-12" id="user-show-kitchens">
                     <h3>Cooking in</h3>
                     <hr/>
                 </div>
-                <div ng-if="UserShowCtrl.kitchens.length === 0">
+                <div class="col-md-12" ng-if="UserShowCtrl.kitchens.length === 0">
                     Nothing to show
                 </div>
             </div>

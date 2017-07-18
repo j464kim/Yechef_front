@@ -87,7 +87,6 @@ angular.module('user.show', [
 					// that.media = response.medias[0].url;
 
 				}, function (response) {
-					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 
@@ -109,7 +108,6 @@ angular.module('user.show', [
 					// that.media = response.medias[0].url;
 
 				}, function (response) {
-					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 
@@ -131,7 +129,6 @@ angular.module('user.show', [
 					// that.media = response.medias[0].url;
 
 				}, function (response) {
-					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 

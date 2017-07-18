@@ -29,8 +29,7 @@ angular.module('reaction', [
 				var userID = $rootScope.currentUser ? $rootScope.currentUser.id : null;
 
 				var reactionableKind = constant[$scope.for.toUpperCase()];
-				if (!reactionableKind) {
-					reactionableKind = 0;
+				if (typeof reactionableKind == 'undefined') {
 					devHelper.log('Unknown reactionable kind: ' + $scope.for.toUpperCase(), 'error');
 				}
 
@@ -110,8 +109,8 @@ angular.module('reaction', [
 				// As a workaround, I will pass some extra information into request in order to look for the added reaction
 				function _removeReaction(kind) {
 
-					var userReactionId = 1; // placeholder for now until (1) is implemented
-					ReactionAPI.destroy(reactionObj, userReactionId).then(function (response) {
+					reactionObj.kind = kind;
+					ReactionAPI.destroy(reactionObj).then(function (response) {
 						var removedReaction = response;
 						devHelper.log(removedReaction);
 

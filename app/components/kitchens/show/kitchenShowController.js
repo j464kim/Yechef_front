@@ -44,7 +44,7 @@ angular.module('kitchen.show', [
 				KitchenAPI.getAdmins(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchenAdmins = response;
-					if ($rootScope.currentUser) {
+					if (!_.isEmpty($rootScope.currentUser)) {
 						for (var i in that.kitchenAdmins) {
 
 							if (that.kitchenAdmins[i].id === $rootScope.currentUser.id) {

@@ -49,7 +49,7 @@ angular.module('ngCart.directives', [
 				ngCart.$cart.shipping = storedCart.shipping;
 				ngCart.$cart.tax = storedCart.tax;
 
-				if ($rootScope.currentUser) {
+				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.list().then(function (response) {
 
 						devHelper.log('successfully retrieved cart information from db');
@@ -99,7 +99,7 @@ angular.module('ngCart.directives', [
 
 				}
 
-				if ($rootScope.currentUser) {
+				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.update(inCart._id, inCart._quantity).then(function (response) {
 						devHelper.log(response);
 					}, function (response) {
@@ -125,7 +125,7 @@ angular.module('ngCart.directives', [
 
 					_updateQty(inCart, quantity, false);
 
-					if ($rootScope.currentUser) {
+					if (!_.isEmpty($rootScope.currentUser)) {
 						CartAPI.update(id, quantity).then(function (response) {
 							devHelper.log(name + ' in cart is successfully updated');
 							devHelper.log(response);
@@ -141,7 +141,7 @@ angular.module('ngCart.directives', [
 					ngCart.$cart.items.push(newItem);
 					$rootScope.$broadcast('ngCart:itemAdded', newItem);
 
-					if ($rootScope.currentUser) {
+					if (!_.isEmpty($rootScope.currentUser)) {
 						CartAPI.create(id, quantity).then(function (response) {
 							devHelper.log('item is successfully added to Cart');
 							devHelper.log(response);
@@ -170,7 +170,7 @@ angular.module('ngCart.directives', [
 				$rootScope.$broadcast('ngCart:itemRemoved', {});
 				$rootScope.$broadcast('ngCart:change', {});
 
-				if ($rootScope.currentUser) {
+				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.destroy(id).then(function (response) {
 						devHelper.log('dish ' + id + ' is successfully removed from cart db');
 						devHelper.log(response);

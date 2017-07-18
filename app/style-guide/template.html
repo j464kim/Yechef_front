@@ -52,15 +52,15 @@
             </div>
 
             <div class="col-md-3">
-                <div class="color-block bg-secondary">Blue</div>
+                <div class="color-block bg-secondary">Secondary Color</div>
             </div>
 
             <div class="col-md-3">
-                <div class="color-block bg-ternary">Yellow</div>
+                <div class="color-block bg-ternary">Ternary Color</div>
             </div>
 
             <div class="col-md-3">
-                <div class="color-block bg-quaternary">Red</div>
+                <div class="color-block bg-quaternary">Quaterly Color</div>
             </div>
 
             <div class="col-md-3">
@@ -316,7 +316,7 @@
                                     </md-input-container>
 
                                     <md-input-container class="md-block">
-                                        <md-checkbox name="tos" ng-model="project.tos" required>
+                                        <md-checkbox name="tos" ng-model="project.tos" class="md-primary" required>
                                             I accept the terms of service.
                                         </md-checkbox>
                                         <div ng-messages="userForm.tos.$error" multiple md-auto-hide="false">
@@ -352,6 +352,8 @@
                                             <md-button class="md-raised md-primary">Primary</md-button>
                                             <md-button ng-disabled="true" class="md-raised bg-primary">Disabled</md-button>
                                             <md-button class="md-raised md-warn">Warn</md-button>
+                                            <md-button class="md-raised bg-danger">Success</md-button>
+                                            <md-button class="md-raised bg-success">Info</md-button>
                                             <div class="label">Raised</div>
                                         </section>
                                     </div>

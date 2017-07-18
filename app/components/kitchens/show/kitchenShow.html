@@ -30,10 +30,6 @@
                 <i class="material-icons">phone</i>
                 <label>{{KitchenCtrl.kitchen.phone}}</label>
             </a>
-            <a>
-                <i class="material-icons">place</i>
-                <label>{{KitchenCtrl.kitchen.address}}</label>
-            </a>
         </div>
         <div class="col-md-3 pull-right" ng-if="KitchenCtrl.kitchen">
             <a>
@@ -102,6 +98,10 @@
                 </a>
             </div>
         </div>
+    </div>
+    <!-- Gmap -->
+    <div class="row margin-top-2em" ng-if="KitchenCtrl.kitchen">
+        <google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}"></google-map-show>
     </div>
     <!--See more chefs-->
     <div style="visibility: hidden">

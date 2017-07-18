@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('dish.show', [
-    'share',
-    'carousel',
-    'dishes.api',
+	'share',
+	'carousel',
+	'dishes.api',
+	'googleMapShow',
 ])
 
     .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper', 'genericService',

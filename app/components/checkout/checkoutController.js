@@ -4,7 +4,7 @@ angular.module('checkout.billing', [
 	'checkout.api',
 ])
 
-	.controller('CheckoutController', ['$state', 'CheckoutAPI', 'devHelper', 'config', '$rootScope', 'genericService'
+	.controller('CheckoutController', ['$state', 'CheckoutAPI', 'devHelper', 'config', '$rootScope', 'genericService',
 		function ($state, CheckoutAPI, devHelper, config, $rootScope, genericService) {
 
 			/*********************

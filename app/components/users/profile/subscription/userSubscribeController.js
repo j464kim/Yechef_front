@@ -4,8 +4,8 @@ angular.module('user.profile.subscribe', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserSubscribeController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
-		function ($stateParams, $state, UserAPI, devHelper) {
+	.controller('UserSubscribeController', ['$stateParams', '$state', 'UserAPI', 'devHelper', 'genericService',
+		function ($stateParams, $state, UserAPI, devHelper, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -41,7 +41,7 @@ angular.module('user.profile.subscribe', [
 							that.loadButton = false;
 						}
 					}, function (response) {
-						// TODO handle error state ie. front end display
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			};

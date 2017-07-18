@@ -2,8 +2,8 @@ angular.module('kitchen.destroy', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper',
-		function ($stateParams, KitchenAPI, $state, devHelper) {
+	.controller('KitchenDestroyController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService',
+		function ($stateParams, KitchenAPI, $state, devHelper, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -27,7 +27,7 @@ angular.module('kitchen.destroy', [
 						that.kitchen = response;
 						$state.go('kitchen.list');
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				} else {

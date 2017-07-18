@@ -4,8 +4,8 @@ angular.module('kitchen.list', [
     'kitchen.api'
 ])
 
-    .controller('KitchenListController', ['$state', 'KitchenAPI', 'devHelper',
-        function ($state, KitchenAPI, devHelper) {
+    .controller('KitchenListController', ['$state', 'KitchenAPI', 'devHelper', 'genericService',
+        function ($state, KitchenAPI, devHelper, genericService) {
 
             /*********************
              *  Private Variables
@@ -36,7 +36,7 @@ angular.module('kitchen.list', [
                     that.totalItems = response.total;
                     that.currentPage = response.current_page;
                 }, function (response) {
-                    // TODO handle error state ie. front end display
+                    genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
                 });
             }

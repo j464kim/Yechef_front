@@ -4,8 +4,8 @@ angular.module('dish.list', [
 	'dishes.api',
 ])
 
-	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI',
-		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI) {
+	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService',
+		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -107,7 +107,7 @@ angular.module('dish.list', [
 								that.currentPage = response.current_page;
 								_locateDishes();
 							}, function (response) {
-								// TODO handle error state
+								genericService.showToast('Oops..! Something is wrong');
 								devHelper.log(response, 'error');
 							});
 						});
@@ -120,7 +120,7 @@ angular.module('dish.list', [
 						that.currentPage = response.current_page;
 						_locateDishes();
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}

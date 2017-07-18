@@ -4,8 +4,8 @@ angular.module('user.profile.general', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserGeneralController', ['$state', 'UserAPI', 'devHelper', '$rootScope', 'AuthAPI',
-		function ($state, UserAPI, devHelper, $rootScope, AuthAPI) {
+	.controller('UserGeneralController', ['$state', 'UserAPI', 'devHelper', '$rootScope', 'AuthAPI', 'genericService',
+		function ($state, UserAPI, devHelper, $rootScope, AuthAPI, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -35,7 +35,7 @@ angular.module('user.profile.general', [
 					// that.media = response.medias[0].url;
 
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
@@ -48,7 +48,7 @@ angular.module('user.profile.general', [
 					AuthAPI.setCurrentUser();
 					$state.go('user.profile.info.view', {'id': updatedUser.id});
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

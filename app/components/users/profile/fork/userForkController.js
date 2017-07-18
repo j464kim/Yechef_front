@@ -4,8 +4,8 @@ angular.module('user.profile.fork', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserForkController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
-		function ($stateParams, $state, UserAPI, devHelper) {
+	.controller('UserForkController', ['$stateParams', '$state', 'UserAPI', 'devHelper', 'genericService',
+		function ($stateParams, $state, UserAPI, devHelper, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -41,7 +41,7 @@ angular.module('user.profile.fork', [
 							that.loadButton = false;
 						}
 					}, function (response) {
-						// TODO handle error state ie. front end display
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			};

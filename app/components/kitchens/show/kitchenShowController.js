@@ -4,8 +4,8 @@ angular.module('kitchen.show', [
 	'kitchen.api', 'ngMaterial', 'share',
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope',
-		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope', 'genericService',
+		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -34,7 +34,7 @@ angular.module('kitchen.show', [
 					that.kitchen = response;
 					that.media = response.medias[0].url;
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
@@ -53,7 +53,7 @@ angular.module('kitchen.show', [
 						}
 					}
 				}, function (response) {
-					//TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
@@ -63,7 +63,7 @@ angular.module('kitchen.show', [
 					devHelper.log(response);
 					that.dishes = response;
 				}, function (response) {
-					//TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

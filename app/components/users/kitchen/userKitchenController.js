@@ -3,7 +3,7 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams) {
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, genericService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -36,7 +36,7 @@ angular.module('user.kitchen', [
 					that.myKitchensTotalItems = response.total;
 					that.myKitchensCurrentPage = response.current_page;
 				}, function (response) {
-					// TODO handle error state ie. front end display
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 		};

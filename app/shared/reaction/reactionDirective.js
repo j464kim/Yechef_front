@@ -70,7 +70,7 @@ angular.module('reaction', [
 						devHelper.log(reactionObj);
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}
@@ -91,7 +91,7 @@ angular.module('reaction', [
 						_incrementReaction(kind)
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}
@@ -113,7 +113,7 @@ angular.module('reaction', [
 						_decrementReaction(kind);
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}

@@ -4,8 +4,8 @@ angular.module('checkout.billing', [
 	'checkout.api',
 ])
 
-	.controller('CheckoutController', ['$state', 'CheckoutAPI', 'devHelper', 'config', '$rootScope',
-		function ($state, CheckoutAPI, devHelper, config, $rootScope) {
+	.controller('CheckoutController', ['$state', 'CheckoutAPI', 'devHelper', 'config', '$rootScope', 'genericService'
+		function ($state, CheckoutAPI, devHelper, config, $rootScope, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -45,7 +45,7 @@ angular.module('checkout.billing', [
 					devHelper.log(response);
 					devHelper.log('charged successfully');
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

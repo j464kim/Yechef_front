@@ -6,8 +6,8 @@ angular.module('dish.show', [
     'dishes.api',
 ])
 
-    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper',
-        function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper) {
+    .controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper', 'genericService',
+        function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper, genericService) {
 
             /*********************
              *    Private Variables
@@ -34,7 +34,7 @@ angular.module('dish.show', [
                         that.dish = response;
                         _getKitchen(that.dish.kitchen_id);
                     }, function (response) {
-                        // TODO handle error state
+                        genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
                     });
 
@@ -44,7 +44,7 @@ angular.module('dish.show', [
                 KitchenAPI.show(kitchenId).then(function (response) {
                     that.kitchen = response;
                 }, function (response) {
-                    // TODO handle error state
+                    genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
                 });
             }

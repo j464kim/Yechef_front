@@ -3,8 +3,8 @@
 angular.module('rating', [
 	'rating.api',
 ])
-	.controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q', 'devHelper',
-		function ($state, $stateParams, RatingAPI, $q, devHelper) {
+	.controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q', 'devHelper', 'genericService',
+		function ($state, $stateParams, RatingAPI, $q, devHelper, genericService) {
 			/*********************
 			 *    Private Variables
 			 **********************/
@@ -48,7 +48,7 @@ angular.module('rating', [
 							that.loadButton = false;
 						}
 					}, function (response) {
-						// TODO handle error state ie. front end display
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			}

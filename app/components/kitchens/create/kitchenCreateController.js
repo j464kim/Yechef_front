@@ -36,7 +36,7 @@ angular.module('kitchen.create', [
 
 					$state.go('kitchen.show', {'id': newKitchen.id});
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

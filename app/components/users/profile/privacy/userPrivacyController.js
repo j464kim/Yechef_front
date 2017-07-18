@@ -38,7 +38,7 @@ angular.module('user.profile.privacy', [
 					//TODO: user media to be ready soon
 					// that.media = response.medias[0].url;
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
@@ -51,7 +51,6 @@ angular.module('user.profile.privacy', [
 					AuthAPI.setCurrentUser();
 					genericService.showToast('Successfully Updated Privacy Settings');
 				}, function (response) {
-					// TODO handle error state
 					devHelper.log(response, 'error');
 					genericService.showToast('Error Updating Privacy Settings...');
 				});

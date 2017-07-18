@@ -4,8 +4,8 @@ angular.module('kitchen.update', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper',
-		function ($stateParams, KitchenAPI, $state, devHelper) {
+	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService',
+		function ($stateParams, KitchenAPI, $state, devHelper, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -31,7 +31,7 @@ angular.module('kitchen.update', [
                     devHelper.log(response);
 					that.kitchen = response;
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
@@ -42,7 +42,7 @@ angular.module('kitchen.update', [
                     devHelper.log(response);
 					$state.go('kitchen.show', {'id': updatedKitchen.id});
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

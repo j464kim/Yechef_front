@@ -35,7 +35,7 @@ angular.module('dish.update', [
 						devHelper.log(response);
 						_showDish();
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			}
@@ -50,7 +50,7 @@ angular.module('dish.update', [
 						};
 						mediaService.previewUploadedMedia(that.dish);
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			}

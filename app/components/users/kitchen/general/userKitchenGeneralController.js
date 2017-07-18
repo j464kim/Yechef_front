@@ -19,7 +19,7 @@ angular.module('user.kitchen.general', [
 				devHelper.log(response);
 				that.kitchenAdmins = response;
 			}, function (response) {
-				//TODO handle error state
+				genericService.showToast('Oops..! Something is wrong');
 				devHelper.log(response, 'error');
 			});
 		}
@@ -34,7 +34,7 @@ angular.module('user.kitchen.general', [
 						return user;
 					});
 				}, function (response) {
-					//TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 		};
@@ -51,7 +51,7 @@ angular.module('user.kitchen.general', [
 				devHelper.log(response);
 				$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
 			}, function (response) {
-				// TODO handle error state
+				genericService.showToast('Oops..! Something is wrong');
 				devHelper.log(response, 'error');
 			});
 		}
@@ -62,7 +62,6 @@ angular.module('user.kitchen.general', [
 				devHelper.log(response);
 				_getKitchenAdmins();
 			}, function (response) {
-				//TODO handle error state
 				genericService.showToast(response.data.message);
 				devHelper.log(response, 'error');
 			});
@@ -74,7 +73,7 @@ angular.module('user.kitchen.general', [
 					devHelper.log(response);
 					_getKitchenAdmins();
 				}, function (response) {
-					//TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

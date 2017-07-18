@@ -110,7 +110,7 @@ angular.module('reaction', [
 				function _removeReaction(kind) {
 
 					reactionObj.kind = kind;
-					ReactionAPI.destroy(reactionObj).then(function (response) {
+					ReactionAPI.destroy($scope.userReactionId).then(function (response) {
 						var removedReaction = response;
 						devHelper.log(removedReaction);
 

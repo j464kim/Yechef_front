@@ -53,10 +53,12 @@ angular.module('reaction_api', [
 				});
 			}
 
-			function destroy(reactionObj) {
+			function destroy(reactionId) {
 
 				return $q(function (resolve, reject) {
-					ReactionResource.destroy(reactionObj)
+					ReactionResource.destroy({
+						id: reactionId
+					})
 						.$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {

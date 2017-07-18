@@ -2574,6 +2574,7 @@ md-toast.md-top.md-center {
   position: fixed;
   right: 0;
   height: 100%;
+  width: inherit;
 }
 #map-dish-show {
   padding: 0 1em 0 1em;

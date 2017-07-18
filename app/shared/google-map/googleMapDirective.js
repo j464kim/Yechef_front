@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('googleMapShow', [])
+angular.module('googleMapDirectives', [])
 	.directive('googleMapShow', [function () {
 		return {
 			restrict: 'E',
 			replace: true,
-			templateUrl: 'shared/google-map/googleMapDirective.html',
+			templateUrl: 'shared/google-map/googleMapShowDirective.html',
 			scope: {
 				for: '@',
 				address: '@'
@@ -44,4 +44,25 @@ angular.module('googleMapShow', [])
 			}]
 		}
 	}
-	]);
+	])
+
+	.directive('googleMapSearch', [function() {
+		return {
+			restrict: 'E',
+			replace: true,
+			templateUrl: 'shared/google-map/googleMapSearchDirective.html',
+			scope: {
+				map: '=',
+				mapEvents: '=',
+				mapCtrl: '=',
+				window: '=',
+				markers: '=',
+				markersEvents: '=',
+				markersControl: '=',
+				circle: '='
+			},
+			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
+
+			}]
+		}
+	}]);

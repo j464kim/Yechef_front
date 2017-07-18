@@ -1,0 +1,30 @@
+<div id="map-dish-list">
+    <ui-gmap-google-map center='map.center'
+                        zoom='map.zoom'
+                        events="mapEvents"
+                        control="mapCtrl"
+                        options="map.options"
+                        ng-cloak>
+        <ui-gmap-window
+                show="window.show"
+                coords="window.model"
+                options="window.options"
+                closeClick="window.closeClick()"
+                control="window.ctrl">
+        </ui-gmap-window>
+        <ui-gmap-markers
+                models="markers"
+                coords="'self'"
+                icon="'icon'"
+                options="'options'"
+                events="markersEvents"
+                control="markersControl">
+        </ui-gmap-markers>
+        <ui-gmap-circle center='circle.center'
+                        radius='circle.radius'
+                        fill='circle.fill'
+                        stroke='circle.stroke'
+                        clickable='false'>
+        </ui-gmap-circle>
+    </ui-gmap-google-map>
+</div>

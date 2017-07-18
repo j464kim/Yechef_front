@@ -4,7 +4,7 @@ angular.module('dish.show', [
 	'share',
 	'carousel',
 	'dishes.api',
-	'googleMapShow',
+	'googleMapDirectives',
 ])
 
 	.controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper',

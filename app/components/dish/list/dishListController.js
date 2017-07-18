@@ -3,6 +3,7 @@
 angular.module('dish.list', [
 	'dishes.api',
 	'ngMaterial',
+	'googleMapDirectives'
 ])
 
 	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService',
@@ -25,6 +26,7 @@ angular.module('dish.list', [
 			this.mapCtrl = {};
 			this.dishMapMarkers = [];
 			this.dishMapMarkerControl = {};
+			this.mapInited = false;
 
 			/*********************
 			 *    Private Functions
@@ -57,33 +59,43 @@ angular.module('dish.list', [
 							that.options.userLng = position.coords.longitude;
 							that.circle.center.latitude = position.coords.latitude;
 							that.circle.center.longitude = position.coords.longitude;
-							SearchAPI.dish(that.options).then(function (response) {
-								devHelper.log(response);
-								that.dishes = response.data;
-								that.totalItems = response.total;
-								that.currentPage = response.current_page;
-								_locateDishes();
-							}, function (response) {
-								// TODO handle error state
-								devHelper.log(response, 'error');
-								genericService.showToast(response.data.message);
-							});
+							_searchDish();
+						}, function(error) {
+							switch(error.code) {
+								case error.PERMISSION_DENIED:
+									devHelper.log("User denied the request for Geolocation.", 'error');
+									break;
+								case error.POSITION_UNAVAILABLE:
+									devHelper.log("Location information is unavailable.", 'error');
+									break;
+								case error.TIMEOUT:
+									devHelper.log("The request to get user location timed out.", 'error');
+									break;
+								case error.UNKNOWN_ERROR:
+									devHelper.log("An unknown error occurred.", 'error');
+									break;
+							}
+							_searchDish();
 						});
 				}
 				else {
 					devHelper.log("navigator.geolocation is not available", 'error');
-					SearchAPI.dish(that.options).then(function (response) {
-						devHelper.log(response);
-						that.dishes = response.data;
-						that.totalItems = response.total;
-						that.currentPage = response.current_page;
-						_locateDishes();
-					}, function (response) {
-						// TODO handle error state
-						devHelper.log(response, 'error');
-						genericService.showToast(response.data.message);
-					});
+					_searchDish();
 				}
+			}
+
+			function _searchDish() {
+				SearchAPI.dish(that.options).then(function (response) {
+					devHelper.log(response);
+					that.dishes = response.data;
+					that.totalItems = response.total;
+					that.currentPage = response.current_page;
+					_locateDishes();
+				}, function (response) {
+					// TODO handle error state
+					devHelper.log(response, 'error');
+					genericService.showToast(response.data.message);
+				});
 			}
 
 			function _initGmap() {
@@ -134,6 +146,7 @@ angular.module('dish.list', [
 						}
 					}
 				);
+				that.mapInited = true;
 			}
 
 			function _locateDishes() {

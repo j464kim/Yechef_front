@@ -24,7 +24,6 @@ angular.module('ngCart.directives', [
 
 				ngCart.setTaxRate(7.5);
 				// ngCart.setShipping(2.99);
-				$scope.isCartReady = true;
 			}
 
 			/*********************
@@ -41,6 +40,7 @@ angular.module('ngCart.directives', [
 				} else {
 					devHelper.log('You do not have a cart yet');
 					ngCart.init();
+					$scope.isCartReady = true;
 				}
 			}
 
@@ -66,6 +66,7 @@ angular.module('ngCart.directives', [
 						devHelper.log(ngCart.getCart());
 						ngCart.setTaxRate(7.5);
 						that.carts = ngCart.getCart();
+						$scope.isCartReady = true;
 
 					}, function (response) {
 						// TODO handle error state
@@ -93,6 +94,7 @@ angular.module('ngCart.directives', [
 					}
 					that.carts = ngCart.getCart();
 					ngCart.$save();
+					$scope.isCartReady = true;
 				}
 
 			};

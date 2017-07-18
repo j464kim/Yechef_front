@@ -8,7 +8,7 @@ angular.module('kitchen.api', [
 		function ($resource, config) {
 			var apiEndpoint = config.endpoint + 'kitchens/';
 
-			return $resource(apiEndpoint + ':id', {id: '@id'}, {
+			return $resource(apiEndpoint + ':id', {id: '@id', orderId: '@orderId'}, {
 				list: {
 					method: 'GET'
 				},
@@ -27,6 +27,14 @@ angular.module('kitchen.api', [
 				checkOwnership: {
 					method: 'POST',
 					url: apiEndpoint + 'checkOwnership',
+				},
+				acceptOrder: {
+					method: 'GET',
+					url: apiEndpoint + ':id' + '/acceptOrder/' + ':orderId',
+				},
+				declineOrder: {
+					method: 'GET',
+					url: apiEndpoint + ':id' + '/declineOrder/' + ':orderId',
 				}
 			});
 		}
@@ -206,6 +214,36 @@ angular.module('kitchen.api', [
 				});
 			}
 
+			function acceptOrder(kitchenId, orderId) {
+				return $q(function (resolve, reject) {
+					KitchenResource.acceptOrder(
+						{
+							id: kitchenId,
+							orderId: orderId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			};
+
+			function declineOrder(kitchenId, orderId) {
+				return $q(function (resolve, reject) {
+					KitchenResource.declineOrder(
+						{
+							id: kitchenId,
+							orderId: orderId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
@@ -219,6 +257,8 @@ angular.module('kitchen.api', [
 				getSubscribers: getSubscribers,
 				checkOwnership: checkOwnership,
 				getOrders: getOrders,
+				acceptOrder: acceptOrder,
+				declineOrder: declineOrder,
 			};
 		}
 	]);

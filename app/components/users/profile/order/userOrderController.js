@@ -34,12 +34,22 @@ angular.module('user.profile.order', [
 						// TODO handle error state ie. front end display
 						console.error(response);
 					});
-			};
+			}
+
+			function _cancelOrder(orderId) {
+				UserAPI.cancelOrder(orderId).then(
+					function (response) {
+						devHelper.log(response);
+					}, function (response) {
+						// TODO handle error state ie. front end display
+						console.error(response);
+					});
+			}
 
 			/*********************
 			 *  Public Functions
 			 **********************/
-
+			this.cancelOrder = _cancelOrder;
 
 			/*********************
 			 *  Initialization

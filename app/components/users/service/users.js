@@ -16,6 +16,10 @@ angular.module('user.api', [])
 				update: {
 					method: 'PUT'
 				},
+				cancelOrder: {
+					method: 'GET',
+					url: api_endpoint + '/cancelOrder/' + ':orderId',
+				}
 			});
 		}
 	])
@@ -75,11 +79,26 @@ angular.module('user.api', [])
 				});
 			};
 
+			function cancelOrder(orderId) {
+				return $q(function (resolve, reject) {
+					UserResource.cancelOrder(
+						{
+							orderId: orderId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
 				update: update,
 				getMyKitchens: getMyKitchens,
+				cancelOrder: cancelOrder,
 			};
 		}
 	]);

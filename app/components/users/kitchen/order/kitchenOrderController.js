@@ -12,7 +12,7 @@ angular.module('user.kitchen.order', [
 			 **********************/
 				// reference to this controller
 
-			var that = this
+			var that = this;
 			var kitchenId = $stateParams.myCurrentKitchenId;
 			/*********************
 			 *  Public Variables
@@ -37,11 +37,31 @@ angular.module('user.kitchen.order', [
 					});
 			};
 
+			function _acceptOrder(orderId) {
+				KitchenAPI.acceptOrder(kitchenId, orderId).then(
+					function (response) {
+						devHelper.log(response);
+					}, function (response) {
+						// TODO handle error state ie. front end display
+						console.error(response);
+					});
+			}
+
+			function _declineOrder(orderId) {
+				KitchenAPI.declineOrder(kitchenId, orderId).then(
+					function (response) {
+						devHelper.log(response);
+					}, function (response) {
+						// TODO handle error state ie. front end display
+						console.error(response);
+					});
+			}
 
 			/*********************
 			 *  Public Functions
 			 **********************/
-
+			this.acceptOrder = _acceptOrder;
+			this.declineOrder = _declineOrder;
 
 			/*********************
 			 *  Initialization

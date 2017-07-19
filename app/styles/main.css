@@ -2583,6 +2583,12 @@ md-toast.md-top.md-center {
 #map-kitchen-show {
   height: 34em;
 }
+.gm-style-iw + div {
+  display: none;
+}
+.gm-style-iw {
+  text-align: center;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

@@ -92,6 +92,8 @@ angular.module('map.api', [
 							width: 0
 						}
 					},
+					templateUrl: 'shared/google-map/googleMapWindow.html',
+					templateParameter: {}
 				};
 				return window;
 			}

@@ -1,0 +1,22 @@
+<div>
+    <div ng-if="parameter.style == 'complex'">
+        <div class='row'>
+            <div class='col-sm-12'><img src="{{parameter.dish.medias[0].url}}" width='140' height='93.33'></div>
+            <br/>
+            <a ui-sref="dish.show({id: {{parameter.dish.id}}})">
+                <div class='col-sm-12'>
+                    <div class='pull-left'>
+                        {{parameter.dish.name}}
+                    </div>
+                    <div class='pull-right'><br/>$ {{:: parameter.dish.price}}
+                    </div>
+                    <br/><i class='fa fa-star'></i> {{:: parameter.dish.total_rating.toFixed(1)}}
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div ng-if="parameter.style == 'simple'">
+        $ {{parameter.dish.price}}
+    </div>
+</div>

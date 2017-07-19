@@ -108,7 +108,10 @@ angular.module('dish.list', [
 					click: function (marker, eventName, model) {
 						that.window.model = model;
 						var dish = _findDishById(model.id);
-						that.window.options.content = "<img src=" + dish.medias[0].url + " width='280' height='186.66' > <br/>" + dish.name + "<br/>" + dish.price;
+						that.window.templateParameter = {
+							dish: dish,
+							style: 'complex',
+						};
 						that.window.show = true;
 						that.searchEnabled = false;
 					}
@@ -243,7 +246,10 @@ angular.module('dish.list', [
 				that.searchEnabled = false;
 				marker.options.zIndex = null;
 				marker.options.icon = 'images/google_map_icon_active.png';
-				that.window.options.content = '$ ' + dish.price;
+				that.window.templateParameter = {
+					dish: dish,
+					style: 'simple',
+				};
 				that.window.model = marker;
 				that.window.show = true;
 			};

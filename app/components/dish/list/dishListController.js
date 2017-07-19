@@ -27,6 +27,7 @@ angular.module('dish.list', [
 			this.dishMapMarkers = [];
 			this.dishMapMarkerControl = {};
 			this.mapInited = false;
+			this.searchEnabled = true;
 
 			/*********************
 			 *    Private Functions
@@ -60,8 +61,8 @@ angular.module('dish.list', [
 							that.circle.center.latitude = position.coords.latitude;
 							that.circle.center.longitude = position.coords.longitude;
 							_searchDish();
-						}, function(error) {
-							switch(error.code) {
+						}, function (error) {
+							switch (error.code) {
 								case error.PERMISSION_DENIED:
 									devHelper.log("User denied the request for Geolocation.", 'error');
 									break;
@@ -107,8 +108,9 @@ angular.module('dish.list', [
 					click: function (marker, eventName, model) {
 						that.window.model = model;
 						var dish = _findDishById(model.id);
-						that.window.options.content = dish.name + "<br/>" + dish.price;
+						that.window.options.content = "<img src=" + dish.medias[0].url + " width='280' height='186.66' > <br/>" + dish.name + "<br/>" + dish.price;
 						that.window.show = true;
+						that.searchEnabled = false;
 					}
 				};
 
@@ -121,7 +123,10 @@ angular.module('dish.list', [
 						that.options.SW_lat = map.getBounds().getSouthWest().lat();
 						that.options.NE_lng = map.getBounds().getNorthEast().lng();
 						that.options.SW_lng = map.getBounds().getSouthWest().lng();
-						_getDishes();
+
+						if (_isMapSearchEnabled(that.options.NE_lat, that.options.NE_lng)) {
+							_getDishes();
+						}
 						that.mapCtrl.refresh();
 					},
 					click: function (map, eventName, originalEventArgs) {
@@ -129,6 +134,7 @@ angular.module('dish.list', [
 						for (var i = 0; i < windows.length; i++) {
 							windows[i].hideWindow()
 						}
+						that.searchEnabled = true;
 					}
 				};
 
@@ -147,6 +153,33 @@ angular.module('dish.list', [
 					}
 				);
 				that.mapInited = true;
+			}
+
+			// Update the map search result if the map's center is moved enough
+			function _isMapSearchEnabled(newNELat, newNELng) {
+				if (!that.searchEnabled) {
+					return false;
+				}
+				if (!that.oldNELat && !that.oldNELng) {
+					that.oldNELat = newNELat;
+					that.oldNELng = newNELng;
+					return true;
+				} else if (that.oldNELat && that.oldNELng) {
+					var latDiff = Math.abs(newNELat - that.oldNELat);
+					var lngDiff = Math.abs(newNELng - that.oldNELng);
+					if (latDiff > 0.007 || lngDiff > 0.007) {
+						devHelper.log('User moved the map enough distance to refresh search');
+						that.oldNELat = newNELat;
+						that.oldNELng = newNELng;
+						return true;
+					} else {
+						devHelper.log('Map not moved enough distance to refresh search');
+						return false;
+					}
+				} else {
+					devHelper.log('Something is wrong with setting up boundary values in GMaps', 'error');
+					return false;
+				}
 			}
 
 			function _locateDishes() {
@@ -207,6 +240,7 @@ angular.module('dish.list', [
 
 			this.dishMouseEnter = function (dish) {
 				var marker = _findDishMarker(dish);
+				that.searchEnabled = false;
 				marker.options.zIndex = null;
 				marker.options.icon = 'images/google_map_icon_active.png';
 				that.window.options.content = '$ ' + dish.price;
@@ -216,6 +250,7 @@ angular.module('dish.list', [
 
 			this.dishMouseLeave = function (dish) {
 				var marker = _findDishMarker(dish);
+				that.searchEnabled = true;
 				marker.options.zIndex = marker.latitude;
 				marker.options.icon = 'images/google_map_icon.png';
 				that.window.show = false;
@@ -230,4 +265,5 @@ angular.module('dish.list', [
 			 *    EVENTS
 			 **********************/
 		}
+
 	])

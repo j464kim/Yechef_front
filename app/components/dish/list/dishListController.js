@@ -107,6 +107,7 @@ angular.module('dish.list', [
 				that.markersEvents = {
 					click: function (marker, eventName, model) {
 						that.window.model = model;
+						that.window.ctrl.showWindow();
 						var dish = _findDishById(model.id);
 						that.window.templateParameter = {
 							dish: dish,
@@ -133,10 +134,8 @@ angular.module('dish.list', [
 						that.mapCtrl.refresh();
 					},
 					click: function (map, eventName, originalEventArgs) {
-						var windows = that.window.ctrl.getChildWindows();
-						for (var i = 0; i < windows.length; i++) {
-							windows[i].hideWindow()
-						}
+						that.window.ctrl.hideWindow();
+						that.window.show = false;
 						that.searchEnabled = true;
 					}
 				};

@@ -4,15 +4,7 @@
 <div class="row" id="kitchenList">
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
     <div class="col-md-4" ng-repeat="kitchen in usCtrl.subscribedKitchens" loader>
-        <md-card>
-            <img class="md-user-avatar" ui-sref="kitchen.show({id: kitchen.id})" ng-src="{{kitchen.medias[0].url}}">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-subhead">{{kitchen.name}}</span>
-                    <span class="md-subhead">{{kitchen.phone}}</span>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
+        <kitchen-card kitchen="kitchen"></kitchen-card>
     </div>
 </div>
 

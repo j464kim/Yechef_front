@@ -17,6 +17,8 @@ angular
 		'ngMaterialDatePicker',
 		'directive.loader',
 		'angular-loading-bar',
+		'directive.card.dish',
+		'directive.card.kitchen',
 
 		// libraries
 		'ui.router',

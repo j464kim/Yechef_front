@@ -50,16 +50,7 @@
             <div class="row">
                 <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
                 <div class="col-md-4" ng-repeat="kitchen in UserShowCtrl.kitchens" loader>
-                    <md-card>
-                        <img class="md-user-avatar" ui-sref="kitchen.show({id: kitchen.id})"
-                             ng-src="{{kitchen.medias[0].url}}">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-subhead">{{kitchen.name}}</span>
-                                <span class="md-subhead">{{kitchen.phone}}</span>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </md-card>
+                    <kitchen-card kitchen="kitchen"></kitchen-card>
                 </div>
             </div>
             <div class="row" ng-if="UserShowCtrl.kitchensLoadButton">
@@ -84,16 +75,7 @@
             <div class="row">
                 <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
                 <div class="col-md-3" ng-repeat="dish in UserShowCtrl.forkedDishes" loader>
-                    <md-card>
-                        <img class="md-user-avatar" ui-sref="dish.show({id: dish.id})"
-                             ng-src="{{dish.medias[0].url}}">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-subhead">{{dish.name}}</span>
-                                <span class="md-subhead">{{dish.price}}</span>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </md-card>
+                    <dish-card dish="dish"></dish-card>
                 </div>
             </div>
             <div class="row" ng-if="UserShowCtrl.forkedDishesLoadButton">
@@ -118,16 +100,7 @@
             <div class="row">
                 <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
                 <div class="col-md-4" ng-repeat="kitchen in UserShowCtrl.subscribedKitchens" loader>
-                    <md-card>
-                        <img class="md-user-avatar" ui-sref="kitchen.show({id: kitchen.id})"
-                             ng-src="{{kitchen.medias[0].url}}">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-subhead">{{kitchen.name}}</span>
-                                <span class="md-subhead">{{kitchen.phone}}</span>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </md-card>
+                    <kitchen-card kitchen="kitchen"></kitchen-card>
                 </div>
             </div>
             <div class="row" ng-if="UserShowCtrl.subscribedKitchensLoadButton">

@@ -2523,12 +2523,18 @@ body {
 .dish-show-left {
   padding-right: 1.5em;
 }
+.dish-show-right-wrapper {
+  overflow-y: hidden;
+}
 .dish-show-right {
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-left: 1.5em;
   padding-right: 1.5em;
   width: 350px;
   height: 90%;
+}
+.dish-show-right::-webkit-scrollbar {
+  display: none;
 }
 .margin-bottom-1em {
   margin-bottom: 1em;
@@ -2636,9 +2642,6 @@ md-toast.md-top.md-center {
   background-color: #FAFAFA;
   border-color: #EEA5C5;
   color: #333;
-}
-::-webkit-scrollbar {
-  display: none;
 }
 #map-dish-list {
   position: fixed;

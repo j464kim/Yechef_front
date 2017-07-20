@@ -51,12 +51,12 @@
 
         </md-sidenav>
 
-        <md-content flex layout-padding style="background-color: white">
+        <md-content flex layout-padding layout="row">
 
             <div layout="column" layout-align="top center">
 
                 <!--Main Content-->
-                <div ui-view ng-if="UkCtrl.myCurrentKitchen"></div>
+                <div flex layout-fill ui-view ng-if="UkCtrl.myCurrentKitchen"></div>
 
                 <div>
                     <md-button ng-click="toggleLeft()"

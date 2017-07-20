@@ -7,7 +7,8 @@ angular.module('profile', [
 	'user.profile.subscribe',
 	'user.profile.fork',
 	'user.profile.order',
-	'user.profile.payment'
+	'user.profile.payment',
+	'user.profile.payment.create',
 ])
 
 	.config(function ($stateProvider) {
@@ -62,13 +63,13 @@ angular.module('profile', [
 			})
 			.state('user.profile.payment.list', {
 				url: '/list',
-				templateUrl: 'components/users/profile/payment/userPaymentList.html',
-				controller: 'UserPaymentController as upCtrl',
+				templateUrl: 'components/users/profile/payment/list/userPaymentList.html',
+				controller: 'PaymentListController as plCtrl',
 			})
 			.state('user.profile.payment.create', {
 				url: '/create',
-				templateUrl: 'components/users/profile/payment/userPaymentCreate.html',
-				controller: 'CheckoutController as coCtrl',
+				templateUrl: 'components/users/profile/payment/create/userPaymentCreate.html',
+				controller: 'PaymentCreateController as pcCtrl',
 			})
 			.state('user.profile.payment.edit', {
 				url: '/edit',

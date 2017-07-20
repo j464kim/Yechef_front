@@ -4,7 +4,7 @@ angular.module('user.profile.payment', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserPaymentController', ['$stateParams', '$state', 'CheckoutAPI', 'devHelper', '$scope',
+	.controller('PaymentListController', ['$stateParams', '$state', 'CheckoutAPI', 'devHelper', '$scope',
 		function ($stateParams, $state, CheckoutAPI, devHelper, $scope) {
 
 			/*********************
@@ -28,8 +28,6 @@ angular.module('user.profile.payment', [
 			function _getPayment() {
 				CheckoutAPI.list().then(
 					function (response) {
-						console.log('get paymnet');
-						console.log(response);
 						devHelper.log(response);
 						that.customer = response;
 					}, function (response) {
@@ -42,6 +40,7 @@ angular.module('user.profile.payment', [
 				CheckoutAPI.removeCard(cardId).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Card has been deleted successfully');
+					$state.reload();
 				}, function (response) {
 					// TODO handle error state-*/ ˙
 					console.error(response);

@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('checkout.billing', [
-	'checkout.api',
+angular.module('user.profile.payment.create', [
+	'user.api', 'ngMaterial'
 ])
 
-	.controller('CheckoutController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper', 'config', '$rootScope', '$q',
-		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper, config, $rootScope, $q) {
+	.controller('PaymentCreateController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper',
+		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper) {
 
 			/*********************
 			 *  Private Variables
@@ -15,26 +15,10 @@ angular.module('checkout.billing', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
-			var amount = $stateParams.amount;
-			var kitchenId = $stateParams.kitchenId;
-			var stripeAmount = Math.round(amount * 100);
 
 			/*********************
 			 *  Private Functions
 			 **********************/
-
-			function _chargePayment() {
-				CheckoutService.tokenize(that.credit.number, that.credit.cvc, that.credit.exp_month, that.credit.exp_year)
-					.then(function (response) {
-						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
-							devHelper.log(response);
-							devHelper.log('Authorization hold successful');
-						}, function (response) {
-							// TODO handle error state-*/ ˙
-							console.error(response);
-						})
-					})
-			}
 
 			function _addCard() {
 				CheckoutService.tokenize(that.credit.number, that.credit.cvc, that.credit.exp_month, that.credit.exp_year)
@@ -53,7 +37,6 @@ angular.module('checkout.billing', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.chargePayment = _chargePayment;
 			this.addCard = _addCard;
 
 			/*********************
@@ -65,6 +48,4 @@ angular.module('checkout.billing', [
 			 **********************/
 
 		}
-
-	])
-;
+	]);

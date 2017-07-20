@@ -57,9 +57,9 @@ angular.module('checkout.billing', [
 
 			function _addCard() {
 				_tokenize().then(function (response) {
-					CheckoutAPI.addCard(response.id).then(function (response) {
+					CheckoutAPI.create(response.id).then(function (response) {
 						devHelper.log(response);
-						devHelper.log('Card added successfully');
+						devHelper.log('Card has been added successfully');
 					}, function (response) {
 						// TODO handle error state-*/ ˙
 						console.error(response);

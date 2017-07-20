@@ -7,12 +7,12 @@
 <div>
     <md-list flex>
         <md-subheader class="md-no-sticky">{{upCtrl.customer.sources.data.length}} Payment Method</md-subheader>
-        <md-list-item ui-sref="user.profile.payment.edit" class="md-3-line" ng-repeat="card in upCtrl.customer.sources.data" ng-click="null">
+        <md-list-item class="md-3-line" ng-repeat="card in upCtrl.customer.sources.data">
             <div class="md-list-item-text" layout="column">
                 <span>
                     {{ card.brand }} / {{ card.funding }}
-                    <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                    <a ui-sref="user.profile.payment.edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a ng-click="upCtrl.removeCard(card.id)"><i class="fa fa-times" aria-hidden="true"></i></a>
                 </span>
 
                 <h4>xxxx - xxxx - xxxx - {{ card.last4 }}</h4>

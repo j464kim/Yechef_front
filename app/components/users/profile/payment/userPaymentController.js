@@ -38,10 +38,20 @@ angular.module('user.profile.payment', [
 					});
 			}
 
+			function _removeCard(cardId) {
+				CheckoutAPI.removeCard(cardId).then(function (response) {
+					devHelper.log(response);
+					devHelper.log('Card has been deleted successfully');
+				}, function (response) {
+					// TODO handle error state-*/ ˙
+					console.error(response);
+				})
+			}
+
 			/*********************
 			 *  Public Functions
 			 **********************/
-
+			this.removeCard = _removeCard;
 
 			/*********************
 			 *  Initialization

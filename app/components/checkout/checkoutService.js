@@ -72,10 +72,25 @@ angular.module('checkout.api', [
 				});
 			}
 
+			function removeCard(cardId) {
+				return $q(function (resolve, reject) {
+					CheckoutResource.destroy(
+						{
+							id: cardId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				charge: charge,
 				addCard: addCard,
 				list: list,
+				removeCard: removeCard,
 			};
 		}
 	]);

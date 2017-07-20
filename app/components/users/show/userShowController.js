@@ -50,21 +50,8 @@ angular.module('user.show', [
 			function _showUser() {
 				UserAPI.show(that.userId).then(function (response) {
 					that.user = response;
-					that.user.medias = [{id: 1, url: 'http://data.whicdn.com/images/61121884/large.gif'},
-						{
-							id: 2,
-							url: 'http://vignette2.wikia.nocookie.net/onepiece/images/e/e6/Tony_Tony_Chopper_Anime_Pre_Timeskip_Infobox.png/revision/latest?cb=20160207143020'
-						},
-						{
-							id: 3,
-							url: 'http://www.wtfgamersonly.com/wp-content/uploads/2015/12/Tony-Tony-Chopper-cute-dance.gif'
-						}];
 					devHelper.log(that.user);
 					that.user.joinedIn = new Date(that.user.created_at).toDateString().split(' ');
-
-					//TODO: user media to be ready soon
-					// that.media = response.medias[0].url;
-
 				}, function (response) {
 					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
@@ -82,10 +69,6 @@ angular.module('user.show', [
 						that.kitchensLoadButton = false;
 					}
 					devHelper.log(that.kitchens);
-
-					//TODO: user media to be ready soon
-					// that.media = response.medias[0].url;
-
 				}, function (response) {
 					devHelper.log(response, 'error');
 				});
@@ -103,10 +86,6 @@ angular.module('user.show', [
 						that.forkedDishesLoadButton = false;
 					}
 					devHelper.log(that.forkedDishes);
-
-					//TODO: user media to be ready soon
-					// that.media = response.medias[0].url;
-
 				}, function (response) {
 					devHelper.log(response, 'error');
 				});
@@ -124,10 +103,6 @@ angular.module('user.show', [
 						that.subscribedKitchensLoadButton = false;
 					}
 					devHelper.log(that.subscribedKitchens);
-
-					//TODO: user media to be ready soon
-					// that.media = response.medias[0].url;
-
 				}, function (response) {
 					devHelper.log(response, 'error');
 				});

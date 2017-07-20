@@ -91,11 +91,7 @@
         <h2>Dishes</h2>
         <div class="row">
             <div class="col-md-3" ng-repeat="dish in KitchenCtrl.dishes" loader>
-                <a ui-sref="dish.show({id: dish.id})">
-                    <img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
-                    <h4 class="card-title">{{dish.name}}</h4>
-                    <p class="card-text">{{dish.price}}</p>
-                </a>
+                <dish-card dish="dish"></dish-card>
             </div>
         </div>
     </div>

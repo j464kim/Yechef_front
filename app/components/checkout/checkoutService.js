@@ -4,26 +4,27 @@ angular.module('checkout.api', [
 	'configuration'
 ])
 
-	.service('CheckoutResource', ['$resource', 'config', '$http',
-		function ($resource, config, $http) {
-			var apiEndpoint = config.endpoint;
+	.factory('CheckoutResource', ['$resource', 'config',
+		function ($resource, config) {
+			var api_endpoint = config.endpoint + 'users/payment/';
 
-			function charge(token, amount, currency, kitchenId) {
-				return $http({
-					method: 'POST',
-					url: apiEndpoint + 'charge-payment',
-					params: {
-						token: token,
-						amount: amount,
-						currency: currency,
-						kitchenId: kitchenId,
-					}
-				});
-			}
-
-			return {
-				charge: charge,
-			}
+			return $resource(api_endpoint + ':id', {id: '@id'}, {
+				list: {
+					method: 'GET'
+				},
+				show: {
+					method: 'GET'
+				},
+				create: {
+					method: 'POST'
+				},
+				update: {
+					method: 'PUT'
+				},
+				destroy: {
+					method: 'DELETE'
+				},
+			});
 		}
 	])
 
@@ -32,7 +33,38 @@ angular.module('checkout.api', [
 
 			function charge(token, amount, currency, kitchenId) {
 				return $q(function (resolve, reject) {
-					CheckoutResource.charge(token, amount, currency, kitchenId).then(function (response) {
+					CheckoutResource.charge(
+						{
+							token: token,
+							amount: amount,
+							currency: currency,
+							kitchenId: kitchenId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function addCard(token) {
+				return $q(function (resolve, reject) {
+					CheckoutResource.create(
+						{
+							token: token
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function list() {
+				return $q(function (resolve, reject) {
+					CheckoutResource.list().$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -42,6 +74,8 @@ angular.module('checkout.api', [
 
 			return {
 				charge: charge,
+				addCard: addCard,
+				list: list,
 			};
 		}
 	]);

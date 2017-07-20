@@ -4,8 +4,8 @@ angular.module('checkout.billing', [
 	'checkout.api',
 ])
 
-	.controller('CheckoutController', ['$stateParams', 'CheckoutAPI', 'devHelper', 'config', '$rootScope',
-		function ($stateParams, CheckoutAPI, devHelper, config, $rootScope) {
+	.controller('CheckoutController', ['$stateParams', 'CheckoutAPI', 'devHelper', 'config', '$rootScope', '$q',
+		function ($stateParams, CheckoutAPI, devHelper, config, $rootScope, $q) {
 
 			/*********************
 			 *  Private Variables
@@ -29,32 +29,49 @@ angular.module('checkout.billing', [
 			 **********************/
 
 			function _tokenize() {
-
+				var deferred = $q.defer();
 				Stripe.card.createToken(
 					{
 						number: that.credit.number,
 						cvc: that.credit.cvc,
 						exp_month: that.credit.exp_month,
 						exp_year: that.credit.exp_year
-					},
-					_chargePayment
+					}, function (status, response) {
+						deferred.resolve(response);
+					}
 				);
+				return deferred.promise;
 			}
 
-			function _chargePayment(status, response) {
-				CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
-					devHelper.log(response);
-					devHelper.log('Authorization hold successful');
-				}, function (response) {
-					// TODO handle error state
-					console.error(response);
-				});
+			function _chargePayment() {
+				_tokenize().then(function (response) {
+					CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
+						devHelper.log(response);
+						devHelper.log('Authorization hold successful');
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						console.error(response);
+					})
+				})
+			}
+
+			function _addCard() {
+				_tokenize().then(function (response) {
+					CheckoutAPI.addCard(response.id).then(function (response) {
+						devHelper.log(response);
+						devHelper.log('Card added successfully');
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						console.error(response);
+					})
+				})
 			}
 
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.tokenize = _tokenize;
+			this.chargePayment = _chargePayment;
+			this.addCard = _addCard;
 
 			/*********************
 			 *  Initialization
@@ -65,4 +82,6 @@ angular.module('checkout.billing', [
 			 **********************/
 
 		}
-	]);
+
+	])
+;

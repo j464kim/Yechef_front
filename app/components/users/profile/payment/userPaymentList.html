@@ -6,16 +6,16 @@
 </h3>
 <div>
     <md-list flex>
-        <md-subheader class="md-no-sticky">3 Credit Card Information</md-subheader>
-        <md-list-item ui-sref="user.profile.payment.edit" class="md-3-line" ng-repeat="card in paymentCards" ng-click="null">
+        <md-subheader class="md-no-sticky">{{upCtrl.customer.sources.data.length}} Payment Method</md-subheader>
+        <md-list-item ui-sref="user.profile.payment.edit" class="md-3-line" ng-repeat="card in upCtrl.customer.sources.data" ng-click="null">
             <div class="md-list-item-text" layout="column">
                 <span>
-                    {{ card.type }}
+                    {{ card.brand }} / {{ card.funding }}
                     <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     <a><i class="fa fa-times" aria-hidden="true"></i></a>
                 </span>
 
-                <h4>{{ card.number }}</h4>
+                <h4>xxxx - xxxx - xxxx - {{ card.last4 }}</h4>
             </div>
         </md-list-item>
     </md-list>

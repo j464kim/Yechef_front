@@ -24,7 +24,7 @@ angular.module('checkout.billing', [
 			 **********************/
 
 			function _chargePayment() {
-				CheckoutService.tokenize(that.credit.number, that.credit.cvc, that.credit.exp_month, that.credit.exp_year)
+				CheckoutService.tokenize(that.card)
 					.then(function (response) {
 						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
 							devHelper.log(response);

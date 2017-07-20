@@ -26,7 +26,7 @@ angular.module('user.profile.payment', [
 			}
 
 			function _getPayment() {
-				CheckoutAPI.list().then(
+				CheckoutAPI.getCards().then(
 					function (response) {
 						devHelper.log(response);
 						that.customer = response;

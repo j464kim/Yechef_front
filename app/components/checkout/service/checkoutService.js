@@ -6,14 +6,14 @@ angular.module('checkout.billing')
 			// Create a Stripe client
 			Stripe.setPublishableKey('pk_test_RZjSNtHLydLfeylIF2BkP6s5');
 
-			function tokenize(number, cvc, exp_month, exp_year) {
+			function tokenize(card) {
 				var deferred = $q.defer();
 				Stripe.card.createToken(
 					{
-						number: number,
-						cvc: cvc,
-						exp_month: exp_month,
-						exp_year: exp_year
+						number: card.number,
+						cvc: card.cvc,
+						exp_month: card.exp_month,
+						exp_year: card.exp_year
 					}, function (status, response) {
 						deferred.resolve(response);
 					}

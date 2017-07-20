@@ -6,7 +6,7 @@ angular.module('checkout.api', [
 
 	.factory('CheckoutResource', ['$resource', 'config',
 		function ($resource, config) {
-			var api_endpoint = config.endpoint + 'users/payment/';
+			var api_endpoint = config.endpoint + 'payment/';
 
 			return $resource(api_endpoint + ':id', {id: '@id'}, {
 				list: {
@@ -48,6 +48,30 @@ angular.module('checkout.api', [
 				});
 			}
 
+			function getCards() {
+				return $q(function (resolve, reject) {
+					CheckoutResource.list().$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function showCard(index) {
+				return $q(function (resolve, reject) {
+					CheckoutResource.show(
+						{
+							id: index
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			function addCard(token) {
 				return $q(function (resolve, reject) {
 					CheckoutResource.create(
@@ -62,9 +86,13 @@ angular.module('checkout.api', [
 				});
 			}
 
-			function list() {
+			function updateCard(card, cardId) {
 				return $q(function (resolve, reject) {
-					CheckoutResource.list().$promise.then(function (response) {
+					CheckoutResource.update(
+						{
+							id: cardId
+						}, card
+					).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -88,8 +116,10 @@ angular.module('checkout.api', [
 
 			return {
 				charge: charge,
+				getCards: getCards,
+				showCard: showCard,
 				addCard: addCard,
-				list: list,
+				updateCard: updateCard,
 				removeCard: removeCard,
 			};
 		}

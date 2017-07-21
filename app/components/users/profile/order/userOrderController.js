@@ -40,6 +40,7 @@ angular.module('user.profile.order', [
 				UserAPI.cancelOrder(orderId).then(
 					function (response) {
 						devHelper.log(response);
+						$state.reload();
 					}, function (response) {
 						// TODO handle error state ie. front end display
 						console.error(response);

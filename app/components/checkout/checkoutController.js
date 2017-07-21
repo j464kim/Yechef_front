@@ -29,6 +29,7 @@ angular.module('checkout.billing', [
 						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
 							devHelper.log(response);
 							devHelper.log('Authorization hold successful');
+							$state.go('user.profile.order');
 						}, function (response) {
 							// TODO handle error state-*/ ˙
 							console.error(response);

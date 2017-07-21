@@ -18,7 +18,7 @@ angular.module('user.api', [])
 				},
 				cancelOrder: {
 					method: 'GET',
-					url: api_endpoint + '/cancelOrder/' + ':orderId',
+					url: api_endpoint + 'cancelOrder/' + ':orderId',
 				}
 			});
 		}

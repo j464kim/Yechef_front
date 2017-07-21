@@ -2642,9 +2642,12 @@ md-toast.md-top.md-center {
   background-color: #e7e7e7;
 }
 .panel-default > .panel-heading {
-  background-color: #FAFAFA;
-  border-color: #EEA5C5;
+  background-color: #e7e7e7;
+  border-color: #B53389;
   color: #333;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 md-tabs.md-default-theme md-ink-bar,
 md-tabs md-ink-bar {

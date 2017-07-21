@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('user.profile.payment', [
-	'user.api', 'ngMaterial'
+	'payment.api', 'ngMaterial'
 ])
 
-	.controller('PaymentListController', ['$stateParams', '$state', 'CheckoutAPI', 'devHelper', '$scope',
-		function ($stateParams, $state, CheckoutAPI, devHelper, $scope) {
+	.controller('PaymentListController', ['$stateParams', '$state', 'PaymentAPI', 'devHelper', '$scope',
+		function ($stateParams, $state, PaymentAPI, devHelper, $scope) {
 
 			/*********************
 			 *  Private Variables
@@ -26,7 +26,7 @@ angular.module('user.profile.payment', [
 			}
 
 			function _getPayment() {
-				CheckoutAPI.getCards().then(
+				PaymentAPI.getCards().then(
 					function (response) {
 						devHelper.log(response);
 						that.customer = response;
@@ -37,7 +37,7 @@ angular.module('user.profile.payment', [
 			}
 
 			function _removeCard(cardId) {
-				CheckoutAPI.removeCard(cardId).then(function (response) {
+				PaymentAPI.removeCard(cardId).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Card has been deleted successfully');
 					$state.reload();

@@ -36,25 +36,10 @@ angular.module('checkout.billing', [
 					})
 			}
 
-			function _addCard() {
-				CheckoutService.tokenize(that.credit.number, that.credit.cvc, that.credit.exp_month, that.credit.exp_year)
-					.then(function (response) {
-						CheckoutAPI.addCard(response.id).then(function (response) {
-							devHelper.log(response);
-							devHelper.log('Card has been added successfully');
-							$state.go('user.profile.payment.list');
-						}, function (response) {
-							// TODO handle error state-*/ ˙
-							console.error(response);
-						})
-					})
-			}
-
 			/*********************
 			 *  Public Functions
 			 **********************/
 			this.chargePayment = _chargePayment;
-			this.addCard = _addCard;
 
 			/*********************
 			 *  Initialization

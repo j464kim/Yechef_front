@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('user.profile.payment.update', [
-	'user.api', 'ngMaterial'
+	'payment.api', 'ngMaterial'
 ])
 
-	.controller('PaymentUpdateController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper',
-		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper) {
+	.controller('PaymentUpdateController', ['$stateParams', '$state', 'PaymentAPI', 'CheckoutService', 'devHelper',
+		function ($stateParams, $state, PaymentAPI, CheckoutService, devHelper) {
 
 			/*********************
 			 *  Private Variables
@@ -26,7 +26,7 @@ angular.module('user.profile.payment.update', [
 
 			function _showCard() {
 				console.log(index);
-				CheckoutAPI.showCard(index).then(function (response) {
+				PaymentAPI.showCard(index).then(function (response) {
 					that.cardToUpdate = response;
 					devHelper.log(that.cardToUpdate);
 				}, function (response) {
@@ -37,7 +37,7 @@ angular.module('user.profile.payment.update', [
 
 			function _updateCard() {
 				console.log(that.cardToUpdate.id);
-				CheckoutAPI.updateCard(that.card, that.cardToUpdate.id).then(function (response) {
+				PaymentAPI.updateCard(that.card, that.cardToUpdate.id).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Card has been updated successfully');
 					$state.go('user.profile.payment.list');

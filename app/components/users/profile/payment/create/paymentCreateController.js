@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('user.profile.payment.create', [
-	'user.api', 'ngMaterial'
+	'payment.api', 'ngMaterial'
 ])
 
-	.controller('PaymentCreateController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper',
-		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper) {
+	.controller('PaymentCreateController', ['$stateParams', '$state', 'PaymentAPI', 'CheckoutService', 'devHelper',
+		function ($stateParams, $state, PaymentAPI, CheckoutService, devHelper) {
 
 			/*********************
 			 *  Private Variables
@@ -23,7 +23,7 @@ angular.module('user.profile.payment.create', [
 			function _addCard() {
 				CheckoutService.tokenize(that.card)
 					.then(function (response) {
-						CheckoutAPI.addCard(response.id).then(function (response) {
+						PaymentAPI.addCard(response.id).then(function (response) {
 							devHelper.log(response);
 							devHelper.log('Card has been added successfully');
 							$state.go('user.profile.payment.list');

@@ -29,7 +29,7 @@ angular.module('user.profile.payment.create', [
 							$state.go('user.profile.payment.list');
 						}, function (response) {
 							// TODO handle error state-*/ ˙
-							console.error(response);
+							devHelper.log(response, 'error');
 						})
 					})
 			}

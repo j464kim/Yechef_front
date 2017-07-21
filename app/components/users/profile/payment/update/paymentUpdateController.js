@@ -25,25 +25,23 @@ angular.module('user.profile.payment.update', [
 			}
 
 			function _showCard() {
-				console.log(index);
 				PaymentAPI.showCard(index).then(function (response) {
 					that.cardToUpdate = response;
 					devHelper.log(that.cardToUpdate);
 				}, function (response) {
 					// TODO handle error state-*/ ˙
-					console.error(response);
+					devHelper.log(response, 'error');
 				})
 			}
 
 			function _updateCard() {
-				console.log(that.cardToUpdate.id);
 				PaymentAPI.updateCard(that.card, that.cardToUpdate.id).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Card has been updated successfully');
 					$state.go('user.profile.payment.list');
 				}, function (response) {
 					// TODO handle error state-*/ ˙
-					console.error(response);
+					devHelper.log(response, 'error');
 				})
 
 			}

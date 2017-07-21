@@ -32,7 +32,7 @@ angular.module('user.profile.order', [
 						that.orders = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						devHelper.log(response, 'error')
 					});
 			}
 
@@ -43,7 +43,7 @@ angular.module('user.profile.order', [
 						$state.reload();
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						console.error(response, 'error');
 					});
 			}
 

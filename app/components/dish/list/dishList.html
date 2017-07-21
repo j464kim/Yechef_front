@@ -82,8 +82,8 @@
                 </md-content>
 
                 <div class="row no-gutters">
-                    <div class="col-sm-push-9 col-sm-3">
-                        <md-button class="md-raised md-warn" ng-click="sctrl.searchDish()">Search</md-button>
+                    <div class="col-sm-push-10 col-sm-2">
+                        <md-button class="md-raised md-primary" ng-click="sctrl.searchDish()">Search</md-button>
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-sm-3">
                     <md-slider-container ng-mouseup="sctrl.searchDish()">
-                        <md-slider flex min="0" max="100"
+                        <md-slider class="md-primary" flex min="0" max="100"
                                    ng-model="sctrl.distance"
                                    aria-label="distance"
                                    id="distance-slider">

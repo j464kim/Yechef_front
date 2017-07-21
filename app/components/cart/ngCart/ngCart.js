@@ -20,13 +20,13 @@ angular.module('ngCart', [
 		var that = this;
 
 		this.init = function (storedCart, kitchenId) {
-			console.log('storedCart in json: ');
+			devHelper.log('storedCart in json: ');
 			devHelper.log(storedCart);
 
 			// if there is nothing in storage
 			if (!storedCart) {
 				// on page refresh,
-				console.log('Init on refresh - no cart');
+				devHelper.log('Init on refresh - no cart');
 
 				// kitchenId = 0;
 				this.$cart = {};
@@ -39,12 +39,6 @@ angular.module('ngCart', [
 						items: []
 					}
 				}
-				// this.$cart[kitchenId] = {
-				// 	shipping: null,
-				// 	taxRate: null,
-				// 	tax: null,
-				// 	items: []
-				// }
 			}
 
 			else {
@@ -53,11 +47,11 @@ angular.module('ngCart', [
 
 				if (kitchenId) {
 					// on adding items to cart, assign kitchenId as a key of cart object
-					console.log('Init to add items ' + kitchenId);
+					devHelper.log('Init to add items ' + kitchenId);
 
 					// if cart of the kitchenId not exists yet
 					if (typeof this.$cart[kitchenId] == 'undefined') {
-						console.log('make new cart of kitchen ' + kitchenId);
+						devHelper.log('make new cart of kitchen ' + kitchenId);
 						this.$cart[kitchenId] = {
 							shipping: null,
 							taxRate: null,
@@ -66,13 +60,13 @@ angular.module('ngCart', [
 						}
 						devHelper.log(this.getCart());
 					} else {
-						console.log('already have cart of kitchen ' + kitchenId);
+						devHelper.log('already have cart of kitchen ' + kitchenId);
 						devHelper.log(this.$cart);
 					}
 
 				} else {
 					// on page refresh,
-					console.log('Init on refresh');
+					devHelper.log('Init on refresh');
 
 					this.$cart = {};
 					for (var key in storedCart) {
@@ -93,7 +87,7 @@ angular.module('ngCart', [
 
 		this.initDb = function (dbCart) {
 			// on page refresh,
-			console.log('Init dbCart on refresh');
+			devHelper.log('Init dbCart on refresh');
 
 			this.$cart = {};
 			angular.forEach(dbCart, function (cart) {
@@ -124,7 +118,7 @@ angular.module('ngCart', [
 
 		// this.setShipping = function (shipping) {
 		//
-		// 	console.log('set shipping');
+		// 	devHelper.log('set shipping');
 		// 	for (var key in this.$cart) {
 		// 		this.$cart[key].shipping = shipping;
 		// 	}
@@ -133,7 +127,7 @@ angular.module('ngCart', [
 		// };
 
 		// this.getShipping = function () {
-		// 	console.log('get shipping');
+		// 	devHelper.log('get shipping');
 		//
 		// 	if (this.getCart(kitchenId).items.length == 0) return 0;
 		// 	return this.getCart(kitchenId).shipping;
@@ -149,7 +143,7 @@ angular.module('ngCart', [
 		};
 
 		this.getTaxRate = function () {
-			console.log('get tax rate');
+			devHelper.log('get tax rate');
 			devHelper.log(this.$cart);
 			return this.$cart[Object.keys(this.$cart)[0]].taxRate;
 			// return this.$cart.taxRate
@@ -159,27 +153,33 @@ angular.module('ngCart', [
 			return +parseFloat(((this.getSubTotal(kitchenId) / 100) * this.getCart(kitchenId).taxRate )).toFixed(2);
 		};
 
-		this.setCart = function (cart) {
+		this.setCart = function (cart, kitchenId) {
 
-			devHelper.log('set cart');
-			this.$cart = cart;
-			this.$save();
-			return this.getCart();
+			if (typeof kitchenId == 'undefined') {
+				this.$cart = cart;
+				this.$save();
+				return this.getCart();
+			} else {
+				this.$cart[kitchenId] = cart;
+				this.$save();
+				return this.getCart(kitchenId);
+			}
+
 		};
 
 		this.getCart = function (kitchenId) {
 			if (typeof kitchenId == 'undefined') {
 				// var cart = this.$cart[Object.keys(this.$cart)[0]];
 				// if (cart === 'null') {
-				// 	console.log('cart is null');
+				// 	devHelper.log('cart is null');
 				// 	return null;
 				// }
 				return this.$cart;
-				// console.log('get first object in cart');
+				// devHelper.log('get first object in cart');
 				// devHelper.log(this.$cart[Object.keys(this.$cart)[0]]);
 				// return this.$cart[Object.keys(this.$cart)[0]];
 			} else {
-				// console.log('get cart of ' + kitchenId);
+				// devHelper.log('get cart of ' + kitchenId);
 				// devHelper.log(this.$cart[kitchenId]);
 				return this.$cart[kitchenId];
 			}
@@ -271,12 +271,12 @@ angular.module('ngCart', [
 		// };
 
 		this.$save = function () {
-			console.log('save to storage');
+			devHelper.log('save to storage');
 			return store.set('cart', JSON.stringify(this.getCart()));
 		};
 
 		// this.$remove = function () {
-		// 	console.log('remove storage');
+		// 	devHelper.log('remove storage');
 		// 	return store.set('cart');
 		// };
 

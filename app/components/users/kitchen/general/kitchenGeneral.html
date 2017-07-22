@@ -34,8 +34,7 @@
         </md-content>
     </div>
     <md-list>
-        <md-list-item ng-repeat="person in UkgCtrl.kitchenAdmins" ng-click="goToPerson(person.name, $event)"
-                      class="noright">
+        <md-list-item ng-repeat="person in UkgCtrl.kitchenAdmins">
             <img alt="{{ person.email }}"
                  ng-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk"
                  class="md-avatar"/>

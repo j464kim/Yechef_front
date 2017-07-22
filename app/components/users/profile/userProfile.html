@@ -21,8 +21,8 @@
                     <a ui-sref=".payment.list" class="list-group-item">Payment</a>
 
                 </div>
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
+                <md-button ng-click="close()" class="md-warn md-raised" hide-gt-md>
+                    Close Menu
                 </md-button>
             </md-content>
 
@@ -30,16 +30,18 @@
 
         <md-content flex layout-padding>
 
+            <div layout="row">
+                <md-button ng-click="toggleLeft()"
+                           class="pull-left md-primary md-raised" hide-gt-md>
+                    Show Menu
+                </md-button>
+            </div>
+
             <div layout="column" layout-align="top center">
 
-                <div ui-view></div>
 
-                <div>
-                    <md-button ng-click="toggleLeft()"
-                               class="md-primary" hide-gt-md>
-                        Toggle left
-                    </md-button>
-                </div>
+                <div flex layout-fill ui-view></div>
+
             </div>
 
         </md-content>

@@ -44,26 +44,27 @@
                     <a ui-sref=".subscriber" class="list-group-item">Subscribers</a>
                     <a ui-sref=".payout.view" class="list-group-item">Payout</a>
                 </div>
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
+                <md-button ng-click="close()" class="md-warn md-raised" hide-gt-md>
+                    Close Menu
                 </md-button>
             </md-content>
 
         </md-sidenav>
 
-        <md-content flex layout-padding layout="row">
+        <md-content flex layout-padding>
+
+            <div layout="row">
+                <md-button ng-click="toggleLeft()"
+                           class="pull-left md-primary md-raised" hide-gt-md>
+                    Show Menu
+                </md-button>
+            </div>
 
             <div layout="column" layout-align="top center">
 
                 <!--Main Content-->
                 <div flex layout-fill ui-view ng-if="UkCtrl.myCurrentKitchen"></div>
 
-                <div>
-                    <md-button ng-click="toggleLeft()"
-                               class="md-primary" hide-gt-md>
-                        Toggle left
-                    </md-button>
-                </div>
             </div>
 
         </md-content>

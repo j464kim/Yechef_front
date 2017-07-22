@@ -34,7 +34,7 @@ angular.module('ngCart.directives', [
 					ngCart.$save();
 				});
 
-				if (angular.isObject(store.get('cart')) || $rootScope.currentUser) {
+				if (angular.isObject(store.get('cart')) || !_.isEmpty($rootScope.currentUser)) {
 					that.restore(store.get('cart'));
 
 				} else {
@@ -48,7 +48,7 @@ angular.module('ngCart.directives', [
 
 				// ngCart.$cart.shipping = storedCart.shipping;
 				// ngCart.$cart.tax = storedCart.tax;
-				if ($rootScope.currentUser) {
+				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.list().then(function (response) {
 						devHelper.log('successfully retrieved cart information from db');
 						devHelper.log(response);
@@ -117,7 +117,7 @@ angular.module('ngCart.directives', [
 
 				}
 
-				if ($rootScope.currentUser) {
+				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.update(inCart._id, inCart._quantity).then(function (response) {
 						devHelper.log(response);
 						devHelper.log(inCart._name + ' in cart is successfully updated');
@@ -163,7 +163,7 @@ angular.module('ngCart.directives', [
 					devHelper.log('check if cart is saved to storage');
 					devHelper.log(store.get('cart'));
 
-					if ($rootScope.currentUser) {
+					if (!_.isEmpty($rootScope.currentUser)) {
 						CartAPI.create(id, quantity).then(function (response) {
 							devHelper.log('a new item is successfully added to Cart');
 							devHelper.log(response);
@@ -209,7 +209,7 @@ angular.module('ngCart.directives', [
 					devHelper.log(ngCart.getCart());
 				}
 
-				if ($rootScope.currentUser) {
+				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.destroy(id).then(function (response) {
 						devHelper.log('dish ' + id + ' is successfully removed from cart db');
 						devHelper.log(response);

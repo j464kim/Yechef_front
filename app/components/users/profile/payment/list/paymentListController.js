@@ -4,8 +4,8 @@ angular.module('user.profile.payment', [
 	'payment.api', 'ngMaterial'
 ])
 
-	.controller('PaymentListController', ['$stateParams', '$state', 'PaymentAPI', 'devHelper', '$scope',
-		function ($stateParams, $state, PaymentAPI, devHelper, $scope) {
+	.controller('PaymentListController', ['$stateParams', '$state', 'PaymentAPI', 'devHelper', '$scope', '$rootScope',
+		function ($stateParams, $state, PaymentAPI, devHelper, $scope, $rootScope) {
 
 			/*********************
 			 *  Private Variables
@@ -23,6 +23,8 @@ angular.module('user.profile.payment', [
 
 			function _init() {
 				_getPayment();
+				console.log('current usr');
+				devHelper.log($rootScope.currentUser);
 			}
 
 			function _getPayment() {

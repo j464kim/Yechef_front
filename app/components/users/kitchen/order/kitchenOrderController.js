@@ -33,7 +33,7 @@ angular.module('user.kitchen.order', [
 						that.orders = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			};
 
@@ -43,7 +43,7 @@ angular.module('user.kitchen.order', [
 						devHelper.log(response);
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 
@@ -53,7 +53,7 @@ angular.module('user.kitchen.order', [
 						devHelper.log(response);
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 

@@ -43,7 +43,7 @@ angular.module('user.profile.order', [
 						$state.reload();
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						console.error(response, 'error');
+						devHelper.log(response, 'error');
 					});
 			}
 

@@ -297,14 +297,14 @@ angular.module('ngCart', [
 		item.prototype.setId = function (id) {
 			if (id) this._id = id;
 			else {
-				console.error('An ID must be provided');
+				devHelper.log('An ID must be provided', 'error');
 			}
 		};
 
 		item.prototype.setKitchenId = function (kitchenId) {
 			if (kitchenId) this._kitchenId = kitchenId;
 			else {
-				console.error('KitchenId must be provided');
+				devHelper.log('KitchenId must be provided', 'error');
 			}
 		};
 
@@ -315,7 +315,7 @@ angular.module('ngCart', [
 		item.prototype.setName = function (name) {
 			if (name) this._name = name;
 			else {
-				console.error('A name must be provided');
+				devHelper.log('A name must be provided', 'error');
 			}
 		};
 		item.prototype.getName = function () {
@@ -326,12 +326,12 @@ angular.module('ngCart', [
 			var priceFloat = parseFloat(price);
 			if (priceFloat) {
 				if (priceFloat <= 0) {
-					console.error('A price must be over 0');
+					devHelper.log('A price must be over 0', 'error');
 				} else {
 					this._price = (priceFloat);
 				}
 			} else {
-				console.error('A price must be provided');
+				devHelper.log('A price must be provided', 'error');
 			}
 		};
 

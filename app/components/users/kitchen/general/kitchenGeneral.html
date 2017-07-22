@@ -1,38 +1,42 @@
 <h2>General Info</h2>
 <hr>
 <div class="row">
-    <label class="h3">Owner</label>
-    <!--Manage Kitchen Owners-->
-    <div layout="column" ng-cloak>
-        <md-content layout-padding layout="column">
-            <form ng-submit="$event.preventDefault()">
-                <div layout="row">
-                    <md-autocomplete flex
-                                     md-selected-item="UkgCtrl.adminToAdd"
-                                     md-search-text="UkgCtrl.searchAdminText"
-                                     md-items="item in UkgCtrl.querySearch(UkgCtrl.searchAdminText, UkgCtrl.users)"
-                                     md-item-text="item.email"
-                                     md-min-length="1"
-                                     placeholder="Enter Email"
-                                     md-menu-class="autocomplete-custom-template" ng-cloak>
-                        <md-item-template loader>
+	<div class="col-md-12">
+		<label class="h3">Owner</label>
+	</div>
+	<div class="col-md-12">
+		<!--Manage Kitchen Owners-->
+		<div layout="column" ng-cloak>
+			<md-content layout-padding layout="column">
+				<form ng-submit="$event.preventDefault()">
+					<div layout="row">
+						<md-autocomplete flex
+						                 md-selected-item="UkgCtrl.adminToAdd"
+						                 md-search-text="UkgCtrl.searchAdminText"
+						                 md-items="item in UkgCtrl.querySearch(UkgCtrl.searchAdminText, UkgCtrl.users)"
+						                 md-item-text="item.email"
+						                 md-min-length="1"
+						                 placeholder="Enter Email"
+						                 md-menu-class="autocomplete-custom-template" ng-cloak>
+							<md-item-template loader>
                         <span class="item-title">
                             <span> {{item.email}} </span>
                         </span>
-                            <span class="item-metadata">
+								<span class="item-metadata">
                             <span>
                                 <strong>  ({{item.first_name}} {{item.last_name}})</strong>
                             </span>
                         </span>
-                        </md-item-template>
-                    </md-autocomplete>
-                    <md-button class="md-raised md-primary" id="add-admin"
-                               ng-click="UkgCtrl.addAdmin()">Add
-                    </md-button>
-                </div>
-            </form>
-        </md-content>
-    </div>
+							</md-item-template>
+						</md-autocomplete>
+						<md-button class="md-raised md-primary" id="add-admin"
+						           ng-click="UkgCtrl.addAdmin()">Add
+						</md-button>
+					</div>
+				</form>
+			</md-content>
+		</div>
+	</div>
     <md-list>
         <md-list-item ng-repeat="person in UkgCtrl.kitchenAdmins">
             <img alt="{{ person.email }}"

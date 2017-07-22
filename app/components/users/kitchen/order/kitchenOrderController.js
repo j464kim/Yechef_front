@@ -41,6 +41,7 @@ angular.module('user.kitchen.order', [
 				KitchenAPI.acceptOrder(kitchenId, orderId).then(
 					function (response) {
 						devHelper.log(response);
+						$state.reload();
 					}, function (response) {
 						// TODO handle error state ie. front end display
 						devHelper.log(response, 'error');
@@ -51,6 +52,7 @@ angular.module('user.kitchen.order', [
 				KitchenAPI.declineOrder(kitchenId, orderId).then(
 					function (response) {
 						devHelper.log(response);
+						$state.reload();
 					}, function (response) {
 						// TODO handle error state ie. front end display
 						devHelper.log(response, 'error');

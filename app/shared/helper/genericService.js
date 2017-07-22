@@ -1,6 +1,6 @@
 /* Generic Services */
 angular.module('helper', [])
-	.factory("genericService", function ($q, $timeout, $mdToast, $mdSidenav) {
+	.factory("genericService", function ($q, $timeout, $mdToast, $mdSidenav, devHelper) {
 
 		function createFilterFor(query) {
 			var lowercaseQuery = angular.lowercase(query);

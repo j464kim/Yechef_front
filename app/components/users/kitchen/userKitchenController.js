@@ -23,51 +23,9 @@ angular.module('user.kitchen', [
 		}, function (newVal, oldVal) {
 			that.myCurrentKitchenToEdit = angular.copy(newVal);
 		});
-		$scope.toggleLeft = buildDelayedToggler('left');
-		$scope.toggleRight = buildToggler('right');
-		/**
-		 * Supplies a function that will continue to operate until the
-		 * time is up.
-		 */
-		function debounce(func, wait, context) {
-			var timer;
+		$scope.toggleLeft = genericService.buildToggler('left');
+		$scope.toggleRight = genericService.buildToggler('right');
 
-			return function debounced() {
-				var context = $scope,
-					args = Array.prototype.slice.call(arguments);
-				$timeout.cancel(timer);
-				timer = $timeout(function () {
-					timer = undefined;
-					func.apply(context, args);
-				}, wait || 10);
-			};
-		}
-
-		/**
-		 * Build handler to open/close a SideNav; when animation finishes
-		 * report completion in console
-		 */
-		function buildDelayedToggler(navID) {
-			return debounce(function () {
-				// Component lookup should always be available since we are not using `ng-if`
-				$mdSidenav(navID)
-					.toggle()
-					.then(function () {
-						devHelper.log("toggle " + navID + " is done");
-					});
-			}, 200);
-		}
-
-		function buildToggler(navID) {
-			return function () {
-				// Component lookup should always be available since we are not using `ng-if`
-				$mdSidenav(navID)
-					.toggle()
-					.then(function () {
-						devHelper.log("toggle " + navID + " is done");
-					});
-			};
-		}
 		function _getMyKitchens() {
 			var pageNum = ++that.myKitchensCurrentPage;
 			UserAPI.getMyKitchens(pageNum, 100).then(

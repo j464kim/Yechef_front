@@ -1,10 +1,10 @@
 angular.module('checkout.billing')
 
-	.service('CheckoutService', ['$state', 'devHelper', '$q',
-		function ($state, devHelper, $q) {
+	.service('CheckoutService', ['$state', 'devHelper', '$q', 'config',
+		function ($state, devHelper, $q, config) {
 
 			// Create a Stripe client
-			Stripe.setPublishableKey('pk_test_RZjSNtHLydLfeylIF2BkP6s5');
+			Stripe.setPublishableKey(config.stripePublishableKey);
 
 			function tokenize(card) {
 				var deferred = $q.defer();

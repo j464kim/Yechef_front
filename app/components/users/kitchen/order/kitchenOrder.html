@@ -2,44 +2,44 @@
 <hr>
 
 <div class="container">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Price</th>
-            <th>Kitchen</th>
-            <th>Date & Time</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat-start="order in koCtrl.orders track by $index" style="background-color: ghostwhite">
-            <td>
-                <button ng-click="isCollapsed = !isCollapsed">{{$index+1}}</button>
-            </td>
-            <td>${{order.transaction.amount}}</td>
-            <td>{{order.kitchen.name}}</td>
-            <td>{{order.created_at}}</td>
-            <td>{{order.status}}</td>
-            <td>
-                <div ng-show="order.status == 'pending'">
-                    <button ng-click="koCtrl.acceptOrder(order.id)">Accept</button>
-                    <button ng-click="koCtrl.declineOrder(order.id)">Cancel</button>
-                </div>
-            </td>
-        </tr>
-        <tr ng-repeat-end="">
-            <td></td>
-            <td colspan="6" style="padding: 0">
-                <div uib-collapse="isCollapsed" ng-repeat="item in order.items">
-                    <h4>{{item.dish.name}}</h4>
-                    <p>${{item.dish.price}}</p>
-                    <p>Quantity: {{item.quantity}}</p>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Price</th>
+			<th>Ordered By</th>
+			<th>Date & Time</th>
+			<th>Status</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat-start="order in koCtrl.orders track by $index" style="background-color: ghostwhite">
+			<td>
+				<button ng-click="isCollapsed = !isCollapsed">{{$index+1}}</button>
+			</td>
+			<td>${{order.transaction.amount}}</td>
+			<td>{{order.user_name}}</td>
+			<td>{{order.created_at}}</td>
+			<td>{{order.status}}</td>
+			<td>
+				<div ng-show="order.status == 'pending'">
+					<button ng-click="koCtrl.acceptOrder(order.id)">Accept</button>
+					<button ng-click="koCtrl.declineOrder(order.id)">Cancel</button>
+				</div>
+			</td>
+		</tr>
+		<tr ng-repeat-end="">
+			<td></td>
+			<td colspan="6" style="padding: 0">
+				<div uib-collapse="isCollapsed" ng-repeat="item in order.items">
+					<h4>{{item.dish.name}}</h4>
+					<p>${{item.dish.price}}</p>
+					<p>Quantity: {{item.quantity}}</p>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 

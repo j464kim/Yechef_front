@@ -169,18 +169,8 @@ angular.module('ngCart', [
 
 		this.getCart = function (kitchenId) {
 			if (typeof kitchenId == 'undefined') {
-				// var cart = this.$cart[Object.keys(this.$cart)[0]];
-				// if (cart === 'null') {
-				// 	devHelper.log('cart is null');
-				// 	return null;
-				// }
 				return this.$cart;
-				// devHelper.log('get first object in cart');
-				// devHelper.log(this.$cart[Object.keys(this.$cart)[0]]);
-				// return this.$cart[Object.keys(this.$cart)[0]];
 			} else {
-				// devHelper.log('get cart of ' + kitchenId);
-				// devHelper.log(this.$cart[kitchenId]);
 				return this.$cart[kitchenId];
 			}
 		};

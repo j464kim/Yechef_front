@@ -189,8 +189,7 @@ angular.module('ngCart.directives', [
 						devHelper.log(item._name + ' is successfully removed from cart');
 					}
 				});
-				ngCart.$cart[kitchenId] = cart;
-				ngCart.setCart(ngCart.getCart());
+				ngCart.setCart(cart, kitchenId);
 
 				$rootScope.$broadcast('ngCart:itemRemoved', {});
 				$rootScope.$broadcast('ngCart:change', {});

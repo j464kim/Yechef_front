@@ -17,6 +17,7 @@ angular.module('user.profile.fork', [
 			 *  Public Variables
 			 **********************/
 			this.currentPage = 0;
+			this.lastPage = 0;
 			this.forkedDishes = [];
 			this.totalItems = 0;
 			this.loadButton = true;
@@ -37,9 +38,7 @@ angular.module('user.profile.fork', [
 						that.forkedDishes = that.forkedDishes.concat(response.data);
 						that.totalItems = response.total;
 						that.currentPage = response.current_page;
-						if (response.last_page <= that.currentPage) {
-							that.loadButton = false;
-						}
+						that.lastPage = response.last_page;
 					}, function (response) {
 						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');

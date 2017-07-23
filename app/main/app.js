@@ -19,6 +19,7 @@ angular
 		'angular-loading-bar',
 		'directive.card.dish',
 		'directive.card.kitchen',
+		'directive.button',
 
 		// libraries
 		'ui.router',

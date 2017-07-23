@@ -8,6 +8,6 @@
     </div>
 </div>
 
-<div class="row" layout="column" ng-if="ufCtrl.loadButton">
-    <md-button class="md-raised md-primary" ng-click="ufCtrl.getForkedDishes()">Load More</md-button>
-</div>
+<infinite-load-button last-page="ufCtrl.lastPage"
+                      current-page="ufCtrl.currentPage"
+                      load-function="ufCtrl.getForkedDishes"></infinite-load-button>

@@ -8,6 +8,6 @@
     </div>
 </div>
 
-<div class="row" layout="column" ng-if="usCtrl.loadButton">
-    <md-button class="md-raised md-primary" ng-click="usCtrl.getSubscriptions()">Load More</md-button>
-</div>
+<infinite-load-button last-page="usCtrl.lastPage"
+                      current-page="usCtrl.currentPage"
+                      load-function="usCtrl.getSubscriptions"></infinite-load-button>

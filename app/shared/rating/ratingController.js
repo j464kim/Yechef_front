@@ -16,6 +16,7 @@ angular.module('rating', [
 			 **********************/
 			this.totalItems = 0;
 			this.currentPage = 0;
+			this.lastPage = 0;
 			this.ratings = [];
 			this.avg = [];
 			this.readonly = true;
@@ -44,9 +45,7 @@ angular.module('rating', [
 						that.ratings = that.ratings.concat(response.data);
 						that.totalItems = response.total;
 						that.currentPage = response.current_page;
-						if (response.last_page <= that.currentPage) {
-							that.loadButton = false;
-						}
+						that.lastPage = response.last_page;
 					}, function (response) {
 						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');

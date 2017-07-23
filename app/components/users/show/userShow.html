@@ -11,17 +11,17 @@
 			<a class="btn-link" href="" ng-click=""><i class="md-warn fa fa-frown-o" aria-hidden="true"></i> Report this
 				User</a>
 		</div>
-		<div class="col-md-6">
-			<h1 class="text-center">{{UserShowCtrl.user.first_name}} {{UserShowCtrl.user.last_name}}</h1>
-			<h3 class="text-center">
+		<div class="col-md-6 text-center">
+			<h1>{{UserShowCtrl.user.first_name}} {{UserShowCtrl.user.last_name}}</h1>
+			<h3>
 				<i class="fa fa-envelope" aria-hidden="true"></i> {{UserShowCtrl.user.email}}
 			</h3>
 			<div ng-if="UserShowCtrl.user.show_phone === 1">
-				<h4 class="text-center">
+				<h4>
 					<i class="fa fa-phone" aria-hidden="true"></i> {{UserShowCtrl.user.phone}}
 				</h4>
 			</div>
-			<div class="text-center" ng-if="currentUser.id === UserShowCtrl.user.id">
+			<div ng-if="currentUser.id === UserShowCtrl.user.id">
 				<md-button flex class="md-raised md-warn" ui-sref="user.profile.info.edit({id: currentUser.id})">
 					Edit my profile
 				</md-button>

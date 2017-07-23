@@ -40,7 +40,7 @@ angular.module('user.login', [
 								$state.go('home');
 							},
 							function (error) {
-								console.error(error);
+								devHelper.log(error, 'error');
 							}
 						);
 						//set access token
@@ -48,7 +48,7 @@ angular.module('user.login', [
 					},
 					function (response) {
 						genericService.showToast(response.data.message);
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			}
@@ -64,7 +64,7 @@ angular.module('user.login', [
 								$state.go('home');
 							},
 							function (error) {
-								console.error(error);
+								devHelper.log(error, 'error');
 							}
 						);
 						;
@@ -72,7 +72,7 @@ angular.module('user.login', [
 					},
 					function (response) {
 						genericService.showToast(response);
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			}
@@ -84,7 +84,7 @@ angular.module('user.login', [
 						$state.go('home');
 					},
 					function (response) {
-						console.error(response);
+						devHelper.log(response, 'error');
 					}
 				);
 			}

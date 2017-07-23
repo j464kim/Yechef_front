@@ -32,7 +32,7 @@ angular.module('dish.create', [
 						devHelper.log(response);
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 
@@ -49,7 +49,7 @@ angular.module('dish.create', [
 						$state.go('dish.show', {"id": newDish.id});
 					}, function (response) {
 						// TODO handle error state
-						console.error(response);
+						devHelper.log(response, 'error');
 					});
 			}
 

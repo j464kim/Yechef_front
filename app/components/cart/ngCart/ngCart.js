@@ -31,7 +31,7 @@ angular.module('ngCart', [
 				// kitchenId = 0;
 				this.$cart = {};
 
-				if(kitchenId) {
+				if (kitchenId) {
 					this.$cart[kitchenId] = {
 						shipping: null,
 						taxRate: null,

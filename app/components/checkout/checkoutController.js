@@ -26,14 +26,15 @@ angular.module('checkout.billing', [
 			function _chargePayment() {
 				CheckoutService.tokenize(that.card)
 					.then(function (response) {
-						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId).then(function (response) {
-							devHelper.log(response);
-							devHelper.log('Authorization hold successful');
-							$state.go('user.profile.order');
-						}, function (response) {
-							// TODO handle error state-*/ ˙
-							console.error(response);
-						})
+						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId)
+							.then(function (response) {
+								devHelper.log(response);
+								devHelper.log('Authorization hold successful');
+								$state.go('user.profile.order');
+							}, function (response) {
+								// TODO handle error state-*/ ˙
+								// devHelper.log(response, 'error');
+							})
 					})
 			}
 

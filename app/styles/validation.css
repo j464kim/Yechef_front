@@ -2340,43 +2340,43 @@
 /* COLOR */
 .bg-primary {
   color: #fff;
-  background-color: #50C875;
+  background-color: #88B04B;
 }
 .bg-primary:hover {
-  background-color: #2b8747;
+  background-color: #51682d;
 }
 .bg-secondary {
   color: #fff;
-  background-color: blue;
+  background-color: #e7e7e7;
 }
 .bg-secondary:hover {
-  background-color: #000099;
+  background-color: #b4b4b4;
 }
 .bg-ternary {
   color: inherit;
-  background-color: yellow;
+  background-color: #B53389;
 }
 .bg-ternary:hover {
-  background-color: #999900;
+  background-color: #651d4d;
 }
 .bg-quaternary {
   color: #fff;
-  background-color: red;
+  background-color: #EEA5C5;
 }
 .bg-quaternary:hover {
-  background-color: #990000;
+  background-color: #de4f8e;
 }
 .font-primary {
-  color: #50C875;
+  color: #88B04B;
 }
 .font-secondary {
-  color: blue;
+  color: #e7e7e7;
 }
 .font-ternary {
-  color: yellow;
+  color: #B53389;
 }
 .font-quaternary {
-  color: red;
+  color: #EEA5C5;
 }
 body {
   font-family: 'Raleway', sans-serif;
@@ -2409,7 +2409,7 @@ h6 {
   counter-increment: item;
 }
 .md-button.md-primary {
-  background-color: #50C875;
+  background-color: #88B04B;
 }
 .navbar-brand {
   transform: translateX(-50%);
@@ -2428,6 +2428,26 @@ h6 {
 }
 .large-icon:hover {
   color: darkblue;
+}
+/* TODO: what are these for?? */
+/* bg color defination */
+/* these color schemes are used for js to fetch color setting */
+/* DO NOT change the class name and make sure to define all properties */
+.bg-primary {
+  color: #fff;
+  background-color: #88B04B;
+}
+.bg-secondary {
+  color: #000;
+  background-color: #e7e7e7;
+}
+.bg-ternary {
+  color: #fff;
+  background-color: #B53389;
+}
+.bg-quaternary {
+  color: #fff;
+  background-color: #EEA5C5;
 }
 .kitchen-image {
   height: 100%;
@@ -2467,6 +2487,9 @@ h6 {
 .small-margin {
   margin: 0.5em;
 }
+md-checkbox.md-checked .md-icon {
+  background-color: #88B04B;
+}
 .kitchen-title {
   font-size: 24px;
   font-weight: bold;
@@ -2504,11 +2527,17 @@ body {
   padding-right: 1.5em;
 }
 .dish-show-right {
+  overflow-y: scroll;
   padding-left: 1.5em;
+  padding-right: 1.5em;
   width: 350px;
+  height: 90%;
 }
 .margin-bottom-1em {
   margin-bottom: 1em;
+}
+.margin-top-2em {
+  margin-top: 2em;
 }
 .padding-1em {
   padding: 1em;
@@ -2540,6 +2569,30 @@ md-toast.md-top.md-center {
   left: 50%;
   margin-top: 75px;
   transform: translate3d(-50%, 0, 0);
+}
+::-webkit-scrollbar {
+  display: none;
+}
+md-tabs.md-default-theme md-ink-bar,
+md-tabs md-ink-bar {
+  color: #88B04B !important;
+  background-color: #88B04B !important;
+}
+md-content.md-default-theme,
+md-content {
+  background-color: #FAFAFA !important;
+}
+#map-dish-list {
+  position: fixed;
+  right: 0;
+  height: 100%;
+}
+#map-dish-show {
+  padding: 0 1em 0 1em;
+  height: 24em;
+}
+#map-kitchen-show {
+  height: 34em;
 }
 .loader-wrapper {
   min-height: 0;

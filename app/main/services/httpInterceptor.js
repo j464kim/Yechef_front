@@ -5,8 +5,8 @@ angular
         'configuration'
     ])
 
-    .factory('httpRequestInterceptor', ['$q', 'config', 'sessionService',
-        function ($q, config, sessionService) {
+    .factory('httpRequestInterceptor', ['$q', 'config', 'sessionService', 'devHelper',
+        function ($q, config, sessionService, devHelper) {
 
             var request = function (httpConfig) {
                 httpConfig.headers = httpConfig.headers || {};
@@ -28,8 +28,8 @@ angular
 
                 if (config.debugMode === true) {
                     if (httpCode !== 200) {
-                        console.error('##Response Status of ' + httpCode + ' returned');
-                        console.error('##Response Body: ', response);
+						devHelper.log('##Response Status of ' + httpCode + ' returned', 'error');
+						devHelper.log('##Response Body: ', 'error');
                     }
                 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kitchen.show', [
-	'kitchen.api', 'ngMaterial', 'share',
+	'kitchen.api', 'ngMaterial', 'share', 'googleMapShow',
 ])
 
 	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope',
@@ -18,6 +18,7 @@ angular.module('kitchen.show', [
 			 *  Public Variables
 			 **********************/
 			this.isMine = false;
+
 			/*********************
 			 *  Private Functions
 			 **********************/
@@ -35,7 +36,7 @@ angular.module('kitchen.show', [
 					that.media = response.medias[0].url;
 				}, function (response) {
 					// TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -54,7 +55,7 @@ angular.module('kitchen.show', [
 					}
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -64,7 +65,7 @@ angular.module('kitchen.show', [
 					that.dishes = response;
 				}, function (response) {
 					//TODO handle error state
-					console.error(response);
+					devHelper.log(response, 'error');
 				});
 			}
 
@@ -89,7 +90,7 @@ angular.module('kitchen.show', [
 			 **********************/
 			_init();
 
-
+			
 			/*********************
 			 *  EVENTS
 			 **********************/

@@ -57,11 +57,33 @@ angular.module('map.api', [
 				return map;
 			}
 
+			function getCircle() {
+				var circle = {
+					id: 0,
+					center: {
+						latitude: 0,
+						longitude: 0
+					},
+					radius: 50,
+					stroke: {
+						color: '#08B21F',
+						weight: 2,
+						opacity: 1
+					},
+					fill: {
+						color: '#08B21F',
+						opacity: 0.5
+					},
+				};
+				return circle;
+			}
+
 
 			return {
 				geocode: geocode,
 				rgeocode: rgeocode,
 				getMapOption: getMapOption,
+				getCircle: getCircle,
 			};
 		}
 	]);

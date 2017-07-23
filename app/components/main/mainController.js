@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('home', [])
+angular.module('main', [])
 
-	.controller('HomeController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService) {
+	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'genericService',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
 
 			var that = this;
 
@@ -36,6 +36,31 @@ angular.module('home', [])
 			}
 
 			this.isLoggedIn = sessionService.isLogin;
+
+			// themeing
+			$scope.$watch(angular.bind(this, function () {
+				return this.themes;
+			}), function (value) {
+				if(value) {
+					if(value.primary) {
+						themeProvider.definePalette('primaryTheme', value.primary);
+					}
+
+					if(value.secondary) {
+						themeProvider.definePalette('secondaryTheme', value.secondary);
+					}
+
+					if(value.ternary) {
+						themeProvider.definePalette('ternaryTheme', value.ternary);
+					}
+
+					themeProvider.theme('default')
+						.primaryPalette('primaryTheme')
+						.accentPalette('secondaryTheme')
+						.warnPalette('ternaryTheme');
+					$mdTheming.generateTheme('default');
+				}
+			});
 		}
 	])
 	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
@@ -64,7 +89,7 @@ angular.module('home', [])
 						);
 					});
 			} else {
-				console.error("Geolocation is not supported by this browser.");
+				devHelper.log("Geolocation is not supported by this browser.", 'error');
 			}
 		}
 

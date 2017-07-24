@@ -47,7 +47,7 @@ angular.module('map.api', [
 					disableDefaultUI: true,
 					zoomControl: true,
 					minZoom: 5,
-					maxZoom: 15,
+					maxZoom: 20,
 					noClear: false,
 				};
 

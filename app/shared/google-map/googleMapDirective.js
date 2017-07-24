@@ -62,7 +62,13 @@ angular.module('googleMapDirectives', [])
 				circle: '='
 			},
 			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
-
+				$scope.clusterEvents = {
+					click: function (cluster, model) {
+						console.log("ANG!");
+						console.log(cluster);
+						console.log(model);
+					}
+				};
 			}]
 		}
 	}]);

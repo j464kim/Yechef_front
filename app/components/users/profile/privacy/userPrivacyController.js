@@ -50,6 +50,9 @@ angular.module('user.profile.privacy', [
 				UserAPI.setMySettings(that.userSetting).then(function (response) {
 					var updatedUserSetting = response;
 					devHelper.log(updatedUserSetting);
+					that.old_show_phone = that.userSetting.show_phone;
+					that.old_show_subscription = that.userSetting.show_subscription;
+					that.old_show_forks = that.userSetting.show_forks;
 					genericService.showToast('Successfully Updated Settings');
 				}, function (response) {
 					devHelper.log(response, 'error');

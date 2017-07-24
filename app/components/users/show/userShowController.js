@@ -83,20 +83,22 @@ angular.module('user.show', [
 				var pageNum = ++that.forkedDishesCurrentPage;
 
 				UserAPI.getForkedDishes(that.userId, pageNum, 4).then(function (response) {
-					that.forkedDishes = that.forkedDishes.concat(response.data);
-					that.forkedDishesTotalItems = response.total;
-					that.forkedDishesCurrentPage = response.current_page;
-					that.forkedDishesLastPage = response.last_page;
-					that.isForkedDishesPublic = true;
-					if (response.last_page <= that.forkedDishesCurrentPage) {
-						that.forkedDishesLoadButton = false;
+					if (response === null) {
+						//Private Information
+						that.isForkedDishesPublic = false;
+					} else {
+						that.forkedDishes = that.forkedDishes.concat(response.data);
+						that.forkedDishesTotalItems = response.total;
+						that.forkedDishesCurrentPage = response.current_page;
+						that.forkedDishesLastPage = response.last_page;
+						that.isForkedDishesPublic = true;
+						if (response.last_page <= that.forkedDishesCurrentPage) {
+							that.forkedDishesLoadButton = false;
+						}
+						devHelper.log(that.forkedDishes);
 					}
-					devHelper.log(that.forkedDishes);
 				}, function (response) {
 					devHelper.log(response, 'error');
-					if (response.data.return_code === 15503) {
-						that.isForkedDishesPublic = false;
-					}
 				});
 
 			}
@@ -105,20 +107,22 @@ angular.module('user.show', [
 				var pageNum = ++that.subscribedKitchensCurrentPage;
 
 				UserAPI.getSubscriptions(that.userId, pageNum, 3).then(function (response) {
-					that.subscribedKitchens = that.subscribedKitchens.concat(response.data);
-					that.subscribedKitchensTotalItems = response.total;
-					that.subscribedKitchensCurrentPage = response.current_page;
-					that.subscribedKitchensLastPage = response.last_page;
-					that.isSubscribedKitchensPublic = true;
-					if (response.last_page <= that.subscribedKitchensCurrentPage) {
-						that.subscribedKitchensLoadButton = false;
+					if (response === null) {
+						//Private Information
+						that.isSubscribedKitchensPublic = false;
+					} else {
+						that.subscribedKitchens = that.subscribedKitchens.concat(response.data);
+						that.subscribedKitchensTotalItems = response.total;
+						that.subscribedKitchensCurrentPage = response.current_page;
+						that.subscribedKitchensLastPage = response.last_page;
+						that.isSubscribedKitchensPublic = true;
+						if (response.last_page <= that.subscribedKitchensCurrentPage) {
+							that.subscribedKitchensLoadButton = false;
+						}
+						devHelper.log(that.subscribedKitchens);
 					}
-					devHelper.log(that.subscribedKitchens);
 				}, function (response) {
 					devHelper.log(response, 'error');
-					if (response.data.return_code === 15503) {
-						that.isSubscribedKitchensPublic = false;
-					}
 				});
 
 			}

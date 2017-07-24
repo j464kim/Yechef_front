@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('user.api', [])
+angular.module('payment.api', [
+	'configuration'
+])
 
-	.factory('UserResource', ['$resource', 'config',
+	.factory('PaymentResource', ['$resource', 'config',
 		function ($resource, config) {
-			var api_endpoint = config.endpoint + 'users/';
+			var api_endpoint = config.endpoint + 'payment/';
 
 			return $resource(api_endpoint + ':id', {id: '@id'}, {
 				list: {
@@ -13,40 +15,37 @@ angular.module('user.api', [])
 				show: {
 					method: 'GET'
 				},
+				create: {
+					method: 'POST'
+				},
 				update: {
 					method: 'PUT'
 				},
-				cancelOrder: {
-					method: 'GET',
-					url: api_endpoint + 'cancelOrder/' + ':orderId',
-				}
+				destroy: {
+					method: 'DELETE'
+				},
 			});
 		}
 	])
 
-	.service('UserAPI', ['$q', 'UserResource',
-		function ($q, UserResource) {
+	.service('PaymentAPI', ['$q', 'PaymentResource',
+		function ($q, PaymentResource) {
 
-			function list(option) {
-
+			function getCards() {
 				return $q(function (resolve, reject) {
-					UserResource.list({
-						id: option,
-					}).$promise.then(function (response) {
+					PaymentResource.list().$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
-						console.log(seconds, expireAt);
 						reject(response);
 					});
 				});
-			};
+			}
 
-			function show(userId) {
-
+			function showCard(index) {
 				return $q(function (resolve, reject) {
-					UserResource.show(
+					PaymentResource.show(
 						{
-							id: userId
+							id: index
 						}
 					).$promise.then(function (response) {
 						resolve(response.body);
@@ -56,10 +55,13 @@ angular.module('user.api', [])
 				});
 			}
 
-			function update(user, userId) {
+			function addCard(token) {
 				return $q(function (resolve, reject) {
-					UserResource.update(user, userId)
-						.$promise.then(function (response) {
+					PaymentResource.create(
+						{
+							token: token
+						}
+					).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -67,38 +69,40 @@ angular.module('user.api', [])
 				});
 			}
 
-			function getMyKitchens() {
+			function updateCard(card, cardId) {
 				return $q(function (resolve, reject) {
-					UserResource.list({
-						id: 'getMyKitchens',
-					}).$promise.then(function (response) {
+					PaymentResource.update(
+						{
+							id: cardId
+						}, card
+					).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
 					});
 				});
-			};
+			}
 
-			function cancelOrder(orderId) {
+			function removeCard(cardId) {
 				return $q(function (resolve, reject) {
-					UserResource.cancelOrder(
+					PaymentResource.destroy(
 						{
-							orderId: orderId
+							id: cardId
 						}
 					).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
-						reject(response)
+						reject(response);
 					});
 				});
-			};
+			}
 
 			return {
-				list: list,
-				show: show,
-				update: update,
-				getMyKitchens: getMyKitchens,
-				cancelOrder: cancelOrder,
+				getCards: getCards,
+				showCard: showCard,
+				addCard: addCard,
+				updateCard: updateCard,
+				removeCard: removeCard,
 			};
 		}
 	]);

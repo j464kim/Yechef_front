@@ -1,12 +1,12 @@
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
-        <form class="form-validation" ng-submit="coCtrl.tokenize()" name="form" novalidate>
-            <h2 class="text-center">Checkout</h2><br>
+        <form class="form-validation" ng-submit="coCtrl.chargePayment()" name="form" novalidate>
+            <h2 class="text-center">Billing Information</h2><br>
             <!--Card Holder Name-->
             <div class="cardHolder">
                 <md-input-container class="md-block">
                     <label for="cardHolder">Card Holder Name</label>
-                    <input id="cardHolder" type="text" name="cardHolder" ng-model="coCtrl.credit.cardHolder"
+                    <input id="cardHolder" type="text" name="cardHolder" ng-model="coCtrl.card.name"
                            placeholder="" required/>
                     <div class="field-message" ng-messages="form.cardHolder.$error" ng-if='form.cardHolder.$touched'
                          ng-cloak>
@@ -19,7 +19,7 @@
                 <md-input-container class="md-block">
                     <label for="billingAddress">Billing Address</label>
                     <input id="billingAddress" type="text" name="billingAddress"
-                           ng-model="coCtrl.credit.billingAddress" placeholder="" required/>
+                           ng-model="coCtrl.card.billingAddress" placeholder="" required/>
                     <div class="field-message" ng-messages="form.billingAddress.$error"
                          ng-if='form.billingAddress.$touched'
                          ng-cloak>
@@ -27,15 +27,15 @@
                     </div>
                 </md-input-container>
             </div>
-            <!--Credit Card Number-->
+            <!--Card Number-->
             <div class="cardNumber">
                 <md-input-container class="md-block">
-                    <label for="cardNumber">Credit Card Number</label>
-                    <input id="cardNumber" type="text" name="cardNumber" ng-model="coCtrl.credit.number"
+                    <label for="cardNumber">Card Number</label>
+                    <input id="cardNumber" type="text" name="cardNumber" ng-model="coCtrl.card.number"
                            ui-mask="9999 9999 9999 9999" placeholder="" required/>
                     <div class="field-message" ng-messages="form.cardNumber.$error" ng-if='form.cardNumber.$touched'
                          ng-cloak>
-                        <div ng-message="required">Credit Card Number is required</div>
+                        <div ng-message="required">Card Number is required</div>
                     </div>
                 </md-input-container>
             </div>
@@ -43,7 +43,7 @@
             <div class="expMonth col-md-4">
                 <md-input-container class="md-block">
                     <label for="expMonth">Expiration Month</label>
-                    <input id="expMonth" type="text" name="expMonth" ng-model="coCtrl.credit.exp_month" ui-mask="99"
+                    <input id="expMonth" type="text" name="expMonth" ng-model="coCtrl.card.exp_month" ui-mask="99"
                            placeholder="" required/>
                     <div class="field-message" ng-messages="form.expMonth.$error" ng-if='form.expMonth.$touched'
                          ng-cloak>
@@ -55,7 +55,7 @@
             <div class="expYear col-md-4">
                 <md-input-container class="md-block">
                     <label for="expYear">Expiration Year</label>
-                    <input id="expYear" type="text" name="expYear" ng-model="coCtrl.credit.exp_year" ui-mask="9999"
+                    <input id="expYear" type="text" name="expYear" ng-model="coCtrl.card.exp_year" ui-mask="9999"
                            placeholder="" required/>
                     <div class="field-message" ng-messages="form.expYear.$error" ng-if='form.expYear.$touched'
                          ng-cloak>
@@ -67,7 +67,7 @@
             <div class="cvc col-md-4">
                 <md-input-container class="md-block">
                     <label for="cvc">CVC</label>
-                    <input id="cvc" type="text" name="cvc" ng-model="coCtrl.credit.cvc" ui-mask="999"
+                    <input id="cvc" type="text" name="cvc" ng-model="coCtrl.card.cvc" ui-mask="999"
                            placeholder="" required/>
                     <div class="field-message" ng-messages="form.cvc.$error" ng-if='form.cvc.$touched'
                          ng-cloak>
@@ -79,7 +79,7 @@
             <!--Button-->
             <div class="row submit">
                 <div class="col-sm-1">
-                    <md-button class="md-raised md-primary" ng-disabled="form.$invalid" type="submit">Process Payment</md-button>
+                    <md-button class="md-raised md-primary" ng-disabled="form.$invalid" type="submit">Request Order</md-button>
                 </div>
                 <div class="col-sm-offset-7 col-sm-1">
                     <!--TODO: GO Back to previous page-->

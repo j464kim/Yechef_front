@@ -6,17 +6,17 @@ angular.module('checkout.api', [
 
 	.service('CheckoutResource', ['$resource', 'config', '$http',
 		function ($resource, config, $http) {
-			var apiEndpoint = config.endpoint;
+			var apiEndpoint = config.endpoint + 'payment';
 
-			function charge(token, email, amount, currency) {
+			function charge(token, amount, currency, kitchenId) {
 				return $http({
 					method: 'POST',
-					url: apiEndpoint + 'charge-payment',
+					url: apiEndpoint + '/charge',
 					params: {
 						token: token,
-						email: email,
 						amount: amount,
-						currency: currency
+						currency: currency,
+						kitchenId: kitchenId,
 					}
 				});
 			}
@@ -30,9 +30,10 @@ angular.module('checkout.api', [
 	.service('CheckoutAPI', ['$q', 'CheckoutResource',
 		function ($q, CheckoutResource) {
 
-			function charge(token, email, amount, currency) {
+			function charge(token, amount, currency, kitchenId) {
 				return $q(function (resolve, reject) {
-					CheckoutResource.charge(token, email, amount, currency).then(function (response) {
+					CheckoutResource.charge(token, amount, currency, kitchenId)
+						.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -45,3 +46,5 @@ angular.module('checkout.api', [
 			};
 		}
 	]);
+
+

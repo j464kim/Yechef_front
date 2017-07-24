@@ -32,6 +32,9 @@ angular.module('configuration', [])
 		var autoProcessQueue = false;
 		var addRemoveLinks = true;
 
+		// Payment Service
+		var stripePublishableKey = 'pk_test_RZjSNtHLydLfeylIF2BkP6s5';
+
 		// Nationality
 		var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
                     Chinese, Ecuadorian, English, Ethiopian, French, German, Greek, Hungarian, Indian, Indonesian, \
@@ -79,6 +82,7 @@ angular.module('configuration', [])
 			nationalities: nationalities,
 			currency: currency,
 			dishSearchParams: dishSearchParams,
+			stripePublishableKey: stripePublishableKey,
 		};
 
 	})());

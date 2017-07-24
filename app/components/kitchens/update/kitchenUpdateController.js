@@ -13,7 +13,6 @@ angular.module('kitchen.update', [
 				// reference to this controller
 
 			var that = this;
-			var kitchenId = $stateParams.id;
 			/*********************
 			 *  Public Variables
 			 **********************/

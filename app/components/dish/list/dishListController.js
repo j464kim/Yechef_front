@@ -118,6 +118,22 @@ angular.module('dish.list', [
 					}
 				};
 
+				that.clusterEvents = {
+					click: function (cluster, model) {
+						if (cluster.map_.zoom === cluster.map_.maxZoom) {
+							console.log('Max Zoom acheived');
+							that.window.model = model[0];
+							that.window.templateParameter = {
+								style: 'cluster'
+							}
+							that.window.ctrl.showWindow();
+							that.window.show = true;
+						}
+						console.log(cluster);
+						console.log(model);
+					}
+				};
+
 				that.mapEvents = {
 					//This turns of events and hits against scope from gMap events this does speed things up
 					// adding a blacklist for watching your controller scope should even be better

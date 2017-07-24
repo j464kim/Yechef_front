@@ -46,7 +46,7 @@ angular.module('googleMapDirectives', [])
 	}
 	])
 
-	.directive('googleMapSearch', [function() {
+	.directive('googleMapSearch', [function () {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -59,16 +59,12 @@ angular.module('googleMapDirectives', [])
 				markers: '=',
 				markersEvents: '=',
 				markersControl: '=',
-				circle: '='
+				circle: '=',
+				clusterEvents: '='
 			},
 			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
-				$scope.clusterEvents = {
-					click: function (cluster, model) {
-						console.log("ANG!");
-						console.log(cluster);
-						console.log(model);
-					}
-				};
+				// $scope.totalItems = $scope.dishes.length;
+				$scope.currentPage = 1;
 			}]
 		}
 	}]);

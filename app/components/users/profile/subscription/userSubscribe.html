@@ -1,13 +1,15 @@
 <h2>MY SUBSCRIPTION</h2>
 <hr/>
 
-<div class="row" id="kitchenList">
-    <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
-    <div class="col-md-4" ng-repeat="kitchen in usCtrl.subscribedKitchens" loader>
-        <kitchen-card kitchen="kitchen"></kitchen-card>
-    </div>
-</div>
+<div layout-fill>
+	<div class="row" id="kitchenList">
+		<!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+		<div class="col-md-4" ng-repeat="kitchen in usCtrl.subscribedKitchens" loader>
+			<kitchen-card kitchen="kitchen"></kitchen-card>
+		</div>
+	</div>
 
-<infinite-load-button last-page="usCtrl.lastPage"
-                      current-page="usCtrl.currentPage"
-                      load-function="usCtrl.getSubscriptions"></infinite-load-button>
+	<infinite-load-button last-page="usCtrl.lastPage"
+	                      current-page="usCtrl.currentPage"
+	                      load-function="usCtrl.getSubscriptions"></infinite-load-button>
+</div>

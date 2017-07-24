@@ -1,13 +1,15 @@
-<h2>MY FORK</h2>
+<h2>MY FORKED DISHES</h2>
 <hr/>
 
-<div class="row" id="kitchenList">
-    <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
-    <div class="col-md-4" ng-repeat="dish in ufCtrl.forkedDishes" loader>
-        <dish-card dish="dish"></dish-card>
-    </div>
-</div>
+<div layout-fill>
+	<div class="row" id="kitchenList">
+		<!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+		<div class="col-md-4" ng-repeat="dish in ufCtrl.forkedDishes" loader>
+			<dish-card dish="dish"></dish-card>
+		</div>
+	</div>
 
-<infinite-load-button last-page="ufCtrl.lastPage"
-                      current-page="ufCtrl.currentPage"
-                      load-function="ufCtrl.getForkedDishes"></infinite-load-button>
+	<infinite-load-button last-page="ufCtrl.lastPage"
+	                      current-page="ufCtrl.currentPage"
+	                      load-function="ufCtrl.getForkedDishes"></infinite-load-button>
+</div>

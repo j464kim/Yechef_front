@@ -2736,3 +2736,9 @@ md-content {
   overflow: hidden;
   white-space: nowrap;
 }
+.ngCart.cart span[ng-click] {
+  cursor: pointer;
+}
+.ngCart.cart .glyphicon.disabled {
+  color: #aaa;
+}

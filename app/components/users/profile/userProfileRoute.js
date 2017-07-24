@@ -7,6 +7,10 @@ angular.module('profile', [
 	'user.profile.subscribe',
 	'user.profile.fork',
 	'user.profile.privacy',
+	'user.profile.order',
+	'user.profile.payment',
+	'user.profile.payment.create',
+	'user.profile.payment.update',
 ])
 
 	.config(function ($stateProvider) {
@@ -38,6 +42,7 @@ angular.module('profile', [
 			.state('user.profile.order', {
 				url: '/myOrder',
 				templateUrl: 'components/users/profile/order/userOrder.html',
+				controller: 'UserOrderController as uoCtrl',
 			})
 			.state('user.profile.forked', {
 				url: '/forked',
@@ -61,14 +66,17 @@ angular.module('profile', [
 			})
 			.state('user.profile.payment.list', {
 				url: '/list',
-				templateUrl: 'components/users/profile/payment/userPaymentList.html',
+				templateUrl: 'components/users/profile/payment/list/paymentList.html',
+				controller: 'PaymentListController as plCtrl',
 			})
 			.state('user.profile.payment.create', {
 				url: '/create',
-				templateUrl: 'components/users/profile/payment/userPaymentCreate.html',
+				templateUrl: 'components/users/profile/payment/create/paymentCreate.html',
+				controller: 'PaymentCreateController as pcCtrl',
 			})
 			.state('user.profile.payment.edit', {
-				url: '/edit',
-				templateUrl: 'components/users/profile/payment/userPaymentEdit.html',
+				url: '/edit/{index}',
+				templateUrl: 'components/users/profile/payment/update/paymentUpdate.html',
+				controller: 'PaymentUpdateController as puCtrl',
 			});
 	});

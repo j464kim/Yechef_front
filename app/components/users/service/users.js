@@ -20,6 +20,10 @@ angular.module('user.api', [])
 					methbod: 'GET',
 					url: api_endpoint + ':userId' + "/" + ':option',
 					params: {userId: '@userId', option: '@option'}
+				},
+				cancelOrder: {
+					method: 'GET',
+					url: api_endpoint + 'cancelOrder/' + ':orderId'
 				}
 			});
 		}
@@ -189,6 +193,20 @@ angular.module('user.api', [])
 				});
 			};
 
+			function cancelOrder(orderId) {
+				return $q(function (resolve, reject) {
+					UserResource.cancelOrder(
+						{
+							orderId: orderId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
@@ -201,6 +219,7 @@ angular.module('user.api', [])
 				getMySubscriptions: getMySubscriptions,
 				getMySettings: getMySettings,
 				setMySettings: setMySettings,
+				cancelOrder: cancelOrder
 			};
 		}
 	]);

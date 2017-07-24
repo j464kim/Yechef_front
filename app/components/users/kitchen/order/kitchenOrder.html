@@ -2,46 +2,44 @@
 <hr>
 
 <div class="container">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Kitchen</th>
-            <th>Date & Time</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Cold Noodle</td>
-            <td>3</td>
-            <td>$33.40</td>
-            <td>Jun's 1st Kitchen</td>
-            <td>2017-05-05 6:03pm</td>
-            <td>Order Received</td>
-            <td><button>Cancel</button></td>
-        </tr>
-        <tr>
-            <td>Tomato Pasta</td>
-            <td>2</td>
-            <td>22.50</td>
-            <td>Jun's 2nd Kitchen</td>
-            <td>2017-05-05 3:03pm</td>
-            <td>Ready For Pickup</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>BiBimBab</td>
-            <td>1</td>
-            <td>$8.90</td>
-            <td>Jun's 2nd Kitchen</td>
-            <td>2017-05-05 12:13pm</td>
-            <td>Picked Up</td>
-            <td></td>
-        </tr>
-        </tbody>
-    </table>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Price</th>
+			<th>Ordered By</th>
+			<th>Date & Time</th>
+			<th>Status</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat-start="order in koCtrl.orders track by $index" style="background-color: ghostwhite">
+			<td>
+				<button ng-click="isCollapsed = !isCollapsed">{{$index+1}}</button>
+			</td>
+			<td>${{order.transaction.amount}}</td>
+			<td>{{order.user_name}}</td>
+			<td>{{order.created_at}}</td>
+			<td>{{order.status}}</td>
+			<td>
+				<div ng-show="order.status == 'pending'">
+					<button ng-click="koCtrl.acceptOrder(order.id)">Accept</button>
+					<button ng-click="koCtrl.declineOrder(order.id)">Cancel</button>
+				</div>
+			</td>
+		</tr>
+		<tr ng-repeat-end="">
+			<td></td>
+			<td colspan="6" style="padding: 0">
+				<div uib-collapse="isCollapsed" ng-repeat="item in order.items">
+					<h4>{{item.dish.name}}</h4>
+					<p>${{item.dish.price}}</p>
+					<p>Quantity: {{item.quantity}}</p>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
+

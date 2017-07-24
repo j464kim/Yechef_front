@@ -1,68 +1,77 @@
-<div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
-    Your cart is empty
+<div ng-if="cartCtrl.carts">
+
+	<div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
+		Your cart is empty
+	</div>
+
+	<div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
+		<div ng-repeat="cart in cartCtrl.carts" loader>
+			<div ng-show="cart.items[0]._kitchenId">
+				<h4>Kitchen Id: {{cart.items[0]._kitchenId}}</h4>
+				<table class="table table-striped ngCart cart">
+					<thead>
+					<tr>
+						<th></th>
+						<th>Name</th>
+						<th>Quantity</th>
+						<th>Amount</th>
+						<th>Total</th>
+					</tr>
+					</thead>
+					<tfoot>
+					<tr ng-show="cart.taxRate">
+						<td></td>
+						<td></td>
+						<td></td>
+						<!--<td>Tax ({{ ngCart.getTaxRate() }}%):</td>-->
+						<td>Tax ({{ cart.taxRate }}%):</td>
+						<td>{{ ngCart.getTax(cart.items[0]._kitchenId) | currency }}</td>
+					</tr>
+					<!--TODO: Will be optionally put later depending on shipping availability-->
+					<!--<tr ng-show="ngCart.getShipping()">-->
+					<!--<td></td>-->
+					<!--<td></td>-->
+					<!--<td></td>-->
+					<!--<td>Shipping:</td>-->
+					<!--<td>{{ ngCart.getShipping() | currency }}</td>-->
+					<!--</tr>-->
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Total:</td>
+						<td>{{ ngCart.totalCost(cart.items[0]._kitchenId) | currency }}</td>
+					</tr>
+					</tfoot>
+					<tbody>
+					<tr ng-repeat="item in cart.items track by $index">
+						{{item}}
+						<td><span ng-click="cartCtrl.removeItemById(item.getId(), item._kitchenId)"
+						          class="glyphicon glyphicon-remove"></span>
+						</td>
+						<td>{{ item.getName() }}</td>
+						<td><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
+						          ng-click="cartCtrl.updateQty(item, -1, true)"></span>&nbsp;&nbsp;
+							{{ item.getQuantity() | number }}&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-plus" ng-click="cartCtrl.updateQty(item, 1, true)"></span>
+						</td>
+						<td>{{ item.getPrice() | currency }}</td>
+						<td>{{ item.getTotal() | currency }}</td>
+					</tr>
+					</tbody>
+				</table>
+				<!--Order-->
+				<div class="pull-right">
+					<div class="row">
+						<button class="small-margin btn-danger btn-lg" ui-sref="checkout.billing({amount: ngCart.totalCost(cart.items[0]._kitchenId), kitchenId: cart.items[0]._kitchenId})">
+							To
+							Request Order
+						</button>
+					</div>
+				</div>
+				<br><br>
+			</div>
+		</div>
+
+	</div>
 </div>
-
-<div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
-</div>
-<div>
-    <table class="table table-striped ngCart cart">
-
-        <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Total</th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr ng-show="ngCart.getTax()">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Tax ({{ ngCart.getTaxRate() }}%):</td>
-            <td>{{ ngCart.getTax() | currency }}</td>
-        </tr>
-        <!--TODO: Will be optionally put later depending on shipping availability-->
-        <!--<tr ng-show="ngCart.getShipping()">-->
-            <!--<td></td>-->
-            <!--<td></td>-->
-            <!--<td></td>-->
-            <!--<td>Shipping:</td>-->
-            <!--<td>{{ ngCart.getShipping() | currency }}</td>-->
-        <!--</tr>-->
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total:</td>
-            <td>{{ ngCart.totalCost() | currency }}</td>
-        </tr>
-        </tfoot>
-        <tbody>
-        <tr ng-repeat="item in ngCart.getCart().items track by $index">
-            <td><span ng-click="cartCtrl.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span>
-            </td>
-
-            <td>{{ item.getName() }}</td>
-            <td><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
-                      ng-click="cartCtrl.updateQty(item, -1, true)"></span>&nbsp;&nbsp;
-                {{ item.getQuantity() | number }}&nbsp;&nbsp;
-                <span class="glyphicon glyphicon-plus" ng-click="cartCtrl.updateQty(item, 1, true)"></span></td>
-            <td>{{ item.getPrice() | currency}}</td>
-            <td>{{ item.getTotal() | currency }}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<style>
-    .ngCart.cart span[ng-click] {
-        cursor: pointer;
-    }
-
-    .ngCart.cart .glyphicon.disabled {
-        color: #aaa;
-    }
-</style>

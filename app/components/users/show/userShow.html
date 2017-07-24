@@ -16,7 +16,7 @@
 			<h3>
 				<i class="fa fa-envelope" aria-hidden="true"></i> {{UserShowCtrl.user.email}}
 			</h3>
-			<h4 ng-if="UserShowCtrl.user.phone !== 'PRIVATE'">
+			<h4 ng-if="UserShowCtrl.user.phone !== ''">
 				<i class="fa fa-phone" aria-hidden="true"></i> {{UserShowCtrl.user.phone}}
 			</h4>
 			<div ng-if="currentUser.id === UserShowCtrl.user.id">

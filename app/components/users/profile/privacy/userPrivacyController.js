@@ -25,16 +25,16 @@ angular.module('user.profile.privacy', [
 			 **********************/
 
 			function _init() {
-				_showUser();
+				_getUserSettings();
 			}
 
-			function _showUser() {
-				UserAPI.show(userId).then(function (response) {
-					that.user = response;
-					devHelper.log(that.user);
-					that.old_show_phone = that.user.show_phone;
-					that.old_show_subscription = that.user.show_subscription;
-					that.old_show_forks = that.user.show_forks;
+			function _getUserSettings() {
+				UserAPI.getMySettings().then(function (response) {
+					that.userSetting = response;
+					devHelper.log(that.userSetting);
+					that.old_show_phone = that.userSetting.show_phone;
+					that.old_show_subscription = that.userSetting.show_subscription;
+					that.old_show_forks = that.userSetting.show_forks;
 					that.loaded = true;
 
 					//TODO: user media to be ready soon
@@ -45,13 +45,12 @@ angular.module('user.profile.privacy', [
 				});
 			}
 
-			function _updateUser() {
+			function _updateUserSettings() {
 				devHelper.log('update user');
-				UserAPI.update(that.user, userId).then(function (response) {
-					var updatedUser = response;
-					devHelper.log(updatedUser);
-					AuthAPI.setCurrentUser();
-					genericService.showToast('Successfully Updated Privacy Settings');
+				UserAPI.setMySettings(that.userSetting).then(function (response) {
+					var updatedUserSetting = response;
+					devHelper.log(updatedUserSetting);
+					genericService.showToast('Successfully Updated Settings');
 				}, function (response) {
 					devHelper.log(response, 'error');
 					genericService.showToast('Error Updating Privacy Settings...');
@@ -61,12 +60,12 @@ angular.module('user.profile.privacy', [
 			/*********************
 			 *  Public Functions
 			 **********************/
-			this.updateUser = _updateUser;
+			this.updateUserSettings = _updateUserSettings;
 
 			this.validate = function () {
-				return that.old_show_forks === that.user.show_phone &&
-					that.old_show_subscription === that.user.show_subscription &&
-					that.old_show_forks === that.user.show_forks;
+				return that.old_show_phone === that.userSetting.show_phone &&
+					that.old_show_subscription === that.userSetting.show_subscription &&
+					that.old_show_forks === that.userSetting.show_forks;
 			};
 			/*********************
 			 *  Initialization

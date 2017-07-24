@@ -25,8 +25,22 @@ angular.module('user.api', [])
 		}
 	])
 
-	.service('UserAPI', ['$q', 'UserResource',
-		function ($q, UserResource) {
+	.factory('UserSettingResource', ['$resource', 'config',
+		function ($resource, config) {
+			var api_endpoint = config.endpoint + 'userSetting/';
+			return $resource(api_endpoint, {}, {
+				show: {
+					method: 'GET'
+				},
+				update: {
+					method: 'PUT'
+				}
+			});
+		}
+	])
+
+	.service('UserAPI', ['$q', 'UserResource', 'UserSettingResource',
+		function ($q, UserResource, UserSettingResource) {
 
 			function list(option) {
 
@@ -155,6 +169,26 @@ angular.module('user.api', [])
 				});
 			};
 
+			function getMySettings() {
+				return $q(function (resolve, reject) {
+					UserSettingResource.show().$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function setMySettings(settings) {
+				return $q(function (resolve, reject) {
+					UserSettingResource.update(settings).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
@@ -164,7 +198,9 @@ angular.module('user.api', [])
 				getSubscriptions: getSubscriptions,
 				getMyKitchens: getMyKitchens,
 				getMyForkedDishes: getMyForkedDishes,
-				getMySubscriptions: getMySubscriptions
+				getMySubscriptions: getMySubscriptions,
+				getMySettings: getMySettings,
+				setMySettings: setMySettings,
 			};
 		}
 	]);

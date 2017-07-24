@@ -12,8 +12,6 @@ angular.module('directive.button', [])
 				loadFunction: '=',
 			},
 			link: function (scope, elem) {
-				devHelper.log(scope.currentPage);
-				devHelper.log(scope.lastPage);
 			},
 			controller: function () {
 			}

@@ -16,11 +16,9 @@
 			<h3>
 				<i class="fa fa-envelope" aria-hidden="true"></i> {{UserShowCtrl.user.email}}
 			</h3>
-			<div ng-if="UserShowCtrl.user.show_phone === 1">
-				<h4>
-					<i class="fa fa-phone" aria-hidden="true"></i> {{UserShowCtrl.user.phone}}
-				</h4>
-			</div>
+			<h4>
+				<i class="fa fa-phone" aria-hidden="true"></i> {{UserShowCtrl.user.phone}}
+			</h4>
 			<div ng-if="currentUser.id === UserShowCtrl.user.id">
 				<md-button flex class="md-raised md-warn" ui-sref="user.profile.info.edit({id: currentUser.id})">
 					Edit my profile
@@ -59,7 +57,7 @@
 		</div>
 
 		<!--User's forked dishes-->
-		<div class="row" ng-if="UserShowCtrl.user.show_forks === 1">
+		<div class="row" ng-if="UserShowCtrl.isForkedDishesPublic">
 			<div class="row">
 				<div class="col-md-3" id="user-show-forked-dishes">
 					<h3>Forked Dishes</h3>
@@ -82,7 +80,7 @@
 		</div>
 
 		<!--User's subscribed kitchens-->
-		<div class="row" ng-if="UserShowCtrl.user.show_subscription === 1">
+		<div class="row" ng-if="UserShowCtrl.isSubscribedKitchensPublic">
 			<div class="row">
 				<div class="col-md-3" id="user-show-subscribed-kitchens">
 					<h3>Subscribed Kitchens</h3>

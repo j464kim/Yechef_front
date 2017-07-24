@@ -1,4 +1,4 @@
-<h2>MY PRIVACY</h2>
+<h2>PRIVACY SETTINGS</h2>
 <hr/>
 <div class="inset" ng-cloak ng-if="uvCtrl.loaded" loader>
     <table class="table">
@@ -12,26 +12,26 @@
         <tr>
             <td>Phone Number</td>
             <td>
-                <md-switch ng-model="uvCtrl.user.show_phone" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
+                <md-switch ng-model="uvCtrl.userSetting.show_phone" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
                 </md-switch>
             </td>
         </tr>
         <tr>
             <td>Forked Dishes</td>
             <td>
-                <md-switch ng-model="uvCtrl.user.show_forks" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
+                <md-switch ng-model="uvCtrl.userSetting.show_forks" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
                 </md-switch>
             </td>
         </tr>
         <tr>
             <td>Subscribed Kitchens</td>
             <td>
-                <md-switch ng-model="uvCtrl.user.show_subscription" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
+                <md-switch ng-model="uvCtrl.userSetting.show_subscription" ng-false-value="0" ng-true-value="1" aria-label="phonePrivacy" class="md-primary">
                 </md-switch>
             </td>
         </tr>
         </tbody>
     </table>
-    <md-button class="md-primary md-raised" ng-disabled="uvCtrl.validate()" type="submit" ng-click="uvCtrl.updateUser()">Update Privacy Setting</md-button>
+    <md-button class="md-primary md-raised" ng-disabled="uvCtrl.validate()" type="submit" ng-click="uvCtrl.updateUserSettings()">Update Privacy Setting</md-button>
 </div>
 

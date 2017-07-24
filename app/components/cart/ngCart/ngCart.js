@@ -102,6 +102,30 @@ angular.module('ngCart', [
 			devHelper.log(this.getCart());
 		};
 
+		this.checkEmptyCart = function (kitchenId) {
+
+			// remove the cart object if no items exist
+			if (typeof kitchenId != 'undefined' && this.getTotalItems(kitchenId) == 0) {
+				devHelper.log('removing cart of kitchen ' + kitchenId + ' since there is no more item left');
+				delete this.$cart[kitchenId];
+				devHelper.log(this.getCart());
+			}
+
+			// loop through cart of each kitchen and delete if empty
+			for (var key in this.getCart()) {
+				if (this.getTotalItems(key) == 0) {
+					delete this.$cart[key];
+				}
+			}
+
+			// remove the whole cart if total # items are zero
+			if (this.getTotalItems() == 0) {
+				devHelper.log('total # items are zero - empty cart object');
+				this.setCart({});
+				devHelper.log(this.getCart());
+			}
+		};
+
 		this.getItemById = function (itemId, kitchenId) {
 			if (!this.getCart(kitchenId)) {
 				return false;
@@ -134,7 +158,6 @@ angular.module('ngCart', [
 		// };
 
 		this.setTaxRate = function (taxRate) {
-			devHelper.log(this.$cart);
 			for (var key in this.$cart) {
 				this.$cart[key].taxRate = +parseFloat(taxRate).toFixed(2);
 			}

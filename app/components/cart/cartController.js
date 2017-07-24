@@ -54,18 +54,17 @@ angular.module('ngCart.directives', [
 						devHelper.log(response);
 						ngCart.initDb(response);
 
-						// Iterate through each item in cart session and create a new instance of ngCartItem for each one
-						// technically, every time page is refreshed, new items(in local storage) are being added to cart
 						angular.forEach(response, function (cart) {
 							angular.forEach(cart.items, function (item) {
 								ngCart.$cart[item.kitchenId].items.push(new ngCartItem(item.id, item.name, item.eachPrice, item.quantity, item.data, item.kitchenId));
 							});
 						});
 
-						devHelper.log('restored cart from db: ');
-						devHelper.log(ngCart.getCart());
-						ngCart.setTaxRate(7.5);
+						ngCart.checkEmptyCart();
 						that.carts = ngCart.getCart();
+						devHelper.log('restored cart from db: ');
+						devHelper.log(that.carts);
+						ngCart.setTaxRate(7.5);
 						$scope.isCartReady = true;
 
 					}, function (response) {
@@ -78,8 +77,6 @@ angular.module('ngCart.directives', [
 					devHelper.log('Retrieving cart from local storage..');
 					devHelper.log('storageCart: ');
 					devHelper.log(storedCart);
-					// Iterate through each item in cart session and create a new instance of ngCartItem for each one
-					// technically, every time page is refreshed, new items(in local storage) are being added to cart
 
 					if (storedCart) {
 						for (var key in storedCart) {
@@ -92,6 +89,8 @@ angular.module('ngCart.directives', [
 							});
 						}
 					}
+
+					ngCart.checkEmptyCart();
 					that.carts = ngCart.getCart();
 					ngCart.$save();
 					$scope.isCartReady = true;
@@ -110,12 +109,14 @@ angular.module('ngCart.directives', [
 					inCart._quantity += quantityInt;
 					devHelper.log(inCart._name + ' quantity in cart is updated to ' + inCart._quantity);
 
-					// for adding the same item with different qty
 				} else {
+					// for adding the same item with different qty
 					inCart._quantity = quantityInt;
 					devHelper.log(inCart._name + ' qty is set to ' + quantity);
 
 				}
+				$rootScope.$broadcast('ngCart:change', {});
+
 
 				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.update(inCart._id, inCart._quantity).then(function (response) {
@@ -127,7 +128,6 @@ angular.module('ngCart.directives', [
 					});
 				}
 
-				$rootScope.$broadcast('ngCart:change', {});
 			}
 
 			/*********************
@@ -146,6 +146,7 @@ angular.module('ngCart.directives', [
 
 					// for a new item
 				} else {
+
 					// create a new instance of cart item
 					var newItem = new ngCartItem(id, name, price, quantity, data, kitchenId);
 
@@ -163,6 +164,10 @@ angular.module('ngCart.directives', [
 					devHelper.log('check if cart is saved to storage');
 					devHelper.log(store.get('cart'));
 
+					ngCart.checkEmptyCart(kitchenId);
+					$scope.isInCart = true;
+					$rootScope.$broadcast('ngCart:change', {});
+
 					if (!_.isEmpty($rootScope.currentUser)) {
 						CartAPI.create(id, quantity).then(function (response) {
 							devHelper.log('a new item is successfully added to Cart');
@@ -174,8 +179,6 @@ angular.module('ngCart.directives', [
 					}
 
 				}
-				$scope.isInCart = true;
-				$rootScope.$broadcast('ngCart:change', {});
 			};
 
 			this.removeItemById = function (id, kitchenId) {
@@ -193,20 +196,8 @@ angular.module('ngCart.directives', [
 
 				$rootScope.$broadcast('ngCart:itemRemoved', {});
 				$rootScope.$broadcast('ngCart:change', {});
-
-				// remove the cart object if no items exist
-				if (ngCart.getTotalItems(kitchenId) == 0) {
-					devHelper.log('removing cart of kitchen ' + kitchenId + ' since there is no more item left');
-					delete ngCart.$cart[kitchenId];
-					devHelper.log(ngCart.getCart());
-				}
-
-				// remove all cart objects if total # items are zero
-				if (ngCart.getTotalItems() == 0) {
-					devHelper.log('total # items are zero - empty cart object');
-					ngCart.setCart({});
-					devHelper.log(ngCart.getCart());
-				}
+				ngCart.checkEmptyCart(kitchenId);
+				$scope.isInCart = false;
 
 				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.destroy(id).then(function (response) {
@@ -217,7 +208,6 @@ angular.module('ngCart.directives', [
 						devHelper.log(response, 'error');
 					});
 				}
-				$scope.isInCart = false;
 
 			};
 

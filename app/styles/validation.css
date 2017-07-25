@@ -2429,6 +2429,9 @@ h6 {
 .large-icon:hover {
   color: darkblue;
 }
+.clickable {
+  cursor: pointer;
+}
 /* TODO: what are these for?? */
 /* bg color defination */
 /* these color schemes are used for js to fetch color setting */

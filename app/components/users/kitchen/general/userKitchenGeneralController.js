@@ -61,10 +61,6 @@ angular.module('user.kitchen.general', [
 			}
 		};
 
-		this.showAdmin = function (adminId) {
-			$state.go('user.show', {'id': adminId});
-		};
-
 		this.querySearch = genericService.querySearch;
 
 		_init();

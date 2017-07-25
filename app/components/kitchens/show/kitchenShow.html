@@ -1,131 +1,135 @@
 <div class="container">
-    <!--Header-->
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            <p class="text-center kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
-        </div>
-        <div class="col-md-3">
-            <i class="material-icons">star</i>
-            <i class="material-icons">star</i>
-            <i class="material-icons">star</i>
-            <i class="material-icons">star</i>
-            <i class="material-icons">star</i>
-            <label>524 Reviews</label>
-        </div>
-    </div>
-    <!--Sub Header-->
-    <div class="row">
-        <div class="col-md-3 text-center">
-            <label>Share it with</label>
-            <share-button for="kitchen"></share-button>
-        </div>
-        <div class="col-md-6 text-center">
-            <a>
-                <i class="material-icons">mail</i>
-                <label>{{KitchenCtrl.kitchen.email}}</label>
-            </a>
-            <a>
-                <i class="material-icons">phone</i>
-                <label>{{KitchenCtrl.kitchen.phone}}</label>
-            </a>
-        </div>
-        <div class="col-md-3 pull-right" ng-if="KitchenCtrl.kitchen">
-            <a>
-                <reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
-            </a>
+	<!--Header-->
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6">
+			<p class="text-center kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
+		</div>
+		<div class="col-md-3">
+			<i class="material-icons">star</i>
+			<i class="material-icons">star</i>
+			<i class="material-icons">star</i>
+			<i class="material-icons">star</i>
+			<i class="material-icons">star</i>
+			<label>524 Reviews</label>
+		</div>
+	</div>
+	<!--Sub Header-->
+	<div class="row">
+		<div class="col-md-3 text-center">
+			<label>Share it with</label>
+			<share-button for="kitchen"></share-button>
+		</div>
+		<div class="col-md-6 text-center">
+			<a>
+				<i class="material-icons">mail</i>
+				<label>{{KitchenCtrl.kitchen.email}}</label>
+			</a>
+			<a>
+				<i class="material-icons">phone</i>
+				<label>{{KitchenCtrl.kitchen.phone}}</label>
+			</a>
+		</div>
+		<div class="col-md-3 pull-right" ng-if="KitchenCtrl.kitchen">
+			<a>
+				<reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
+			</a>
 
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 <hr>
 
 <div class="container" id="kitchenList">
-    <div class="row">
-        <!--Kitchen Image-->
-        <div class="col-md-6 padding">
-            <div class="row" loader>
-                <img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
-                <button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})"
-                        ng-if="KitchenCtrl.isMine"
-                        class="btn btn-danger btn-sm btn-edit">Manage My Kitchen
-                </button>
-                <!--Must load it "after" kitchen data is available-->
-                <div ng-if="KitchenCtrl.kitchen" class="pull-right">
-                    <reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
-                </div>
-            </div>
-        </div>
-        <!--About Kitchen-->
-        <div class="col-md-6">
-            <div class="row">
-                <!--Kitchen Description-->
-                <div class="col-md-8">
-                    <p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
-                </div>
-                <!--Kitchen Chef-->
-                <div class="col-md-4">
-                    <div class="owner-info pull-right"
-                         ng-if="KitchenCtrl.kitchenAdmins[0].pivot.role == 1 && KitchenCtrl.kitchenAdmins[0].pivot.verified == 1"
-                         loader>
-                        <h4>Chef</h4>
-                        <img class="kitchen-owner" ng-src="{{KitchenCtrl.kitchenAdmins[0].medias[0].url}}">
-                        <a ui-sref="user.show({id: KitchenCtrl.kitchenAdmins[0].id})"><h4 id="kitchenOwnerName">{{KitchenCtrl.kitchenAdmins[0].first_name}}
-                            {{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
-                        <div>
-                            <md-button class="md-raised md-primary">Message</md-button>
-                            <br/>
-                            <a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
-                        </div>
-                    </div>
-                    <hr/>
-                </div>
-                <hr/>
-            </div>
-        </div>
-    </div>
-    <!--Kitchen Dishes-->
-    <div class="row">
-        <h2>Dishes</h2>
-        <div class="row">
-            <div class="col-md-3" ng-repeat="dish in KitchenCtrl.dishes" loader>
-                <dish-card dish="dish"></dish-card>
-            </div>
-        </div>
-    </div>
-    <!-- Gmap -->
-    <div class="row margin-top-2em" ng-if="KitchenCtrl.kitchen">
-        <google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}"></google-map-show>
-    </div>
-    <!--See more chefs-->
-    <div style="visibility: hidden">
-        <div class="md-dialog-container" id="showChefs">
-            <md-dialog layout-padding>
-                <md-toolbar>
-                    <div class="md-toolbar-tools">
-                        <h2>Chefs</h2>
-                        <span flex></span>
-                        <md-button class="md-icon-button" ng-click="KitchenCtrl.closeDialog()">
-                            X
-                        </md-button>
-                    </div>
-                </md-toolbar>
-                <md-dialog-content>
-                    <div ng-repeat="person in KitchenCtrl.kitchenAdmins">
-                        <div class="owner-info"
-                             ng-if="person.pivot.role == 1 && person.pivot.verified == 1">
-                            <img class="kitchen-owner"
-                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
-                            <a ui-sref="user.show({id: person.id})"><h4 id="kitchenChefName">{{person.first_name}} {{person.last_name}}</h4></a>
-                            <div>
-                                <md-button class="md-raised md-primary">Message</md-button>
-                                <br/>
-                            </div>
-                        </div>
-                    </div>
-                </md-dialog-content>
-            </md-dialog>
-        </div>
-    </div>
+	<div class="row">
+		<!--Kitchen Image-->
+		<div class="col-md-6 padding">
+			<div class="row" loader>
+				<md-card>
+					<img ng-src="{{KitchenCtrl.media}}" alt="Card image cap" style="width:100%;">
+				</md-card>
+				<button ui-sref="user.kitchen.general.view({myCurrentKitchenId: KitchenCtrl.kitchen.id})"
+				        ng-if="KitchenCtrl.isMine"
+				        class="btn btn-default btn-sm btn-edit">Manage My Kitchen
+				</button>
+				<!--Must load it "after" kitchen data is available-->
+				<div ng-if="KitchenCtrl.kitchen" class="pull-right">
+					<reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
+				</div>
+			</div>
+		</div>
+		<!--About Kitchen-->
+		<div class="col-md-6">
+			<div class="row">
+				<!--Kitchen Description-->
+				<div class="col-md-8">
+					<p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
+				</div>
+				<!--Kitchen Chef-->
+				<div class="col-md-4">
+					<div class="owner-info pull-right"
+					     ng-if="KitchenCtrl.kitchenAdmins[0].pivot.role == 1 && KitchenCtrl.kitchenAdmins[0].pivot.verified == 1"
+					     loader>
+						<h4>Chef</h4>
+						<img class="kitchen-owner" ng-src="{{KitchenCtrl.kitchenAdmins[0].medias[0].url}}">
+						<a ui-sref="user.show({id: KitchenCtrl.kitchenAdmins[0].id})"><h4 id="kitchenOwnerName">
+							{{KitchenCtrl.kitchenAdmins[0].first_name}}
+							{{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
+						<div>
+							<md-button class="md-raised md-primary">Message</md-button>
+							<br/>
+							<a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
+						</div>
+					</div>
+					<hr/>
+				</div>
+				<hr/>
+			</div>
+		</div>
+	</div>
+	<!--Kitchen Dishes-->
+	<div class="row">
+		<h2>Dishes</h2>
+		<div class="row">
+			<div class="col-md-3" ng-repeat="dish in KitchenCtrl.dishes" loader>
+				<dish-card dish="dish"></dish-card>
+			</div>
+		</div>
+	</div>
+	<!-- Gmap -->
+	<div class="row margin-top-2em" ng-if="KitchenCtrl.kitchen">
+		<google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}"></google-map-show>
+	</div>
+	<!--See more chefs-->
+	<div style="visibility: hidden">
+		<div class="md-dialog-container" id="showChefs">
+			<md-dialog layout-padding>
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2>Chefs</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="KitchenCtrl.closeDialog()">
+							X
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-dialog-content>
+					<div ng-repeat="person in KitchenCtrl.kitchenAdmins">
+						<div class="owner-info"
+						     ng-if="person.pivot.role == 1 && person.pivot.verified == 1">
+							<img class="kitchen-owner"
+							     ng-src="{{person.medias[0].url}}">
+							<a ui-sref="user.show({id: person.id})"><h4 id="kitchenChefName">{{person.first_name}}
+								{{person.last_name}}</h4></a>
+							<div>
+								<md-button class="md-raised md-primary">Message</md-button>
+								<br/>
+							</div>
+						</div>
+					</div>
+				</md-dialog-content>
+			</md-dialog>
+		</div>
+	</div>
 </div>

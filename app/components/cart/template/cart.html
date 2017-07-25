@@ -46,14 +46,18 @@
 					<tbody>
 					<tr ng-repeat="item in cart.items track by $index">
 						{{item}}
-						<td><span ng-click="cartCtrl.removeItemById(item.getId(), item._kitchenId)"
-						          class="glyphicon glyphicon-remove"></span>
+						<td><button ng-click="cartCtrl.removeItemById(item.getId(), item._kitchenId)"
+						          class="glyphicon glyphicon-remove"></button>
 						</td>
 						<td>{{ item.getName() }}</td>
-						<td><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
-						          ng-click="cartCtrl.updateQty(item, -1, true)"></span>&nbsp;&nbsp;
+						<td>
+							<button class="glyphicon glyphicon-minus" ng-disabled="item.getQuantity() == 1"
+							        ng-class="{'disabled':item.getQuantity()==1}"
+							        ng-click="cartCtrl.updateQty(item, -1, true)"></button>
+							&nbsp;&nbsp;
 							{{ item.getQuantity() | number }}&nbsp;&nbsp;
-							<span class="glyphicon glyphicon-plus" ng-click="cartCtrl.updateQty(item, 1, true)"></span>
+							<button class="glyphicon glyphicon-plus"
+							        ng-click="cartCtrl.updateQty(item, 1, true)"></button>
 						</td>
 						<td>{{ item.getPrice() | currency }}</td>
 						<td>{{ item.getTotal() | currency }}</td>
@@ -63,7 +67,8 @@
 				<!--Order-->
 				<div class="pull-right">
 					<div class="row">
-						<button class="small-margin btn-danger btn-lg" ui-sref="checkout.billing({amount: ngCart.totalCost(cart.items[0]._kitchenId), kitchenId: cart.items[0]._kitchenId})">
+						<button class="small-margin btn-danger btn-lg"
+						        ui-sref="checkout.billing({amount: ngCart.totalCost(cart.items[0]._kitchenId), kitchenId: cart.items[0]._kitchenId})">
 							To
 							Request Order
 						</button>

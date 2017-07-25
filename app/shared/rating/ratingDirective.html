@@ -3,9 +3,11 @@
 		<br>
 		<div class="row">
 			<div class="col-md-1">
+				<br/>
 				<a ui-sref="user.show({id: rating.user_id})">
 					<img class="img-circle profile-image-comment" ng-src="{{rating.user.medias[0].url}}"
 					     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+					<br/><br/>
 					<strong>{{rating.user.first_name}} {{rating.user.last_name}}</strong>
 				</a>
 			</div>
@@ -44,12 +46,14 @@
 					<!--{{rating.updated_at}}-->
 					<!--</span>-->
 				</div>
-				<div class="panel-body">
+				<md-card>
+					<div class="panel-body">
                     <span e-style="width: 250%;" editable-textarea="rating.comment" e-form="textBtnForm"
                           onbeforesave="RatingCtrl.updateComment(rating, $data)">
                         {{rating.comment || 'empty'}}
                     </span>
-				</div>
+					</div>
+				</md-card>
 			</div>
 		</div>
 	</div>

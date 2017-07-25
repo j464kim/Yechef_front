@@ -9,12 +9,15 @@ angular.module('carousel', [])
 				medias: '=',
 				interval: '@'
 			},
-			controller: function($scope, config) {
+			controller: function($scope, config, $state) {
 				if (!$scope.interval) {
 					$scope.interval = config.carouselDefaultInterval;
 				}
 				$scope.noWrapSlides = false;
 				$scope.active = 0;
+				if ($state.current.name == 'user.show') {
+					$scope.user_show = true;
+				}
 			}
 		};
 	}]);

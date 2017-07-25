@@ -4,8 +4,8 @@ angular.module('dish.list.feature', [
     'dishes.api',
 ])
 
-    .controller('FeaturedDishController', ['$state', 'DishesAPI', 'devHelper',
-        function ($state, DishesAPI, devHelper) {
+    .controller('FeaturedDishController', ['$state', 'DishesAPI', 'devHelper', 'genericService',
+        function ($state, DishesAPI, devHelper, genericService) {
 
             /*********************
              *    Private Variables
@@ -37,7 +37,7 @@ angular.module('dish.list.feature', [
 					that.totalItems = response.total;
 					that.currentPage = response.current_page;
                 }, function (response) {
-                    // TODO handle error state
+                    genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
                 });
             }

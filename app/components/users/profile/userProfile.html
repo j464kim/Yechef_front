@@ -1,79 +1,66 @@
 <div ng-controller="userMainController" layout="column" style="height:600px;" ng-cloak>
 
-    <section layout="row" flex>
+	<section layout="row" flex>
 
-        <md-sidenav
-                class="md-sidenav-left"
-                md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')"
-                md-whiteframe="4">
+		<md-sidenav
+				class="md-sidenav-left"
+				md-component-id="left"
+				md-is-locked-open="$mdMedia('gt-md')"
+				md-whiteframe="4">
 
-            <md-toolbar class="md-theme-indigo">
-                <h1 ui-sref=".main" class="md-toolbar-tools">User Profile</h1>
-            </md-toolbar>
-            <md-content ng-controller="LeftCtrl">
-                <div class="list-group">
-                    <a ui-sref=".info.view" class="list-group-item">Basic Information</a>
-                    <a ui-sref=".order" class="list-group-item">My Orders</a>
-                    <a ui-sref=".forked" class="list-group-item">Forked Dishes</a>
-                    <a ui-sref=".subscribe" class="list-group-item">Subscribed Kitchens</a>
-                    <a ui-sref=".privacySetting" class="list-group-item">Privacy Settings</a>
-                    <a ui-sref=".payment.list" class="list-group-item">Payment</a>
+			<md-toolbar class="md-theme-indigo">
+				<h1 ui-sref=".main" class="md-toolbar-tools">User Profile</h1>
+			</md-toolbar>
+			<md-content ng-controller="LeftCtrl">
+				<div class="list-group">
+					<a ui-sref=".info.view" class="list-group-item">Basic Information</a>
+					<a ui-sref=".order" class="list-group-item">My Orders</a>
+					<a ui-sref=".forked" class="list-group-item">Forked Dishes</a>
+					<a ui-sref=".subscribe" class="list-group-item">Subscribed Kitchens</a>
+					<a ui-sref=".privacySetting" class="list-group-item">Privacy Settings</a>
+					<a ui-sref=".payment.list" class="list-group-item">Payment</a>
 
-                </div>
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
-                </md-button>
-            </md-content>
+				</div>
+				<md-button ng-click="close()" class="md-warn md-raised" hide-gt-md>
+					Close Menu
+				</md-button>
+			</md-content>
 
-        </md-sidenav>
+		</md-sidenav>
 
-        <md-content flex layout-padding>
+		<md-content flex layout-padding>
 
-            <div layout-fill flex layout="column" layout-align="top center">
+			<div layout="row">
+				<md-button ng-click="toggleLeft()"
+				           class="pull-left md-primary md-raised" hide-gt-md>
+					Show Menu
+				</md-button>
+			</div>
 
-                <!--Main Content-->
-                <div ui-view></div>
+			<div layout="column" layout-align="top center" ui-view></div>
 
-                <div>
-                    <md-button ng-click="toggleLeft()"
-                               class="md-primary" hide-gt-md>
-                        Toggle left
-                    </md-button>
-                </div>
-                <!--<div>-->
-                    <!--<md-button ng-click="toggleRight()"-->
-                               <!--ng-hide="isOpenRight()"-->
-                               <!--class="md-primary">-->
-                        <!--Toggle right-->
-                    <!--</md-button>-->
-                <!--</div>-->
-            </div>
+		</md-content>
 
-            <div flex></div>
+		<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
 
-        </md-content>
+			<md-toolbar class="md-theme-light">
+				<h1 class="md-toolbar-tools">Sidenav Right</h1>
+			</md-toolbar>
+			<md-content ng-controller="RightCtrl" layout-padding>
+				<form>
+					<md-input-container>
+						<label for="testInput">Test input</label>
+						<input type="text" id="testInput"
+						       ng-model="data" md-autofocus>
+					</md-input-container>
+				</form>
+				<md-button ng-click="close()" class="md-primary">
+					Close Sidenav Right
+				</md-button>
+			</md-content>
 
-        <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+		</md-sidenav>
 
-            <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Sidenav Right</h1>
-            </md-toolbar>
-            <md-content ng-controller="RightCtrl" layout-padding>
-                <form>
-                    <md-input-container>
-                        <label for="testInput">Test input</label>
-                        <input type="text" id="testInput"
-                               ng-model="data" md-autofocus>
-                    </md-input-container>
-                </form>
-                <md-button ng-click="close()" class="md-primary">
-                    Close Sidenav Right
-                </md-button>
-            </md-content>
-
-        </md-sidenav>
-
-    </section>
+	</section>
 
 </div>

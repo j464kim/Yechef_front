@@ -3,8 +3,8 @@ angular.module('ngCart.directives', [
 	'ngCart.fulfilment'
 ])
 
-	.controller('CartController', ['$scope', 'ngCart', 'CartAPI', 'devHelper', 'ngCartItem', '$rootScope', 'store',
-		function ($scope, ngCart, CartAPI, devHelper, ngCartItem, $rootScope, store) {
+	.controller('CartController', ['$scope', 'ngCart', 'CartAPI', 'devHelper', 'ngCartItem', '$rootScope', 'store', 'genericService',
+		function ($scope, ngCart, CartAPI, devHelper, ngCartItem, $rootScope, store, genericService) {
 
 			$scope.ngCart = ngCart;
 
@@ -68,7 +68,7 @@ angular.module('ngCart.directives', [
 						$scope.isCartReady = true;
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 
@@ -117,13 +117,12 @@ angular.module('ngCart.directives', [
 				}
 				$rootScope.$broadcast('ngCart:change', {});
 
-
 				if (!_.isEmpty($rootScope.currentUser)) {
 					CartAPI.update(inCart._id, inCart._quantity).then(function (response) {
 						devHelper.log(response);
 						devHelper.log(inCart._name + ' in cart is successfully updated');
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}
@@ -173,7 +172,7 @@ angular.module('ngCart.directives', [
 							devHelper.log('a new item is successfully added to Cart');
 							devHelper.log(response);
 						}, function (response) {
-							// TODO handle error state
+							genericService.showToast('Oops..! Something is wrong');
 							devHelper.log(response, 'error');
 						});
 					}
@@ -204,7 +203,7 @@ angular.module('ngCart.directives', [
 						devHelper.log('dish ' + id + ' is successfully removed from cart db');
 						devHelper.log(response);
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}

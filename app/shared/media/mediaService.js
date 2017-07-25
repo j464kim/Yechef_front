@@ -46,7 +46,7 @@ angular.module('mediaUpload')
 					}
 
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			};
@@ -67,7 +67,7 @@ angular.module('mediaUpload')
 						var deletedMedia = response;
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}

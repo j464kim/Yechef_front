@@ -6,6 +6,7 @@ angular.module('profile', [
 	'user.profile.general',
 	'user.profile.subscribe',
 	'user.profile.fork',
+	'user.profile.privacy',
 	'user.profile.order',
 	'user.profile.payment',
 	'user.profile.payment.create',
@@ -16,7 +17,7 @@ angular.module('profile', [
 
 		$stateProvider
 			.state('user.profile', {
-				url: '/profile/{id}',
+				url: '/profile',
 				templateUrl: 'components/users/profile/userProfile.html',
 			})
 			.state('user.profile.main', {
@@ -56,6 +57,7 @@ angular.module('profile', [
 			.state('user.profile.privacySetting', {
 				url: '/privacySetting',
 				templateUrl: 'components/users/profile/privacy/userPrivacy.html',
+				controller: 'UserPrivacyController as upCtrl',
 			})
 			.state('user.profile.payment', {
 				url: '/payment',

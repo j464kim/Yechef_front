@@ -1,5 +1,7 @@
 <h2>MY INFO</h2>
 <hr>
+<img class="profile-image img-circle" ng-src="{{ugCtrl.user.medias[0].url}}" alt="Card image cap">
+
 <div class="userName">
     <label>Name:</label>
     <span>{{ugCtrl.user.first_name + ' ' + ugCtrl.user.last_name}}</span>
@@ -12,5 +14,15 @@
     <label>Phone:</label>
     <span>{{ugCtrl.user.phone}}</span>
 </div>
-<button ui-sref="user.profile.info.edit({id: currentUser.id})">Edit</button>
-<button ui-sref="user.password.updateRequest">Change Password</button>
+<!--Button-->
+<div layout="column">
+    <md-button flex class="md-raised md-primary" ui-sref="user.show({id: currentUser.id})">
+        View
+    </md-button>
+    <md-button flex class="md-raised md-warn" ui-sref="user.profile.info.edit({id: currentUser.id})">
+        Edit My Info
+    </md-button>
+    <md-button flex class="md-raised" ui-sref="user.password.updateRequest">
+        Change Password
+    </md-button>
+</div>

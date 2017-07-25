@@ -4,8 +4,8 @@ angular.module('dish.destroy', [
     'dishes.api',
 ])
 
-    .controller('DishDestroyController', ['$state', '$stateParams', 'DishesAPI', 'devHelper',
-        function ($state, $stateParams, DishesAPI, devHelper) {
+    .controller('DishDestroyController', ['$state', '$stateParams', 'DishesAPI', 'devHelper', 'genericService',
+        function ($state, $stateParams, DishesAPI, devHelper, genericService) {
 
             /*********************
              *    Private Variables
@@ -36,7 +36,7 @@ angular.module('dish.destroy', [
                         .then(function (response) {
                             $state.go('dish.list');
                         }, function (response) {
-                            // TODO handle error state
+                            genericService.showToast('Oops..! Something is wrong');
 							devHelper.log(response, 'error');
                         });
                 } else {

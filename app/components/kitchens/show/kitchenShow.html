@@ -72,14 +72,14 @@
 					     ng-if="KitchenCtrl.kitchenAdmins[0].pivot.role == 1 && KitchenCtrl.kitchenAdmins[0].pivot.verified == 1"
 					     loader>
 						<h4>Chef</h4>
-						<img class="kitchen-owner"
-						     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
-						<h4 id="kitchenOwnerName">{{KitchenCtrl.kitchenAdmins[0].first_name}}
-							{{KitchenCtrl.kitchenAdmins[0].last_name}}</h4>
+						<img class="kitchen-owner" ng-src="{{KitchenCtrl.kitchenAdmins[0].medias[0].url}}">
+						<a ui-sref="user.show({id: KitchenCtrl.kitchenAdmins[0].id})"><h4 id="kitchenOwnerName">
+							{{KitchenCtrl.kitchenAdmins[0].first_name}}
+							{{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
 						<div>
 							<md-button class="md-raised md-primary">Message</md-button>
 							<br/>
-							<a ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
+							<a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
 						</div>
 					</div>
 					<hr/>
@@ -93,11 +93,7 @@
 		<h2>Dishes</h2>
 		<div class="row">
 			<div class="col-md-3" ng-repeat="dish in KitchenCtrl.dishes" loader>
-				<a ui-sref="dish.show({id: dish.id})">
-					<img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
-					<h4 class="card-title">{{dish.name}}</h4>
-					<p class="card-text">{{dish.price}}</p>
-				</a>
+				<dish-card dish="dish"></dish-card>
 			</div>
 		</div>
 	</div>
@@ -123,8 +119,9 @@
 						<div class="owner-info"
 						     ng-if="person.pivot.role == 1 && person.pivot.verified == 1">
 							<img class="kitchen-owner"
-							     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56ZsAfy-cSFhFg6qovcr0fGQTnyDIRfJx1XMdOs05isUElvHk">
-							<h4 id="kitchenChefName">{{person.first_name}} {{person.last_name}}</h4>
+							     ng-src="{{person.medias[0].url}}">
+							<a ui-sref="user.show({id: person.id})"><h4 id="kitchenChefName">{{person.first_name}}
+								{{person.last_name}}</h4></a>
 							<div>
 								<md-button class="md-raised md-primary">Message</md-button>
 								<br/>

@@ -7,8 +7,8 @@ angular.module('dish.show', [
 	'googleMapShow',
 ])
 
-	.controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper',
-		function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper) {
+	.controller('DishShowController', ['$state', '$stateParams', 'DishesAPI', 'KitchenAPI', 'devHelper', 'genericService',
+		function ($state, $stateParams, DishesAPI, KitchenAPI, devHelper, genericService) {
 
 			/*********************
 			 *    Private Variables
@@ -32,23 +32,21 @@ angular.module('dish.show', [
 			function _showDish() {
 				DishesAPI.show(that.dishId)
 					.then(function (response) {
-						devHelper.log(response);
 						that.dish = response;
 						_getKitchen(that.dish.kitchen_id);
 					}, function (response) {
-						// TODO handle error state
-						console.error(response);
+						genericService.showToast('Oops..! Something is wrong');
+						devHelper.log(response, 'error');
 					});
 
 			}
 
 			function _getKitchen(kitchenId) {
 				KitchenAPI.show(kitchenId).then(function (response) {
-					devHelper.log(response);
 					that.kitchen = response;
 				}, function (response) {
-					// TODO handle error state
-					console.error(response);
+					genericService.showToast('Oops..! Something is wrong');
+					devHelper.log(response, 'error');
 				});
 			}
 

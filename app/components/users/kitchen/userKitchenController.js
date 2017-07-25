@@ -3,12 +3,16 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams) {
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, genericService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
 		that.myCurrentKitchen = $stateParams.myCurrentKitchen;
 		that.isKitchenSelected = false;
+
+
+		this.myKitchensTotalItems = 0;
+		this.myKitchensCurrentPage = 0;
 
 		function _init() {
 			_getMyKitchens();
@@ -19,14 +23,22 @@ angular.module('user.kitchen', [
 		}, function (newVal, oldVal) {
 			that.myCurrentKitchenToEdit = angular.copy(newVal);
 		});
+		$scope.toggleLeft = genericService.buildToggler('left');
+		$scope.toggleRight = genericService.buildToggler('right');
 
 		function _getMyKitchens() {
-			UserAPI.getMyKitchens().then(
+			var pageNum = ++that.myKitchensCurrentPage;
+			UserAPI.getMyKitchens(pageNum, 100).then(
 				function (response) {
 					devHelper.log(response);
-					that.myKitchens = response;
+					if (!that.myKitchens) {
+						that.myKitchens = [];
+					}
+					that.myKitchens = that.myKitchens.concat(response.data);
+					that.myKitchensTotalItems = response.total;
+					that.myKitchensCurrentPage = response.current_page;
 				}, function (response) {
-					// TODO handle error state ie. front end display
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 		};
@@ -41,11 +53,14 @@ angular.module('user.kitchen', [
 						return true;
 					}
 				}
+			} else {
+				//If No current Kitchen is set, just set the first kitchen to be selected
+				$state.go('.', {'myCurrentKitchenId': that.myKitchens[0].id});
 			}
 		};
 
 		this.selectChanged = function () {
-			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id, 'myCurrentKitchen': that.myCurrentKitchen});
+			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id});
 		};
 
 		_init();

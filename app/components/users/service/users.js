@@ -16,16 +16,35 @@ angular.module('user.api', [])
 				update: {
 					method: 'PUT'
 				},
+				getInfo: {
+					methbod: 'GET',
+					url: api_endpoint + ':userId' + "/" + ':option',
+					params: {userId: '@userId', option: '@option'}
+				},
 				cancelOrder: {
 					method: 'GET',
-					url: api_endpoint + 'cancelOrder/' + ':orderId',
+					url: api_endpoint + 'cancelOrder/' + ':orderId'
 				}
 			});
 		}
 	])
 
-	.service('UserAPI', ['$q', 'UserResource',
-		function ($q, UserResource) {
+	.factory('UserSettingResource', ['$resource', 'config',
+		function ($resource, config) {
+			var api_endpoint = config.endpoint + 'userSetting/';
+			return $resource(api_endpoint, {}, {
+				show: {
+					method: 'GET'
+				},
+				update: {
+					method: 'PUT'
+				}
+			});
+		}
+	])
+
+	.service('UserAPI', ['$q', 'UserResource', 'UserSettingResource',
+		function ($q, UserResource, UserSettingResource) {
 
 			function list(option) {
 
@@ -67,11 +86,106 @@ angular.module('user.api', [])
 				});
 			}
 
-			function getMyKitchens() {
+			function getKitchens(userId, pageNum, perPage) {
+				return $q(function (resolve, reject) {
+					UserResource.getInfo({
+						option: 'getKitchens',
+						userId: userId,
+						page: pageNum,
+						perPage: perPage
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getForkedDishes(userId, pageNum, perPage) {
+				return $q(function (resolve, reject) {
+					UserResource.getInfo({
+						option: 'getForkedDishes',
+						userId: userId,
+						page: pageNum,
+						perPage: perPage
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getSubscriptions(userId, pageNum, perPage) {
+				return $q(function (resolve, reject) {
+					UserResource.getInfo({
+						option: 'getSubscriptions',
+						userId: userId,
+						page: pageNum,
+						perPage: perPage
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getMyKitchens(pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.list({
-						id: 'getMyKitchens',
+						page: pageNum,
+						perPage: perPage,
+						id: 'getMyKitchens'
 					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getMyForkedDishes(pageNum, perPage) {
+				return $q(function (resolve, reject) {
+					UserResource.list({
+						page: pageNum,
+						perPage: perPage,
+						id: 'getMyForkedDishes'
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getMySubscriptions(pageNum, perPage) {
+				return $q(function (resolve, reject) {
+					UserResource.list({
+						page: pageNum,
+						perPage: perPage,
+						id: 'getMySubscriptions'
+					}).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function getMySettings() {
+				return $q(function (resolve, reject) {
+					UserSettingResource.show().$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			};
+
+			function setMySettings(settings) {
+				return $q(function (resolve, reject) {
+					UserSettingResource.update(settings).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -97,8 +211,15 @@ angular.module('user.api', [])
 				list: list,
 				show: show,
 				update: update,
+				getKitchens: getKitchens,
+				getForkedDishes: getForkedDishes,
+				getSubscriptions: getSubscriptions,
 				getMyKitchens: getMyKitchens,
-				cancelOrder: cancelOrder,
+				getMyForkedDishes: getMyForkedDishes,
+				getMySubscriptions: getMySubscriptions,
+				getMySettings: getMySettings,
+				setMySettings: setMySettings,
+				cancelOrder: cancelOrder
 			};
 		}
 	]);

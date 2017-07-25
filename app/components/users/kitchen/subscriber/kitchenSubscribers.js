@@ -2,7 +2,7 @@ angular.module('user.kitchen.subscriber', [
 	'ngMaterial',
 ])
 
-	.controller('kitchenSubscriberController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, DishesAPI) {
+	.controller('kitchenSubscriberController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, genericService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -16,7 +16,7 @@ angular.module('user.kitchen.subscriber', [
 				devHelper.log(response);
 				that.subscribers = response;
 			}, function (response) {
-				//TODO handle error state
+				genericService.showToast('Oops..! Something is wrong');
 				devHelper.log(response, 'error');
 			});
 		}

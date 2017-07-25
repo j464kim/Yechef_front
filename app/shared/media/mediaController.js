@@ -3,8 +3,8 @@ angular.module('mediaUpload', [
 	'media.api'
 ])
 
-	.controller('MediaController', ['config', 'devHelper', 'sessionService', 'mediaService',
-		function (config, devHelper, sessionService, mediaService) {
+	.controller('MediaController', ['config', 'devHelper', 'sessionService', 'mediaService', '$state', 'AuthAPI',
+		function (config, devHelper, sessionService, mediaService, $state, AuthAPI) {
 
 			/*********************
 			 *  Private Functions
@@ -32,6 +32,9 @@ angular.module('mediaUpload', [
 
 						myDropzone.on("success", function (file, xhr, formData) {
 							devHelper.log('image is successfully uploaded');
+							$state.reload();
+							// For updating Profile picture at the top right headaer.
+							AuthAPI.setCurrentUser();
 						});
 
 						myDropzone.on("maxfilesexceeded", function (file) {

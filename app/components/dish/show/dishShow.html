@@ -47,74 +47,77 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-		<div class="dish-show-right affix" loader>
-			<!--Description & Ingredients-->
-			<div class="row">
-				<md-card>
-					<md-content>
-						<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-							<md-tab label="Description">
-								<md-content class="md-padding">
-									<p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})">
-										{{DishCtrl.kitchen.name}} </a></p>
-									<br/>
-									<p class="card-text">{{DishCtrl.dish.description}}</p>
-								</md-content>
-							</md-tab>
-							<md-tab label="Ingredients">
-								<md-content class="md-padding">
-									<p>salt 1g</p>
-									<p>chicken 500g</p>
-									<p>water 500ml</p>
-									<p>2 eggs</p>
-									<p>angmotti</p>
-								</md-content>
-							</md-tab>
-						</md-tabs>
-					</md-content>
-				</md-card>
-			</div>
+		<div class="dish-show-right-wrapper: affix">
+			<div class="dish-show-right affix" loader>
+				<!--Description & Ingredients-->
+				<div class="row">
+					<md-card>
+						<md-content>
+							<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+								<md-tab label="Description">
+									<md-content class="md-padding">
+										<p>Cooked by: <a ui-sref="kitchen.show({id: DishCtrl.kitchen.id})">
+											{{DishCtrl.kitchen.name}} </a></p>
+										<br/>
+										<p class="card-text">{{DishCtrl.dish.description}}</p>
+									</md-content>
+								</md-tab>
+								<md-tab label="Ingredients">
+									<md-content class="md-padding">
+										<p>salt 1g</p>
+										<p>chicken 500g</p>
+										<p>water 500ml</p>
+										<p>2 eggs</p>
+										<p>angmotti</p>
+									</md-content>
+								</md-tab>
+							</md-tabs>
+						</md-content>
+						<!--Order & Price-->
+					</md-card>
+				</div>
 
-			<!--Order & Price-->
-			<div class="row" ng-if="DishCtrl.dish">
-				<md-card>
-					<md-content class="dish-show-order padding-1em">
-						<div class="text-center">
-							<div class="col-md-6">
-								<!--Add-to-cart-->
-								<ngcart-addtocart id="{{ DishCtrl.dish.id }}" name="{{ DishCtrl.dish.name }}"
-								                  price="{{ DishCtrl.dish.price }}" quantity="1"
-								                  quantity-max="30" data="item" kitchen-id="{{ DishCtrl.dish.kitchen_id }}">
-								</ngcart-addtocart>
-								<!--Dish Price-->
-								<div class="row">
-									<span id="dishPrice">${{DishCtrl.dish.price}}</span>
+				<!--Order & Price-->
+				<div class="row" ng-if="DishCtrl.dish">
+					<md-card>
+						<md-content class="dish-show-order padding-1em">
+							<div class="text-center">
+								<div class="col-md-6">
+									<!--Add-to-cart-->
+									<ngcart-addtocart id="{{ DishCtrl.dish.id }}" name="{{ DishCtrl.dish.name }}"
+									                  price="{{ DishCtrl.dish.price }}" quantity="1"
+									                  quantity-max="30" data="item"
+									                  kitchen-id="{{ DishCtrl.dish.kitchen_id }}">
+									</ngcart-addtocart>
+									<!--Dish Price-->
+									<div class="row">
+										<span id="dishPrice">${{DishCtrl.dish.price}}</span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</md-content>
-				</md-card>
-			</div>
-			<!--Social Media-->
-			<div class="row margin-bottom-1em text-center">
-				<md-card>
-					<md-content class="padding-1em">
-						<div ng-if="DishCtrl.dish" class="col-md-6">
-							<!--Must load it "after" Dish data is available-->
-							<reaction-button reactionable="DishCtrl.dish" for="'fork'"></reaction-button>
-						</div>
-						<div class="col-md-6 font-size-1-2em">
-							Share it with
-							<share-button for="dish"></share-button>
-						</div>
-					</md-content>
-				</md-card>
-			</div>
-			<!--Gmap-->
-			<div class="row center" ng-if="DishCtrl.kitchen">
-				<google-map-show for="dish" address="{{DishCtrl.kitchen.address}}"></google-map-show>
+						</md-content>
+					</md-card>
+				</div>
+				<!--Social Media-->
+				<div class="row margin-bottom-1em text-center">
+					<md-card>
+						<md-content class="padding-1em">
+							<div ng-if="DishCtrl.dish" class="col-md-6">
+								<!--Must load it "after" Dish data is available-->
+								<reaction-button reactionable="DishCtrl.dish" for="'fork'"></reaction-button>
+							</div>
+							<div class="col-md-6 font-size-1-2em">
+								Share it with
+								<share-button for="dish"></share-button>
+							</div>
+						</md-content>
+					</md-card>
+				</div>
+				<!--Gmap-->
+				<div class="row center" ng-if="DishCtrl.kitchen">
+					<google-map-show for="dish" address="{{DishCtrl.kitchen.address}}"></google-map-show>
+				</div>
 			</div>
 		</div>
 	</div>
-
 </div>

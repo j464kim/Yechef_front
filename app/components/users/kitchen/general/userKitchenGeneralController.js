@@ -6,7 +6,6 @@ angular.module('user.kitchen.general', [
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
-		that.myCurrentKitchen = $stateParams.myCurrentKitchen;
 		that.isKitchenSelected = false;
 
 		function _init() {
@@ -19,7 +18,7 @@ angular.module('user.kitchen.general', [
 				devHelper.log(response);
 				that.kitchenAdmins = response;
 			}, function (response) {
-				//TODO handle error state
+				genericService.showToast('Oops..! Something is wrong');
 				devHelper.log(response, 'error');
 			});
 		}
@@ -34,27 +33,10 @@ angular.module('user.kitchen.general', [
 						return user;
 					});
 				}, function (response) {
-					//TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 		};
-
-		function _updateKitchen(myCurrentKitchenToEdit, ukCtrl) {
-			KitchenAPI.update(myCurrentKitchenToEdit, that.myCurrentKitchen.id).then(function (response) {
-				var updatedKitchen = response;
-				ukCtrl.myCurrentKitchen.name = updatedKitchen.name;
-				ukCtrl.myCurrentKitchen.phone = updatedKitchen.phone;
-				ukCtrl.myCurrentKitchen.address = updatedKitchen.address;
-				ukCtrl.myCurrentKitchen.email = updatedKitchen.email;
-				ukCtrl.myCurrentKitchen.description = updatedKitchen.description;
-				ukCtrl.myCurrentKitchen.medias = updatedKitchen.medias;
-				devHelper.log(response);
-				$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
-			}, function (response) {
-				// TODO handle error state
-				devHelper.log(response, 'error');
-			});
-		}
 
 		this.addAdmin = function () {
 			devHelper.log(that.adminToAdd);
@@ -62,7 +44,6 @@ angular.module('user.kitchen.general', [
 				devHelper.log(response);
 				_getKitchenAdmins();
 			}, function (response) {
-				//TODO handle error state
 				genericService.showToast(response.data.message);
 				devHelper.log(response, 'error');
 			});
@@ -74,14 +55,13 @@ angular.module('user.kitchen.general', [
 					devHelper.log(response);
 					_getKitchenAdmins();
 				}, function (response) {
-					//TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
 		};
 
 		this.querySearch = genericService.querySearch;
-		this.updateKitchen = _updateKitchen;
 
 		_init();
 

@@ -91,26 +91,26 @@
                     </div>
                 </div>
                 <!--Button-->
-                <div class="row submit">
-                    <div class="col-sm-1">
-                        <md-button class="md-raised md-primary" type="submit"
-                                   ng-disabled="form.$invalid || RegisterCtrl.newUser.password
+                <div class="row submit" layout="column">
+                    <md-button flex class="md-raised md-primary" type="submit"
+                               ng-disabled="form.$invalid || RegisterCtrl.newUser.password
                                    !== RegisterCtrl.newUser.password_confirmation">Register
-                        </md-button>
-                    </div>
-                    <div class="col-sm-offset-7 col-sm-1">
-                        <!--TODO: Implement back-to previous page-->
-                        <md-button ui-sref="home" class="md-raised md-warn">Cancel</md-button>
-                    </div>
+                    </md-button>
                 </div>
-                <div class="row" ng-controller="LoginController as LoginCtrl">
-                    <md-button ng-click="LoginCtrl.socialLogin('google')" class="md-raised md-button md-ink-ripple">
-                        Login with <i class="fa fa-google font-quaternary" aria-hidden="true"></i>
-                    </md-button>
-                    <md-button ng-click="LoginCtrl.socialLogin('facebook')" class="md-raised md-button md-ink-ripple">
-                        Login with <i class="fa fa-facebook font-secondary" aria-hidden="true"></i>
-                    </md-button>
-                    <md-button class="bg-primary" ui-sref="user.login">Go to Login</md-button>
+                <div class="text-center">
+                    <a class="btn btn-link" ui-sref="user.login">Go to Login</a>
+                </div>
+                <hr/>
+                <div class="row text-center" ng-controller="LoginController as LoginCtrl">
+                    <h4 class="text-center">Login with Social Media</h4>
+                    <button type="button" ng-click="LoginCtrl.socialLogin('google')"
+                            class="loginBtn loginBtn--google">
+                        Google
+                    </button>
+                    <button type="button" ng-click="LoginCtrl.socialLogin('facebook')"
+                            class="loginBtn loginBtn--facebook">
+                        Facebook
+                    </button>
                 </div>
             </div>
         </form>

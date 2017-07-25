@@ -1,6 +1,5 @@
 <div class="row no-gutters">
 	<div class="col-sm-1">
-
 	</div>
 	<md-card>
 		<md-content class="md-padding" ng-controller="SearchCtrl as sctrl">
@@ -40,7 +39,6 @@
 						<label for="min_price">min</label>
 					</md-input-container>
 				</div>
-
 				<div class="col-sm-6">
 					<md-input-container>
 						<input type="text" id="max_price" ng-model="sctrl.max_price">
@@ -71,7 +69,6 @@
 							</md-not-found>
 							<div ng-message="md-require-match">Please select an existing nationality.</div>
 						</md-autocomplete>
-
 						<br/><br/>
 						<md-checkbox ng-model="sctrl.vegan" ng-true-value="1">Vegan</md-checkbox>
 						<md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1">Vegetarian</md-checkbox>
@@ -103,12 +100,7 @@
 			    ng-change="DishCtrl.getFeaturedDishes()"></ul>
 			<div class="row">
 				<div class="col-md-4" ng-repeat="dish in DishCtrl.dishes" loader>
-					<a ui-sref="dish.show({id: dish.id})">
-						<img ng-src="{{dish.medias[0].url}}" alt="Card image cap" style="width:100%;">
-
-						<h4 class="card-title">{{dish.name}}</h4>
-						<p class="card-text">{{dish.price}}</p>
-					</a>
+					<dish-card dish="dish"></dish-card>
 				</div>
 			</div>
 		</div>

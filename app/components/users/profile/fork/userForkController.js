@@ -4,8 +4,8 @@ angular.module('user.profile.fork', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserForkController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
-		function ($stateParams, $state, UserAPI, devHelper) {
+	.controller('UserForkController', ['$stateParams', '$state', 'UserAPI', 'devHelper', 'genericService',
+		function ($stateParams, $state, UserAPI, devHelper, genericService) {
 
 			/*********************
 			 *  Private Variables
@@ -13,10 +13,14 @@ angular.module('user.profile.fork', [
 				// reference to this controller
 
 			var that = this;
-			var userId = $stateParams.id;
 			/*********************
 			 *  Public Variables
 			 **********************/
+			this.currentPage = 0;
+			this.lastPage = 0;
+			this.forkedDishes = [];
+			this.totalItems = 0;
+			this.loadButton = true;
 
 			/*********************
 			 *  Private Functions
@@ -27,12 +31,16 @@ angular.module('user.profile.fork', [
 			}
 
 			function _getForkedDishes() {
-				UserAPI.list('getForkedDishes').then(
+				var pageNum = ++that.currentPage;
+				UserAPI.getMyForkedDishes(pageNum, 12).then(
 					function (response) {
 						devHelper.log(response);
-						that.forkedDishes = response;
+						that.forkedDishes = that.forkedDishes.concat(response.data);
+						that.totalItems = response.total;
+						that.currentPage = response.current_page;
+						that.lastPage = response.last_page;
 					}, function (response) {
-						// TODO handle error state ie. front end display
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			};
@@ -40,6 +48,7 @@ angular.module('user.profile.fork', [
 			/*********************
 			 *  Public Functions
 			 **********************/
+			this.getForkedDishes = _getForkedDishes;
 
 			/*********************
 			 *  Initialization

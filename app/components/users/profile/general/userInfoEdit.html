@@ -36,11 +36,19 @@
             </div>
         </div>
     </md-input-container>
+    <div class="DishImage">
+        <label class="control-label" for="dropzone">Profile Picture:</label>
+        <div class="controls">
+            <div ng-app="mediaUpload" ng-controller="MediaController">
+                <div class="dropzone" id="dropzone" ng-dropzone></div>
+            </div>
+        </div>
+    </div>
     <!--Button-->
     <md-button class="md-raised md-primary" ng-click="ugCtrl.updateUser()" ng-disabled="form.$invalid">
         Update
     </md-button>
-    <md-button ui-sref="user.profile.info.view">
+    <md-button class="md-raised md-warn" ui-sref="user.profile.info.view">
         Back
     </md-button>
 </form>

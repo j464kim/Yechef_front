@@ -55,12 +55,12 @@ angular.module('user.kitchen', [
 				}
 			} else {
 				//If No current Kitchen is set, just set the first kitchen to be selected
-				$state.go('.', {'myCurrentKitchenId': that.myKitchens[0].id, 'myCurrentKitchen': that.myKitchens[0]});
+				$state.go('.', {'myCurrentKitchenId': that.myKitchens[0].id});
 			}
 		};
 
 		this.selectChanged = function () {
-			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id, 'myCurrentKitchen': that.myCurrentKitchen});
+			$state.go('.', {'myCurrentKitchenId': that.myCurrentKitchen.id});
 		};
 
 		_init();

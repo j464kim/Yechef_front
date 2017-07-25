@@ -21,25 +21,17 @@ angular.module('kitchen.update', [
 			 *  Private Functions
 			 **********************/
 
-			function _init() {
-				_getKitchen();
-			}
-
-			function _getKitchen() {
-				KitchenAPI.show(kitchenId).then(function (response) {
-                    devHelper.log(response);
-					that.kitchen = response;
-				}, function (response) {
-					genericService.showToast('Oops..! Something is wrong');
-					devHelper.log(response, 'error');
-				});
-			}
-
-			function _updateKitchen() {
-				KitchenAPI.update(that.kitchen, kitchenId).then(function (response) {
+			function _updateKitchen(myCurrentKitchenToEdit, ukCtrl) {
+				KitchenAPI.update(myCurrentKitchenToEdit, myCurrentKitchenToEdit.id).then(function (response) {
 					var updatedKitchen = response;
-                    devHelper.log(response);
-					$state.go('kitchen.show', {'id': updatedKitchen.id});
+					ukCtrl.myCurrentKitchen.name = updatedKitchen.name;
+					ukCtrl.myCurrentKitchen.phone = updatedKitchen.phone;
+					ukCtrl.myCurrentKitchen.address = updatedKitchen.address;
+					ukCtrl.myCurrentKitchen.email = updatedKitchen.email;
+					ukCtrl.myCurrentKitchen.description = updatedKitchen.description;
+					ukCtrl.myCurrentKitchen.medias = updatedKitchen.medias;
+					devHelper.log(response);
+					$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
 				}, function (response) {
 					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
@@ -55,7 +47,6 @@ angular.module('kitchen.update', [
 			/*********************
 			 *  Initialization
 			 **********************/
-			_init();
 
 
 			/*********************

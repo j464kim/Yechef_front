@@ -15,7 +15,6 @@ angular.module('userKitchen', [
 		$stateProvider
 			.state('user.kitchen', {
 				url: '/kitchen/{myCurrentKitchenId}',
-				params: {myCurrentKitchen: ''},
 				templateUrl: 'components/users/kitchen/userKitchen.html',
 				controller: 'userKitchenController as UkCtrl',
 			})
@@ -35,7 +34,7 @@ angular.module('userKitchen', [
 			})
 			.state('user.kitchen.general.edit', {
 				url: '/myKitchen/edit',
-				templateUrl: 'components/users/kitchen/general/myKitchenEdit.html',
+				templateUrl: 'components/kitchens/update/kitchenUpdate.html',
 			})
 			.state('user.kitchen.dish', {
 				url: '/dish',

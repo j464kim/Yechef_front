@@ -6,7 +6,6 @@ angular.module('user.kitchen.general', [
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
-		that.myCurrentKitchen = $stateParams.myCurrentKitchen;
 		that.isKitchenSelected = false;
 
 		function _init() {
@@ -39,23 +38,6 @@ angular.module('user.kitchen.general', [
 				});
 		};
 
-		function _updateKitchen(myCurrentKitchenToEdit, ukCtrl) {
-			KitchenAPI.update(myCurrentKitchenToEdit, that.myCurrentKitchen.id).then(function (response) {
-				var updatedKitchen = response;
-				ukCtrl.myCurrentKitchen.name = updatedKitchen.name;
-				ukCtrl.myCurrentKitchen.phone = updatedKitchen.phone;
-				ukCtrl.myCurrentKitchen.address = updatedKitchen.address;
-				ukCtrl.myCurrentKitchen.email = updatedKitchen.email;
-				ukCtrl.myCurrentKitchen.description = updatedKitchen.description;
-				ukCtrl.myCurrentKitchen.medias = updatedKitchen.medias;
-				devHelper.log(response);
-				$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
-			}, function (response) {
-				genericService.showToast('Oops..! Something is wrong');
-				devHelper.log(response, 'error');
-			});
-		}
-
 		this.addAdmin = function () {
 			devHelper.log(that.adminToAdd);
 			KitchenAPI.addAdmin(that.adminToAdd.id, that.myCurrentKitchenId).then(function (response) {
@@ -84,7 +66,6 @@ angular.module('user.kitchen.general', [
 		};
 
 		this.querySearch = genericService.querySearch;
-		this.updateKitchen = _updateKitchen;
 
 		_init();
 

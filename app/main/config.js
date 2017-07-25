@@ -17,8 +17,8 @@ angular.module('configuration', [])
 		var productAPI = '//serene-hamlet-46448.herokuapp.com/api/';
 
 		// social configurations
-		var facebookAppId = '789389204557240';
-		var googleAppId = '716914948245-t5k325iea7jmqhk8kolu59cdt6v4ssrr.apps.googleusercontent.com';
+		var facebookAppId = '1830093113873770';
+		var googleAppId = '713347919649-pndccmhn95t2pp68gk36368k6ccvgsp0.apps.googleusercontent.com';
 
 		// TODO: configure locale to know which type of currency
 		var currency = 'cad';
@@ -31,6 +31,12 @@ angular.module('configuration', [])
 		var uploadMultiple = true;
 		var autoProcessQueue = false;
 		var addRemoveLinks = true;
+
+		//carousel
+		var carouselDefaultInterval = 5000; //ms
+
+		// Payment Service
+		var stripePublishableKey = 'pk_test_RZjSNtHLydLfeylIF2BkP6s5';
 
 		// Nationality
 		var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
@@ -79,6 +85,8 @@ angular.module('configuration', [])
 			nationalities: nationalities,
 			currency: currency,
 			dishSearchParams: dishSearchParams,
+			carouselDefaultInterval: carouselDefaultInterval,
+			stripePublishableKey: stripePublishableKey,
 		};
 
 	})());

@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('user.profile.general', [
-	'user.api', 'ngMaterial'
+	'user.api',
+	'ngMaterial',
+	'mediaUpload'
 ])
 
-	.controller('UserGeneralController', ['$stateParams', '$state', 'UserAPI', 'devHelper',
-		function ($stateParams, $state, UserAPI, devHelper) {
+	.controller('UserGeneralController', ['$state', 'UserAPI', 'devHelper', '$rootScope', 'AuthAPI', 'genericService', 'mediaService',
+		function ($state, UserAPI, devHelper, $rootScope, AuthAPI, genericService, mediaService) {
 
 			/*********************
 			 *  Private Variables
@@ -13,7 +15,8 @@ angular.module('user.profile.general', [
 				// reference to this controller
 
 			var that = this;
-			var userId = $stateParams.id;
+			var userId = $rootScope.currentUser.id;
+
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -30,24 +33,25 @@ angular.module('user.profile.general', [
 				UserAPI.show(userId).then(function (response) {
 					that.user = response;
 					devHelper.log(that.user);
-
-					//TODO: user media to be ready soon
-					// that.media = response.medias[0].url;
-
+					if ($state.current.name == 'user.profile.info.edit') {
+						mediaService.previewUploadedMedia(that.user);
+					}
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}
 
 			function _updateUser() {
-				console.log('update user');
+				devHelper.log('update user');
 				UserAPI.update(that.user, userId).then(function (response) {
 					var updatedUser = response;
 					devHelper.log(updatedUser);
+					mediaService.uploadMedia(updatedUser);
+					AuthAPI.setCurrentUser();
 					$state.go('user.profile.info.view', {'id': updatedUser.id});
 				}, function (response) {
-					// TODO handle error state
+					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
 			}

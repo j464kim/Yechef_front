@@ -1,0 +1,106 @@
+<div class="container" ng-if="UserShowCtrl.user">
+	<!--Header-->
+	<div class="row" loader>
+		<div class="col-md-3">
+			<h3>Joined in {{UserShowCtrl.user.joinedIn[1]}} {{UserShowCtrl.user.joinedIn[3]}}</h3>
+			<h4 ng-if="UserShowCtrl.user.verified === 1"><i class="fa fa-check" aria-hidden="true"></i> Verified User
+			</h4>
+			<h4 ng-if="UserShowCtrl.user.verified === 1"><i class="fa fa-star" aria-hidden="true"></i> Best Cook</h4>
+			<h4 ng-if="UserShowCtrl.user.verified === 1"><i class="fa fa-heart"
+			                                                aria-hidden="true"></i> Power Buyer</h4>
+			<a class="btn-link" href="" ng-click=""><i class="md-warn fa fa-frown-o" aria-hidden="true"></i> Report this
+				User</a>
+		</div>
+		<div class="col-md-6 text-center">
+			<h1>{{UserShowCtrl.user.first_name}} {{UserShowCtrl.user.last_name}}</h1>
+			<h3>
+				<i class="fa fa-envelope" aria-hidden="true"></i> {{UserShowCtrl.user.email}}
+			</h3>
+			<h4 ng-if="UserShowCtrl.user.phone !== ''">
+				<i class="fa fa-phone" aria-hidden="true"></i> {{UserShowCtrl.user.phone}}
+			</h4>
+			<div ng-if="currentUser.id === UserShowCtrl.user.id">
+				<md-button flex class="md-raised md-warn" ui-sref="user.profile.info.edit({id: currentUser.id})">
+					Edit my profile
+				</md-button>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<!--Image Carousel-->
+			<img class="img-circle profile-image" ng-src="{{UserShowCtrl.user.medias[0].url}}"/>
+		</div>
+	</div>
+	<hr/>
+	<!--Main Contents-->
+	<div class="row" loader>
+		<!--User's kitchens-->
+		<div class="row" ng-if="UserShowCtrl.kitchens">
+			<div class="row">
+				<div class="col text-center" id="user-show-kitchens">
+					<h2>Cooking in</h2>
+					<hr/>
+
+					<div ng-if="UserShowCtrl.kitchens.length === 0">
+						<h4>{{UserShowCtrl.user.first_name}} does not own any Kitchen</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+				<div class="col-md-4" ng-repeat="kitchen in UserShowCtrl.kitchens" loader>
+					<kitchen-card kitchen="kitchen"></kitchen-card>
+				</div>
+			</div>
+			<infinite-load-button last-page="UserShowCtrl.kitchensLastPage"
+			                      current-page="UserShowCtrl.kitchensCurrentPage"
+			                      load-function="UserShowCtrl.getKitchens"></infinite-load-button>
+		</div>
+		<br/><br/>
+
+		<!--User's forked dishes-->
+		<div class="row" ng-if="UserShowCtrl.isForkedDishesPublic">
+			<div class="row">
+				<div class="col text-center" id="user-show-forked-dishes">
+					<h2>Forked Dishes</h2>
+					<hr/>
+
+					<div ng-if="UserShowCtrl.forkedDishes.length === 0">
+						<h4>{{UserShowCtrl.user.first_name}} does not have Forked Dishes</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+				<div class="col-md-3" ng-repeat="dish in UserShowCtrl.forkedDishes" loader>
+					<dish-card dish="dish"></dish-card>
+				</div>
+			</div>
+			<infinite-load-button last-page="UserShowCtrl.forkedDishesLastPage"
+			                      current-page="UserShowCtrl.forkedDishesCurrentPage"
+			                      load-function="UserShowCtrl.getForkedDishes"></infinite-load-button>
+		</div>
+		<br/><br/>
+
+		<!--User's subscribed kitchens-->
+		<div class="row" ng-if="UserShowCtrl.isSubscribedKitchensPublic">
+			<div class="row">
+				<div class="col text-center" id="user-show-subscribed-kitchens">
+					<h2>Subscribed Kitchens</h2>
+					<hr/>
+					<div ng-if="UserShowCtrl.subscribedKitchens.length === 0">
+						<h4>{{UserShowCtrl.user.first_name}} does not have Subscribed Kitchens</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
+				<div class="col-md-4" ng-repeat="kitchen in UserShowCtrl.subscribedKitchens" loader>
+					<kitchen-card kitchen="kitchen"></kitchen-card>
+				</div>
+			</div>
+			<infinite-load-button last-page="UserShowCtrl.subscribedKitchensLastPage"
+			                      current-page="UserShowCtrl.subscribedKitchensCurrentPage"
+			                      load-function="UserShowCtrl.getSubscriptions"></infinite-load-button>
+		</div>
+	</div>
+</div>

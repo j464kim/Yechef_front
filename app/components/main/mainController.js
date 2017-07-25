@@ -6,6 +6,9 @@ angular.module('main', ['ngMaterial'])
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
 
 			var that = this;
+			if(!$rootScope.currentUser) {
+				$rootScope.currentUser = {};
+			}
 
 			$rootScope.previousState;
 			$rootScope.previousParams;
@@ -27,12 +30,16 @@ angular.module('main', ['ngMaterial'])
 				});
 			});
 
-			$rootScope.$on('currentUserChanged', function (event, currentUser) {
-				$rootScope.currentUser = currentUser;
+			/* Re-assigning $rootScope.currentUser variable breaks the binding in other templates.
+			Thus, angular.extend needs to be used for the purpose of updating the key-value properties or the
+			$rootScope.currentUser variable.
+			*/
+			$rootScope.$on('auth:currentUserChanged', function (event, currentUser) {
+				angular.extend($rootScope.currentUser, currentUser);
 			});
 
-			if (!$rootScope.currentUser) {
-				$rootScope.currentUser = sessionService.getCurrentUser();
+			if (_.isEmpty($rootScope.currentUser)) {
+				angular.extend($rootScope.currentUser, sessionService.getCurrentUser());
 			}
 
 			this.isLoggedIn = sessionService.isLogin;

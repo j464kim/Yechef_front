@@ -7,13 +7,13 @@
         <label for="search">Search</label>
         <input layout-fill flex id="search" type="text" placeholder="email"/>
         <md-divider></md-divider>
-        <md-subheader class="md-no-sticky">{{KsCtrl.subscribers.length}} users subscribed to the kitchen!
+        <md-subheader class="md-no-sticky"><span class="badge">{{KsCtrl.subscribers.length}}</span> users subscribed to the kitchen!
         </md-subheader>
         <md-list-item class="md-2-line contact-item" ng-repeat="subscriber in KsCtrl.subscribers">
             <img ng-src="{{subscriber.medias[0].url}}" class="md-avatar"
                  src="http://lorempixel.com/400/200/people/YeChef" alt="{{subscriber.last_name}}"/>
             <div class="md-list-item-text compact">
-                <h3>{{subscriber.first_name}} {{subscriber.last_name}}</h3>
+                <a ui-sref="user.show({id: subscriber.id})"><h3>{{subscriber.first_name}} {{subscriber.last_name}}</h3></a>
                 <p>{{subscriber.email}}</p>
             </div>
             <i class="material-icons md-24 md-secondary md-hue-3">message</i>

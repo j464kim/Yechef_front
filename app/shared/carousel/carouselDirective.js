@@ -6,10 +6,13 @@ angular.module('carousel', [])
 			restrict: 'E',
 			templateUrl: 'shared/carousel/carouselDirective.html',
 			scope: {
-				medias: '='
+				medias: '=',
+				interval: '@'
 			},
-			controller: function($scope) {
-				$scope.myInterval = 5000;
+			controller: function($scope, config, $state) {
+				if (!$scope.interval) {
+					$scope.interval = config.carouselDefaultInterval;
+				}
 				$scope.noWrapSlides = false;
 				$scope.active = 0;
 			}

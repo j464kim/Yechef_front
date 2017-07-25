@@ -7,6 +7,7 @@ angular.module('userKitchen', [
 	'user.kitchen.general',
 	'user.kitchen.dish',
 	'user.kitchen.subscriber',
+	'user.kitchen.order',
 ])
 
 	.config(function ($stateProvider) {
@@ -14,12 +15,11 @@ angular.module('userKitchen', [
 		$stateProvider
 			.state('user.kitchen', {
 				url: '/kitchen/{myCurrentKitchenId}',
-				params: {myCurrentKitchen: ''},
 				templateUrl: 'components/users/kitchen/userKitchen.html',
 				controller: 'userKitchenController as UkCtrl',
 			})
 			.state('user.kitchen.dashboard', {
-				url: '/dasborad',
+				url: '/dashboard',
 				templateUrl: 'components/users/kitchen/dashboard/kitchenDashboard.html',
 			})
 			.state('user.kitchen.general', {
@@ -34,7 +34,7 @@ angular.module('userKitchen', [
 			})
 			.state('user.kitchen.general.edit', {
 				url: '/myKitchen/edit',
-				templateUrl: 'components/users/kitchen/general/myKitchenEdit.html',
+				templateUrl: 'components/kitchens/update/kitchenUpdate.html',
 			})
 			.state('user.kitchen.dish', {
 				url: '/dish',
@@ -44,6 +44,7 @@ angular.module('userKitchen', [
 			.state('user.kitchen.order', {
 				url: '/order',
 				templateUrl: 'components/users/kitchen/order/kitchenOrder.html',
+				controller: 'KitchenOrderController as koCtrl',
 			})
 			.state('user.kitchen.subscriber', {
 				url: '/subscriber',

@@ -31,7 +31,7 @@ angular.module('dish.create', [
 					function (response) {
 						devHelper.log(response);
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			}
@@ -48,7 +48,7 @@ angular.module('dish.create', [
 						mediaService.uploadMedia(newDish);
 						$state.go('dish.show', {"id": newDish.id});
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			}

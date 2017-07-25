@@ -25,16 +25,16 @@
                 <li ng-if="login"><a>Messages</a></li>
                 <li ng-if="login" class="dropdown" ng-cloak>
                     <a class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="http://placehold.it/18x18" class="profile-image img-circle">
+                        <img ng-src="{{currentUser.medias[0].url}}" class="profile-image-header img-circle">
                         <label>{{currentUser.first_name}}</label> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a ui-sref="user.profile.main"><i class="fa fa-id-badge"></i> Profile</a></li>
+                        <li><a ui-sref="user.profile.info.view"><i class="fa fa-id-badge"></i> Profile</a></li>
                         <li class="divider"></li>
                         <li>
-                            <a href=""><i class="fa fa-navicon"></i> Orders</a></li>
+                            <a ui-sref="user.profile.order"><i class="fa fa-navicon"></i> Orders</a></li>
                         <li class="divider"></li>
                         <li>
-                            <a href=""><i class="fa fa-heart-o"></i> Forked</a></li>
+                            <a ui-sref="user.profile.forked"><i class="fa fa-heart-o"></i> Forked</a></li>
                         <li class="divider"></li>
                         <li><a href="" ng-click="LoginCtrl.logout()"><i class="fa fa-sign-out"></i> Sign-out</a>
                         </li>

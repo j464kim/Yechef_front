@@ -26,11 +26,17 @@ angular.module('reaction', [
 				// figure out which eloquent model it belongs to
 				var reactionableInfo = genericService.getModelType($state);
 
-				var userID = $rootScope.currentUser ? $rootScope.currentUser.id : null;
+				var userID = !_.isEmpty($rootScope.currentUser) ? $rootScope.currentUser.id : null;
+
+				var reactionableKind = constant[$scope.for.toUpperCase()];
+				if (typeof reactionableKind == 'undefined') {
+					devHelper.log('Unknown reactionable kind: ' + $scope.for.toUpperCase(), 'error');
+				}
 
 				var reactionObj = {
 					reactionableId: reactionable.id,
 					reactionableType: reactionableInfo['type'],
+					reactionableKind: reactionableKind,
 					userId: userID
 				};
 
@@ -42,7 +48,6 @@ angular.module('reaction', [
 				$scope.LIKE = constant.LIKE;
 				$scope.FORK = constant.FORK;
 				$scope.SUBSCRIBE = constant.SUBSCRIBE;
-
 
 				/*********************
 				 *  Private Functions
@@ -70,7 +75,7 @@ angular.module('reaction', [
 						devHelper.log(reactionObj);
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}
@@ -91,7 +96,7 @@ angular.module('reaction', [
 						_incrementReaction(kind)
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}
@@ -104,8 +109,8 @@ angular.module('reaction', [
 				// As a workaround, I will pass some extra information into request in order to look for the added reaction
 				function _removeReaction(kind) {
 
-					var userReactionId = 1; // placeholder for now until (1) is implemented
-					ReactionAPI.destroy(reactionObj, userReactionId).then(function (response) {
+					reactionObj.kind = kind;
+					ReactionAPI.destroy($scope.userReactionId).then(function (response) {
 						var removedReaction = response;
 						devHelper.log(removedReaction);
 
@@ -113,7 +118,7 @@ angular.module('reaction', [
 						_decrementReaction(kind);
 
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 				}

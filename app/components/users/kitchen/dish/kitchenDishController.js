@@ -2,7 +2,7 @@ angular.module('user.kitchen.dish', [
 	'ngMaterial',
 ])
 
-	.controller('kitchenDishController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, DishesAPI) {
+	.controller('kitchenDishController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, DishesAPI, genericService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -16,7 +16,7 @@ angular.module('user.kitchen.dish', [
 				devHelper.log(response);
 				that.dishes = response;
 			}, function (response) {
-				//TODO handle error state
+				genericService.showToast('Oops..! Something is wrong');
 				devHelper.log(response, 'error');
 			});
 		}
@@ -29,7 +29,7 @@ angular.module('user.kitchen.dish', [
 					.then(function (response) {
 						_getDishes();
 					}, function (response) {
-						// TODO handle error state
+						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
 			}

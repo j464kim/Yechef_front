@@ -26,11 +26,6 @@ angular.module('kitchen', [
 				templateUrl: 'components/kitchens/create/kitchenCreate.html',
 				controller: 'KitchenCreateController as KitchenCtrl'
 			})
-			.state('kitchen.edit', {
-				url: '/edit/{id}',
-				templateUrl: 'components/kitchens/update/kitchenUpdate.html',
-				controller: 'KitchenUpdateController as KitchenCtrl'
-			})
 			.state('kitchen.show', {
 				url: '/show/{id}',
 				templateUrl: 'components/kitchens/show/kitchenShow.html',

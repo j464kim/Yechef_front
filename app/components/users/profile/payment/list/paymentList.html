@@ -1,0 +1,27 @@
+<h2>MY PAYMENT</h2>
+<hr/>
+<h3>
+	Credit Cards
+	<i class="fa fa-credit-card" aria-hidden="true"></i>
+</h3>
+<div>
+	<md-list flex>
+		<md-subheader class="md-no-sticky">{{plCtrl.customer.sources.data.length}} Payment Method</md-subheader>
+		<md-list-item class="md-3-line" ng-repeat="card in plCtrl.customer.sources.data track by $index">
+			<div class="md-list-item-text" layout="column">
+                <span>
+                    {{ card.brand }} / {{ card.funding }}
+                    <a ui-sref="user.profile.payment.edit({ index: $index })">
+	                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a ng-click="plCtrl.removeCard(card.id)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </span>
+				<span>xxxx - xxxx - xxxx - {{ card.last4 }}</span>
+				<span>
+                    Exp: {{ card.exp_month }} / {{ card.exp_year }}
+                </span>
+			</div>
+		</md-list-item>
+	</md-list>
+</div>
+<button ui-sref="user.profile.payment.create">Add New Payment Method</button>

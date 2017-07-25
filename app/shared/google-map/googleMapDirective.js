@@ -63,8 +63,6 @@ angular.module('googleMapDirectives', [])
 				clusterEvents: '='
 			},
 			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
-				// $scope.totalItems = $scope.dishes.length;
-				$scope.currentPage = 1;
 			}]
 		}
 	}]);

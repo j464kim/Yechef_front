@@ -25,8 +25,8 @@
 		$ {{parameter.dish.price}}
 	</div>
 
-	<div ng-if="parameter.style == 'cluster'">
-		<ul uib-pager items-per-page="1" total-items="totalItems" ng-model="currentPage"></ul>
+	<div ng-if="parameter.style == 'cluster'" ng-init="currentPage = 1">
+		<ul uib-pager items-per-page="1" total-items="parameter.dishes.length" ng-model="currentPage"></ul>
 		<div ng-repeat="dish in parameter.dishes.slice(((currentPage-1)), ((currentPage)))">
 			<td>{{dish.name}}</td>
 			<td>{{dish.id}}</td>

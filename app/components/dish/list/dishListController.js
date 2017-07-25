@@ -119,18 +119,22 @@ angular.module('dish.list', [
 				};
 
 				that.clusterEvents = {
-					click: function (cluster, model) {
+					click: function (cluster, models) {
+						devHelper.log(cluster);
+						devHelper.log(models);
 						if (cluster.map_.zoom === cluster.map_.maxZoom) {
-							console.log('Max Zoom acheived');
-							that.window.model = model[0];
+							var dishes = [];
+							for (var i in models) {
+								dishes.push(_findDishById(models[i].id));
+							}
+							that.window.model = models[0];
 							that.window.templateParameter = {
-								style: 'cluster'
+								style: 'cluster',
+								dishes: dishes
 							}
 							that.window.ctrl.showWindow();
 							that.window.show = true;
 						}
-						console.log(cluster);
-						console.log(model);
 					}
 				};
 

@@ -4,32 +4,21 @@
 			<div class='col-sm-12'><img ng-src="{{parameter.dish.medias[0].url}}" width='140' height='93.33'></div>
 			<br/>
 		</div>
-		<a ui-sref="dish.show({id: {{parameter.dish.id}}})">
-			<div class="row">
-				<h5 class="card-title">{{parameter.dish.name}}</h5>
-			</div>
-			<div class="row">
-				<div class='col-sm-6'>
-					<h6 class="card-title">$ {{parameter.dish.price}}</h6>
-				</div>
-				<div class='col-sm-6 pull-right'>
-					<h6>
-						<i class='fa fa-star'></i> {{parameter.dish.total_rating.toFixed(1)}}
-					</h6>
-				</div>
-			</div>
-		</a>
+		<dish-card dish="parameter.dish"></dish-card>
 	</div>
 
 	<div ng-if="parameter.style == 'simple'">
-		$ {{parameter.dish.price}}
+		<div class='row'>
+			<div class='col-sm-12'><img ng-src="{{parameter.dish.medias[0].url}}" width='140' height='93.33'></div>
+			<br/>
+		</div>
+		<dish-card dish="parameter.dish"></dish-card>
 	</div>
 
 	<div ng-if="parameter.style == 'cluster'" ng-init="currentPage = 1">
 		<ul uib-pager items-per-page="1" total-items="parameter.dishes.length" ng-model="currentPage"></ul>
 		<div ng-repeat="dish in parameter.dishes.slice(((currentPage-1)), ((currentPage)))">
-			<td>{{dish.name}}</td>
-			<td>{{dish.id}}</td>
+			<dish-card dish="dish"></dish-card>
 		</div>
 	</div>
 </div>

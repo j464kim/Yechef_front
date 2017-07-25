@@ -12,8 +12,8 @@ angular.module('helper', [])
 		return {
 			getModelType: function ($state) {
 				var stateName = $state.current.name;
-				var modelName = _.capitalize(stateName.split(".")[0]);
-				var modelType = 'App\\Models\\' + modelName;
+				var modelName = stateName.split(".")[0];
+				var modelType = 'App\\Models\\' + _.capitalize(modelName);
 
 				var modelInfo = {
 					'name': modelName,

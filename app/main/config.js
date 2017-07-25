@@ -86,7 +86,7 @@ angular.module('configuration', [])
 			currency: currency,
 			dishSearchParams: dishSearchParams,
 			carouselDefaultInterval: carouselDefaultInterval,
-			stripePublishableKey: stripePublishableKey
+			stripePublishableKey: stripePublishableKey,
 		};
 
 	})());

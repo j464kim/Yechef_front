@@ -36,12 +36,12 @@
 		<!--User's kitchens-->
 		<div class="row" ng-if="UserShowCtrl.kitchens">
 			<div class="row">
-				<div class="col-md-3" id="user-show-kitchens">
-					<h3>Cooking in</h3>
+				<div class="col text-center" id="user-show-kitchens">
+					<h2>Cooking in</h2>
 					<hr/>
 
 					<div ng-if="UserShowCtrl.kitchens.length === 0">
-						Nothing to show
+						<h4>{{UserShowCtrl.user.first_name}} does not own any Kitchen</h4>
 					</div>
 				</div>
 			</div>
@@ -55,16 +55,17 @@
 			                      current-page="UserShowCtrl.kitchensCurrentPage"
 			                      load-function="UserShowCtrl.getKitchens"></infinite-load-button>
 		</div>
+		<br/><br/>
 
 		<!--User's forked dishes-->
 		<div class="row" ng-if="UserShowCtrl.isForkedDishesPublic">
 			<div class="row">
-				<div class="col-md-3" id="user-show-forked-dishes">
-					<h3>Forked Dishes</h3>
+				<div class="col text-center" id="user-show-forked-dishes">
+					<h2>Forked Dishes</h2>
 					<hr/>
 
 					<div ng-if="UserShowCtrl.forkedDishes.length === 0">
-						Nothing to show
+						<h4>{{UserShowCtrl.user.first_name}} does not have Forked Dishes</h4>
 					</div>
 				</div>
 			</div>
@@ -78,15 +79,16 @@
 			                      current-page="UserShowCtrl.forkedDishesCurrentPage"
 			                      load-function="UserShowCtrl.getForkedDishes"></infinite-load-button>
 		</div>
+		<br/><br/>
 
 		<!--User's subscribed kitchens-->
 		<div class="row" ng-if="UserShowCtrl.isSubscribedKitchensPublic">
 			<div class="row">
-				<div class="col-md-3" id="user-show-subscribed-kitchens">
-					<h3>Subscribed Kitchens</h3>
+				<div class="col text-center" id="user-show-subscribed-kitchens">
+					<h2>Subscribed Kitchens</h2>
 					<hr/>
 					<div ng-if="UserShowCtrl.subscribedKitchens.length === 0">
-						Nothing to show
+						<h4>{{UserShowCtrl.user.first_name}} does not have Subscribed Kitchens</h4>
 					</div>
 				</div>
 			</div>

@@ -15,9 +15,6 @@ angular.module('carousel', [])
 				}
 				$scope.noWrapSlides = false;
 				$scope.active = 0;
-				if ($state.current.name == 'user.show') {
-					$scope.user_show = true;
-				}
 			}
 		};
 	}]);

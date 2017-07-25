@@ -57,7 +57,7 @@ angular.module('profile', [
 			.state('user.profile.privacySetting', {
 				url: '/privacySetting',
 				templateUrl: 'components/users/profile/privacy/userPrivacy.html',
-				controller: 'UserPrivacyController as uvCtrl',
+				controller: 'UserPrivacyController as upCtrl',
 			})
 			.state('user.profile.payment', {
 				url: '/payment',

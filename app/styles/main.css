@@ -2670,6 +2670,11 @@ md-content.md-default-theme,
 md-content {
   background-color: #FAFAFA !important;
 }
+@media screen and (max-width: 768px) {
+  .md-sidenav-left {
+    padding-top: 50px;
+  }
+}
 #map-dish-list {
   position: fixed;
   right: 0;

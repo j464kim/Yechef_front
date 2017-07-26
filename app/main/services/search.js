@@ -22,7 +22,8 @@ angular.module('search.api', [
 
             function dish(options, pageNum) {
                 pageNum = pageNum || 0;
-
+                //Convert km to m
+                options.distance *= 1000;
                 return $q(function (resolve, reject) {
 					SearchResource.dish(
 					    options

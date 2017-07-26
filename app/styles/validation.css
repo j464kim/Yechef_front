@@ -2696,6 +2696,7 @@ md-content {
 }
 .gm-style-iw {
   text-align: center;
+  max-width: 280px;
 }
 .loader-wrapper {
   min-height: 0;

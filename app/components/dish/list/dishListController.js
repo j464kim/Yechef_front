@@ -86,7 +86,9 @@ angular.module('dish.list', [
 			}
 
 			function _searchDish() {
-				SearchAPI.dish(that.options).then(function (response) {
+				var pageNum = ++that.currentPage;
+
+				SearchAPI.dish(that.options, pageNum).then(function (response) {
 					devHelper.log(response);
 					that.dishes = response.data;
 					that.totalItems = response.total;
@@ -134,6 +136,7 @@ angular.module('dish.list', [
 							}
 							that.window.ctrl.showWindow();
 							that.window.show = true;
+							console.log(that.window.ctrl.getGWindows());
 						}
 					}
 				};
@@ -157,7 +160,7 @@ angular.module('dish.list', [
 						that.window.ctrl.hideWindow();
 						that.window.show = false;
 						that.searchEnabled = true;
-					}
+					},
 				};
 
 				MapAPI.geocode($stateParams.city).then(function (result) {

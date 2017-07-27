@@ -11,6 +11,7 @@ angular.module('profile', [
 	'user.profile.payment',
 	'user.profile.payment.create',
 	'user.profile.payment.update',
+	'user.profile.payout.create'
 ])
 
 	.config(function ($stateProvider) {
@@ -78,5 +79,45 @@ angular.module('profile', [
 				url: '/edit/{index}',
 				templateUrl: 'components/users/profile/payment/update/paymentUpdate.html',
 				controller: 'PaymentUpdateController as puCtrl',
-			});
+			})
+			.state('user.profile.payout', {
+				url: '/payout',
+				abstract: true,
+				template: '<ui-view/>'
+			})
+			.state('user.profile.payout.list', {
+				url: '/view',
+				templateUrl: 'components/users/profile/payout/userPayoutList.html',
+				controller: 'PayoutCreateController as pcCtrl',
+			})
+			.state('user.profile.payout.preference', {
+				url: '/view',
+				templateUrl: 'components/users/profile/payout/payoutPreference.html',
+			})
+			.state('user.profile.payout.new', {
+				url: '/new',
+				abstract: true,
+				template: '<ui-view/>',
+				controller: 'PayoutCreateController as pcCtrl',
+			})
+			.state('user.profile.payout.new.address', {
+				url: '/address',
+				templateUrl: 'components/users/profile/payout/create/enterAddress.html',
+			})
+			.state('user.profile.payout.new.method', {
+				url: '/method',
+				abstract: true,
+				templateUrl: 'components/users/profile/payout/create/selectMethod.html',
+			})
+			.state('user.profile.payout.new.method.select', {
+				url: '',
+				views: {
+					'paypal': {
+						templateUrl: 'components/users/profile/payout/create/addPayPal.html',
+					},
+					'bankAccount': {
+						templateUrl: 'components/users/profile/payout/create/addBankAccount.html',
+					},
+				}
+			})
 	});

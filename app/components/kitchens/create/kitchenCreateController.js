@@ -24,7 +24,7 @@ angular.module('kitchen.create', [
 			 **********************/
 			function _createKitchen() {
 
-				devHelper.log(that.kitchen);
+				devHelper.log(that.kitchen.address);
 				if (typeof that.kitchen.address === 'object') {
 					that.kitchen.address = that.kitchen.address.formatted_address;
 				}
@@ -62,7 +62,6 @@ angular.module('kitchen.create', [
 			 *  Public Functions
 			 **********************/
 			this.createKitchen = _createKitchen;
-
 
 			/*********************
 			 *  Initialization

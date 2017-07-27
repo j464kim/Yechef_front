@@ -45,6 +45,17 @@ angular.module('configuration', [])
                     Nepalese, Oceanic, Pakistani, Palestinian, Peruvian, Philippine, Polish, Portuguese, Russian, \
                     Sami, Scottish, Sicilian, Singaporean, Spanish, Thai, Tibetan, Uzbek, Vietnamese';
 
+		// Countries available for payout
+		var payoutCountries = 'US, CA';
+
+		// State / Province
+		var states = {
+			'US': 'AK, AL, AR, AS, AZ, CA, CO, CT, DC, DE, FL, GA, GU, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN,'  +
+			'MO, MS, MT, NC, ND, NH, NJ, NM, NV, NY, OH, OK, OR, PA, PR, RI, SC, SD, TN, TX, UT, VA, VI, VT, WA, WI, WV, WY',
+
+			'CA': 'AB, BC, MB, NB, NL, NS, ON, PE, QC, SK, NT, NU, YT'
+		};
+
 		// cookie expiration in days
 		var cookieExpirationInDays = 3;
 
@@ -83,6 +94,8 @@ angular.module('configuration', [])
 			autoProcessQueue: autoProcessQueue,
 			addRemoveLinks: addRemoveLinks,
 			nationalities: nationalities,
+			payoutCountries: payoutCountries,
+			states: states,
 			currency: currency,
 			dishSearchParams: dishSearchParams,
 			carouselDefaultInterval: carouselDefaultInterval,

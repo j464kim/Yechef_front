@@ -1,65 +1,76 @@
 /* Generic Services */
 angular.module('helper', [])
-	.factory("genericService", function ($q, $timeout, $mdToast, $mdSidenav, devHelper) {
+	.factory("genericService", function ($q, $timeout, $mdToast, $mdSidenav, devHelper, config) {
 
-		function createFilterFor(query) {
+		function _createFilterFor(query) {
 			var lowercaseQuery = angular.lowercase(query);
 			return function filterFn(item) {
 				return (item.value.indexOf(lowercaseQuery) === 0);
 			};
 		}
 
-		return {
-			getModelType: function ($state) {
-				var stateName = $state.current.name;
-				var modelName = stateName.split(".")[0];
-				var modelType = 'App\\Models\\' + _.capitalize(modelName);
+		var getModelType = function ($state) {
+			var stateName = $state.current.name;
+			var modelName = stateName.split(".")[0];
+			var modelType = 'App\\Models\\' + _.capitalize(modelName);
 
-				var modelInfo = {
-					'name': modelName,
-					'type': modelType,
-				}
+			var modelInfo = {
+				'name': modelName,
+				'type': modelType,
+			};
 
-				return modelInfo;
-			},
+			return modelInfo;
+		};
 
-			querySearch: function (query, list) {
-				var results = query ? list.filter(createFilterFor(query)) : list;
+		var querySearch = function (query, list) {
+			var results = query ? list.filter(_createFilterFor(query)) : list;
 
-				return results;
-			},
+			return results;
+		};
 
-			loadItems: function (items) {
-
-				return (items).split(/, +/g).map(function (item) {
-					return {
-						value: item.toLowerCase(),
-						display: item
-					};
-				});
-			},
-
-			showToast: function (message) {
-				$mdToast.show(
-					$mdToast.simple()
-						.textContent(message)
-						.position('top center')
-						.highlightClass('md-warn')
-						.capsule(true)
-						.hideDelay(3000)
-				);
-			},
-
-			buildToggler: function (navID) {
-				return function () {
-					// Component lookup should always be available since we are not using `ng-if`
-					$mdSidenav(navID)
-						.toggle()
-						.then(function () {
-							devHelper.log("toggle " + navID + " is done");
-						});
+		var loadItems = function (items) {
+			return (items).split(/, +/g).map(function (item) {
+				return {
+					value: item.toLowerCase(),
+					display: item
 				};
-			},
+			});
+		};
+
+		var getStates = function (country) {
+			var states = config.states[country];
+			return loadItems(states)
+		};
+
+		var showToast = function (message) {
+			$mdToast.show(
+				$mdToast.simple()
+					.textContent(message)
+					.position('top center')
+					.highlightClass('md-warn')
+					.capsule(true)
+					.hideDelay(3000)
+			);
+		};
+
+		var buildToggler = function (navID) {
+			return function () {
+				// Component lookup should always be available since we are not using `ng-if`
+				$mdSidenav(navID)
+					.toggle()
+					.then(function () {
+						devHelper.log("toggle " + navID + " is done");
+					});
+			};
+		};
+
+		return {
+			getModelType: getModelType,
+			querySearch: querySearch,
+			loadItems: loadItems,
+			getStates: getStates,
+			showToast: showToast,
+			buildToggler: buildToggler,
 
 			// parse rgb str into an arr of color elements
 			parseRgbStr: function (rgbStr) {

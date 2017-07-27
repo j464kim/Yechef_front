@@ -121,19 +121,6 @@ angular.module('main', [])
 				devHelper.log('Item changed to ' + JSON.stringify(item));
 			}
 
-
-			/**
-			 * Create filter function for a query string
-			 */
-			function createFilterFor(query) {
-				var lowercaseQuery = angular.lowercase(query);
-
-				return function filterFn(nationality) {
-					return (nationality.value.indexOf(lowercaseQuery) === 0);
-				};
-
-			}
-
 			this.searchDish = function () {
 				if (!self.selectedNationality) {
 					self.nationality = 'all';

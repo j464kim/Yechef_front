@@ -6,7 +6,7 @@ angular.module('main', [])
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
 
 			var that = this;
-			if(!$rootScope.currentUser) {
+			if (!$rootScope.currentUser) {
 				$rootScope.currentUser = {};
 			}
 
@@ -33,9 +33,8 @@ angular.module('main', [])
 			/* Re-assigning $rootScope.currentUser variable breaks the binding in other templates.
 			Thus, angular.extend needs to be used for the purpose of updating the key-value properties or the
 			$rootScope.currentUser variable.
-			*/
-			$rootScope.$on('auth:currentUserChanged', function (event, currentUser) {
-				angular.extend($rootScope.currentUser, currentUser);
+			*/$rootScope.$on('auth:currentUserChanged', function (event, currentUser) {
+				angular.extend($rootScope.currentUser , currentUser);
 			});
 
 			if (_.isEmpty($rootScope.currentUser)) {
@@ -48,16 +47,16 @@ angular.module('main', [])
 			$scope.$watch(angular.bind(this, function () {
 				return this.themes;
 			}), function (value) {
-				if(value) {
-					if(value.primary) {
+				if (value) {
+					if (value.primary) {
 						themeProvider.definePalette('primaryTheme', value.primary);
 					}
 
-					if(value.secondary) {
+					if (value.secondary) {
 						themeProvider.definePalette('secondaryTheme', value.secondary);
 					}
 
-					if(value.ternary) {
+					if (value.ternary) {
 						themeProvider.definePalette('ternaryTheme', value.ternary);
 					}
 
@@ -70,117 +69,92 @@ angular.module('main', [])
 			});
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
-		var self = this;
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', 'genericService',
+		function (config, $q, $timeout, devHelper, $state, MapAPI, genericService) {
+			var self = this;
 
-		self.isDisabled = false;
+			self.isDisabled = false;
 
-		// list of `nationalities` value/display objects
-		self.nationalities = loadAll();
-		self.querySearch = querySearch;
-		self.selectedItemChange = selectedItemChange;
-		self.searchTextChange = searchTextChange;
-		self.nationality = newNationality;
+			// list of `nationalities` value/display objects
+			self.nationalities = genericService.loadItems('ALL, ' + config.nationalities);
+			self.querySearch = genericService.querySearch;
+			self.selectedItemChange = selectedItemChange;
+			self.searchTextChange = searchTextChange;
+			self.nationality = newNationality;
 
-		self.distance = 0;
+			self.distance = 0;
 
-		if ($state.is('home')) {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(
-					function (position) {
-						self.currentLocation = position;
-						MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
-							function (result) {
-								self.city = result[1];
-							}
-						);
-					});
-			} else {
-				devHelper.log("Geolocation is not supported by this browser.", 'error');
+			if ($state.is('home')) {
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(
+						function (position) {
+							self.currentLocation = position;
+							MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
+								function (result) {
+									self.city = result[1];
+								}
+							);
+						});
+				} else {
+					devHelper.log("Geolocation is not supported by this browser.", 'error');
+				}
 			}
-		}
 
-		this.autocompleteOptions = {
-			types: ['(regions)']
-		}
+			this.autocompleteOptions = {
+				types: ['(regions)']
+			}
 
-		function newNationality(nationality) {
-			alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
-		}
+			function newNationality(nationality) {
+				alert("Sorry! You'll need to create a Constitution for " + nationality + " first!");
+			}
 
 
-		// ******************************
-		// Internal methods
-		// ******************************
+			// ******************************
+			// Internal methods
+			// ******************************
 
-		/**
-		 * Search for nationalities... use $timeout to simulate
-		 * remote dataservice call.
-		 */
-		function querySearch(query) {
-			var results = query ? self.nationalities.filter(createFilterFor(query)) : self.nationalities,
-				deferred;
-			deferred = $q.defer();
-			$timeout(function () {
-				deferred.resolve(results);
-			}, Math.random() * 1000, false);
-			return deferred.promise;
-		}
+			function searchTextChange(text) {
+				devHelper.log('Text changed to ' + text);
+			}
 
-		function searchTextChange(text) {
-			devHelper.log('Text changed to ' + text);
-		}
+			function selectedItemChange(item) {
+				devHelper.log('Item changed to ' + JSON.stringify(item));
+			}
 
-		function selectedItemChange(item) {
-			devHelper.log('Item changed to ' + JSON.stringify(item));
-		}
 
-		/**
-		 * Build `states` list of key/value pairs
-		 */
-		function loadAll() {
+			/**
+			 * Create filter function for a query string
+			 */
+			function createFilterFor(query) {
+				var lowercaseQuery = angular.lowercase(query);
 
-			return ('ALL, ' + config.nationalities).split(/, +/g).map(function (nationality) {
-				return {
-					value: nationality.toLowerCase(),
-					display: nationality
+				return function filterFn(nationality) {
+					return (nationality.value.indexOf(lowercaseQuery) === 0);
 				};
-			});
-		}
 
-		/**
-		 * Create filter function for a query string
-		 */
-		function createFilterFor(query) {
-			var lowercaseQuery = angular.lowercase(query);
-
-			return function filterFn(nationality) {
-				return (nationality.value.indexOf(lowercaseQuery) === 0);
-			};
-
-		}
-
-		this.searchDish = function () {
-			if (!self.selectedNationality) {
-				self.nationality = 'all';
-			} else {
-				self.nationality = self.selectedNationality.value;
 			}
-			if (!self.sortBy) {
-				self.sortBy = 'newest';
+
+			this.searchDish = function () {
+				if (!self.selectedNationality) {
+					self.nationality = 'all';
+				} else {
+					self.nationality = self.selectedNationality.value;
+				}
+				if (!self.sortBy) {
+					self.sortBy = 'newest';
+				}
+				$state.go('dish.list', {
+					q: self.q,
+					vegan: self.vegan,
+					vegetarian: self.vegetarian,
+					gluten_free: self.gluten_free,
+					min_price: self.min_price,
+					max_price: self.max_price,
+					nationality: self.nationality,
+					sortBy: self.sortBy,
+					city: self.city.formatted_address,
+					distance: self.distance,
+				});
 			}
-			$state.go('dish.list', {
-				q: self.q,
-				vegan: self.vegan,
-				vegetarian: self.vegetarian,
-				gluten_free: self.gluten_free,
-				min_price: self.min_price,
-				max_price: self.max_price,
-				nationality: self.nationality,
-				sortBy: self.sortBy,
-				city: self.city.formatted_address,
-				distance: self.distance,
-			});
 		}
-	}
 	]);

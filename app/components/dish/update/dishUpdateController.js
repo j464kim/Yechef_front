@@ -18,7 +18,7 @@ angular.module('dish.update', [
 			/*********************
 			 *    Public Variables
 			 **********************/
-			this.nationalities = _loadNationalities();
+			this.nationalities = genericService.loadItems(config.nationalities);
 			this.kitchen = {};
 
 			/*********************
@@ -70,19 +70,6 @@ angular.module('dish.update', [
 						//     TODO handle error state
 						devHelper.log(response, 'error');
 					});
-			}
-
-			/**
-			 * Build `states` list of key/value pairs
-			 */
-			function _loadNationalities() {
-
-				return (config.nationalities).split(/, +/g).map(function (nationality) {
-					return {
-						value: nationality.toLowerCase(),
-						display: nationality
-					};
-				});
 			}
 
 			/*********************

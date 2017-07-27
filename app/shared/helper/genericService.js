@@ -24,13 +24,19 @@ angular.module('helper', [])
 			},
 
 			querySearch: function (query, list) {
-				var results = query ? list.filter(createFilterFor(query)) : list,
-					deferred;
-				deferred = $q.defer();
-				$timeout(function () {
-					deferred.resolve(results);
-				}, Math.random() * 1000, false);
-				return deferred.promise;
+				var results = query ? list.filter(createFilterFor(query)) : list;
+
+				return results;
+			},
+
+			loadItems: function (items) {
+
+				return (items).split(/, +/g).map(function (item) {
+					return {
+						value: item.toLowerCase(),
+						display: item
+					};
+				});
 			},
 
 			showToast: function (message) {

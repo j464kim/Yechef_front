@@ -47,12 +47,12 @@ angular.module('map.api', [
 					disableDefaultUI: true,
 					zoomControl: true,
 					minZoom: 5,
-					maxZoom: 15,
+					maxZoom: 20,
 					noClear: false,
 				};
 
 				map.options.zoomControlOptions = {
-					position: google.maps.ControlPosition.TOP_RIGHT,
+					position: google.maps.ControlPosition.TOP_LEFT,
 				};
 				return map;
 			}
@@ -98,12 +98,21 @@ angular.module('map.api', [
 				return window;
 			}
 
+			function getClusterOption() {
+				var clusterOption = {
+					averageCenter: false,
+					zoomOnClick: false
+				};
+				return clusterOption;
+			}
+
 			return {
 				geocode: geocode,
 				rgeocode: rgeocode,
 				getMapOption: getMapOption,
 				getCircle: getCircle,
 				getWindow: getWindow,
+				getClusterOption: getClusterOption
 			};
 		}
 	]);

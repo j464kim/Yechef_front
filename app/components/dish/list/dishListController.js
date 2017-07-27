@@ -6,8 +6,8 @@ angular.module('dish.list', [
 	'googleMapDirectives'
 ])
 
-	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService',
-		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI, genericService) {
+	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService', 'uiGmapGoogleMapApi',
+		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI, genericService, uiGmapGoogleMapApi) {
 
 			/*********************
 			 *    Private Variables
@@ -28,6 +28,7 @@ angular.module('dish.list', [
 			this.dishMapMarkerControl = {};
 			this.mapInited = false;
 			this.searchEnabled = true;
+			this.windowStyled = false;
 
 			/*********************
 			 *    Private Functions
@@ -108,23 +109,33 @@ angular.module('dish.list', [
 
 				that.markersEvents = {
 					click: function (marker, eventName, model) {
+						that.searchEnabled = false;
 						that.window.model = model;
-						that.window.ctrl.showWindow();
 						var dish = _findDishById(model.id);
 						that.window.templateParameter = {
 							dish: dish,
 							style: 'complex',
 						};
-						that.window.show = true;
-						that.searchEnabled = false;
+						_showWindow();
 					}
 				};
 
+				that.clusterOptions = MapAPI.getClusterOption();
+
 				that.clusterEvents = {
 					click: function (cluster, models) {
+						var allSameAddress = true;
+						for (var i = 0; i < models.length - 1; i++) {
+							if (models[i].latitude != models[i + 1].latitude || models[i].longitude != models[i + 1].longitude) {
+								allSameAddress = false;
+								_zoomIn();
+								that.mapCtrl.getGMap().setCenter({lat: models[i].latitude, lng: models[i].longitude});
+								break;
+							}
+						}
 						devHelper.log(cluster);
 						devHelper.log(models);
-						if (cluster.map_.zoom === cluster.map_.maxZoom) {
+						if (cluster.map_.zoom === cluster.map_.maxZoom || allSameAddress) {
 							var dishes = [];
 							for (var i in models) {
 								dishes.push(_findDishById(models[i].id));
@@ -133,10 +144,8 @@ angular.module('dish.list', [
 							that.window.templateParameter = {
 								style: 'cluster',
 								dishes: dishes
-							}
-							that.window.ctrl.showWindow();
-							that.window.show = true;
-							console.log(that.window.ctrl.getGWindows());
+							};
+							_showWindow();
 						}
 					}
 				};
@@ -157,8 +166,7 @@ angular.module('dish.list', [
 						that.mapCtrl.refresh();
 					},
 					click: function (map, eventName, originalEventArgs) {
-						that.window.ctrl.hideWindow();
-						that.window.show = false;
+						_hideWindow();
 						that.searchEnabled = true;
 					},
 				};
@@ -180,6 +188,12 @@ angular.module('dish.list', [
 				that.mapInited = true;
 			}
 
+			function _zoomIn() {
+				if (that.map.zoom < that.map.options.maxZoom) {
+					that.mapCtrl.getGMap().setZoom(that.map.zoom + 1);
+				}
+			}
+
 			// Update the map search result if the map's center is moved enough
 			function _isMapSearchEnabled(newNELat, newNELng) {
 				if (!that.searchEnabled) {
@@ -193,12 +207,12 @@ angular.module('dish.list', [
 					var latDiff = Math.abs(newNELat - that.oldNELat);
 					var lngDiff = Math.abs(newNELng - that.oldNELng);
 					if (latDiff > 0.007 || lngDiff > 0.007) {
-						devHelper.log('User moved the map enough distance to refresh search');
+						// devHelper.log('User moved the map enough distance to refresh search');
 						that.oldNELat = newNELat;
 						that.oldNELng = newNELng;
 						return true;
 					} else {
-						devHelper.log('Map not moved enough distance to refresh search');
+						// devHelper.log('Map not moved enough distance to refresh search');
 						return false;
 					}
 				} else {
@@ -243,6 +257,41 @@ angular.module('dish.list', [
 				devHelper.log('No Dish found with id: ' + id, 'error');
 			}
 
+			function _showWindow() {
+				that.window.ctrl.showWindow();
+				that.window.show = true;
+				_styleWindow();
+			}
+
+			function _hideWindow() {
+				that.window.ctrl.hideWindow();
+				that.window.show = false;
+			}
+
+			function _styleWindow() {
+				if (!that.windowStyled) {
+					uiGmapGoogleMapApi.then(
+						function (maps) {
+							var windows = that.window.ctrl.getGWindows();
+							maps.event.addListener(windows[0], 'domready', function () {
+								//Remove ugly default window background
+								var iwOuter = $('.gm-style-iw');
+								/* The DIV we want to change is above the .gm-style-iw DIV.
+								 * So, we use jQuery and create a iwBackground variable,
+								 * and took advantage of the existing reference to .gm-style-iw for the previous DIV with .prev().
+								 */
+								var iwBackground = iwOuter.prev();
+								// Remove the background shadow DIV
+								iwBackground.children(':nth-child(2)').css({'display': 'none'});
+								// Remove the white background DIV
+								iwBackground.children(':nth-child(4)').css({'display': 'none'});
+								that.windowStyled = true;
+							});
+						}
+					);
+				}
+			}
+
 			/*********************
 			 *    Public Functions
 			 **********************/
@@ -273,7 +322,7 @@ angular.module('dish.list', [
 					style: 'simple',
 				};
 				that.window.model = marker;
-				that.window.show = true;
+				_showWindow();
 			};
 
 			this.dishMouseLeave = function (dish) {

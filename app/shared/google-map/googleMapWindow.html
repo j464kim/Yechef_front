@@ -1,24 +1,17 @@
 <div>
 	<div ng-if="parameter.style == 'complex'">
-		<div class='row'>
-			<div class='col-sm-12'><img ng-src="{{parameter.dish.medias[0].url}}" width='140' height='93.33'></div>
-			<br/>
-		</div>
 		<dish-card dish="parameter.dish"></dish-card>
 	</div>
 
 	<div ng-if="parameter.style == 'simple'">
-		<div class='row'>
-			<div class='col-sm-12'><img ng-src="{{parameter.dish.medias[0].url}}" width='140' height='93.33'></div>
-			<br/>
-		</div>
 		<dish-card dish="parameter.dish"></dish-card>
 	</div>
 
 	<div ng-if="parameter.style == 'cluster'" ng-init="currentPage = 1">
-		<ul uib-pager items-per-page="1" total-items="parameter.dishes.length" ng-model="currentPage"></ul>
+		<span class="badge badge-important text-center">{{currentPage}} / {{parameter.dishes.length}}</span>
 		<div ng-repeat="dish in parameter.dishes.slice(((currentPage-1)), ((currentPage)))">
 			<dish-card dish="dish"></dish-card>
 		</div>
+		<ul uib-pager class="no-margin" items-per-page="1" total-items="parameter.dishes.length" ng-model="currentPage"></ul>
 	</div>
 </div>

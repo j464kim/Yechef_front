@@ -60,7 +60,9 @@ angular.module('googleMapDirectives', [])
 				markersEvents: '=',
 				markersControl: '=',
 				circle: '=',
-				clusterEvents: '='
+				clusterEvents: '=',
+				clusterOptions: '=',
+				dishes: '=',
 			},
 			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
 			}]

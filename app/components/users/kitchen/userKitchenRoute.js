@@ -8,6 +8,7 @@ angular.module('userKitchen', [
 	'user.kitchen.dish',
 	'user.kitchen.subscriber',
 	'user.kitchen.order',
+
 ])
 
 	.config(function ($stateProvider) {
@@ -51,33 +52,5 @@ angular.module('userKitchen', [
 				templateUrl: 'components/users/kitchen/subscriber/kitchenSubscriber.html',
 				controller: 'kitchenSubscriberController as KsCtrl',
 			})
-			.state('user.kitchen.payout', {
-				url: '/payout',
-				abstract: true,
-				template: '<ui-view/>'
-			})
-			.state('user.kitchen.payout.view', {
-				url: '/view',
-				templateUrl: 'components/users/kitchen/payout/kitchenPayout.html',
-			})
-			.state('user.kitchen.payout.preference', {
-				url: '/view',
-				templateUrl: 'components/users/kitchen/payout/payoutPreference.html',
-			})
-			.state('user.kitchen.payout.setting', {
-				url: '/setting',
-				abstract: true,
-				templateUrl: 'components/users/kitchen/payout/payoutSetting.html',
-			})
-			.state('user.kitchen.payout.setting.view', {
-				url:'',
-				views: {
-					'paypal': {
-						templateUrl: 'components/users/kitchen/payout/addPayPal.html',
-					},
-					'bankAccount': {
-						templateUrl: 'components/users/kitchen/payout/addBankAccount.html',
-					},
-				}
-			})
+
 	});

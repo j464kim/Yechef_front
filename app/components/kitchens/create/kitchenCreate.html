@@ -3,6 +3,38 @@
         <form class="form-validation" name="form" novalidate>
             <h2 class="text-center">New Kitchen</h2><br>
             <div class="row">
+                <!--Country-->
+                <div>
+                    <md-autocomplete
+                            md-no-cache="true"
+                            md-selected-item="KitchenCtrl.selectedCountry"
+                            md-search-text="searchCountry"
+                            md-items="country in KitchenCtrl.querySearch(searchCountry, KitchenCtrl.payoutCountries)"
+                            md-min-length="0"
+                            md-item-text="country.display"
+                            placeholder="Select Country"
+                            md-require-match
+                            required>
+                        <md-item-template>
+                            <span md-highlight-flags="^i">{{country.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No matches found.
+                        </md-not-found>
+                        <div ng-message="md-require-match">Please select an existing country.</div>
+                    </md-autocomplete>
+                </div><br>
+                <!--Address-->
+                <div class="kitchenAddress">
+                    <md-input-container class="md-block">
+                        <label for="address">Address</label>
+                        <input id="address" type="text" name="address" g-places-autocomplete ng-model="KitchenCtrl.kitchen.address" autocomplete="off" required/>
+                        <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
+                             ng-cloak>
+                            <div ng-message="required">Address is required</div>
+                        </div>
+                    </md-input-container>
+                </div>
                 <!--Name-->
                 <div class="kitchenName">
                     <md-input-container class="md-block">
@@ -13,17 +45,6 @@
                             <div ng-message="required">Kitchen Name is required</div>
                             <div ng-message="minlength">Kitchen Name must have minimum 5 characters</div>
                             <div ng-message="maxlength">Kitchen Name must have maximum 40 characters</div>
-                        </div>
-                    </md-input-container>
-                </div>
-                <!--Address-->
-                <div class="kitchenAddress">
-                    <md-input-container class="md-block">
-                        <label for="address">Address</label>
-                        <input id="address" type="text" name="address" g-places-autocomplete ng-model="KitchenCtrl.kitchen.address" autocomplete="off" required/>
-                        <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
-                             ng-cloak>
-                            <div ng-message="required">Address is required</div>
                         </div>
                     </md-input-container>
                 </div>

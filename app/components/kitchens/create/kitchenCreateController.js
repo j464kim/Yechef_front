@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService',
-		function ($state, KitchenAPI, devHelper, genericService) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService', 'config',
+		function ($state, KitchenAPI, devHelper, genericService, config) {
 
 			/*********************
 			 *  Private Variables
@@ -17,13 +17,14 @@ angular.module('kitchen.create', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
+			this.payoutCountries = genericService.loadItems(config.payoutCountries);
 
 
 			/*********************
 			 *  Private Functions
 			 **********************/
 			function _createKitchen() {
-
+				this.kitchen.country = this.selectedCountry.display;
 				devHelper.log(that.kitchen.address);
 				if (typeof that.kitchen.address === 'object') {
 					that.kitchen.address = that.kitchen.address.formatted_address;
@@ -62,6 +63,7 @@ angular.module('kitchen.create', [
 			 *  Public Functions
 			 **********************/
 			this.createKitchen = _createKitchen;
+			this.querySearch = genericService.querySearch;
 
 			/*********************
 			 *  Initialization

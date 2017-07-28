@@ -50,10 +50,14 @@ angular.module('dish.list', [
 				that.options.sortBy = $stateParams.sortBy;
 				that.options.city = $stateParams.city;
 				that.options.distance = Number($stateParams.distance);
+				that.options.ne_lat = $stateParams.ne_lat;
+				that.options.sw_lat = $stateParams.sw_lat;
+				that.options.ne_lng = $stateParams.ne_lng;
+				that.options.sw_lng = $stateParams.sw_lng;
 			}
 
 			function _getDishes() {
-				that.options.page = that.currentPage || that.currentPage++;
+				that.options.page = that.currentPage;
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(
 						function (position) {
@@ -87,9 +91,7 @@ angular.module('dish.list', [
 			}
 
 			function _searchDish() {
-				var pageNum = ++that.currentPage;
-
-				SearchAPI.dish(that.options, pageNum).then(function (response) {
+				SearchAPI.dish(that.options).then(function (response) {
 					devHelper.log(response);
 					that.dishes = response.data;
 					that.totalItems = response.total;
@@ -103,7 +105,11 @@ angular.module('dish.list', [
 			}
 
 			function _initGmap() {
+				var lat = $stateParams.lat;
+				var lng = $stateParams.lng;
 				that.map = MapAPI.getMapOption();
+				that.map.center.latitude = lat;
+				that.map.center.longitude = lng;
 				that.circle = MapAPI.getCircle();
 				that.window = MapAPI.getWindow();
 
@@ -155,14 +161,28 @@ angular.module('dish.list', [
 					// adding a blacklist for watching your controller scope should even be better
 					//        blacklist: ['drag', 'dragend','dragstart','zoom_changed', 'center_changed'],
 					idle: function (map, eventName, originalEventArgs) {
-						that.options.NE_lat = map.getBounds().getNorthEast().lat();
-						that.options.SW_lat = map.getBounds().getSouthWest().lat();
-						that.options.NE_lng = map.getBounds().getNorthEast().lng();
-						that.options.SW_lng = map.getBounds().getSouthWest().lng();
 
-						if (_isMapSearchEnabled(that.options.NE_lat, that.options.NE_lng)) {
+						var lat = that.mapCtrl.getGMap().getCenter().lat();
+						var lng = that.mapCtrl.getGMap().getCenter().lng();
+						that.options.ne_lat = map.getBounds().getNorthEast().lat();
+						that.options.sw_lat = map.getBounds().getSouthWest().lat();
+						that.options.ne_lng = map.getBounds().getNorthEast().lng();
+						that.options.sw_lng = map.getBounds().getSouthWest().lng();
+
+						if (_isMapSearchEnabled(that.options.ne_lat, that.options.ne_lng)) {
+							that.currentPage = 0;
 							_getDishes();
 						}
+
+						$state.go('.', {
+							lat: lat,
+							lng: lng,
+							ne_lat: that.options.ne_lat,
+							sw_lat: that.options.sw_lat,
+							ne_lng: that.options.ne_lng,
+							sw_lng: that.options.sw_lng
+						}, {notify: false});
+
 						that.mapCtrl.refresh();
 					},
 					click: function (map, eventName, originalEventArgs) {
@@ -170,21 +190,6 @@ angular.module('dish.list', [
 						that.searchEnabled = true;
 					},
 				};
-
-				MapAPI.geocode($stateParams.city).then(function (result) {
-						if (result) {
-							that.map.center.latitude = result[0].geometry.location.lat();
-							that.map.center.longitude = result[0].geometry.location.lng();
-							that.map.zoom = 14;
-							that.options.userLat = result[0].geometry.location.lat();
-							that.options.userLng = result[0].geometry.location.lng();
-							that.mapCtrl.refresh({
-								latitude: that.map.center.latitude,
-								longitude: that.map.center.longitude
-							});
-						}
-					}
-				);
 				that.mapInited = true;
 			}
 
@@ -226,11 +231,11 @@ angular.module('dish.list', [
 				that.dishMapMarkers.splice(0, that.dishMapMarkers.length);
 				Object.keys(that.dishes).forEach(function (dish) {
 					var ret = {
-						latitude: that.dishes[dish].lat,
-						longitude: that.dishes[dish].lng,
+						latitude: that.dishes[dish].kitchen.lat,
+						longitude: that.dishes[dish].kitchen.lng,
 						options: {
 							title: that.dishes[dish].name,
-							zIndex: that.dishes[dish].lat,
+							zIndex: that.dishes[dish].kitchen.lat,
 							icon: 'images/google_map_icon.png',
 						},
 					};

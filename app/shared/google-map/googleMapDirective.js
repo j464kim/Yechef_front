@@ -8,7 +8,9 @@ angular.module('googleMapDirectives', [])
 			templateUrl: 'shared/google-map/googleMapShowDirective.html',
 			scope: {
 				for: '@',
-				address: '@'
+				address: '@',
+				lat: '@',
+				lng: '@'
 			},
 			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
 				var address = $scope.address;
@@ -16,7 +18,7 @@ angular.module('googleMapDirectives', [])
 				devHelper.log($scope.address);
 				$scope.map = MapAPI.getMapOption();
 				$scope.map.options.gestureHandling = 'none';
-				$scope.map.zoom = 20;
+				$scope.map.zoom = 15;
 				$scope.mapCtrl = {};
 				$scope.marker = {id: 0};
 
@@ -25,19 +27,26 @@ angular.module('googleMapDirectives', [])
 				}
 
 				function _locateKitchen(address) {
-					MapAPI.geocode(address).then(function (result) {
-							if (result) {
-								devHelper.log(result);
-								$scope.map.center.latitude = result[0].geometry.location.lat();
-								$scope.map.center.longitude = result[0].geometry.location.lng();
-								$scope.marker.coords = {
-									latitude: result[0].geometry.location.lat(),
-									longitude: result[0].geometry.location.lng()
-								};
-								$scope.mapCtrl.refresh();
+					if ($scope.lat && $scope.lng) {
+						_setMap($scope.lat, $scope.lng);
+					} else {
+						MapAPI.geocode(address).then(function (result) {
+								if (result) {
+									devHelper.log(result);
+									_setMap(result[0].geometry.location.lat(), result[0].geometry.location.lng());
+								}
 							}
-						}
-					);
+						);
+					}
+				}
+
+				function _setMap(lat, lng) {
+					$scope.map.center.latitude = lat;
+					$scope.map.center.longitude = lng;
+					$scope.marker.coords = {
+						latitude: lat,
+						longitude: lng
+					};
 				}
 
 				$scope.init = _init;

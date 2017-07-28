@@ -115,7 +115,8 @@
 				</div>
 				<!--Gmap-->
 				<div class="row center" ng-if="DishCtrl.kitchen">
-					<google-map-show for="dish" address="{{DishCtrl.kitchen.address}}"></google-map-show>
+					<google-map-show for="dish" address="{{DishCtrl.kitchen.address}}" lat="{{DishCtrl.kitchen.lat}}"
+					                 lng="{{DishCtrl.kitchen.lng}}"></google-map-show>
 				</div>
 			</div>
 		</div>

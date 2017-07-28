@@ -6,7 +6,7 @@ angular.module('main', ['ngMaterial'])
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
 
 			var that = this;
-			if(!$rootScope.currentUser) {
+			if (!$rootScope.currentUser) {
 				$rootScope.currentUser = {};
 			}
 
@@ -48,16 +48,16 @@ angular.module('main', ['ngMaterial'])
 			$scope.$watch(angular.bind(this, function () {
 				return this.themes;
 			}), function (value) {
-				if(value) {
-					if(value.primary) {
+				if (value) {
+					if (value.primary) {
 						themeProvider.definePalette('primaryTheme', value.primary);
 					}
 
-					if(value.secondary) {
+					if (value.secondary) {
 						themeProvider.definePalette('secondaryTheme', value.secondary);
 					}
 
-					if(value.ternary) {
+					if (value.ternary) {
 						themeProvider.definePalette('ternaryTheme', value.ternary);
 					}
 
@@ -169,6 +169,15 @@ angular.module('main', ['ngMaterial'])
 			if (!self.sortBy) {
 				self.sortBy = 'newest';
 			}
+			console.log(self.city);
+			var lat = self.city.geometry.location.lat();
+			var lng = self.city.geometry.location.lng();
+			if (self.city.geometry) {
+				self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
+				self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
+				self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
+				self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
+			}
 			$state.go('dish.list', {
 				q: self.q,
 				vegan: self.vegan,
@@ -180,6 +189,12 @@ angular.module('main', ['ngMaterial'])
 				sortBy: self.sortBy,
 				city: self.city.formatted_address,
 				distance: self.distance,
+				ne_lat: self.ne_lat,
+				ne_lng: self.ne_lng,
+				sw_lat: self.sw_lat,
+				sw_lng: self.sw_lng,
+				lat: lat,
+				lng: lng
 			});
 		}
 	}

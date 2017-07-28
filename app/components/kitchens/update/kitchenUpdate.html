@@ -25,7 +25,7 @@
             <div class="kitchenAddress">
                 <md-input-container class="md-block">
                     <label for="address">Address</label>
-                    <input id="address" type="text" name="address" ng-model="UkCtrl.myCurrentKitchenToEdit.address"
+                    <input id="address" type="text" name="address" ng-model="UkCtrl.myCurrentKitchenToEdit.address" g-places-autocomplete
                            required/>
                     <div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
                          ng-cloak>

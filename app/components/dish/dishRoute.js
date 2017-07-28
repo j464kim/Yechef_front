@@ -19,6 +19,38 @@ angular.module('dish', [
 			.state('dish.list', {
 				url: 'es?' + config.dishSearchParams,
 				templateUrl: '/components/dish/list/dishList.html',
+				params: {
+					lat: {
+						type: 'string',
+						raw: true,
+						dynamic: true
+					},
+					lng: {
+						type: 'string',
+						raw: true,
+						dynamic: true
+					},
+					ne_lat: {
+						type: 'string',
+						raw: true,
+						dynamic: true
+					},
+					ne_lng: {
+						type: 'string',
+						raw: true,
+						dynamic: true
+					},
+					sw_lat: {
+						type: 'string',
+						raw: true,
+						dynamic: true
+					},
+					sw_lng: {
+						type: 'string',
+						raw: true,
+						dynamic: true
+					}
+				},
 				controller: 'DishListController as DishCtrl',
 			})
 			.state('dish.show', {

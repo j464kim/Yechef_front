@@ -25,12 +25,12 @@ angular.module('kitchen.create', [
 			function _createKitchen() {
 
 				devHelper.log(that.kitchen);
-				if (typeof that.kitchen.address === 'object') {
-					that.kitchen.address = that.kitchen.address.formatted_address;
-				}
+				that.kitchen.lat = that.kitchen.address.geometry.location.lat();
+				that.kitchen.lng = that.kitchen.address.geometry.location.lng();
+				that.kitchen.address = that.kitchen.address.formatted_address;
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
-                    devHelper.log(newKitchen);
+					devHelper.log(newKitchen);
 
 					_uploadKitchenMedia(newKitchen);
 

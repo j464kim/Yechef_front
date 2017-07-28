@@ -12,7 +12,7 @@ angular.module('googleMapDirectives', [])
 				lat: '@',
 				lng: '@'
 			},
-			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
+			controller: ['$scope', 'MapAPI', 'devHelper', 'uiGmapIsReady', function ($scope, MapAPI, devHelper, uiGmapIsReady) {
 				var address = $scope.address;
 				devHelper.log($scope.for);
 				devHelper.log($scope.address);
@@ -38,6 +38,10 @@ angular.module('googleMapDirectives', [])
 							}
 						);
 					}
+					uiGmapIsReady.promise().then((function (maps) {
+						$scope.mapCtrl.refresh();
+
+					}))
 				}
 
 				function _setMap(lat, lng) {
@@ -73,7 +77,8 @@ angular.module('googleMapDirectives', [])
 				clusterOptions: '=',
 				dishes: '=',
 			},
-			controller: ['$scope', 'MapAPI', 'devHelper', function ($scope, MapAPI, devHelper) {
+			controller: ['$scope', 'MapAPI', 'devHelper', '$stateParams', function ($scope, MapAPI, devHelper, $stateParams) {
+				console.log($stateParams.ne_lat);
 			}]
 		}
 	}]);

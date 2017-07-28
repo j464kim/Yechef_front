@@ -10,21 +10,17 @@ angular.module('user.profile.payment', [
 			/*********************
 			 *  Private Variables
 			 **********************/
-				// reference to this controller
 
-			var that = this;
 			/*********************
 			 *  Public Variables
 			 **********************/
+			var that = this;
 
 			/*********************
 			 *  Private Functions
 			 **********************/
-
 			function _init() {
 				_getPayment();
-				console.log('current usr');
-				devHelper.log($rootScope.currentUser);
 			}
 
 			function _getPayment() {
@@ -58,7 +54,6 @@ angular.module('user.profile.payment', [
 			 *  Initialization
 			 **********************/
 			_init();
-
 
 			/*********************
 			 *  EVENTS

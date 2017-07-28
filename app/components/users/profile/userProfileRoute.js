@@ -11,6 +11,7 @@ angular.module('profile', [
 	'user.profile.payment',
 	'user.profile.payment.create',
 	'user.profile.payment.update',
+	'user.profile.payout.list',
 	'user.profile.payout.create'
 ])
 
@@ -87,8 +88,8 @@ angular.module('profile', [
 			})
 			.state('user.profile.payout.list', {
 				url: '/view',
-				templateUrl: 'components/users/profile/payout/userPayoutList.html',
-				controller: 'PayoutCreateController as pcCtrl',
+				templateUrl: 'components/users/profile/payout/list/userPayoutList.html',
+				controller: 'PayoutListController as plCtrl',
 			})
 			.state('user.profile.payout.preference', {
 				url: '/view',

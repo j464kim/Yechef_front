@@ -22,7 +22,6 @@ angular.module('user.profile.payout.create', [
 			 **********************/
 
 			function _createAccount() {
-				console.log('creating payout account..');
 				PayoutAPI.createAccount().then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Successfully created Payout Account for the user');

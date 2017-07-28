@@ -19,8 +19,11 @@
 			{{plCtrl.account.external_account}}
 		</div>
 		<div>
-			<label>Balance: </label>
+			<label>Available Balance: </label>
 			${{plCtrl.account.balance}}
+		</div>
+		<div>
+			<button ui-sref="user.profile.payout.update.address">Update Payout Account</button>
 		</div>
 	</div>
 
@@ -29,10 +32,10 @@
 			<p>Payout preference is not set up yet.</p>
 			<p>In order to receive money, please set up your payout preference.</p>
 		</h4>
+		<div>
+			<button ui-sref="user.profile.payout.new.address">Add New Payout Method</button>
+		</div>
 	</div>
 
-	<br>
-
-	<button ui-sref="user.profile.payout.new.address">Add Payout Method</button>
 </div>
 

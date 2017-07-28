@@ -14,6 +14,9 @@ angular.module('payout.api', [
 				},
 				create: {
 					method: 'POST'
+				},
+				update: {
+					method: 'PUT'
 				}
 			});
 		}
@@ -21,17 +24,6 @@ angular.module('payout.api', [
 
 	.service('PayoutAPI', ['$q', 'PayoutResource',
 		function ($q, PayoutResource) {
-
-			function createAccount() {
-				return $q(function (resolve, reject) {
-					PayoutResource.create()
-						.$promise.then(function (response) {
-						resolve(response.body);
-					}, function (response) {
-						reject(response);
-					});
-				});
-			}
 
 			function getAccount() {
 				return $q(function (resolve, reject) {
@@ -44,9 +36,34 @@ angular.module('payout.api', [
 				});
 			}
 
+			function createAccount() {
+				return $q(function (resolve, reject) {
+					PayoutResource.create()
+						.$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function updateAddress(address, accountId) {
+				return $q(function (resolve, reject) {
+					PayoutResource.update({
+							id: accountId
+						}, address
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				getAccount: getAccount,
 				createAccount: createAccount,
+				updateAddress: updateAddress
 			};
 		}
 	]);

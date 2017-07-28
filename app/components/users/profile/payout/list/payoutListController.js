@@ -15,6 +15,7 @@ angular.module('user.profile.payout.list', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
+			this.payoutCountries = genericService.loadItems(config.payoutCountries);
 
 			/*********************
 			 *  Private Functions
@@ -24,20 +25,38 @@ angular.module('user.profile.payout.list', [
 			}
 
 			function _getPayoutAccount() {
-				console.log('retrieving payout account..');
-				PayoutAPI.getAccount().then(function (response) {
-					devHelper.log(response);
-					that.account = response;
-					devHelper.log('Successfully retrieved Payout Account of the user');
-				}, function (response) {
-					// TODO handle error state-*/ ˙
-					devHelper.log(response, 'error');
-				})
+				PayoutAPI.getAccount()
+					.then(function (response) {
+						devHelper.log(response);
+						that.account = response;
+						devHelper.log('Successfully retrieved Payout Account of the user');
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						devHelper.log(response, 'error');
+					})
+			}
+
+			function _updateAddress() {
+				devHelper.log(that.address);
+				that.address.state = that.selectedState.display;
+				PayoutAPI.updateAddress(that.address, that.account.id)
+					.then(function (response) {
+						devHelper.log(response);
+						that.account = response;
+						devHelper.log('Successfully updated address of the payout account');
+						$state.go('user.profile.payout.list');
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						devHelper.log(response, 'error');
+					})
 			}
 
 			/*********************
 			 *  Public Functions
 			 **********************/
+			this.updateAddress = _updateAddress;
+			this.getStates = genericService.getStates;
+			this.querySearch = genericService.querySearch;
 
 			/*********************
 			 *  Initialization

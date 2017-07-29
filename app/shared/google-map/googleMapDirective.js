@@ -140,32 +140,18 @@ angular.module('googleMapDirectives', [])
 
 						$scope.clusterEvents = {
 							click: function (cluster, models) {
-								var allSameAddress = true;
-								for (var i = 0; i < models.length - 1; i++) {
-									if (models[i].latitude != models[i + 1].latitude || models[i].longitude != models[i + 1].longitude) {
-										allSameAddress = false;
-										_zoomIn();
-										$scope.mapCtrl.getGMap().setCenter({
-											lat: models[i].latitude,
-											lng: models[i].longitude
-										});
-										break;
-									}
-								}
 								devHelper.log(cluster);
 								devHelper.log(models);
-								if (cluster.map_.zoom === cluster.map_.maxZoom || allSameAddress) {
-									var dishes = [];
-									for (var i in models) {
-										dishes.push(_findDishById(models[i].id));
-									}
-									$scope.window.model = models[0];
-									$scope.window.templateParameter = {
-										style: 'cluster',
-										dishes: dishes
-									};
-									_showWindow();
+								var dishes = [];
+								for (var i in models) {
+									dishes.push(_findDishById(models[i].id));
 								}
+								$scope.window.model = models[0];
+								$scope.window.templateParameter = {
+									style: 'cluster',
+									dishes: dishes
+								};
+								_showWindow();
 							}
 						};
 					}

@@ -1,23 +1,34 @@
 <div>
-    <a ui-sref="dish.show({id: dish.id})">
-        <md-card>
-            <img class="md-user-avatar" ng-src="{{dish.medias[0].url}}">
-            <md-card-title>
-                <md-card-title-text>
-                    <div class="row no-margin">
-                        <div class="col-md-6">
-                            <span class="card-title md-subhead">{{dish.name}}</span>
-                            <ng-rate-it ng-model="dish.total_rating" max="5" read-only="true"
-                                        star-width="14" step="0.01"></ng-rate-it>
-                        </div>
-                        <div class="col-md-6 pull-right text-right">
-                            <span class="md-subhead">$ {{dish.price}}</span>
-                            <br/>
-                            <span ng-if="dish.distance" class="md-subhead">{{(dish.distance / 1000.0).toFixed(2)}} km</span>
-                        </div>
-                    </div>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
-    </a>
+	<a ui-sref="dish.show({id: dish.id})">
+		<md-card>
+			<img class="md-user-avatar" ng-src="{{dish.medias[0].url}}">
+			<md-card-title>
+				<md-card-title-text>
+					<div class="row no-margin">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-12">
+									<span class="card-title md-subhead">{{dish.name}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<ng-rate-it ng-model="dish.total_rating" max="5" read-only="true"
+									            style="display: inline-block"
+									            star-width="14" step="0.01"></ng-rate-it>
+									<span>({{dish.ratingsCount}})</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 pull-right text-right">
+							<span class="md-subhead">$ {{dish.price}}</span>
+							<br/>
+							<span ng-if="dish.distance"
+							      class="md-subhead">{{(dish.distance / 1000.0).toFixed(2)}} km</span>
+						</div>
+					</div>
+				</md-card-title-text>
+			</md-card-title>
+		</md-card>
+	</a>
 </div>

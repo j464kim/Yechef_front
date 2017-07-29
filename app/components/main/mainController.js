@@ -86,11 +86,9 @@ angular.module('main', ['ngMaterial'])
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(
 					function (position) {
-						console.log(position);
 						self.currentLocation = position;
 						MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
 							function (result) {
-								console.log(result);
 								self.city = result[1];
 							}
 						);

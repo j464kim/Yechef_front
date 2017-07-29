@@ -15,9 +15,9 @@ angular.module('checkout.billing', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
-			var amount = $stateParams.amount;
+			var _amount = $stateParams.amount;
 			var kitchenId = $stateParams.kitchenId;
-			var amount_inStripe = numberService.getAmountInStripe(amount);
+			var amount = numberService.stripeToDb(_amount);
 
 			/*********************
 			 *  Private Functions
@@ -28,8 +28,8 @@ angular.module('checkout.billing', [
 
 			function _redirectOnReload() {
 				try {
-					var _amtBeforeService = ngCart.totalWithoutService(kitchenId);
-					that.amtBeforeService_inStripe = numberService.getAmountInStripe(_amtBeforeService);
+					var _serviceFee = ngCart.serviceFee(kitchenId);
+					that.serviceFee = numberService.stripeToDb(_serviceFee);
 				} catch (err) {
 					$state.go('cart.view');
 				}
@@ -38,7 +38,7 @@ angular.module('checkout.billing', [
 			function _chargePayment() {
 				CheckoutService.tokenize(that.card)
 					.then(function (response) {
-						CheckoutAPI.charge(response.id, amount_inStripe, config.currency, kitchenId, that.amtBeforeService_inStripe)
+						CheckoutAPI.charge(response.id, amount, that.serviceFee, config.currency, kitchenId)
 							.then(function (response) {
 								devHelper.log(response);
 								devHelper.log('Authorization hold successful');

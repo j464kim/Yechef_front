@@ -17,7 +17,7 @@
 			<td>
 				<button ng-click="isCollapsed = !isCollapsed">{{$index+1}}</button>
 			</td>
-			<td>${{order.transaction.amount}}</td>
+			<td>${{uoCtrl.stripeToDb(order.transaction.amount + order.transaction.service_fee)}}</td>
 			<td>{{order.kitchen.name}}</td>
 			<td>{{order.created_at}}</td>
 			<td>{{order.status}}</td>

@@ -238,10 +238,6 @@ angular.module('ngCart', [
 			return +parseFloat(total).toFixed(2);
 		};
 
-		this.totalWithoutService = function (kitchenId) {
-			return +parseFloat(this.getSubTotal(kitchenId) + this.getTax(kitchenId)).toFixed(2);
-		};
-
 		this.totalCost = function (kitchenId) {
 			return +parseFloat(this.getSubTotal(kitchenId) + this.getTax(kitchenId) + this.serviceFee(kitchenId)).toFixed(2);
 		};

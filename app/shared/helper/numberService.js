@@ -2,11 +2,16 @@
 angular.module('helper')
 	.factory("numberService", function (devHelper, config) {
 
-		var _getAmountInStripe = function(amount) {
-			return Math.round(amount * 100);
+		var _dbToStripe = function(value) {
+			return Math.round(value * 100);
+		};
+
+		var _stripeToDb = function(value) {
+			return (value / 100).toFixed(2);
 		};
 
 		return {
-			getAmountInStripe: _getAmountInStripe
+			dbToStripe: _dbToStripe,
+			stripeToDb: _stripeToDb
 		}
 	});

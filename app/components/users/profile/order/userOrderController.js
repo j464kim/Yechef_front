@@ -4,8 +4,8 @@ angular.module('user.profile.order', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope',
-		function ($stateParams, $state, UserAPI, devHelper, $scope) {
+	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope', 'numberService',
+		function ($stateParams, $state, UserAPI, devHelper, $scope, numberService) {
 
 			/*********************
 			 *  Private Variables
@@ -51,6 +51,7 @@ angular.module('user.profile.order', [
 			 *  Public Functions
 			 **********************/
 			this.cancelOrder = _cancelOrder;
+			this.stripeToDb = numberService.stripeToDb;
 
 			/*********************
 			 *  Initialization

@@ -4,7 +4,7 @@
 	</div>
 
 	<div ng-if="parameter.style == 'simple'">
-		<dish-card dish="parameter.dish"></dish-card>
+		<span class="">$ {{parameter.dish.price}}</span>
 	</div>
 
 	<div ng-if="parameter.style == 'cluster'" ng-init="currentPage = 1">

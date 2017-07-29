@@ -55,9 +55,7 @@
 									<md-autocomplete
 											md-no-cache="true"
 											md-selected-item="sctrl.selectedNationality"
-											md-search-text-change="sctrl.searchTextChange(sctrl.searchText)"
 											md-search-text="sctrl.searchText"
-											md-selected-item-change="sctrl.selectedItemChange(item)"
 											md-items="item in sctrl.querySearch(sctrl.searchText)"
 											md-item-text="item.display"
 											md-min-length="0"
@@ -132,10 +130,9 @@
 	</div>
 
 	<div class="col-sm-4">
-		<google-map-search ng-if="DishCtrl.mapInited" map="DishCtrl.map" map-ctrl="DishCtrl.mapCtrl"
-		                   map-events="DishCtrl.mapEvents" markers="DishCtrl.dishMapMarkers" dishes="DishCtrl.dishes"
-		                   markers-events="DishCtrl.markersEvents" markers-control="DishCtrl.dishMapMarkerControl"
-		                   window="DishCtrl.window" circle="DishCtrl.circle"
-		                   cluster-events="DishCtrl.clusterEvents" cluster-options="DishCtrl.clusterOptions"></google-map-search>
+		<google-map-search ng-if="DishCtrl.mapInited" search-enabled="DishCtrl.searchEnabled"
+		                   markers="DishCtrl.dishMapMarkers" dishes="DishCtrl.dishes" circle="DishCtrl.circle"
+		                   search-function="DishCtrl.getDishes" search-bounds-changed="DishCtrl.searchBoundsChanged"
+		></google-map-search>
 	</div>
 </div>

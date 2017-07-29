@@ -78,8 +78,6 @@ angular.module('main', ['ngMaterial'])
 		// list of `nationalities` value/display objects
 		self.nationalities = loadAll();
 		self.querySearch = querySearch;
-		self.selectedItemChange = selectedItemChange;
-		self.searchTextChange = searchTextChange;
 		self.nationality = newNationality;
 
 		self.distance = 0;
@@ -127,14 +125,6 @@ angular.module('main', ['ngMaterial'])
 				deferred.resolve(results);
 			}, Math.random() * 1000, false);
 			return deferred.promise;
-		}
-
-		function searchTextChange(text) {
-			devHelper.log('Text changed to ' + text);
-		}
-
-		function selectedItemChange(item) {
-			devHelper.log('Item changed to ' + JSON.stringify(item));
 		}
 
 		/**

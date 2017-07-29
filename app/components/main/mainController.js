@@ -159,12 +159,15 @@ angular.module('main', ['ngMaterial'])
 			if (!self.sortBy) {
 				self.sortBy = 'newest';
 			}
-			var lat = self.city.geometry.location.lat();
-			var lng = self.city.geometry.location.lng();
-			self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
-			self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
-			self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
-			self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
+			if (typeof self.city == 'object') {
+				var lat = self.city.geometry.location.lat();
+				var lng = self.city.geometry.location.lng();
+				self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
+				self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
+				self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
+				self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
+			}
+
 			$state.go('dish.list', {
 				q: self.q,
 				vegan: self.vegan,

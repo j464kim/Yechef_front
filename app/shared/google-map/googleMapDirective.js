@@ -40,8 +40,7 @@ angular.module('googleMapDirectives', [])
 					}
 					uiGmapIsReady.promise().then((function (maps) {
 						$scope.mapCtrl.refresh();
-
-					}))
+					}));
 				}
 
 				function _setMap(lat, lng) {

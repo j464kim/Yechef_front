@@ -107,11 +107,15 @@ angular.module('dish.list', [
 			function _initGmap() {
 				var lat = $stateParams.lat;
 				var lng = $stateParams.lng;
+				console.log('ANG@!!!!');
+				console.log(lat);
+				console.log(lng);
 				that.map = MapAPI.getMapOption();
 				that.map.center.latitude = lat;
 				that.map.center.longitude = lng;
 				that.circle = MapAPI.getCircle();
 				that.window = MapAPI.getWindow();
+				that.clusterOptions = MapAPI.getClusterOption();
 
 				that.markersEvents = {
 					click: function (marker, eventName, model) {
@@ -126,7 +130,6 @@ angular.module('dish.list', [
 					}
 				};
 
-				that.clusterOptions = MapAPI.getClusterOption();
 
 				that.clusterEvents = {
 					click: function (cluster, models) {
@@ -164,6 +167,9 @@ angular.module('dish.list', [
 
 						var lat = that.mapCtrl.getGMap().getCenter().lat();
 						var lng = that.mapCtrl.getGMap().getCenter().lng();
+						console.log('IDLE');
+						console.log(lat);
+						console.log(lng);
 						that.options.ne_lat = map.getBounds().getNorthEast().lat();
 						that.options.sw_lat = map.getBounds().getSouthWest().lat();
 						that.options.ne_lng = map.getBounds().getNorthEast().lng();
@@ -182,8 +188,27 @@ angular.module('dish.list', [
 							ne_lng: that.options.ne_lng,
 							sw_lng: that.options.sw_lng
 						}, {notify: false});
-
 						that.mapCtrl.refresh();
+					},
+					bounds_changed: function (map, eventName, originalEventArgs) {
+						console.log('BOUNDS_CHANGED');
+					},
+					dragend: function (map, eventName, originalEventArgs) {
+
+						console.log('DRAGEND');
+					},
+					resize: function (map, eventName, originalEventArgs) {
+
+						console.log('RESIZE');
+					},
+					tilesloaded: function (map, eventName, originalEventArgs) {
+
+						console.log('TILES_LOADED');
+
+					},
+					zoom_changed: function (map, eventName, originalEventArgs) {
+
+						console.log('ZOOM_CHANGED');
 					},
 					click: function (map, eventName, originalEventArgs) {
 						_hideWindow();

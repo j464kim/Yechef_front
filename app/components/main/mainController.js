@@ -88,9 +88,11 @@ angular.module('main', ['ngMaterial'])
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(
 					function (position) {
+						console.log(position);
 						self.currentLocation = position;
 						MapAPI.rgeocode(position.coords.latitude, position.coords.longitude).then(
 							function (result) {
+								console.log(result);
 								self.city = result[1];
 							}
 						);
@@ -169,15 +171,12 @@ angular.module('main', ['ngMaterial'])
 			if (!self.sortBy) {
 				self.sortBy = 'newest';
 			}
-			console.log(self.city);
 			var lat = self.city.geometry.location.lat();
 			var lng = self.city.geometry.location.lng();
-			if (self.city.geometry) {
-				self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
-				self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
-				self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
-				self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
-			}
+			self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
+			self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
+			self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
+			self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
 			$state.go('dish.list', {
 				q: self.q,
 				vegan: self.vegan,

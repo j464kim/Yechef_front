@@ -48,7 +48,7 @@ angular.module('map.api', [
 					zoomControl: true,
 					minZoom: 5,
 					maxZoom: 20,
-					noClear: false,
+					// noClear: false,
 				};
 
 				map.options.zoomControlOptions = {

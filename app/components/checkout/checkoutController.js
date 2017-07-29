@@ -4,8 +4,8 @@ angular.module('checkout.billing', [
 	'checkout.api',
 ])
 
-	.controller('CheckoutController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper', 'config', '$rootScope', '$q',
-		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper, config, $rootScope, $q) {
+	.controller('CheckoutController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper', 'config', 'ngCart', 'numberService',
+		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper, config, ngCart, numberService) {
 
 			/*********************
 			 *  Private Variables
@@ -17,16 +17,28 @@ angular.module('checkout.billing', [
 			var that = this;
 			var amount = $stateParams.amount;
 			var kitchenId = $stateParams.kitchenId;
-			var stripeAmount = Math.round(amount * 100);
+			var amount_inStripe = numberService.getAmountInStripe(amount);
 
 			/*********************
 			 *  Private Functions
 			 **********************/
+			function _init() {
+				_redirectOnReload();
+			}
+
+			function _redirectOnReload() {
+				try {
+					var _amtBeforeService = ngCart.totalWithoutService(kitchenId);
+					that.amtBeforeService_inStripe = numberService.getAmountInStripe(_amtBeforeService);
+				} catch (err) {
+					$state.go('cart.view');
+				}
+			}
 
 			function _chargePayment() {
 				CheckoutService.tokenize(that.card)
 					.then(function (response) {
-						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId)
+						CheckoutAPI.charge(response.id, amount_inStripe, config.currency, kitchenId, that.amtBeforeService_inStripe)
 							.then(function (response) {
 								devHelper.log(response);
 								devHelper.log('Authorization hold successful');
@@ -46,6 +58,7 @@ angular.module('checkout.billing', [
 			/*********************
 			 *  Initialization
 			 **********************/
+			_init();
 
 			/*********************
 			 *  EVENTS

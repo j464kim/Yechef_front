@@ -8,7 +8,7 @@ angular.module('checkout.api', [
 		function ($resource, config, $http) {
 			var apiEndpoint = config.endpoint + 'payment';
 
-			function charge(token, amount, currency, kitchenId) {
+			function charge(token, amount, currency, kitchenId, amtBeforeService) {
 				return $http({
 					method: 'POST',
 					url: apiEndpoint + '/charge',
@@ -17,6 +17,7 @@ angular.module('checkout.api', [
 						amount: amount,
 						currency: currency,
 						kitchenId: kitchenId,
+						amtBeforeService: amtBeforeService,
 					}
 				});
 			}
@@ -30,9 +31,9 @@ angular.module('checkout.api', [
 	.service('CheckoutAPI', ['$q', 'CheckoutResource',
 		function ($q, CheckoutResource) {
 
-			function charge(token, amount, currency, kitchenId) {
+			function charge(token, amount, currency, kitchenId, amtBeforeService) {
 				return $q(function (resolve, reject) {
-					CheckoutResource.charge(token, amount, currency, kitchenId)
+					CheckoutResource.charge(token, amount, currency, kitchenId, amtBeforeService)
 						.then(function (response) {
 						resolve(response.body);
 					}, function (response) {

@@ -76,7 +76,6 @@ angular.module('googleMapDirectives', [])
 				function ($scope, MapAPI, devHelper, $stateParams, uiGmapGoogleMapApi, $rootScope, $state) {
 					$scope.windowStyled = false;
 					$scope.inited = false;
-					$scope.mapCtrl = {};
 
 					function _init() {
 						$scope.map = MapAPI.getMapOption();
@@ -84,6 +83,8 @@ angular.module('googleMapDirectives', [])
 						$scope.clusterOptions = MapAPI.getClusterOption();
 						$scope.map.center.latitude = $stateParams.lat;
 						$scope.map.center.longitude = $stateParams.lng;
+						$scope.mapCtrl = {};
+
 						$scope.markersEvents = {
 							click: function (marker, eventName, model) {
 								$scope.searchEnabled = false;

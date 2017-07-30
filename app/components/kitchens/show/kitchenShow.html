@@ -3,16 +3,13 @@
 	<div class="row">
 		<div class="col-md-3">
 		</div>
-		<div class="col-md-6">
-			<p class="text-center kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
+		<div class="col-md-6 text-center">
+			<p class="kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
 		</div>
 		<div class="col-md-3">
-			<i class="material-icons">star</i>
-			<i class="material-icons">star</i>
-			<i class="material-icons">star</i>
-			<i class="material-icons">star</i>
-			<i class="material-icons">star</i>
-			<label>524 Reviews</label>
+			<!--star-width and star-height cannot be assigned via less as this values are going to be used in ng-rate-it directive for calculation-->
+			<ng-rate-it ng-model="KitchenCtrl.kitchen.totalRating" max="5" star-width="25" star-height="25" read-only="true" class="bigstar-25"
+			            star-width="14" step="0.01"></ng-rate-it>
 		</div>
 	</div>
 	<!--Sub Header-->

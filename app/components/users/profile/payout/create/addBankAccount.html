@@ -1,19 +1,37 @@
-<label for="accountHolder">Name of Account Holder</label>
 <div>
-    <input class="full-width" id="accountHolder" type="text">
+	<md-content>
+		<label>Country: </label>
+		<span>{{plCtrl.account.country}}</span>
+	</md-content>
 </div>
-<label for="accoutnType">Account Type</label>
 <div>
-    <input class="full-width" id="accoutnType" type="email">
+	<md-content>
+		<label>Currency: </label>
+		<span>{{plCtrl.account.default_currency}}</span>
+	</md-content>
 </div>
-<label for="transitNum">Transit Number</label>
-<div>
-    <input class="full-width" id="transitNum" type="text">
-</div>
-<label for="accountNum">Account Number</label>
-<div>
-    <input class="full-width" id="accountNum" type="number">
-</div>
-<br>
-<button ui-sref="user.kitchen.payout.view">Back</button>
-<button ui-sref="user.kitchen.payout.view" class="pull-right">Next</button>
+<form class="form-validation" ng-submit="plCtrl.createExternalAccount()" name="form" novalidate>
+	<label for="accountHolder">Name of Account Holder</label>
+	<div>
+		<input class="full-width" id="accountHolder" type="text" ng-model="plCtrl.bankAccount.account_holder_name">
+	</div>
+	<div>
+		<md-input-container>
+			<label for="accountType">Account Type</label>
+			<md-select ng-model="plCtrl.bankAccount.account_holder_type" id="accountType">
+				<md-option ng-value="type" ng-repeat="type in plCtrl.accountHolderTypes">{{ type }}</md-option>
+			</md-select>
+		</md-input-container>
+	</div>
+	<label for="transitNum">Routing/Transit Number</label>
+	<div>
+		<input class="full-width" id="transitNum" ng-model="plCtrl.bankAccount.routing_number">
+	</div>
+	<label for="accountNum">Account Number</label>
+	<div>
+		<input class="full-width" id="accountNum" ng-model="plCtrl.bankAccount.account_number">
+	</div>
+	<br>
+	<button ui-sref="user.profile.payout.list">Back</button>
+	<button class="pull-right" type="submit">Submit</button>
+</form>

@@ -42,7 +42,7 @@ angular.module('checkout.billing', [
 			}
 
 			function _chargePayment() {
-				CheckoutService.tokenize(that.card)
+				CheckoutService.tokenizeCard(that.card)
 					.then(function (response) {
 						_chargeObj.token = response.id;
 						CheckoutAPI.charge(_chargeObj)

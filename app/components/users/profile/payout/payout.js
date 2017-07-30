@@ -17,7 +17,7 @@ angular.module('payout.api', [
 				},
 				update: {
 					method: 'PUT'
-				}
+				},
 			});
 		}
 	])
@@ -60,10 +60,24 @@ angular.module('payout.api', [
 				});
 			}
 
+			function createExternalAccount(token) {
+				return $q(function (resolve, reject) {
+					PayoutResource.create({
+							id: 'externalAccount'
+						}, token
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				getAccount: getAccount,
 				createAccount: createAccount,
-				updateAddress: updateAddress
+				updateAddress: updateAddress,
+				createExternalAccount: createExternalAccount
 			};
 		}
 	]);

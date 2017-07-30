@@ -21,7 +21,7 @@ angular.module('user.profile.payment.create', [
 			 **********************/
 
 			function _addCard() {
-				CheckoutService.tokenize(that.card)
+				CheckoutService.tokenizeCard(that.card)
 					.then(function (response) {
 						PaymentAPI.addCard(response.id).then(function (response) {
 							devHelper.log(response);

@@ -6,7 +6,7 @@ angular.module('checkout.billing')
 			// Create a Stripe client
 			Stripe.setPublishableKey(config.stripePublishableKey);
 
-			function tokenize(card) {
+			function _tokenizeCard(card) {
 				var deferred = $q.defer();
 				Stripe.card.createToken(
 					{
@@ -21,9 +21,27 @@ angular.module('checkout.billing')
 				return deferred.promise;
 			}
 
+			function _tokenizeBankAccount(bankAccount) {
+				var deferred = $q.defer();
+				Stripe.bankAccount.createToken(
+					{
+						country: bankAccount.country,
+						currency: bankAccount.currency,
+						routing_number: bankAccount.routing_number,
+						account_number: bankAccount.account_number,
+						account_holder_name: bankAccount.account_holder_name,
+						account_holder_type: bankAccount.account_holder_type
+					}, function (status, response) {
+						deferred.resolve(response);
+					}
+				);
+				return deferred.promise;
+			}
+
 			return {
-				tokenize: tokenize
+				tokenizeCard: _tokenizeCard,
+				tokenizeBankAccount: _tokenizeBankAccount
 			}
 
 		}
-	])
+	]);

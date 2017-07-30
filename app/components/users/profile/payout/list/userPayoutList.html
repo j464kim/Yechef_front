@@ -11,8 +11,8 @@
 			{{plCtrl.account.email}}
 		</div>
 		<div>
-			<label>External Accounts: </label>
-			{{plCtrl.account.external_account}}
+			<label># of External Accounts: </label>
+			{{plCtrl.account.total_count}}
 		</div>
 		<div>
 			<label>Pending Balance: </label>
@@ -23,7 +23,8 @@
 			${{plCtrl.account.available_balance}} {{plCtrl.account.default_currency}}
 		</div>
 		<div>
-			<button ui-sref="user.profile.payout.update.address">Update Payout Account</button>
+			<button ui-sref="user.profile.payout.update.address">Update Payout Account</button><br>
+			<button ui-sref="user.profile.payout.new.method.select">Set Up Bank / Debit Payout</button>
 		</div>
 	</div>
 

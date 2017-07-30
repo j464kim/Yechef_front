@@ -101,13 +101,15 @@ angular.module('rating', [
 			};
 
 			this.destroyRating = function ($ratingId) {
-				RatingAPI.destroy(that.dishId, $ratingId).then(
-					function (response) {
-						$state.reload();
-					}, function (response) {
-						devHelper.log(response, 'error');
-					}
-				)
+				if (confirm("Do you want to delete the dish?")) {
+					RatingAPI.destroy(that.dishId, $ratingId).then(
+						function (response) {
+							$state.reload();
+						}, function (response) {
+							devHelper.log(response, 'error');
+						}
+					)
+				}
 			};
 
 			/*********************

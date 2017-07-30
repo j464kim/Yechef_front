@@ -1,59 +1,60 @@
 <div id="RatingList" loader>
 	<div class="row" ng-repeat="rating in RatingCtrl.ratings">
-		<md-card class="padding-1em">
-			<div class="ui comments">
-				<div class="comment">
-					<div class="metadata comment-rating">
-						<div class="rating full-width">
-							<div class="col-md-4">
-								<div class="pull-left">
-									Taste
-								</div>
-								<ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
+		<div class="ui comments">
+			<div class="comment">
+				<div class="metadata comment-rating">
+					<div class="rating full-width">
+						<div class="col-md-4 text-center">
+							<div class="">
+								Taste
 							</div>
-							<div class="col-md-4">
-								<div class="pull-left">
-									Visual:
-								</div>
-								<ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
+							<ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
+						</div>
+						<div class="col-md-4 text-center">
+							<div class="">
+								Visual:
 							</div>
-							<div class="col-md-4">
-								<div class="pull-left">
-									Quantity:
-								</div>
-								<ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
+							<ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
+						</div>
+						<div class="col-md-4 text-center">
+							<div class="">
+								Quantity:
 							</div>
+							<ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
 						</div>
 					</div>
-					<a class="avatar" ui-sref="user.show({id: rating.user_id})">
-						<img ng-src="{{rating.user.medias[0].url}}"
-						     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-					</a>
-					<div class="content">
-						<a class="author" ui-sref="user.show({id: rating.user_id})">{{rating.user.first_name}}
-							{{rating.user.last_name}}</a>
-						<div class="metadata">
-							<div class="date">2 days ago</div>
-						</div>
-						<div class="text">
+				</div>
+				<a class="avatar" ui-sref="user.show({id: rating.user_id})">
+					<img ng-src="{{rating.user.medias[0].url}}"
+					     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+				</a>
+				<div class="content">
+					<a class="author" ui-sref="user.show({id: rating.user_id})">{{rating.user.first_name}}
+						{{rating.user.last_name}}</a>
+					<div class="metadata">
+						<div class="date">2 days ago</div>
+						<div class="date">taste: 5  ang: mo  :tti :ang</div>
+					</div>
+					<div class="text">
 						<span e-style="width: 250%;" editable-textarea="rating.comment" e-form="textBtnForm"
 						      onbeforesave="RatingCtrl.updateComment(rating, $data)">
                         {{rating.comment || 'empty'}}
                     </span>
-						</div>
-						<div class="actions">
-							<a class="reply">Reply</a>
-							<a class="save" ng-if="currentUser.id == rating.user_id" ng-hide="textBtnForm.$visible"
-							   ng-click="textBtnForm.$show()"> <i class="fa fa-edit fa-x"></i>
-								Edit</a>
-							<a class="delete" ng-if="currentUser.id == rating.user_id"
-							   ng-click="RatingCtrl.destroyRating(rating.id)"> <i class="fa fa-close fa-x"></i>
-								Delete</a>
-						</div>
+					</div>
+					<div class="actions">
+						<a class="reply">Reply</a>
+						<a class="save" ng-if="currentUser.id == rating.user_id" ng-hide="textBtnForm.$visible"
+						   ng-click="textBtnForm.$show()"> <i class="fa fa-edit fa-x"></i>
+							Edit</a>
+						<a class="delete" ng-if="currentUser.id == rating.user_id"
+						   ng-click="RatingCtrl.destroyRating(rating.id)"> <i class="fa fa-close fa-x"></i>
+							Delete</a>
 					</div>
 				</div>
 			</div>
-		</md-card>
+		</div>
+		<md-divider></md-divider>
+		<br/>
 	</div>
 </div>
 <infinite-load-button last-page="RatingCtrl.lastPage"

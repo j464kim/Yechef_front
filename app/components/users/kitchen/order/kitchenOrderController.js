@@ -4,8 +4,8 @@ angular.module('user.kitchen.order', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('KitchenOrderController', ['$stateParams', '$state', 'KitchenAPI', 'devHelper', '$scope',
-		function ($stateParams, $state, KitchenAPI, devHelper, $scope) {
+	.controller('KitchenOrderController', ['$stateParams', '$state', 'KitchenAPI', 'devHelper', '$scope', 'numberService',
+		function ($stateParams, $state, KitchenAPI, devHelper, $scope, numberService) {
 
 			/*********************
 			 *  Private Variables
@@ -64,7 +64,7 @@ angular.module('user.kitchen.order', [
 			 **********************/
 			this.acceptOrder = _acceptOrder;
 			this.declineOrder = _declineOrder;
-
+			this.stripeToDb = numberService.stripeToDb;
 			/*********************
 			 *  Initialization
 			 **********************/

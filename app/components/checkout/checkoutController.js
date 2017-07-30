@@ -17,7 +17,7 @@ angular.module('checkout.billing', [
 			var that = this;
 			var _totalAmount = $stateParams.amount;
 			var kitchenId = $stateParams.kitchenId;
-			var totalAmount = numberService.dbToStripe(_totalAmount);
+			var totalAmount = numberService.amtToStripe(_totalAmount);
 
 			/*********************
 			 *  Private Functions
@@ -35,7 +35,7 @@ angular.module('checkout.billing', [
 			function _redirectOnReload() {
 				try {
 					var _serviceFee = ngCart.serviceFee(kitchenId);
-					_chargeObj.serviceFee = numberService.dbToStripe(_serviceFee);
+					_chargeObj.serviceFee = numberService.amtToStripe(_serviceFee);
 				} catch (err) {
 					$state.go('cart.view');
 				}

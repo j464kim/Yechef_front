@@ -2720,7 +2720,6 @@ md-content {
   max-width: unset !important;
 }
 .comment-rating {
-  display: block !important;
   margin-bottom: 10px;
 }
 .loader-wrapper {

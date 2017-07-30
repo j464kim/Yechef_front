@@ -2,28 +2,28 @@
 	<div class="row" ng-repeat="rating in RatingCtrl.ratings">
 		<div class="ui comments">
 			<div class="comment">
-				<div class="metadata comment-rating">
-					<div class="rating full-width">
-						<div class="col-md-4 text-center">
-							<div class="">
-								Taste
-							</div>
-							<ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
-						</div>
-						<div class="col-md-4 text-center">
-							<div class="">
-								Visual:
-							</div>
-							<ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
-						</div>
-						<div class="col-md-4 text-center">
-							<div class="">
-								Quantity:
-							</div>
-							<ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
-						</div>
-					</div>
-				</div>
+				<!--<div class="metadata comment-rating">-->
+					<!--<div class="rating full-width">-->
+						<!--<div class="col-md-4 text-center">-->
+							<!--<div class="">-->
+								<!--Taste-->
+							<!--</div>-->
+							<!--<ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>-->
+						<!--</div>-->
+						<!--<div class="col-md-4 text-center">-->
+							<!--<div class="">-->
+								<!--Visual:-->
+							<!--</div>-->
+							<!--<ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>-->
+						<!--</div>-->
+						<!--<div class="col-md-4 text-center">-->
+							<!--<div class="">-->
+								<!--Quantity:-->
+							<!--</div>-->
+							<!--<ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
 				<a class="avatar" ui-sref="user.show({id: rating.user_id})">
 					<img ng-src="{{rating.user.medias[0].url}}"
 					     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
@@ -33,7 +33,9 @@
 						{{rating.user.last_name}}</a>
 					<div class="metadata">
 						<div class="date">2 days ago</div>
-						<div class="date">taste: 5  ang: mo  :tti :ang</div>
+						<div class="rating">
+							taste: {{rating.taste_rating}} | visual: {{rating.visual_rating}} | quantity: {{rating.quantity_rating}}
+						</div>
 					</div>
 					<div class="text">
 						<span e-style="width: 250%;" editable-textarea="rating.comment" e-form="textBtnForm"

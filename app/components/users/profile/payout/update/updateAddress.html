@@ -50,7 +50,6 @@
 			<input id="payoutPostalCode" type="text" ng-model="plCtrl.address.postal_code" required/>
 		</md-input-container>
 	</div>
-	<md-button flex class="md-raised md-primary pull-right" type="submit" ng-disabled="form.$invalid">
-		Update
-	</md-button>
+	<md-button flex class="md-raised md-primary pull-left" type="submit" ng-disabled="form.$invalid">Update</md-button>
+	<md-button flex class="md-raised pull-right" ui-sref="user.profile.payout.list">Back</md-button>
 </form>

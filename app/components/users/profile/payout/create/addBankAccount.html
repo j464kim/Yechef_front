@@ -1,37 +1,42 @@
-<div>
+<div class="text-center">
 	<md-content>
 		<label>Country: </label>
 		<span>{{plCtrl.account.country}}</span>
 	</md-content>
-</div>
-<div>
 	<md-content>
 		<label>Currency: </label>
 		<span>{{plCtrl.account.default_currency}}</span>
 	</md-content>
 </div>
+
 <form class="form-validation" ng-submit="plCtrl.createExternalAccount()" name="form" novalidate>
-	<label for="accountHolder">Name of Account Holder</label>
 	<div>
-		<input class="full-width" id="accountHolder" type="text" ng-model="plCtrl.bankAccount.account_holder_name">
-	</div>
-	<div>
-		<md-input-container>
+		<md-input-container class="md-block">
 			<label for="accountType">Account Type</label>
-			<md-select ng-model="plCtrl.bankAccount.account_holder_type" id="accountType">
+			<md-select ng-model="plCtrl.bankAccount.account_holder_type" id="accountType" class="full-width layout-padding" required>
 				<md-option ng-value="type" ng-repeat="type in plCtrl.accountHolderTypes">{{ type }}</md-option>
 			</md-select>
 		</md-input-container>
 	</div>
-	<label for="transitNum">Routing/Transit Number</label>
 	<div>
-		<input class="full-width" id="transitNum" ng-model="plCtrl.bankAccount.routing_number">
+		<md-input-container class="md-block">
+			<label for="accountHolder">Name of Account Holder</label>
+			<input class="full-width" id="accountHolder" type="text" ng-model="plCtrl.bankAccount.account_holder_name" placeholder="" required>
+		</md-input-container>
 	</div>
-	<label for="accountNum">Account Number</label>
 	<div>
-		<input class="full-width" id="accountNum" ng-model="plCtrl.bankAccount.account_number">
+		<md-input-container class="md-block">
+			<label for="transitNum">Routing/Transit Number</label>
+			<input class="full-width" id="transitNum" ng-model="plCtrl.bankAccount.routing_number" ui-mask="99999-999" placeholder="" required>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="accountNum">Account Number</label>
+			<input class="full-width" id="accountNum" ng-model="plCtrl.bankAccount.account_number" ui-mask="999999999999" placeholder="" required>
+		</md-input-container>
 	</div>
 	<br>
-	<button ui-sref="user.profile.payout.list">Back</button>
-	<button class="pull-right" type="submit">Submit</button>
+	<md-button class="md-raised md-primary pull-left" type="submit" ng-disabled="form.$invalid">Update</md-button>
+	<md-button class="md-raised pull-right" ui-sref="user.profile.payout.list">Back</md-button>
 </form>

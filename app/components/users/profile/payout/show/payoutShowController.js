@@ -46,7 +46,7 @@ angular.module('user.profile.payout.show', [
 							.then(function (response) {
 								devHelper.log(response);
 								devHelper.log('External account updated successfully');
-								$state.go('user.profile.payout.list');
+								$state.go('user.profile.payout.show');
 							}, function (response) {
 								// TODO handle error state-*/ ˙
 								devHelper.log(response, 'error');
@@ -54,10 +54,23 @@ angular.module('user.profile.payout.show', [
 					})
 			}
 
+			function _deleteExternalAccount(externalAccountId) {
+				PayoutAPI.deleteExternalAccount(externalAccountId)
+					.then(function (response) {
+						devHelper.log(response);
+						devHelper.log('External account removed successfully');
+						$state.reload();
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						devHelper.log(response, 'error');
+					})
+			}
+
 			/*********************
 			 *  Public Functions
 			 **********************/
 			this.createExternalAccount = _createExternalAccount;
+			this.deleteExternalAccount = _deleteExternalAccount;
 			this.getCurrency = genericService.getCurrency;
 
 			/*********************

@@ -1,7 +1,7 @@
 <button ui-sref="user.profile.payout.new.method.select">Add Bank Account for Payout</button>
 <div ng-repeat="external in psCtrl.externalAccounts">
 	<md-content layout-padding>
-		<i class="material-icons pull-right clickable" style="font-size: 16px;">close</i>
+		<i class="material-icons pull-right clickable" ng-click="psCtrl.deleteExternalAccount(external.id)" style="font-size: 16px;">close</i>
 		<md-card>
 			<md-card-header>
 				<md-card-avatar>

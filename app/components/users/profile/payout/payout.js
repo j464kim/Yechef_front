@@ -18,6 +18,9 @@ angular.module('payout.api', [
 				update: {
 					method: 'PUT'
 				},
+				destroy: {
+					method: 'DELETE'
+				},
 			});
 		}
 	])
@@ -85,12 +88,26 @@ angular.module('payout.api', [
 				});
 			}
 
+			function deleteExternalAccount(externalAccountId) {
+				return $q(function (resolve, reject) {
+					PayoutResource.destroy({
+							id: 'externalAccount/' + externalAccountId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				getAccount: getAccount,
 				getExternalAccounts: getExternalAccounts,
 				createAccount: createAccount,
 				updateAddress: updateAddress,
-				createExternalAccount: createExternalAccount
+				createExternalAccount: createExternalAccount,
+				deleteExternalAccount: deleteExternalAccount
 			};
 		}
 	]);

@@ -25,7 +25,7 @@ angular.module('checkout.billing')
 				var deferred = $q.defer();
 				Stripe.bankAccount.createToken(
 					{
-						country: bankAccount.country,
+						country: bankAccount.country.display,
 						currency: bankAccount.currency,
 						routing_number: bankAccount.routing_number,
 						account_number: bankAccount.account_number,

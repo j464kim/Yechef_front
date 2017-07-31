@@ -93,7 +93,7 @@ angular.module('profile', [
 				controller: 'PayoutListController as plCtrl',
 			})
 			.state('user.profile.payout.show', {
-				url: '/show/{id}',
+				url: '/external_accounts',
 				templateUrl: 'components/users/profile/payout/show/payoutShow.html',
 				controller: 'PayoutShowController as psCtrl',
 			})

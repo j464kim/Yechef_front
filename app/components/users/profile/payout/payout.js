@@ -12,9 +12,6 @@ angular.module('payout.api', [
 				list: {
 					method: 'GET'
 				},
-				show: {
-					method: 'GET'
-				},
 				create: {
 					method: 'POST'
 				},
@@ -39,10 +36,10 @@ angular.module('payout.api', [
 				});
 			}
 
-			function showAccount(payoutId) {
+			function getExternalAccounts() {
 				return $q(function (resolve, reject) {
-					PayoutResource.show({
-						id: payoutId
+					PayoutResource.list({
+						id: 'externalAccount'
 					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -90,7 +87,7 @@ angular.module('payout.api', [
 
 			return {
 				getAccount: getAccount,
-				showAccount: showAccount,
+				getExternalAccounts: getExternalAccounts,
 				createAccount: createAccount,
 				updateAddress: updateAddress,
 				createExternalAccount: createExternalAccount

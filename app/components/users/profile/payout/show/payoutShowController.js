@@ -10,7 +10,6 @@ angular.module('user.profile.payout.show', [
 			/*********************
 			 *  Private Variables
 			 **********************/
-			var _payoutId = $stateParams.id;
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -20,11 +19,11 @@ angular.module('user.profile.payout.show', [
 			 *  Private Functions
 			 **********************/
 			function _init() {
-				_showPayoutAccount();
+				_getExternalAccounts();
 			}
 
-			function _showPayoutAccount() {
-				PayoutAPI.showAccount(_payoutId)
+			function _getExternalAccounts() {
+				PayoutAPI.getExternalAccounts()
 					.then(function (response) {
 						that.externalAccounts = response.data;
 						devHelper.log(that.externalAccounts);

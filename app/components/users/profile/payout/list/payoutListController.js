@@ -16,9 +16,7 @@ angular.module('user.profile.payout.list', [
 			 **********************/
 			var that = this;
 			this.payoutCountries = genericService.loadItems(config.payoutCountries);
-			this.accountHolderTypes = [
-				'individual', 'company'
-			];
+
 			/*********************
 			 *  Private Functions
 			 **********************/
@@ -53,29 +51,11 @@ angular.module('user.profile.payout.list', [
 					})
 			}
 
-			function _createExternalAccount() {
-				CheckoutService.tokenizeBankAccount(that.bankAccount)
-					.then(function (response) {
-						that.bankAccount.token = response.id;
-						PayoutAPI.createExternalAccount(that.bankAccount)
-							.then(function (response) {
-								devHelper.log(response);
-								devHelper.log('External account updated successfully');
-								$state.go('user.profile.payout.list');
-							}, function (response) {
-								// TODO handle error state-*/ ˙
-								devHelper.log(response, 'error');
-							})
-					})
-			}
-
 			/*********************
 			 *  Public Functions
 			 **********************/
 			this.updateAddress = _updateAddress;
-			this.createExternalAccount = _createExternalAccount;
 			this.getStates = genericService.getStates;
-			this.getCurrency = genericService.getCurrency;
 			this.querySearch = genericService.querySearch;
 
 			/*********************

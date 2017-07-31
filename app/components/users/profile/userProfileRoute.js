@@ -125,7 +125,7 @@ angular.module('profile', [
 				url: '/method',
 				abstract: true,
 				templateUrl: 'components/users/profile/payout/create/selectMethod.html',
-				controller: 'PayoutListController as plCtrl',
+				controller: 'PayoutShowController as psCtrl',
 			})
 			.state('user.profile.payout.new.method.select', {
 				url: '',

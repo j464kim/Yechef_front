@@ -36,6 +36,16 @@ angular.module('rating', [
 				_getRatings();
 			}
 
+			this.openMenu = function($mdMenu, ev) {
+				var originatorEv = ev;
+				$mdMenu.open(ev);
+			};
+
+			this.notificationsEnabled = true;
+			this.toggleNotifications = function() {
+				this.notificationsEnabled = !this.notificationsEnabled;
+			};
+
 			function _getRatings() {
 				var pageNum = ++that.currentPage;
 

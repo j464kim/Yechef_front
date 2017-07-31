@@ -2722,6 +2722,9 @@ md-content {
 .comment-rating {
   margin-bottom: 10px;
 }
+.ui.comments.comment.text {
+  margin-top: 10px;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

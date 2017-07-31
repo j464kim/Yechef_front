@@ -2,6 +2,7 @@
 
 angular.module('dish.list', [
 	'dishes.api',
+	'search'
 ])
 
 	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService',

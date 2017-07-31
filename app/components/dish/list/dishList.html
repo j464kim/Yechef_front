@@ -1,4 +1,4 @@
-<div class="container" id="dishList" ng-controller="SearchCtrl as sctrl">
+<div class="container" id="dishList" ng-controller="SearchController as sctrl">
 	<div class="col-sm-8">
 		<div class="row">
 			<button type="button" class="btn btn-default"
@@ -56,7 +56,7 @@
 											md-no-cache="true"
 											md-selected-item="sctrl.selectedNationality"
 											md-search-text="sctrl.searchText"
-											md-items="item in sctrl.querySearch(sctrl.searchText)"
+											md-items="item in sctrl.querySearch(sctrl.searchText, sctrl.nationalities)"
 											md-item-text="item.display"
 											md-min-length="0"
 											placeholder="Choose Nationality">

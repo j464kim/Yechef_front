@@ -4,8 +4,8 @@ angular.module('user.profile.order', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope', '$mdDialog',
-		function ($stateParams, $state, UserAPI, devHelper, $scope, $mdDialog) {
+	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope', 'RatingAPI',
+		function ($stateParams, $state, UserAPI, devHelper, $scope, RatingAPI) {
 
 			/*********************
 			 *  Private Variables
@@ -33,7 +33,7 @@ angular.module('user.profile.order', [
 						that.orders = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						devHelper.log(response, 'error')
+						devHelper.log(response, 'error');
 					});
 			}
 
@@ -52,19 +52,11 @@ angular.module('user.profile.order', [
 			 *  Public Functions
 			 **********************/
 			this.cancelOrder = _cancelOrder;
-			this.reviewOrder = function (ev) {
-				$mdDialog.show({
-					templateUrl: 'shared/rating/create/ratingCreate.html',
-					parent: angular.element(document.body),
-					targetEvent: ev,
-					clickOutsideToClose: true,
-					fullscreen: true // Only for -xs, -sm breakpoints.
-				})
-					.then(function (answer) {
-						$scope.status = 'You said the information was "' + answer + '".';
-					}, function () {
-						$scope.status = 'You cancelled the dialog.';
-					});
+			this.reviewOrder = RatingAPI.showRatingCreateDialog;
+			this.isReviewable = function (order, item) {
+				var from = moment(order.created_at);
+				var now = moment();
+				return order.status == 'accepted' && now.diff(from, 'hours') < 24;
 			};
 
 			/*********************

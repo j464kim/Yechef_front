@@ -25,8 +25,8 @@ angular.module('rating.api', [
         }
     ])
 
-    .service('RatingAPI', ['$q', 'RatingResource',
-        function ($q, RatingResource) {
+    .service('RatingAPI', ['$q', 'RatingResource', '$mdDialog',
+        function ($q, RatingResource, $mdDialog) {
 
             function list(dishId, ratingId, pageNum) {
                 pageNum = pageNum || 0;
@@ -90,11 +90,34 @@ angular.module('rating.api', [
                 });
             };
 
+            function showRatingCreateDialog(ev, dishId) {
+				$mdDialog.show({
+					templateUrl: 'shared/rating/create/ratingCreate.html',
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose: true,
+					controller: function ($mdDialog) {
+						var that = this;
+						that.dishId = dishId;  //your task object from the ng-repeat
+
+						that.hide = function () {
+							$mdDialog.hide();
+						};
+						that.cancel = function () {
+							$mdDialog.cancel();
+						};
+					},
+					controllerAs: 'modal',
+					fullscreen: true // Only for -xs, -sm breakpoints.
+				})
+			};
+
             return {
                 list: list,
                 create: create,
                 update: update,
                 destroy: destroy,
+                showRatingCreateDialog: showRatingCreateDialog
             };
         }
     ]);

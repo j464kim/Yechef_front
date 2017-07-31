@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('rating')
-    .controller('RatingCreateController', ['$state', '$stateParams', 'RatingAPI', 'devHelper', '$mdDialog',
-        function ($state, $stateParams, RatingAPI, devHelper, $mdDialog) {
+    .controller('RatingCreateController', ['$state', '$scope', 'RatingAPI', 'devHelper', '$mdDialog',
+        function ($state, $scope, RatingAPI, devHelper, $mdDialog) {
             /*********************
              *    Private Variables
              **********************/
@@ -12,11 +12,13 @@ angular.module('rating')
             /*********************
              *    Public Variables
              **********************/
-            this.dishId = $stateParams.id;
 
             /*********************
              *    Private Functions
              **********************/
+            function _init(dishId) {
+                that.dishId = dishId;
+            }
             function _validateInputs() {
                 if (that.rating === undefined) {
                     return false;
@@ -36,6 +38,8 @@ angular.module('rating')
             // /*********************
             //  *    Public Functions
             //  **********************/
+            this.init = _init;
+
             this.rateDish = function () {
                 if (!_validateInputs()) {
                     devHelper.log("Invalid Rating Inputs");
@@ -44,13 +48,10 @@ angular.module('rating')
                 RatingAPI.create(that.dishId, that.rating).then(
                     function (response) {
                         $state.reload();
-                    }, function (response) {
+						$mdDialog.hide();
+					}, function (response) {
 						devHelper.log(response, 'error');
                     })
-            };
-
-            this.cancel = function() {
-                $mdDialog.cancel();
             };
 
             /*********************

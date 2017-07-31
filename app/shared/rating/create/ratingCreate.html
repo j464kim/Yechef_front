@@ -1,10 +1,10 @@
-<md-dialog aria-label="Review Dish">
-	<form name="form" ng-controller="RatingCreateController as RatingCCtrl" ng-cloak>
+<md-dialog aria-label="Review Dish" ng-controller="RatingCreateController as RatingCCtrl">
+	<form name="form" ng-init="RatingCCtrl.init(modal.dishId)" ng-cloak>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>Review Dish</h2>
 				<span flex></span>
-				<md-button class="md-icon-button" ng-click="RatingCCtrl.cancel()">
+				<md-button class="md-icon-button" ng-click="modal.cancel()">
 					<i class="fa fa-close" aria-label="Close dialog"></i>
 				</md-button>
 			</div>

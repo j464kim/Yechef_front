@@ -31,7 +31,7 @@ angular.module('user.profile.payout.list', [
 					.then(function (response) {
 						devHelper.log(response);
 						that.account = response;
-						devHelper.log('Successfully retrieved Payout Account of the user');
+						devHelper.log('Successfully retrieved the list of Payout Account of the user');
 					}, function (response) {
 						// TODO handle error state-*/ ˙
 						devHelper.log(response, 'error');

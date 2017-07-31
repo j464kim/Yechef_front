@@ -12,6 +12,9 @@ angular.module('payout.api', [
 				list: {
 					method: 'GET'
 				},
+				show: {
+					method: 'GET'
+				},
 				create: {
 					method: 'POST'
 				},
@@ -29,6 +32,18 @@ angular.module('payout.api', [
 				return $q(function (resolve, reject) {
 					PayoutResource.list()
 						.$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function showAccount(payoutId) {
+				return $q(function (resolve, reject) {
+					PayoutResource.show({
+						id: payoutId
+					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
 						reject(response);
@@ -75,6 +90,7 @@ angular.module('payout.api', [
 
 			return {
 				getAccount: getAccount,
+				showAccount: showAccount,
 				createAccount: createAccount,
 				updateAddress: updateAddress,
 				createExternalAccount: createExternalAccount

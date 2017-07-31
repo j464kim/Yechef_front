@@ -12,6 +12,7 @@ angular.module('profile', [
 	'user.profile.payment.create',
 	'user.profile.payment.update',
 	'user.profile.payout.list',
+	'user.profile.payout.show',
 	'user.profile.payout.create'
 ])
 
@@ -88,8 +89,13 @@ angular.module('profile', [
 			})
 			.state('user.profile.payout.list', {
 				url: '/view',
-				templateUrl: 'components/users/profile/payout/list/userPayoutList.html',
+				templateUrl: 'components/users/profile/payout/list/payoutList.html',
 				controller: 'PayoutListController as plCtrl',
+			})
+			.state('user.profile.payout.show', {
+				url: '/show/{id}',
+				templateUrl: 'components/users/profile/payout/show/payoutShow.html',
+				controller: 'PayoutShowController as psCtrl',
 			})
 			.state('user.profile.payout.update', {
 				url: '/update',

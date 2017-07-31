@@ -21,7 +21,10 @@ angular.module('configuration', [])
 		var googleAppId = '713347919649-pndccmhn95t2pp68gk36368k6ccvgsp0.apps.googleusercontent.com';
 
 		// TODO: configure locale to know which type of currency
-		var currency = 'cad';
+		var currency = {
+			'US': ['usd'],
+			'CA': ['cad', 'usd']
+		};
 
 		// image upload
 		var maxFiles = 3;

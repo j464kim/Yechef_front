@@ -1,23 +1,28 @@
-<div class="text-center">
-	<md-content>
-		<label>Country: </label>
-		<span>{{plCtrl.account.country}}</span>
-	</md-content>
-	<md-content>
-		<label>Currency: </label>
-		<span>{{plCtrl.account.default_currency}}</span>
-	</md-content>
-</div>
-
-<form class="form-validation" ng-submit="plCtrl.createExternalAccount()" name="form" novalidate>
+<form class="form-validation margin-top-2em" ng-submit="plCtrl.createExternalAccount()" name="form" novalidate>
 	<div>
 		<md-input-container class="md-block">
-			<label for="accountType">Account Type</label>
-			<md-select ng-model="plCtrl.bankAccount.account_holder_type" id="accountType" class="full-width layout-padding" required>
-				<md-option ng-value="type" ng-repeat="type in plCtrl.accountHolderTypes">{{ type }}</md-option>
+			<label for="country">Country</label>
+			<md-select ng-model="plCtrl.bankAccount.country" id="country" class="full-width" required>
+				<md-option ng-value="country" ng-repeat="country in plCtrl.payoutCountries">{{ country.display }}</md-option>
 			</md-select>
 		</md-input-container>
 	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="currency">Currency </label>
+			<md-select ng-disabled="!plCtrl.bankAccount.country" ng-model="plCtrl.bankAccount.currency" id="currency" class="full-width" required>
+				<md-option ng-value="currency" ng-repeat="currency in plCtrl.getCurrency(plCtrl.bankAccount.country.display)">{{ currency }}</md-option>
+			</md-select>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="accountType">Account Type</label>
+			<md-select ng-model="plCtrl.bankAccount.account_holder_type" id="accountType" class="full-width" required>
+				<md-option ng-value="type" ng-repeat="type in plCtrl.accountHolderTypes">{{ type }}</md-option>
+			</md-select>
+		</md-input-container>
+	</div><br>
 	<div>
 		<md-input-container class="md-block">
 			<label for="accountHolder">Name of Account Holder</label>

@@ -1,10 +1,13 @@
+<button ui-sref="user.profile.payout.new.method.select">Add Bank Account for Payout</button>
 <div ng-repeat="external in psCtrl.externalAccounts">
 	<md-content layout-padding>
+		<i class="material-icons pull-right clickable" style="font-size: 16px;">close</i>
 		<md-card>
 			<md-card-header>
 				<md-card-avatar>
 					<!--TODO: Should come image of bank logo-->
-					<img class="md-user-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFkZU7uKFT_9N97jXOaQ74MeP8pfRtDsS0BUwJ6Q84jaYZ3gj">
+					<img class="md-user-avatar"
+					     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFkZU7uKFT_9N97jXOaQ74MeP8pfRtDsS0BUwJ6Q84jaYZ3gj">
 				</md-card-avatar>
 				<md-card-header-text>
 					<span class="md-title">{{external.bank_name}}</span>

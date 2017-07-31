@@ -54,8 +54,6 @@ angular.module('user.profile.payout.list', [
 			}
 
 			function _createExternalAccount() {
-				that.bankAccount.country = that.account.country;
-				that.bankAccount.currency = that.account.default_currency;
 				CheckoutService.tokenizeBankAccount(that.bankAccount)
 					.then(function (response) {
 						that.bankAccount.token = response.id;
@@ -77,6 +75,7 @@ angular.module('user.profile.payout.list', [
 			this.updateAddress = _updateAddress;
 			this.createExternalAccount = _createExternalAccount;
 			this.getStates = genericService.getStates;
+			this.getCurrency = genericService.getCurrency;
 			this.querySearch = genericService.querySearch;
 
 			/*********************

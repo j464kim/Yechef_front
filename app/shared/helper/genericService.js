@@ -42,6 +42,11 @@ angular.module('helper', [])
 			return loadItems(states)
 		};
 
+		var getCurrency = function (country) {
+			var currency = config.currency[country];
+			return currency;
+		};
+
 		var showToast = function (message) {
 			$mdToast.show(
 				$mdToast.simple()
@@ -69,6 +74,7 @@ angular.module('helper', [])
 			querySearch: querySearch,
 			loadItems: loadItems,
 			getStates: getStates,
+			getCurrency: getCurrency,
 			showToast: showToast,
 			buildToggler: buildToggler,
 

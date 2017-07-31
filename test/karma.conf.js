@@ -59,6 +59,7 @@ module.exports = function(config) {
       'bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js',
       'bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
+      'bower_components/angular-moment/angular-moment.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

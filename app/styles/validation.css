@@ -2725,6 +2725,14 @@ md-content {
 .ui.comments.comment.text {
   margin-top: 10px;
 }
+.editable-wrap {
+  white-space: normal;
+  width: 100%;
+}
+.editable-wrap .editable-controls,
+.editable-wrap .editable-error {
+  width: 95%;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

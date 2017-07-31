@@ -2,6 +2,7 @@
 
 angular.module('rating', [
 	'rating.api',
+	'angularMoment'
 ])
 	.controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q', 'devHelper', 'genericService',
 		function ($state, $stateParams, RatingAPI, $q, devHelper, genericService) {

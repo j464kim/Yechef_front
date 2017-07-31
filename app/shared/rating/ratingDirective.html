@@ -2,28 +2,6 @@
 	<div class="row" ng-repeat="rating in RatingCtrl.ratings">
 		<div class="ui comments">
 			<div class="comment">
-				<!--<div class="metadata comment-rating">-->
-				<!--<div class="rating full-width">-->
-				<!--<div class="col-md-4 text-center">-->
-				<!--<div class="">-->
-				<!--Taste-->
-				<!--</div>-->
-				<!--<ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>-->
-				<!--</div>-->
-				<!--<div class="col-md-4 text-center">-->
-				<!--<div class="">-->
-				<!--Visual:-->
-				<!--</div>-->
-				<!--<ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>-->
-				<!--</div>-->
-				<!--<div class="col-md-4 text-center">-->
-				<!--<div class="">-->
-				<!--Quantity:-->
-				<!--</div>-->
-				<!--<ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
 				<a class="avatar" ui-sref="user.show({id: rating.user_id})">
 					<img ng-src="{{rating.user.medias[0].url}}"
 					     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
@@ -32,27 +10,32 @@
 					<a class="author" ui-sref="user.show({id: rating.user_id})">{{rating.user.first_name}}
 						{{rating.user.last_name}}</a>
 					<div class="metadata">
-						<div class="date">2 days ago</div>
+						<div class="date"><span am-time-ago="rating.created_at"></span></div>
 						<div class="rating">
 							taste: {{rating.taste_rating}} | visual: {{rating.visual_rating}} | quantity:
 							{{rating.quantity_rating}}
 						</div>
 					</div>
-					<div class="pull-right" ng-if="currentUser.id == rating.user_id">
+					<div class="pull-right">
 						<md-menu md-offset="0 -7">
 							<md-button class="md-icon-button" aria-label="More"
 							           ng-click="RatingCtrl.openMenu($mdMenu, $event)"><i class="material-icons">more_vert</i>
 							</md-button>
 							<md-menu-content width="2">
 								<md-menu-item>
+									<md-button class="reply" disabled="true">
+										Reply
+									</md-button>
+								</md-menu-item>
+								<md-menu-divider></md-menu-divider>
+								<md-menu-item ng-if="currentUser.id == rating.user_id">
 									<md-button class="save" ng-if="currentUser.id == rating.user_id"
 									           ng-hide="textBtnForm.$visible"
 									           ng-click="textBtnForm.$show()"><i class="fa fa-edit fa-x"></i>
 										Edit
 									</md-button>
 								</md-menu-item>
-								<md-menu-divider></md-menu-divider>
-								<md-menu-item>
+								<md-menu-item ng-if="currentUser.id == rating.user_id">
 									<md-button class="delete" ng-if="currentUser.id == rating.user_id"
 									           ng-click="RatingCtrl.destroyRating(rating.id)"><i
 											class="fa fa-close fa-x"></i>
@@ -63,7 +46,7 @@
 						</md-menu>
 					</div>
 					<div class="text">
-						<span e-style="width: 250%;" editable-textarea="rating.comment" e-form="textBtnForm"
+						<span e-style="width: 100%;" editable-textarea="rating.comment" e-form="textBtnForm"
 						      onbeforesave="RatingCtrl.updateComment(rating, $data)">
                         {{rating.comment || 'empty'}}
                     </span>

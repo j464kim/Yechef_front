@@ -93,6 +93,14 @@ angular
 		$mdThemingProvider.generateThemesOnDemand(true);
 		$provide.value('themeProvider', $mdThemingProvider);
 	})
-	.run(function (editableOptions) {
+	.run(function (editableOptions, editableThemes) {
 		editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'
+		editableOptions.submitButtonTitle = 'Update';
+		editableOptions.submitButtonAriaLabel = 'Update';
+		editableOptions.cancelButtonTitle = 'Cancel';
+		editableOptions.cancelButtonAriaLabel = 'Cancel';
+		editableOptions.clearButtonTitle = 'Clear';
+		editableOptions.clearButtonAriaLabel = 'Clear';
+		editableThemes.bs3.submitTpl = '<md-button class="md-primary md-raised" type="submit">update</md-button>';
+		editableThemes.bs3.cancelTpl = '<md-button class="md-warn md-raised" ng-click="$form.$cancel()">cancel</md-button>';
 	});

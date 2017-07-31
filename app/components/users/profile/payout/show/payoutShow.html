@@ -1,28 +1,36 @@
 <button ui-sref="user.profile.payout.new.method.select">Add Bank Account for Payout</button>
-<div ng-repeat="external in psCtrl.externalAccounts">
-	<md-content layout-padding>
-		<i class="material-icons pull-right clickable" ng-click="psCtrl.deleteExternalAccount(external.id)" style="font-size: 16px;">close</i>
-		<md-card>
-			<md-card-header>
-				<md-card-avatar>
-					<!--TODO: Should come image of bank logo-->
-					<img class="md-user-avatar"
-					     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFkZU7uKFT_9N97jXOaQ74MeP8pfRtDsS0BUwJ6Q84jaYZ3gj">
-				</md-card-avatar>
-				<md-card-header-text>
-					<span class="md-title">{{external.bank_name}}</span>
-					<span class="md-subhead">Account #: xxxxxxxx{{external.last4}}</span>
-					<span class="md-subhead">Routing #: {{external.routing_number}}</span>
-				</md-card-header-text>
-			</md-card-header>
-			<md-card-content>
-				<ul>
-					<li>Name: {{external.account_holder_name}}</li>
-					<li>Type: {{external.account_holder_type}}</li>
-					<li>Country: {{external.country}}</li>
-					<li>Currency: {{external.currency}}</li>
-				</ul>
-			</md-card-content>
-		</md-card>
-	</md-content>
-</div>
+<form ng-submit="psCtrl.switchDefaultExternalAccount()" ng-cloak>
+	<md-radio-group ng-model="psCtrl.selectedId" ng-repeat="external in psCtrl.externalAccounts">
+		<md-content layout-padding>
+			<md-radio-button ng-value="external.id" ng-disabled="external.default_for_currency">
+				<i class="material-icons pull-right clickable button" ng-if="!external.default_for_currency"
+				   ng-click="psCtrl.deleteExternalAccount(external.id)" style="font-size: 16px;">close</i>
+				<md-card>
+					<md-card-header>
+						<md-card-avatar>
+							<!--TODO: Should come image of bank logo-->
+							<img class="md-user-avatar"
+							     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFkZU7uKFT_9N97jXOaQ74MeP8pfRtDsS0BUwJ6Q84jaYZ3gj">
+						</md-card-avatar>
+						<md-card-header-text>
+							<span class="md-title">{{external.bank_name}}</span>
+							<span class="md-subhead">Account #: xxxxxxxx{{external.last4}}</span>
+							<span class="md-subhead">Routing #: {{external.routing_number}}</span>
+						</md-card-header-text>
+					</md-card-header>
+					<md-card-content>
+						<ul>
+							<li>Name: {{external.account_holder_name}}</li>
+							<li>Type: {{external.account_holder_type}}</li>
+							<li>Country: {{external.country}}</li>
+							<li>Currency: {{external.currency}}</li>
+						</ul>
+					</md-card-content>
+				</md-card>
+			</md-radio-button>
+		</md-content>
+	</md-radio-group>
+	<div>
+		<button type="submit">Set it to Default Bank Account</button>
+	</div>
+</form>

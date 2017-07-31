@@ -21,6 +21,10 @@ angular.module('payout.api', [
 				destroy: {
 					method: 'DELETE'
 				},
+				switchDefault: {
+					method: 'POST',
+					url: api_endpoint + 'externalAccount/switchDefault',
+				},
 			});
 		}
 	])
@@ -101,13 +105,28 @@ angular.module('payout.api', [
 				});
 			}
 
+			function switchDefaultExternalAccount(externalAccountId) {
+				console.log(externalAccountId);
+				return $q(function (resolve, reject) {
+					PayoutResource.switchDefault({
+						id: externalAccountId
+					})
+						.$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				getAccount: getAccount,
 				getExternalAccounts: getExternalAccounts,
 				createAccount: createAccount,
 				updateAddress: updateAddress,
 				createExternalAccount: createExternalAccount,
-				deleteExternalAccount: deleteExternalAccount
+				deleteExternalAccount: deleteExternalAccount,
+				switchDefaultExternalAccount: switchDefaultExternalAccount,
 			};
 		}
 	]);

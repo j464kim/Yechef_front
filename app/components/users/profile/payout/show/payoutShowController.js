@@ -66,11 +66,24 @@ angular.module('user.profile.payout.show', [
 					})
 			}
 
+			function _switchDefaultExternalAccount() {
+				PayoutAPI.switchDefaultExternalAccount(that.selectedId)
+					.then(function (response) {
+						devHelper.log(response);
+						devHelper.log('Switched Default External Account');
+						$state.reload();
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						devHelper.log(response, 'error');
+					})
+			}
+
 			/*********************
 			 *  Public Functions
 			 **********************/
 			this.createExternalAccount = _createExternalAccount;
 			this.deleteExternalAccount = _deleteExternalAccount;
+			this.switchDefaultExternalAccount = _switchDefaultExternalAccount;
 			this.getCurrency = genericService.getCurrency;
 
 			/*********************

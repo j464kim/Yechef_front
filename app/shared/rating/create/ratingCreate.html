@@ -1,32 +1,49 @@
-<form class="form-horizontal" ng-controller="RatingCreateController as RatingCCtrl">
-    <div class="row">
-        <div class="col-md-10">
-            <label class="control-label" for="comment">
-                Comment:<br>
-            </label>
-            <textarea id="comment" class="form-control" ng-model="RatingCCtrl.rating.comment" required/>
-        </div>
-        <div class="col-md-offset-2">
-            <br>
-            <a ng-click="RatingCCtrl.rateDish()" class="btn btn-primary">Rate Dish</a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="col-md-3">Taste:</div>
-        <div class="col-md-9">
-            <ng-rate-it resetable="false" ng-model="RatingCCtrl.rating.taste_rating" step="1.0"></ng-rate-it>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="col-md-3">Visual:</div>
-        <div class="col-md-9">
-            <ng-rate-it resetable="false" ng-model="RatingCCtrl.rating.visual_rating" step="1.0"></ng-rate-it>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="col-md-3">Quantity:</div>
-        <div class="col-md-9">
-            <ng-rate-it resetable="false" ng-model="RatingCCtrl.rating.quantity_rating" step="1.0"></ng-rate-it>
-        </div>
-    </div>
-</form>
+<md-dialog aria-label="Review Dish">
+	<form name="form" ng-controller="RatingCreateController as RatingCCtrl" ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Review Dish</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="RatingCCtrl.cancel()">
+					<i class="fa fa-close" aria-label="Close dialog"></i>
+				</md-button>
+			</div>
+		</md-toolbar>
+
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<md-input-container class="md-block">
+					<label class="control-label" for="comment">
+						Comment
+					</label>
+					<textarea md-maxlength="200" id="comment" name="comment" rows="3" cols="80"
+					          ng-model="RatingCCtrl.rating.comment"
+					          placeholder="The food was prepared on time and fresh."
+					          md-select-on-focus required></textarea>
+					<div ng-messages="form.comment.$error" ng-if="form.comment.$touched">
+						<div ng-message="required">Description is required.</div>
+						<div ng-message="maxlength">Your description should be less than 200 letters.</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block text-center" layout="row">
+					<span class="pull-left">Taste:
+						<ng-rate-it resetable="false" ng-model="RatingCCtrl.rating.taste_rating"
+						            step="1.0" required></ng-rate-it></span>
+					<span>	Visual:
+						<ng-rate-it resetable="false" ng-model="RatingCCtrl.rating.visual_rating"
+						            step="1.0" required></ng-rate-it></span>
+					<span class="pull-right">	Quantity:
+						<ng-rate-it resetable="false" ng-model="RatingCCtrl.rating.quantity_rating"
+						            step="1.0" required></ng-rate-it></span>
+				</md-input-container>
+			</div>
+		</md-dialog-content>
+
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="RatingCCtrl.rateDish()">
+				Rate
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

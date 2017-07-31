@@ -23,6 +23,7 @@
 			<td>{{order.status}}</td>
 			<td>
 				<button ng-show="order.status == 'pending'" ng-click="uoCtrl.cancelOrder(order.id)">Cancel</button>
+				<button ng-show="order.status == 'accepted'" ng-click="uoCtrl.reviewOrder()">Review</button>
 			</td>
 		</tr>
 		<tr ng-repeat-end="">

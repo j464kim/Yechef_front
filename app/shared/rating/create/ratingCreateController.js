@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('rating')
-    .controller('RatingCreateController', ['$state', '$stateParams', 'RatingAPI', 'devHelper',
-        function ($state, $stateParams, RatingAPI, devHelper) {
+    .controller('RatingCreateController', ['$state', '$stateParams', 'RatingAPI', 'devHelper', '$mdDialog',
+        function ($state, $stateParams, RatingAPI, devHelper, $mdDialog) {
             /*********************
              *    Private Variables
              **********************/
@@ -47,6 +47,10 @@ angular.module('rating')
                     }, function (response) {
 						devHelper.log(response, 'error');
                     })
+            };
+
+            this.cancel = function() {
+                $mdDialog.cancel();
             };
 
             /*********************

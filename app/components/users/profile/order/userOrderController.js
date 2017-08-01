@@ -56,7 +56,7 @@ angular.module('user.profile.order', [
 			this.isReviewable = function (order, item) {
 				var from = moment(order.updated_at);
 				var now = moment();
-				return order.status == 'accepted' && now.diff(from, 'hours') < 24 && item.dish_rating_id == null;
+				return order.status == 'accepted' && now.diff(from, 'hours') < 24 && !item.dish_rating;
 			};
 
 			/*********************

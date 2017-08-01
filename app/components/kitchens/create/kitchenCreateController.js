@@ -18,6 +18,9 @@ angular.module('kitchen.create', [
 			 **********************/
 			var that = this;
 			this.payoutCountries = genericService.loadItems(config.payoutCountries);
+			this.addressOptions = {
+				componentRestrictions: {}
+			};
 
 
 			/*********************
@@ -31,7 +34,7 @@ angular.module('kitchen.create', [
 				}
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
-                    devHelper.log(newKitchen);
+					devHelper.log(newKitchen);
 
 					_uploadKitchenMedia(newKitchen);
 
@@ -64,6 +67,9 @@ angular.module('kitchen.create', [
 			 **********************/
 			this.createKitchen = _createKitchen;
 			this.querySearch = genericService.querySearch;
+			this.selectedCountryChange = function (country) {
+				that.addressOptions.componentRestrictions.country = country.value;
+			};
 
 			/*********************
 			 *  Initialization

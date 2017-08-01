@@ -12,12 +12,12 @@ angular.module('googleMapShowDirective', [])
 				lat: '@',
 				lng: '@'
 			},
-			controller: ['$scope', 'MapAPI', 'devHelper', 'uiGmapIsReady',
-				function ($scope, MapAPI, devHelper, uiGmapIsReady) {
+			controller: ['$scope', 'MapAPI', 'devHelper', 'uiGmapIsReady', 'mapService',
+				function ($scope, MapAPI, devHelper, uiGmapIsReady, mapService) {
 					var address = $scope.address;
 					devHelper.log($scope.for);
 					devHelper.log($scope.address);
-					$scope.map = MapAPI.getMapOption();
+					$scope.map = mapService.getMapOption();
 					$scope.map.options.gestureHandling = 'none';
 					$scope.map.zoom = 15;
 					$scope.mapCtrl = {};

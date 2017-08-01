@@ -14,15 +14,15 @@ angular.module('googleMapSearchDirective', [])
 				searchFunction: '=',
 				searchBoundsChanged: '=',
 			},
-			controller: ['$scope', 'MapAPI', 'devHelper', '$stateParams', 'uiGmapGoogleMapApi', '$rootScope', '$state',
-				function ($scope, MapAPI, devHelper, $stateParams, uiGmapGoogleMapApi, $rootScope, $state) {
+			controller: ['$scope', 'MapAPI', 'devHelper', '$stateParams', 'uiGmapGoogleMapApi', '$rootScope', '$state', 'mapService',
+				function ($scope, MapAPI, devHelper, $stateParams, uiGmapGoogleMapApi, $rootScope, $state, mapService) {
 					$scope.windowStyled = false;
 					$scope.inited = false;
 
 					function _init() {
-						$scope.map = MapAPI.getMapOption();
-						$scope.window = MapAPI.getWindow();
-						$scope.clusterOptions = MapAPI.getClusterOption();
+						$scope.map = mapService.getMapOption();
+						$scope.window = mapService.getWindow();
+						$scope.clusterOptions = mapService.getClusterOption();
 						$scope.map.center.latitude = $stateParams.lat;
 						$scope.map.center.longitude = $stateParams.lng;
 						$scope.mapCtrl = {};

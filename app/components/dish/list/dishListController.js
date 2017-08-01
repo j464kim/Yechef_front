@@ -6,8 +6,8 @@ angular.module('dish.list', [
 	'googleMapSearchDirective'
 ])
 
-	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService', '$rootScope',
-		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI, genericService, $rootScope) {
+	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService', '$rootScope', 'mapService',
+		function ($state, DishesAPI, devHelper, SearchAPI, $stateParams, MapAPI, genericService, $rootScope, mapService) {
 
 			/*********************
 			 *    Private Variables
@@ -102,7 +102,7 @@ angular.module('dish.list', [
 			}
 
 			function _initGmap() {
-				that.circle = MapAPI.getCircle();
+				that.circle = mapService.getCircle();
 
 				that.mapInitiated = true;
 			}

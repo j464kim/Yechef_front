@@ -58,13 +58,6 @@ angular.module('helper', [])
 			);
 		};
 
-		var restrictAddressByCountry = function (ctrl, country) {
-			ctrl.addressOptions = {
-				componentRestrictions: {}
-			};
-			ctrl.addressOptions.componentRestrictions.country = country;
-		};
-
 		var buildToggler = function (navID) {
 			return function () {
 				// Component lookup should always be available since we are not using `ng-if`
@@ -83,7 +76,6 @@ angular.module('helper', [])
 			getStates: getStates,
 			getCurrency: getCurrency,
 			showToast: showToast,
-			restrictAddressByCountry: restrictAddressByCountry,
 			buildToggler: buildToggler,
 
 			// parse rgb str into an arr of color elements

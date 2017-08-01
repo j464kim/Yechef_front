@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService', 'config',
-		function ($state, KitchenAPI, devHelper, genericService, config) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService', 'config', 'mapService',
+		function ($state, KitchenAPI, devHelper, genericService, config, mapService) {
 
 			/*********************
 			 *  Private Variables
@@ -66,7 +66,7 @@ angular.module('kitchen.create', [
 			this.selectedCountryChange = function (country) {
 				// only when a country is selected
 				if (country) {
-					genericService.restrictAddressByCountry(that, country.value);
+					mapService.restrictAddressByCountry(that, country.value);
 				}
 				// Empty address input
 				if (that.kitchen) {

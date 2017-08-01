@@ -3,7 +3,7 @@ angular.module('user.kitchen', [
 	'chart.js',
 ])
 
-	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, genericService) {
+	.controller('userKitchenController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, genericService, mapService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -50,7 +50,7 @@ angular.module('user.kitchen', [
 					if (kitchen.id == that.myCurrentKitchenId) {
 						that.myCurrentKitchen = kitchen;
 						that.isKitchenSelected = true;
-						// genericService.restrictAddressByCountry(that, kitchen.country);
+						// mapService.restrictAddressByCountry(that, kitchen.country);
 						return true;
 					}
 				}

@@ -16,8 +16,9 @@ angular.module('rating')
             /*********************
              *    Private Functions
              **********************/
-            function _init(dishId) {
+            function _init(dishId, orderItemId) {
                 that.dishId = dishId;
+                that.orderItemId = orderItemId;
             }
             function _validateInputs() {
                 if (that.rating === undefined) {
@@ -45,7 +46,7 @@ angular.module('rating')
                     devHelper.log("Invalid Rating Inputs");
                     return;
                 }
-                RatingAPI.create(that.dishId, that.rating).then(
+                RatingAPI.create(that.dishId, that.orderItemId, that.rating).then(
                     function (response) {
                         $state.reload();
 						$mdDialog.hide();

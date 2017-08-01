@@ -32,7 +32,9 @@
 					<h4>{{item.dish.name}}</h4>
 					<p>${{item.dish.price}}</p>
 					<p>Quantity: {{item.quantity}}</p>
-					<button ng-if="uoCtrl.isReviewable(order, item)" ng-click="uoCtrl.reviewOrder($event, item.dish.id)">Review</button>
+					<button ng-if="uoCtrl.isReviewable(order, item)"
+					        ng-click="uoCtrl.reviewOrder($event, item.dish.id, item.id)">Review
+					</button>
 				</div>
 			</td>
 		</tr>

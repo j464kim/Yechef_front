@@ -45,11 +45,12 @@ angular.module('rating.api', [
                 });
             };
 
-            function create(dishId, rating) {
+            function create(dishId, orderItemId, rating) {
                 return $q(function (resolve, reject) {
                     RatingResource.create(rating,
                         {
                             dishId: dishId,
+							orderItemId: orderItemId
                         })
                         .$promise.then(function (response) {
                         resolve(response.body);
@@ -90,7 +91,7 @@ angular.module('rating.api', [
                 });
             };
 
-            function showRatingCreateDialog(ev, dishId) {
+            function showRatingCreateDialog(ev, dishId, orderItemId) {
 				$mdDialog.show({
 					templateUrl: 'shared/rating/create/ratingCreate.html',
 					parent: angular.element(document.body),
@@ -99,6 +100,7 @@ angular.module('rating.api', [
 					controller: function ($mdDialog) {
 						var that = this;
 						that.dishId = dishId;  //your task object from the ng-repeat
+                        that.orderItemId = orderItemId;
 
 						that.hide = function () {
 							$mdDialog.hide();

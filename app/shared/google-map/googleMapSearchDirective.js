@@ -88,8 +88,8 @@ angular.module('googleMapSearchDirective', [])
 										allSameAddress = false;
 										_zoomIn();
 										$scope.mapCtrl.getGMap().setCenter({
-											lat: models[i].latitude,
-											lng: models[i].longitude
+											lat: Number(models[i].latitude),
+											lng: Number(models[i].longitude)
 										});
 										break;
 									}

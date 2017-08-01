@@ -116,7 +116,7 @@ angular.module('dish.list', [
 						longitude: that.dishes[dish].kitchen.lng,
 						options: {
 							title: that.dishes[dish].name,
-							zIndex: that.dishes[dish].kitchen.lat,
+							zIndex: Number(that.dishes[dish].kitchen.lat),
 							icon: 'images/google_map_icon.png',
 						},
 					};

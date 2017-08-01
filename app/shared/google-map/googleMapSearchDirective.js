@@ -102,7 +102,7 @@ angular.module('googleMapSearchDirective', [])
 						$rootScope.$on('search:dishListMouseEnter', function (event, dish) {
 							var marker = _findDishMarker(dish);
 							$scope.searchEnabled = false;
-							marker.options.zIndex = null;
+							marker.options.zIndex = 86; // Maximum latitude in gmap is 85.
 							marker.options.icon = 'images/google_map_icon_active.png';
 							$scope.window.templateParameter = {
 								dish: dish,
@@ -114,7 +114,7 @@ angular.module('googleMapSearchDirective', [])
 						$rootScope.$on('search:dishListMouseLeave', function (event, dish) {
 							var marker = _findDishMarker(dish);
 							$scope.searchEnabled = true;
-							marker.options.zIndex = marker.latitude;
+							marker.options.zIndex = Number(marker.latitude);
 							marker.options.icon = 'images/google_map_icon.png';
 							// $scope.window.show = false;
 							_hideWindow();

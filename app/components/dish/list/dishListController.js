@@ -24,7 +24,7 @@ angular.module('dish.list', [
 			this.isSearchCollapsed = true;
 			this.options = {};
 			this.dishMapMarkers = [];
-			this.mapInited = false;
+			this.mapInitiated = false;
 			this.searchEnabled = true;
 
 			/*********************
@@ -104,7 +104,7 @@ angular.module('dish.list', [
 			function _initGmap() {
 				that.circle = MapAPI.getCircle();
 
-				that.mapInited = true;
+				that.mapInitiated = true;
 			}
 
 			function _locateDishes() {

@@ -17,7 +17,8 @@ angular.module('googleMapSearchDirective', [])
 			controller: ['$scope', 'MapAPI', 'devHelper', '$stateParams', 'uiGmapGoogleMapApi', '$rootScope', '$state', 'mapService',
 				function ($scope, MapAPI, devHelper, $stateParams, uiGmapGoogleMapApi, $rootScope, $state, mapService) {
 					$scope.windowStyled = false;
-					$scope.inited = false;
+					$scope.initiated = false;
+					$scope.mouseEventsEnabled = true;
 
 					function _init() {
 						$scope.map = mapService.getMapOption();
@@ -27,22 +28,10 @@ angular.module('googleMapSearchDirective', [])
 						$scope.map.center.longitude = $stateParams.lng;
 						$scope.mapCtrl = {};
 
-						$scope.markersEvents = {
-							click: function (marker, eventName, model) {
-								$scope.searchEnabled = false;
-								$scope.window.model = model;
-								var dish = _findDishById(model.id);
-								$scope.window.templateParameter = {
-									dish: dish,
-									style: 'complex',
-								};
-								_showWindow();
-							}
-						};
 						_setEvents();
 						_registerListeners();
 
-						$scope.inited = true;
+						$scope.initiated = true;
 					}
 
 					function _setEvents() {
@@ -75,9 +64,24 @@ angular.module('googleMapSearchDirective', [])
 								$scope.mapCtrl.refresh();
 							},
 							click: function (map, eventName, originalEventArgs) {
+								$scope.mouseEventsEnabled = true;
 								_hideWindow();
 								$scope.searchEnabled = true;
 							},
+						};
+
+						$scope.markersEvents = {
+							click: function (marker, eventName, model) {
+								$scope.mouseEventsEnabled = false;
+								$scope.searchEnabled = false;
+								$scope.window.model = model;
+								var dish = _findDishById(model.id);
+								$scope.window.templateParameter = {
+									dish: dish,
+									style: 'complex',
+								};
+								_showWindow();
+							}
 						};
 
 						$scope.clusterEvents = {
@@ -97,6 +101,7 @@ angular.module('googleMapSearchDirective', [])
 								devHelper.log(cluster);
 								devHelper.log(models);
 								if (cluster.map_.zoom === cluster.map_.maxZoom || allSameAddress) {
+									$scope.mouseEventsEnabled = false;
 									var dishes = [];
 									for (var i in models) {
 										dishes.push(_findDishById(models[i].id));
@@ -114,24 +119,28 @@ angular.module('googleMapSearchDirective', [])
 
 					function _registerListeners() {
 						$rootScope.$on('search:dishListMouseEnter', function (event, dish) {
-							var marker = _findDishMarker(dish);
-							$scope.searchEnabled = false;
-							marker.options.zIndex = 86; // Maximum latitude in gmap is 85.
-							marker.options.icon = 'images/google_map_icon_active.png';
-							$scope.window.templateParameter = {
-								dish: dish,
-								style: 'simple',
-							};
-							$scope.window.model = marker;
-							_showWindow();
+							if ($scope.mouseEventsEnabled) {
+								var marker = _findDishMarker(dish);
+								$scope.searchEnabled = false;
+								marker.options.zIndex = 86; // Maximum latitude in gmap is 85.
+								marker.options.icon = 'images/google_map_icon_active.png';
+								$scope.window.templateParameter = {
+									dish: dish,
+									style: 'simple',
+								};
+								$scope.window.model = marker;
+								_showWindow();
+							}
 						});
 						$rootScope.$on('search:dishListMouseLeave', function (event, dish) {
-							var marker = _findDishMarker(dish);
-							$scope.searchEnabled = true;
-							marker.options.zIndex = Number(marker.latitude);
-							marker.options.icon = 'images/google_map_icon.png';
-							// $scope.window.show = false;
-							_hideWindow();
+							if ($scope.mouseEventsEnabled) {
+								var marker = _findDishMarker(dish);
+								$scope.searchEnabled = true;
+								marker.options.zIndex = Number(marker.latitude);
+								marker.options.icon = 'images/google_map_icon.png';
+								// $scope.window.show = false;
+								_hideWindow();
+							}
 						});
 					}
 

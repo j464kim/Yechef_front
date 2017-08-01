@@ -90,7 +90,7 @@
 			<div class="row no-gutters">
 				<div class="col-sm-3">
 					<md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline"
-					           ng-change="sctrl.searchDish()">
+					           ng-change="DishCtrl.searchDish(true)">
 						<md-option value="price_asc">Price (Ascending)</md-option>
 						<md-option value="price_dsc">Price (Descending)</md-option>
 						<md-option value="newest">Newest</md-option>
@@ -100,7 +100,7 @@
 					</md-select>
 				</div>
 				<div class="col-sm-3">
-					<md-slider-container ng-mouseup="sctrl.searchDish()">
+					<md-slider-container ng-mouseup="DishCtrl.searchDish(true)">
 						<md-slider class="md-primary" flex min="0" max="100"
 						           ng-model="sctrl.distance"
 						           aria-label="distance"

@@ -70,7 +70,7 @@ angular.module('main', ['ngMaterial'])
 			});
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', '$stateParams', function (config, $q, $timeout, devHelper, $state, MapAPI, $stateParams) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -160,14 +160,14 @@ angular.module('main', ['ngMaterial'])
 				self.sortBy = 'newest';
 			}
 			if (self.city.geometry) {
-				var lat = self.city.geometry.location.lat();
-				var lng = self.city.geometry.location.lng();
+				self.lat = self.city.geometry.location.lat();
+				self.lng = self.city.geometry.location.lng();
 				self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
 				self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
 				self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
 				self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
 			}
-
+			
 			$state.go('dish.list', {
 				q: self.q,
 				vegan: self.vegan,
@@ -183,8 +183,8 @@ angular.module('main', ['ngMaterial'])
 				ne_lng: self.ne_lng,
 				sw_lat: self.sw_lat,
 				sw_lng: self.sw_lng,
-				lat: lat,
-				lng: lng
+				lat: self.lat,
+				lng: self.lng
 			});
 		}
 	}

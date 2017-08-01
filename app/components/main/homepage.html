@@ -2,32 +2,32 @@
 	<div class="col-sm-1">
 	</div>
 	<md-card>
-		<md-content class="md-padding" ng-controller="SearchCtrl as sctrl">
+		<md-content class="md-padding" ng-controller="SearchController as sCtrl">
 			<div class="col-sm-2">
 				<div class="row no-gutters">
 					<md-input-container>
-						<input type="text" id="food" ng-model="sctrl.q">
+						<input type="text" id="food" ng-model="sCtrl.q">
 						<label for="food">Key word (ex. Seafood)</label>
 						<br/> <br/><br/>
-						<md-checkbox ng-model="sctrl.deliverOnly" disabled="true">Deliver Only</md-checkbox>
+						<md-checkbox ng-model="sCtrl.deliverOnly" disabled="true">Deliver Only</md-checkbox>
 					</md-input-container>
 				</div>
 			</div>
 			<div class="col-sm-2">
 				<div class="row no-gutters">
 					<md-input-container>
-						<input type="text" id="City" options="sctrl.autocompleteOptions" g-places-autocomplete
-						       ng-model="sctrl.city"/>
+						<input type="text" id="City" options="sCtrl.autocompleteOptions" g-places-autocomplete
+						       ng-model="sCtrl.city"/>
 						<label for="City">City</label>
 						<br/><br/>
 						<md-slider-container>
-							<md-slider class="md-primary" flex min="0" max="100" ng-model="sctrl.distance"
+							<md-slider class="md-primary" flex min="0" max="100" ng-model="sCtrl.distance"
 							           aria-label="distance"
 							           id="distance-slider">
 							</md-slider>
 						</md-slider-container>
-						<span ng-if="sctrl.distance != 0">Max Distance: {{sctrl.distance}} km</span>
-						<span ng-if="sctrl.distance == 0 || sctrl.distance === undefined">Max Distance: Any</span>
+						<span ng-if="sCtrl.distance != 0">Max Distance: {{sCtrl.distance}} km</span>
+						<span ng-if="sCtrl.distance == 0 || sCtrl.distance === undefined">Max Distance: Any</span>
 					</md-input-container>
 				</div>
 			</div>
@@ -35,13 +35,13 @@
 				<label class="col-sm-offset-2">Price Range</label>
 				<div class="col-sm-6">
 					<md-input-container>
-						<input type="text" id="min_price" ng-model="sctrl.min_price">
+						<input type="text" id="min_price" ng-model="sCtrl.min_price">
 						<label for="min_price">min</label>
 					</md-input-container>
 				</div>
 				<div class="col-sm-6">
 					<md-input-container>
-						<input type="text" id="max_price" ng-model="sctrl.max_price">
+						<input type="text" id="max_price" ng-model="sCtrl.max_price">
 						<label for="max_price">max</label>
 					</md-input-container>
 				</div>
@@ -51,34 +51,34 @@
 					<form ng-submit="$event.preventDefault()">
 						<md-autocomplete
 								md-no-cache="true"
-								md-selected-item="sctrl.selectedNationality"
-								md-search-text="sctrl.searchText"
-								md-items="item in sctrl.querySearch(sctrl.searchText)"
+								md-selected-item="sCtrl.selectedNationality"
+								md-search-text="sCtrl.searchText"
+								md-items="item in sCtrl.querySearch(sCtrl.searchText, sCtrl.nationalities)"
 								md-item-text="item.display"
 								md-min-length="0"
 								placeholder="Choose Nationality"
 								md-require-match>
 							<md-item-template>
-								<span md-highlight-text="sctrl.searchText"
+								<span md-highlight-text="sCtrl.searchText"
 								      md-highlight-flags="^i">{{item.display}}</span>
 							</md-item-template>
 							<md-not-found>
-								No states matching "{{sctrl.searchText}}" were found.
+								No states matching "{{sCtrl.searchText}}" were found.
 							</md-not-found>
 							<div ng-message="md-require-match">Please select an existing nationality.</div>
 						</md-autocomplete>
 						<br/><br/>
-						<md-checkbox ng-model="sctrl.vegan" ng-true-value="1">Vegan</md-checkbox>
-						<md-checkbox ng-model="sctrl.vegetarian" ng-true-value="1">Vegetarian</md-checkbox>
-						<md-checkbox ng-model="sctrl.gluten_free" ng-true-value="1">Gluten-free</md-checkbox>
+						<md-checkbox ng-model="sCtrl.vegan" ng-true-value="1">Vegan</md-checkbox>
+						<md-checkbox ng-model="sCtrl.vegetarian" ng-true-value="1">Vegetarian</md-checkbox>
+						<md-checkbox ng-model="sCtrl.gluten_free" ng-true-value="1">Gluten-free</md-checkbox>
 					</form>
 				</div>
 			</div>
 			<div class="col-sm-2">
 				<div class="row no-gutters">
-					<md-button class="md-raised md-primary" ng-click="sctrl.searchDish()">Search</md-button>
+					<md-button class="md-raised md-primary" ng-click="sCtrl.searchDish()">Search</md-button>
 					<br/>
-					<md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline">
+					<md-select ng-model="sCtrl.sortBy" placeholder="Sort by" class="md-no-underline">
 						<md-option value="price_asc">Price (Ascending)</md-option>
 						<md-option value="price_dsc">Price (Descending)</md-option>
 						<md-option value="newest">Newest</md-option>

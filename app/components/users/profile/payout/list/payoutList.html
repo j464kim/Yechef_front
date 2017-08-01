@@ -1,0 +1,42 @@
+<div class="text-center">
+	<h2>Payout Information</h2>
+	<hr>
+	<div ng-show="plCtrl.account">
+		<div>
+			<label>Country: </label>
+			{{plCtrl.account.country}}
+		</div>
+		<div>
+			<label>Email: </label>
+			{{plCtrl.account.email}}
+		</div>
+		<div>
+			<label># of External Accounts: </label>
+			{{plCtrl.account.total_count}}
+		</div>
+		<div>
+			<label>Pending Balance: </label>
+			${{plCtrl.account.pending_balance}} {{plCtrl.account.default_currency}}
+		</div>
+		<div>
+			<label>Available Balance: </label>
+			${{plCtrl.account.available_balance}} {{plCtrl.account.default_currency}}
+		</div>
+		<div>
+			<button ui-sref="user.profile.payout.show">Manage external accounts</button><br>
+			<button ui-sref="user.profile.payout.update.address">Update Account Address</button><br>
+		</div>
+	</div>
+
+	<div ng-show="!plCtrl.account">
+		<h4>
+			<p>Payout preference is not set up yet.</p>
+			<p>In order to receive money, please set up your payout preference.</p>
+		</h4>
+		<div>
+			<button ui-sref="user.profile.payout.new.address">Add New Payout Method</button>
+		</div>
+	</div>
+
+</div>
+

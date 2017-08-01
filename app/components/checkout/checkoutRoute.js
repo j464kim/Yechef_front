@@ -13,9 +13,13 @@ angular.module('checkout', [
 				template: '<ui-view/>'
 			})
 			.state('checkout.billing', {
-				url: '/billing/{amount}/kitchen/{kitchenId}',
+				url: '/billing',
 				templateUrl: 'components/checkout/billingInformation.html',
-				controller: 'CheckoutController as coCtrl'
+				controller: 'CheckoutController as coCtrl',
+				params: {
+					'amount': null,
+					'kitchenId': null
+				}
 			})
 
 	});

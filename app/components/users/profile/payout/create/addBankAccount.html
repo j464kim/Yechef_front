@@ -1,0 +1,47 @@
+<form class="form-validation margin-top-2em" ng-submit="psCtrl.createExternalAccount()" name="form" novalidate>
+	<div>
+		<md-input-container class="md-block">
+			<label for="country">Country</label>
+			<md-select ng-model="psCtrl.bankAccount.country" id="country" class="full-width" required>
+				<md-option ng-value="country" ng-repeat="country in psCtrl.payoutCountries">{{ country.display }}</md-option>
+			</md-select>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="currency">Currency </label>
+			<md-select ng-disabled="!psCtrl.bankAccount.country" ng-model="psCtrl.bankAccount.currency" id="currency" class="full-width" required>
+				<md-option ng-value="currency" ng-repeat="currency in psCtrl.getCurrency(psCtrl.bankAccount.country.display)">{{ currency }}</md-option>
+			</md-select>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="accountType">Account Type</label>
+			<md-select ng-model="psCtrl.bankAccount.account_holder_type" id="accountType" class="full-width" required>
+				<md-option ng-value="type" ng-repeat="type in psCtrl.accountHolderTypes">{{ type }}</md-option>
+			</md-select>
+		</md-input-container>
+	</div><br>
+	<div>
+		<md-input-container class="md-block">
+			<label for="accountHolder">Name of Account Holder</label>
+			<input class="full-width" id="accountHolder" type="text" ng-model="psCtrl.bankAccount.account_holder_name" placeholder="" required>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="transitNum">Routing/Transit Number</label>
+			<input class="full-width" id="transitNum" ng-model="psCtrl.bankAccount.routing_number" ui-mask="99999-999?9" placeholder="" required>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="accountNum">Account Number</label>
+			<input class="full-width" id="accountNum" ng-model="psCtrl.bankAccount.account_number" ui-mask="999999999999" placeholder="" required>
+		</md-input-container>
+	</div>
+	<br>
+	<md-button class="md-raised md-primary pull-left" type="submit" ng-disabled="form.$invalid">Update</md-button>
+	<md-button class="md-raised pull-right" ui-sref="user.profile.payout.list">Back</md-button>
+</form>

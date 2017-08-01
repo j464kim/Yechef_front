@@ -5,9 +5,9 @@
 	</div>
 
 	<div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
-		<div ng-repeat="cart in cartCtrl.carts" loader>
-			<div ng-show="cart.items[0]._kitchenId">
-				<h4>Kitchen Id: {{cart.items[0]._kitchenId}}</h4>
+		<div ng-repeat="(kitchenId, cart) in cartCtrl.carts" loader>
+			<div ng-show="kitchenId">
+				<h4>Kitchen Id: {{kitchenId}}</h4>
 				<table class="table table-striped ngCart cart">
 					<thead>
 					<tr>
@@ -20,12 +20,9 @@
 					</thead>
 					<tfoot>
 					<tr ng-show="cart.taxRate">
-						<td></td>
-						<td></td>
-						<td></td>
-						<!--<td>Tax ({{ ngCart.getTaxRate() }}%):</td>-->
-						<td>Tax ({{ cart.taxRate }}%):</td>
-						<td>{{ ngCart.getTax(cart.items[0]._kitchenId) | currency }}</td>
+						<td></td><td></td><td></td>
+						<td>Tax ({{ ngCart.getTaxRate(kitchenId) }}%):</td>
+						<td>{{ ngCart.getTax(kitchenId) | currency }}</td>
 					</tr>
 					<!--TODO: Will be optionally put later depending on shipping availability-->
 					<!--<tr ng-show="ngCart.getShipping()">-->
@@ -36,15 +33,18 @@
 					<!--<td>{{ ngCart.getShipping() | currency }}</td>-->
 					<!--</tr>-->
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td></td><td></td><td></td>
+						<td>Service Fee:</td>
+						<td>{{ ngCart.serviceFee(kitchenId) | currency }}</td>
+					</tr>
+					<tr>
+						<td></td><td></td><td></td>
 						<td>Total:</td>
-						<td>{{ ngCart.totalCost(cart.items[0]._kitchenId) | currency }}</td>
+						<td>{{ ngCart.totalCost(kitchenId) | currency }}</td>
 					</tr>
 					</tfoot>
 					<tbody>
-					<tr ng-repeat="item in cart.items track by $index">
+					<tr ng-repeat="item in cart.items">
 						{{item}}
 						<td><button ng-click="cartCtrl.removeItemById(item.getId(), item._kitchenId)"
 						          class="glyphicon glyphicon-remove"></button>
@@ -68,7 +68,7 @@
 				<div class="pull-right">
 					<div class="row">
 						<button class="small-margin btn-danger btn-lg"
-						        ui-sref="checkout.billing({amount: ngCart.totalCost(cart.items[0]._kitchenId), kitchenId: cart.items[0]._kitchenId})">
+						        ui-sref="checkout.billing({amount: ngCart.totalCost(kitchenId), kitchenId: kitchenId})">
 							To
 							Request Order
 						</button>

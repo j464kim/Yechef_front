@@ -1,0 +1,15 @@
+<h2>Add Payout Method</h2>
+<hr>
+<div>
+	<label>Method</label>
+	<md-radio-group ng-model="radioContent">
+		<md-radio-button class="md-primary" value="payPal" ng-disabled="true">PayPal</md-radio-button>
+		<md-radio-button value="bankAccount"> Bank Account</md-radio-button>
+	</md-radio-group>
+</div>
+<div ng-show="radioContent == 'payPal'">
+	<div ui-view="paypal"></div>
+</div>
+<div ng-show="radioContent == 'bankAccount'">
+	<div ui-view="bankAccount"></div>
+</div>

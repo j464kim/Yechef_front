@@ -4,40 +4,30 @@ angular.module('checkout.api', [
 	'configuration'
 ])
 
-	.service('CheckoutResource', ['$resource', 'config', '$http',
-		function ($resource, config, $http) {
-			var apiEndpoint = config.endpoint + 'payment';
+	.factory('CheckoutResource', ['$resource', 'config',
+		function ($resource, config) {
+			var api_endpoint = config.endpoint + 'payment';
 
-			function charge(token, amount, currency, kitchenId) {
-				return $http({
+			return $resource(api_endpoint + ':id', {id: '@id'}, {
+				charge: {
 					method: 'POST',
-					url: apiEndpoint + '/charge',
-					params: {
-						token: token,
-						amount: amount,
-						currency: currency,
-						kitchenId: kitchenId,
-					}
-				});
-			}
-
-			return {
-				charge: charge,
-			}
+					url: api_endpoint + '/charge'
+				}
+			});
 		}
 	])
 
 	.service('CheckoutAPI', ['$q', 'CheckoutResource',
 		function ($q, CheckoutResource) {
 
-			function charge(token, amount, currency, kitchenId) {
+			function charge(chargeObj) {
 				return $q(function (resolve, reject) {
-					CheckoutResource.charge(token, amount, currency, kitchenId)
-						.then(function (response) {
-						resolve(response.body);
-					}, function (response) {
-						reject(response);
-					});
+					CheckoutResource.charge(chargeObj)
+						.$promise.then(function (response) {
+							resolve(response.body);
+						}, function (response) {
+							reject(response);
+						});
 				});
 			}
 

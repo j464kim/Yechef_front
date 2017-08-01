@@ -4,8 +4,8 @@ angular.module('checkout.billing', [
 	'checkout.api',
 ])
 
-	.controller('CheckoutController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper', 'config', '$rootScope', '$q',
-		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper, config, $rootScope, $q) {
+	.controller('CheckoutController', ['$stateParams', '$state', 'CheckoutAPI', 'CheckoutService', 'devHelper', 'config', 'ngCart', 'numberService',
+		function ($stateParams, $state, CheckoutAPI, CheckoutService, devHelper, config, ngCart, numberService) {
 
 			/*********************
 			 *  Private Variables
@@ -15,18 +15,37 @@ angular.module('checkout.billing', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
-			var amount = $stateParams.amount;
+			var _totalAmount = $stateParams.amount;
 			var kitchenId = $stateParams.kitchenId;
-			var stripeAmount = Math.round(amount * 100);
+			var totalAmount = numberService.amtToStripe(_totalAmount);
 
 			/*********************
 			 *  Private Functions
 			 **********************/
+			function _init() {
+				_redirectOnReload();
+			}
+
+			var _chargeObj = {
+				total: totalAmount,
+				currency: config.currency,
+				kitchenId: kitchenId
+			};
+
+			function _redirectOnReload() {
+				try {
+					var _serviceFee = ngCart.serviceFee(kitchenId);
+					_chargeObj.serviceFee = numberService.amtToStripe(_serviceFee);
+				} catch (err) {
+					$state.go('cart.view');
+				}
+			}
 
 			function _chargePayment() {
-				CheckoutService.tokenize(that.card)
+				CheckoutService.tokenizeCard(that.card)
 					.then(function (response) {
-						CheckoutAPI.charge(response.id, stripeAmount, config.currency, kitchenId)
+						_chargeObj.token = response.id;
+						CheckoutAPI.charge(_chargeObj)
 							.then(function (response) {
 								devHelper.log(response);
 								devHelper.log('Authorization hold successful');
@@ -46,6 +65,7 @@ angular.module('checkout.billing', [
 			/*********************
 			 *  Initialization
 			 **********************/
+			_init();
 
 			/*********************
 			 *  EVENTS

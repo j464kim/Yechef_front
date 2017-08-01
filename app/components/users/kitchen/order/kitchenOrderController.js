@@ -64,7 +64,6 @@ angular.module('user.kitchen.order', [
 			 **********************/
 			this.acceptOrder = _acceptOrder;
 			this.declineOrder = _declineOrder;
-
 			/*********************
 			 *  Initialization
 			 **********************/

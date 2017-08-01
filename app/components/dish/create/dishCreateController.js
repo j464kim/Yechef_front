@@ -15,7 +15,7 @@ angular.module('dish.create', [
 			var that = this;
 
 			this.kitchenId = $stateParams.kid;
-			this.nationalities = _loadNationalities();
+			this.nationalities = genericService.loadItems(config.nationalities);
 
 			that.dish = {};
 			that.dish.gluten_free = false;
@@ -51,19 +51,6 @@ angular.module('dish.create', [
 						genericService.showToast('Oops..! Something is wrong');
 						devHelper.log(response, 'error');
 					});
-			}
-
-			/**
-			 * Build `states` list of key/value pairs
-			 */
-			function _loadNationalities() {
-
-				return (config.nationalities).split(/, +/g).map(function (nationality) {
-					return {
-						value: nationality.toLowerCase(),
-						display: nationality
-					};
-				});
 			}
 
 			/*********************

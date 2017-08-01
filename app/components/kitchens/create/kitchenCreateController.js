@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService',
-		function ($state, KitchenAPI, devHelper, genericService) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService', 'config', 'mapService',
+		function ($state, KitchenAPI, devHelper, genericService, config, mapService) {
 
 			/*********************
 			 *  Private Variables
@@ -17,14 +17,14 @@ angular.module('kitchen.create', [
 			 *  Public Variables
 			 **********************/
 			var that = this;
-
+			this.payoutCountries = genericService.loadItems(config.payoutCountries);
 
 			/*********************
 			 *  Private Functions
 			 **********************/
 			function _createKitchen() {
-
-				devHelper.log(that.kitchen);
+				this.kitchen.country = this.selectedCountry.display;
+				devHelper.log(that.kitchen.address);
 				that.kitchen.lat = that.kitchen.address.geometry.location.lat();
 				that.kitchen.lng = that.kitchen.address.geometry.location.lng();
 				that.kitchen.address = that.kitchen.address.formatted_address;
@@ -62,7 +62,17 @@ angular.module('kitchen.create', [
 			 *  Public Functions
 			 **********************/
 			this.createKitchen = _createKitchen;
-
+			this.querySearch = genericService.querySearch;
+			this.selectedCountryChange = function (country) {
+				// only when a country is selected
+				if (country) {
+					mapService.restrictAddressByCountry(that, country.value);
+				}
+				// Empty address input
+				if (that.kitchen) {
+					that.kitchen.address = null;
+				}
+			};
 
 			/*********************
 			 *  Initialization

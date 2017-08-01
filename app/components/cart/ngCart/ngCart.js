@@ -166,11 +166,8 @@ angular.module('ngCart', [
 			// return this.getTaxRate();
 		};
 
-		this.getTaxRate = function () {
-			devHelper.log('get tax rate');
-			devHelper.log(this.$cart);
-			return this.$cart[Object.keys(this.$cart)[0]].taxRate;
-			// return this.$cart.taxRate
+		this.getTaxRate = function (kitchenId) {
+			return this.$cart[kitchenId].taxRate;
 		};
 
 		this.getTax = function (kitchenId) {
@@ -242,7 +239,11 @@ angular.module('ngCart', [
 		};
 
 		this.totalCost = function (kitchenId) {
-			return +parseFloat(this.getSubTotal(kitchenId) + this.getTax(kitchenId)).toFixed(2);
+			return +parseFloat(this.getSubTotal(kitchenId) + this.getTax(kitchenId) + this.serviceFee(kitchenId)).toFixed(2);
+		};
+
+		this.serviceFee = function(kitchenId) {
+			return +parseFloat(this.getSubTotal(kitchenId) / 10).toFixed(2);
 		};
 
 		this.removeItem = function (index) {

@@ -1,55 +1,55 @@
 <!doctype html>
 <html class="white-background">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/filereader.js/filereader.js"></script>
-    <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
-    <script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
-    <script src="bower_components/ng-buffer-dropzone/dist/ng-dropzone.js"></script>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
-    <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css" />
-    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
-    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
-    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/validation.css">
-    <!-- endbuild -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/filereader.js/filereader.js"></script>
+	<script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
+	<script src="bower_components/ng-dropzone/dist/ng-dropzone.js"></script>
+	<script src="bower_components/ng-buffer-dropzone/dist/ng-dropzone.js"></script>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<!-- build:css(.) styles/vendor.css -->
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
+	<link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css" />
+	<link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+	<link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.css" />
+	<link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+	<link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
+	<link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/validation.css">
+	<!-- endbuild -->
 </head>
 <body ng-app="yechefFrontApp">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
+	your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <div id="pageContent" ng-controller="MainController as MainCtrl">
-    <!-- defines the theme pixel -->
-    <theme-pixel themes="MainCtrl.themes"></theme-pixel>
+	<!-- defines the theme pixel -->
+	<theme-pixel themes="MainCtrl.themes"></theme-pixel>
 
-    <page-header login="MainCtrl.isLoggedIn()"></page-header>
+	<page-header login="MainCtrl.isLoggedIn()"></page-header>
 
-    <div class="container">
-        <section ui-view></section>
-    </div>
+	<div class="container">
+		<section ui-view></section>
+	</div>
 
-    <div class="footer">
-        <page-footer login="MainCtrl.isLoggedIn()"></page-footer>
-    </div>
+	<div class="footer">
+		<page-footer login="MainCtrl.isLoggedIn()"></page-footer>
+	</div>
 </div>
 
 
@@ -114,6 +114,7 @@
 <script src="main/app.js"></script>
 <script src="main/config.js"></script>
 <script src="components/main/mainController.js"></script>
+<script src="components/main/searchController.js"></script>
 <script src="main/services/httpInterceptor.js"></script>
 <script src="main/services/auth.js"></script>
 <script src="main/services/devHelper.js"></script>
@@ -148,6 +149,7 @@
 <script src="shared/share/shareDirective.js"></script>
 <script src="shared/confirmPassword/confirmPasswordDirective.js"></script>
 <script src="shared/helper/genericService.js"></script>
+<script src="shared/helper/numberService.js"></script>
 <script src="shared/themePixel/themePixelDirective.js"></script>
 <script src="shared/carousel/carouselDirective.js"></script>
 <script src="shared/google-map/googleMapShowDirective.js"></script>
@@ -170,6 +172,10 @@
 <script src="components/users/kitchen/dish/kitchenDishController.js"></script>
 <script src="components/users/kitchen/subscriber/kitchenSubscribers.js"></script>
 <script src="components/users/kitchen/order/kitchenOrderController.js"></script>
+<script src="components/users/profile/payout/payout.js"></script>
+<script src="components/users/profile/payout/list/payoutListController.js"></script>
+<script src="components/users/profile/payout/show/payoutShowController.js"></script>
+<script src="components/users/profile/payout/create/payoutCreateController.js"></script>
 <script src="components/users/profile/general/userGeneralController.js"></script>
 <script src="components/users/profile/subscription/userSubscribeController.js"></script>
 <script src="components/users/profile/fork/userForkController.js"></script>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main', ['ngMaterial'])
+angular.module('main', ['search'])
 
 	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'genericService',
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
@@ -31,9 +31,9 @@ angular.module('main', ['ngMaterial'])
 			});
 
 			/* Re-assigning $rootScope.currentUser variable breaks the binding in other templates.
-			Thus, angular.extend needs to be used for the purpose of updating the key-value properties or the
-			$rootScope.currentUser variable.
-			*/
+			 Thus, angular.extend needs to be used for the purpose of updating the key-value properties or the
+			 $rootScope.currentUser variable.
+			 */
 			$rootScope.$on('auth:currentUserChanged', function (event, currentUser) {
 				angular.extend($rootScope.currentUser, currentUser);
 			});
@@ -167,7 +167,7 @@ angular.module('main', ['ngMaterial'])
 				self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
 				self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
 			}
-			
+
 			$state.go('dish.list', {
 				q: self.q,
 				vegan: self.vegan,

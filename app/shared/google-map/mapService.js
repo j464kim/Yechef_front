@@ -73,11 +73,19 @@ angular.module('map.service', [])
 				return clusterOption;
 			}
 
+			function restrictAddressByCountry(ctrl, country) {
+				ctrl.addressOptions = {
+					componentRestrictions: {}
+				};
+				ctrl.addressOptions.componentRestrictions.country = country;
+			}
+
 			return {
 				getMapOption: getMapOption,
 				getCircle: getCircle,
 				getWindow: getWindow,
-				getClusterOption: getClusterOption
+				getClusterOption: getClusterOption,
+				restrictAddressByCountry: restrictAddressByCountry
 			};
 		}
 	]);

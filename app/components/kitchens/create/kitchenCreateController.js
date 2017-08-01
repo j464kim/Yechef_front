@@ -25,9 +25,9 @@ angular.module('kitchen.create', [
 			function _createKitchen() {
 				this.kitchen.country = this.selectedCountry.display;
 				devHelper.log(that.kitchen.address);
-				if (typeof that.kitchen.address === 'object') {
-					that.kitchen.address = that.kitchen.address.formatted_address;
-				}
+				that.kitchen.lat = that.kitchen.address.geometry.location.lat();
+				that.kitchen.lng = that.kitchen.address.geometry.location.lng();
+				that.kitchen.address = that.kitchen.address.formatted_address;
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
 					devHelper.log(newKitchen);

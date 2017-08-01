@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kitchen.show', [
-	'kitchen.api', 'ngMaterial', 'share', 'googleMapShow',
+	'kitchen.api', 'ngMaterial', 'share', 'googleMapShowDirective',
 ])
 
 	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope', 'genericService',

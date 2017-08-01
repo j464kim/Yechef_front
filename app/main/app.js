@@ -55,6 +55,7 @@ angular
 		'auth.api',
 		'search.api',
 		'map.api',
+		'map.service',
 
 		// configuration
 		'configuration',

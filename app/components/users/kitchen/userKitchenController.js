@@ -50,6 +50,7 @@ angular.module('user.kitchen', [
 					if (kitchen.id == that.myCurrentKitchenId) {
 						that.myCurrentKitchen = kitchen;
 						that.isKitchenSelected = true;
+						// genericService.restrictAddressByCountry(that, kitchen.country);
 						return true;
 					}
 				}

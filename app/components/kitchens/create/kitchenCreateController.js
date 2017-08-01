@@ -18,10 +18,6 @@ angular.module('kitchen.create', [
 			 **********************/
 			var that = this;
 			this.payoutCountries = genericService.loadItems(config.payoutCountries);
-			this.addressOptions = {
-				componentRestrictions: {}
-			};
-
 
 			/*********************
 			 *  Private Functions
@@ -68,7 +64,14 @@ angular.module('kitchen.create', [
 			this.createKitchen = _createKitchen;
 			this.querySearch = genericService.querySearch;
 			this.selectedCountryChange = function (country) {
-				that.addressOptions.componentRestrictions.country = country.value;
+				// only when a country is selected
+				if (country) {
+					genericService.restrictAddressByCountry(that, country.value);
+				}
+				// Empty address input
+				if (that.kitchen) {
+					that.kitchen.address = null;
+				}
 			};
 
 			/*********************

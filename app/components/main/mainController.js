@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('main', [])
+angular.module('main', ['ngMaterial'])
 
 	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'genericService',
 		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
 
 			var that = this;
-			if(!$rootScope.currentUser) {
+			if (!$rootScope.currentUser) {
 				$rootScope.currentUser = {};
 			}
 
@@ -48,16 +48,16 @@ angular.module('main', [])
 			$scope.$watch(angular.bind(this, function () {
 				return this.themes;
 			}), function (value) {
-				if(value) {
-					if(value.primary) {
+				if (value) {
+					if (value.primary) {
 						themeProvider.definePalette('primaryTheme', value.primary);
 					}
 
-					if(value.secondary) {
+					if (value.secondary) {
 						themeProvider.definePalette('secondaryTheme', value.secondary);
 					}
 
-					if(value.ternary) {
+					if (value.ternary) {
 						themeProvider.definePalette('ternaryTheme', value.ternary);
 					}
 
@@ -70,7 +70,7 @@ angular.module('main', [])
 			});
 		}
 	])
-	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', function (config, $q, $timeout, devHelper, $state, MapAPI) {
+	.controller('SearchCtrl', ['config', '$q', '$timeout', 'devHelper', '$state', 'MapAPI', '$stateParams', function (config, $q, $timeout, devHelper, $state, MapAPI, $stateParams) {
 		var self = this;
 
 		self.isDisabled = false;
@@ -78,8 +78,6 @@ angular.module('main', [])
 		// list of `nationalities` value/display objects
 		self.nationalities = loadAll();
 		self.querySearch = querySearch;
-		self.selectedItemChange = selectedItemChange;
-		self.searchTextChange = searchTextChange;
 		self.nationality = newNationality;
 
 		self.distance = 0;
@@ -127,14 +125,6 @@ angular.module('main', [])
 			return deferred.promise;
 		}
 
-		function searchTextChange(text) {
-			devHelper.log('Text changed to ' + text);
-		}
-
-		function selectedItemChange(item) {
-			devHelper.log('Item changed to ' + JSON.stringify(item));
-		}
-
 		/**
 		 * Build `states` list of key/value pairs
 		 */
@@ -169,6 +159,15 @@ angular.module('main', [])
 			if (!self.sortBy) {
 				self.sortBy = 'newest';
 			}
+			if (self.city.geometry) {
+				self.lat = self.city.geometry.location.lat();
+				self.lng = self.city.geometry.location.lng();
+				self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();
+				self.ne_lng = self.city.geometry.viewport.getNorthEast().lng();
+				self.sw_lat = self.city.geometry.viewport.getSouthWest().lat();
+				self.sw_lng = self.city.geometry.viewport.getSouthWest().lng();
+			}
+			
 			$state.go('dish.list', {
 				q: self.q,
 				vegan: self.vegan,
@@ -180,6 +179,12 @@ angular.module('main', [])
 				sortBy: self.sortBy,
 				city: self.city.formatted_address,
 				distance: self.distance,
+				ne_lat: self.ne_lat,
+				ne_lng: self.ne_lng,
+				sw_lat: self.sw_lat,
+				sw_lng: self.sw_lng,
+				lat: self.lat,
+				lng: self.lng
 			});
 		}
 	}

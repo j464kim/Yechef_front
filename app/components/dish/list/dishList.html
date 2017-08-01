@@ -55,9 +55,7 @@
 									<md-autocomplete
 											md-no-cache="true"
 											md-selected-item="sctrl.selectedNationality"
-											md-search-text-change="sctrl.searchTextChange(sctrl.searchText)"
 											md-search-text="sctrl.searchText"
-											md-selected-item-change="sctrl.selectedItemChange(item)"
 											md-items="item in sctrl.querySearch(sctrl.searchText)"
 											md-item-text="item.display"
 											md-min-length="0"
@@ -92,7 +90,7 @@
 			<div class="row no-gutters">
 				<div class="col-sm-3">
 					<md-select ng-model="sctrl.sortBy" placeholder="Sort by" class="md-no-underline"
-					           ng-change="sctrl.searchDish()">
+					           ng-change="DishCtrl.searchDish(true)">
 						<md-option value="price_asc">Price (Ascending)</md-option>
 						<md-option value="price_dsc">Price (Descending)</md-option>
 						<md-option value="newest">Newest</md-option>
@@ -102,7 +100,7 @@
 					</md-select>
 				</div>
 				<div class="col-sm-3">
-					<md-slider-container ng-mouseup="sctrl.searchDish()">
+					<md-slider-container ng-mouseup="DishCtrl.searchDish(true)">
 						<md-slider class="md-primary" flex min="0" max="100"
 						           ng-model="sctrl.distance"
 						           aria-label="distance"
@@ -116,7 +114,8 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-md-6" ng-repeat="dish in DishCtrl.dishes" loader>
+			<div class="col-md-6" ng-repeat="dish in DishCtrl.dishes" ng-mouseenter="DishCtrl.dishMouseEnter(dish)"
+			     ng-mouseleave="DishCtrl.dishMouseLeave(dish)" loader>
 				<dish-card dish="dish"></dish-card>
 			</div>
 		</div>
@@ -129,24 +128,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-4" id="map-dish-list" loader>
-		<ui-gmap-google-map center='DishCtrl.map.center'
-		                    zoom='DishCtrl.map.zoom'
-		                    events="DishCtrl.mapEvents"
-		                    control="DishCtrl.mapCtrl"
-		                    options="DishCtrl.map.options"
-		                    ng-cloak>
-			<ui-gmap-markers
-					models="DishCtrl.dishMapMarkers"
-					coords="'self'"
-					icon="'icon'">
-			</ui-gmap-markers>
-			<ui-gmap-circle center='DishCtrl.circle.center'
-			                radius='DishCtrl.circle.radius'
-			                fill='DishCtrl.circle.fill'
-			                stroke='DishCtrl.circle.stroke'
-			                clickable='false'>
-			</ui-gmap-circle>
-		</ui-gmap-google-map>
+
+	<div class="col-sm-4">
+		<google-map-search ng-if="DishCtrl.mapInitiated" search-enabled="DishCtrl.searchEnabled"
+		                   markers="DishCtrl.dishMapMarkers" dishes="DishCtrl.dishes" circle="DishCtrl.circle"
+		                   search-function="DishCtrl.getDishes" search-bounds-changed="DishCtrl.searchBoundsChanged"
+		></google-map-search>
 	</div>
 </div>

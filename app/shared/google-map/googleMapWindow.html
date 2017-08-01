@@ -1,0 +1,17 @@
+<div>
+	<div ng-if="parameter.style == 'complex'">
+		<dish-card dish="parameter.dish"></dish-card>
+	</div>
+
+	<div ng-if="parameter.style == 'simple'">
+		<span class="">$ {{parameter.dish.price}}</span>
+	</div>
+
+	<div ng-if="parameter.style == 'cluster'" ng-init="currentPage = 1">
+		<span class="badge badge-important text-center">{{currentPage}} / {{parameter.dishes.length}}</span>
+		<div ng-repeat="dish in parameter.dishes.slice(((currentPage-1)), ((currentPage)))">
+			<dish-card dish="dish"></dish-card>
+		</div>
+		<ul uib-pager class="no-margin" items-per-page="1" total-items="parameter.dishes.length" ng-model="currentPage"></ul>
+	</div>
+</div>

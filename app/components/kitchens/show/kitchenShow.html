@@ -99,7 +99,8 @@
 	</div>
 	<!-- Gmap -->
 	<div class="row margin-top-2em" ng-if="KitchenCtrl.kitchen">
-		<google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}"></google-map-show>
+		<google-map-show for="kitchen" address="{{KitchenCtrl.kitchen.address}}" lat="{{KitchenCtrl.kitchen.lat}}"
+		                 lng="{{KitchenCtrl.kitchen.lng}}"></google-map-show>
 	</div>
 	<!--See more chefs-->
 	<div style="visibility: hidden">

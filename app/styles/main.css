@@ -2502,6 +2502,9 @@ h6 {
 .small-margin {
   margin: 0.5em;
 }
+.no-margin {
+  margin: 0 0;
+}
 md-checkbox.md-checked .md-icon {
   background-color: #88B04B;
 }
@@ -2682,6 +2685,7 @@ md-content {
   position: fixed;
   right: 0;
   height: 100%;
+  width: inherit;
 }
 #map-dish-show {
   padding: 0 1em 0 1em;
@@ -2689,6 +2693,17 @@ md-content {
 }
 #map-kitchen-show {
   height: 34em;
+}
+.gm-style-iw + div {
+  display: none;
+}
+.gm-style-iw {
+  text-align: center;
+  max-width: 280px;
+  top: 13px !important;
+  left: 25px !important;
+  background-color: #FAFAFA;
+  border-radius: 5%;
 }
 .loader-wrapper {
   min-height: 0;

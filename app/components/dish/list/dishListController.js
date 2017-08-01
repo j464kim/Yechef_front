@@ -3,7 +3,7 @@
 angular.module('dish.list', [
 	'dishes.api',
 	'ngMaterial',
-	'googleMapDirectives'
+	'googleMapSearchDirective'
 ])
 
 	.controller('DishListController', ['$state', 'DishesAPI', 'devHelper', 'SearchAPI', '$stateParams', 'MapAPI', 'genericService', '$rootScope',

@@ -159,7 +159,7 @@ angular.module('main', ['ngMaterial'])
 			if (!self.sortBy) {
 				self.sortBy = 'newest';
 			}
-			if (typeof self.city == 'object') {
+			if (self.city.geometry) {
 				var lat = self.city.geometry.location.lat();
 				var lng = self.city.geometry.location.lng();
 				self.ne_lat = self.city.geometry.viewport.getNorthEast().lat();

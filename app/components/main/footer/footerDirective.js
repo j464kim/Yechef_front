@@ -7,7 +7,7 @@ angular.module('footer', []).directive('pageFooter', ['$rootScope', function () 
 		scope: {
 			login: '='
 		}, // This is one of the cool things :). Will be explained in post.
-		templateUrl: "components/main/header/header.html",
+		templateUrl: "components/main/footer/footer.html",
 		controller: ['$scope', '$filter', '$rootScope', function ($scope, $filter, $rootScope) {
 			// Your behaviour goes here :)
 			$scope.currentUser = $rootScope.currentUser;

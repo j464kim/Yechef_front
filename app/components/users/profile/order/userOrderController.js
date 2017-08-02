@@ -4,8 +4,8 @@ angular.module('user.profile.order', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope', 'RatingAPI',
-		function ($stateParams, $state, UserAPI, devHelper, $scope, RatingAPI) {
+	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope', 'RatingService',
+		function ($stateParams, $state, UserAPI, devHelper, $scope, RatingService) {
 
 			/*********************
 			 *  Private Variables
@@ -52,12 +52,8 @@ angular.module('user.profile.order', [
 			 *  Public Functions
 			 **********************/
 			this.cancelOrder = _cancelOrder;
-			this.reviewOrder = RatingAPI.showRatingCreateDialog;
-			this.isReviewable = function (order, item) {
-				var from = moment(order.updated_at);
-				var now = moment();
-				return order.status == 'accepted' && now.diff(from, 'hours') < 24 && !item.dish_rating;
-			};
+			this.reviewOrder = RatingService.showRatingCreateDialog;
+			this.isReviewable = RatingService.isReviewable;
 
 			/*********************
 			 *  Initialization

@@ -248,18 +248,6 @@ angular.module('kitchen.api', [
 				});
 			};
 
-			function getRating(kitchenId) {
-				return $q(function (resolve, reject) {
-					KitchenResource.getRating({
-						id: kitchenId
-					}).$promise.then(function (response) {
-						resolve(response.body);
-					}, function (response) {
-						reject(response)
-					});
-				});
-			}
-
 			return {
 				list: list,
 				show: show,
@@ -275,7 +263,6 @@ angular.module('kitchen.api', [
 				getOrders: getOrders,
 				acceptOrder: acceptOrder,
 				declineOrder: declineOrder,
-				getRating: getRating
 			};
 		}
 	]);

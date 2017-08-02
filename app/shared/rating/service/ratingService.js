@@ -1,106 +1,22 @@
 'use strict';
 
-angular.module('rating.api', [
-    'configuration'
+angular.module('rating.service', [
+	'configuration'
 ])
 
-    .factory('RatingResource', ['$resource', 'config',
-        function ($resource, config) {
-            var api_endpoint = config.endpoint + 'dishes/:dishId/rating/';
+	.service('RatingService', ['$q', '$mdDialog',
+		function ($q, $mdDialog) {
 
-            return $resource(api_endpoint + ':ratingId', {dishId: '@dishId', ratingId: '@ratingId'}, {
-                list: {
-                    method: 'GET',
-                },
-                create: {
-                    method: 'POST',
-                },
-                update: {
-                    method: 'PUT',
-                },
-                destroy: {
-                    method: 'DELETE',
-                },
-            });
-        }
-    ])
-
-    .service('RatingAPI', ['$q', 'RatingResource', '$mdDialog',
-        function ($q, RatingResource, $mdDialog) {
-
-            function list(dishId, ratingId, pageNum) {
-                pageNum = pageNum || 0;
-                return $q(function (resolve, reject) {
-                    RatingResource.list(
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId,
-                            page: pageNum
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            function create(dishId, orderItemId, rating) {
-                return $q(function (resolve, reject) {
-                    RatingResource.create(rating,
-                        {
-                            dishId: dishId,
-							orderItemId: orderItemId
-                        })
-                        .$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            function update(dishId, ratingId, rating) {
-                return $q(function (resolve, reject) {
-                    RatingResource.update(rating,
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId,
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            function destroy(dishId, ratingId) {
-
-                return $q(function (resolve, reject) {
-                    RatingResource.destroy(
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId,
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            function showRatingCreateDialog(ev, dishId, orderItemId) {
+			function showRatingCreateDialog(ev, dishId, orderItemId) {
 				$mdDialog.show({
-					templateUrl: 'shared/rating/create/ratingCreate.html',
+					templateUrl: 'shared/rating/create/ratingCreateModal.html',
 					parent: angular.element(document.body),
 					targetEvent: ev,
 					clickOutsideToClose: true,
 					controller: function ($mdDialog) {
 						var that = this;
 						that.dishId = dishId;  //your task object from the ng-repeat
-                        that.orderItemId = orderItemId;
+						that.orderItemId = orderItemId;
 
 						that.hide = function () {
 							$mdDialog.hide();
@@ -109,17 +25,20 @@ angular.module('rating.api', [
 							$mdDialog.cancel();
 						};
 					},
-					controllerAs: 'modal',
+					controllerAs: 'modalCtrl',
 					fullscreen: true // Only for -xs, -sm breakpoints.
 				})
-			};
+			}
 
-            return {
-                list: list,
-                create: create,
-                update: update,
-                destroy: destroy,
-                showRatingCreateDialog: showRatingCreateDialog
-            };
-        }
-    ]);
+			function isReviewable (order, item) {
+				var from = moment(order.updated_at);
+				var now = moment();
+				return order.status == 'accepted' && now.diff(from, 'hours') < 24 && !item.dish_rating;
+			}
+
+			return {
+				showRatingCreateDialog: showRatingCreateDialog,
+				isReviewable: isReviewable
+			};
+		}
+	]);

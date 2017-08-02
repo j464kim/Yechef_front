@@ -20,7 +20,7 @@ angular.module('rating')
                 that.dishId = dishId;
                 that.orderItemId = orderItemId;
             }
-            function _validateInputs() {
+            function _isValidInput() {
                 if (that.rating === undefined) {
                     return false;
                 }
@@ -42,14 +42,14 @@ angular.module('rating')
             this.init = _init;
 
             this.rateDish = function () {
-                if (!_validateInputs()) {
+                if (!_isValidInput()) {
                     devHelper.log("Invalid Rating Inputs");
                     return;
                 }
                 RatingAPI.create(that.dishId, that.orderItemId, that.rating).then(
                     function (response) {
-                        $state.reload();
 						$mdDialog.hide();
+						$state.go('dish.show', {"id": that.dishId});
 					}, function (response) {
 						devHelper.log(response, 'error');
                     })

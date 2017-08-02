@@ -4,8 +4,8 @@ angular.module('user.profile.order', [
 	'user.api', 'ngMaterial'
 ])
 
-	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope',
-		function ($stateParams, $state, UserAPI, devHelper, $scope) {
+	.controller('UserOrderController', ['$stateParams', '$state', 'UserAPI', 'devHelper', '$scope', 'RatingService',
+		function ($stateParams, $state, UserAPI, devHelper, $scope, RatingService) {
 
 			/*********************
 			 *  Private Variables
@@ -13,6 +13,7 @@ angular.module('user.profile.order', [
 				// reference to this controller
 
 			var that = this;
+
 			/*********************
 			 *  Public Variables
 			 **********************/
@@ -32,7 +33,7 @@ angular.module('user.profile.order', [
 						that.orders = response;
 					}, function (response) {
 						// TODO handle error state ie. front end display
-						devHelper.log(response, 'error')
+						devHelper.log(response, 'error');
 					});
 			}
 
@@ -51,6 +52,8 @@ angular.module('user.profile.order', [
 			 *  Public Functions
 			 **********************/
 			this.cancelOrder = _cancelOrder;
+			this.reviewOrder = RatingService.showRatingCreateDialog;
+			this.isReviewable = RatingService.isReviewable;
 
 			/*********************
 			 *  Initialization

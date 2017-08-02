@@ -35,6 +35,10 @@ angular.module('kitchen.api', [
 				declineOrder: {
 					method: 'GET',
 					url: apiEndpoint + ':id' + '/declineOrder/' + ':orderId',
+				},
+				getRating: {
+					method: 'GET',
+					url: apiEndpoint + ':id' + '/rating'
 				}
 			});
 		}

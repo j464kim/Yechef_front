@@ -1,100 +1,44 @@
 'use strict';
 
-angular.module('rating.api', [
-    'configuration'
+angular.module('rating.service', [
+	'configuration'
 ])
 
-    .factory('RatingResource', ['$resource', 'config',
-        function ($resource, config) {
-            var api_endpoint = config.endpoint + 'dishes/:dishId/rating/';
+	.service('RatingService', ['$q', '$mdDialog',
+		function ($q, $mdDialog) {
 
-            return $resource(api_endpoint + ':ratingId', {dishId: '@dishId', ratingId: '@ratingId'}, {
-                list: {
-                    method: 'GET',
-                },
-                create: {
-                    method: 'POST',
-                },
-                update: {
-                    method: 'PUT',
-                },
-                destroy: {
-                    method: 'DELETE',
-                },
-            });
-        }
-    ])
+			function showRatingCreateDialog(ev, dishId, orderItemId) {
+				$mdDialog.show({
+					templateUrl: 'shared/rating/create/ratingCreateModal.html',
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose: true,
+					controller: function ($mdDialog) {
+						var that = this;
+						that.dishId = dishId;  //your task object from the ng-repeat
+						that.orderItemId = orderItemId;
 
-    .service('RatingAPI', ['$q', 'RatingResource',
-        function ($q, RatingResource) {
+						that.hide = function () {
+							$mdDialog.hide();
+						};
+						that.cancel = function () {
+							$mdDialog.cancel();
+						};
+					},
+					controllerAs: 'modalCtrl',
+					fullscreen: true // Only for -xs, -sm breakpoints.
+				})
+			}
 
-            function list(dishId, ratingId, pageNum) {
-                pageNum = pageNum || 0;
-                return $q(function (resolve, reject) {
-                    RatingResource.list(
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId,
-                            page: pageNum
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
+			function isReviewable (order, item) {
+				var from = moment(order.updated_at);
+				var now = moment();
+				return order.status == 'accepted' && now.diff(from, 'hours') < 24 && !item.dish_rating;
+			}
 
-            function create(dishId, rating) {
-                return $q(function (resolve, reject) {
-                    RatingResource.create(rating,
-                        {
-                            dishId: dishId,
-                        })
-                        .$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            function update(dishId, ratingId, rating) {
-                return $q(function (resolve, reject) {
-                    RatingResource.update(rating,
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId,
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            function destroy(dishId, ratingId) {
-
-                return $q(function (resolve, reject) {
-                    RatingResource.destroy(
-                        {
-                            dishId: dishId,
-                            ratingId: ratingId,
-                        }
-                    ).$promise.then(function (response) {
-                        resolve(response.body);
-                    }, function (response) {
-                        reject(response)
-                    });
-                });
-            };
-
-            return {
-                list: list,
-                create: create,
-                update: update,
-                destroy: destroy,
-            };
-        }
-    ]);
+			return {
+				showRatingCreateDialog: showRatingCreateDialog,
+				isReviewable: isReviewable
+			};
+		}
+	]);

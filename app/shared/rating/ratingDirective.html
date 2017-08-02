@@ -1,61 +1,66 @@
-<div id="RatingList" loader>
+<div id="RatingList">
 	<div class="row" ng-repeat="rating in RatingCtrl.ratings">
-		<br>
-		<div class="row">
-			<div class="col-md-1">
-				<br/>
-				<a ui-sref="user.show({id: rating.user_id})">
-					<img class="img-circle profile-image-comment" ng-src="{{rating.user.medias[0].url}}"
+		<div class="ui comments">
+			<div class="comment">
+				<a class="avatar" ui-sref="user.show({id: rating.user_id})">
+					<img ng-src="{{rating.user.medias[0].url}}"
 					     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-					<br/><br/>
-					<strong>{{rating.user.first_name}} {{rating.user.last_name}}</strong>
 				</a>
-			</div>
-			<div class="col-md-11">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-md-11">
-								<div class="col-md-4">
-									<div class="pull-left">
-										Taste
-									</div>
-									<ng-rate-it ng-model="rating.taste_rating" max="5" read-only="true"></ng-rate-it>
-								</div>
-								<div class="col-md-4">
-									<div class="pull-left">
-										Visual:
-									</div>
-									<ng-rate-it ng-model="rating.visual_rating" max="5" read-only="true"></ng-rate-it>
-								</div>
-								<div class="col-md-4">
-									<div class="pull-left">
-										Quantity:
-									</div>
-									<ng-rate-it ng-model="rating.quantity_rating" max="5" read-only="true"></ng-rate-it>
-								</div>
-							</div>
-							<div class="col-md-1" ng-if="currentUser.id == rating.user_id">
-								<i ng-hide="textBtnForm.$visible" ng-click="textBtnForm.$show()"
-								   class="fa fa-edit fa-x"></i>
-								<i ng-click="RatingCtrl.destroyRating(rating.id)" class="fa fa-close fa-x"></i>
-							</div>
+				<div class="content">
+					<a class="author" ui-sref="user.show({id: rating.user_id})">{{rating.user.first_name}}
+						{{rating.user.last_name}}</a>
+					<div class="metadata">
+						<div class="date"><span am-time-ago="rating.created_at"></span></div>
+						<div class="rating">
+							<i class="fa fa-star"></i>
+							taste: {{rating.taste_rating}} |
+							<i class="fa fa-star"></i>
+							visual: {{rating.visual_rating}} |
+							<i class="fa fa-star"></i>
+							quantity:
+							{{rating.quantity_rating}}
 						</div>
 					</div>
-					<!--<span class="text-muted">-->
-					<!--{{rating.updated_at}}-->
-					<!--</span>-->
-				</div>
-				<md-card>
-					<div class="panel-body">
-                    <span e-style="width: 250%;" editable-textarea="rating.comment" e-form="textBtnForm"
-                          onbeforesave="RatingCtrl.updateComment(rating, $data)">
+					<div class="pull-right">
+						<md-menu md-offset="0 -7">
+							<md-button class="md-icon-button" aria-label="More"
+							           ng-click="RatingCtrl.openMenu($mdMenu, $event)"><i class="material-icons">more_vert</i>
+							</md-button>
+							<md-menu-content width="2">
+								<md-menu-item>
+									<md-button class="reply" disabled="true">
+										Reply
+									</md-button>
+								</md-menu-item>
+								<md-menu-divider></md-menu-divider>
+								<md-menu-item ng-if="currentUser.id == rating.user_id">
+									<md-button class="save" ng-if="currentUser.id == rating.user_id"
+									           ng-hide="textBtnForm.$visible"
+									           ng-click="textBtnForm.$show()"><i class="fa fa-edit fa-x"></i>
+										Edit
+									</md-button>
+								</md-menu-item>
+								<md-menu-item ng-if="currentUser.id == rating.user_id">
+									<md-button class="delete" ng-if="currentUser.id == rating.user_id"
+									           ng-click="RatingCtrl.destroyRating(rating.id)"><i
+											class="fa fa-close fa-x"></i>
+										Delete
+									</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
+					<div class="text">
+						<span e-style="width: 100%;" editable-textarea="rating.comment" e-form="textBtnForm"
+						      onbeforesave="RatingCtrl.updateComment(rating, $data)">
                         {{rating.comment || 'empty'}}
                     </span>
 					</div>
-				</md-card>
+				</div>
 			</div>
 		</div>
+		<md-divider></md-divider>
+		<br/>
 	</div>
 </div>
 <infinite-load-button last-page="RatingCtrl.lastPage"

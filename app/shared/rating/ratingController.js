@@ -2,6 +2,8 @@
 
 angular.module('rating', [
 	'rating.api',
+	'rating.service',
+	'angularMoment'
 ])
 	.controller('RatingController', ['$state', '$stateParams', 'RatingAPI', '$q', 'devHelper', 'genericService',
 		function ($state, $stateParams, RatingAPI, $q, devHelper, genericService) {
@@ -35,6 +37,16 @@ angular.module('rating', [
 				_getAverage();
 				_getRatings();
 			}
+
+			this.openMenu = function($mdMenu, ev) {
+				var originatorEv = ev;
+				$mdMenu.open(ev);
+			};
+
+			this.notificationsEnabled = true;
+			this.toggleNotifications = function() {
+				this.notificationsEnabled = !this.notificationsEnabled;
+			};
 
 			function _getRatings() {
 				var pageNum = ++that.currentPage;
@@ -101,13 +113,15 @@ angular.module('rating', [
 			};
 
 			this.destroyRating = function ($ratingId) {
-				RatingAPI.destroy(that.dishId, $ratingId).then(
-					function (response) {
-						$state.reload();
-					}, function (response) {
-						devHelper.log(response, 'error');
-					}
-				)
+				if (confirm("Do you want to delete the dish?")) {
+					RatingAPI.destroy(that.dishId, $ratingId).then(
+						function (response) {
+							$state.reload();
+						}, function (response) {
+							devHelper.log(response, 'error');
+						}
+					)
+				}
 			};
 
 			/*********************

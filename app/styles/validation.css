@@ -2680,6 +2680,12 @@ md-content.md-default-theme,
 md-content {
   background-color: #FAFAFA !important;
 }
+.ngrateit {
+  display: inline-block;
+}
+.bigstar-25.ngrateit .ngrateit-star {
+  background-size: 25px;
+}
 @media screen and (max-width: 768px) {
   .md-sidenav-left {
     padding-top: 50px;
@@ -2708,6 +2714,24 @@ md-content {
   left: 25px !important;
   background-color: #FAFAFA;
   border-radius: 5%;
+}
+.ui.comments {
+  font-size: inherit !important;
+  max-width: unset !important;
+}
+.comment-rating {
+  margin-bottom: 10px;
+}
+.ui.comments .comment .text {
+  margin-top: 10px;
+}
+.editable-wrap {
+  white-space: normal;
+  width: 100%;
+}
+.editable-wrap .editable-controls,
+.editable-wrap .editable-error {
+  width: 95%;
 }
 .loader-wrapper {
   min-height: 0;

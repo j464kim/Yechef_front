@@ -39,8 +39,9 @@
 		<!--Buyers Reviews / Ratings-->
 		<div class="row">
 			<div>
-				<h4>Reviews / Ratings ({{RatingCtrl.totalItems}})</h4>
+				<h4>{{RatingCtrl.totalItems}} Review<span ng-if="RatingCtrl.totalItems>1">s</span></h4>
 			</div>
+			<br/>
 			<div class="dish-rating">
 				<ratings></ratings>
 			</div>

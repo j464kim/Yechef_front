@@ -10,6 +10,8 @@ angular.module('header',[]).directive('pageHeader', ['$rootScope', function () {
 		templateUrl: "components/main/header/header.html",
 		controller: ['$scope', '$filter', '$rootScope', function ($scope, $filter, $rootScope) {
 			// Your behaviour goes here :)
+			$scope.currentUser = $rootScope.currentUser;
+
 		}]
 	}
 }]);

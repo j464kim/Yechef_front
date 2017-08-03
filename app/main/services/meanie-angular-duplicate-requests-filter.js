@@ -33,6 +33,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				var pendingRequests = {};
 				var $http = $delegate;
 
+				function trimConfigData(configData) {
+					var trimList = ['token'];
+					var configDataTrimmed = angular.copy(configData);
+					for (var i in trimList) {
+						if (_.has(configDataTrimmed, trimList[i])) {
+							configDataTrimmed = _.omit(configDataTrimmed, trimList[i]);
+						}
+					}
+					return configDataTrimmed;
+				}
+
 				/**
 				 * Hash generator
 				 */
@@ -59,10 +70,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 						str += angular.toJson(config.params);
 					}
 					if (config.data && _typeof(config.data) === 'object') {
-						str += angular.toJson(config.data);
+						var dataTrimmed = trimConfigData(config.data);
+						str += angular.toJson(dataTrimmed);
 					}
-					console.log(config);
-					console.log(str);
 					return hash(str);
 				}
 
@@ -73,18 +83,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 					//Ignore for this request?
 					if (config.ignoreDuplicateRequest) {
-						console.log("ignore");
 						return $http(config);
 					}
 
 					//Get unique request identifier
 					var identifier = getRequestIdentifier(config);
-					console.log(identifier);
 
 					//Check if such a request is pending already
 					if (pendingRequests[identifier]) {
-						console.log('reject');
-						console.log(pendingRequests[identifier]);
 
 						return $q.reject({
 							data: '',
@@ -97,8 +103,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 					//Create promise using $http and make sure it's reset when resolved
 					pendingRequests[identifier] = $http(config).finally(function () {
-						console.log("delete");
-						console.log(pendingRequests[identifier]);
 						delete pendingRequests[identifier];
 					});
 

@@ -4,7 +4,11 @@
  * Copyright (c) 2016 Adam Reis <adam@reis.nz>
  * License: MIT
  */
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+	return typeof obj;
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+};
 
 (function (window, angular, undefined) {
 	'use strict';
@@ -79,17 +83,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 					//Check if such a request is pending already
 					if (pendingRequests[identifier]) {
-						if (config.rejectDuplicateRequest) {
-							console.log('reject');
-							console.log(pendingRequests[identifier]);
+						console.log('reject');
+						console.log(pendingRequests[identifier]);
 
-							return $q.reject({
-								data: '',
-								headers: {},
-								status: config.rejectDuplicateStatusCode || 400,
-								config: config
-							});
-						}
+						return $q.reject({
+							data: '',
+							headers: {},
+							status: config.rejectDuplicateStatusCode || 400,
+							config: config
+						});
 						return pendingRequests[identifier];
 					}
 

@@ -13,12 +13,24 @@ angular.module('checkout', [
 				template: '<ui-view/>'
 			})
 			.state('checkout.billing', {
-				url: '/billing',
-				templateUrl: 'components/checkout/billingInformation.html',
+				url: '/method',
+				abstract: true,
+				templateUrl: 'components/checkout/selectPayment.html',
 				controller: 'CheckoutController as coCtrl',
 				params: {
 					'amount': null,
 					'kitchenId': null
+				}
+			})
+			.state('checkout.billing.select', {
+				url: '',
+				views: {
+					'default': {
+						templateUrl: 'components/checkout/defaultCard.html',
+					},
+					'new': {
+						templateUrl: 'components/checkout/newCard.html',
+					}
 				}
 			})
 

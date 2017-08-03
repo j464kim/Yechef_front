@@ -21,6 +21,8 @@ angular
 		'directive.card.kitchen',
 		'directive.button',
 
+		'DuplicateRequestsFilter.Decorator',
+
 		// libraries
 		'ui.router',
 		'ui.mask',

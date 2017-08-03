@@ -58,6 +58,14 @@ angular.module('helper', [])
 			);
 		};
 
+		var getByUniqueProperty = function(objects, property_name, property_value) {
+			for (var key in objects) {
+				if (objects[key][property_name] == property_value) {
+					return objects[key];
+				}
+			}
+		};
+
 		var buildToggler = function (navID) {
 			return function () {
 				// Component lookup should always be available since we are not using `ng-if`
@@ -76,6 +84,7 @@ angular.module('helper', [])
 			getStates: getStates,
 			getCurrency: getCurrency,
 			showToast: showToast,
+			getByUniqueProperty: getByUniqueProperty,
 			buildToggler: buildToggler,
 
 			// parse rgb str into an arr of color elements

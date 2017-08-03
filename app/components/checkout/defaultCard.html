@@ -1,0 +1,8 @@
+<div class="text-center">
+	<label>Your default payment method is this. Would you like to proceed with this method?</label>
+
+	<credit-card card="coCtrl.defaultCard" default="true"></credit-card>
+
+	<md-button class="md-raised md-primary" ng-click="coCtrl.chargePayment(coCtrl.existingCard)">Request Order</md-button>
+	<md-button class="md-raised" ng-click="coCtrl.showNewCardForm()">Check out with new card</md-button>
+</div>

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('user.profile.payment', [
-	'payment.api', 'ngMaterial'
+	'payment.api',
+	'ngMaterial',
+	'directive.card.credit',
 ])
 
 	.controller('PaymentListController', ['$stateParams', '$state', 'PaymentAPI', 'devHelper', '$scope', '$rootScope',

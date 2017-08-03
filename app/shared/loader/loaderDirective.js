@@ -8,7 +8,7 @@ angular.module('directive.loader', [])
 			templateUrl: 'shared/loader/loaderDirective.html',
 			link: function (scope, elem) {
 				scope.isLoading = function () {
-					return $http.pendingRequests.length > 0;
+					return typeof $http.pendingRequests == 'undefined' ? false : $http.pendingRequests.length > 0;
 				};
 
 				scope.$watch(scope.isLoading, function (value) {

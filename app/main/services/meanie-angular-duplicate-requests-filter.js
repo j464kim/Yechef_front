@@ -73,6 +73,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 						var dataTrimmed = trimConfigData(config.data);
 						str += angular.toJson(dataTrimmed);
 					}
+					if (config.headers && _typeof(config.headers) === 'object') {
+						str += angular.toJson(config.headers);
+					}
 					return hash(str);
 				}
 
@@ -80,7 +83,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				 * Modified $http service
 				 */
 				function $duplicateRequestsFilter(config) {
-
 					//Ignore for this request?
 					if (config.ignoreDuplicateRequest) {
 						return $http(config);

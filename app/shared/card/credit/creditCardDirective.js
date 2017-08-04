@@ -8,7 +8,8 @@ angular.module('directive.card.credit', [])
 			templateUrl: 'shared/card/credit/creditCardDirective.html',
 			scope: {
 				card: '=',
-				default: '='
+				default: '=',
+				ctrl: '='
 			},
 			link: function (scope, elem) {
 				devHelper.log(scope.dish);

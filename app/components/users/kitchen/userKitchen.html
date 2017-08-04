@@ -2,11 +2,11 @@
 
 	<section layout="row" flex>
 
-        <md-sidenav
-                class="md-sidenav-left"
-                md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')"
-                md-whiteframe="4">
+		<md-sidenav
+				class="md-sidenav-left"
+				md-component-id="left"
+				md-is-locked-open="$mdMedia('gt-md')"
+				md-whiteframe="4">
 
 			<md-toolbar class="md-theme-indigo">
 				<div class="kitchen-dashboard-header">
@@ -37,11 +37,11 @@
 					<i class="fa fa-arrow-up"></i>
 				</div>
 				<div class="list-group" ng-if="UkCtrl.myCurrentKitchen">
-					<a ui-sref=".dashboard" class="list-group-item">Dashboard</a>
-					<a ui-sref=".general.view" class="list-group-item">General Info</a>
-					<a ui-sref=".dish" class="list-group-item">Dishes</a>
-					<a ui-sref=".order" class="list-group-item">Orders</a>
-					<a ui-sref=".subscriber" class="list-group-item">Subscribers</a>
+					<a ng-click="close()" ui-sref=".dashboard" class="list-group-item">Dashboard</a>
+					<a ng-click="close()" ui-sref=".general.view" class="list-group-item">General Info</a>
+					<a ng-click="close()" ui-sref=".dish" class="list-group-item">Dishes</a>
+					<a ng-click="close()" ui-sref=".order" class="list-group-item">Orders</a>
+					<a ng-click="close()" ui-sref=".subscriber" class="list-group-item">Subscribers</a>
 				</div>
 				<md-button ng-click="close()" class="md-warn md-raised" hide-gt-md>
 					Close Menu

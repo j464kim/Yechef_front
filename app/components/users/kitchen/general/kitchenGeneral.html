@@ -45,12 +45,32 @@
 					person.last_name
 					}}</strong> ({{person.email}})
 				</p>
-				<i ui-sref="user.show({id:person.id})"
-				   class="clickable material-icons md-24 md-secondary md-hue-3">info</i>
-				<i class="material-icons md-24 md-secondary md-hue-3">message</i>
-				<i class="material-icons md-24 md-secondary md-hue-3">phone</i>
-				<i class="material-icons md-24 md-secondary md-hue-3" ng-disabled="currentUser.id == person.id"
-				   ng-click="UkgCtrl.removeAdmin(person.id)">delete</i>
+				<md-menu md-offset="0 -7">
+					<md-button class="md-icon-button" aria-label="More"
+					           ng-click="UkgCtrl.openMenu($mdMenu, $event)">
+					</md-button>
+					<md-menu-content width="2">
+						<md-menu-item>
+							<md-button ui-sref="user.show({id:person.id})">
+								<!--<i class="clickable material-icons md-24 md-secondary md-hue-3">info</i>-->
+								Info
+							</md-button>
+						</md-menu-item>
+						<md-menu-divider></md-menu-divider>
+						<md-menu-item>
+							<md-button>
+								Message
+							</md-button>
+						</md-menu-item>
+						<md-menu-divider></md-menu-divider>
+						<md-menu-item>
+							<md-button ng-disabled="currentUser.id == person.id"
+							           ng-click="UkgCtrl.removeAdmin(person.id)">
+								Delete
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
 			</md-list-item>
 		</md-list>
 	</div>

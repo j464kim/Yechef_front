@@ -38,10 +38,7 @@ angular.module('rating', [
 				_getRatings();
 			}
 
-			this.openMenu = function($mdMenu, ev) {
-				var originatorEv = ev;
-				$mdMenu.open(ev);
-			};
+			this.openMenu = genericService.openMenu;
 
 			this.notificationsEnabled = true;
 			this.toggleNotifications = function() {

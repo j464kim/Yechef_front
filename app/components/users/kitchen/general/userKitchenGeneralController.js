@@ -62,6 +62,7 @@ angular.module('user.kitchen.general', [
 		};
 
 		this.querySearch = genericService.querySearch;
+		this.openMenu = genericService.openMenu;
 
 		_init();
 

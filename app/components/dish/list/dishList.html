@@ -1,5 +1,5 @@
-<div class="container" id="dishList" ng-controller="SearchCtrl as sCtrl">
-	<div class="col-sm-8">
+<div id="dishList" ng-controller="SearchCtrl as sCtrl">
+	<div class="col-sm-8 col-xs-12">
 		<div class="row">
 			<button type="button" class="btn btn-default"
 			        ng-click="DishCtrl.isSearchCollapsed = !DishCtrl.isSearchCollapsed">Refine Search
@@ -10,46 +10,43 @@
 			     ng-init="DishCtrl.getSearchParams(sCtrl)">
 				<md-card>
 					<md-content class="md-padding">
-						<div class="col-sm-3">
+						<div class="col-sm-3 col-xs-6">
 							<div class="row no-gutters">
 								<md-input-container>
 									<input type="text" id="food" ng-model="sCtrl.q">
 									<label for="food">Key word (ex. Seafood)</label>
 									<br/> <br/><br/>
-									<md-checkbox ng-model="sCtrl.deliverOnly" disabled>Deliver Only</md-checkbox>
+									<!--<md-checkbox ng-model="sCtrl.deliverOnly" disabled>Deliver Only</md-checkbox>-->
 								</md-input-container>
 							</div>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2 col-xs-6">
 							<div class="row no-gutters">
 								<md-input-container>
 									<input type="text" id="City" options="sCtrl.autocompleteOptions"
 									       g-places-autocomplete
 									       ng-model="sCtrl.city"/>
 									<label for="City">City</label>
-									<br/> <br/><br/>
-									<md-checkbox ng-model="sCtrl.gluten_free" ng-true-value="1"
-									             ng-checked="sCtrl.gluten_free == 1">Gluten-free
-									</md-checkbox>
+									<br/>
 								</md-input-container>
 							</div>
 						</div>
-						<div class="col-sm-3">
-							<label class="col-sm-offset-2">Price Range</label>
-							<div class="col-sm-6">
+						<div class="col-sm-3 col-xs-12">
+							<label class="col-sm-offset-2 col-xs-12">Price Range</label>
+							<div class="col-sm-6 col-xs-6">
 								<md-input-container>
 									<input type="text" id="min_price" ng-model="sCtrl.min_price">
 									<label for="max_price">min</label>
 								</md-input-container>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-6 col-xs-6">
 								<md-input-container>
 									<input type="text" id="max_price" ng-model="sCtrl.max_price">
 									<label for="max_price">max</label>
 								</md-input-container>
 							</div>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-3 col-xs-12">
 							<div layout="column" ng-cloak>
 								<form ng-submit="$event.preventDefault()">
 									<md-autocomplete
@@ -76,6 +73,9 @@
 									<md-checkbox ng-model="sCtrl.vegan" ng-true-value="1" ng-checked="sCtrl.vegan == 1">
 										Vegan
 									</md-checkbox>
+									<md-checkbox ng-model="sCtrl.gluten_free" ng-true-value="1"
+									             ng-checked="sCtrl.gluten_free == 1">Gluten-free
+									</md-checkbox>
 								</form>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 				</div>
 			</div>
 			<div class="row no-gutters">
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<md-select ng-model="sCtrl.sortBy" placeholder="Sort by" class="md-no-underline"
 					           ng-change="DishCtrl.searchDish(true)">
 						<md-option value="price_asc">Price (Ascending)</md-option>
@@ -99,7 +99,7 @@
 						<md-option value="quantity">Quantity</md-option>
 					</md-select>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<md-slider-container ng-mouseup="DishCtrl.searchDish(true)">
 						<md-slider class="md-primary" flex min="0" max="100"
 						           ng-model="sCtrl.distance"
@@ -114,25 +114,23 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-md-6" ng-repeat="dish in DishCtrl.dishes" ng-mouseenter="DishCtrl.dishMouseEnter(dish)"
+			<div class="col-md-6 col-xs-12" ng-repeat="dish in DishCtrl.dishes" ng-mouseenter="DishCtrl.dishMouseEnter(dish)"
 			     ng-mouseleave="DishCtrl.dishMouseLeave(dish)" loader>
 				<dish-card dish="dish"></dish-card>
 			</div>
 		</div>
-		<hr/>
 		<div class="row">
-			<div class="col-md-10 col-md-offset-2">
+			<div class="col-md-10 col-md-offset-2 col-xs-12">
 				<ul uib-pagination total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage" items-per-page="18"
 				    boundary-links="true" force-ellipses="true" max-size="5"
 				    ng-change="DishCtrl.getDishes()"></ul>
 			</div>
 		</div>
 	</div>
-
-	<div class="col-sm-4">
+	<div class="col-sm-4 col-xs-12">
 		<google-map-search ng-if="DishCtrl.mapInitiated" search-enabled="DishCtrl.searchEnabled"
 		                   markers="DishCtrl.dishMapMarkers" dishes="DishCtrl.dishes" circle="DishCtrl.circle"
-		                   search-function="DishCtrl.getDishes" search-bounds-changed="DishCtrl.searchBoundsChanged"
-		></google-map-search>
+		                   search-function="DishCtrl.getDishes" search-bounds-changed="DishCtrl.searchBoundsChanged">
+		</google-map-search>
 	</div>
 </div>

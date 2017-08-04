@@ -74,7 +74,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 col-xs-12">
 				<div class="row no-gutters">
 					<md-button class="md-raised md-primary" ng-click="sCtrl.searchDish()">Search</md-button>
 					<br/>
@@ -91,7 +91,7 @@
 		</md-content>
 	</md-card>
 	<br>
-	<div>
+	<div class="col-xs-12">
 		<h3 class="text-center">Featrued Dishes</h3>
 		<div ng-controller="FeaturedDishController as DishCtrl" id="featuredDishList">
 			<ul uib-pager items-per-page="6" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"

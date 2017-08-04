@@ -1,22 +1,21 @@
 <div>
-		<div class="md-list-item-text" layout="column">
-                <span>
-                    {{ card.brand }} / {{ card.funding }}
-	                <span ng-show="!default">
-		                <a ui-sref="user.profile.payment.edit({ index: $index })">
-		                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-	                    </a>
-	                    <a ng-click="plCtrl.removeCard(card.id)">
-		                    <i class="fa fa-times" aria-hidden="true"></i>
-	                    </a>
-	                </span>
-                </span>
-			<span>
-				xxxx - xxxx - xxxx - {{ card.last4 }}
-			</span>
-			<span>
-				Exp: {{ card.exp_month }} / {{ card.exp_year }}
-			</span>
-		</div>
-	</md-list>
+	<div class="md-list-item-text" layout="column">
+        <span>
+            {{ card.brand }} / {{ card.funding }}
+            <span ng-show="!default">
+                <a ui-sref="user.profile.payment.edit({ index: $index })">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                <a ng-click="ctrl.removeCard(card.id)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+            </span>
+        </span>
+		<span>
+			xxxx - xxxx - xxxx - {{ card.last4 }}
+		</span>
+		<span>
+			Exp: {{ card.exp_month }} / {{ card.exp_year }}
+		</span>
+	</div>
 </div>

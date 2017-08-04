@@ -80,13 +80,13 @@
 			</div>
 			<!--Button-->
 			<div class="submit">
-				<div class="col-sm-1" ng-controller="KitchenUpdateController as kuCtrl">
+				<div class="col-xs-6 col-sm-6" ng-controller="KitchenUpdateController as kuCtrl">
 					<md-button class="md-raised md-primary"
 					           ng-click="kuCtrl.updateKitchen(UkCtrl.myCurrentKitchenToEdit, UkCtrl)"
-					           ng-disabled="form.$invalid">Update the Kitchen!
+					           ng-disabled="form.$invalid">Update
 					</md-button>
 				</div>
-				<div class="col-sm-offset-7 col-sm-1">
+				<div class="col-xs-6 col-sm-6 text-right">
 					<a type="button"
 					   ui-sref="user.kitchen.general.view()"
 					   class="btn btn-small">cancel</a>

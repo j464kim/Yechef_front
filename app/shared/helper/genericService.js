@@ -58,7 +58,7 @@ angular.module('helper', [])
 			);
 		};
 
-		var getByUniqueProperty = function(objects, property_name, property_value) {
+		var getByUniqueProperty = function (objects, property_name, property_value) {
 			for (var key in objects) {
 				if (objects[key][property_name] == property_value) {
 					return objects[key];
@@ -77,6 +77,11 @@ angular.module('helper', [])
 			};
 		};
 
+		var openMenu = function ($mdMenu, ev) {
+			var originatorEv = ev;
+			$mdMenu.open(ev);
+		};
+
 		return {
 			getModelType: getModelType,
 			querySearch: querySearch,
@@ -86,6 +91,7 @@ angular.module('helper', [])
 			showToast: showToast,
 			getByUniqueProperty: getByUniqueProperty,
 			buildToggler: buildToggler,
+			openMenu: openMenu,
 
 			// parse rgb str into an arr of color elements
 			parseRgbStr: function (rgbStr) {

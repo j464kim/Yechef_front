@@ -6,39 +6,44 @@
 		<div class="col-md-6 text-center">
 			<p class="kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 text-center">
 			<!--star-width and star-height cannot be assigned via less as this values are going to be used in ng-rate-it directive for calculation-->
-			<ng-rate-it ng-model="KitchenCtrl.kitchen.totalRating" max="5" star-width="25" star-height="25" read-only="true" class="bigstar-25"
+			<ng-rate-it ng-model="KitchenCtrl.kitchen.totalRating" max="5" star-width="25" star-height="25"
+			            read-only="true" class="bigstar-25"
 			            star-width="14" step="0.01"></ng-rate-it>
 		</div>
 	</div>
 	<!--Sub Header-->
 	<div class="row">
-		<div class="col-md-3 text-center">
+		<div class="col-sm-3 text-center">
 			<label>Share it with</label>
 			<share-button for="kitchen"></share-button>
 		</div>
-		<div class="col-md-6 text-center">
-			<a>
-				<i class="material-icons">mail</i>
-				<label>{{KitchenCtrl.kitchen.email}}</label>
-			</a>
-			<a>
-				<i class="material-icons">phone</i>
-				<label>{{KitchenCtrl.kitchen.phone}}</label>
-			</a>
+		<div class="col-sm-6 text-center">
+			<div class="row">
+				<br/>
+				<div class="col-sm-6">
+					<a>
+						<i class="material-icons">mail</i>
+						<label>{{KitchenCtrl.kitchen.email}}</label>
+					</a>
+				</div>
+				<div class="col-sm-6">
+					<a>
+						<i class="material-icons">phone</i>
+						<label>{{KitchenCtrl.kitchen.phone}}</label>
+					</a>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-3 pull-right" ng-if="KitchenCtrl.kitchen">
+		<div class="col-sm-3 text-center" ng-if="KitchenCtrl.kitchen">
 			<a>
 				<reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
 			</a>
 
 		</div>
 	</div>
-</div>
-<hr>
-
-<div class="container" id="kitchenList">
+	<hr/>
 	<div class="row">
 		<!--Kitchen Image-->
 		<div class="col-md-6 padding">
@@ -61,25 +66,33 @@
 			<div class="row">
 				<!--Kitchen Description-->
 				<div class="col-md-8">
-					<p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
+					<md-card>
+						<md-content flex layout-padding>
+							<h4 class="font-primary md-flex">About the Kitchen</h4>
+							<p id="kitchenDescription">{{KitchenCtrl.kitchen.description}}</p>
+						</md-content>
+					</md-card>
 				</div>
 				<!--Kitchen Chef-->
 				<div class="col-md-4">
-					<div class="owner-info pull-right"
+					<div class="owner-info"
 					     ng-if="KitchenCtrl.kitchenAdmins[0].pivot.role == 1 && KitchenCtrl.kitchenAdmins[0].pivot.verified == 1"
 					     loader>
-						<h4>Chef</h4>
-						<img class="kitchen-owner" ng-src="{{KitchenCtrl.kitchenAdmins[0].medias[0].url}}">
-						<a ui-sref="user.show({id: KitchenCtrl.kitchenAdmins[0].id})"><h4 id="kitchenOwnerName">
-							{{KitchenCtrl.kitchenAdmins[0].first_name}}
-							{{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
-						<div>
-							<md-button class="md-raised md-primary">Message</md-button>
-							<br/>
-							<a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
-						</div>
+						<md-card>
+							<md-content flex layout-padding>
+								<h4 class="font-primary md-flex">Chef</h4>
+								<img class="kitchen-owner" ng-src="{{KitchenCtrl.kitchenAdmins[0].medias[0].url}}">
+								<a ui-sref="user.show({id: KitchenCtrl.kitchenAdmins[0].id})"><h4 id="kitchenOwnerName">
+									{{KitchenCtrl.kitchenAdmins[0].first_name}}
+									{{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
+								<div>
+									<md-button class="md-raised md-primary">Message</md-button>
+									<br/>
+									<a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
+								</div>
+							</md-content>
+						</md-card>
 					</div>
-					<hr/>
 				</div>
 				<hr/>
 			</div>

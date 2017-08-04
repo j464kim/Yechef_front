@@ -64,21 +64,32 @@ angular.module('checkout.billing', [
 			}
 
 			function _chargePayment(withDefault) {
-				if (withDefault == false) {
+				if (withDefault == undefined) {
 					CheckoutService.tokenizeCard(that.card)
 						.then(function (response) {
 							_chargeObj.token = response.id;
+
+							CheckoutAPI.charge(_chargeObj)
+								.then(function (response) {
+									devHelper.log(response);
+									devHelper.log('Authorization hold successful');
+									$state.go('user.profile.order');
+								}, function (response) {
+									// TODO handle error state-*/ ˙
+									// devHelper.log(response, 'error');
+								});
 						})
+				} else {
+					CheckoutAPI.charge(_chargeObj)
+						.then(function (response) {
+							devHelper.log(response);
+							devHelper.log('Authorization hold successful');
+							$state.go('user.profile.order');
+						}, function (response) {
+							// TODO handle error state-*/ ˙
+							// devHelper.log(response, 'error');
+						});
 				}
-				CheckoutAPI.charge(_chargeObj)
-					.then(function (response) {
-						devHelper.log(response);
-						devHelper.log('Authorization hold successful');
-						$state.go('user.profile.order');
-					}, function (response) {
-						// TODO handle error state-*/ ˙
-						// devHelper.log(response, 'error');
-					});
 			}
 
 			function _showNewCardForm() {

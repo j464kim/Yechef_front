@@ -3,7 +3,7 @@
 	</div>
 	<md-card>
 		<md-content class="md-padding" ng-controller="SearchCtrl as sCtrl">
-			<div class="col-sm-2">
+			<div class="col-sm-2 col-xs-6">
 				<div class="row no-gutters">
 					<md-input-container>
 						<input type="text" id="food" ng-model="sCtrl.q">
@@ -13,7 +13,7 @@
 					</md-input-container>
 				</div>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 col-xs-6">
 				<div class="row no-gutters">
 					<md-input-container>
 						<input type="text" id="City" options="sCtrl.autocompleteOptions" g-places-autocomplete
@@ -31,22 +31,22 @@
 					</md-input-container>
 				</div>
 			</div>
-			<div class="col-sm-2">
-				<label class="col-sm-offset-2">Price Range</label>
-				<div class="col-sm-6">
+			<div class="col-sm-2 col-xs-12">
+				<label class="col-sm-offset-2 col-xs-12">Price Range</label>
+				<div class="col-sm-6 col-xs-6">
 					<md-input-container>
 						<input type="text" id="min_price" ng-model="sCtrl.min_price">
 						<label for="min_price">min</label>
 					</md-input-container>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6 col-xs-6">
 					<md-input-container>
 						<input type="text" id="max_price" ng-model="sCtrl.max_price">
 						<label for="max_price">max</label>
 					</md-input-container>
 				</div>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3 col-xs-12">
 				<div layout="column" ng-cloak>
 					<form ng-submit="$event.preventDefault()">
 						<md-autocomplete

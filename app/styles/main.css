@@ -2548,16 +2548,6 @@ body {
 .dish-show-left {
   padding-right: 1.5em;
 }
-.dish-show-right-wrapper {
-  overflow-y: hidden;
-}
-.dish-show-right {
-  overflow-y: auto;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
-  width: 350px;
-  height: 90%;
-}
 .dish-show-right::-webkit-scrollbar {
   display: none;
 }
@@ -2732,6 +2722,24 @@ md-content {
 .editable-wrap .editable-controls,
 .editable-wrap .editable-error {
   width: 95%;
+}
+@media screen and (max-width: 576px) {
+  .td-only {
+    display: none;
+  }
+}
+@media screen and (min-width: 576px) {
+  .dish-show-right-wrapper {
+    overflow-y: hidden;
+  }
+  .dish-show-right {
+    overflow-y: auto;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    width: 350px;
+    height: 90%;
+    position: fixed;
+  }
 }
 .loader-wrapper {
   min-height: 0;

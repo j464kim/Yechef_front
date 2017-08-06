@@ -2436,6 +2436,9 @@ h6 {
 .clickable {
   cursor: pointer;
 }
+.md-button .material-icons {
+  margin-top: inherit;
+}
 /* TODO: what are these for?? */
 /* bg color defination */
 /* these color schemes are used for js to fetch color setting */

@@ -1,24 +1,27 @@
 <div ng-hide="attrs.id">
-    <a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
+	<a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
 </div>
 <div ng-if="attrs.id">
-    <div>
+	<div>
         <span ng-show="quantityMax">
             <select name="quantity" id="quantity" ng-model="q"
                     ng-options=" v for v in qtyOpt"></select>
         </span>
-        <a class="btn btn-sm btn-primary"
-           ng-click="cartCtrl.addItem(id, name, price, q, data, kitchenId)"
-           ng-transclude>
-            <i class="material-icons">add_shopping_cart</i>Add
-        </a>
-    </div>
-    <mark ng-if="isCartReady" ng-init="inCart()">
+		<md-button class="md-raised md-primary"
+		   ng-click="cartCtrl.addItem(id, name, price, q, data, kitchenId)">
+			<i class="material-icons">add_shopping_cart</i>Add
+		</md-button>
+	</div>
+	<mark ng-if="isCartReady" ng-init="inCart()">
         <span ng-if="isInCart">
-        This item is in your cart.
+        This item is in your cart.<br/>
+        <a ui-sref="cart.view" style="cursor:pointer;">
+            <i class="material-icons">local_grocery_store</i>Checkout
+        </a>
+		<br/>
         <a ng-click="cartCtrl.removeItemById(id, kitchenId)" style="cursor: pointer;">
             <i class="material-icons">remove_shopping_cart</i>Remove
         </a>
         </span>
-    </mark>
+	</mark>
 </div>

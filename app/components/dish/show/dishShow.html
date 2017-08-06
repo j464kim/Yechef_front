@@ -90,16 +90,16 @@
 					<md-card>
 						<md-content class="dish-show-order padding-1em">
 							<div class="text-center">
-								<div class="col-md-6">
-									<!--Add-to-cart-->
-									<ngcart-addtocart id="{{ DishCtrl.dish.id }}" name="{{ DishCtrl.dish.name }}"
-									                  price="{{ DishCtrl.dish.price }}" quantity="1"
-									                  quantity-max="30" data="item"
-									                  kitchen-id="{{ DishCtrl.dish.kitchen_id }}">
-									</ngcart-addtocart>
+								<div class="col-md-12">
 									<!--Dish Price-->
+									<span id="dishPrice">${{DishCtrl.dish.price}}</span>
 									<div class="row">
-										<span id="dishPrice">${{DishCtrl.dish.price}}</span>
+										<!--Add-to-cart-->
+										<ngcart-addtocart id="{{ DishCtrl.dish.id }}" name="{{ DishCtrl.dish.name }}"
+										                  price="{{ DishCtrl.dish.price }}" quantity="1"
+										                  quantity-max="30" data="item"
+										                  kitchen-id="{{ DishCtrl.dish.kitchen_id }}">
+										</ngcart-addtocart>
 									</div>
 								</div>
 							</div>

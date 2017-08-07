@@ -1,4 +1,3 @@
-
 'use strict';
 
 angular.module('userKitchen', [
@@ -33,10 +32,6 @@ angular.module('userKitchen', [
 				url: '/view',
 				templateUrl: 'components/users/kitchen/general/kitchenGeneral.html',
 			})
-			.state('user.kitchen.general.edit', {
-				url: '/myKitchen/edit',
-				templateUrl: 'components/kitchens/update/kitchenUpdate.html',
-			})
 			.state('user.kitchen.dish', {
 				url: '/dish',
 				templateUrl: 'components/users/kitchen/dish/kitchenDish.html',
@@ -52,5 +47,4 @@ angular.module('userKitchen', [
 				templateUrl: 'components/users/kitchen/subscriber/kitchenSubscriber.html',
 				controller: 'kitchenSubscriberController as KsCtrl',
 			})
-
 	});

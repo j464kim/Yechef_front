@@ -2,16 +2,7 @@
     <!--we will add a column in media table to specify whether it's a thumbnail so that we can show it in here-->
     <div class="row">
         <div class="col-md-6" ng-repeat="kitchen in KitchenCtrl.kitchens" loader>
-            <img ui-sref="kitchen.show({id: kitchen.id})" ng-src="{{kitchen.medias[0].url}}" alt="Card image cap"
-                 style="width:100%;">
-
-            <h4 class="card-title">{{kitchen.name}}</h4>
-            <p class="card-text">{{kitchen.email}}</p>
-            <p class="card-text">{{kitchen.phone}}</p>
-            <p class="card-text">{{kitchen.address}}</p>
-            <a ui-sref="kitchen.show({id: kitchen.id})" class="btn btn-primary btn-sm btn-detail">See
-                more</a>
-            </a>
+            <kitchen-card kitchen="kitchen"></kitchen-card>
         </div>
     </div>
 </div>

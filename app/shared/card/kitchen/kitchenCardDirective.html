@@ -1,13 +1,23 @@
 <div>
-    <a ui-sref="kitchen.show({id: kitchen.id})">
-        <md-card>
-            <img class="md-user-avatar" ng-src="{{kitchen.medias[0].url}}">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-subhead">{{kitchen.name}}</span>
-                    <span class="md-subhead">{{kitchen.phone}}</span>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
-    </a>
+	<a ui-sref="kitchen.show({id: kitchen.id})">
+		<md-card>
+			<img class="md-user-avatar" ng-src="{{kitchen.medias[0].url}}">
+			<md-card-title>
+				<md-card-title-text>
+					<div class="row">
+						<div class="col-sm-8 col-7 col-xs-6">
+							<h4>{{kitchen.name}}</h4>
+						</div>
+						<div class="col-sm-4 col-5 col-xs-6">
+							<ng-rate-it ng-model="kitchen.totalRating" max="5" read-only="true" star-width="14"
+							            step="0.01"></ng-rate-it>
+							<span>({{kitchen.ratingsCount}})</span>
+							<p>[{{kitchen.totalDishes}} Dishes]</p>
+						</div>
+					</div>
+
+				</md-card-title-text>
+			</md-card-title>
+		</md-card>
+	</a>
 </div>

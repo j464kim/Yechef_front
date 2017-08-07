@@ -9,7 +9,8 @@ angular.module('directive.card.credit', [])
 			scope: {
 				card: '=',
 				default: '=',
-				ctrl: '='
+				ctrl: '=',
+				index: '='
 			},
 			link: function (scope, elem) {
 				devHelper.log(scope.dish);

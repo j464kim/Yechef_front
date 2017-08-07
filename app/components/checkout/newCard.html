@@ -2,6 +2,25 @@
 	<div class="col-md-4 col-md-offset-4 col-xs-12">
 		<form class="form-validation" ng-submit="coCtrl.chargePayment()" name="form" novalidate>
 			<h2 class="text-center">Billing Information</h2><br>
+			<!--Billing Address-->
+			<div>
+				<md-input-container class="md-block">
+					<label for="paymentCity">City</label>
+					<input id="paymentCity" type="text" ng-model="coCtrl.card.address_city" required/>
+				</md-input-container>
+			</div>
+			<div>
+				<md-input-container class="md-block">
+					<label for="paymentLine1">Address Line 1</label>
+					<input id="paymentLine1" type="text" ng-model="coCtrl.card.address_line1" required/>
+				</md-input-container>
+			</div>
+			<div>
+				<md-input-container class="md-block">
+					<label for="paymentPostalCode">Zip Code / Postal Code</label>
+					<input id="paymentPostalCode" type="text" ng-model="coCtrl.card.address_zip" required/>
+				</md-input-container>
+			</div>
 			<!--Card Holder Name-->
 			<div class="cardHolder">
 				<md-input-container class="md-block">
@@ -11,19 +30,6 @@
 					<div class="field-message" ng-messages="form.cardHolder.$error" ng-if='form.cardHolder.$touched'
 					     ng-cloak>
 						<div ng-message="required">Card Holder Name is required</div>
-					</div>
-				</md-input-container>
-			</div>
-			<!--Billing Address-->
-			<div class="billingAddress">
-				<md-input-container class="md-block">
-					<label for="billingAddress">Billing Address</label>
-					<input id="billingAddress" type="text" name="billingAddress"
-					       ng-model="coCtrl.card.billingAddress" placeholder="" required/>
-					<div class="field-message" ng-messages="form.billingAddress.$error"
-					     ng-if='form.billingAddress.$touched'
-					     ng-cloak>
-						<div ng-message="required">Billing Address is required</div>
 					</div>
 				</md-input-container>
 			</div>

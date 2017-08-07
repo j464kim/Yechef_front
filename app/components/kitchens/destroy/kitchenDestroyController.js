@@ -10,7 +10,6 @@ angular.module('kitchen.destroy', [
 			 **********************/// reference to this controller
 
 			var that = this;
-			var kitchenId = $stateParams.id;
 
 			/*********************
 			 *  Public Variables
@@ -20,7 +19,7 @@ angular.module('kitchen.destroy', [
 			 *  Private Functions
 			 **********************/
 
-			function _destroyKitchen() {
+			function _destroyKitchen(kitchenId) {
 				if (confirm("Do you want to delete the dish?")) {
 					KitchenAPI.destroy(kitchenId).then(function (response) {
 						devHelper.log(response);

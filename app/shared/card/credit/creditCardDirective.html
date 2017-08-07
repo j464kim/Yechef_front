@@ -3,7 +3,7 @@
         <span>
             {{ card.brand }} / {{ card.funding }}
             <span ng-show="!default">
-                <a ui-sref="user.profile.payment.edit({ index: $index })">
+                <a ui-sref="user.profile.payment.edit({ index: index })">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
                 <a ng-click="ctrl.removeCard(card.id)">

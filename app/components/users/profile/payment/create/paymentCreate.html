@@ -1,93 +1,99 @@
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <form class="form-validation" ng-submit="pcCtrl.addCard()" name="form" novalidate>
-            <h2 class="text-center">NEW CARD</h2><br>
-            <!--Card Holder Name-->
-            <div class="cardHolder">
-                <md-input-container class="md-block">
-                    <label for="cardHolder">Card Holder Name</label>
-                    <input id="cardHolder" type="text" name="cardHolder" ng-model="pcCtrl.card.name"
-                           placeholder="" required/>
-                    <div class="field-message" ng-messages="form.cardHolder.$error" ng-if='form.cardHolder.$touched'
-                         ng-cloak>
-                        <div ng-message="required">Card Holder Name is required</div>
-                    </div>
-                </md-input-container>
-            </div>
-            <!--Billing Address-->
-            <div class="billingAddress">
-                <md-input-container class="md-block">
-                    <label for="billingAddress">Billing Address</label>
-                    <input id="billingAddress" type="text" name="billingAddress" g-places-autocomplete
-                           ng-model="pcCtrl.card.billingAddress" placeholder="" required/>
-                    <div class="field-message" ng-messages="form.billingAddress.$error"
-                         ng-if='form.billingAddress.$touched'
-                         ng-cloak>
-                        <div ng-message="required">Billing Address is required</div>
-                    </div>
-                </md-input-container>
-            </div>
-            <!--Card Number-->
-            <div class="cardNumber">
-                <md-input-container class="md-block">
-                    <label for="cardNumber">Card Number</label>
-                    <input id="cardNumber" type="text" name="cardNumber" ng-model="pcCtrl.card.number"
-                           ui-mask="9999 9999 9999 9999" placeholder="" required/>
-                    <div class="field-message" ng-messages="form.cardNumber.$error" ng-if='form.cardNumber.$touched'
-                         ng-cloak>
-                        <div ng-message="required">Card Number is required</div>
-                    </div>
-                </md-input-container>
-            </div>
-            <div class="row">
-                <!--Expiration Month-->
-                <div class="expMonth col-md-4">
-                    <md-input-container class="md-block">
-                        <label for="expMonth">MM</label>
-                        <input id="expMonth" type="text" name="expMonth" ng-model="pcCtrl.card.exp_month" ui-mask="99"
-                               placeholder="" required/>
-                        <div class="field-message" ng-messages="form.expMonth.$error" ng-if='form.expMonth.$touched'
-                             ng-cloak>
-                            <div ng-message="required">Expiration Month is required</div>
-                        </div>
-                    </md-input-container>
-                </div>
-                <!--Expiration Year-->
-                <div class="expYear col-md-4">
-                    <md-input-container class="md-block">
-                        <label for="expYear">YYYY</label>
-                        <input id="expYear" type="text" name="expYear" ng-model="pcCtrl.card.exp_year" ui-mask="9999"
-                               placeholder="" required/>
-                        <div class="field-message" ng-messages="form.expYear.$error" ng-if='form.expYear.$touched'
-                             ng-cloak>
-                            <div ng-message="required">Expiration Year is required</div>
-                        </div>
-                    </md-input-container>
-                </div>
-                <!--CVC-->
-                <div class="cvc col-md-4">
-                    <md-input-container class="md-block">
-                        <label for="cvc">CVC</label>
-                        <input id="cvc" type="text" name="cvc" ng-model="pcCtrl.card.cvc" ui-mask="999"
-                               placeholder="" required/>
-                        <div class="field-message" ng-messages="form.cvc.$error" ng-if='form.cvc.$touched'
-                             ng-cloak>
-                            <div ng-message="required">CVC is required</div>
-                        </div>
-                    </md-input-container>
-                </div>
-            </div>
-            <br/>
-            <!--Button-->
-            <div class="row submit">
-                <div class="col-sm-1">
-                    <md-button class="md-raised md-primary" ng-disabled="form.$invalid" type="submit">Add Card
-                    </md-button>
-                </div>
-                <div class="col-sm-offset-7 col-sm-1">
-                    <md-button class="md-raised md-warn" ui-sref="user.profile.payment.list">Cancel</md-button>
-                </div>
-            </div>
-        </form>
-    </div>
+	<div class="col-md-8 col-md-offset-2">
+		<form class="form-validation" ng-submit="pcCtrl.addCard()" name="form" novalidate>
+			<h2 class="text-center">NEW CARD</h2><br>
+			<!--Billing Address-->
+			<div>
+				<md-input-container class="md-block">
+					<label for="paymentCity">City</label>
+					<input id="paymentCity" type="text" ng-model="pcCtrl.card.address_city" required/>
+				</md-input-container>
+			</div>
+			<div>
+				<md-input-container class="md-block">
+					<label for="paymentLine1">Address Line 1</label>
+					<input id="paymentLine1" type="text" ng-model="pcCtrl.card.address_line1" required/>
+				</md-input-container>
+			</div>
+			<div>
+				<md-input-container class="md-block">
+					<label for="paymentPostalCode">Zip Code / Postal Code</label>
+					<input id="paymentPostalCode" type="text" ng-model="pcCtrl.card.address_zip" required/>
+				</md-input-container>
+			</div>
+			<!--Card Holder Name-->
+			<div class="cardHolder">
+				<md-input-container class="md-block">
+					<label for="cardHolder">Card Holder Name</label>
+					<input id="cardHolder" type="text" name="cardHolder" ng-model="pcCtrl.card.name"
+					       placeholder="" required/>
+					<div class="field-message" ng-messages="form.cardHolder.$error" ng-if='form.cardHolder.$touched'
+					     ng-cloak>
+						<div ng-message="required">Card Holder Name is required</div>
+					</div>
+				</md-input-container>
+			</div>
+			<!--Card Number-->
+			<div class="cardNumber">
+				<md-input-container class="md-block">
+					<label for="cardNumber">Card Number</label>
+					<input id="cardNumber" type="text" name="cardNumber" ng-model="pcCtrl.card.number"
+					       ui-mask="9999 9999 9999 9999" placeholder="" required/>
+					<div class="field-message" ng-messages="form.cardNumber.$error" ng-if='form.cardNumber.$touched'
+					     ng-cloak>
+						<div ng-message="required">Card Number is required</div>
+					</div>
+				</md-input-container>
+			</div>
+			<div class="row">
+				<!--Expiration Month-->
+				<div class="expMonth col-md-4">
+					<md-input-container class="md-block">
+						<label for="expMonth">MM</label>
+						<input id="expMonth" type="text" name="expMonth" ng-model="pcCtrl.card.exp_month" ui-mask="99"
+						       placeholder="" required/>
+						<div class="field-message" ng-messages="form.expMonth.$error" ng-if='form.expMonth.$touched'
+						     ng-cloak>
+							<div ng-message="required">Expiration Month is required</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--Expiration Year-->
+				<div class="expYear col-md-4">
+					<md-input-container class="md-block">
+						<label for="expYear">YYYY</label>
+						<input id="expYear" type="text" name="expYear" ng-model="pcCtrl.card.exp_year" ui-mask="9999"
+						       placeholder="" required/>
+						<div class="field-message" ng-messages="form.expYear.$error" ng-if='form.expYear.$touched'
+						     ng-cloak>
+							<div ng-message="required">Expiration Year is required</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--CVC-->
+				<div class="cvc col-md-4">
+					<md-input-container class="md-block">
+						<label for="cvc">CVC</label>
+						<input id="cvc" type="text" name="cvc" ng-model="pcCtrl.card.cvc" ui-mask="999"
+						       placeholder="" required/>
+						<div class="field-message" ng-messages="form.cvc.$error" ng-if='form.cvc.$touched'
+						     ng-cloak>
+							<div ng-message="required">CVC is required</div>
+						</div>
+					</md-input-container>
+				</div>
+			</div>
+			<br/>
+			<!--Button-->
+			<div class="row submit">
+				<div class="col-sm-1">
+					<md-button class="md-raised md-primary" ng-disabled="form.$invalid" type="submit">Add Card
+					</md-button>
+				</div>
+				<div class="col-sm-offset-7 col-sm-1">
+					<md-button class="md-raised md-warn" ui-sref="user.profile.payment.list">Cancel</md-button>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>

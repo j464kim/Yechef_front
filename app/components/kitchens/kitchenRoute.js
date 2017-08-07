@@ -5,7 +5,7 @@ angular.module('kitchen', [
 	'kitchen.show',
 	'kitchen.create',
 	'kitchen.update',
-	'kitchen.destroy'
+	'kitchen.destroy',
 ])
 
 	.config(function ($stateProvider) {
@@ -30,6 +30,12 @@ angular.module('kitchen', [
 				url: '/show/{id}',
 				templateUrl: 'components/kitchens/show/kitchenShow.html',
 				controller: 'KitchenShowController as KitchenCtrl'
-			});
+			})
+			.state('kitchen.update', {
+				url: '/edit/{id}',
+				templateUrl: 'components/kitchens/update/kitchenUpdate.html',
+				controller: 'KitchenUpdateController as kuCtrl'
+			})
+		;
 
 	});

@@ -18,11 +18,6 @@ angular.module('user.kitchen', [
 			_getMyKitchens();
 		}
 
-		$scope.$watch(function () {
-			return that.myCurrentKitchen
-		}, function (newVal, oldVal) {
-			that.myCurrentKitchenToEdit = angular.copy(newVal);
-		});
 		$scope.toggleLeft = genericService.buildToggler('left');
 		$scope.toggleRight = genericService.buildToggler('right');
 

@@ -4,8 +4,8 @@ angular.module('kitchen.update', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService', 'MapAPI',
-		function ($stateParams, KitchenAPI, $state, devHelper, genericService, MapAPI) {
+	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService', 'MapAPI', 'mediaService',
+		function ($stateParams, KitchenAPI, $state, devHelper, genericService, MapAPI, mediaService) {
 
 			/*********************
 			 *  Private Variables
@@ -53,6 +53,7 @@ angular.module('kitchen.update', [
 					ukCtrl.myCurrentKitchenToEdit.lat = updatedKitchen.lat;
 					ukCtrl.myCurrentKitchenToEdit.lng = updatedKitchen.lng;
 					devHelper.log(response);
+					mediaService.uploadMedia(updatedKitchen);
 					$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
 				}, function (response) {
 					genericService.showToast('Oops..! Something is wrong');

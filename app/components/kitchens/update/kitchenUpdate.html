@@ -1,6 +1,6 @@
 <h2>MY KITCHEN</h2>
 <hr>
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-6 col-md-offset-3">
 
 	<form class="form-validation" novalidate name="form">
 		<div class="row">
@@ -12,7 +12,7 @@
 			<div class="kitchenName">
 				<md-input-container class="md-block">
 					<label for="name">Kitchen Name</label>
-					<input id="name" type="text" name="name" ng-model="UkCtrl.myCurrentKitchenToEdit.name"
+					<input id="name" type="text" name="name" ng-model="kuCtrl.kitchen.name"
 					       ng-minlength="5" ng-maxlength="40" required/>
 					<div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$touched' ng-cloak>
 						<div ng-message="required">Kitchen Name is required</div>
@@ -24,8 +24,8 @@
 			<!--Address-->
 			<div class="kitchenAddress">
 				<md-input-container class="md-block">
-					<label for="address">Address ({{UkCtrl.myCurrentKitchenToEdit.country}})</label>
-					<input id="address" type="text" name="address" ng-model="UkCtrl.myCurrentKitchenToEdit.address"
+					<label for="address">Address ({{kuCtrl.kitchen.country}})</label>
+					<input id="address" type="text" name="address" ng-model="kuCtrl.kitchen.address"
 					       g-places-autocomplete options="UkCtrl.addressOptions" autocomplete="off"
 					       required/>
 					<div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
@@ -38,7 +38,7 @@
 			<div class="kitchenPhone">
 				<md-input-container class="md-block">
 					<label for="phone">Phone</label>
-					<input id="phone" type="text" name="phone" ng-model="UkCtrl.myCurrentKitchenToEdit.phone"
+					<input id="phone" type="text" name="phone" ng-model="kuCtrl.kitchen.phone"
 					       ui-mask="+9-999-999-9999"
 					       placeholder="" required/>
 					<div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$touched' ng-cloak>
@@ -51,7 +51,7 @@
 			<div class="kitchenEmail">
 				<md-input-container class="md-block">
 					<label for="email">Email</label>
-					<input id="email" type="email" name="email" ng-model="UkCtrl.myCurrentKitchenToEdit.email"
+					<input id="email" type="email" name="email" ng-model="kuCtrl.kitchen.email"
 					       required/>
 					<div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$touched' ng-cloak>
 						<div ng-message="required">Email is required</div>
@@ -64,7 +64,7 @@
 				<md-input-container class="md-block">
 					<label for="description">Description</label>
 					<textarea md-maxlength="200" id="description" name="description"
-					          ng-model="UkCtrl.myCurrentKitchenToEdit.description" required></textarea>
+					          ng-model="kuCtrl.kitchen.description" required></textarea>
 					<div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$touched'
 					     ng-cloak>
 						<div ng-message="required">Description is required</div>
@@ -80,15 +80,13 @@
 			</div>
 			<!--Button-->
 			<div class="submit">
-				<div class="col-xs-6 col-sm-6" ng-controller="KitchenUpdateController as kuCtrl">
-					<md-button class="md-raised md-primary"
-					           ng-click="kuCtrl.updateKitchen(UkCtrl.myCurrentKitchenToEdit, UkCtrl)"
-					           ng-disabled="form.$invalid">Update
-					</md-button>
-				</div>
-				<div class="col-xs-6 col-sm-6 text-right">
+				<md-button class="md-raised md-primary pull-left"
+				           ng-click="kuCtrl.updateKitchen(kuCtrl.kitchen, UkCtrl)"
+				           ng-disabled="form.$invalid">Update
+				</md-button>
+				<div class="pull-right">
 					<a type="button"
-					   ui-sref="user.kitchen.general.view()"
+					   ui-sref="user.kitchen.general.view"
 					   class="btn btn-small">cancel</a>
 				</div>
 			</div>

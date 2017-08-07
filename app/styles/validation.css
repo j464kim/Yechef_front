@@ -2436,6 +2436,9 @@ h6 {
 .clickable {
   cursor: pointer;
 }
+.md-button .material-icons {
+  margin-top: inherit;
+}
 /* TODO: what are these for?? */
 /* bg color defination */
 /* these color schemes are used for js to fetch color setting */
@@ -2461,8 +2464,8 @@ h6 {
   width: 100%;
 }
 .kitchen-owner {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   margin: 0 auto;
 }
@@ -2726,6 +2729,10 @@ md-content {
 @media screen and (max-width: 576px) {
   .td-only {
     display: none;
+  }
+  .dish-show-header [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 @media screen and (min-width: 576px) {

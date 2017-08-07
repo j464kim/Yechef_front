@@ -39,7 +39,9 @@ angular.module('configuration', [])
 		var carouselDefaultInterval = 5000; //ms
 
 		// Payment Service
-		var stripePublishableKey = 'pk_test_RZjSNtHLydLfeylIF2BkP6s5';
+		var stripeTestPublishable = 'pk_test_RZjSNtHLydLfeylIF2BkP6s5';
+		var stripeLivePublishable = 'pk_live_QyUbscUAIRaV56PhoXBZUK2D';
+		var stripePublishableKey = stripeTestPublishable;
 
 		// Nationality
 		var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
@@ -103,6 +105,8 @@ angular.module('configuration', [])
 			dishSearchParams: dishSearchParams,
 			carouselDefaultInterval: carouselDefaultInterval,
 			stripePublishableKey: stripePublishableKey,
+			stripeTestPublishable: stripeTestPublishable,
+			stripeLivePublishable: stripeLivePublishable,
 		};
 
 	})());

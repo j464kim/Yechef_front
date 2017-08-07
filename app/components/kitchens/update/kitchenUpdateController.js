@@ -4,8 +4,8 @@ angular.module('kitchen.update', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService', 'MapAPI',
-		function ($stateParams, KitchenAPI, $state, devHelper, genericService, MapAPI) {
+	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService', 'MapAPI', 'mediaService',
+		function ($stateParams, KitchenAPI, $state, devHelper, genericService, MapAPI, mediaService) {
 
 			/*********************
 			 *  Private Variables
@@ -13,6 +13,7 @@ angular.module('kitchen.update', [
 				// reference to this controller
 
 			var that = this;
+			var kitchenId = $stateParams.id;
 
 			/*********************
 			 *  Public Variables
@@ -21,43 +22,35 @@ angular.module('kitchen.update', [
 			/*********************
 			 *  Private Functions
 			 **********************/
-
-			function _updateKitchen(myCurrentKitchenToEdit, ukCtrl) {
-				if (typeof myCurrentKitchenToEdit.address == 'string') {
-					MapAPI.geocode(myCurrentKitchenToEdit.address).then(function (result) {
-							if (result) {
-								devHelper.log(result);
-								myCurrentKitchenToEdit.lat = result[0].geometry.location.lat();
-								myCurrentKitchenToEdit.lng = result[0].geometry.location.lng();
-								_executeUpdate(myCurrentKitchenToEdit, ukCtrl);
-							}
-						}
-					);
-				} else if (typeof myCurrentKitchenToEdit.address == 'object') {
-					myCurrentKitchenToEdit.lat = myCurrentKitchenToEdit.address.geometry.location.lat();
-					myCurrentKitchenToEdit.lng = myCurrentKitchenToEdit.address.geometry.location.lng();
-					myCurrentKitchenToEdit.address = myCurrentKitchenToEdit.address.formatted_address;
-					_executeUpdate(myCurrentKitchenToEdit, ukCtrl);
-				}
+			function _init() {
+				_showKitchen();
 			}
 
-			function _executeUpdate(myCurrentKitchenToEdit, ukCtrl) {
-				KitchenAPI.update(myCurrentKitchenToEdit, myCurrentKitchenToEdit.id).then(function (response) {
-					var updatedKitchen = response;
-					ukCtrl.myCurrentKitchen.name = updatedKitchen.name;
-					ukCtrl.myCurrentKitchen.phone = updatedKitchen.phone;
-					ukCtrl.myCurrentKitchen.address = updatedKitchen.address;
-					ukCtrl.myCurrentKitchen.email = updatedKitchen.email;
-					ukCtrl.myCurrentKitchen.description = updatedKitchen.description;
-					ukCtrl.myCurrentKitchen.medias = updatedKitchen.medias;
-					ukCtrl.myCurrentKitchenToEdit.lat = updatedKitchen.lat;
-					ukCtrl.myCurrentKitchenToEdit.lng = updatedKitchen.lng;
+			function _showKitchen() {
+				KitchenAPI.show(kitchenId).then(function (response) {
 					devHelper.log(response);
-					$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
+					that.kitchen = response;
+					if (response.medias.length) {
+						that.media = response.medias[0].url;
+					}
+					mediaService.previewUploadedMedia(that.kitchen);
 				}, function (response) {
 					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');
 				});
+			}
+
+			function _updateKitchen() {
+				KitchenAPI.update(that.kitchen, that.kitchen.id)
+					.then(function (response) {
+						var updatedKitchen = response;
+						devHelper.log(updatedKitchen);
+						mediaService.uploadMedia(updatedKitchen);
+						$state.go('user.kitchen.general.view', {'myCurrentKitchenId': updatedKitchen.id});
+					}, function (response) {
+						//     TODO handle error state
+						devHelper.log(response, 'error');
+					});
 			}
 
 			/*********************
@@ -69,7 +62,7 @@ angular.module('kitchen.update', [
 			/*********************
 			 *  Initialization
 			 **********************/
-
+			_init();
 
 			/*********************
 			 *  EVENTS

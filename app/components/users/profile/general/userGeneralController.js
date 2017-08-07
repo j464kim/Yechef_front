@@ -33,6 +33,9 @@ angular.module('user.profile.general', [
 				UserAPI.show(userId).then(function (response) {
 					that.user = response;
 					devHelper.log(that.user);
+					if (response.medias.length) {
+						that.media = response.medias[0].url;
+					}
 					if ($state.current.name == 'user.profile.info.edit') {
 						mediaService.previewUploadedMedia(that.user);
 					}

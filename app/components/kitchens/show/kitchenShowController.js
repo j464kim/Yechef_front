@@ -33,7 +33,9 @@ angular.module('kitchen.show', [
 				KitchenAPI.show(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchen = response;
-					that.media = response.medias[0].url;
+					if (response.medias.length) {
+						that.media = response.medias[0].url;
+					}
 				}, function (response) {
 					genericService.showToast('Oops..! Something is wrong');
 					devHelper.log(response, 'error');

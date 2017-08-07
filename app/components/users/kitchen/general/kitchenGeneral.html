@@ -117,7 +117,7 @@
 	<uib-accordion>
 		<div uib-accordion-group class="panel-default" heading="Close Kitchen">
             <span ng-controller="KitchenDestroyController as vm">
-                <md-button ng-click="vm.destroyKitchen()" class="md-raised md-warn">Close the kitchen</md-button>
+                <md-button ng-click="vm.destroyKitchen(UkCtrl.myCurrentKitchenId)" class="md-raised md-warn">Close the kitchen</md-button>
             </span>
 		</div>
 	</uib-accordion>

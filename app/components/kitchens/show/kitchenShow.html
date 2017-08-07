@@ -1,7 +1,12 @@
 <div class="container">
 	<!--Header-->
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-3 text-center">
+			<!--Must load it "after" kitchen data is available-->
+			<div ng-if="KitchenCtrl.kitchen">
+				<reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
+			</div>
+
 		</div>
 		<div class="col-md-6 text-center">
 			<p class="kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
@@ -16,7 +21,7 @@
 	<!--Sub Header-->
 	<div class="row">
 		<div class="col-sm-3 text-center">
-			<label>Share it with</label>
+			<br/>
 			<share-button for="kitchen"></share-button>
 		</div>
 		<div class="col-sm-6 text-center">
@@ -37,6 +42,7 @@
 			</div>
 		</div>
 		<div class="col-sm-3 text-center" ng-if="KitchenCtrl.kitchen">
+			<br/>
 			<a>
 				<reaction-button reactionable="KitchenCtrl.kitchen" for="'subscribe'"></reaction-button>
 			</a>
@@ -55,10 +61,6 @@
 				        ng-if="KitchenCtrl.isMine"
 				        class="btn btn-default btn-sm btn-edit">Manage My Kitchen
 				</button>
-				<!--Must load it "after" kitchen data is available-->
-				<div ng-if="KitchenCtrl.kitchen" class="pull-right">
-					<reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
-				</div>
 			</div>
 		</div>
 		<!--About Kitchen-->

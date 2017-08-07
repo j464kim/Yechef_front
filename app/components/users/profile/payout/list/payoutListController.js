@@ -16,6 +16,8 @@ angular.module('user.profile.payout.list', [
 			 **********************/
 			var that = this;
 			this.payoutCountries = genericService.loadItems(config.payoutCountries);
+			this.hasAccount = false;
+			this.hasNoAccount = false;
 
 			/*********************
 			 *  Private Functions
@@ -29,6 +31,11 @@ angular.module('user.profile.payout.list', [
 					.then(function (response) {
 						devHelper.log(response);
 						that.account = response;
+						if (that.account) {
+							that.hasAccount = true
+						} else {
+							that.hasNoAccount = true;
+						}
 						devHelper.log('Successfully retrieved the list of Payout Account of the user');
 					}, function (response) {
 						// TODO handle error state-*/ ˙

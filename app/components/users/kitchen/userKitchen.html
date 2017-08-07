@@ -22,9 +22,9 @@
 						Create Your First Kitchen!
 					</md-button>
 					<select name="myCurrentKitchen" ng-if="UkCtrl.myKitchens.length > 0"
-					        ng-model="UkCtrl.myCurrentKitchen" ng-change="UkCtrl.selectChanged()"
+					        ng-model="UkCtrl.myCurrentKitchenSelect" ng-change="UkCtrl.selectChanged()"
 					        ng-options="myKitchen.name for myKitchen in UkCtrl.myKitchens"
-					        ng-selected="UkCtrl.preSelect()">
+					        ng-init="UkCtrl.preSelect()">
 						<option value="" disabled>Select Kitchen</option>
 					</select>
 				</div>

@@ -131,12 +131,12 @@ angular.module('user.api', [])
 				});
 			};
 
-			function getMyKitchens(pageNum, perPage) {
+			function getMyKitchensInCompactList(pageNum, perPage) {
 				return $q(function (resolve, reject) {
 					UserResource.list({
 						page: pageNum,
 						perPage: perPage,
-						id: 'getMyKitchens'
+						id: 'getMyKitchensInCompactList'
 					}).$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {
@@ -214,7 +214,7 @@ angular.module('user.api', [])
 				getKitchens: getKitchens,
 				getForkedDishes: getForkedDishes,
 				getSubscriptions: getSubscriptions,
-				getMyKitchens: getMyKitchens,
+				getMyKitchensInCompactList: getMyKitchensInCompactList,
 				getMyForkedDishes: getMyForkedDishes,
 				getMySubscriptions: getMySubscriptions,
 				getMySettings: getMySettings,

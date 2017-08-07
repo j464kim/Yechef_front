@@ -2,8 +2,11 @@
 	<!--Header-->
 	<div class="row">
 		<div class="col-md-3 text-center">
-			<label>Share it with</label>
-			<share-button for="kitchen"></share-button>
+			<!--Must load it "after" kitchen data is available-->
+			<div ng-if="KitchenCtrl.kitchen">
+				<reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
+			</div>
+
 		</div>
 		<div class="col-md-6 text-center">
 			<p class="kitchen-title">{{KitchenCtrl.kitchen.name}}</p>
@@ -19,10 +22,7 @@
 	<div class="row">
 		<div class="col-sm-3 text-center">
 			<br/>
-			<!--Must load it "after" kitchen data is available-->
-			<div ng-if="KitchenCtrl.kitchen">
-				<reaction-button reactionable="KitchenCtrl.kitchen" for="'like'"></reaction-button>
-			</div>
+			<share-button for="kitchen"></share-button>
 		</div>
 		<div class="col-sm-6 text-center">
 			<div class="row">

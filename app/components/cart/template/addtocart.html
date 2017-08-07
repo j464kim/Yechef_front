@@ -8,7 +8,7 @@
                     ng-options=" v for v in qtyOpt"></select>
         </span>
 		<md-button class="md-raised md-primary"
-		   ng-click="cartCtrl.addItem(id, name, price, q, data, kitchenId)">
+		           ng-click="cartCtrl.addItem(id, name, price, q, data, kitchenId)">
 			<i class="material-icons">add_shopping_cart</i>Add
 		</md-button>
 	</div>
@@ -16,7 +16,7 @@
         <span ng-if="isInCart">
         This item is in your cart.<br/>
         <a ui-sref="cart.view" style="cursor:pointer;">
-            <i class="material-icons">local_grocery_store</i>Checkout
+            <i class="material-icons">local_grocery_store</i>Go To Cart
         </a>
 		<br/>
         <a ng-click="cartCtrl.removeItemById(id, kitchenId)" style="cursor: pointer;">

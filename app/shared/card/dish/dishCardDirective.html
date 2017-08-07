@@ -5,10 +5,10 @@
 			<md-card-title>
 				<md-card-title-text>
 					<div class="row no-margin">
-						<div class="col-md-8">
+						<div class="col-md-7">
 							<div class="row">
 								<div class="col-md-12">
-									<span class="card-title md-subhead">{{dish.name}}</span>
+									<div class="card-title md-subhead" md-truncate>{{dish.name}}</div>
 								</div>
 							</div>
 							<div class="row">
@@ -19,11 +19,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 pull-right text-right">
-							<span class="md-subhead">$ {{dish.price}}</span>
-							<br/>
+						<div class="col-md-5 pull-right text-right">
+							<div class="row">
+								<div class="md-subhead">$ {{dish.price}}</div>
+							</div>
+							<div class="row">
 							<span ng-if="dish.distance"
 							      class="md-subhead">{{(dish.distance / 1000.0).toFixed(2)}} km</span>
+							</div>
 						</div>
 					</div>
 				</md-card-title-text>

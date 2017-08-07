@@ -13,7 +13,8 @@ angular.module('checkout.billing')
 						number: card.number,
 						cvc: card.cvc,
 						exp_month: card.exp_month,
-						exp_year: card.exp_year
+						exp_year: card.exp_year,
+						address_zip: card.address_zip,
 					}, function (status, response) {
 						deferred.resolve(response);
 					}

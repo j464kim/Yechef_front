@@ -4,7 +4,7 @@
 <hr>
 <div layout-fill class="row">
 	<br/>
-	<div class="col-md-6" ng-repeat="dish in KdCtrl.dishes" loader>
+	<div class="col-md-4" ng-repeat="dish in KdCtrl.dishes" loader>
 		<a href ng-click="KdCtrl.destroyDish(dish.id)"><i class="fa fa-close pull-right" style="margin-right:8px;">Delete</i></a>
 		<a ui-sref="dish.update({id: {{dish.id}}})"><i class="pull-right fa fa-edit ">Edit</i></a>
 		<br/>

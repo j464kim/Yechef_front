@@ -40,6 +40,7 @@ angular.module('configuration', [])
 
 		// Payment Service
 		var stripeTestPublishable = 'pk_test_RZjSNtHLydLfeylIF2BkP6s5';
+		var stripeLivePublishable = 'pk_live_QyUbscUAIRaV56PhoXBZUK2D';
 		var stripePublishableKey = stripeTestPublishable;
 
 		// Nationality
@@ -105,6 +106,7 @@ angular.module('configuration', [])
 			carouselDefaultInterval: carouselDefaultInterval,
 			stripePublishableKey: stripePublishableKey,
 			stripeTestPublishable: stripeTestPublishable,
+			stripeLivePublishable: stripeLivePublishable,
 		};
 
 	})());

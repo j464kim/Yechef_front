@@ -14,7 +14,6 @@ angular.module('mediaUpload', [
 					url: config.endpoint + 'media/',
 					method: 'POST',
 					maxFiles: config.maxFiles,
-					maxFileSize: config.maxFileSize,
 					acceptedFiles: config.acceptedFiles,
 					parallelUploads: config.parallelUploads,
 					uploadMultiple: config.uploadMultiple,

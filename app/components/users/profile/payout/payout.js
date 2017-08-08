@@ -55,9 +55,9 @@ angular.module('payout.api', [
 				});
 			}
 
-			function createAccount() {
+			function createAccount(payoutAddress) {
 				return $q(function (resolve, reject) {
-					PayoutResource.create()
+					PayoutResource.create(payoutAddress)
 						.$promise.then(function (response) {
 						resolve(response.body);
 					}, function (response) {

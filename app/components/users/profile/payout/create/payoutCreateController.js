@@ -22,10 +22,10 @@ angular.module('user.profile.payout.create', [
 			 **********************/
 
 			function _createAccount() {
-				PayoutAPI.createAccount().then(function (response) {
+				PayoutAPI.createAccount(that.address).then(function (response) {
 					devHelper.log(response);
 					devHelper.log('Successfully created Payout Account for the user');
-					$state.go('user.kitchen.payout.new.method.select');
+					$state.go('user.profile.payout.new.method.select');
 				}, function (response) {
 					// TODO handle error state-*/ ˙
 					devHelper.log(response, 'error');

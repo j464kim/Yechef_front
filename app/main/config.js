@@ -50,8 +50,8 @@ angular.module('configuration', [])
                     Nepalese, Oceanic, Pakistani, Palestinian, Peruvian, Philippine, Polish, Portuguese, Russian, \
                     Sami, Scottish, Sicilian, Singaporean, Spanish, Thai, Tibetan, Uzbek, Vietnamese';
 
-		// Countries available for payout
-		var payoutCountries = 'US, CA';
+		// Countries available for payout (enforce it to CA only until app is launched in US)
+		var payoutCountries = 'CA';
 
 		// State / Province
 		var states = {

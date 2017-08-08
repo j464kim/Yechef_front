@@ -4,9 +4,9 @@
 	<div class="margin-bottom-1em">
 		<md-autocomplete
 				md-no-cache="true"
-				md-selected-item="pcCtrl.address.country"
-				md-search-text="searchCountry"
-				md-items="country in pcCtrl.querySearch(searchCountry, pcCtrl.payoutCountries)"
+				md-selected-item="selectedCountry"
+				md-search-text="pcCtrl.address.country"
+				md-items="country in pcCtrl.querySearch(pcCtrl.address.country, pcCtrl.payoutCountries)"
 				md-min-length="0"
 				md-item-text="country.display"
 				placeholder="Select Country"
@@ -23,11 +23,11 @@
 	</div>
 	<div class="margin-bottom-1em">
 		<md-autocomplete
-				ng-disabled="!pcCtrl.address.country"
+				ng-disabled="!selectedCountry"
 				md-no-cache="true"
 				md-selected-item="pcCtrl.address.state"
 				md-search-text="searchState"
-				md-items="state in pcCtrl.querySearch(searchState, pcCtrl.getStates(pcCtrl.address.country.display))"
+				md-items="state in pcCtrl.querySearch(searchState, pcCtrl.getStates(pcCtrl.address.country))"
 				md-min-length="0"
 				md-item-text="state.display"
 				placeholder="Select State / Province"

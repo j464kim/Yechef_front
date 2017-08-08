@@ -20,6 +20,7 @@ angular.module('dish', [
 				url: 'es?' + config.dishSearchParams,
 				templateUrl: '/components/dish/list/dishList.html',
 				params: {
+					city:{},
 					lat: {
 						type: 'string',
 						raw: true,

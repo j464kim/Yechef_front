@@ -64,7 +64,7 @@ angular.module('configuration', [])
 		// cookie expiration in days
 		var cookieExpirationInDays = 3;
 
-		var dishSearchParams = 'q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy&city&distance&ne_lat&sw_lat&ne_lng&sw_lng&lat&lng';
+		var dishSearchParams = 'q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy&distance&ne_lat&sw_lat&ne_lng&sw_lng&lat&lng';
 
 		/* jshint undef: false */
 		switch (env) {

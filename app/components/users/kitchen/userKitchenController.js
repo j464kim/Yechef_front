@@ -30,7 +30,7 @@ angular.module('user.kitchen', [
 				});
 		};
 
-		function _selectKitchen(kitchenId) {
+		function _getKitchen(kitchenId) {
 			KitchenAPI.show(kitchenId).then(function (response) {
 				devHelper.log(response);
 				that.myCurrentKitchen = response;
@@ -45,9 +45,11 @@ angular.module('user.kitchen', [
 		}
 
 		function _switchKitchen(kitchenId, notify) {
+			// getKitchen will be called from preselect anyway when state is reloaded
 			if (!notify) {
-				_selectKitchen(kitchenId);
+				_getKitchen(kitchenId);
 			}
+			// when notify set to false, state is not being reloaded but the url only changes
 			$state.go('.', {'myCurrentKitchenId': kitchenId}, {notify: notify});
 		}
 
@@ -57,20 +59,20 @@ angular.module('user.kitchen', [
 					var kitchen = that.myKitchens[index];
 					if (kitchen.id == that.myCurrentKitchenId) {
 						// mapService.restrictAddressByCountry(that, kitchen.country);
-						that.myCurrentKitchenSelect = kitchen;
-						_selectKitchen(kitchen.id);
+						that.kitchenToSelect = kitchen;
+						_getKitchen(kitchen.id);
 						return true;
 					}
 				}
 			} else {
 				//If No current Kitchen is set, just set the first kitchen to be selected
-				that.myCurrentKitchenSelect = that.myKitchens[0];
+				that.kitchenToSelect = that.myKitchens[0];
 				_switchKitchen(that.myKitchens[0].id, false);
 			}
 		};
 
 		this.selectChanged = function () {
-			_switchKitchen(that.myCurrentKitchenSelect.id, true);
+			_switchKitchen(that.kitchenToSelect.id, true);
 		};
 
 		_init();

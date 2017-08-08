@@ -2,8 +2,8 @@
 
 angular.module('main', ['search'])
 
-	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'genericService',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
+	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'authService',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, authService) {
 
 			var that = this;
 			if (!$rootScope.currentUser) {
@@ -21,6 +21,7 @@ angular.module('main', ['search'])
 
 			$scope.$on('event:auth-loginRequired', function (event, data) {
 				devHelper.log('refreshing token...');
+				authService.loginCancelled("", data); //Fixes infinitely showing loading-bar by rejecting ajax calls
 				AuthAPI.refreshToken().then(function () {
 					devHelper.log('Token successfully refreshed');
 				}, function () {

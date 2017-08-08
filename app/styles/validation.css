@@ -2771,6 +2771,9 @@ md-card .carousel {
   margin-left: 0;
   margin-right: 0;
 }
+.dish-card-content {
+  padding-top: 0;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

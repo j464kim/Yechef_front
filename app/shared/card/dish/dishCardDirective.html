@@ -2,35 +2,33 @@
 	<md-card>
 		<carousel class="md-user-avatar" medias="dish.medias"></carousel>
 		<a ui-sref="dish.show({id: dish.id})">
-			<md-card-title>
-				<md-card-title-text>
-					<div class="row no-margin">
-						<div class="col-xs-7">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="card-title md-subhead" md-truncate>{{dish.name}}</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<ng-rate-it ng-model="dish.total_rating" max="5" read-only="true"
-									            star-width="14" step="0.01"></ng-rate-it>
-									<span>({{dish.ratingsCount}})</span>
-								</div>
+			<md-card-content class="dish-card-content">
+				<div class="row no-margin">
+					<div class="col-xs-7">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-title md-subhead" md-truncate>{{dish.name}}</div>
 							</div>
 						</div>
-						<div class="col-xs-5 pull-right text-right">
-							<div class="row">
-								<div class="md-subhead">$ {{dish.price}}</div>
-							</div>
-							<div class="row">
-							<span ng-if="dish.distance"
-							      class="md-subhead">{{(dish.distance / 1000.0).toFixed(2)}} km</span>
+						<div class="row">
+							<div class="col-md-12">
+								<ng-rate-it ng-model="dish.total_rating" max="5" read-only="true"
+								            star-width="14" step="0.01"></ng-rate-it>
+								<span>({{dish.ratingsCount}})</span>
 							</div>
 						</div>
 					</div>
-				</md-card-title-text>
-			</md-card-title>
+					<div class="col-xs-5 pull-right text-right">
+						<div class="row">
+							<div class="md-subhead">$ {{dish.price}}</div>
+						</div>
+						<div class="row">
+							<span ng-if="dish.distance"
+							      class="md-subhead">{{(dish.distance / 1000.0).toFixed(2)}} km</span>
+						</div>
+					</div>
+				</div>
+			</md-card-content>
 		</a>
 	</md-card>
 </div>

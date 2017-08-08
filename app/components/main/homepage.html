@@ -92,14 +92,21 @@
 	</md-card>
 	<br>
 	<div class="col-xs-12">
-		<h3 class="text-center">Featrued Dishes</h3>
+		<div class="row">
+			<h3 class="text-center">Featrued Dishes</h3>
+			<button class="go-prev pull-left">previous</button>
+			<button class="go-next pull-right">next</button>
+		</div>
 		<div ng-controller="FeaturedDishController as DishCtrl" id="featuredDishList">
-			<ul uib-pager items-per-page="6" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"
-			    ng-change="DishCtrl.getFeaturedDishes()"></ul>
+			<!--<ul uib-pager items-per-page="6" total-items="DishCtrl.totalItems" ng-model="DishCtrl.currentPage"-->
+			<!--ng-change="DishCtrl.getFeaturedDishes()"></ul>-->
 			<div class="row">
-				<div class="col-md-4" ng-repeat="dish in DishCtrl.dishes" loader>
-					<dish-card dish="dish"></dish-card>
-				</div>
+				<slick swipe="true" swipe-to-slide="true" init-onload=true data="dishes" infinite="false"
+				       prev-arrow=".go-prev" next-arrow=".go-next" responsive="DishCtrl.dishBreakpoints">
+					<div ng-repeat="dish in dishes">
+						<dish-card dish="dish"></dish-card>
+					</div>
+				</slick>
 			</div>
 		</div>
 	</div>

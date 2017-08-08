@@ -82,6 +82,56 @@ angular.module('helper', [])
 			$mdMenu.open(ev);
 		};
 
+		var dishBreakpoints = [
+			{
+				breakpoint: 2000,
+				settings: {
+					slidesToShow: 4,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+		];
+
+		var kitchenBreakpoints = [
+			{
+				breakpoint: 2000,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1
+				}
+			}, {
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+		];
+
 		return {
 			getModelType: getModelType,
 			querySearch: querySearch,
@@ -92,6 +142,8 @@ angular.module('helper', [])
 			getByUniqueProperty: getByUniqueProperty,
 			buildToggler: buildToggler,
 			openMenu: openMenu,
+			dishBreakpoints: dishBreakpoints,
+			kitchenBreakpoints: kitchenBreakpoints,
 
 			// parse rgb str into an arr of color elements
 			parseRgbStr: function (rgbStr) {

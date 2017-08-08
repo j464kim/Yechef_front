@@ -1,6 +1,8 @@
 <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" class="row margin-bottom-1em">
 	<div uib-slide ng-repeat="media in medias track by media.id" index="$index">
-		<img ng-src="{{media.url}}"
-		     class="full-width item" style="margin:auto;">
+		<div class="carousel-img-container">
+			<img ng-src="{{media.url}}"
+			     class="carousel-img" style="margin:auto;">
+		</div>
 	</div>
 </div>

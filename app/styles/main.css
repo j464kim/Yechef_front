@@ -2489,6 +2489,25 @@ h6 {
   width: 34px;
   height: 34px;
 }
+.carousel-img-container {
+  display: block;
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding: 56.25% 0 0 0;
+  overflow: hidden;
+}
+.carousel-img {
+  position: absolute;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
 .full-width {
   width: 100%;
 }
@@ -2747,6 +2766,10 @@ md-content {
     height: 90%;
     position: fixed;
   }
+}
+md-card .carousel {
+  margin-left: 0;
+  margin-right: 0;
 }
 .loader-wrapper {
   min-height: 0;

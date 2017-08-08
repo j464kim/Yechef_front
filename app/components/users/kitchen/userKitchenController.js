@@ -17,17 +17,21 @@ angular.module('user.kitchen', [
 		$scope.toggleRight = genericService.buildToggler('right');
 
 		function _getMyKitchens() {
-			UserAPI.getMyKitchensInCompactList().then(
-				function (response) {
-					devHelper.log(response);
-					if (!that.myKitchens) {
-						that.myKitchens = [];
-					}
-					that.myKitchens = response;
-				}, function (response) {
-					genericService.showToast('Oops..! Something is wrong');
-					devHelper.log(response, 'error');
-				});
+			if (_.isEmpty($stateParams.myKitchens)) {
+				UserAPI.getMyKitchensInCompactList().then(
+					function (response) {
+						devHelper.log(response);
+						if (!that.myKitchens) {
+							that.myKitchens = [];
+						}
+						that.myKitchens = response;
+					}, function (response) {
+						genericService.showToast('Oops..! Something is wrong');
+						devHelper.log(response, 'error');
+					});
+			} else {
+				that.myKitchens = $stateParams.myKitchens;
+			}
 		};
 
 		function _getKitchen(kitchenId) {
@@ -44,13 +48,10 @@ angular.module('user.kitchen', [
 			});
 		}
 
-		function _switchKitchen(kitchenId, notify) {
-			// getKitchen will be called from preselect anyway when state is reloaded
-			if (!notify) {
-				_getKitchen(kitchenId);
-			}
-			// when notify set to false, state is not being reloaded but the url only changes
-			$state.go('.', {'myCurrentKitchenId': kitchenId}, {notify: notify});
+		function _switchKitchen(kitchenId) {
+			$state.go('.', {'myCurrentKitchenId': kitchenId, 'myKitchens': that.myKitchens}, {
+				location: 'replace', //  update url and replace
+			});
 		}
 
 		this.preSelect = function () {
@@ -67,12 +68,12 @@ angular.module('user.kitchen', [
 			} else {
 				//If No current Kitchen is set, just set the first kitchen to be selected
 				that.kitchenToSelect = that.myKitchens[0];
-				_switchKitchen(that.myKitchens[0].id, false);
+				_switchKitchen(that.myKitchens[0].id);
 			}
 		};
 
 		this.selectChanged = function () {
-			_switchKitchen(that.kitchenToSelect.id, true);
+			_switchKitchen(that.kitchenToSelect.id);
 		};
 
 		_init();

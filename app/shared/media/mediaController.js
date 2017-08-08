@@ -53,7 +53,7 @@ angular.module('mediaUpload', [
 								// initialize cropper for uploaded image
 								$img.cropper({
 									viewMode: 1,
-									aspectRatio: 4 / 3,
+									aspectRatio: 1.8,
 									autoCropArea: 1,
 									movable: true,
 									cropBoxResizable: true,

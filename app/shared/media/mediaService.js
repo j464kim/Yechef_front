@@ -71,7 +71,39 @@ angular.module('mediaUpload')
 						devHelper.log(response, 'error');
 					});
 				}
-			}
+			};
 
+			this.dataURItoBlob = function (dataURI) {
+				var byteString = atob(dataURI.split(',')[1]);
+				var ab = new ArrayBuffer(byteString.length);
+				var ia = new Uint8Array(ab);
+				for (var i = 0; i < byteString.length; i++) {
+					ia[i] = byteString.charCodeAt(i);
+				}
+				return new Blob([ab], {type: 'image/jpeg'});
+			};
+
+			this.getCropperModalTemplate = function () {
+				var modalTemplate = '' +
+					'<div class="modal fade" tabindex="-1" role="dialog">' +
+					'<div class="modal-dialog modal-cropper" role="document">' +
+					'<div class="modal-content">' +
+					'<div class="modal-header">' +
+					'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+					'<h4 class="modal-title">Crop Image</h4>' +
+					'</div>' +
+					'<div class="modal-body">' +
+					'<div class="image-container text-center"></div>' +
+					'</div>' +
+					'<div class="modal-footer">' +
+					'<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+					'<button type="button" class="btn btn-primary crop-upload">Upload</button>' +
+					'</div>' +
+					'</div>' +
+					'</div>' +
+					'</div>' +
+					'';
+				return modalTemplate;
+			};
 		}
 	]);

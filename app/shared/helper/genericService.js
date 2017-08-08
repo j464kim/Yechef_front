@@ -103,7 +103,7 @@ angular.module('helper', [])
 			// @color str in format of rgb(255,255,255)
 			// @percent decimal positive=brighten, negative=darken
 			// @returnArr bool default false, return rgb color in arr format
-			shadeRGBColor: function (color, percent, returnArr = false) {
+			shadeRGBColor: function (color, percent, returnArr) {
 				var f = color.split(","), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent,
 					R = parseInt(f[0].slice(4)), G = parseInt(f[1]), B = parseInt(f[2]);
 				var rgb = "rgb(" + (Math.round((t - R) * p) + R) + "," + (Math.round((t - G) * p) + G) + "," + (Math.round((t - B) * p) + B) + ")";
@@ -118,7 +118,7 @@ angular.module('helper', [])
 			// @c1 str in format of rgb(255,255,255)
 			// @percent decimal 
 			// @returnArr bool default false, return rgb color in arr format
-			blendRGBColors: function (c0, c1, p, returnArr = false) {
+			blendRGBColors: function (c0, c1, p, returnArr) {
 				var f = c0.split(","), t = c1.split(","), R = parseInt(f[0].slice(4)), G = parseInt(f[1]),
 					B = parseInt(f[2]);
 				var rgb = "rgb(" + (Math.round((parseInt(t[0].slice(4)) - R) * p) + R) + "," + (Math.round((parseInt(t[1]) - G) * p) + G) + "," + (Math.round((parseInt(t[2]) - B) * p) + B) + ")";

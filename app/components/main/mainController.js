@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('main', ['search'])
+angular.module('main', ['search', 'cfp.loadingBar'])
 
-	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'genericService',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, genericService) {
+	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'cfpLoadingBar',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, cfpLoadingBar) {
 
 			var that = this;
 			if (!$rootScope.currentUser) {
@@ -25,6 +25,10 @@ angular.module('main', ['search'])
 					devHelper.log('Token successfully refreshed');
 				}, function () {
 					devHelper.log('Fail to refresh token, redirecting to login page');
+          // https://github.com/chieffancypants/angular-loading-bar/pull/50
+          // Looks like the loading bar's interceptor has sync issue with http-auth-interceptor
+          // only in case refresh token fails loading bar has to be manually completed
+					cfpLoadingBar.complete();
 					sessionService.revokeSession();
 					$state.go('user.login');
 				});

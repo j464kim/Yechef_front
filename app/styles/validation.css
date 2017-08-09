@@ -2489,6 +2489,25 @@ h6 {
   width: 34px;
   height: 34px;
 }
+.carousel-img-container {
+  display: block;
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding: 56% 0 0 0;
+  overflow: hidden;
+}
+.carousel-img {
+  position: absolute;
+  display: block;
+  width: 100%;
+  max-height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
 .full-width {
   width: 100%;
 }
@@ -2679,6 +2698,15 @@ md-content {
 .bigstar-25.ngrateit .ngrateit-star {
   background-size: 25px;
 }
+.modal-cropper.modal-dialog {
+  position: relative;
+  display: table;
+  /* This is important */
+  overflow-y: auto;
+  overflow-x: auto;
+  width: auto;
+  min-width: 300px;
+}
 @media screen and (max-width: 768px) {
   .md-sidenav-left {
     padding-top: 50px;
@@ -2747,6 +2775,13 @@ md-content {
     height: 90%;
     position: fixed;
   }
+}
+md-card .carousel {
+  margin-left: 0;
+  margin-right: 0;
+}
+.dish-card-content {
+  padding-top: 0;
 }
 .loader-wrapper {
   min-height: 0;

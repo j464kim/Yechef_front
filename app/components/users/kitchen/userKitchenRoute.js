@@ -17,6 +17,9 @@ angular.module('userKitchen', [
 				url: '/kitchen/{myCurrentKitchenId}',
 				templateUrl: 'components/users/kitchen/userKitchen.html',
 				controller: 'userKitchenController as UkCtrl',
+				params: {
+					myKitchens: {}
+				}
 			})
 			.state('user.kitchen.dashboard', {
 				url: '/dashboard',

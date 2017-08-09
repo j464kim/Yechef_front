@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('directive.card.dish', [])
+angular.module('directive.card.dish', [
+	'carousel'
+])
 
 	.directive('dishCard', ['devHelper', function (devHelper) {
 		return {

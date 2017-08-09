@@ -34,6 +34,7 @@ angular.module('configuration', [])
 		var uploadMultiple = true;
 		var autoProcessQueue = false;
 		var addRemoveLinks = true;
+		var autoDiscover = false;
 
 		//carousel
 		var carouselDefaultInterval = 5000; //ms
@@ -55,7 +56,7 @@ angular.module('configuration', [])
 
 		// State / Province
 		var states = {
-			'US': 'AK, AL, AR, AS, AZ, CA, CO, CT, DC, DE, FL, GA, GU, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN,'  +
+			'US': 'AK, AL, AR, AS, AZ, CA, CO, CT, DC, DE, FL, GA, GU, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN,' +
 			'MO, MS, MT, NC, ND, NH, NJ, NM, NV, NY, OH, OK, OR, PA, PR, RI, SC, SD, TN, TX, UT, VA, VI, VT, WA, WI, WV, WY',
 
 			'CA': 'AB, BC, MB, NB, NL, NS, ON, PE, QC, SK, NT, NU, YT'
@@ -64,7 +65,7 @@ angular.module('configuration', [])
 		// cookie expiration in days
 		var cookieExpirationInDays = 3;
 
-		var dishSearchParams = 'q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy&city&distance&ne_lat&sw_lat&ne_lng&sw_lng&lat&lng';
+		var dishSearchParams = 'q&vegan&vegetarian&gluten_free&min_price&max_price&nationality&sortBy&distance&ne_lat&sw_lat&ne_lng&sw_lng&lat&lng';
 
 		/* jshint undef: false */
 		switch (env) {
@@ -98,6 +99,7 @@ angular.module('configuration', [])
 			uploadMultiple: uploadMultiple,
 			autoProcessQueue: autoProcessQueue,
 			addRemoveLinks: addRemoveLinks,
+			autoDiscover: autoDiscover,
 			nationalities: nationalities,
 			payoutCountries: payoutCountries,
 			states: states,

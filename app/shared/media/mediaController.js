@@ -1,10 +1,11 @@
 angular.module('mediaUpload', [
 	'configuration',
-	'media.api'
+	'media.api',
+	'cropper'
 ])
 
-	.controller('MediaController', ['config', 'devHelper', 'sessionService', 'mediaService', '$state', 'AuthAPI',
-		function (config, devHelper, sessionService, mediaService, $state, AuthAPI) {
+	.controller('MediaController', ['config', 'devHelper', 'sessionService', 'mediaService', '$state', 'AuthAPI', 'cropperService',
+		function (config, devHelper, sessionService, mediaService, $state, AuthAPI, cropperService) {
 
 			/*********************
 			 *  Private Functions
@@ -38,7 +39,7 @@ angular.module('mediaUpload', [
 							myDropzone.removeFile(file);
 
 							// dynamically create modals to allow multiple files processing
-							var $cropperModal = $(mediaService.getCropperModalTemplate());
+							var $cropperModal = $(cropperService.getCropperModalTemplate());
 							// 'Crop and Upload' button in a modal
 							var $uploadCrop = $cropperModal.find('.crop-upload');
 
@@ -71,7 +72,7 @@ angular.module('mediaUpload', [
 								// get cropped image data
 								var blob = $img.cropper('getCroppedCanvas').toDataURL();
 								// transform it to Blob object
-								var newFile = mediaService.dataURItoBlob(blob);
+								var newFile = cropperService.dataURItoBlob(blob);
 								// set 'cropped to true' (so that we don't get to that listener again)
 								newFile.cropped = true;
 								// assign original filename

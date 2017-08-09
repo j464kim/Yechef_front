@@ -18,7 +18,8 @@
 			<div>
 				<md-input-container class="md-block">
 					<label for="paymentPostalCode">Zip Code / Postal Code</label>
-					<input id="paymentPostalCode" type="text" ng-model="pcCtrl.card.address_zip" required/>
+					<input id="paymentPostalCode" type="text" ng-model="pcCtrl.card.address_zip" placeholder=""
+					       ui-mask="*****?*" required/>
 				</md-input-container>
 			</div>
 			<!--Card Holder Name-->

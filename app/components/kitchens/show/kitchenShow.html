@@ -102,11 +102,19 @@
 	</div>
 	<!--Kitchen Dishes-->
 	<div class="row">
-		<h2>Dishes</h2>
 		<div class="row">
-			<div class="col-md-3" ng-repeat="dish in KitchenCtrl.dishes" loader>
-				<dish-card dish="dish"></dish-card>
-			</div>
+			<h2 class="text-center">Dishes</h2>
+			<button class="go-prev pull-left">previous</button>
+			<button class="go-next pull-right">next</button>
+		</div>
+
+		<div class="row">
+			<slick swipe="true" swipe-to-slide="true" init-onload=true data="KitchenCtrl.dishes" infinite="false"
+			       prev-arrow=".go-prev" next-arrow=".go-next" responsive="KitchenCtrl.dishBreakpoints">
+				<div ng-repeat="dish in KitchenCtrl.dishes">
+					<dish-card dish="dish"></dish-card>
+				</div>
+			</slick>
 		</div>
 	</div>
 	<!-- Gmap -->

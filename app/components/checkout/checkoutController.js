@@ -64,7 +64,7 @@ angular.module('checkout.billing', [
 			}
 
 			function _chargePayment(withDefault) {
-				if (withDefault == undefined) {
+				if (typeof withDefault == undefined) {
 					CheckoutService.tokenizeCard(that.card)
 						.then(function (response) {
 							_chargeObj.token = response.id;

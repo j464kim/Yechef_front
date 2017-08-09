@@ -61,6 +61,8 @@ module.exports = function(config) {
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-moment/angular-moment.js',
       'bower_components/cropper/dist/cropper.js',
+      'bower_components/slick-carousel/slick/slick.min.js',
+      'bower_components/angular-slick/dist/slick.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

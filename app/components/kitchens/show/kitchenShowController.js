@@ -18,6 +18,7 @@ angular.module('kitchen.show', [
 			 *  Public Variables
 			 **********************/
 			this.isMine = false;
+			this.dishBreakpoints = genericService.dishBreakpoints;
 
 			/*********************
 			 *  Private Functions

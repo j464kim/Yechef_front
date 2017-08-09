@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('main', ['search'])
+angular.module('main', ['search', 'cfp.loadingBar'])
 
-	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'authService',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, authService) {
+	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'cfpLoadingBar',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, cfpLoadingBar) {
 
 			var that = this;
 			if (!$rootScope.currentUser) {
@@ -21,11 +21,11 @@ angular.module('main', ['search'])
 
 			$scope.$on('event:auth-loginRequired', function (event, data) {
 				devHelper.log('refreshing token...');
-				authService.loginCancelled("", data); //Fixes infinitely showing loading-bar by rejecting ajax calls
 				AuthAPI.refreshToken().then(function () {
 					devHelper.log('Token successfully refreshed');
 				}, function () {
 					devHelper.log('Fail to refresh token, redirecting to login page');
+					cfpLoadingBar.complete();
 					sessionService.revokeSession();
 					$state.go('user.login');
 				});

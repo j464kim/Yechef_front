@@ -43,10 +43,13 @@ angular.module('mediaUpload', [
 							// 'Crop and Upload' button in a modal
 							var $uploadCrop = $cropperModal.find('.crop-upload');
 
-							var $img = $('<img />');
+							var $img = $('<img id="image-to-crop" />');
+							var mimeType = '';
 							// initialize FileReader which reads uploaded file
 							var reader = new FileReader();
 							reader.onloadend = function () {
+								// Find the true mime type
+								mimeType = cropperService.dataURLtoMimeType(reader.result, file.type);
 								// add uploaded and read image to modal
 								$cropperModal.find('.image-container').html($img);
 								$img.attr('src', reader.result);
@@ -70,9 +73,9 @@ angular.module('mediaUpload', [
 							// listener for 'Crop and Upload' button in modal
 							$uploadCrop.on('click', function () {
 								// get cropped image data
-								var blob = $img.cropper('getCroppedCanvas').toDataURL();
+								var blob = $img.cropper('getCroppedCanvas').toDataURL(mimeType);
 								// transform it to Blob object
-								var newFile = cropperService.dataURItoBlob(blob);
+								var newFile = cropperService.dataURItoBlob(blob, mimeType);
 								// set 'cropped to true' (so that we don't get to that listener again)
 								newFile.cropped = true;
 								// assign original filename

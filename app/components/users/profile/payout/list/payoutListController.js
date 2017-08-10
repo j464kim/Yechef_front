@@ -45,7 +45,6 @@ angular.module('user.profile.payout.list', [
 
 			function _updateAddress() {
 				devHelper.log(that.address);
-				that.address.state = that.selectedState.display;
 				PayoutAPI.updateAddress(that.address, that.account.id)
 					.then(function (response) {
 						devHelper.log(response);

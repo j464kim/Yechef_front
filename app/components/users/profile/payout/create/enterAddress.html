@@ -25,9 +25,9 @@
 		<md-autocomplete
 				ng-disabled="!selectedCountry"
 				md-no-cache="true"
-				md-selected-item="pcCtrl.address.state"
-				md-search-text="searchState"
-				md-items="state in pcCtrl.querySearch(searchState, pcCtrl.getStates(pcCtrl.address.country))"
+				md-selected-item="selectedState"
+				md-search-text="pcCtrl.address.state"
+				md-items="state in pcCtrl.querySearch(pcCtrl.address.state, pcCtrl.getStates(pcCtrl.address.country))"
 				md-min-length="0"
 				md-item-text="state.display"
 				placeholder="Select State / Province"

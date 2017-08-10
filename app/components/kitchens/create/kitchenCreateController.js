@@ -23,7 +23,6 @@ angular.module('kitchen.create', [
 			 *  Private Functions
 			 **********************/
 			function _createKitchen() {
-				this.kitchen.country = this.selectedCountry.display;
 				devHelper.log(that.kitchen.address);
 				that.kitchen.lat = that.kitchen.address.geometry.location.lat();
 				that.kitchen.lng = that.kitchen.address.geometry.location.lng();

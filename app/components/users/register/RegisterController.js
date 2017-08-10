@@ -6,8 +6,8 @@ angular.module('user.register', [
 ])
 
 
-	.controller('RegisterController', ['$state', '$stateParams', 'AuthAPI', 'devHelper', 'genericService',
-		function ($state, $stateParams, AuthAPI, devHelper, genericService) {
+	.controller('RegisterController', ['$state', '$stateParams', 'AuthAPI', 'devHelper', 'genericService', '$rootScope',
+		function ($state, $stateParams, AuthAPI, devHelper, genericService, $rootScope) {
 
 			/*********************
 			 *    Private Variables
@@ -34,7 +34,7 @@ angular.module('user.register', [
 						var data = response;
 						devHelper.log('Successfully sent email verify link');
 						devHelper.log(data.body);
-						$state.go('home');
+						$state.go($rootScope.previousState, $rootScope.previousParams);
 						genericService.showToast(data.message);
 					},
 					function (response) {

@@ -6,8 +6,8 @@ angular.module('user.login', [
 ])
 
 
-	.controller('LoginController', ['$state', 'AuthAPI', 'devHelper', 'genericService',
-		function ($state, AuthAPI, devHelper, genericService) {
+	.controller('LoginController', ['$state', 'AuthAPI', 'devHelper', 'genericService', '$rootScope',
+		function ($state, AuthAPI, devHelper, genericService, $rootScope) {
 
 			/*********************
 			 *    Private Variables
@@ -37,7 +37,7 @@ angular.module('user.login', [
 						AuthAPI.setCurrentUser().then(
 							function (currentUser) {
 								devHelper.log(currentUser);
-								$state.go('home');
+								$state.go($rootScope.previousState, $rootScope.previousParams);
 							},
 							function (error) {
 								devHelper.log(error, 'error');
@@ -61,7 +61,7 @@ angular.module('user.login', [
 						AuthAPI.setCurrentUser().then(
 							function (currentUser) {
 								devHelper.log(currentUser);
-								$state.go('home');
+								$state.go($rootScope.previousState, $rootScope.previousParams);
 							},
 							function (error) {
 								devHelper.log(error, 'error');
@@ -81,7 +81,7 @@ angular.module('user.login', [
 				AuthAPI.logout().then(
 					function (response) {
 						devHelper.log(response);
-						$state.go('home');
+						$state.go($rootScope.currentState, $rootScope.currentParams);
 					},
 					function (response) {
 						devHelper.log(response, 'error');

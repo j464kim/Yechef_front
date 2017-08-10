@@ -25,7 +25,7 @@ angular.module('mediaUpload', [
 					init: function () {
 						myDropzone = this; // closure
 
-						myDropzone.on("complete", function (file) {
+						myDropzone.on("coamplete", function (file) {
 							myDropzone.removeFile(file);
 						});
 

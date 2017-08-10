@@ -1,0 +1,56 @@
+<h2 class="text-center">Personal Information</h2>
+<br>
+<form class="form-validation" ng-submit="plCtrl.updatePersonalInfo()" name="form" novalidate>
+	<div class="row">
+		<!--DOB Date-->
+		<div class="col-sm-4 col-xs-4">
+			<md-input-container class="md-block">
+				<label for="dobDate">DD(birth)</label>
+				<input id="dobDate" type="text" name="expMonth" ng-model="plCtrl.info.dob_day" ui-mask="99"
+				       placeholder="" required/>
+				<div class="field-message" ng-messages="form.expMonth.$error" ng-if='form.expMonth.$touched'
+				     ng-cloak>
+					<div ng-message="required">Day of birth is required</div>
+				</div>
+			</md-input-container>
+		</div>
+		<!--DOB Month-->
+		<div class="col-sm-4 col-xs-4">
+			<md-input-container class="md-block">
+				<label for="dobMonth">MM(birth)</label>
+				<input id="dobMonth" type="text" name="expMonth" ng-model="plCtrl.info.dob_month" ui-mask="99"
+				       placeholder="" required/>
+				<div class="field-message" ng-messages="form.expMonth.$error" ng-if='form.expMonth.$touched'
+				     ng-cloak>
+					<div ng-message="required">Month of birth is required</div>
+				</div>
+			</md-input-container>
+		</div>
+		<!--DOB Year-->
+		<div class="col-sm-4 col-xs-4">
+			<md-input-container class="md-block">
+				<label for="dobYear">YYYY(birth)</label>
+				<input id="dobYear" type="text" name="expYear" ng-model="plCtrl.info.dob_year" ui-mask="9999"
+				       placeholder="" required/>
+				<div class="field-message" ng-messages="form.expYear.$error" ng-if='form.expYear.$touched'
+				     ng-cloak>
+					<div ng-message="required">Year of birth is required</div>
+				</div>
+			</md-input-container>
+		</div>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="firstName">First Name</label>
+			<input id="firstName" type="text" ng-model="plCtrl.info.first_name" required>
+		</md-input-container>
+	</div>
+	<div>
+		<md-input-container class="md-block">
+			<label for="lastName">Last Name</label>
+			<input id="lastName" type="text" ng-model="plCtrl.info.last_name" required/>
+		</md-input-container>
+	</div>
+	<md-button flex class="md-raised md-primary pull-left" type="submit" ng-disabled="form.$invalid">Submit</md-button>
+	<md-button flex class="md-raised pull-right" ui-sref="user.profile.payout.list">Back</md-button>
+</form>

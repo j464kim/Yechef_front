@@ -79,6 +79,19 @@ angular.module('payout.api', [
 				});
 			}
 
+			function updateInfo(personalInfo, accountId) {
+				return $q(function (resolve, reject) {
+					PayoutResource.update({
+							id: accountId + '/personalInfo'
+						}, personalInfo
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			function createExternalAccount(token) {
 				return $q(function (resolve, reject) {
 					PayoutResource.create({
@@ -124,6 +137,7 @@ angular.module('payout.api', [
 				getExternalAccounts: getExternalAccounts,
 				createAccount: createAccount,
 				updateAddress: updateAddress,
+				updateInfo: updateInfo,
 				createExternalAccount: createExternalAccount,
 				deleteExternalAccount: deleteExternalAccount,
 				switchDefaultExternalAccount: switchDefaultExternalAccount,

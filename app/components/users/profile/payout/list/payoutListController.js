@@ -49,7 +49,20 @@ angular.module('user.profile.payout.list', [
 					.then(function (response) {
 						devHelper.log(response);
 						that.account = response;
-						devHelper.log('Successfully updated address of the payout account');
+						devHelper.log('Successfully updated address of payout account');
+						$state.go('user.profile.payout.list');
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						devHelper.log(response, 'error');
+					})
+			}
+
+			function _updatePersonalInfo() {
+				PayoutAPI.updateInfo(that.info, that.account.id)
+					.then(function (response) {
+						devHelper.log(response);
+						that.account = response;
+						devHelper.log('Successfully updated personal information of payout account');
 						$state.go('user.profile.payout.list');
 					}, function (response) {
 						// TODO handle error state-*/ ˙
@@ -61,6 +74,7 @@ angular.module('user.profile.payout.list', [
 			 *  Public Functions
 			 **********************/
 			this.updateAddress = _updateAddress;
+			this.updatePersonalInfo = _updatePersonalInfo;
 			this.getStates = genericService.getStates;
 			this.querySearch = genericService.querySearch;
 

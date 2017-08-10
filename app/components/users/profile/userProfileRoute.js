@@ -103,8 +103,13 @@ angular.module('profile', [
 				template: '<ui-view/>',
 			})
 			.state('user.profile.payout.update.address', {
-				url: '',
+				url: '/address',
 				templateUrl: 'components/users/profile/payout/update/updateAddress.html',
+				controller: 'PayoutListController as plCtrl',
+			})
+			.state('user.profile.payout.update.personalInfo', {
+				url: '/personal',
+				templateUrl: 'components/users/profile/payout/update/personalInfo.html',
 				controller: 'PayoutListController as plCtrl',
 			})
 			.state('user.profile.payout.preference', {

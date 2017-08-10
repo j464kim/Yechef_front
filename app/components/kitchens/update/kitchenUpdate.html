@@ -1,95 +1,98 @@
-<h2>MY KITCHEN</h2>
-<hr>
-<div class="col-md-6 col-md-offset-3">
-
-	<form class="form-validation" novalidate name="form">
-		<div class="row">
-			<img ng-src="{{kuCtrl.kitchen.medias[0].url}}" class="image-show" alt="Card image cap"
-			     style="width:100%;">
-		</div>
-		<!--Name-->
-		<div class="row">
-			<div class="kitchenName">
-				<md-input-container class="md-block">
-					<label for="name">Kitchen Name</label>
-					<input id="name" type="text" name="name" ng-model="kuCtrl.kitchen.name"
-					       ng-minlength="5" ng-maxlength="40" required/>
-					<div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$touched' ng-cloak>
-						<div ng-message="required">Kitchen Name is required</div>
-						<div ng-message="minlength">Kitchen Name must have minimum 5 characters</div>
-						<div ng-message="maxlength">Kitchen Name must have maximum 40 characters</div>
-					</div>
-				</md-input-container>
+<div class="container">
+	<div class="col-md-6 col-md-offset-3">
+		<hr>
+		<form class="form-validation" novalidate name="form">
+			<h2 class="text-center">Update Kitchen</h2><br>
+			<div class="row">
+				<img ng-src="{{kuCtrl.kitchen.medias[0].url}}" class="image-show" alt="Card image cap"
+				     style="width:100%;">
 			</div>
-			<!--Address-->
-			<div class="kitchenAddress">
-				<md-input-container class="md-block">
-					<label for="address">Address ({{kuCtrl.kitchen.country}})</label>
-					<input id="address" type="text" name="address" ng-model="kuCtrl.kitchen.address"
-					       g-places-autocomplete options="UkCtrl.addressOptions" autocomplete="off"
-					       required/>
-					<div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
-					     ng-cloak>
-						<div ng-message="required">Address is required</div>
+			<!--Name-->
+			<div class="row">
+				<div class="kitchenName">
+					<md-input-container class="md-block">
+						<label for="name">Kitchen Name</label>
+						<input id="name" type="text" name="name" ng-model="kuCtrl.kitchen.name"
+						       ng-minlength="5" ng-maxlength="40" required/>
+						<div class="field-message" ng-messages="form.name.$error" ng-if='form.name.$touched' ng-cloak>
+							<div ng-message="required">Kitchen Name is required</div>
+							<div ng-message="minlength">Kitchen Name must have minimum 5 characters</div>
+							<div ng-message="maxlength">Kitchen Name must have maximum 40 characters</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--Address-->
+				<div class="kitchenAddress">
+					<md-input-container class="md-block">
+						<label for="address">Address ({{kuCtrl.kitchen.country}})</label>
+						<input id="address" type="text" name="address" ng-model="kuCtrl.address"
+						       g-places-autocomplete options="kuCtrl.addressOptions" autocomplete="off"
+						       forceSelection="true"
+						       required/>
+						<div class="field-message" ng-messages="form.address.$error" ng-if='form.address.$touched'
+						     ng-cloak>
+							<div ng-message="required">Address is required</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--Phone-->
+				<div class="kitchenPhone">
+					<md-input-container class="md-block">
+						<label for="phone">Phone</label>
+						<input id="phone" type="text" name="phone" ng-model="kuCtrl.kitchen.phone"
+						       ui-mask="+9-999-999-9999"
+						       placeholder="" required/>
+						<div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$touched' ng-cloak>
+							<div ng-message="required">Phone number is required</div>
+							<div ng-message="pattern">Must be a valid 10 digit phone number</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--Email-->
+				<div class="kitchenEmail">
+					<md-input-container class="md-block">
+						<label for="email">Email</label>
+						<input id="email" type="email" name="email" ng-model="kuCtrl.kitchen.email"
+						       required/>
+						<div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$touched' ng-cloak>
+							<div ng-message="required">Email is required</div>
+							<div ng-message="email">Must be a valid email</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--Description-->
+				<div class="kitchenDescription">
+					<md-input-container class="md-block">
+						<label for="description">Description</label>
+						<textarea md-maxlength="200" id="description" name="description"
+						          ng-model="kuCtrl.kitchen.description" required></textarea>
+						<div class="field-message" ng-messages="form.description.$error"
+						     ng-if='form.description.$touched'
+						     ng-cloak>
+							<div ng-message="required">Description is required</div>
+						</div>
+					</md-input-container>
+				</div>
+				<!--Image-->
+				<div class="kitchenImage">
+					<label for="dropzone">Image</label>
+					<div ng-app="mediaUpload" ng-controller="MediaController">
+						<div class="dropzone" id="dropzone" ng-dropzone></div>
 					</div>
-				</md-input-container>
-			</div>
-			<!--Phone-->
-			<div class="kitchenPhone">
-				<md-input-container class="md-block">
-					<label for="phone">Phone</label>
-					<input id="phone" type="text" name="phone" ng-model="kuCtrl.kitchen.phone"
-					       ui-mask="+9-999-999-9999"
-					       placeholder="" required/>
-					<div class="field-message" ng-messages="form.phone.$error" ng-if='form.phone.$touched' ng-cloak>
-						<div ng-message="required">Phone number is required</div>
-						<div ng-message="pattern">Must be a valid 10 digit phone number</div>
+				</div>
+				<!--Button-->
+				<div class="submit">
+					<md-button class="md-raised md-primary pull-left"
+					           ng-click="kuCtrl.updateKitchen(kuCtrl.kitchen, UkCtrl)"
+					           ng-disabled="form.$invalid">Update
+					</md-button>
+					<div class="pull-right">
+						<a type="button"
+						   ui-sref="user.kitchen.general.view"
+						   class="btn btn-small">cancel</a>
 					</div>
-				</md-input-container>
-			</div>
-			<!--Email-->
-			<div class="kitchenEmail">
-				<md-input-container class="md-block">
-					<label for="email">Email</label>
-					<input id="email" type="email" name="email" ng-model="kuCtrl.kitchen.email"
-					       required/>
-					<div class="field-message" ng-messages="form.email.$error" ng-if='form.email.$touched' ng-cloak>
-						<div ng-message="required">Email is required</div>
-						<div ng-message="email">Must be a valid email</div>
-					</div>
-				</md-input-container>
-			</div>
-			<!--Description-->
-			<div class="kitchenDescription">
-				<md-input-container class="md-block">
-					<label for="description">Description</label>
-					<textarea md-maxlength="200" id="description" name="description"
-					          ng-model="kuCtrl.kitchen.description" required></textarea>
-					<div class="field-message" ng-messages="form.description.$error" ng-if='form.description.$touched'
-					     ng-cloak>
-						<div ng-message="required">Description is required</div>
-					</div>
-				</md-input-container>
-			</div>
-			<!--Image-->
-			<div class="kitchenImage">
-				<label for="dropzone">Image</label>
-				<div ng-app="mediaUpload" ng-controller="MediaController">
-					<div class="dropzone" id="dropzone" ng-dropzone></div>
 				</div>
 			</div>
-			<!--Button-->
-			<div class="submit">
-				<md-button class="md-raised md-primary pull-left"
-				           ng-click="kuCtrl.updateKitchen(kuCtrl.kitchen, UkCtrl)"
-				           ng-disabled="form.$invalid">Update
-				</md-button>
-				<div class="pull-right">
-					<a type="button"
-					   ui-sref="user.kitchen.general.view"
-					   class="btn btn-small">cancel</a>
-				</div>
-			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 </div>

@@ -59,7 +59,6 @@ angular.module('user.kitchen', [
 				for (index in that.myKitchens) {
 					var kitchen = that.myKitchens[index];
 					if (kitchen.id == that.myCurrentKitchenId) {
-						// mapService.restrictAddressByCountry(that, kitchen.country);
 						that.kitchenToSelect = kitchen;
 						_getKitchen(kitchen.id);
 						return true;

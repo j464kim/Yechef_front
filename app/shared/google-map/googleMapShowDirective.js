@@ -18,7 +18,6 @@ angular.module('googleMapShowDirective', [])
 					devHelper.log($scope.for);
 					devHelper.log($scope.address);
 					$scope.map = mapService.getMapOption();
-					$scope.map.options.gestureHandling = 'none';
 					$scope.map.zoom = 15;
 					$scope.mapCtrl = {};
 					$scope.marker = {id: 0};

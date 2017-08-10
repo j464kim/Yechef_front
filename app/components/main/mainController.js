@@ -1,9 +1,28 @@
 'use strict';
 
-angular.module('main', ['search', 'cfp.loadingBar'])
+angular.module('main', [
+	'search',
+	'cfp.loadingBar',
+	'configuration'
+])
 
-	.controller('MainController', ['$scope', '$rootScope', 'AuthAPI', 'devHelper', '$state', 'sessionService', '$mdTheming', 'themeProvider', 'cfpLoadingBar',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, cfpLoadingBar) {
+	.controller('MainController', [
+		'$scope',
+		'$rootScope',
+		'AuthAPI',
+		'devHelper',
+		'$state',
+		'sessionService',
+		'$mdTheming',
+		'themeProvider',
+		'cfpLoadingBar',
+		'config',
+		'$location',
+		'$window',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, cfpLoadingBar, config, $location, $window) {
+
+			//We need to make sure the app is running on https protocol for the best security.
+			forceSsl();
 
 			var that = this;
 			if (!$rootScope.currentUser) {
@@ -25,9 +44,9 @@ angular.module('main', ['search', 'cfp.loadingBar'])
 					devHelper.log('Token successfully refreshed');
 				}, function () {
 					devHelper.log('Fail to refresh token, redirecting to login page');
-          // https://github.com/chieffancypants/angular-loading-bar/pull/50
-          // Looks like the loading bar's interceptor has sync issue with http-auth-interceptor
-          // only in case refresh token fails loading bar has to be manually completed
+					// https://github.com/chieffancypants/angular-loading-bar/pull/50
+					// Looks like the loading bar's interceptor has sync issue with http-auth-interceptor
+					// only in case refresh token fails loading bar has to be manually completed
 					cfpLoadingBar.complete();
 					sessionService.revokeSession();
 					$state.go('user.login');
@@ -72,5 +91,13 @@ angular.module('main', ['search', 'cfp.loadingBar'])
 					$mdTheming.generateTheme('default');
 				}
 			});
+
+			function forceSsl() {
+				if (config.env === 'PROD') {
+					if ($location.protocol() !== 'https') {
+						$window.location.href = $location.absUrl().replace(/http/g, 'https');
+					}
+				}
+			}
 		}
 	]);

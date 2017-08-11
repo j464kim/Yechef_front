@@ -124,7 +124,7 @@ angular.module('profile', [
 			})
 			.state('user.profile.payout.new.address', {
 				url: '/address',
-				templateUrl: 'components/users/profile/payout/create/enterAddress.html',
+				templateUrl: 'components/users/profile/payout/create/payoutCreate.html',
 			})
 			.state('user.profile.payout.new.method', {
 				url: '/method',

@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'devHelper', 'genericService', 'config', 'mapService',
-		function ($state, KitchenAPI, devHelper, genericService, config, mapService) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'UserAPI', 'devHelper', 'genericService', 'config', 'mapService',
+		function ($state, KitchenAPI, UserAPI, devHelper, genericService, config, mapService) {
 
 			/*********************
 			 *  Private Variables
@@ -22,6 +22,26 @@ angular.module('kitchen.create', [
 			/*********************
 			 *  Private Functions
 			 **********************/
+			function _init() {
+				_checkPayout();
+			}
+
+			function _checkPayout() {
+				UserAPI.checkPayout().then(
+					function (response) {
+						devHelper.log(response);
+						if (!response) {
+							genericService.showToast('You need to create a payout account to receive fund ' +
+								'before opening your first kitchen :)');
+							$state.go('user.profile.payout.new.address');
+						}
+					}, function (response) {
+						genericService.showToast('Oops..! Something is wrong');
+						devHelper.log(response, 'error');
+					});
+			}
+
+
 			function _createKitchen() {
 				devHelper.log(that.kitchen.address);
 				that.kitchen.lat = that.kitchen.address.geometry.location.lat();
@@ -76,7 +96,7 @@ angular.module('kitchen.create', [
 			/*********************
 			 *  Initialization
 			 **********************/
-
+			_init();
 
 			/*********************
 			 *  EVENTS

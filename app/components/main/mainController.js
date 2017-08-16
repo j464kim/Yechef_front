@@ -25,6 +25,9 @@ angular.module('main', [
 			forceSsl();
 
 			var that = this;
+			$rootScope.pusherClient = new Pusher(config.pusherAPIKey, {
+				cluster: 'us2'
+			});
 			if (!$rootScope.currentUser) {
 				$rootScope.currentUser = {};
 			}

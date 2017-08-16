@@ -51,7 +51,7 @@ angular.module('kitchen.create', [
 					var newKitchen = response;
 					devHelper.log(newKitchen);
 
-					_uploadKitchenMedia(newKitchen);
+					mediaService.uploadMedia(newKitchen);
 
 					$state.go('kitchen.show', {'id': newKitchen.id});
 				}, function (response) {
@@ -59,23 +59,6 @@ angular.module('kitchen.create', [
 					devHelper.log(response, 'error');
 				});
 			}
-
-			function _uploadKitchenMedia(response) {
-
-				// instantiate Dropzone
-				var dropzoneInstance = Dropzone.forElement("#dropzone");
-
-				// figure out the model type to pass into dropzone controller
-				var mediableInfo = genericService.getModelType($state);
-
-				dropzoneInstance.on("sending", function (file, xhr, formData) {
-					formData.append('mediable_id', response.id);
-					formData.append('mediable_type', mediableInfo['type']);
-				});
-
-				dropzoneInstance.processQueue();
-			}
-
 
 			/*********************
 			 *  Public Functions
@@ -97,7 +80,6 @@ angular.module('kitchen.create', [
 			 *  Initialization
 			 **********************/
 			_init();
-
 			/*********************
 			 *  EVENTS
 			 **********************/

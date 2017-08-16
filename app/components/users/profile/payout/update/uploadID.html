@@ -1,0 +1,14 @@
+<h2 class="text-center">Upload ID</h2>
+<form class="form-validation" ng-submit="plCtrl.uploadID()" name="form" novalidate>
+	<div class="idImage">
+		<label for="dropzone">Image</label>
+		<div ng-app="mediaUpload" ng-controller="MediaController">
+			<div class="dropzone" id="dropzone" ng-dropzone></div>
+		</div>
+	</div>
+	<div>
+		<md-button flex class="md-raised md-primary pull-left" type="submit" ng-disabled="form.$invalid">Update
+		</md-button>
+		<md-button flex class="md-raised pull-right" ui-sref="user.profile.payout.list">Back</md-button>
+	</div>
+</form>

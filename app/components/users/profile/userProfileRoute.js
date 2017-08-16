@@ -112,6 +112,11 @@ angular.module('profile', [
 				templateUrl: 'components/users/profile/payout/update/personalInfo.html',
 				controller: 'PayoutListController as plCtrl',
 			})
+			.state('user.profile.payout.update.uploadID', {
+				url: '/identification',
+				templateUrl: 'components/users/profile/payout/update/uploadID.html',
+				controller: 'PayoutListController as plCtrl',
+			})
 			.state('user.profile.payout.preference', {
 				url: '/view',
 				templateUrl: 'components/users/profile/payout/payoutPreference.html',

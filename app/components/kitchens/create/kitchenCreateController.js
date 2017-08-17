@@ -4,8 +4,8 @@ angular.module('kitchen.create', [
 	'kitchen.api',
 ])
 
-	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'UserAPI', 'devHelper', 'genericService', 'config', 'mapService',
-		function ($state, KitchenAPI, UserAPI, devHelper, genericService, config, mapService) {
+	.controller('KitchenCreateController', ['$state', 'KitchenAPI', 'UserAPI', 'devHelper', 'genericService', 'config', 'mapService', 'mediaService',
+		function ($state, KitchenAPI, UserAPI, devHelper, genericService, config, mapService, mediaService) {
 
 			/*********************
 			 *  Private Variables

@@ -15,6 +15,8 @@ angular.module('user.show', [
 			 **********************/
 				// reference to this controller
 			var that = this;
+			this.dishBreakpoints = genericService.dishBreakpoints;
+			this.kitchenBreakpoints = genericService.kitchenBreakpoints;
 
 			/*********************
 			 *    Private Variables

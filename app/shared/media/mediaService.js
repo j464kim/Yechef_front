@@ -53,6 +53,10 @@ angular.module('mediaUpload')
 
 			this.retrieveMediaToBeRemoved = function (mediaId) {
 
+				// for image crop, uncroped image is temporarily removed frmo dropzone which triggers this
+				if (typeof mediaId == 'undefined') {
+					return;
+				}
 				this.mediaIds.push(mediaId);
 				devHelper.log(this.mediaIds);
 			};
@@ -71,7 +75,6 @@ angular.module('mediaUpload')
 						devHelper.log(response, 'error');
 					});
 				}
-			}
-
+			};
 		}
 	]);

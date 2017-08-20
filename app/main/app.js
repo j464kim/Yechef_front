@@ -20,6 +20,7 @@ angular
 		'directive.card.dish',
 		'directive.card.kitchen',
 		'directive.button',
+		'slick',
 
 		'DuplicateRequestsFilter.Decorator',
 

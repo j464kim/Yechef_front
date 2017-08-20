@@ -15,7 +15,7 @@ angular.module('search', ['ngMaterial'])
 
 		self.distance = 0;
 
-		if ($state.is('home')) {
+		if ($state.is('home') || _.isEmpty($stateParams.city)) {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(
 					function (position) {
@@ -110,7 +110,7 @@ angular.module('search', ['ngMaterial'])
 				max_price: self.max_price,
 				nationality: self.nationality,
 				sortBy: self.sortBy,
-				city: self.city.formatted_address,
+				city: self.city,
 				distance: self.distance,
 				ne_lat: self.ne_lat,
 				ne_lng: self.ne_lng,

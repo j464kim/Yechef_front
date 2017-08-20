@@ -45,7 +45,7 @@ angular.module('dish.list', [
 				that.options.min_price = $stateParams.min_price;
 				that.options.max_price = $stateParams.max_price;
 				that.options.sortBy = $stateParams.sortBy;
-				that.options.city = $stateParams.city;
+				that.options.city = $stateParams.city.formatted_address;
 				that.options.distance = Number($stateParams.distance);
 				that.options.ne_lat = $stateParams.ne_lat;
 				that.options.sw_lat = $stateParams.sw_lat;
@@ -142,7 +142,7 @@ angular.module('dish.list', [
 				sctrl.max_price = $stateParams.max_price;
 				sctrl.sortBy = $stateParams.sortBy;
 				sctrl.distance = Number($stateParams.distance);
-				sctrl.city = {formatted_address: $stateParams.city};
+				sctrl.city = $stateParams.city;
 			};
 
 			this.dishMouseEnter = function (dish) {

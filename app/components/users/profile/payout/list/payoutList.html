@@ -25,12 +25,14 @@
 		<div>
 			<button ui-sref="user.profile.payout.show">Manage external accounts</button><br>
 			<button ui-sref="user.profile.payout.update.address">Update Account Address</button><br>
+			<button ui-sref="user.profile.payout.update.personalInfo">Update Personal Information</button>
+			<button ui-sref="user.profile.payout.update.uploadID">Upload ID (ex. Driver</button>
 		</div>
 	</div>
 
 	<div ng-show="plCtrl.hasNoAccount">
 		<h4>
-			<p>Payout preference is not set up yet.</p>
+			<p>Your payout preference is not set up yet.</p>
 			<p>In order to receive money, please set up your payout preference.</p>
 		</h4>
 		<div>

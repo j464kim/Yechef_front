@@ -39,7 +39,7 @@ angular.module('kitchen.api', [
 				getRating: {
 					method: 'GET',
 					url: apiEndpoint + ':id' + '/rating'
-				}
+				},
 			});
 		}
 	])

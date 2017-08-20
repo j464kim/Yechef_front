@@ -92,7 +92,7 @@ angular.module('mediaUpload', [
 						myDropzone.on("success", function (file, xhr, formData) {
 							devHelper.log('image is successfully uploaded');
 							$state.reload();
-							// For updating Profile picture at the top right headaer.
+							// For updating Profile picture at the top right header.
 							AuthAPI.setCurrentUser();
 						});
 

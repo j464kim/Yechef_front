@@ -1,0 +1,41 @@
+<h2 class="text-center">Create Payout Account</h2>
+<br>
+<form class="form-validation col-sm-8 col-sm-offset-2" ng-submit="pcCtrl.createAccount()" name="form" novalidate>
+	<div class="margin-bottom-1em">
+		<md-autocomplete
+				md-no-cache="true"
+				md-selected-item="selectedCountry"
+				md-search-text="pcCtrl.address.country"
+				md-items="country in pcCtrl.querySearch(pcCtrl.address.country, pcCtrl.payoutCountries)"
+				md-min-length="0"
+				md-item-text="country.display"
+				placeholder="Select Country"
+				md-require-match
+				required>
+			<md-item-template>
+				<span md-highlight-flags="^i">{{country.display}}</span>
+			</md-item-template>
+			<md-not-found>
+				No matches found.
+			</md-not-found>
+			<div ng-message="md-require-match">Please select an existing country.</div>
+		</md-autocomplete>
+	</div>
+	<div>
+		<md-checkbox ng-model="isChecked" required>
+			By registering your account, you agree to our
+			<a href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">
+				Services Agreement
+			</a>
+			and the
+			<a href="https://stripe.com/ca/connect-account/legal">
+				Stripe Connected Account Agreement.
+			</a>
+		</md-checkbox>
+	</div>
+	<div>
+		<md-button flex class="md-raised md-primary pull-right" type="submit" ng-disabled="form.$invalid">
+			Complete
+		</md-button>
+	</div>
+</form>

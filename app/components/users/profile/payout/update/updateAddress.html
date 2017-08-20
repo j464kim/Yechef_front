@@ -9,9 +9,9 @@
 		<md-autocomplete
 				ng-disabled="!plCtrl.account.country"
 				md-no-cache="true"
-				md-selected-item="plCtrl.selectedState"
-				md-search-text="searchState"
-				md-items="state in plCtrl.querySearch(searchState, plCtrl.getStates(plCtrl.account.country))"
+				md-selected-item="selectedState"
+				md-search-text="plCtrl.address.state"
+				md-items="state in plCtrl.querySearch(plCtrl.address.state, plCtrl.getStates(plCtrl.account.country))"
 				md-min-length="0"
 				md-item-text="state.display"
 				placeholder="Select State / Province"

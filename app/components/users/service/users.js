@@ -24,6 +24,11 @@ angular.module('user.api', [])
 				cancelOrder: {
 					method: 'GET',
 					url: api_endpoint + 'cancelOrder/' + ':orderId'
+				},
+				checkPayout: {
+					method: 'GET',
+					url: api_endpoint + 'checkPayout',
+					params: {userId: '@userId'}
 				}
 			});
 		}
@@ -207,6 +212,17 @@ angular.module('user.api', [])
 				});
 			};
 
+			function checkPayout() {
+				return $q(function (resolve, reject) {
+					UserResource.checkPayout()
+						.$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response)
+					});
+				});
+			};
+
 			return {
 				list: list,
 				show: show,
@@ -219,7 +235,8 @@ angular.module('user.api', [])
 				getMySubscriptions: getMySubscriptions,
 				getMySettings: getMySettings,
 				setMySettings: setMySettings,
-				cancelOrder: cancelOrder
+				cancelOrder: cancelOrder,
+				checkPayout: checkPayout,
 			};
 		}
 	]);

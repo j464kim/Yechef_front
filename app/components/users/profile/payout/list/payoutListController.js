@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('user.profile.payout.list', [
-	'payout.api', 'ngMaterial'
+	'payout.api', 'ngMaterial',
 ])
 
-	.controller('PayoutListController', ['$stateParams', '$state', 'PayoutAPI', 'CheckoutService', 'devHelper', 'genericService', 'config',
-		function ($stateParams, $state, PayoutAPI, CheckoutService, devHelper, genericService, config) {
+	.controller('PayoutListController', ['$stateParams', '$state', 'PayoutAPI', 'CheckoutService', 'devHelper', 'genericService', 'config', '$scope',
+		function ($stateParams, $state, PayoutAPI, CheckoutService, devHelper, genericService, config, $scope) {
 
 			/*********************
 			 *  Private Variables
@@ -45,12 +45,11 @@ angular.module('user.profile.payout.list', [
 
 			function _updateAddress() {
 				devHelper.log(that.address);
-				that.address.state = that.selectedState.display;
 				PayoutAPI.updateAddress(that.address, that.account.id)
 					.then(function (response) {
 						devHelper.log(response);
 						that.account = response;
-						devHelper.log('Successfully updated address of the payout account');
+						devHelper.log('Successfully updated address of payout account');
 						$state.go('user.profile.payout.list');
 					}, function (response) {
 						// TODO handle error state-*/ ˙
@@ -58,10 +57,40 @@ angular.module('user.profile.payout.list', [
 					})
 			}
 
+			function _updatePersonalInfo() {
+				PayoutAPI.updateInfo(that.info, that.account.id)
+					.then(function (response) {
+						devHelper.log(response);
+						that.account = response;
+						devHelper.log('Successfully updated personal information of payout account');
+						$state.go('user.profile.payout.list');
+					}, function (response) {
+						// TODO handle error state-*/ ˙
+						devHelper.log(response, 'error');
+					})
+			}
+
+			function _uploadID() {
+				// instantiate Dropzone
+				var dropzoneInstance = Dropzone.forElement("#dropzone");
+
+				// specific config for id upload
+				dropzoneInstance.options.url = config.endpoint + 'payout/identity';
+				dropzoneInstance.options.uploadMultiple = false;
+
+				dropzoneInstance.processQueue();
+
+				dropzoneInstance.on("success", function (file, xhr, formData) {
+					$state.go('user.profile.payout.list');
+				});
+			}
+
 			/*********************
 			 *  Public Functions
 			 **********************/
 			this.updateAddress = _updateAddress;
+			this.updatePersonalInfo = _updatePersonalInfo;
+			this.uploadID = _uploadID;
 			this.getStates = genericService.getStates;
 			this.querySearch = genericService.querySearch;
 

@@ -103,8 +103,18 @@ angular.module('profile', [
 				template: '<ui-view/>',
 			})
 			.state('user.profile.payout.update.address', {
-				url: '',
+				url: '/address',
 				templateUrl: 'components/users/profile/payout/update/updateAddress.html',
+				controller: 'PayoutListController as plCtrl',
+			})
+			.state('user.profile.payout.update.personalInfo', {
+				url: '/personal',
+				templateUrl: 'components/users/profile/payout/update/personalInfo.html',
+				controller: 'PayoutListController as plCtrl',
+			})
+			.state('user.profile.payout.update.uploadID', {
+				url: '/identification',
+				templateUrl: 'components/users/profile/payout/update/uploadID.html',
 				controller: 'PayoutListController as plCtrl',
 			})
 			.state('user.profile.payout.preference', {
@@ -119,7 +129,7 @@ angular.module('profile', [
 			})
 			.state('user.profile.payout.new.address', {
 				url: '/address',
-				templateUrl: 'components/users/profile/payout/create/enterAddress.html',
+				templateUrl: 'components/users/profile/payout/create/payoutCreate.html',
 			})
 			.state('user.profile.payout.new.method', {
 				url: '/method',

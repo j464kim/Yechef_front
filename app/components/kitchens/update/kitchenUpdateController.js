@@ -4,8 +4,8 @@ angular.module('kitchen.update', [
 	'kitchen.api'
 ])
 
-	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService', 'MapAPI', 'mediaService',
-		function ($stateParams, KitchenAPI, $state, devHelper, genericService, MapAPI, mediaService) {
+	.controller('KitchenUpdateController', ['$stateParams', 'KitchenAPI', '$state', 'devHelper', 'genericService', 'MapAPI', 'mediaService', 'mapService',
+		function ($stateParams, KitchenAPI, $state, devHelper, genericService, MapAPI, mediaService, mapService) {
 
 			/*********************
 			 *  Private Variables
@@ -30,6 +30,10 @@ angular.module('kitchen.update', [
 				KitchenAPI.show(kitchenId).then(function (response) {
 					devHelper.log(response);
 					that.kitchen = response;
+					that.address = {
+						formatted_address: that.kitchen.address
+					};
+					mapService.restrictAddressByCountry(that, that.kitchen.country);
 					if (response.medias.length) {
 						that.media = response.medias[0].url;
 					}
@@ -41,6 +45,11 @@ angular.module('kitchen.update', [
 			}
 
 			function _updateKitchen() {
+				if (that.address.formatted_address !== that.kitchen.address) {
+					that.kitchen.lat = that.address.geometry.location.lat();
+					that.kitchen.lng = that.address.geometry.location.lng();
+					that.kitchen.address = that.address.formatted_address;
+				}
 				KitchenAPI.update(that.kitchen, that.kitchen.id)
 					.then(function (response) {
 						var updatedKitchen = response;

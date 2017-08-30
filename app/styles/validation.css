@@ -2508,6 +2508,10 @@ h6 {
   bottom: 0;
   margin: auto;
 }
+#image-to-crop {
+  max-width: 300px;
+  height: auto;
+}
 .full-width {
   width: 100%;
 }

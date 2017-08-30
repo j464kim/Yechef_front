@@ -29,13 +29,11 @@ angular.module('main', [
 				$rootScope.currentUser = {};
 			}
 
-			$rootScope.previousState;
-			$rootScope.previousParams;
-			$rootScope.currentState;
 			$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 				$rootScope.previousState = from.name;
 				$rootScope.previousParams = fromParams;
 				$rootScope.currentState = to.name;
+				$rootScope.currentParams = toParams;
 			});
 
 			$scope.$on('event:auth-loginRequired', function (event, data) {

@@ -24,10 +24,10 @@ angular.module('kitchen.create', [
 			 **********************/
 			function _createKitchen() {
 				this.kitchen.country = this.selectedCountry.display;
-				devHelper.log(that.kitchen.address);
-				that.kitchen.lat = that.kitchen.address.geometry.location.lat();
-				that.kitchen.lng = that.kitchen.address.geometry.location.lng();
-				that.kitchen.address = that.kitchen.address.formatted_address;
+				devHelper.log(that.address);
+				that.kitchen.lat = that.address.geometry.location.lat();
+				that.kitchen.lng = that.address.geometry.location.lng();
+				that.kitchen.address = that.address.formatted_address;
 				KitchenAPI.create(that.kitchen).then(function (response) {
 					var newKitchen = response;
 					devHelper.log(newKitchen);
@@ -70,7 +70,7 @@ angular.module('kitchen.create', [
 				}
 				// Empty address input
 				if (that.kitchen) {
-					that.kitchen.address = null;
+					that.address = null;
 				}
 			};
 

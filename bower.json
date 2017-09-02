@@ -32,7 +32,8 @@
     "semantic-ui-comment": "^2.2.11",
     "angular-moment": "^1.0.1",
     "cropper": "^2.3.4",
-    "angular-slick": "^0.2.1"
+    "angular-slick": "^0.2.1",
+    "angular-time-picker": "^1.1.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

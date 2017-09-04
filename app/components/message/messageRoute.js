@@ -11,10 +11,11 @@ angular.module('message', [
 		$stateProvider
 			.state('message', {
 				url: '/messages',
+				params: {message_room_id: ""},
 				templateUrl: 'components/message/messageMain.html',
 				controller: 'MessageController as MessageCtrl'
 			})
-			.state('message.joined', {
+			.state('message.join', {
 				url: '/{message_room_id}',
 				templateUrl: 'components/message/message.html'
 			})

@@ -26,7 +26,7 @@ angular.module('main', [
 
 			var that = this;
 			$rootScope.pusherClient = new Pusher(config.pusherAPIKey, {
-				cluster: 'us2'
+				cluster: 'us2',
 			});
 			if (!$rootScope.currentUser) {
 				$rootScope.currentUser = {};

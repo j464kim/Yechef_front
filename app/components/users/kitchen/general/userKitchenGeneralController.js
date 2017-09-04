@@ -2,7 +2,7 @@ angular.module('user.kitchen.general', [
 	'ngMaterial',
 ])
 
-	.controller('userKitchenGeneralController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService) {
+	.controller('userKitchenGeneralController', function ($scope, $timeout, $mdSidenav, devHelper, UserAPI, KitchenAPI, $state, $stateParams, $q, genericService, MessageService) {
 		var that = this;
 
 		this.myCurrentKitchenId = $stateParams.myCurrentKitchenId;
@@ -63,6 +63,7 @@ angular.module('user.kitchen.general', [
 
 		this.querySearch = genericService.querySearch;
 		this.openMenu = genericService.openMenu;
+		this.message = MessageService.joinMessageRoom;
 
 		_init();
 

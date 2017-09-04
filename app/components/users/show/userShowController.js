@@ -4,11 +4,12 @@ angular.module('user.show', [
 	'ngMaterial',
 	'user.api',
 	'carousel',
+	'message.service'
 ])
 
 
-	.controller('UserShowController', ['$state', '$stateParams', 'UserAPI', 'devHelper', 'genericService',
-		function ($state, $stateParams, UserAPI, devHelper, genericService) {
+	.controller('UserShowController', ['$state', '$stateParams', 'UserAPI', 'devHelper', 'genericService', 'MessageService',
+		function ($state, $stateParams, UserAPI, devHelper, genericService, MessageService) {
 
 			/*********************
 			 *    Private Variables
@@ -135,6 +136,7 @@ angular.module('user.show', [
 			this.getKitchens = _getKitchens;
 			this.getForkedDishes = _getForkedDishes;
 			this.getSubscriptions = _getSubscriptions;
+			this.message = MessageService.joinMessageRoom;
 
 			/*********************
 			 *  Initialization

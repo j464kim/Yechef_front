@@ -12,9 +12,17 @@
 				<div class="list-group">
 					<div ng-repeat="messageRoom in MessageCtrl.messageRooms" loader>
 						<a ng-click="close()" ui-sref="message.join({message_room_id: {{messageRoom.id}}})"
-						   class="list-group-item">{{messageRoom.messages[0].user.first_name}}
-							{{messageRoom.messages[0].user.last_name}}: <br/>
-							{{messageRoom.messages[0].message_body}}</a>
+						   class="list-group-item">
+							{{messageRoom.recipient.first_name}} {{messageRoom.recipient.last_name}}
+							<br/>
+							<h6 ng-if="messageRoom.messages[0]">
+								<b>{{messageRoom.messages[0].user.first_name}} {{messageRoom.messages[0].user.last_name}}:</b>
+								{{messageRoom.messages[0].message_body}}
+							</h6>
+							<h6 ng-if="!messageRoom.messages[0]">
+								No messages
+							</h6>
+						</a>
 					</div>
 				</div>
 				<md-button ng-click="close()" class="md-warn md-raised" hide-gt-md>

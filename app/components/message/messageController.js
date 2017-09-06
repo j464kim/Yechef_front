@@ -41,8 +41,9 @@ angular.module('message.controller', [
 		});
 
 		MessageAPI.list(that.messageRoomId).then(function (response) {
-			devHelper.log(that.messages);
-			angular.extend(that.messages, response.map(function (message) {
+			devHelper.log(response);
+			that.title = response.recipient.first_name + ' ' + response.recipient.last_name;
+			angular.extend(that.messages, response.messages.map(function (message) {
 				message.username = message.user.first_name + ' ' + message.user.last_name;
 				message.content = message.message_body;
 				message.fromUserId = message.user_id;

@@ -1,9 +1,9 @@
-<div class="message-panel">
+<div class="message-panel" ng-if="MessageCtrl.title">
 	<irontec-simple-chat
 			messages="MessageCtrl.messages"
 			username="MessageCtrl.username"
 			my-user-id="MessageCtrl.myUserId"
-			input-placeholder-text="You can write here"
+			input-placeholder-text="Type your message"
 			submit-button-text="Send your message"
 			title="{{MessageCtrl.title}}"
 			theme="material"

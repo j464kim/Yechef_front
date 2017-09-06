@@ -41,8 +41,12 @@ angular.module('kitchen.api', [
 					url: apiEndpoint + ':id' + '/rating'
 				},
 				updateBusinessHour: {
-					method: 'POST',
+					method: 'PUT',
 					url: apiEndpoint + ':id' + '/businessHour'
+				},
+				toggleBusinessHour: {
+					method: 'POST',
+					url: apiEndpoint + ':id' + '/businessHour/toggle'
 				}
 			});
 		}
@@ -270,6 +274,23 @@ angular.module('kitchen.api', [
 				});
 			}
 
+			function toggleBusinessHour(kitchenId, day, active) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.toggleBusinessHour(
+						{
+							id: kitchenId,
+							day: day,
+							active: active,
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				list: list,
 				show: show,
@@ -286,6 +307,7 @@ angular.module('kitchen.api', [
 				acceptOrder: acceptOrder,
 				declineOrder: declineOrder,
 				updateBusinessHour: updateBusinessHour,
+				toggleBusinessHour: toggleBusinessHour,
 			};
 		}
 	]);

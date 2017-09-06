@@ -31,6 +31,18 @@ angular.module('businessHour', [
 				$scope.active = true;
 				var myCurrentKitchenId = $stateParams.myCurrentKitchenId;
 
+				$scope.toggleBusinessHour = function () {
+					console.log('toggled to ' + $scope.active);
+
+					KitchenAPI.toggleBusinessHour(myCurrentKitchenId, $scope.day, $scope.active).then(function (response) {
+						devHelper.log(response);
+						devHelper.log('toggled business hours');
+					}, function (response) {
+						genericService.showToast('Oops..! Something is wrong');
+						devHelper.log(response, 'error');
+					});
+				};
+
 				$scope.onApplyTimePicker = function (time) {
 					var open = time.fromHour + time.fromMinute;
 					var close = time.toHour + time.toMinute;

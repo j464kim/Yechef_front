@@ -2,9 +2,10 @@
 
 angular.module('message.controller', [
 	'irontec.simpleChat',
-	'message.api'
+	'message.api',
+	'constants.event'
 ])
-	.controller('MessageController', function ($rootScope, $stateParams, $pusher, MessageAPI, devHelper) {
+	.controller('MessageController', function ($rootScope, $stateParams, MessageAPI, devHelper, eventConstants) {
 		var that = this;
 
 		that.username = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
@@ -12,19 +13,7 @@ angular.module('message.controller', [
 
 		that.messageRoomId = $stateParams.message_room_id;
 		that.messages = [];
-
-		var pusher = $pusher($rootScope.pusherClient);
-		var my_channel = pusher.subscribe('message.' + $rootScope.currentUser.id);
-
-		// var channels = pusher.allChannels();
-
-		// my_channel.bind('App', function (data) {
-		// 	console.log(data);
-		// });
-
-		my_channel.bind_all(function (event, data) {
-			devHelper.log(event);
-			devHelper.log(data);
+		$rootScope.$on(eventConstants.message.type, function (event, data) {
 			that.messages.push({
 				'username': data.user.first_name + ' ' + data.user.last_name,
 				'content': data.message.message_body,

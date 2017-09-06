@@ -3,7 +3,8 @@
 angular.module('main', [
 	'search',
 	'cfp.loadingBar',
-	'configuration'
+	'configuration',
+	'event.service'
 ])
 
 	.controller('MainController', [
@@ -19,15 +20,32 @@ angular.module('main', [
 		'config',
 		'$location',
 		'$window',
-		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, cfpLoadingBar, config, $location, $window) {
+		'$pusher',
+		'EventService',
+		function ($scope, $rootScope, AuthAPI, devHelper, $state, sessionService, $mdTheming, themeProvider, cfpLoadingBar, config, $location, $window, $pusher, EventService) {
 
 			//We need to make sure the app is running on https protocol for the best security.
 			forceSsl();
 
 			var that = this;
-			$rootScope.pusherClient = new Pusher(config.pusherAPIKey, {
-				cluster: 'us2',
-			});
+
+			function _initPusher() {
+				$rootScope.pusherClient = new Pusher(config.pusherAPIKey, {
+					cluster: 'us2',
+				});
+				var pusher = $pusher($rootScope.pusherClient);
+				var my_channel = pusher.subscribe('pusher.' + $rootScope.currentUser.id);
+
+				my_channel.bind_all(function (event, data) {
+					EventService.handleEvent(event, data);
+				});
+
+				// var channels = pusher.allChannels();
+				// my_channel.bind('App', function (data) {
+				// 	console.log(data);
+				// });
+			}
+
 			if (!$rootScope.currentUser) {
 				$rootScope.currentUser = {};
 			}
@@ -100,5 +118,7 @@ angular.module('main', [
 					}
 				}
 			}
+
+			_initPusher();
 		}
 	]);

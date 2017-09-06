@@ -39,6 +39,10 @@ angular.module('kitchen.api', [
 				getRating: {
 					method: 'GET',
 					url: apiEndpoint + ':id' + '/rating'
+				},
+				updateBusinessHour: {
+					method: 'POST',
+					url: apiEndpoint + ':id' + '/businessHour'
 				}
 			});
 		}
@@ -248,6 +252,21 @@ angular.module('kitchen.api', [
 				});
 			};
 
+			function updateBusinessHour(kitchenId) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.updateBusinessHour(
+						{
+							id: kitchenId
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				list: list,
 				show: show,
@@ -263,6 +282,7 @@ angular.module('kitchen.api', [
 				getOrders: getOrders,
 				acceptOrder: acceptOrder,
 				declineOrder: declineOrder,
+				updateBusinessHour: updateBusinessHour,
 			};
 		}
 	]);

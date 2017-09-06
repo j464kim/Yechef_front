@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('businessHour', [
+	'kitchen.api'
 ])
 
 	.directive('businessHour', function () {
@@ -13,7 +14,7 @@ angular.module('businessHour', [
 				close: "@"
 			},
 			templateUrl: 'shared/businessHour/businessHourDirective.html',
-			controller: function ($rootScope, $scope, $state, devHelper, genericService) {
+			controller: function ($rootScope, $scope, $state, $stateParams, KitchenAPI, devHelper, genericService) {
 				// Set initial time range to be 09:30 - 17:00
 				$scope.settings = {
 					dropdownToggleState: false,
@@ -21,7 +22,7 @@ angular.module('businessHour', [
 						fromHour: '09',
 						fromMinute: '00',
 						toHour: '17',
-						toMinute: '30'
+						toMinute: '00'
 					},
 					theme: 'light',
 					noRange: false,
@@ -30,6 +31,7 @@ angular.module('businessHour', [
 				};
 
 				$scope.active = true;
+				var myCurrentKitchenId = $stateParams.myCurrentKitchenId;
 
 				$scope.onApplyTimePicker = function (time) {
 					$scope.open = time.fromHour + time.fromMinute;
@@ -39,6 +41,14 @@ angular.module('businessHour', [
 					devHelper.log(time);
 					console.log('Opening: ' + $scope.open);
 					console.log('Closing: ' + $scope.close);
+
+					KitchenAPI.updateBusinessHour(myCurrentKitchenId).then(function (response) {
+						devHelper.log(response);
+						devHelper.log('updated business hours');
+					}, function (response) {
+						genericService.showToast('Oops..! Something is wrong');
+						devHelper.log(response, 'error');
+					});
 				};
 				$scope.onClearTimePicker = function () {
 					console.log('Time range current operation cancelled.');

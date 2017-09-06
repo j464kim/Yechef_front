@@ -252,12 +252,15 @@ angular.module('kitchen.api', [
 				});
 			};
 
-			function updateBusinessHour(kitchenId) {
+			function updateBusinessHour(kitchenId, day, open, close) {
 
 				return $q(function (resolve, reject) {
 					KitchenResource.updateBusinessHour(
 						{
-							id: kitchenId
+							id: kitchenId,
+							day: day,
+							open: open,
+							close: close
 						}
 					).$promise.then(function (response) {
 						resolve(response.body);

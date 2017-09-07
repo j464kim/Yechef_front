@@ -15,7 +15,6 @@ angular.module('user.kitchen.general', [
 		}
 
 		function _getBusinessHour() {
-			console.log('get business hour');
 			KitchenAPI.getBusinessHour(that.myCurrentKitchenId).then(function (response) {
 				devHelper.log(response);
 				that.businessHours = response;

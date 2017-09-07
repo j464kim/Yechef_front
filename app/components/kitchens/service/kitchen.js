@@ -39,6 +39,18 @@ angular.module('kitchen.api', [
 				getRating: {
 					method: 'GET',
 					url: apiEndpoint + ':id' + '/rating'
+				},
+				updateBusinessHour: {
+					method: 'PUT',
+					url: apiEndpoint + ':id' + '/businessHour'
+				},
+				toggleBusinessHour: {
+					method: 'POST',
+					url: apiEndpoint + ':id' + '/businessHour/toggle'
+				},
+				getBusinessHour: {
+					method: 'GET',
+					url: apiEndpoint + ':id' + '/businessHour'
 				}
 			});
 		}
@@ -248,6 +260,56 @@ angular.module('kitchen.api', [
 				});
 			};
 
+			function getBusinessHour(kitchenId) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.getBusinessHour(
+						{
+							id: kitchenId,
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function updateBusinessHour(kitchenId, day, open, close) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.updateBusinessHour(
+						{
+							id: kitchenId,
+							day: day,
+							open: open,
+							close: close
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
+			function toggleBusinessHour(kitchenId, day, active) {
+
+				return $q(function (resolve, reject) {
+					KitchenResource.toggleBusinessHour(
+						{
+							id: kitchenId,
+							day: day,
+							active: active,
+						}
+					).$promise.then(function (response) {
+						resolve(response.body);
+					}, function (response) {
+						reject(response);
+					});
+				});
+			}
+
 			return {
 				list: list,
 				show: show,
@@ -263,6 +325,9 @@ angular.module('kitchen.api', [
 				getOrders: getOrders,
 				acceptOrder: acceptOrder,
 				declineOrder: declineOrder,
+				updateBusinessHour: updateBusinessHour,
+				toggleBusinessHour: toggleBusinessHour,
+				getBusinessHour: getBusinessHour,
 			};
 		}
 	]);

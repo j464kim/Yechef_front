@@ -77,6 +77,13 @@
 	<hr>
 </div>
 <div class="col-md-12 col-xs-12">
+	<label class="h3 row text-center">Business Hours</label>
+	<div class="row" ng-repeat="bHour in UkgCtrl.businessHours">
+		<business-hour day="{{bHour.day}}" active="{{bHour.active}}" open="{{bHour.open_time}}" close="{{bHour.close_time}}"></business-hour>
+	</div>
+	<hr/>
+</div>
+<div class="col-md-12 col-xs-12">
 	<!--Manage My Kitchen-->
 	<div class="row">
 		<label class="h3">My Kitchen</label>

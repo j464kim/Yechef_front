@@ -32,6 +32,7 @@ angular
 		'http-auth-interceptor',
 		'uiGmapgoogle-maps',
 		'google.places',
+		'wingify.timePicker',
 
 		// main modules
 		'main',
@@ -51,7 +52,7 @@ angular
 		'helper',
 		'header',
 		'footer',
-
+		'businessHour',
 
 		// services
 		'http.interceptor',

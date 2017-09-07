@@ -26,6 +26,16 @@ angular.module('configuration', [])
 			'CA': ['cad', 'usd']
 		};
 
+		var day = {
+			1: 'Mon',
+			2: 'Tue',
+			3: 'Wed',
+			4: 'Thu',
+			5: 'Fri',
+			6: 'Sat',
+			7: 'Sun',
+		};
+
 		// image upload
 		var maxFiles = 3;
 		var maxFileSize = 4; // 4mb
@@ -104,6 +114,7 @@ angular.module('configuration', [])
 			payoutCountries: payoutCountries,
 			states: states,
 			currency: currency,
+			day: day,
 			dishSearchParams: dishSearchParams,
 			carouselDefaultInterval: carouselDefaultInterval,
 			stripePublishableKey: stripePublishableKey,

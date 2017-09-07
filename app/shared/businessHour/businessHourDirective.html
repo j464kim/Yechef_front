@@ -1,11 +1,11 @@
 <div class="row col-md-4 col-md-offset-4">
 	<div class="pull-left">
 		<label>{{label}}</label>
-		<input type="checkbox" ng-model="active" ng-change="toggleBusinessHour()"/>
+		<input type="checkbox" ng-model="isOpen" ng-change="toggleBusinessHour()"/>
 	</div>
 	<div class="pull-right">
 		<wy-time-picker
-				ng-show="active"
+				ng-show="isOpen"
 				data-dropdown-toggle-state="settings.dropdownToggleState"
 				data-time-settings="settings.time"
 				data-theme="settings.theme"

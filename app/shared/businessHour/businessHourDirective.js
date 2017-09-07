@@ -8,33 +8,37 @@ angular.module('businessHour', [
 		return {
 			scope: {
 				day: "@",
-				label: "@",
 				active: "@", //import referenced model to our directives scope
+				open: "@",
+				close: "@"
 			},
 			templateUrl: 'shared/businessHour/businessHourDirective.html',
-			controller: function ($rootScope, $scope, $state, $stateParams, KitchenAPI, devHelper, genericService) {
-				// Set initial time range to be 09:30 - 17:00
-				$scope.settings = {
-					dropdownToggleState: false,
-					time: {
-						fromHour: '09',
-						fromMinute: '00',
-						toHour: '17',
-						toMinute: '00'
-					},
-					theme: 'light',
-					noRange: false,
-					format: 24,
-					noValidation: false
-				};
+			controller: function ($scope, $stateParams, KitchenAPI, devHelper, genericService, config) {
 
-				$scope.active = true;
+				// $scope.active = true;
 				var myCurrentKitchenId = $stateParams.myCurrentKitchenId;
 
-				$scope.toggleBusinessHour = function () {
-					console.log('toggled to ' + $scope.active);
+				function _init() {
+					// conversion of 0 and 1 to boolean expression
+					$scope.isOpen = !!+$scope.active;
+					$scope.label = config.day[$scope.day];
+					$scope.settings = {
+						dropdownToggleState: false,
+						time: {
+							fromHour: $scope.open.split('_')[0],
+							fromMinute: $scope.open.split('_')[1],
+							toHour: $scope.close.split('_')[0],
+							toMinute: $scope.close.split('_')[1]
+						},
+						theme: 'light',
+						noRange: false,
+						format: 24,
+						noValidation: false
+					};
+				}
 
-					KitchenAPI.toggleBusinessHour(myCurrentKitchenId, $scope.day, $scope.active).then(function (response) {
+				$scope.toggleBusinessHour = function () {
+					KitchenAPI.toggleBusinessHour(myCurrentKitchenId, $scope.day, $scope.isOpen).then(function (response) {
 						devHelper.log(response);
 						devHelper.log('toggled business hours');
 					}, function (response) {
@@ -44,14 +48,10 @@ angular.module('businessHour', [
 				};
 
 				$scope.onApplyTimePicker = function (time) {
-					var open = time.fromHour + time.fromMinute;
-					var close = time.toHour + time.toMinute;
+					var open = time.fromHour + '_' + time.fromMinute;
+					var close = time.toHour + '_' + time.toMinute;
 
-					console.log('Time range applied.');
 					devHelper.log(time);
-					console.log('Day: ' + $scope.day);
-					console.log('Opening: ' + open);
-					console.log('Closing: ' + close);
 
 					KitchenAPI.updateBusinessHour(myCurrentKitchenId, $scope.day, open, close).then(function (response) {
 						devHelper.log(response);
@@ -61,9 +61,12 @@ angular.module('businessHour', [
 						devHelper.log(response, 'error');
 					});
 				};
+
 				$scope.onClearTimePicker = function () {
-					console.log('Time range current operation cancelled.');
+					// custom action on clear time picker if wanted
 				};
+
+				_init();
 			}
 
 		}

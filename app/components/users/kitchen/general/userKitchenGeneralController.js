@@ -11,7 +11,19 @@ angular.module('user.kitchen.general', [
 		function _init() {
 			_getKitchenAdmins();
 			_getUsers();
+			_getBusinessHour();
 		}
+
+		function _getBusinessHour() {
+			console.log('get business hour');
+			KitchenAPI.getBusinessHour(that.myCurrentKitchenId).then(function (response) {
+				devHelper.log(response);
+				that.businessHours = response;
+			}, function (response) {
+				genericService.showToast('Oops..! Something is wrong');
+				devHelper.log(response, 'error');
+			});
+		};
 
 		function _getKitchenAdmins() {
 			KitchenAPI.getAdmins(that.myCurrentKitchenId).then(function (response) {

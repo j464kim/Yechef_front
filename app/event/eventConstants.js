@@ -20,6 +20,9 @@ angular.module('constants.event', [])
 		};
 
 		return {
+			unchecked: 0,
+			checked: 1,
+			deleted: 2,
 			message: message,
 			order: order
 		}

@@ -63,6 +63,8 @@ module.exports = function(config) {
       'bower_components/cropper/dist/cropper.js',
       'bower_components/slick-carousel/slick/slick.min.js',
       'bower_components/angular-slick/dist/slick.js',
+      'bower_components/pusher-angular/lib/pusher-angular.js',
+      'bower_components/angular-bootstrap-simple-chat/src/scripts/index.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

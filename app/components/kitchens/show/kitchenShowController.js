@@ -4,8 +4,8 @@ angular.module('kitchen.show', [
 	'kitchen.api', 'ngMaterial', 'share', 'googleMapShowDirective',
 ])
 
-	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope', 'genericService',
-		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope, genericService) {
+	.controller('KitchenShowController', ['$stateParams', 'KitchenAPI', 'devHelper', '$mdDialog', '$rootScope', 'genericService', 'MessageService',
+		function ($stateParams, KitchenAPI, devHelper, $mdDialog, $rootScope, genericService, MessageService) {
 
 			/*********************
 			 *  Private Variables
@@ -87,6 +87,8 @@ angular.module('kitchen.show', [
 			this.closeDialog = function () {
 				$mdDialog.cancel();
 			};
+
+			this.message = MessageService.joinMessageRoom;
 
 			/*********************
 			 *  Initialization

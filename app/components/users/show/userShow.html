@@ -28,6 +28,9 @@
 		<div class="col-md-3">
 			<!--Image Carousel-->
 			<img class="img-circle profile-image" ng-src="{{UserShowCtrl.user.medias[0].url}}"/>
+			<md-button ng-if="currentUser.id !== UserShowCtrl.user.id" class="md-primary md-raised"
+			           ng-click="UserShowCtrl.message(UserShowCtrl.user.id)">Message
+			</md-button>
 		</div>
 	</div>
 	<hr/>
@@ -61,7 +64,8 @@
 			                      current-page="UserShowCtrl.kitchensCurrentPage"
 			                      load-function="UserShowCtrl.getKitchens"></infinite-load-button>
 		</div>
-		<br/><hr>
+		<br/>
+		<hr>
 		<!--User's forked dishes-->
 		<div class="row" ng-if="UserShowCtrl.isForkedDishesPublic">
 			<div class="row">
@@ -90,7 +94,8 @@
 			                      current-page="UserShowCtrl.forkedDishesCurrentPage"
 			                      load-function="UserShowCtrl.getForkedDishes"></infinite-load-button>
 		</div>
-		<br/><hr>
+		<br/>
+		<hr>
 		<!--User's subscribed kitchens-->
 		<div class="row" ng-if="UserShowCtrl.isSubscribedKitchensPublic">
 			<div class="row">

@@ -88,7 +88,10 @@
 									{{KitchenCtrl.kitchenAdmins[0].first_name}}
 									{{KitchenCtrl.kitchenAdmins[0].last_name}}</h4></a>
 								<div>
-									<md-button class="md-raised md-primary">Message</md-button>
+									<md-button class="md-raised md-primary"
+									           ng-if="currentUser.id !== KitchenCtrl.kitchenAdmins[0].id"
+									           ng-click="KitchenCtrl.message(KitchenCtrl.kitchenAdmins[0].id)">Message
+									</md-button>
 									<br/>
 									<a class="btn btn-link" ng-click="KitchenCtrl.showChefs($event)">See more Chefs</a>
 								</div>
@@ -144,7 +147,9 @@
 							<a ui-sref="user.show({id: person.id})"><h4 id="kitchenChefName">{{person.first_name}}
 								{{person.last_name}}</h4></a>
 							<div>
-								<md-button class="md-raised md-primary">Message</md-button>
+								<md-button class="md-raised md-primary" ng-if="currentUser.id !== person.id"
+								           ng-click="KitchenCtrl.message(person.id)">Message
+								</md-button>
 								<br/>
 							</div>
 						</div>

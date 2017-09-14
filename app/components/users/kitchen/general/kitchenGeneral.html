@@ -58,7 +58,7 @@
 						</md-menu-item>
 						<md-menu-divider></md-menu-divider>
 						<md-menu-item>
-							<md-button>
+							<md-button ng-click="UkgCtrl.message(person.id)" ng-disabled="currentUser.id == person.id">
 								Message
 							</md-button>
 						</md-menu-item>

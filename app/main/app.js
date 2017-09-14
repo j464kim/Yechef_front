@@ -32,6 +32,7 @@ angular
 		'http-auth-interceptor',
 		'uiGmapgoogle-maps',
 		'google.places',
+		'pusher-angular',
 
 		// main modules
 		'main',
@@ -51,7 +52,7 @@ angular
 		'helper',
 		'header',
 		'footer',
-
+		'message',
 
 		// services
 		'http.interceptor',
@@ -67,11 +68,11 @@ angular
 		'dev',
 	])
 	.config(function (
-		$stateProvider, 
-		$urlRouterProvider, 
-		$httpProvider, 
-		uiGmapGoogleMapApiProvider, 
-		$mdThemingProvider, 
+		$stateProvider,
+		$urlRouterProvider,
+		$httpProvider,
+		uiGmapGoogleMapApiProvider,
+		$mdThemingProvider,
 		$provide
 	) {
 		//push http interceptor
@@ -96,7 +97,7 @@ angular
 		$mdThemingProvider.generateThemesOnDemand(true);
 		$provide.value('themeProvider', $mdThemingProvider);
 	})
-	.run(function (editableOptions, editableThemes) {
+	.run(function (editableOptions, editableThemes, $rootScope) {
 		editableOptions.theme = 'bs3'; //bootstrap3 theme. Can be also 'bs2', 'default'
 		editableOptions.submitButtonTitle = 'Update';
 		editableOptions.submitButtonAriaLabel = 'Update';

@@ -1,0 +1,14 @@
+<div class="message-panel" ng-if="MessageCtrl.title">
+	<irontec-simple-chat
+			messages="MessageCtrl.messages"
+			username="MessageCtrl.username"
+			my-user-id="MessageCtrl.myUserId"
+			input-placeholder-text="Type your message"
+			submit-button-text="Send your message"
+			title="{{MessageCtrl.title}}"
+			theme="material"
+			submit-function="MessageCtrl.sendMessage"
+			visible="MessageCtrl.visible"
+			expand-on-new="MessageCtrl.expandOnNew">
+	</irontec-simple-chat>
+</div>

@@ -2787,6 +2787,9 @@ md-card .carousel {
 .dish-card-content {
   padding-top: 0;
 }
+.chat-top-bar .window-actions .fa {
+  display: none !important;
+}
 .loader-wrapper {
   min-height: 0;
   height: 100%;

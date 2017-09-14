@@ -44,6 +44,9 @@ angular.module('configuration', [])
 		var stripeLivePublishable = 'pk_live_QyUbscUAIRaV56PhoXBZUK2D';
 		var stripePublishableKey = stripeTestPublishable;
 
+		//pusher
+		var pusherAPIKey = '9f9e3fe7532b12f773f8';
+
 		// Nationality
 		var nationalities = 'Fusion, African, American, Argentine, Bangladeshi, Brazilian, Burmese, Canadian, Chilean, \
                     Chinese, Ecuadorian, English, Ethiopian, French, German, Greek, Hungarian, Indian, Indonesian, \
@@ -109,6 +112,7 @@ angular.module('configuration', [])
 			stripePublishableKey: stripePublishableKey,
 			stripeTestPublishable: stripeTestPublishable,
 			stripeLivePublishable: stripeLivePublishable,
+			pusherAPIKey: pusherAPIKey
 		};
 
 	})());

@@ -13,6 +13,7 @@ angular.module('message.controller', [
 
 		that.messageRoomId = $stateParams.message_room_id;
 		that.messages = [];
+
 		$rootScope.$on(eventConstants.message.type, function (event, data) {
 			that.messages.push({
 				'username': data.user.first_name + ' ' + data.user.last_name,
@@ -32,6 +33,7 @@ angular.module('message.controller', [
 		MessageAPI.list(that.messageRoomId).then(function (response) {
 			devHelper.log(response);
 			that.title = response.recipient.first_name + ' ' + response.recipient.last_name;
+			that.recipient = response.recipient;
 			angular.extend(that.messages, response.messages.map(function (message) {
 				message.username = message.user.first_name + ' ' + message.user.last_name;
 				message.content = message.message_body;
